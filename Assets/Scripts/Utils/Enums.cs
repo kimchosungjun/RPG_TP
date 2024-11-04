@@ -19,8 +19,8 @@ public class Enums
 
 public enum e_SCENE
 {
-    SCENE_TITLE,
+    SCENE_TITLE=0,
+    SCENE_GAME=1,
+    SCENE_UI=2,
     SCENE_LOGIN,
-    SCENE_GAME,
-    SCENE_UI,
 }

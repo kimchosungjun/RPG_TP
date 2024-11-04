@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SuperMgr : MonoBehaviour
 {
+    // 씬을 관리하는 매니저
     [SerializeField] SceneMgr sceneMgr;
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class SuperMgr : MonoBehaviour
         }
         else
         {
+            DontDestroyOnLoad(this.gameObject);
             SharedMgr.SuperMgr = this;
             sceneMgr.Init();
         }
