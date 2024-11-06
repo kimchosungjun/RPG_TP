@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class QuaterView
 {
+    // 벽, 땅 
+    int wallNGroundLayer = 1 << 3 | 1 << 6;
+    
     // 처음에 초기화해줘야 하는 값들
     Transform camTransform = null; // 카메라의 Transform
     Transform lookatTransform = null; // 바라볼 목표의 Transfrom
@@ -59,7 +62,7 @@ public class QuaterView
         // 위치 = 위치 + 사원수 * 벡터  <-- 사원수 * 벡터는 벡터의 결과를 내도록 유니티에 구현되어 있다.
         RaycastHit hit;
         Vector3 deltaVec = camTransform.rotation * offset;
-        if (Physics.Raycast(lookatTransform.position, deltaVec.normalized, out hit, deltaVec.magnitude, LayerMask.GetMask("Wall"))) // Layer는 나중에 변경
+        if (Physics.Raycast(lookatTransform.position, deltaVec.normalized, out hit, deltaVec.magnitude, wallNGroundLayer)) // Layer는 나중에 변경
         {
             float distance = (hit.point - lookatTransform.position).magnitude * 0.9f;
             camTransform.position = lookatTransform.position + distance * deltaVec.normalized;

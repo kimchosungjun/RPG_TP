@@ -30,3 +30,9 @@ public enum E_CAMERAVIEW
     CAMERA_QUATERVIEW=0,
     CAMERA_CLOSEUP=1,
 }
+
+public enum E_PLAYERSTATE
+{
+    PLAYER_IDLE,
+    PLAYER_MOVE,
+}
