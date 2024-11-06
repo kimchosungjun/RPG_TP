@@ -17,10 +17,16 @@ public class Enums
 }
 
 
-public enum e_SCENE
+public enum E_SCENE
 {
     SCENE_TITLE=0,
     SCENE_GAME=1,
     SCENE_UI=2,
     SCENE_LOGIN,
+}
+
+public enum E_CAMERAVIEW
+{
+    CAMERA_QUATERVIEW=0,
+    CAMERA_CLOSEUP=1,
 }

@@ -5,24 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneMgr : MonoBehaviour
 {
-    e_SCENE currentScene = e_SCENE.SCENE_TITLE;
+    E_SCENE CURRENT_SCENE = E_SCENE.SCENE_TITLE;
     AsyncOperation asyncOperation = null;
     CommonUIController commonUIController = null;
     public CommonUIController CommonUIController { set { commonUIController = value; } }
+
     public void Init()
     {
         SharedMgr.SceneMgr = this;
-        SceneManager.LoadScene(Enums.GetIntValue(e_SCENE.SCENE_UI), LoadSceneMode.Additive);
+        SceneManager.LoadScene(Enums.GetIntValue(E_SCENE.SCENE_UI), LoadSceneMode.Additive);
     }
 
-    public void LoadScene(e_SCENE _changeScene, bool _isLoading = false)
+    public void LoadScene(E_SCENE _changeScene, bool _isLoading = false)
     {
-        if (currentScene == _changeScene)
+        if (CURRENT_SCENE == _changeScene)
             return;
 
-        currentScene = _changeScene;
+        CURRENT_SCENE = _changeScene;
 
-        int _loadSceneIndex = Enums.GetIntValue(currentScene);
+        int _loadSceneIndex = Enums.GetIntValue(CURRENT_SCENE);
         if (!_isLoading)
             SceneManager.LoadScene(_loadSceneIndex);
         else
@@ -32,7 +33,7 @@ public class SceneMgr : MonoBehaviour
     /// <summary>
     /// 페이드 아웃 후 실행
     /// </summary>
-    public void LoadingScene()  { StartCoroutine(CLoadingScene((int)currentScene));  }
+    public void LoadingScene()  { StartCoroutine(CLoadingScene((int)CURRENT_SCENE));  }
 
     IEnumerator CLoadingScene(int _loadIndex)
     {
