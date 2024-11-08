@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneMgr : MonoBehaviour
 {
-    E_SCENE CURRENT_SCENE = E_SCENE.SCENE_TITLE;
+    E_SCENE currentScene = E_SCENE.SCENE_TITLE;
     AsyncOperation asyncOperation = null;
     CommonUIController commonUIController = null;
     public CommonUIController CommonUIController { set { commonUIController = value; } }
@@ -18,12 +18,12 @@ public class SceneMgr : MonoBehaviour
 
     public void LoadScene(E_SCENE _changeScene, bool _isLoading = false)
     {
-        if (CURRENT_SCENE == _changeScene)
+        if (currentScene == _changeScene)
             return;
 
-        CURRENT_SCENE = _changeScene;
+        currentScene = _changeScene;
 
-        int _loadSceneIndex = Enums.GetIntValue(CURRENT_SCENE);
+        int _loadSceneIndex = Enums.GetIntValue(currentScene);
         if (!_isLoading)
             SceneManager.LoadScene(_loadSceneIndex);
         else
@@ -33,7 +33,7 @@ public class SceneMgr : MonoBehaviour
     /// <summary>
     /// 페이드 아웃 후 실행
     /// </summary>
-    public void LoadingScene()  { StartCoroutine(CLoadingScene((int)CURRENT_SCENE));  }
+    public void LoadingScene()  { StartCoroutine(CLoadingScene((int)currentScene));  }
 
     IEnumerator CLoadingScene(int _loadIndex)
     {
