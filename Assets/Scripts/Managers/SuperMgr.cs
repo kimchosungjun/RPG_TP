@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class SuperMgr : MonoBehaviour
 {
-    // 씬을 관리하는 매니저
+    #region Link Manager
     [SerializeField] SceneMgr sceneMgr;
+    #endregion
+    
+    #region Not Link Manager
+    HoldItemMgr holdItemMgr = new HoldItemMgr();
+    #endregion
+    
     private void Awake()
     {
         if (SharedMgr.SuperMgr != null && SharedMgr.SuperMgr != this)
@@ -18,6 +24,7 @@ public class SuperMgr : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             SharedMgr.SuperMgr = this;
             sceneMgr.Init();
+            holdItemMgr.Init();
         }
     }
 }

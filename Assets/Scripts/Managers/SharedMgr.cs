@@ -6,4 +6,5 @@ public static class SharedMgr
 {
     public static SuperMgr SuperMgr = null;
     public static SceneMgr SceneMgr = null;
+    public static HoldItemMgr HoldItemMgr = null;
 }

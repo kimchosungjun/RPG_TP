@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneMgr : MonoBehaviour
+public partial class SceneMgr : MonoBehaviour
 {
     E_SCENE currentScene = E_SCENE.SCENE_TITLE;
     AsyncOperation asyncOperation = null;

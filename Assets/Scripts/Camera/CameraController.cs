@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     { 
-        if (playerBodyTransform == null) playerBodyTransform = FindObjectOfType<PlayerController>().BodyTransform;
+        //if (playerBodyTransform == null) playerBodyTransform = FindObjectOfType<PlayerController>().BodyTransform;
         quaterView = new QuaterView(this.transform, playerBodyTransform);
         quaterView.Setup();
     }

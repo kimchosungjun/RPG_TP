@@ -39,6 +39,12 @@ public enum E_SCENE
     SCENE_LOGIN,
 }
 
+public enum E_LOGIN
+{
+    LOGIN_ID,
+    LOGIN_PW
+}
+
 public enum E_CAMERAVIEW
 {
     CAMERA_QUATERVIEW=0,
