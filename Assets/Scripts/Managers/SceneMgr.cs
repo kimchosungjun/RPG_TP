@@ -1,20 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public partial class SceneMgr : MonoBehaviour
 {
+    E_SCENE nextLoadScene = E_SCENE.SCENE_LOADING;
     E_SCENE currentScene = E_SCENE.SCENE_TITLE;
     AsyncOperation asyncOperation = null;
-    CommonUIController commonUIController = null;
-    public CommonUIController CommonUIController { set { commonUIController = value; } }
 
-    public void Init()
-    {
-        SharedMgr.SceneMgr = this;
-        SceneManager.LoadScene(Enums.GetIntValue(E_SCENE.SCENE_UI), LoadSceneMode.Additive);
-    }
+    public void Init() { SharedMgr.SceneMgr = this; }
 
     public void LoadScene(E_SCENE _changeScene, bool _isLoading = false)
     {
@@ -27,21 +23,26 @@ public partial class SceneMgr : MonoBehaviour
         if (!_isLoading)
             SceneManager.LoadScene(_loadSceneIndex);
         else
-            commonUIController.UpdateFade(false, LoadingScene);
+        {
+            if(nextLoadScene == _changeScene)
+            {
+                Debug.LogError("잘못된 씬 로딩 호출 방법");
+                return;
+            }
+            nextLoadScene = _changeScene;
+            SceneManager.LoadScene((int) E_SCENE.SCENE_LOADING);
+        }
     }
 
     /// <summary>
-    /// 페이드 아웃 후 실행
+    /// 로딩씬에 의해 호출
     /// </summary>
-    public void LoadingScene()  { StartCoroutine(CLoadingScene((int)currentScene));  }
+    public void LoadingScene(UnityAction action)  { StartCoroutine(CLoadingScene((int)nextLoadScene, action));}
 
-    IEnumerator CLoadingScene(int _loadIndex)
+    IEnumerator CLoadingScene(int _loadIndex, UnityAction action = null)
     {
         asyncOperation = SceneManager.LoadSceneAsync(_loadIndex);
         asyncOperation.allowSceneActivation = false;
-
-        // 로딩 UI 실행
-        commonUIController.UpdateLoading(true);
 
         float fakeProgress = 0f;
         float realProgress = 0f;
@@ -54,10 +55,14 @@ public partial class SceneMgr : MonoBehaviour
             yield return null;
         }
 
-        asyncOperation.allowSceneActivation = true;
+        currentScene = nextLoadScene;
+        nextLoadScene = E_SCENE.SCENE_LOADING;
 
-        // 로딩 UI 중지, 페이드 인 실행
-        commonUIController.UpdateLoading(false);
-        commonUIController.UpdateFade(true);
+        asyncOperation.allowSceneActivation = true; 
+
+        if (action!=null)
+            action();   
     }
+
+    public bool CheckEndSceneLoad() { if (asyncOperation.isDone) { asyncOperation = null; return true; } else return false; }
 }

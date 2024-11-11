@@ -33,10 +33,10 @@ public class Enums
 
 public enum E_SCENE
 {
-    SCENE_TITLE=0,
-    SCENE_GAME=1,
-    SCENE_UI=2,
-    SCENE_LOGIN,
+    SCENE_TITLE = 0,
+    SCENE_LOGIN =1,
+    SCENE_LOADING = 2,
+    SCENE_GAME=3,
 }
 
 public enum E_LOGIN
