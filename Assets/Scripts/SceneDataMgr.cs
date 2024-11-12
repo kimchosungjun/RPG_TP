@@ -8,16 +8,31 @@ using UnityEngine;
 
 public partial class SceneMgr: MonoBehaviour
 {
-    #region String형 값 저장 & 반환
-    public void SetPlayerPrefersIntKey(string _key, string _valueType)
+    #region ID, Password
+    public void SetPlayerAccount(string _ID, string _Password)
     {
-        PlayerPrefs.SetString(_key, _valueType);
+        PlayerPrefs.SetString(_ID, _Password);
         PlayerPrefs.Save();
     }
 
-    public string GetPlayerPrefersStringKey(string _key)
+    public string GetPlayerAccount(string _ID)
     {
-        return PlayerPrefs.GetString(_key);
+        return PlayerPrefs.GetString(_ID);
+    }
+
+    /// <summary>
+    /// 존재하면 True, 없다면 False
+    /// </summary>
+    /// <param name="_ID"></param>
+    /// <returns></returns>
+    public bool IsExistID(string _ID)
+    {
+        return (string.Empty == GetPlayerAccount(_ID)) ? false : true;
+    }
+
+    public bool IsMaintainLogin() 
+    {
+        return IsExistID("ID");
     }
     #endregion
 
