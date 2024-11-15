@@ -39,11 +39,14 @@ public enum E_SCENE
     SCENE_GAME=3,
 }
 
-public enum E_LOGIN
+public enum E_BT
 {
-    LOGIN_ID,
-    LOGIN_PW
+    BT_SUCCESS=0,
+    BT_FAIL=1,
+    BT_RUNNING=2
 }
+
+#region ITEM
 
 public enum E_CAMERAVIEW
 {
@@ -73,3 +76,5 @@ public enum E_WEAPONEFFECT
     WEAPON_CRITICAL = 1, 
     WEAPON_ABSORPTION = 2
 }
+
+#endregion
