@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -7,6 +8,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform mainCamTransfrom = null;
     [SerializeField] Transform bodyTransform = null;
     [SerializeField] Rigidbody rigid = null;
+    [SerializeField] Animator anim = null;
 
     [Header("Slope")]
     [SerializeField] float maxSlopeAngle;
@@ -45,6 +47,7 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         if (rigid == null) rigid = GetComponent<Rigidbody>();
+        if(anim==null) anim = GetComponentInChildren<Animator>();
         rigid.freezeRotation = true;
     }
 
@@ -55,11 +58,28 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        UpdateAnimation();
         GroundCheck();
         PlaneMovementInput();
         SprintInput();
         JumpInput();
         LimitPlaneMovementSpeed();
+    }
+
+    public void UpdateAnimation()
+    {
+        if (isGround)
+        {
+            anim.SetBool("Move", true);
+            float xzVelocity = rigid.velocity.magnitude;
+            anim.SetFloat("MoveValue", xzVelocity);
+        }
+        else
+        {
+            anim.SetBool("Move", false);
+            float yVelocity = Mathf.Clamp(rigid.velocity.y, -1f, 1f);
+            anim.SetFloat("OnAirValue", yVelocity);
+        }
     }
 
     public void GroundCheck()
