@@ -9,7 +9,6 @@ public partial class SceneMgr : MonoBehaviour
     E_SCENE nextLoadScene = E_SCENE.SCENE_LOADING;
     E_SCENE currentScene = E_SCENE.SCENE_TITLE;
     AsyncOperation asyncOperation = null;
-
     public void Init() { SharedMgr.SceneMgr = this; }
 
     public void LoadScene(E_SCENE _changeScene, bool _isLoading = false)
@@ -37,12 +36,13 @@ public partial class SceneMgr : MonoBehaviour
     /// <summary>
     /// 로딩씬에 의해 호출
     /// </summary>
-    public void LoadingScene(UnityAction action)  { StartCoroutine(CLoadingScene((int)nextLoadScene, action));}
+    public void LoadingScene(UnityAction _action = null)  { StartCoroutine(CLoadingScene((int)nextLoadScene, _action));}
 
-    IEnumerator CLoadingScene(int _loadIndex, UnityAction action = null)
+    IEnumerator CLoadingScene(int _loadIndex, UnityAction _action = null)
     {
         asyncOperation = SceneManager.LoadSceneAsync(_loadIndex);
         asyncOperation.allowSceneActivation = false;
+        LoadingUICtrl _uiController = SharedMgr.UIMgr.LoadingUICtrl;
 
         float fakeProgress = 0f;
         float realProgress = 0f;
@@ -52,6 +52,7 @@ public partial class SceneMgr : MonoBehaviour
         {
             realProgress = asyncOperation.progress;
             fakeProgress = Mathf.MoveTowards(fakeProgress, realProgress, Time.deltaTime);
+            _uiController.UpdateLoadingPercent(fakeProgress);
             yield return null;
         }
 
@@ -60,9 +61,18 @@ public partial class SceneMgr : MonoBehaviour
 
         asyncOperation.allowSceneActivation = true; 
 
-        if (action!=null)
-            action();   
+        if (_action!=null)
+            _action();   
     }
 
-    public bool CheckEndSceneLoad() { if (asyncOperation.isDone) { asyncOperation = null; return true; } else return false; }
+    public bool CheckEndSceneLoad() 
+    { 
+        if (asyncOperation.isDone)
+        {
+            asyncOperation = null; 
+            return true; 
+        } 
+        else
+            return false; 
+    }
 }

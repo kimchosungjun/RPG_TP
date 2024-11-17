@@ -467,8 +467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32548595d95aa3345ae4a1a239d77a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteAtlas: {fileID: 4343727234628468602, guid: 4453920147881cf4b9739fd261a14c36,
-    type: 2}
   infoImage: {fileID: 1422570382}
   infoText: {fileID: 1980835806}
   fadeTimer: 0.75
@@ -588,7 +586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d31e0f15092fcfb47bd6e1a8defa5cbc, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

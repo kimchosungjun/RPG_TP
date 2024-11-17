@@ -6,18 +6,18 @@ public class StateMachine
 {
     private State currentState = null;
 
-    public StateMachine(State newState) 
+    public StateMachine(State _newState) 
     {
-        currentState = newState;
+        currentState = _newState;
         currentState.Enter();
     }
 
-    public void ChangeState(State newState)
+    public void ChangeState(State _newState)
     {
-        if (currentState == newState)
+        if (currentState == _newState)
             return;
         currentState.Exit();
-        currentState = newState;
+        currentState = _newState;
         currentState.Enter();
     }
 

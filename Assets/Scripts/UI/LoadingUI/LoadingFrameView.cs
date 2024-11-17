@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class LoadingFrameView : MonoBehaviour
 {
-    [SerializeField] GameObject allObject;
-
     [SerializeField] float fadeTimer;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Image loadingImage;
@@ -18,8 +16,6 @@ public class LoadingFrameView : MonoBehaviour
             loadingImage = GetComponentInChildren<Image>(); 
         if(canvasGroup==null)
             canvasGroup = GetComponentInParent<CanvasGroup>();
-
-        DontDestroyOnLoad(allObject);
     }
 
     public void SetLoadingImage() 
@@ -32,13 +28,6 @@ public class LoadingFrameView : MonoBehaviour
 
     IEnumerator CFadeIn()
     {
-        while (true)
-        {
-            if (SharedMgr.SceneMgr.CheckEndSceneLoad())
-                break;
-            yield return null;
-        }
-
         canvasGroup.alpha = 1f;
         float time = 0f;
         while (time < fadeTimer)
@@ -48,7 +37,7 @@ public class LoadingFrameView : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0f;
-        
-        Destroy(allObject);
+
+        SharedMgr.UIMgr.LoadingUICtrl.DeleteCtrl();
     }
 }

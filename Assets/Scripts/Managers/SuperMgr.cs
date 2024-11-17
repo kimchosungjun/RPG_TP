@@ -10,8 +10,10 @@ public class SuperMgr : MonoBehaviour
     
     #region Not Link Manager
     HoldItemMgr holdItemMgr = new HoldItemMgr();
+    UIMgr uiMgr = new UIMgr();
+    ResourceMgr resourceMgr = new ResourceMgr();
     #endregion
-    
+
     private void Awake()
     {
         if (SharedMgr.SuperMgr != null && SharedMgr.SuperMgr != this)
@@ -24,6 +26,10 @@ public class SuperMgr : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             SharedMgr.SuperMgr = this;
             sceneMgr.Init();
+            resourceMgr.Init();
+            uiMgr.Init();
+
+            // 아이템 정보 : 아직 안씀 
             holdItemMgr.Init();
         }
     }

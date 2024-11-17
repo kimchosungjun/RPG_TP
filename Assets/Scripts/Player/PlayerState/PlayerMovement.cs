@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : State
 {
-    // Start is called before the first frame update
-    void Start()
+
+    
+
+    public PlayerMovement(PlayerController _controller) : base(_controller)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
         
     }
+
+    public override void Execute()
+    {
+        
+    }
+
+    public override void Exit()
+    {
+        
+    }
+
+    public override void FixedExecute()
+    {
+
+    }
+
+    
 }

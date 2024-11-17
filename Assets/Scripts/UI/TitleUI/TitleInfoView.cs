@@ -23,7 +23,11 @@ public class TitleInfoView :MonoBehaviour
         infoImage.color = transparent_Color;
         infoText.color = transparent_Color;
 
-        if (infoImage.gameObject.activeSelf==false) infoImage.gameObject.SetActive(true);
+        if (infoImage.gameObject.activeSelf == false) 
+        {
+            infoImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Test", "battle");
+            infoImage.gameObject.SetActive(true);
+        }
         if(infoText.gameObject.activeSelf==false) infoText.gameObject.SetActive(true);
     }
 

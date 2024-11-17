@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LoginUICtrl : MonoBehaviour
 {
+    // preload 기능 추가
     [Header("씬의 Flow를 관리하는 씬 컨트롤러")]
     [SerializeField] LoginSceneCtrl sceneCtrl;
 
