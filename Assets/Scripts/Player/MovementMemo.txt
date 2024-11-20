@@ -1,0 +1,30 @@
+
+Update 
+=> 키 입력을 받는 곳
+
+FixedUpdate
+=> 물리 이동을 하는 곳
+
+물리 이동 방식
+=> rb.movePosition 
+    * 부드럽게 움직이나 한계점이 많다.
+    * RayCast를 사용해서 체크를 많이 해야됨
+    * 적절히 쓴 것 같은데도 지터링 현상이 발생해서 기각
+
+=> rb.addforce (사용)
+    * moveposition 처럼 부드럽게 움직이진 못함
+    * moveposition 보다 치명적인 한계점이 존재하진 않음
+
+호출 순서
+1. 입력된 키에 따른 방향벡터
+2. 땅 검출
+3. 이동 방향 정하기
+4. 슬로프 이동
+5. 플레이어 속도 한계점 걸기
+6. 플레이어 대쉬
+7. 플레이어 점프
+=> Addforce.forcemode.velocityChange
+
+
+1. 중력 (따로 적용)
+=> Addforce.forcemode.force

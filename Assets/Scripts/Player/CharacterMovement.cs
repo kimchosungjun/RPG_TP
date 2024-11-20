@@ -1,8 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public partial class CharacterCtrl : MonoBehaviour
 {
@@ -43,9 +41,14 @@ public partial class CharacterCtrl : MonoBehaviour
     RaycastHit groundHit;
 
     [Header("중력")]
-    [SerializeField] float gravityIncrease;
-    [SerializeField] float maxGravityScale;
-    [SerializeField] float currentGravityScale;
+    [SerializeField] float gravity=0.0f;
+    [SerializeField] float minGravityScale=-100.0f;
+    [SerializeField] float maxGravityScale=-500.0f;
+    [SerializeField] float curGravityScale=-100.0f;
+    [SerializeField, Range(-5.0f, -35.0f)] float gravityIncreasement = -20.0f;
+    [SerializeField] float gravityFallIncreaseTime = 0.05f;
+    [SerializeField] float playerFallTimer = 0.0f;
+
     Vector3 gravityScale;
     /// <summary>
     /// Call By Start : 초기화 할 변수 모음
@@ -71,6 +74,11 @@ public partial class CharacterCtrl : MonoBehaviour
         moveDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
         moveDirection = mainCamTransform.TransformDirection(moveDirection);
         moveDirection.y = 0;
+    }
+
+    public Vector3 SetMovement()
+    {
+        return new Vector3(moveDirection.x * moveSpeed, moveDirection.y, moveDirection.z * moveSpeed) * rb.mass;
     }
 
     public void SetMoveRotation()
@@ -154,26 +162,27 @@ public partial class CharacterCtrl : MonoBehaviour
         }
     }
 
-    public void SetGravity()
+    public float SetGravity()
     {
-        if(isGround)
+        if (isGround)
         {
-            if (isOverMaxAngle)
-            {
-                currentGravityScale += Time.fixedDeltaTime * gravityIncrease * rb.mass;
-                if (currentGravityScale < maxGravityScale)
-                    currentGravityScale = maxGravityScale;
-            }
-            else currentGravityScale = 0f;
+            gravity = minGravityScale;
+            curGravityScale = minGravityScale;
         }
         else
         {
-            currentGravityScale +=Time.fixedDeltaTime * gravityIncrease * rb.mass;
-            if (currentGravityScale < maxGravityScale)
-                currentGravityScale = maxGravityScale;
+            playerFallTimer -= Time.fixedDeltaTime;
+            if (playerFallTimer < 0.0f)
+            {
+                if(curGravityScale > maxGravityScale)
+                {
+                    curGravityScale += gravityIncreasement;
+                }
+                playerFallTimer = gravityFallIncreaseTime;
+                gravity = curGravityScale;
+            }
         }
-
-        gravityScale = Vector3.up * currentGravityScale;
+        return gravity;
     }
 
     public void SetFrontObjectMovement()
@@ -186,15 +195,39 @@ public partial class CharacterCtrl : MonoBehaviour
 
     public void SetSlopeMovement()
     {
-        if (isOnSlope)
+        if (isGround)
         {
             moveDirection = Vector3.ProjectOnPlane(moveDirection, groundHit.normal).normalized;
+
+            float angle = 0f;
+            if (angle == 0f)
+            {
+                // 만약 키 입력이 있다면?
+                RaycastHit hit;
+                float hegitfromGround = 0.1f;
+                float calrayHegith = rb.position.y - coll.bounds.extents.y + hegitfromGround;
+                Vector3 origin = new Vector3(rb.position.x, calrayHegith, rb.position.z);
+                if(Physics.Raycast(origin, rb.transform.TransformDirection(moveDirection),out hit, 0.75f))
+                {
+                    // 만약 각도가 최대각보다 크다면?
+                    moveDirection.y = -moveSpeed;
+                }
+                if (moveDirection.y == 0f)
+                {
+                    // movedireotion.y = gravityGrounded;
+                }
+            }
+
             if (isOverMaxAngle)
             {
-                float angle = Vector3.Angle(Vector3.up, groundHit.normal);
-                float ratio = angle - maxSlopeAngle;
-                ratio = Mathf.Clamp(ratio, 0f, 10f);
-                moveDirection *= (10f-ratio) / 10;
+
+                //만약 max앵글보다 커지면?
+                //moveDirection.y = -0.2f * angle.
+            }
+            else
+            {
+                // 작으면?
+                // movedirection.y += gravitygrounded 
             }
         }
     }

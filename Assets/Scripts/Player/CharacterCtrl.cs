@@ -14,25 +14,19 @@ public partial class CharacterCtrl : MonoBehaviour
     {
         PlaneInput();
         
-        if (Input.GetKey(KeyCode.Space) && isGround)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        }
+        //if (Input.GetKey(KeyCode.Space) && isGround)
+        //{
+        //    rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        //}
     }
 
     void FixedUpdate()
     {
         SetMoveDirection();
         CheckGround();
-        CheckFrontObject();
-        CheckSlope();
-        SetGravity();
-        SetSlopeMovement();
-        SetFrontObjectMovement();
-        Debug.Log(isFrontObject);
-        rb.AddForce(moveDirection*moveSpeed, ForceMode.VelocityChange);
-        rb.AddForce(gravityScale, ForceMode.Force);
-        SetMoveRotation();
+        moveDirection.y = SetGravity();
+        moveDirection = SetMovement();
+        rb.AddForce(moveDirection, ForceMode.Force);
         LimitSpeed();
     }
     #endregion
