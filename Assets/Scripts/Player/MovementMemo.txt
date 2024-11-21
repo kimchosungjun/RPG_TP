@@ -21,10 +21,12 @@ FixedUpdate
 3. 이동 방향 정하기
 4. 슬로프 이동
 5. 플레이어 속도 한계점 걸기
+
+1. 중력 (따로 적용)
+=> Addforce.forcemode.force
+
 6. 플레이어 대쉬
 7. 플레이어 점프
 => Addforce.forcemode.velocityChange
 
 
-1. 중력 (따로 적용)
-=> Addforce.forcemode.force

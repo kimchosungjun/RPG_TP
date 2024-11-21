@@ -12,21 +12,22 @@ public partial class CharacterCtrl : MonoBehaviour
 
     void Update()
     {
-        PlaneInput();
-        
-        //if (Input.GetKey(KeyCode.Space) && isGround)
-        //{
-        //    rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-        //}
+        MovementInput();
     }
 
     void FixedUpdate()
     {
         SetMoveDirection();
         CheckGround();
-        moveDirection.y = SetGravity();
-        moveDirection = SetMovement();
-        rb.AddForce(moveDirection, ForceMode.Force);
+        SetSlopeMovement();
+        if (moveDirection != Vector3.zero)
+            rb.AddForce(moveDirection, ForceMode.Force);
+         SetMoveRotation();
+
+        SetGravity();
+        if(gravityScale!=Vector3.zero)
+            rb.AddForce(gravityScale, ForceMode.Force);
+        
         LimitSpeed();
     }
     #endregion

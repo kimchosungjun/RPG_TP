@@ -15,55 +15,52 @@ public partial class CharacterCtrl : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] float rotateSpeed;
     [SerializeField] float limitMoveSpeed;
-    float moveHorizontal = 0.0f;
-    float moveVertical = 0.0f;
+    [SerializeField] float airDrag =0.1f;
+    [SerializeField] float groundDrag =2f;
+    
     Vector3 moveDirection;
     Quaternion targetRotation;
-
-    [Header("도약")]
-    [SerializeField] float jumpForce;
-    [SerializeField, Tooltip("공중에서의 이동, 회전 제약"), Range(0.0f, 1f)] float airMultiplier;
+    float moveVertical;
+    float moveHorizontal;
 
     [Header("검출")]
     [SerializeField] bool isGround = false;
     [SerializeField] bool isOnSlope = false;
-    [SerializeField] bool isFrontObject = false;
-    [SerializeField] bool isOverMaxAngle = false;
     [SerializeField] float maxSlopeAngle = 45f;
-    int groundLayer = 1 << 3 | 1 << 6;
-    float groundDistance = 0.6f;
-    float groundRadius = 0.0f;
+    [SerializeField] float detectRadiusDeltaDistance = 0.1f;
+    [SerializeField] float detectGroundDeltaDistance = 0.1f;
+    [SerializeField] float stepDeltaDistance = 0.2f;
 
-    float playerHeight = 1.8f;
-    float stepHeight = 0.2f;
-    float stepRadius = 0.5f;
-   
     RaycastHit groundHit;
+    RaycastHit slopeHit;
+    int groundLayer = 1 << 3 | 1 << 6;
+    float groundDetectDistance;
+    float playerBodyRadius;
 
     [Header("중력")]
-    [SerializeField] float gravity=0.0f;
-    [SerializeField] float minGravityScale=-100.0f;
-    [SerializeField] float maxGravityScale=-500.0f;
-    [SerializeField] float curGravityScale=-100.0f;
-    [SerializeField, Range(-5.0f, -35.0f)] float gravityIncreasement = -20.0f;
-    [SerializeField] float gravityFallIncreaseTime = 0.05f;
-    [SerializeField] float playerFallTimer = 0.0f;
+    [SerializeField] float curGravityScale = -100.0f;
+    [SerializeField] float minGravityScale = -100.0f;
+    [SerializeField] float maxGravityScale = -500.0f;
+    [SerializeField] float gravityIncreaseTime = 0.0f;
+    [SerializeField] float gravityIncreaseTimer = 0.05f;
+    [SerializeField, Range(0.0f, -50.0f)] float gravityIncreasement = -9.8f;
 
     Vector3 gravityScale;
+
     /// <summary>
     /// Call By Start : 초기화 할 변수 모음
     /// </summary>
     public void MovementSetup()
     {
         if (mainCamTransform == null) mainCamTransform = Camera.main.transform;
-        groundRadius = coll.radius * 0.9f;
+        if (coll == null) coll = GetComponent<CapsuleCollider>();
+
         targetRotation = transform.rotation;
+        playerBodyRadius = coll.radius + detectRadiusDeltaDistance;
+        groundDetectDistance = bodyTransform.position.y + detectGroundDeltaDistance;
     }
 
-
-
-    #region Plane
-    public void PlaneInput()
+    public void MovementInput()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         moveVertical = Input.GetAxisRaw("Vertical");
@@ -76,11 +73,33 @@ public partial class CharacterCtrl : MonoBehaviour
         moveDirection.y = 0;
     }
 
-    public Vector3 SetMovement()
+    public void CheckGround()
     {
-        return new Vector3(moveDirection.x * moveSpeed, moveDirection.y, moveDirection.z * moveSpeed) * rb.mass;
+        isGround = Physics.SphereCast(bodyTransform.position, playerBodyRadius, Vector3.down,
+            out groundHit, groundDetectDistance, groundLayer);
+
+        if (isGround) rb.drag = groundDrag;
+        else rb.drag = airDrag;
     }
 
+    public void SetSlopeMovement()
+    {
+        if (isGround)
+        {
+            float angle = Vector3.Angle(Vector3.up, groundHit.normal);
+            // 0도라면, 평면 위
+            if (angle == 0f)
+                return;
+
+            // 최대각도보다 아래라면 해당 각도에 맞는 방향으로 힘 가하기
+            moveDirection = Vector3.ProjectOnPlane(moveDirection, groundHit.normal);
+            moveDirection = moveDirection.normalized;
+            // 최대각도보다 크다면 아래로 힘 가하기
+            if (angle > maxSlopeAngle)
+                moveDirection.y = -0.1f * angle;
+        }
+    }
+  
     public void SetMoveRotation()
     {
         Quaternion curRotation = transform.rotation;
@@ -93,6 +112,8 @@ public partial class CharacterCtrl : MonoBehaviour
         else
         {
             Vector3 lookDirection = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
+            if (lookDirection == Vector3.zero) return;
+
             lookDirection = mainCamTransform.TransformDirection(lookDirection);
             lookDirection.y = 0f;
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
@@ -100,136 +121,44 @@ public partial class CharacterCtrl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(curRotation, lookRotation, Time.fixedDeltaTime * rotateSpeed);
         }
     }
-    #endregion
 
-    #region Check
-    public void CheckGround()
-    {
-        isGround = Physics.SphereCast(bodyTransform.position, groundRadius, Vector3.down, 
-            out groundHit, groundDistance, groundLayer);
-    }
 
-    public void CheckFrontObject()
-    {
-        isFrontObject = Physics.CapsuleCast(transform.position + Vector3.up * playerHeight, transform.position + Vector3.up * stepHeight, stepRadius, moveDirection, 0.1f, groundLayer);
-    }
 
-    public void CheckSlope()
-    {
-        if (!isGround)
-        {
-            isOnSlope = false;
-            isOverMaxAngle = false;
-            return;
-        }
-        
-        float angle = Vector3.Angle(Vector3.up, groundHit.normal);
-        if (angle <= maxSlopeAngle)
-        {
-            if (angle == 0.0f) isOnSlope = false;
-            else isOnSlope = true;
-            isOverMaxAngle = false;
-        }
-        else
-        {
-            isOnSlope = true;
-            isOverMaxAngle = true;
-        }
-    }
-    #endregion
-
-    #region Control Force
     public void LimitSpeed()
     {
-        if (isOnSlope)
+        Vector3 velocityVec = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z);
+        if (isOnSlope && isGround)
         {
-            if (isOverMaxAngle == false)
+            if (velocityVec.magnitude > limitMoveSpeed)
             {
-                if (rb.velocity.magnitude > limitMoveSpeed)
-                {
-                    rb.velocity = rb.velocity.normalized * limitMoveSpeed;
-                    return;
-                }
+                velocityVec = velocityVec.normalized;
+                rb.velocity = velocityVec * limitMoveSpeed;
             }
+            return;
         }
 
-        Vector3 velocityVec = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        velocityVec.y = 0f;
+        velocityVec = velocityVec.normalized;
 
-        if (velocityVec.magnitude > limitMoveSpeed)
-        {
-            velocityVec = velocityVec.normalized;
-            rb.velocity = new Vector3(velocityVec.x * limitMoveSpeed, rb.velocity.y, velocityVec.z * limitMoveSpeed);
-        }
+        rb.velocity = new Vector3(velocityVec.x * limitMoveSpeed, rb.velocity.y, velocityVec.z * limitMoveSpeed);
     }
 
-    public float SetGravity()
+    public void SetGravity()
     {
         if (isGround)
         {
-            gravity = minGravityScale;
             curGravityScale = minGravityScale;
+            gravityScale = Vector3.zero;
+            return;
         }
-        else
+        gravityIncreaseTime += Time.fixedDeltaTime;
+        if (gravityIncreaseTime >= gravityIncreaseTimer)
         {
-            playerFallTimer -= Time.fixedDeltaTime;
-            if (playerFallTimer < 0.0f)
-            {
-                if(curGravityScale > maxGravityScale)
-                {
-                    curGravityScale += gravityIncreasement;
-                }
-                playerFallTimer = gravityFallIncreaseTime;
-                gravity = curGravityScale;
-            }
+            gravityIncreaseTime = 0f;
+            curGravityScale += gravityIncreasement * Time.fixedDeltaTime;
+            if (curGravityScale < maxGravityScale)
+                curGravityScale = maxGravityScale;
         }
-        return gravity;
+        gravityScale = Vector3.up * curGravityScale;
     }
-
-    public void SetFrontObjectMovement()
-    {
-        if (isFrontObject)
-        {
-            moveDirection = Vector3.zero;
-        }
-    }
-
-    public void SetSlopeMovement()
-    {
-        if (isGround)
-        {
-            moveDirection = Vector3.ProjectOnPlane(moveDirection, groundHit.normal).normalized;
-
-            float angle = 0f;
-            if (angle == 0f)
-            {
-                // 만약 키 입력이 있다면?
-                RaycastHit hit;
-                float hegitfromGround = 0.1f;
-                float calrayHegith = rb.position.y - coll.bounds.extents.y + hegitfromGround;
-                Vector3 origin = new Vector3(rb.position.x, calrayHegith, rb.position.z);
-                if(Physics.Raycast(origin, rb.transform.TransformDirection(moveDirection),out hit, 0.75f))
-                {
-                    // 만약 각도가 최대각보다 크다면?
-                    moveDirection.y = -moveSpeed;
-                }
-                if (moveDirection.y == 0f)
-                {
-                    // movedireotion.y = gravityGrounded;
-                }
-            }
-
-            if (isOverMaxAngle)
-            {
-
-                //만약 max앵글보다 커지면?
-                //moveDirection.y = -0.2f * angle.
-            }
-            else
-            {
-                // 작으면?
-                // movedirection.y += gravitygrounded 
-            }
-        }
-    }
-    #endregion
 }
