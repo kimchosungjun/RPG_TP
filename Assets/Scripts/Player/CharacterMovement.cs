@@ -29,7 +29,7 @@ public partial class CharacterCtrl : MonoBehaviour
     [SerializeField] float maxSlopeAngle = 45f;
     [SerializeField] float detectRadiusDeltaDistance = 0.1f;
     [SerializeField] float detectGroundDeltaDistance = 0.1f;
-    [SerializeField] float stepDeltaDistance = 0.2f;
+    //[SerializeField] float stepDeltaDistance = 0.2f;
 
     RaycastHit groundHit;
     RaycastHit slopeHit;
