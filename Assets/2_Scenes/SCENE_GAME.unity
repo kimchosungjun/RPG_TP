@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -322,7 +322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -552,14 +552,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551173364}
-  m_LocalRotation: {x: -0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 1.41, z: -3.7}
   m_LocalScale: {x: 3, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
 --- !u!1 &723405342
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +759,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3
   m_Height: 1.8
@@ -792,22 +792,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 881371688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f25d00dbb1f588459b6d7b53bb6b055, type: 3}
+  m_Script: {fileID: 11500000, guid: acb160bf26eb37447a1217b3fd414711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyTF: {fileID: 113701136}
-  playerBodyRadius: 0.2
+  camTransform: {fileID: 330585546}
+  bodyTransform: {fileID: 113701136}
+  rigid: {fileID: 881371691}
+  anim: {fileID: 0}
+  coll: {fileID: 881371692}
+  playerMoveSpeed: 5
+  playerMoveLimitSpeed: 7
+  playerWalkSpeed: 5
+  playerRotateSpeed: 12
+  planeCoefficient: 10
+  slopeCoefficient: 20
+  playerJumpForce: 0
+  airMovementMultiplier: 0.2
+  playerSprintSpeed: 24
+  sprintMaintainTimer: 3
+  sprintCoolTimer: 5
+  detectGroundDelta: 0.1
+  groundDrag: 2
+  isOnGround: 0
   groundDetectDistance: 0
-  speed: 8
-  groundCheckDistance: 1
-  maxSlopeAngle: 50
-  groundPosition: {x: 0, y: 0, z: 0}
-  isGround: 0
-  useGravity: 1
+  gravityIncreasemenet: -9.8
   curGravity: 0
-  minGravity: -10
+  minGravity: 0
   maxGravity: -100
-  increaseGravityScale: -9.8
 --- !u!1 &1519702717
 GameObject:
   m_ObjectHideFlags: 0
