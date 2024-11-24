@@ -60,9 +60,15 @@ public class forcemodeforce : MonoBehaviour
     [SerializeField, Tooltip("땅 검출 시, 추가 검출 거리")] float detectGroundDelta;
     [SerializeField, Tooltip("땅 저항 값")] float groundDrag;
     [SerializeField] bool isOnGround = false;
-    int groundLayer = 1 << 3 | 1 << 6; // 3은 벽, 6은 땅
+    [SerializeField] float stepHeight = 0.2f;
     [SerializeField] float groundDetectDistance;
+
+    float slopeDetectDistance;
+    int groundLayer = 1 << 3 | 1 << 6; // 3은 벽, 6은 땅
     RaycastHit groundHit;
+
+
+    [SerializeField] float slopeMaxAngle = 50f;
 
     /******************************************/
     /**************** 중력   ******************/
@@ -92,6 +98,7 @@ public class forcemodeforce : MonoBehaviour
         moveRotation = transform.rotation;
         playerMoveSpeed = playerWalkSpeed;
         groundDetectDistance = bodyTransform.position.y - playerBodyRadius + detectGroundDelta;
+        slopeDetectDistance = stepHeight * 0.5f * 3.5f + playerBodyRadius;
     }
 
     void Update()
@@ -192,11 +199,6 @@ public class forcemodeforce : MonoBehaviour
         moveDirection = camTransform.TransformDirection(moveDirection);
         moveDirection.y = 0;
         moveDirection = moveDirection.normalized;
-
-        //if (isOnGround)
-        //    rigid.AddForce(moveDirection * playerMoveSpeed * 10f, ForceMode.Force);
-        //else
-        //    rigid.AddForce(moveDirection * playerMoveSpeed * 10f * airMovementMultiplier, ForceMode.Force);
     }
 
     public void SetGravity()
@@ -212,6 +214,30 @@ public class forcemodeforce : MonoBehaviour
         }
     }
 
+    public void SlopeMovement()
+    {
+        if (isOnGround)
+        {
+            float angle = Vector3.Angle(Vector3.up, groundHit.normal);
+
+            if (angle < 0.1f)
+                return;
+
+            if (angle <= slopeMaxAngle)
+            {
+                Vector3 direction = Vector3.ProjectOnPlane(moveDirection, groundHit.normal);
+                moveDirection = direction.normalized;
+            }
+            //else
+            //{
+            //    Vector3 origin = transform.position + Vector3.up * stepHeight * 0.5f;
+            //    if(Physics.Raycast(origin, moveDirection, slopeDetectDistance ,groundLayer))
+            //    {
+
+            //    }
+            //}
+        }
+    }
 
     public void ApplyMovementForce()
     {
@@ -230,6 +256,7 @@ public class forcemodeforce : MonoBehaviour
         rigid.AddForce(airMovement, ForceMode.Force);
     }
 
+   
     public void ApplyMovementRotation()
     {
         if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)

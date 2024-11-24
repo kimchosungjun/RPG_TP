@@ -50,7 +50,7 @@ public class RBMovement : MonoBehaviour
 
     [Header("Plane Movement")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotateSpeed = 12f;
+    //[SerializeField] private float rotateSpeed = 12f;
     #endregion
 
     #region Gravity
@@ -167,31 +167,22 @@ public class RBMovement : MonoBehaviour
 
     public void DoMovement()
     {
-        // 1. 현재 위치와 이동할 위치 계산
         Vector3 currentPosition = transform.position;
         Vector3 nextPosition = currentPosition + movementDirection * Time.deltaTime * moveSpeed;
 
-        // 2. 캡슐의 시작점과 끝점 계산 (머리와 발 위치)
         Vector3 capsuleStart = currentPosition + Vector3.up * playerBodyRadius;
         Vector3 capsuleEnd = currentPosition + Vector3.up * (1.8f - playerBodyRadius); // 1.8f는 캡슐 콜라이더 높이
 
-        // 3. 충돌 체크
         if (Physics.CapsuleCast(capsuleStart, capsuleEnd, playerBodyRadius, movementDirection, out RaycastHit hit,
             Vector3.Distance(currentPosition, nextPosition), groundLayer))
         {
-            // 충돌 발생 시:
-            Debug.Log($"충돌 발생: {hit.collider.name}");
-
-            // 충돌 위치를 기준으로 이동할 위치를 제한
             targetPosition = hit.point - movementDirection.normalized * playerBodyRadius;
         }
         else
         {
-            // 충돌이 없을 경우: 목표 위치를 그대로 설정
             targetPosition = nextPosition;
         }
 
-        // 4. Rigidbody를 사용한 이동
         rigid.MovePosition(targetPosition);
     }
 
@@ -199,10 +190,6 @@ public class RBMovement : MonoBehaviour
     {
         DetectGravity();
     }
-
-
-
-
 
     public void DetectGravity()
     {

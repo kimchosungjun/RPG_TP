@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : State
 {
-    // Start is called before the first frame update
-    void Start()
+    PlayerAttackCombo combo = null;
+
+    public PlayerAttack(CharacterCtrl _controller, PlayerAttackCombo _combo) : base(_controller)
+    {
+        combo = _combo;
+    }
+
+    public override void Enter()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Execute()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Exit()
     {
         
+    }
+
+    public override void FixedExecute()
+    {
+        throw new System.NotImplementedException();
     }
 }

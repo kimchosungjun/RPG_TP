@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerOnGround : State
 {
-    public PlayerOnGround(PlayerController _controller) : base(_controller)
+    public PlayerOnGround(CharacterCtrl _controller) : base(_controller)
     {
 
     }

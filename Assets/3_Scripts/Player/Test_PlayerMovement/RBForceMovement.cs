@@ -31,7 +31,7 @@ public class RBForceMovement : MonoBehaviour
     [Header("Slope Detect")]
     [SerializeField] float stepHeight = 0.2f;
     [SerializeField] float maxSlopeAngle = 60f; // 60f로 고정할 생각, 나중에 지우기
-    float limitSlopeMovementAngle = 80f;
+    //float limitSlopeMovementAngle = 80f;
     float slopeDetectDistance;
     RaycastHit slopeHit;
     #endregion
