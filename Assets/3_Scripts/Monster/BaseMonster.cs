@@ -7,45 +7,14 @@ using UnityEngine;
 
 public abstract class BaseMonster : MonoBehaviour
 {
-    protected MonsterData monsterData;
+    public abstract void Spawn();
+    public abstract void Death();
 
-    public abstract void Movement();
-    public abstract void Hit();
+    public abstract void DetectPlayer();
+    public abstract void IdleMovement();
+    public abstract void DetectMovement();
+
     public abstract void Attack();
-}
-
-
-public class NormalMonster : BaseMonster
-{
-    public override void Movement() { }
-    public override void Hit() { }
-    public override void Attack() { }
-}
-
-public class BossMonster : BaseMonster
-{
-    public override void Movement() { }
-    public override void Hit() { }
-    public override void Attack() { }
-    public virtual void SpecialAttack() { }
-}
-
-
-
-public class MonsterData
-{
-    public float moveSpeed;
-    public float hp;
-    public float defence;
-    public float damage;
-
-    public MonsterData() { }
-
-    public MonsterData(float _moveSpeed, float _hp, float _defence, float _damage)
-    {
-        moveSpeed = _moveSpeed;
-        hp = _hp;
-        defence = _defence;
-        damage = _damage;
-    }
+    public abstract void TakeDamage();
+    public abstract void Recovery();
 }

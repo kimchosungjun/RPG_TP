@@ -19,14 +19,15 @@ public class forcemodeforce : MonoBehaviour
     /************** 평면 이동 ****************/
     /******************************************/
     [Header("이동")]
-    [SerializeField] float playerMoveSpeed;
     [SerializeField] float playerMoveLimitSpeed;
     [SerializeField] float playerWalkSpeed;
     [SerializeField] float playerRotateSpeed;
     [SerializeField] float planeCoefficient = 10f;
     [SerializeField] float slopeCoefficient = 20f;
+    
     float xMove;
     float zMove;
+    float playerMoveSpeed;
     Vector3 moveDirection;
     Quaternion moveRotation;
 
@@ -35,7 +36,7 @@ public class forcemodeforce : MonoBehaviour
     /******************************************/
     [SerializeField] float playerJumpForce;
     [SerializeField, Range(0,1f)] float airMovementMultiplier;
-
+    
     /******************************************/
     /***************** 대쉬  ******************/
     /******************************************/
@@ -51,36 +52,44 @@ public class forcemodeforce : MonoBehaviour
     /******************************************/
     /*********** 공통 검출 변수 *************/
     /******************************************/
+    int groundLayer = 1 << 3 | 1 << 6; // 3은 벽, 6은 땅
     float playerBodyRadius;
-
+    [SerializeField] float playerBodyHeight; 
     /******************************************/
     /**************** 땅 검출 ****************/
     /******************************************/
     [Header("검출")]
     [SerializeField, Tooltip("땅 검출 시, 추가 검출 거리")] float detectGroundDelta;
     [SerializeField, Tooltip("땅 저항 값")] float groundDrag;
+    [SerializeField, Tooltip("공기 저항 값")] float airDrag;
     [SerializeField] bool isOnGround = false;
-    [SerializeField] float stepHeight = 0.2f;
-    [SerializeField] float groundDetectDistance;
-
-    float slopeDetectDistance;
-    int groundLayer = 1 << 3 | 1 << 6; // 3은 벽, 6은 땅
+    float groundDetectDistance;
     RaycastHit groundHit;
 
-
+    /******************************************/
+    /************ 경사로 검출 ***************/
+    /******************************************/
     [SerializeField] float slopeMaxAngle = 50f;
+    [SerializeField] float stepHeight = 0.2f;
+    float slopeDetectDistance;
+    RaycastHit slopeHit;
 
+    /******************************************/
+    /************** 벽 검출 ******************/
+    /******************************************/
+    [SerializeField] float wallCheckDistanceDelta;
+    #endregion
+
+    #region Gravity
     /******************************************/
     /**************** 중력   ******************/
     /******************************************/
+    [Header("중력")]
+    [SerializeField] bool useGravity = true;
     [SerializeField] float gravityIncreasemenet;
     [SerializeField] float curGravity;
     [SerializeField] float minGravity;
     [SerializeField] float maxGravity;
-    #endregion
-
-    #region Gravity
-
     #endregion
 
     void Awake()
@@ -98,7 +107,8 @@ public class forcemodeforce : MonoBehaviour
         moveRotation = transform.rotation;
         playerMoveSpeed = playerWalkSpeed;
         groundDetectDistance = bodyTransform.position.y - playerBodyRadius + detectGroundDelta;
-        slopeDetectDistance = stepHeight * 0.5f * 3.5f + playerBodyRadius;
+        slopeDetectDistance = stepHeight * 0.5f * 5f + playerBodyRadius;
+        playerBodyHeight = coll.height;
     }
 
     void Update()
@@ -114,7 +124,7 @@ public class forcemodeforce : MonoBehaviour
         if (isOnGround)
             rigid.drag = groundDrag;
         else
-            rigid.drag = 0f;
+            rigid.drag = airDrag;
     }
 
     public void InputMovementKey()
@@ -186,8 +196,11 @@ public class forcemodeforce : MonoBehaviour
 
     void FixedUpdate()
     {
-        SetGravity();
         Movement();
+        SlopeMovement();
+        AirBlock();
+        SetGravity();
+        SetRotation();
         ApplyMovementForce(); 
         ApplyMovementRotation();
     }
@@ -198,11 +211,15 @@ public class forcemodeforce : MonoBehaviour
 
         moveDirection = camTransform.TransformDirection(moveDirection);
         moveDirection.y = 0;
-        moveDirection = moveDirection.normalized;
+
+        moveDirection *= playerMoveSpeed * planeCoefficient;
+
+        //moveDirection = moveDirection.normalized;
     }
 
     public void SetGravity()
     {
+        if (useGravity == false) return;
         if (isOnGround)
         {
             curGravity = minGravity;
@@ -218,41 +235,66 @@ public class forcemodeforce : MonoBehaviour
     {
         if (isOnGround)
         {
-            float angle = Vector3.Angle(Vector3.up, groundHit.normal);
-
-            if (angle < 0.1f)
-                return;
-
-            if (angle <= slopeMaxAngle)
+            float slopeAngle = Vector3.Angle(Vector3.up, groundHit.normal);
+            // 평지일 땐, 따로 계산 필요없음.
+            if (Mathf.Abs(slopeAngle)<0.1f) return;
+            Vector3 slopeMoveDirection = moveDirection;
+            slopeMoveDirection = Vector3.ProjectOnPlane(slopeMoveDirection,groundHit.normal);
+            if (slopeAngle > slopeMaxAngle)
             {
-                Vector3 direction = Vector3.ProjectOnPlane(moveDirection, groundHit.normal);
-                moveDirection = direction.normalized;
+                slopeMoveDirection += slopeMoveDirection * (slopeAngle / 90.0f);
+                slopeMoveDirection.y = slopeAngle * -0.2f;
             }
-            //else
-            //{
-            //    Vector3 origin = transform.position + Vector3.up * stepHeight * 0.5f;
-            //    if(Physics.Raycast(origin, moveDirection, slopeDetectDistance ,groundLayer))
-            //    {
+            if(Physics.Raycast(transform.position + Vector3.up * stepHeight *0.5f, moveDirection, out slopeHit, slopeDetectDistance))
+            {
+                if(Vector3.Angle(slopeHit.normal, Vector3.up) > slopeMaxAngle)
+                {
+                    slopeMoveDirection = Vector3.zero;
+                    slopeMoveDirection.y = slopeAngle * -0.2f;
+                }
+            }
+            moveDirection = slopeMoveDirection;
+        }
+    }
 
-            //    }
-            //}
+    public void AirBlock()
+    {
+        if (!isOnGround)
+        {
+            if (Physics.CapsuleCast(transform.position + Vector3.up *playerBodyHeight, transform.position + Vector3.up * stepHeight , 
+                playerBodyRadius ,moveDirection, playerBodyRadius + wallCheckDistanceDelta, groundLayer))
+            {
+                Debug.Log("공중 충돌중!");
+                moveDirection = Vector3.zero;
+            }
+        }
+    }
+
+    public void SetRotation()
+    {
+        if (moveDirection != Vector3.zero)
+        {
+            Vector3 lookPosition = new Vector3(xMove, 0, zMove);
+            lookPosition = camTransform.TransformDirection(lookPosition);
+            lookPosition.y = 0f;
+            if (lookPosition == Vector3.zero) return;
+            moveRotation = Quaternion.LookRotation(lookPosition);
         }
     }
 
     public void ApplyMovementForce()
     {
-        if(moveDirection != Vector3.zero)
-            moveRotation = Quaternion.LookRotation(moveDirection);
-        
         if (isOnGround)
         {
-            rigid.AddForce(moveDirection * playerMoveSpeed * planeCoefficient, ForceMode.Force);
+            moveDirection *= rigid.mass;
+            rigid.AddForce(moveDirection, ForceMode.Force);
             return;
         }
 
-        Vector3 airMovement = new Vector3(moveDirection.x, planeCoefficient, moveDirection.z);
-        airMovement *= airMovementMultiplier * playerMoveSpeed * planeCoefficient;
-        airMovement.y = curGravity * rigid.mass;
+        Vector3 airMovement = new Vector3(moveDirection.x, 0, moveDirection.z);
+        airMovement *= airMovementMultiplier;
+        airMovement.y = curGravity;
+        airMovement *= rigid.mass;
         rigid.AddForce(airMovement, ForceMode.Force);
     }
 
@@ -260,6 +302,15 @@ public class forcemodeforce : MonoBehaviour
     public void ApplyMovementRotation()
     {
         if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
-            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
+        {
+            if (isOnGround)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed * airMovementMultiplier);
+            }
+        }
     }
 }

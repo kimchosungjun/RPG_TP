@@ -7,7 +7,7 @@ public class PlayerMovement : State
 
     
 
-    public PlayerMovement(PlayerController _controller) : base(_controller)
+    public PlayerMovement(CharacterCtrl _controller) : base(_controller)
     {
         
     }

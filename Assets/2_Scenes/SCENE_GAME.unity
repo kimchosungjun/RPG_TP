@@ -552,14 +552,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551173364}
-  m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
   m_LocalPosition: {x: 0, y: 1.41, z: -3.7}
   m_LocalScale: {x: 3, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
 --- !u!1 &723405342
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,21 +800,25 @@ MonoBehaviour:
   rigid: {fileID: 881371691}
   anim: {fileID: 0}
   coll: {fileID: 881371692}
-  playerMoveSpeed: 5
   playerMoveLimitSpeed: 7
   playerWalkSpeed: 5
   playerRotateSpeed: 12
   planeCoefficient: 10
   slopeCoefficient: 20
-  playerJumpForce: 0
+  playerJumpForce: 5
   airMovementMultiplier: 0.2
   playerSprintSpeed: 24
   sprintMaintainTimer: 3
   sprintCoolTimer: 5
+  playerBodyHeight: 0
   detectGroundDelta: 0.1
-  groundDrag: 2
+  groundDrag: 6
+  airDrag: 2
   isOnGround: 0
-  groundDetectDistance: 0
+  slopeMaxAngle: 47.5
+  stepHeight: 0.2
+  wallCheckDistanceDelta: 0
+  useGravity: 1
   gravityIncreasemenet: -9.8
   curGravity: 0
   minGravity: 0
