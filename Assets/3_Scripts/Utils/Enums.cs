@@ -30,13 +30,26 @@ public class Enums
     }
 }
 
-
 public enum E_SCENE
 {
     SCENE_TITLE = 0,
     SCENE_LOGIN =1,
     SCENE_LOADING = 2,
     SCENE_GAME=3,
+}
+
+public enum E_PLAYER_FSM
+{
+    MOVEMENT=0,
+    DASH=1,
+    JUMP=2,
+    FALL=3,
+    ATTACK=4,
+    SKILL=5,
+    ULTIMATESKILL=6,
+    HIT=7,
+    DEATH=8,
+    MAX=9
 }
 
 public enum E_BT
@@ -78,3 +91,4 @@ public enum E_WEAPONEFFECT
 }
 
 #endregion
+

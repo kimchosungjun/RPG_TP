@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enter, Execute(업데이트), Exit 3가지 구성을 Default로 설정
+/// </summary>
 public class StateMachine 
 {
-    private State currentState = null;
-
-    public StateMachine(State _newState) 
-    {
-        currentState = _newState;
-        currentState.Enter();
-    }
+    protected State currentState = null;
 
     public void ChangeState(State _newState)
     {
@@ -21,6 +18,10 @@ public class StateMachine
         currentState.Enter();
     }
 
+    public void InitStateMachine(State _newState)
+    {
+        currentState = _newState;
+        currentState?.Enter();
+    }
     public void Execute() { currentState.Execute(); }
-    public void FixedExecute() { currentState.FixedExecute(); }
 }

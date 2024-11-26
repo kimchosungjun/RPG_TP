@@ -7,62 +7,96 @@ using UnityEngine;
 
 public partial class CharacterCtrl : MonoBehaviour
 {
-    //StateMachine stateMachine = new StateMachine();
-    
-    PlayerAttackCombo attackCombo = new PlayerAttackCombo();
-
+    PlayerState[] playerStates;
+    PlayerStateMachine stateMachine;
+    PlayerAttackCombo attackCombo;
+    [SerializeField] E_PLAYER_FSM currentPlayerState = E_PLAYER_FSM.MAX;
     #region Unity Life Cycle
-    void Awake()
+    void Start()
+    {
+        LinkComponent();
+        InitValues();
+        CreateStates();
+    }
+
+    public void LinkComponent()
     {
         if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
         if (anim == null) anim = GetComponentInChildren<Animator>();
-        if (coll == null) coll = GetComponentInChildren<CapsuleCollider>();
+        if (collide == null) collide = GetComponentInChildren<CapsuleCollider>();
+        if (camTransform == null) camTransform = Camera.main.transform;
+        if (collide != null) playerBodyRadius = collide.radius;
     }
 
-    void Start()
+    public void InitValues()
     {
-        if (camTransform == null) camTransform = Camera.main.transform;
-        if (coll != null) playerBodyRadius = coll.radius;
         moveDirection = Vector3.zero;
         moveRotation = transform.rotation;
         playerMoveSpeed = playerWalkSpeed;
         groundDetectDistance = bodyTransform.position.y - playerBodyRadius + detectGroundDelta;
         slopeDetectDistance = stepHeight * 0.5f * 5f + playerBodyRadius;
-        playerBodyHeight = coll.height;
+        playerBodyHeight = collide.height;
     }
+
+    public void CreateStates()
+    {
+        stateMachine = new PlayerStateMachine();
+        attackCombo = new PlayerAttackCombo();
+
+        playerStates = new PlayerState[(int)E_PLAYER_FSM.MAX];
+        playerStates[(int)E_PLAYER_FSM.MOVEMENT] = new PlayerGroundMove(this);
+        playerStates[(int)E_PLAYER_FSM.DASH] = new PlayerDash(this);
+        //playerStates[(int)E_PLAYER_FSM.JUMP] = new PlayerMovement(this, rigid, anim);
+        //playerStates[(int)E_PLAYER_FSM.FALL] = new PlayerMovement(this, rigid, anim);
+        playerStates[(int)E_PLAYER_FSM.ATTACK] = new PlayerAttack(this, attackCombo);
+        //playerStates[(int)E_PLAYER_FSM.SKILL] = new PlayerMovement(this, rigid, anim);
+        //playerStates[(int)E_PLAYER_FSM.ULTIMATESKILL] = new PlayerMovement(this, rigid, anim);
+        //playerStates[(int)E_PLAYER_FSM.HIT] = new PlayerMovement(this, rigid, anim);
+        //playerStates[(int)E_PLAYER_FSM.DEATH] = new PlayerMovement(this, rigid, anim);
+
+        currentPlayerState = E_PLAYER_FSM.MOVEMENT;
+        stateMachine.InitStateMachine(playerStates[(int)E_PLAYER_FSM.MOVEMENT]);
+    }
+
+    public void ChangeState(E_PLAYER_FSM _E_PLAYER_NEW_FSM) { stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]); currentPlayerState = _E_PLAYER_NEW_FSM; }
+
 
     void Update()
     {
-        GroundCheck();
-        InputMovementKey();
-        LimitMovementSpeed();
-        UpdateAnimation();
-        // 공격
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            anim.SetInteger("AttackCombo", tempCombo);
-            anim.SetTrigger("Attack");
-            tempCombo += 1;
-            if (tempCombo >= 3) tempCombo = 0;
-        }
+        stateMachine.Execute();
 
-        anim.SetFloat("VerticalVelocity", rigid.velocity.y);
+        //GroundCheck();
+        //InputMovementKey();
+        //LimitMovementSpeed();
+        //UpdateAnimation();
+        //// 공격
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    anim.SetInteger("AttackCombo", tempCombo);
+        //    anim.SetTrigger("Attack");
+        //    tempCombo += 1;
+        //    if (tempCombo >= 3) tempCombo = 0;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            anim.SetTrigger("Hit");
-        }
+        //anim.SetFloat("VerticalVelocity", rigid.velocity.y);
+
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    anim.SetTrigger("Hit");
+        //}
     }
 
     void FixedUpdate()
     {
-        Movement();
-        SlopeMovement();
-        AirBlock();
-        SetGravity();
-        SetRotation();
-        ApplyMovementForce();
-        ApplyMovementRotation();
+        stateMachine.FixedExecute();
+
+        //Movement();
+        //SlopeMovement();
+        //AirBlock();
+        //SetGravity();
+        //SetRotation();
+        //ApplyMovementForce();
+        //ApplyMovementRotation();
     }
     #endregion
 }
