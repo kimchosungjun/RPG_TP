@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 // ai 처리는 fixedupdate와 update가 좋다
@@ -11,6 +12,7 @@ public partial class CharacterCtrl : MonoBehaviour
     PlayerStateMachine stateMachine;
     PlayerAttackCombo attackCombo;
     [SerializeField] E_PLAYER_FSM currentPlayerState = E_PLAYER_FSM.MAX;
+
     #region Unity Life Cycle
     void Start()
     {
@@ -44,15 +46,16 @@ public partial class CharacterCtrl : MonoBehaviour
         attackCombo = new PlayerAttackCombo();
 
         playerStates = new PlayerState[(int)E_PLAYER_FSM.MAX];
-        playerStates[(int)E_PLAYER_FSM.MOVEMENT] = new PlayerGroundMove(this);
-        playerStates[(int)E_PLAYER_FSM.DASH] = new PlayerDash(this);
-        playerStates[(int)E_PLAYER_FSM.JUMP] = new PlayerJump(this);
-        playerStates[(int)E_PLAYER_FSM.FALL] = new PlayerFall(this);
-        playerStates[(int)E_PLAYER_FSM.ATTACK] = new PlayerAttack(this, attackCombo);
-        //playerStates[(int)E_PLAYER_FSM.SKILL] = new PlayerMovement(this, rigid, anim);
-        //playerStates[(int)E_PLAYER_FSM.ULTIMATESKILL] = new PlayerMovement(this, rigid, anim);
-        //playerStates[(int)E_PLAYER_FSM.HIT] = new PlayerMovement(this, rigid, anim);
-        //playerStates[(int)E_PLAYER_FSM.DEATH] = new PlayerMovement(this, rigid, anim);
+        playerStates[(int)E_PLAYER_FSM.MOVEMENT] = new PlayerGroundMoveState(this);
+        playerStates[(int)E_PLAYER_FSM.DASH] = new PlayerDashState(this);
+        playerStates[(int)E_PLAYER_FSM.JUMP] = new PlayerJumpState(this);
+        playerStates[(int)E_PLAYER_FSM.FALL] = new PlayerFallState(this);
+        playerStates[(int)E_PLAYER_FSM.ATTACK] = new PlayerAttackState(this, attackCombo);
+        playerStates[(int)E_PLAYER_FSM.SKILL] = new PlayerSkillState(this,attackCombo);
+        playerStates[(int)E_PLAYER_FSM.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
+        playerStates[(int)E_PLAYER_FSM.HIT] = new PlayerHitState(this);
+        //playerStates[(int)E_PLAYER_FSM.DEATH] = new (this, rigid, anim);
+        playerStates[(int)E_PLAYER_FSM.INTERACTION] = new PlayerInteractionState(this);
 
         currentPlayerState = E_PLAYER_FSM.MOVEMENT;
         stateMachine.InitStateMachine(playerStates[(int)E_PLAYER_FSM.MOVEMENT]);
@@ -99,4 +102,43 @@ public partial class CharacterCtrl : MonoBehaviour
         //ApplyMovementRotation();
     }
     #endregion
+
+    public void TestDialogue(Transform _targetTransform)
+    {
+        if (!isOnGround) return;
+
+        Vector3 direcition = _targetTransform.position - transform.position;
+        direcition.y = 0f;
+        float angle = Vector3.Angle(transform.forward, direcition);
+
+        ChangeState(E_PLAYER_FSM.INTERACTION);
+        
+        if (angle < 10f)
+        {
+            transform.rotation = Quaternion.LookRotation(direcition);
+            anim.SetBool("IsTurn",false);
+        }
+        else
+        {
+            StartCoroutine(CTurn(direcition));
+            anim.SetBool("IsTurn",true);
+        }
+        anim.SetTrigger("Talk");
+    }
+
+    IEnumerator CTurn(Vector3 _direction)
+    {
+        float time = 0f;
+        Quaternion currentRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(_direction);
+        while (true)
+        {
+            time += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, time / 1f);
+            if (time > 1f)
+                break;
+            yield return null;
+        }
+        transform.rotation = targetRotation;
+    }
 }

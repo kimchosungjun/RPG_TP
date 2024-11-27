@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 /// <summary>
-/// 플레이어는 물리 작용을 하기에 FixedUpdate에서 호출될 FixedExecute 추가
+/// PlayerState는 기존 State와 다르게 FixedExecute가 추가했기에
+/// 해당 상태를 다루는 PlayerStateMachine을 구현
 /// </summary>
 public class PlayerStateMachine : StateMachine
 {

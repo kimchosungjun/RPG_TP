@@ -25,7 +25,7 @@ public class forcemodeforce : MonoBehaviour
     [SerializeField] float playerWalkSpeed;
     [SerializeField] float playerRotateSpeed;
     [SerializeField] float planeCoefficient = 10f;
-    [SerializeField] float slopeCoefficient = 20f;
+    //[SerializeField] float slopeCoefficient = 20f;
     
     float xMove;
     float zMove;

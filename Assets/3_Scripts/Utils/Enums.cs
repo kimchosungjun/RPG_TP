@@ -49,7 +49,8 @@ public enum E_PLAYER_FSM
     ULTIMATESKILL=6,
     HIT=7,
     DEATH=8,
-    MAX=9
+    INTERACTION=9,
+    MAX=10
 }
 
 public enum E_BT

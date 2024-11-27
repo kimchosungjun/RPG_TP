@@ -161,7 +161,6 @@ public partial class CharacterCtrl : MonoBehaviour
 
     /****************************************/
     /************** 물리 적용 **************/
-    /************* 애니메이션 *************/
     /****************************************/
 
     #region Common Method : Rotation, Gravity, AddForce, MoveDirection
@@ -171,8 +170,8 @@ public partial class CharacterCtrl : MonoBehaviour
         moveDirection = camTransform.TransformDirection(moveDirection);
         moveDirection.y = 0;
         moveDirection = moveDirection.normalized;
+        moveDirection *= playerMoveSpeed * moveCoefficient;
     }
-
     public void SetGravity()
     {
         if (useGravity == false) return;
@@ -186,7 +185,6 @@ public partial class CharacterCtrl : MonoBehaviour
             if (curGravity < maxGravity) curGravity = maxGravity;
         }
     }
-
     public void SetRotation()
     {
         if (moveDirection != Vector3.zero)
@@ -198,92 +196,51 @@ public partial class CharacterCtrl : MonoBehaviour
             moveRotation = Quaternion.LookRotation(lookPosition);
         }
     }
-
-    public void ApplyMoveForce()
-    {
-        if (isOnGround)
-        {
-            moveDirection *= rigid.mass*playerMoveSpeed *moveCoefficient;
-            rigid.AddForce(moveDirection, ForceMode.Force);
-            return;
-        }
-
-        Vector3 airMovement = new Vector3(moveDirection.x, 0, moveDirection.z);
-        airMovement *= airMovementMultiplier * playerMoveSpeed * moveCoefficient;
-        airMovement.y = curGravity;
-        airMovement *= rigid.mass;
-        rigid.AddForce(airMovement, ForceMode.Force);
-    }
-
-    public void ApplyMoveRotation()
-    {
-        if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
-        {
-            if (isOnGround)
-                transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
-            else
-                transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed * airMovementMultiplier);
-        }
-    }
     #endregion
 
-    #region Ground Movement
+    #region Ground Movement 
     public void SetSlopeMoveDirection()
     {
         if (isOnGround)
         {
             float slopeAngle = Vector3.Angle(Vector3.up, groundHit.normal);
             // 평지일 땐, 따로 계산 필요없음.
-            if (Mathf.Abs(slopeAngle) < 0.1f) return;
+            if (Mathf.Abs(slopeAngle) < 0.1f) { isOnMaxAngleSlope = false; return; }
             Vector3 slopeMoveDirection = moveDirection;
             slopeMoveDirection = Vector3.ProjectOnPlane(slopeMoveDirection, groundHit.normal);
             if (slopeAngle > slopeMaxAngle)
             {
+                isOnMaxAngleSlope = true;
                 slopeMoveDirection += slopeMoveDirection * (slopeAngle / 90.0f);
                 slopeMoveDirection.y = slopeAngle * -0.2f;
+            }
+            else
+            {
+                isOnMaxAngleSlope = false;
+                moveDirection = slopeMoveDirection;
+                return;
             }
             if (Physics.Raycast(transform.position + Vector3.up * stepHeight * 0.5f, moveDirection, out slopeHit, slopeDetectDistance))
             {
                 if (Vector3.Angle(slopeHit.normal, Vector3.up) > slopeMaxAngle)
                 {
+                    isOnMaxAngleSlope = true;
                     slopeMoveDirection = Vector3.zero;
                     slopeMoveDirection.y = slopeAngle * -0.2f;
                 }
             }
             moveDirection = slopeMoveDirection;
         }
-
-
-        //if (isOnGround)
-        //{
-        //    float slopeAngle = Vector3.Angle(Vector3.up, groundHit.normal);
-        //    Vector3 slopeMoveDirection = moveDirection;
-        //    slopeMoveDirection = Vector3.ProjectOnPlane(slopeMoveDirection, groundHit.normal);
-        //    if (slopeAngle > slopeMaxAngle)
-        //    {
-        //        isOnMaxAngleSlope = true;
-        //        slopeMoveDirection += slopeMoveDirection * (slopeAngle / 90.0f);
-        //        slopeMoveDirection.y = slopeAngle * -0.2f;
-        //    }
-        //    else
-        //    {
-        //        // 평지 혹은 최대 경사로 아래일 때 움직임
-        //        isOnMaxAngleSlope = false;
-        //        slopeMoveDirection = slopeMoveDirection.normalized * moveCoefficient * playerMoveSpeed;
-        //        moveDirection = slopeMoveDirection;
-        //        return;
-        //    }
-        //    if (Physics.Raycast(transform.position + Vector3.up * stepHeight * 0.5f, moveDirection, out slopeHit, slopeDetectDistance))
-        //    {
-        //        if (Vector3.Angle(slopeHit.normal, Vector3.up) > slopeMaxAngle)
-        //        {
-        //            isOnMaxAngleSlope = true;
-        //            slopeMoveDirection = Vector3.zero;
-        //            slopeMoveDirection.y = slopeAngle * -0.2f;
-        //        }
-        //    }
-        //    moveDirection = slopeMoveDirection;
-        //}
+    }
+    public void ApplyGroundForce()
+    {
+        moveDirection *= rigid.mass;
+        rigid.AddForce(moveDirection, ForceMode.Force);
+    }
+    public void ApplyGroundRotation()
+    {
+        if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
+            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
     }
     #endregion
 
@@ -299,11 +256,22 @@ public partial class CharacterCtrl : MonoBehaviour
             }
         }
     }
-
-    public void SetVerticalVelocityAnimation() { anim.SetFloat("VerticalVelocity", rigid.velocity.y); }
+    public void ApplyAirForce()
+    {
+        Vector3 airMovement = new Vector3(moveDirection.x, 0, moveDirection.z);
+        airMovement *= airMovementMultiplier;
+        airMovement.y = curGravity;
+        airMovement *= rigid.mass;
+        rigid.AddForce(airMovement, ForceMode.Force);
+    }
+    public void ApplyAirRotation()
+    {
+        if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
+            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed * airMovementMultiplier);
+    }
     #endregion
 
-    #region Dash : Use Dash State 
+    #region Dash
     /// <summary>
     /// 대쉬로 
     /// </summary>
@@ -316,17 +284,24 @@ public partial class CharacterCtrl : MonoBehaviour
             Vector3 dashDirection = transform.forward;
             dashDirection.y = 0;
             dashDirection = dashDirection.normalized;
+            if (isOnGround)
+                dashDirection = Vector3.ProjectOnPlane(dashDirection, groundHit.normal);
             rigid.AddForce(dashDirection * playerDashForce, ForceMode.Impulse);
         }
     }
 
     /// <summary>
-    /// 대쉬 애니메이션 Behaviour Script에서 호출
+    /// 대쉬 쿨타임은 코루틴으로 구현
     /// </summary>
     public void DashCooling()
     {
         isPlayerDashing = false;
-        ChangeState(E_PLAYER_FSM.MOVEMENT);
+
+        if (isOnGround)
+            ChangeState(E_PLAYER_FSM.MOVEMENT);
+        else
+            ChangeState(E_PLAYER_FSM.FALL);
+
         StartCoroutine(CDashCooling());
     }
 
@@ -344,5 +319,20 @@ public partial class CharacterCtrl : MonoBehaviour
             yield return null;
         }
     }
+
+    public void ApplyGravityForce()
+    {
+        if (isOnGround) return;
+        //rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
+        rigid.AddForce(Vector3.up * curGravity * rigid.mass, ForceMode.Force);
+    }
+    #endregion
+
+    #region Attack & Skill & UltimateSkill
+    public void AttackCooling() { ChangeState(E_PLAYER_FSM.MOVEMENT); }
+
+    public void SkillCooling() { ChangeState(E_PLAYER_FSM.MOVEMENT); }
+
+    public void UltimateSkillCooling() { ChangeState(E_PLAYER_FSM.MOVEMENT); }
     #endregion
 }
