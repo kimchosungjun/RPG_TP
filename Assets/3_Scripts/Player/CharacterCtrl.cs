@@ -46,8 +46,8 @@ public partial class CharacterCtrl : MonoBehaviour
         playerStates = new PlayerState[(int)E_PLAYER_FSM.MAX];
         playerStates[(int)E_PLAYER_FSM.MOVEMENT] = new PlayerGroundMove(this);
         playerStates[(int)E_PLAYER_FSM.DASH] = new PlayerDash(this);
-        //playerStates[(int)E_PLAYER_FSM.JUMP] = new PlayerMovement(this, rigid, anim);
-        //playerStates[(int)E_PLAYER_FSM.FALL] = new PlayerMovement(this, rigid, anim);
+        playerStates[(int)E_PLAYER_FSM.JUMP] = new PlayerJump(this);
+        playerStates[(int)E_PLAYER_FSM.FALL] = new PlayerFall(this);
         playerStates[(int)E_PLAYER_FSM.ATTACK] = new PlayerAttack(this, attackCombo);
         //playerStates[(int)E_PLAYER_FSM.SKILL] = new PlayerMovement(this, rigid, anim);
         //playerStates[(int)E_PLAYER_FSM.ULTIMATESKILL] = new PlayerMovement(this, rigid, anim);

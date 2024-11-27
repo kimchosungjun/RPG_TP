@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDash : PlayerOnGroundState
+public class PlayerDash : PlayerState
 {
     Animator anim = null;
     public PlayerDash(CharacterCtrl _controller) : base(_controller)
@@ -12,7 +12,8 @@ public class PlayerDash : PlayerOnGroundState
 
     public override void Enter()
     {
-        base.Enter();
+        characterCtrl.Rigid.drag = 0f;
+        characterCtrl.Dash();
         anim.SetTrigger("Dash");
     }
 }

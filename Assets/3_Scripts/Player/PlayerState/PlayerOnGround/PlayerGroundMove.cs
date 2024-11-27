@@ -1,8 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerGroundMove : PlayerState
+public class PlayerGroundMove : PlayerOnGroundState
 {
+    /******************************************/
+    /*********** 생성자 & 변수  *************/
+    /******************************************/
+
+    #region Createor & Value
     Rigidbody rigid = null;
     Animator anim = null;
     public PlayerGroundMove(CharacterCtrl _controller) : base(_controller) 
@@ -10,19 +15,21 @@ public class PlayerGroundMove : PlayerState
         this.rigid = _controller.Rigid;
         this.anim = _controller.Anim;
     }
+    #endregion
+
+    /******************************************/
+    /********** 상태머신 재정의  ***********/
+    /******************************************/
 
     #region StateMachine Frame
-    public override void Enter()
-    {
-        base.Enter();
-    }
 
     public override void Execute()
     {
         characterCtrl.LimitMovementSpeed();
         characterCtrl.GroundCheck();
         InputKey();
-        SetAnimation();
+        SetPlaneVelocityAnimation();
+        CheckTransitionFallState();
     }
 
     public override void FixedExecute()
@@ -34,12 +41,11 @@ public class PlayerGroundMove : PlayerState
         characterCtrl.ApplyMoveForce();
         characterCtrl.ApplyMoveRotation();
     }
-
-    public override void Exit()
-    {
-        
-    }
     #endregion
+
+    /******************************************/
+    /********** 업데이트 메서드 ************/
+    /******************************************/
 
     #region Excute
     public void InputKey()
@@ -52,37 +58,31 @@ public class PlayerGroundMove : PlayerState
             Jumping();
 
         // 대쉬 입력
-        if (Input.GetKeyDown(KeyCode.Q) && characterCtrl.IsOnGround)
-            Dashing();
+        if (Input.GetKeyDown(KeyCode.Q) && characterCtrl.IsOnGround && !characterCtrl.IsOnMaxAngleSlope)
+            characterCtrl.ChangeState(E_PLAYER_FSM.DASH);
     }
 
     public void Jumping()
     {
-        rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
-        rigid.AddForce(Vector3.up * characterCtrl.PlayerJumpForce, ForceMode.Impulse);
+        //rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
+        //rigid.AddForce(Vector3.up * characterCtrl.PlayerJumpForce, ForceMode.Impulse);
         characterCtrl.ChangeState(E_PLAYER_FSM.JUMP);
     }
 
-    public void Dashing()
+    public void SetPlaneVelocityAnimation()
     {
-        characterCtrl.ChangeState(E_PLAYER_FSM.DASH);
-        characterCtrl.Dash();
-    }
-
-    public void SetAnimation()
-    {
-        if (characterCtrl.IsOnMaxAngleSlope)
-        {
-            anim.SetFloat("PlaneVelocity", 0f);
-            return;
-        }
         Vector3 planeVelocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
         float magnitude = planeVelocity.magnitude;
         anim.SetFloat("PlaneVelocity", Mathf.Clamp(magnitude, 0f, 5f));
     }
-    #endregion
 
-    #region FixedExecute
-
+    public void CheckTransitionFallState()
+    {
+        if(characterCtrl.IsOnGround == false)
+        {
+            if (rigid.velocity.y < -0.1f)
+                characterCtrl.ChangeState(E_PLAYER_FSM.FALL);
+        }
+    }
     #endregion
 }

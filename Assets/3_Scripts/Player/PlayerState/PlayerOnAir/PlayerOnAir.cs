@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerOnAir : MonoBehaviour
+public class PlayerOnAir : PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Rigidbody rigid = null;
+    protected Animator anim = null;
+
+    public PlayerOnAir(CharacterCtrl _controller) : base(_controller) 
     {
-        
+        rigid = _controller.Rigid;
+        anim = _controller.Anim;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        characterCtrl.Rigid.drag = characterCtrl.AirDrag;
+        characterCtrl.SetVerticalVelocityAnimation();
     }
 }
