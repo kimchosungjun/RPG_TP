@@ -15,7 +15,7 @@ public class Sequence : Node
         int listCnt = nodes.Count;
         for (int i = 0; i < listCnt; i++)
         {
-            switch (nodes[i].NodeState)
+            switch (nodes[i].Evaluate())
             {
                 case E_BT.BT_SUCCESS:
                     continue;

@@ -10,13 +10,12 @@ public class Selector : Node
     private List<Node> nodes = new List<Node>();
 
     public Selector(List<Node> btNodes) { this.nodes = btNodes; }
-
     public override E_BT Evaluate()
     {
         int listCnt = nodes.Count;
         for (int i = 0; i < listCnt; i++)
         {
-            switch (nodes[i].NodeState)
+            switch (nodes[i].Evaluate())
             {
                 case E_BT.BT_SUCCESS:
                     nodeState = E_BT.BT_SUCCESS;

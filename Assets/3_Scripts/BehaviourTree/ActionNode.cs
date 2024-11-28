@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActionNode : Node
 {
     public delegate E_BT ActionNodeReturn();
-    private ActionNodeReturn btAction;
+    private ActionNodeReturn btAction = null;
 
     public ActionNode(ActionNodeReturn btAction) { this.btAction = btAction; }
 
