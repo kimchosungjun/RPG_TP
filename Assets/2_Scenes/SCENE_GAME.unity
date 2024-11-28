@@ -826,7 +826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32fe9e862f7734428afbba1e3fc51eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayerState: 9
+  currentPlayerState: 10
   tempCombo: 0
   camTransform: {fileID: 330585546}
   bodyTransform: {fileID: 113701136}
