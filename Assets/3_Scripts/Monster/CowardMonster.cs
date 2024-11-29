@@ -12,6 +12,7 @@ public class CowardMonster : NoneAttackMonster
     float maxDistance = 5f;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] bool isIdleMove = false;
+    [SerializeField] EnemyStatusUIController statusUIController;
 
     void Awake()
     {
@@ -36,6 +37,8 @@ public class CowardMonster : NoneAttackMonster
 
     private void Start()
     {
+        statusUIController.Setup(this.transform);
+
         // 레벨 3
         ActionNode isHitByPlayer = new ActionNode(DoIsHitByPlayer);
         ActionNode hitMove = new ActionNode(DoHitRunAway);
@@ -65,7 +68,8 @@ public class CowardMonster : NoneAttackMonster
 
     private void Update()
     {
-        selectorNode.Evaluate();    
+        selectorNode.Evaluate();
+        statusUIController.Execute();
     }
 
     #region Hit
