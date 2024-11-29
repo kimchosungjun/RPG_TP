@@ -12,7 +12,7 @@ public class CowardMonster : NoneAttackMonster
     float maxDistance = 5f;
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] bool isIdleMove = false;
-    [SerializeField] EnemyStatusUIController statusUIController;
+    [SerializeField] MonsterStatusUICtrl statusUIController;
 
     void Awake()
     {
@@ -37,7 +37,8 @@ public class CowardMonster : NoneAttackMonster
 
     private void Start()
     {
-        statusUIController.Setup(this.transform);
+        Collider coll = GetComponent<Collider>();
+        statusUIController.Setup(this.transform, coll.bounds.size.y);
 
         // 레벨 3
         ActionNode isHitByPlayer = new ActionNode(DoIsHitByPlayer);

@@ -3,41 +3,65 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-enum E_STATUS_UI_HP
+public class MonsterStatusUICtrl : MonoBehaviour
 {
-    MASK=0,
-    FILL=1
-}
-
-public class EnemyStatusUIController : MonoBehaviour
-{
+    /******************************************/
+    /*****************  변수  *****************/
+    /******************************************/
+    #region Link UI & Value
     [SerializeField] Canvas statusCanvas;
     [SerializeField] GameObject hpUIObject;
     [SerializeField] Image hpImage;
     [SerializeField] Image effectImage;
     [SerializeField] Image backImage;
     [SerializeField] Text levelText;
-    [SerializeField] float effectTime;
+    [SerializeField, Tooltip("HP바의 위치 : 머리에서 좀 더 떨어지도록 설정")] float heightDelta = 0.2f;
+
     Transform followTransform = null;
     Transform camTransform = null;
-    public void Setup(Transform _followTransform, int _level = 0)
+    float effectTime = 5f;
+    float monsterHeight = 0f;
+    #endregion
+
+
+    public void Init()
     {
-        followTransform = _followTransform;
+        if (statusCanvas.gameObject.activeSelf) statusCanvas.gameObject.SetActive(false);
+        if (hpUIObject.gameObject.activeSelf) hpUIObject.gameObject.SetActive(false);
+        if (levelText.gameObject.activeSelf) levelText.gameObject.SetActive(false);
+    }
+
+    public void Setup(Transform _followTransform, float _monsterHeight,int _level = 0)
+    {
+        // Set
+        hpImage.fillAmount = 1f;
+        effectImage.fillAmount = 1f;
         levelText.text = "Lv." + _level;
+        monsterHeight = _monsterHeight + heightDelta;
+        // Link
+        followTransform = _followTransform;
         statusCanvas.worldCamera = Camera.main;
         camTransform = Camera.main.transform;
     }
 
     public void Execute()
     {
-        transform.position = followTransform.position + Vector3.up;
-        transform.rotation = camTransform.rotation;
+        UpdatePostion();
 
         if (Input.GetKeyDown(KeyCode.F))
         {
             hpImage.fillAmount -= 0.1f;
         }
         HPEffect();
+    }
+
+    /// <summary>
+    /// 몬스터의 
+    /// </summary>
+    public void UpdatePostion()
+    {
+        transform.position = followTransform.position + Vector3.up * monsterHeight;
+        transform.rotation = camTransform.rotation;
     }
 
     public void HPEffect()
@@ -47,12 +71,6 @@ public class EnemyStatusUIController : MonoBehaviour
         if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
         else if(hpImage.fillAmount> effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
     }
-
-    //IEnumerator HitEffect()
-    //{
-    //    float time = 0f;
-        
-    //}
 
 
     public void DecideShowLevel(bool _isShow) { levelText.gameObject.SetActive(_isShow); }

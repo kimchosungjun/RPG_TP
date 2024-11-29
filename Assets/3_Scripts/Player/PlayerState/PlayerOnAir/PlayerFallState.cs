@@ -18,6 +18,7 @@ public class PlayerFallState : PlayerOnAirState
 
     public override void Execute()
     {
+        characterCtrl.MonsterCheck(); 
         characterCtrl.LimitMovementSpeed();
         characterCtrl.GroundCheck();
         InputKey();

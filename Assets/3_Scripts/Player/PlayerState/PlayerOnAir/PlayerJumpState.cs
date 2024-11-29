@@ -47,7 +47,8 @@ public class PlayerJumpState : PlayerOnAirState
         }
         else
             time += Time.deltaTime;
-       
+
+        characterCtrl.MonsterCheck();
         if (maintainJumpState == true) return;
         characterCtrl.LimitMovementSpeed();
         characterCtrl.GroundCheck();

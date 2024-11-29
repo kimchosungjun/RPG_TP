@@ -67,6 +67,7 @@ public partial class CharacterCtrl : MonoBehaviour
     /*********** 공통 검출 변수 *************/
     /******************************************/
     int groundLayer = 1 << 3 | 1 << 6; // 3은 벽, 6은 땅
+    int monsterLayer = 1 << 7;
     float playerBodyRadius;
     [SerializeField] float playerBodyHeight;
     public int GroundLayer { get { return groundLayer; } }
@@ -157,6 +158,8 @@ public partial class CharacterCtrl : MonoBehaviour
             }
         }
     }
+
+    
     #endregion
 
     /****************************************/
@@ -268,6 +271,17 @@ public partial class CharacterCtrl : MonoBehaviour
     {
         if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
             transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed * airMovementMultiplier);
+    }
+
+    public void MonsterCheck()
+    {
+        RaycastHit monsterHit;
+        if (Physics.SphereCast(bodyTransform.position, playerBodyRadius, Vector3.down,
+         out monsterHit, groundDetectDistance, monsterLayer))
+        {
+            Vector3 reverseForward = transform.forward * -1f + Vector3.up *0.5f;
+            rigid.AddForce(reverseForward * 0.1f, ForceMode.Impulse);
+        }
     }
     #endregion
 

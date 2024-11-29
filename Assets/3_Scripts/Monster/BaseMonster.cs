@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BaseMonster : MonoBehaviour
 {
     protected Animator anim = null;
+    protected MonsterStatusUICtrl statusUICtrl = null;
 
     public abstract E_BT DetectPlayer();
     public abstract E_BT IdleMovement();
