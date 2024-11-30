@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 3054566516119258676}
   - component: {fileID: 3309786654644649927}
   m_Layer: 0
-  m_Name: Swarm08
+  m_Name: P_Rayfish_High
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

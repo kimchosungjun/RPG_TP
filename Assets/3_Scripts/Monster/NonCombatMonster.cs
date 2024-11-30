@@ -29,6 +29,9 @@ public class NonCombatMonster : BaseMonster
         recoveryTime += Time.deltaTime;
     }
 
+    /// <summary>
+    /// 맞았을 때 호출
+    /// </summary>
     public virtual void ResetRecoveryTime()
     {
         recoveryTime = 0f;
