@@ -13,6 +13,11 @@ public class Flybee : PatrolMonster
 
     protected void Start()
     {
+        if (anim == null) anim = GetComponent<Animator>();
+        if (statusUICtrl == null) statusUICtrl = GetComponentInChildren<MonsterStatusUICtrl>();
+        statusUICtrl?.Setup(this.transform, 0.75f);
+
+
         // Level1 
         ActionNode checkCurrentStateAction = new ActionNode(DoCheckHitState);
         ActionNode patrolAction = new ActionNode(DoPatrol);
@@ -26,10 +31,11 @@ public class Flybee : PatrolMonster
         flybeeRoot = new Selector(level1);
     }
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         flybeeRoot.Evaluate();
         if (Input.GetKeyDown(KeyCode.B)) MakeHitState();
+        statusUICtrl.Execute();
     }
 
     public E_BT DoCheckHitState()

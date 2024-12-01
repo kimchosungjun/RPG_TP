@@ -60,6 +60,15 @@ public enum E_BT
     BT_RUNNING=2
 }
 
+public enum E_MONSTER_ANIM
+{
+    IDLE=0,
+    MOVE=1,
+    HIT=2,
+    DEATH=3,
+    ATTACK=4,
+}
+
 #region ITEM
 
 public enum E_CAMERAVIEW
@@ -92,4 +101,12 @@ public enum E_WEAPONEFFECT
 }
 
 #endregion
+
+public enum E_CHARACTER
+{
+    PLAYER=0,
+    NORMAL_MONSTER=1,
+    BOSS_MONSTER=2,
+    NPC=3
+}
 

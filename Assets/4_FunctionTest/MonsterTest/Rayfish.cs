@@ -9,20 +9,12 @@ public class Rayfish : CowardMonster
     {
         PathNode bestNode = null;
         float bestDistance = float.MaxValue;
-        float maxDistanceSqr = maxDistance * maxDistance; // 거리 제곱 값
-
+        float maxDistanceSqr = maxDistance * maxDistance;
         foreach (var node in pathNodes)
         {
-            // 1. 노드와 AI 간의 거리 계산
             float distanceToAI = (node.NodePosition - transform.position).sqrMagnitude;
-
-            // 2. 최대 거리 필터링
             if (distanceToAI > maxDistanceSqr) continue;
-
-            // 3. 노드와 플레이어 간의 거리 계산
             float distanceToPlayer = (node.NodePosition - transform.position).sqrMagnitude;
-
-            // 4. 가장 먼 노드 선택
             if (distanceToPlayer > bestDistance)
             {
                 bestNode = node;
@@ -48,12 +40,11 @@ public class Rayfish : CowardMonster
     {
         for (int i = 0; i < _nodeCnt; i++)
         {
-            float angle = i * Mathf.PI * 2 / _nodeCnt; // 각도 (라디안 단위)
+            float angle = i * Mathf.PI * 2 / _nodeCnt;
             float x = _centerPosition.x + Mathf.Cos(angle) * _pathRadius;
             float z = _centerPosition.z + Mathf.Sin(angle) * _pathRadius;
-
-            Vector3 nodePosition = new Vector3(x, 0, z); // y 값은 0으로 고정
-            pathNodes.Add(new PathNode(nodePosition)); // PathNode 생성 후 리스트에 추가
+            Vector3 nodePosition = new Vector3(x, 0, z); 
+            pathNodes.Add(new PathNode(nodePosition)); 
         }
     }
 

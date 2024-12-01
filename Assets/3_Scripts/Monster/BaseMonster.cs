@@ -4,9 +4,13 @@ using UnityEngine;
 
 public abstract class BaseMonster : MonoBehaviour
 {
-    protected Animator anim = null;
-    protected MonsterStatusUICtrl statusUICtrl = null;
+    [SerializeField] protected Animator anim = null;
+    [SerializeField] protected MonsterStatusUICtrl statusUICtrl = null;
 
+    /// <summary>
+    /// 플레이어가 근처에 오면 상태창 활성화
+    /// </summary>
+    /// <returns></returns>
     public abstract E_BT DetectPlayer();
     public abstract E_BT IdleMovement();
     public abstract E_BT DetectMovement();

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 // ai 처리는 fixedupdate와 update가 좋다
@@ -12,6 +10,8 @@ public partial class CharacterCtrl : MonoBehaviour
     PlayerStateMachine stateMachine;
     PlayerAttackCombo attackCombo;
     [SerializeField] E_PLAYER_FSM currentPlayerState = E_PLAYER_FSM.MAX;
+    bool canPlayerCtrl = true;
+    public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
 
     #region Unity Life Cycle
     void Start()
@@ -66,27 +66,13 @@ public partial class CharacterCtrl : MonoBehaviour
 
     void Update()
     {
-        stateMachine.Execute();
+        if(canPlayerCtrl)
+            stateMachine.Execute();
 
         //GroundCheck();
         //InputMovementKey();
         //LimitMovementSpeed();
         //UpdateAnimation();
-        //// 공격
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    anim.SetInteger("AttackCombo", tempCombo);
-        //    anim.SetTrigger("Attack");
-        //    tempCombo += 1;
-        //    if (tempCombo >= 3) tempCombo = 0;
-        //}
-
-        //anim.SetFloat("VerticalVelocity", rigid.velocity.y);
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    anim.SetTrigger("Hit");
-        //}
     }
 
     void FixedUpdate()
@@ -140,5 +126,10 @@ public partial class CharacterCtrl : MonoBehaviour
             yield return null;
         }
         transform.rotation = targetRotation;
+    }
+
+    public void MoveLock(bool _isMoveLock) 
+    {
+        canPlayerCtrl = _isMoveLock;
     }
 }

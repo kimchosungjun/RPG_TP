@@ -36,6 +36,14 @@ public class PlayerAttackState : PlayerOnGroundState
         anim.SetTrigger("Attack"); 
     }
 
+    public override void Execute()
+    {
+        if (characterCtrl.CanPlayerCtrl == false) return;
+        base.Execute();
+    }
+
+    public bool CanExecute() { return true; }
+
     public override void Exit() { attackCombo.SetComboTime();  }
 
     #endregion

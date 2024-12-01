@@ -393,7 +393,7 @@ Transform:
   m_Children:
   - {fileID: 6646927495751389946}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7926936411174285934
 MonoBehaviour:
@@ -408,8 +408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusCanvas: {fileID: 6463699505570412543}
-  hpImage: {fileID: 3505413558212541397}
-  effectImage: {fileID: 3718283173862718729}
+  hpImage: {fileID: 3718283173862718729}
+  effectImage: {fileID: 3505413558212541397}
   levelText: {fileID: 3633098944620233986}
   heightDelta: -0.5
 --- !u!1 &4938534677707785235

@@ -16,6 +16,7 @@ public class PlayerState : State
     /// 데미지를 입는 상태에선 재정의 하여 사용할 것
     /// </summary>
     public virtual void TakeDamage() { }
+
     /// <summary>
     /// 죽음 상태 : 어떤 상태든 호출되면 바로 죽음 상태로 전환
     /// </summary>
