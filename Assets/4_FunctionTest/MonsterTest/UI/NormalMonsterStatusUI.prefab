@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 1028189660566494355}
   - component: {fileID: 7926936411174285934}
   m_Layer: 0
-  m_Name: EnemyStatusUICtrl_World_Normal
+  m_Name: NormalMonsterStatusUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,7 +393,7 @@ Transform:
   m_Children:
   - {fileID: 6646927495751389946}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7926936411174285934
 MonoBehaviour:

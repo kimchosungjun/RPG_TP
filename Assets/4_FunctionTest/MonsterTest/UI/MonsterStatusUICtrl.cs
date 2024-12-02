@@ -8,6 +8,7 @@ public abstract class MonsterStatusUICtrl : MonoBehaviour
     /******************************************/
 
     #region Link UI & Value
+    [Header("Monster")]
     [SerializeField] protected Canvas statusCanvas;
     [SerializeField] protected Image hpImage;
     [SerializeField] protected Image effectImage;
@@ -27,7 +28,7 @@ public abstract class MonsterStatusUICtrl : MonoBehaviour
     /// <param name="_followTransform"></param>
     /// <param name="_monsterHeight"></param>
     /// <param name="_level"></param>
-    public abstract void Setup(Transform _followTransform, float _monsterHeight, int _level = 0);
+    public abstract void Setup(Transform _followTransform, int _level = 0);
     public abstract void Execute();
     #endregion
 

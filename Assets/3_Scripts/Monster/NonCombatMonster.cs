@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NonCombatMonster : BaseMonster
+public class NonCombatMonster : NormalMonster
 {
     //나중에 지울 변수
     [SerializeField] protected float tempHP;

@@ -11,11 +11,11 @@ public class Flybee : PatrolMonster
     // 하나라도 참이면 바로 참을 반환 
     Selector flybeeRoot = null;
 
-    protected void Start()
+    protected override void Start()
     {
         if (anim == null) anim = GetComponent<Animator>();
         if (statusUICtrl == null) statusUICtrl = GetComponentInChildren<MonsterStatusUICtrl>();
-        statusUICtrl?.Setup(this.transform, 0.75f);
+        statusUICtrl?.Setup(this.transform);
 
 
         // Level1 
@@ -31,7 +31,7 @@ public class Flybee : PatrolMonster
         flybeeRoot = new Selector(level1);
     }
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
         flybeeRoot.Evaluate();
         if (Input.GetKeyDown(KeyCode.B)) MakeHitState();

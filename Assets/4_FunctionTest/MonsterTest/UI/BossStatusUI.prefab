@@ -271,13 +271,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698344537675173301}
+  - component: {fileID: 8519234339764813918}
   m_Layer: 0
-  m_Name: EnemyStatusUICtrl_Overlay_Boss
+  m_Name: BossStatusUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1698344537675173301
 Transform:
   m_ObjectHideFlags: 0
@@ -292,8 +293,28 @@ Transform:
   m_Children:
   - {fileID: 5818267151885739379}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8519234339764813918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436514016855101711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1980a5029337440a1e1abbb6e424d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusCanvas: {fileID: 2770912117513649339}
+  hpImage: {fileID: 4013853282605371239}
+  effectImage: {fileID: 1042253895135580989}
+  levelText: {fileID: 460645879411783706}
+  monsterNameText: {fileID: 4299085115162526315}
+  gaugeImage: {fileID: 3217043439814118700}
+  fillGaugeImage: {fileID: 8368802042023519485}
+  groggyColor: {r: 1, g: 0.8901961, b: 0.3647059, a: 1}
 --- !u!1 &3845741864414451893
 GameObject:
   m_ObjectHideFlags: 0

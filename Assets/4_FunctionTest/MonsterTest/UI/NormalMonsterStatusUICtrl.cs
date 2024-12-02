@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WorldMonsterStatusUICtrl : MonsterStatusUICtrl
+public class NormalMonsterStatusUICtrl : MonsterStatusUICtrl
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -10,25 +10,24 @@ public class WorldMonsterStatusUICtrl : MonsterStatusUICtrl
     [SerializeField, Tooltip("HP바의 위치 : 머리에서 좀 더 떨어지도록 설정")] float heightDelta = 0.2f;
     protected Transform followTransform = null;
     protected Transform camTransform = null;
-    protected float monsterHeight = 0f;
     #endregion
 
     /******************************************/
     /******* 라이프 사이클 재정의 *********/
     /******************************************/
+    
     #region Override Life Cycle
     public override void Init()
     {
         if (statusCanvas.gameObject.activeSelf) statusCanvas.gameObject.SetActive(false);
     }
 
-    public override void Setup(Transform _followTransform, float _monsterHeight, int _level = 0)
+    public override void Setup(Transform _followTransform, int _level = 0)
     {
         // Set
         hpImage.fillAmount = 1f;
         effectImage.fillAmount = 1f;
         levelText.text = "Lv." + _level;
-        monsterHeight = _monsterHeight + heightDelta;
         // Link
         followTransform = _followTransform;
         statusCanvas.worldCamera = Camera.main;
@@ -55,7 +54,7 @@ public class WorldMonsterStatusUICtrl : MonsterStatusUICtrl
     #region Update Status Information
     public void UpdatePostion()
     {
-        transform.position = followTransform.position + Vector3.up * monsterHeight;
+        transform.position = followTransform.position + Vector3.up * heightDelta;
         transform.rotation = camTransform.rotation;
     }
 

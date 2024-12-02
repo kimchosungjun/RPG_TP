@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BaseMonster : MonoBehaviour
 {
     [SerializeField] protected Animator anim = null;
-    [SerializeField] protected MonsterStatusUICtrl statusUICtrl = null;
+ 
 
     /// <summary>
     /// 플레이어가 근처에 오면 상태창 활성화
@@ -19,4 +19,8 @@ public abstract class BaseMonster : MonoBehaviour
     public abstract void Death();
     public abstract void TakeDamage();
     public abstract void Recovery();
+
+    protected virtual void Awake() { }
+    protected virtual void Start() { }
+    protected virtual void FixedUpdate() { } 
 }

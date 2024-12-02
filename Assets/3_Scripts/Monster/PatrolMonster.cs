@@ -10,7 +10,7 @@ public class PatrolMonster : NonCombatMonster
     protected Vector3 targetWay;
     protected Vector3 lastWay;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
         maxWayPoint = pathWays.Length;
         targetWay = pathWays[0];

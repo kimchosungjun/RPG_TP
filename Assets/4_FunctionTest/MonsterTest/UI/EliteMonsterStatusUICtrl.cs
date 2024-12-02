@@ -1,16 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OverlayMonsterStatusUICtrl : MonsterStatusUICtrl
+public class EliteMonsterStatusUICtrl : MonsterStatusUICtrl
 {
     /******************************************/
     /*****************  변수  *****************/
     /******************************************/
 
     #region Variable
-    [SerializeField] Text monsterNameText;
+    [Header("Elite Monster")]
+    [SerializeField] protected Text monsterNameText;
     [SerializeField] protected Image gaugeImage;
-
+    [SerializeField, Tooltip("게이지 색을 바꾸기 위해 필요")] protected Image fillGaugeImage;
+    [SerializeField] protected Color groggyColor;
+    protected Color defaultColor = Color.white;
     #endregion
 
 
@@ -24,11 +27,14 @@ public class OverlayMonsterStatusUICtrl : MonsterStatusUICtrl
         if (statusCanvas.gameObject.activeSelf) statusCanvas.gameObject.SetActive(false);
     }
 
-    public override void Setup(Transform _followTransform, float _monsterHeight, int _level = 0)
+    public override void Setup(Transform _followTransform,int _level = 0)
     {
+
     }
+
     public override void Execute()
     {
+
     }
 
     #endregion

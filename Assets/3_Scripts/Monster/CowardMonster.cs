@@ -13,7 +13,7 @@ public class CowardMonster : NonCombatMonster
     [SerializeField] protected bool isIdleMove = false;
     [SerializeField] protected MonsterStatusUICtrl statusUIController;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
         if(anim==null)  anim = GetComponent<Animator>();    
         if(statusUIController==null) statusUIController = GetComponentInChildren<MonsterStatusUICtrl>();    
