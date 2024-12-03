@@ -32,10 +32,10 @@ public class Enums
 
 public enum E_SCENES
 {
-    SCENE_TITLE = 0,
-    SCENE_LOGIN =1,
-    SCENE_LOADING = 2,
-    SCENE_GAME=3,
+    TITLE = 0,
+    LOGIN =1,
+    LOADING = 2,
+    GAME=3,
 }
 
 public enum E_LAYERS
@@ -68,9 +68,9 @@ public enum E_PLAYER_STATES
 
 public enum E_BTS
 {
-    BT_SUCCESS=0,
-    BT_FAIL=1,
-    BT_RUNNING=2
+    SUCCESS=0,
+    FAIL=1,
+    RUNNING=2
 }
 
 public enum E_MONSTER_ANIMS
@@ -81,6 +81,13 @@ public enum E_MONSTER_ANIMS
     ATTACK=3,
     DEATH=4,
     GROGGY=5
+}
+
+public enum E_ATTACKTYPE
+{
+    NORMAL=0,
+    KNOCKBACK=1,
+    STUN=2,
 }
 
 #region ITEM
@@ -116,11 +123,4 @@ public enum E_WEAPONEFFECT
 
 #endregion
 
-public enum E_CHARACTERS
-{
-    PLAYER=0,
-    NORMAL_MONSTER=1,
-    BOSS_MONSTER=2,
-    NPC=3
-}
 

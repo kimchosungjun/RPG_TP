@@ -13,18 +13,18 @@ public class ActionNode : Node
     {
         switch (btAction())
         {
-            case E_BTS.BT_SUCCESS:
-                nodeState = E_BTS.BT_SUCCESS;
+            case E_BTS.SUCCESS:
+                nodeState = E_BTS.SUCCESS;
                 return nodeState;
-            case E_BTS.BT_FAIL:
-                nodeState = E_BTS.BT_FAIL;
+            case E_BTS.FAIL:
+                nodeState = E_BTS.FAIL;
                 return nodeState;
-            case E_BTS.BT_RUNNING:
-                nodeState = E_BTS.BT_RUNNING;
+            case E_BTS.RUNNING:
+                nodeState = E_BTS.RUNNING;
                 return nodeState;
             default:
                 Debug.LogError("잘못된 행동 상태!");
-                return E_BTS.BT_FAIL;
+                return E_BTS.FAIL;
         }
     }
 }

@@ -33,6 +33,6 @@ public class PatrolMonster : NonCombatMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
 }

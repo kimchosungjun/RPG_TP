@@ -86,8 +86,8 @@ public class AnnoyBear : MonoBehaviour
     #region 1
     public E_BTS DoCheckCanMovable()
     {
-        if (isKnockBackState || isGroggyState) return E_BTS.BT_FAIL;
-        else return E_BTS.BT_SUCCESS;
+        if (isKnockBackState || isGroggyState) return E_BTS.FAIL;
+        else return E_BTS.SUCCESS;
     }
 
     public void SetHitState()
@@ -110,7 +110,7 @@ public class AnnoyBear : MonoBehaviour
     // selector
     public E_BTS DoCheckInBattleField()
     {
-        return (IsInBattleField) ? E_BTS.BT_SUCCESS : E_BTS.BT_FAIL;
+        return (IsInBattleField) ? E_BTS.SUCCESS : E_BTS.FAIL;
     }
     // fail만 반환
     public E_BTS DoIdle()
@@ -119,7 +119,7 @@ public class AnnoyBear : MonoBehaviour
         if (currentIdleTime <= idleTimer)
         {
             currentIdleTime += Time.deltaTime;
-            return E_BTS.BT_FAIL;
+            return E_BTS.FAIL;
         }
 
         currentIdleTime = 0f;
@@ -137,7 +137,7 @@ public class AnnoyBear : MonoBehaviour
                 break;
         }
 
-        return E_BTS.BT_FAIL;
+        return E_BTS.FAIL;
     }
     #endregion
 
@@ -148,10 +148,10 @@ public class AnnoyBear : MonoBehaviour
         if (colls.Length == 0)
         {
             Debug.Log("인식거리 안이 아닙니다!");
-            return E_BTS.BT_FAIL;
+            return E_BTS.FAIL;
         }
         Debug.Log("인식거리 안입니다!");
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
 
     public E_BTS DoGuardIdle()
@@ -165,7 +165,7 @@ public class AnnoyBear : MonoBehaviour
     public E_BTS DoCheckAttackCool()
     {
         anim.SetInteger("State", (int)AnnoyBearState.Attack);
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
     #endregion
 }

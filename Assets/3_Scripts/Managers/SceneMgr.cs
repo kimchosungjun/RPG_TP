@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public partial class SceneMgr : MonoBehaviour
 {
-    E_SCENES nextLoadScene = E_SCENES.SCENE_LOADING;
-    E_SCENES currentScene = E_SCENES.SCENE_TITLE;
+    E_SCENES nextLoadScene = E_SCENES.LOADING;
+    E_SCENES currentScene = E_SCENES.TITLE;
     AsyncOperation asyncOperation = null;
     public void Init() { SharedMgr.SceneMgr = this; }
 
@@ -29,7 +29,7 @@ public partial class SceneMgr : MonoBehaviour
                 return;
             }
             nextLoadScene = _changeScene;
-            SceneManager.LoadScene((int) E_SCENES.SCENE_LOADING);
+            SceneManager.LoadScene((int) E_SCENES.LOADING);
         }
     }
 
@@ -57,7 +57,7 @@ public partial class SceneMgr : MonoBehaviour
         }
 
         currentScene = nextLoadScene;
-        nextLoadScene = E_SCENES.SCENE_LOADING;
+        nextLoadScene = E_SCENES.LOADING;
 
         asyncOperation.allowSceneActivation = true; 
 

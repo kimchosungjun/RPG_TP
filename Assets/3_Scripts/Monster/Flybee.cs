@@ -40,8 +40,8 @@ public class Flybee : PatrolMonster
 
     public E_BTS DoCheckHitState()
     {
-        if (isHitState) return E_BTS.BT_SUCCESS;
-        else return E_BTS.BT_FAIL;   
+        if (isHitState) return E_BTS.SUCCESS;
+        else return E_BTS.FAIL;   
     }
 
     protected override E_BTS DoPatrol()
@@ -59,7 +59,7 @@ public class Flybee : PatrolMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
 
     #region 테스트용 메서드

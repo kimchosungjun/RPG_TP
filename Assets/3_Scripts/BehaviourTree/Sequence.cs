@@ -17,17 +17,17 @@ public class Sequence : Node
         {
             switch (nodes[i].Evaluate())
             {
-                case E_BTS.BT_SUCCESS:
+                case E_BTS.SUCCESS:
                     continue;
-                case E_BTS.BT_FAIL:
-                    nodeState = E_BTS.BT_FAIL;
+                case E_BTS.FAIL:
+                    nodeState = E_BTS.FAIL;
                     return nodeState;
-                case E_BTS.BT_RUNNING:
-                    nodeState = E_BTS.BT_RUNNING;
+                case E_BTS.RUNNING:
+                    nodeState = E_BTS.RUNNING;
                     return nodeState;
             }
         }
-        nodeState = E_BTS.BT_SUCCESS;
+        nodeState = E_BTS.SUCCESS;
         return nodeState;
     }
 }

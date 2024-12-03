@@ -4,7 +4,7 @@ using UnityEngine;
 /// 비전투 몬스터의 경우 바로 상속받아 사용한다.
 /// </summary>
 [System.Serializable]
-public class MonsterStat
+public class MonsterStat : Stat
 {
     #region Protected_StatValue
     // 몬스터 식별 필드

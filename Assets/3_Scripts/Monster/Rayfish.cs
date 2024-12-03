@@ -102,15 +102,15 @@ public class Rayfish : CowardMonster
     /******************************************/
     /****************  행동  ******************/
     /******************************************/
-    public E_BTS DoIsHitByPlayer() { return (isHitState) ? E_BTS.BT_SUCCESS : E_BTS.BT_FAIL; }
+    public E_BTS DoIsHitByPlayer() { return (isHitState) ? E_BTS.SUCCESS : E_BTS.FAIL; }
 
     public E_BTS DoHitRunAway()
     {
         Debug.Log("맞아서 도망중");
-        if (isMoving) return E_BTS.BT_SUCCESS;
+        if (isMoving) return E_BTS.SUCCESS;
         StopCoroutine(CDoRunAway());
         StartCoroutine(CDoRunAway());
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
 
     IEnumerator CDoRunAway()
@@ -151,11 +151,11 @@ public class Rayfish : CowardMonster
         float distance = Vector3.Distance(player.position, transform.position);
         if (2f > distance)
         {
-            return E_BTS.BT_SUCCESS;
+            return E_BTS.SUCCESS;
         }
         else
         {
-            return E_BTS.BT_FAIL;
+            return E_BTS.FAIL;
         }
     }
 
@@ -183,7 +183,7 @@ public class Rayfish : CowardMonster
                 }
                 break;
         }
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
 
     public void DoMove(Vector3 _targetPosition) { StartCoroutine(CDoMove(_targetPosition)); }
@@ -206,6 +206,6 @@ public class Rayfish : CowardMonster
     public E_BTS TestMove()
     {
         Debug.Log("이동중!!");
-        return E_BTS.BT_SUCCESS;
+        return E_BTS.SUCCESS;
     }
 }

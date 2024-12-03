@@ -17,17 +17,17 @@ public class Selector : Node
         {
             switch (nodes[i].Evaluate())
             {
-                case E_BTS.BT_SUCCESS:
-                    nodeState = E_BTS.BT_SUCCESS;
+                case E_BTS.SUCCESS:
+                    nodeState = E_BTS.SUCCESS;
                     return nodeState;
-                case E_BTS.BT_FAIL:
+                case E_BTS.FAIL:
                     continue;    
-                case E_BTS.BT_RUNNING:
-                    nodeState = E_BTS.BT_RUNNING;
+                case E_BTS.RUNNING:
+                    nodeState = E_BTS.RUNNING;
                     return nodeState;
             }
         }
-        nodeState = E_BTS.BT_FAIL;
+        nodeState = E_BTS.FAIL;
         return nodeState;
     }
 }
