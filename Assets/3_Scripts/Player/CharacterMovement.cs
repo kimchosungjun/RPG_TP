@@ -312,9 +312,9 @@ public partial class CharacterCtrl : MonoBehaviour
         isPlayerDashing = false;
 
         if (isOnGround)
-            ChangeState(E_PLAYER_FSM.MOVEMENT);
+            ChangeState(E_PLAYER_STATES.MOVEMENT);
         else
-            ChangeState(E_PLAYER_FSM.FALL);
+            ChangeState(E_PLAYER_STATES.FALL);
 
         StartCoroutine(CDashCooling());
     }
@@ -343,10 +343,10 @@ public partial class CharacterCtrl : MonoBehaviour
     #endregion
 
     #region Attack & Skill & UltimateSkill
-    public void AttackCooling() { ChangeState(E_PLAYER_FSM.MOVEMENT); }
+    public void AttackCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
 
-    public void SkillCooling() { ChangeState(E_PLAYER_FSM.MOVEMENT); }
+    public void SkillCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
 
-    public void UltimateSkillCooling() { ChangeState(E_PLAYER_FSM.MOVEMENT); }
+    public void UltimateSkillCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
     #endregion
 }

@@ -16,17 +16,17 @@ public class BossMonster : BaseMonster
         throw new System.NotImplementedException();
     }
 
-    public override E_BT DetectMovement()
+    public override E_BTS DetectMovement()
     {
         throw new System.NotImplementedException();
     }
 
-    public override E_BT DetectPlayer()
+    public override E_BTS DetectPlayer()
     {
         throw new System.NotImplementedException();
     }
 
-    public override E_BT IdleMovement()
+    public override E_BTS IdleMovement()
     {
         throw new System.NotImplementedException();
     }

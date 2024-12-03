@@ -102,15 +102,15 @@ public class Rayfish : CowardMonster
     /******************************************/
     /****************  행동  ******************/
     /******************************************/
-    public E_BT DoIsHitByPlayer() { return (isHitState) ? E_BT.BT_SUCCESS : E_BT.BT_FAIL; }
+    public E_BTS DoIsHitByPlayer() { return (isHitState) ? E_BTS.BT_SUCCESS : E_BTS.BT_FAIL; }
 
-    public E_BT DoHitRunAway()
+    public E_BTS DoHitRunAway()
     {
         Debug.Log("맞아서 도망중");
-        if (isMoving) return E_BT.BT_SUCCESS;
+        if (isMoving) return E_BTS.BT_SUCCESS;
         StopCoroutine(CDoRunAway());
         StartCoroutine(CDoRunAway());
-        return E_BT.BT_SUCCESS;
+        return E_BTS.BT_SUCCESS;
     }
 
     IEnumerator CDoRunAway()
@@ -145,23 +145,23 @@ public class Rayfish : CowardMonster
 
     #region Detect
 
-    public E_BT DoIsDetectPlayer()
+    public E_BTS DoIsDetectPlayer()
     {
 
         float distance = Vector3.Distance(player.position, transform.position);
         if (2f > distance)
         {
-            return E_BT.BT_SUCCESS;
+            return E_BTS.BT_SUCCESS;
         }
         else
         {
-            return E_BT.BT_FAIL;
+            return E_BTS.BT_FAIL;
         }
     }
 
 
 
-    public E_BT DoIdleBehaviour()
+    public E_BTS DoIdleBehaviour()
     {
         int randomNodeIndex = 0;
         int randomNum = 0;
@@ -183,7 +183,7 @@ public class Rayfish : CowardMonster
                 }
                 break;
         }
-        return E_BT.BT_SUCCESS;
+        return E_BTS.BT_SUCCESS;
     }
 
     public void DoMove(Vector3 _targetPosition) { StartCoroutine(CDoMove(_targetPosition)); }
@@ -203,9 +203,9 @@ public class Rayfish : CowardMonster
 
     #endregion
 
-    public E_BT TestMove()
+    public E_BTS TestMove()
     {
         Debug.Log("이동중!!");
-        return E_BT.BT_SUCCESS;
+        return E_BTS.BT_SUCCESS;
     }
 }

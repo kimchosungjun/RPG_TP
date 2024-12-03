@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public partial class SceneMgr : MonoBehaviour
 {
-    E_SCENE nextLoadScene = E_SCENE.SCENE_LOADING;
-    E_SCENE currentScene = E_SCENE.SCENE_TITLE;
+    E_SCENES nextLoadScene = E_SCENES.SCENE_LOADING;
+    E_SCENES currentScene = E_SCENES.SCENE_TITLE;
     AsyncOperation asyncOperation = null;
     public void Init() { SharedMgr.SceneMgr = this; }
 
-    public void LoadScene(E_SCENE _changeScene, bool _isLoading = false)
+    public void LoadScene(E_SCENES _changeScene, bool _isLoading = false)
     {
         if (currentScene == _changeScene)
             return;
@@ -23,13 +23,13 @@ public partial class SceneMgr : MonoBehaviour
             SceneManager.LoadScene(_loadSceneIndex);
         else
         {
-            if(nextLoadScene == _changeScene)
+            if(nextLoadScene == _changeScene)       
             {
                 Debug.LogError("잘못된 씬 로딩 호출 방법");
                 return;
             }
             nextLoadScene = _changeScene;
-            SceneManager.LoadScene((int) E_SCENE.SCENE_LOADING);
+            SceneManager.LoadScene((int) E_SCENES.SCENE_LOADING);
         }
     }
 
@@ -57,7 +57,7 @@ public partial class SceneMgr : MonoBehaviour
         }
 
         currentScene = nextLoadScene;
-        nextLoadScene = E_SCENE.SCENE_LOADING;
+        nextLoadScene = E_SCENES.SCENE_LOADING;
 
         asyncOperation.allowSceneActivation = true; 
 

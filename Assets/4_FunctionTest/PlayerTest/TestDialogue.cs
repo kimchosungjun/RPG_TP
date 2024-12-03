@@ -14,7 +14,7 @@ public class TestDialogue : MonoBehaviour
 
         if (GUI.Button(new Rect(100, 0, 100, 100), "대화풀기"))
         {
-            characterCtrl?.ChangeState(E_PLAYER_FSM.MOVEMENT);
+            characterCtrl?.ChangeState(E_PLAYER_STATES.MOVEMENT);
         }
     }
 }

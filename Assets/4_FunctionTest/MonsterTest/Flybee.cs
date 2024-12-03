@@ -38,13 +38,13 @@ public class Flybee : PatrolMonster
         statusUICtrl.Execute();
     }
 
-    public E_BT DoCheckHitState()
+    public E_BTS DoCheckHitState()
     {
-        if (isHitState) return E_BT.BT_SUCCESS;
-        else return E_BT.BT_FAIL;   
+        if (isHitState) return E_BTS.BT_SUCCESS;
+        else return E_BTS.BT_FAIL;   
     }
 
-    protected override E_BT DoPatrol()
+    protected override E_BTS DoPatrol()
     {
         if (Vector3.Distance(transform.position, targetWay) < 0.2f)
         {
@@ -59,7 +59,7 @@ public class Flybee : PatrolMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return E_BT.BT_SUCCESS;
+        return E_BTS.BT_SUCCESS;
     }
 
     #region 테스트용 메서드

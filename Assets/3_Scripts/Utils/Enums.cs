@@ -30,7 +30,7 @@ public class Enums
     }
 }
 
-public enum E_SCENE
+public enum E_SCENES
 {
     SCENE_TITLE = 0,
     SCENE_LOGIN =1,
@@ -38,7 +38,20 @@ public enum E_SCENE
     SCENE_GAME=3,
 }
 
-public enum E_PLAYER_FSM
+public enum E_LAYERS
+{
+    DEFAULT=0,
+    WALL=3,
+    WATER=4,
+    UI=5,
+    GROUND=6,
+    MONSTER=7,
+    PLAYER=8,
+    NPC=9,
+    INTERACTOBJECT=10,
+}
+
+public enum E_PLAYER_STATES
 {
     MOVEMENT=0,
     DASH=1,
@@ -53,20 +66,21 @@ public enum E_PLAYER_FSM
     MAX=10
 }
 
-public enum E_BT
+public enum E_BTS
 {
     BT_SUCCESS=0,
     BT_FAIL=1,
     BT_RUNNING=2
 }
 
-public enum E_MONSTER_ANIM
+public enum E_MONSTER_ANIMS
 {
     IDLE=0,
     MOVE=1,
     HIT=2,
-    DEATH=3,
-    ATTACK=4,
+    ATTACK=3,
+    DEATH=4,
+    GROGGY=5
 }
 
 #region ITEM
@@ -102,7 +116,7 @@ public enum E_WEAPONEFFECT
 
 #endregion
 
-public enum E_CHARACTER
+public enum E_CHARACTERS
 {
     PLAYER=0,
     NORMAL_MONSTER=1,

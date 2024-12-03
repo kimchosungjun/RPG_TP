@@ -10,24 +10,24 @@ public class Selector : Node
     private List<Node> nodes = new List<Node>();
 
     public Selector(List<Node> btNodes) { this.nodes = btNodes; }
-    public override E_BT Evaluate()
+    public override E_BTS Evaluate()
     {
         int listCnt = nodes.Count;
         for (int i = 0; i < listCnt; i++)
         {
             switch (nodes[i].Evaluate())
             {
-                case E_BT.BT_SUCCESS:
-                    nodeState = E_BT.BT_SUCCESS;
+                case E_BTS.BT_SUCCESS:
+                    nodeState = E_BTS.BT_SUCCESS;
                     return nodeState;
-                case E_BT.BT_FAIL:
+                case E_BTS.BT_FAIL:
                     continue;    
-                case E_BT.BT_RUNNING:
-                    nodeState = E_BT.BT_RUNNING;
+                case E_BTS.BT_RUNNING:
+                    nodeState = E_BTS.BT_RUNNING;
                     return nodeState;
             }
         }
-        nodeState = E_BT.BT_FAIL;
+        nodeState = E_BTS.BT_FAIL;
         return nodeState;
     }
 }

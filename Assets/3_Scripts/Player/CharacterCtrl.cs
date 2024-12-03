@@ -9,7 +9,7 @@ public partial class CharacterCtrl : MonoBehaviour
     PlayerState[] playerStates;
     PlayerStateMachine stateMachine;
     PlayerAttackCombo attackCombo;
-    [SerializeField] E_PLAYER_FSM currentPlayerState = E_PLAYER_FSM.MAX;
+    [SerializeField] E_PLAYER_STATES currentPlayerState = E_PLAYER_STATES.MAX;
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
 
@@ -45,23 +45,23 @@ public partial class CharacterCtrl : MonoBehaviour
         stateMachine = new PlayerStateMachine();
         attackCombo = new PlayerAttackCombo();
 
-        playerStates = new PlayerState[(int)E_PLAYER_FSM.MAX];
-        playerStates[(int)E_PLAYER_FSM.MOVEMENT] = new PlayerGroundMoveState(this);
-        playerStates[(int)E_PLAYER_FSM.DASH] = new PlayerDashState(this);
-        playerStates[(int)E_PLAYER_FSM.JUMP] = new PlayerJumpState(this);
-        playerStates[(int)E_PLAYER_FSM.FALL] = new PlayerFallState(this);
-        playerStates[(int)E_PLAYER_FSM.ATTACK] = new PlayerAttackState(this, attackCombo);
-        playerStates[(int)E_PLAYER_FSM.SKILL] = new PlayerSkillState(this,attackCombo);
-        playerStates[(int)E_PLAYER_FSM.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
-        playerStates[(int)E_PLAYER_FSM.HIT] = new PlayerHitState(this);
+        playerStates = new PlayerState[(int)E_PLAYER_STATES.MAX];
+        playerStates[(int)E_PLAYER_STATES.MOVEMENT] = new PlayerGroundMoveState(this);
+        playerStates[(int)E_PLAYER_STATES.DASH] = new PlayerDashState(this);
+        playerStates[(int)E_PLAYER_STATES.JUMP] = new PlayerJumpState(this);
+        playerStates[(int)E_PLAYER_STATES.FALL] = new PlayerFallState(this);
+        playerStates[(int)E_PLAYER_STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
+        playerStates[(int)E_PLAYER_STATES.SKILL] = new PlayerSkillState(this,attackCombo);
+        playerStates[(int)E_PLAYER_STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
+        playerStates[(int)E_PLAYER_STATES.HIT] = new PlayerHitState(this);
         //playerStates[(int)E_PLAYER_FSM.DEATH] = new (this, rigid, anim);
-        playerStates[(int)E_PLAYER_FSM.INTERACTION] = new PlayerInteractionState(this);
+        playerStates[(int)E_PLAYER_STATES.INTERACTION] = new PlayerInteractionState(this);
 
-        currentPlayerState = E_PLAYER_FSM.MOVEMENT;
-        stateMachine.InitStateMachine(playerStates[(int)E_PLAYER_FSM.MOVEMENT]);
+        currentPlayerState = E_PLAYER_STATES.MOVEMENT;
+        stateMachine.InitStateMachine(playerStates[(int)E_PLAYER_STATES.MOVEMENT]);
     }
 
-    public void ChangeState(E_PLAYER_FSM _E_PLAYER_NEW_FSM) { stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]); currentPlayerState = _E_PLAYER_NEW_FSM; }
+    public void ChangeState(E_PLAYER_STATES _E_PLAYER_NEW_FSM) { stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]); currentPlayerState = _E_PLAYER_NEW_FSM; }
 
 
     void Update()
@@ -97,7 +97,7 @@ public partial class CharacterCtrl : MonoBehaviour
         direcition.y = 0f;
         float angle = Vector3.Angle(transform.forward, direcition);
 
-        ChangeState(E_PLAYER_FSM.INTERACTION);
+        ChangeState(E_PLAYER_STATES.INTERACTION);
         
         if (angle < 10f)
         {

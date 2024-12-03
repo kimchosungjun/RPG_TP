@@ -11,9 +11,9 @@ public abstract class BaseMonster : MonoBehaviour
     /// 플레이어가 근처에 오면 상태창 활성화
     /// </summary>
     /// <returns></returns>
-    public abstract E_BT DetectPlayer();
-    public abstract E_BT IdleMovement();
-    public abstract E_BT DetectMovement();
+    public abstract E_BTS DetectPlayer();
+    public abstract E_BTS IdleMovement();
+    public abstract E_BTS DetectMovement();
 
     public abstract void Spawn();
     public abstract void Death();

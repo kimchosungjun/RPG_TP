@@ -83,13 +83,13 @@ public class PlayerJumpState : PlayerOnAirState
     {
         if (characterCtrl.IsOnGround)
         {
-            characterCtrl.ChangeState(E_PLAYER_FSM.MOVEMENT);
+            characterCtrl.ChangeState(E_PLAYER_STATES.MOVEMENT);
         }
         else
         {
             if (rigid.velocity.y < 0)
             {
-                characterCtrl.ChangeState(E_PLAYER_FSM.FALL);
+                characterCtrl.ChangeState(E_PLAYER_STATES.FALL);
             }
         }
     }

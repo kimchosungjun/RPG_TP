@@ -2,7 +2,7 @@ using UnityEngine;
 
 public partial class ResourceMgr 
 {
-    public Character GetCharacter(string _characterName, E_CHARACTER _characterType)
+    public Character GetCharacter(string _characterName, E_CHARACTERS _characterType)
     {
         Character character = null;
         //string characterPath = "";
