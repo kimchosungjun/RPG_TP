@@ -83,11 +83,33 @@ public enum E_MONSTER_ANIMS
     GROGGY=5
 }
 
-public enum E_ATTACKTYPE
+/// <summary>
+/// 체력, 속도, 공격력, 방어력 
+/// </summary>
+public enum E_STATUS_EFFECT_TYPES
+{
+    HP=0,
+    SPD=1,
+    ATK=2,
+    DEF=3
+}
+public enum E_ATTACK_EFFECT_TYPES
 {
     NORMAL=0,
     KNOCKBACK=1,
     STUN=2,
+}
+
+public enum E_PARTICLES
+{
+    BRUTE_ATK1,
+    BRUTE_ATK2,
+    BRUTE_ATK3,
+    HEAL,
+    HIT,
+    DAMAGED,
+    BUFF,
+    NONE
 }
 
 #region ITEM
