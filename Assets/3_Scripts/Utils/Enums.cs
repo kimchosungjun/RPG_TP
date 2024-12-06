@@ -102,7 +102,7 @@ public enum E_MONSTER_ANIMS
 /// <summary>
 /// 버프를 주는 스탯에 사용한다.
 /// </summary>
-public enum E_BUFF_APPLY_STAT
+public enum E_BUFF_APPLY_STATS
 {
     HP=0,
     SPD=1,
@@ -114,17 +114,18 @@ public enum E_BUFF_APPLY_STAT
 /// <summary>
 /// 버프에 영향을 주는 스탯을 의미한다.
 /// </summary>
-public enum E_BUFF_EFFECT_STAT
+public enum E_BUFF_EFFECT_STATS
 {
-    HP=0,
-    ATK=1,
-    DEF=2
+    NONE=0,
+    HP=1,
+    ATK=2,
+    DEF=3,
 }
 
 /// <summary>
 /// 버프 지속성
 /// </summary>
-public enum E_BUFF_COUNTINUITY
+public enum E_BUFF_COUNTINUITIES
 {
     IMMEDIATELY=0, // 즉발
     CONTINUOUS=1 // 지속

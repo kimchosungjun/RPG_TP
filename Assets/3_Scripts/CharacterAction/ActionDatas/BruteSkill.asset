@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b17d411cdb7454db4bd9693955fb07, type: 3}
+  m_Name: BruteSkill
+  m_EditorClassIdentifier: 
+  actionParticleKey: 3
+  actionName: "\uD3EC\uD6A8"
+  actionDescriptions:
+  - "\uD3EC\uD6A8\uD558\uBA70 \uC790\uC2E0\uC758 \uACF5\uACA9\uB825\uC740 20%,  \uACF5\uACA9\uC18D\uB3C4\uB294
+    50% \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
+  - "\uD3EC\uD6A8\uD558\uBA70 \uC790\uC2E0\uC758 \uACF5\uACA9\uB825\uC740 30%,  \uACF5\uACA9\uC18D\uB3C4\uB294
+    50% \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
+  - "\uD3EC\uD6A8\uD558\uBA70 \uC790\uC2E0\uC758 \uACF5\uACA9\uB825\uC740 40%,  \uACF5\uACA9\uC18D\uB3C4\uB294
+    50% \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
+  actionMaintainTimers:
+  - 7.5
+  - 7.5
+  - 7.5
+  coolTimers:
+  - 15
+  - 15
+  - 15
+  buffDatas:
+  - applyStatType: 2
+    effectStatType: 0
+    continuityType: 0
+    buffMultipliers:
+    - 0.2
+    - 0.3
+    - 0.4
+  - applyStatType: 4
+    effectStatType: 0
+    continuityType: 0
+    buffMultipliers:
+    - 0.5
+    - 0.5
+    - 0.5

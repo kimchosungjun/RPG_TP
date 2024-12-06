@@ -18,10 +18,37 @@ public abstract class PlayerActionData : ScriptableObject
     #endregion
 
     #region Public : Method & Property
+    // 쓸 파티클 이름
     public E_PARTICLES ActionParticleKey { get { return actionParticleKey; } }
-    public string GetActionName() { return actionName; } 
+
+    // 쿨타임과 지속시간
     public float GetCoolTimer(int _level)  { return coolTimers[_level]; }
     public float GetActionMaintainTimer(int _level) { return coolTimers[_level]; }
+    
+    // 행동 설명 (이름, 내용 그리고 업그레이드) 
+    public string GetActionName() { return actionName; } 
+    public string GetActionDescription(int _level) { return actionDescriptions[_level - 1]; }
+    public List<string> GetUpgradeDescriptions(int _level)
+    {
+        List<string> descriptions = new List<string>();
+        int cnt = actionDescriptions.Length;
+        string currentDescription = "";
+        string nextDescription = "";
+
+        if (cnt <= _level)
+        {
+            currentDescription = actionDescriptions[_level - 1];
+            nextDescription = "더 이상 강화할 수 없습니다.";
+        }
+        else
+        {
+            currentDescription = actionDescriptions[_level - 1];
+            nextDescription = actionDescriptions[_level];
+        }
+        descriptions.Add(currentDescription);
+        descriptions.Add(nextDescription);
+        return descriptions;
+    }
     #endregion 
 
     public float CheckCoolTime(int _level) 

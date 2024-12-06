@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79d0e6ba6ab1f4741a5005998096c6b6, type: 3}
-  m_Name: BruteNormalThirdAttack 2
+  m_Name: BruteNormalThirdAttack
   m_EditorClassIdentifier: 
   actionParticleKey: 2
   actionName: "\uC62C\uB824\uCE58\uAE30"
