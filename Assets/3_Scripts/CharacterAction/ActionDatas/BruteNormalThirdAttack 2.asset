@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d0e6ba6ab1f4741a5005998096c6b6, type: 3}
+  m_Name: BruteNormalThirdAttack 2
+  m_EditorClassIdentifier: 
+  actionParticleKey: 2
+  actionName: "\uC62C\uB824\uCE58\uAE30"
+  actionDescriptions:
+  - "3\uB2E8 : 130% \uACF5\uACA9\uB825\uC73C\uB85C \uC62C\uB824\uCE5C\uB2E4."
+  - "3\uB2E8 : 150% \uACF5\uACA9\uB825\uC73C\uB85C \uC62C\uB824\uCE5C\uB2E4."
+  - "3\uB2E8 : 150% \uACF5\uACA9\uB825\uC73C\uB85C \uC62C\uB824\uCE58\uBA70 \uB109\uBC31\uC2DC\uD0A8\uB2E4."
+  actionMaintainTimers:
+  - 0
+  - 0
+  - 0
+  coolTimers:
+  - 0
+  - 0
+  - 0
+  damageMultipliers:
+  - 1.3
+  - 1.5
+  - 1.5
+  attackEffectTypes: 000000000000000001000000

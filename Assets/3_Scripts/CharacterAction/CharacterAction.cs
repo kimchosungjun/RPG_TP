@@ -20,11 +20,11 @@ public abstract class CharacterAction : MonoBehaviour
 }
 
 /// <summary>
-/// 버프와 디버프
+/// 즉발 버프와 지속 버프
 /// </summary>
-public abstract class StatusEffectAction : CharacterAction
+public abstract class EffectAction : CharacterAction
 {
-    [SerializeField] protected E_STATUS_EFFECT_TYPES statusEffectType;
+    //[SerializeField] protected E_BUFF_STAT statusEffectType;
     public override void DoAction() {}
     public abstract void DoStatus();   
 }

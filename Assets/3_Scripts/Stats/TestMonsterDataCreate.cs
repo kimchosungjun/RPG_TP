@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class TestMonsterDataCreate : MonoBehaviour
 {
-    [SerializeField] TextAsset asset;
-    [SerializeField] PlayerLevelData playerLevelData;
+    //[SerializeField] TextAsset asset;
+    //[SerializeField] PlayerLevelData playerLevelData;
+    //private void Start()
+    //{
+    //    var wrapper = JsonUtility.FromJson<PlayerLevelDataWrapper>(asset.text);
+    //    playerLevelData = wrapper.PlayerLevelData[0]; // 첫 번째 데이터를 사용
+    //}
 
-    private void Start()
-    {
-        var wrapper = JsonUtility.FromJson<PlayerLevelDataWrapper>(asset.text);
-        playerLevelData = wrapper.PlayerLevelData[0]; // 첫 번째 데이터를 사용
-    }
+
     //string pathRootName = string.Empty;
     //[SerializeField] string fileName = string.Empty;
     //[SerializeField] bool checkFileExist = false;

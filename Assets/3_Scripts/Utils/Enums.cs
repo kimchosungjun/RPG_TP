@@ -74,6 +74,13 @@ public enum E_ENHANCE_PLAYER
     LEVEL
 }
 
+public enum E_PLAYER_ACTIONS
+{
+    NORMAL_ATK,
+    SKILL,
+    ULTIMATESKILL,
+}
+
 public enum E_BTS
 {
     SUCCESS=0,
@@ -91,16 +98,39 @@ public enum E_MONSTER_ANIMS
     GROGGY=5
 }
 
+#region 버프
 /// <summary>
-/// 체력, 속도, 공격력, 방어력 
+/// 버프를 주는 스탯에 사용한다.
 /// </summary>
-public enum E_STATUS_EFFECT_TYPES
+public enum E_BUFF_APPLY_STAT
 {
     HP=0,
     SPD=1,
     ATK=2,
-    DEF=3
+    DEF=3,
+    ATKSPD=4
 }
+
+/// <summary>
+/// 버프에 영향을 주는 스탯을 의미한다.
+/// </summary>
+public enum E_BUFF_EFFECT_STAT
+{
+    HP=0,
+    ATK=1,
+    DEF=2
+}
+
+/// <summary>
+/// 버프 지속성
+/// </summary>
+public enum E_BUFF_COUNTINUITY
+{
+    IMMEDIATELY=0, // 즉발
+    CONTINUOUS=1 // 지속
+}
+#endregion
+
 public enum E_ATTACK_EFFECT_TYPES
 {
     NORMAL=0,

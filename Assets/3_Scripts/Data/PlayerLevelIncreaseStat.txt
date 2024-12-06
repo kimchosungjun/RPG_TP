@@ -5,21 +5,21 @@
       "increaseHP": "10",
       "increaseAttack": "5",
       "increaseDefence": "3",
-      "critical": "1"
+      "increaseCritical": "1"
     },
     {
       "playerId": "1",
       "increaseHP": "5",
       "increaseAttack": "8",
       "increaseDefence": "0.5",
-      "critical": "1.5"
+      "increaseCritical": "1.25"
     },
     {
       "playerId": "2",
-      "increaseHP": "7.5",
+      "increaseHP": "5",
       "increaseAttack": "7",
       "increaseDefence": "1",
-      "critical": "1.5"
+      "increaseCritical": "1.5"
     }
   ]
 }
