@@ -66,6 +66,14 @@ public enum E_PLAYER_STATES
     MAX=10
 }
 
+public enum E_ENHANCE_PLAYER
+{
+    NORMALATTACK,
+    SKILL,
+    ULTIMATESKILL,
+    LEVEL
+}
+
 public enum E_BTS
 {
     SUCCESS=0,

@@ -1,0 +1,11 @@
+{
+  "PlayerLevelData": [
+    {
+      "normalLevelupGold": [100, 500, 1000],
+      "skillLevelupGold": [100, 500, 1000],
+      "ultimateSkillLevelupGold": [200, 1000, 2000],
+      "maxLevel": 20,
+      "needExp": [10, 15, 20, 25, 30, 35, 40, 50, 75, 100, 150, 200, 250, 300, 350, 400, 500, 600, 1000]
+    }
+  ]
+}

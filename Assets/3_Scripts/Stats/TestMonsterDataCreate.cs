@@ -5,42 +5,50 @@ using UnityEngine;
 
 public class TestMonsterDataCreate : MonoBehaviour
 {
-    string pathRootName = string.Empty;
-    [SerializeField] string fileName = string.Empty;
-    [SerializeField] bool checkFileExist = false;
-    [SerializeField] MonsterStat stat;
-    private void Awake()
-    {
-        pathRootName = Application.persistentDataPath;
-    }
+    [SerializeField] TextAsset asset;
+    [SerializeField] PlayerLevelData playerLevelData;
 
     private void Start()
     {
-        Debug.Log(pathRootName + fileName);
-
-        if (File.Exists(pathRootName + fileName))
-        {
-            checkFileExist = true;
-            MonsterStat loadStat = JsonUtility.FromJson<MonsterStat>(File.ReadAllText(pathRootName + fileName));
-            stat = loadStat;
-        }
+        var wrapper = JsonUtility.FromJson<PlayerLevelDataWrapper>(asset.text);
+        playerLevelData = wrapper.PlayerLevelData[0]; // 첫 번째 데이터를 사용
     }
+    //string pathRootName = string.Empty;
+    //[SerializeField] string fileName = string.Empty;
+    //[SerializeField] bool checkFileExist = false;
+    //[SerializeField] MonsterStat stat;
+    //private void Awake()
+    //{
+    //    pathRootName = Application.persistentDataPath;
+    //}
 
-    private void OnGUI()
-    {
-        if(GUI.Button(new Rect(0,0,100,100),"데이터 생성"))
-        {
-            CreateNSave();
-        }
-    }
+    //private void Start()
+    //{
+    //    Debug.Log(pathRootName + fileName);
 
-    public void CreateNSave()
-    {
-        if (checkFileExist == false)
-        {
-            MonsterStat stat = new MonsterStat();
-            string texts = JsonUtility.ToJson(stat);
-            File.WriteAllText(pathRootName + fileName, texts);
-        }
-    }
+    //    if (File.Exists(pathRootName + fileName))
+    //    {
+    //        checkFileExist = true;
+    //        MonsterStat loadStat = JsonUtility.FromJson<MonsterStat>(File.ReadAllText(pathRootName + fileName));
+    //        stat = loadStat;
+    //    }
+    //}
+
+    //private void OnGUI()
+    //{
+    //    if(GUI.Button(new Rect(0,0,100,100),"데이터 생성"))
+    //    {
+    //        CreateNSave();
+    //    }
+    //}
+
+    //public void CreateNSave()
+    //{
+    //    if (checkFileExist == false)
+    //    {
+    //        MonsterStat stat = new MonsterStat();
+    //        string texts = JsonUtility.ToJson(stat);
+    //        File.WriteAllText(pathRootName + fileName, texts);
+    //    }
+    //}
 }

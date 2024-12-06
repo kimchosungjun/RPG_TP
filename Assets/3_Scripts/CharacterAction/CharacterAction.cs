@@ -8,7 +8,7 @@ public abstract class CharacterAction : MonoBehaviour
     /// <summary>
     /// 공격력, 방어력, 스피드, 체력
     /// </summary>
-    protected Stat targetStat = null;
+    protected BaseStat targetStat = null;
     [SerializeField] protected E_PARTICLES actionParticleKey = E_PARTICLES.NONE;
     [SerializeField] protected float actionCoolTime;
 
@@ -16,7 +16,7 @@ public abstract class CharacterAction : MonoBehaviour
     /// 반드시 재정의해서 사용할 것
     /// </summary>
     public abstract void DoAction();
-    public virtual void SetTargetStat(Stat _targetStat) { this.targetStat = _targetStat; }
+    public virtual void SetTargetStat(BaseStat _targetStat) { this.targetStat = _targetStat; }
 }
 
 /// <summary>
