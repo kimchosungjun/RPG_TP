@@ -6,10 +6,6 @@ public class BossMonster : BaseMonster
 {
     [SerializeField] protected MonsterStatusUICtrl statusUICtrl = null;
 
-    public void Test()
-    {
-        
-    }
     #region Override
     public override void Death()
     {

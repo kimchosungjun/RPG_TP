@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b17d411cdb7454db4bd9693955fb07, type: 3}
   m_Name: BruteSkill
   m_EditorClassIdentifier: 
-  actionParticleKey: 3
+  actionParticleKey: 0
   actionName: "\uD3EC\uD6A8"
   actionDescriptions:
   - "\uD3EC\uD6A8\uD558\uBA70 \uC790\uC2E0\uC758 \uACF5\uACA9\uB825\uC740 20%,  \uACF5\uACA9\uC18D\uB3C4\uB294

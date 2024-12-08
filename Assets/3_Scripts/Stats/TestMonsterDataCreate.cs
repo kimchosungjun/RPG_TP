@@ -52,4 +52,15 @@ public class TestMonsterDataCreate : MonoBehaviour
     //        File.WriteAllText(pathRootName + fileName, texts);
     //    }
     //}
+
+    [SerializeField] Info info;
+    public void OnGUI()
+    {
+        if(GUI.Button(new Rect(0, 0, 100, 100), "테이블 읽기"))
+        {
+            TableMgr mgr = new TableMgr();
+            mgr.Init();
+            info = mgr.character.Get(2);
+        }
+    }
 }
