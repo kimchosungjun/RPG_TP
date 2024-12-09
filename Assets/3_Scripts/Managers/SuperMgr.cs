@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SuperMgr : MonoBehaviour
@@ -12,6 +10,7 @@ public class SuperMgr : MonoBehaviour
     HoldItemMgr holdItemMgr = new HoldItemMgr();
     UIMgr uiMgr = new UIMgr();
     ResourceMgr resourceMgr = new ResourceMgr();
+    TableMgr tableMgr = new TableMgr();
     #endregion
 
     private void Awake()
@@ -28,7 +27,7 @@ public class SuperMgr : MonoBehaviour
             sceneMgr.Init();
             resourceMgr.Init();
             uiMgr.Init();
-
+            tableMgr.Init();
             // 아이템 정보 : 아직 안씀 
             holdItemMgr.Init();
         }

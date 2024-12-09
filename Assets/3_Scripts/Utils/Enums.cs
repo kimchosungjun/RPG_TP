@@ -39,41 +39,18 @@ namespace PlayerEnums
         MAGE = 2
     }
 
-    public enum STAT
+    public enum BUFF_SKILL
     {
-        WARRIOR=0,
-        ARCHER=1,
-        MAGE=2
+        WARRIOR_ROAR = 0,
+        MAGE_VITALITY_INCREASE = 1
     }
 
-    public enum ATTACK
+    public enum ATTACK_SKILL
     {
-        WARRIOR = 0,
-        ARCHER = 1,
-        MAGE = 2
-    }
-
-    public enum SKILL
-    {
-        WARRIOR = 0,
-        ARCHER = 1,
-        MAGE = 2
-    }
-
-    public enum ULTIMATE
-    {
-        WARRIOR = 0,
-        ARCHER = 1,
-        MAGE = 2
-    }
-
-    public enum LOADDATA
-    {
-        TABLE,
-        STAT,
-        ATTACK,
-        NORMAL,
-        SKILL
+        WARRIOR_ULTIMATE = 0,
+        ARCHER_FULL_BLOWN_SHOOT = 1,
+        ARCHER_ULTIMATE = 2,
+        MAGE_ULTIMATE = 3
     }
 }
 

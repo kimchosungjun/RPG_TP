@@ -18,12 +18,11 @@ public class BaseTable
 #endif
     }
 
-    protected void LoadBinary<T>(string _name, ref T _object)
+    protected void LoadBinary<T>(string _path, ref T _object)
     {
         var binary = new BinaryFormatter();
         binary.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
-
-        TextAsset asset = Resources.Load("Table_" + _name) as TextAsset;
+        TextAsset asset = Resources.Load("Table_" + _path) as TextAsset;
         Stream stream = new MemoryStream(asset.bytes);
         _object = (T)binary.Deserialize(stream);
         stream.Close();
@@ -41,7 +40,7 @@ public class BaseTable
     protected CSVReader GetCSVReader(string _name)
     {
         string ext = ".csv";
-        FileStream file = new FileStream(".Document/" + _name + ext, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        FileStream file = new FileStream("Document/" + _name + ext, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         StreamReader stream = new StreamReader(file, System.Text.Encoding.UTF8);
         CSVReader reader = new CSVReader();
         reader.parse(stream.ReadToEnd(), false, 1);

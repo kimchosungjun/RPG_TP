@@ -8,6 +8,7 @@ public static class SharedMgr
     public static SceneMgr SceneMgr = null;
     public static UIMgr UIMgr = null;
     public static ResourceMgr ResourceMgr = null;
+    public static TableMgr TableMgr = null;
 
     // 아직 안씀
     public static HoldItemMgr HoldItemMgr = null;

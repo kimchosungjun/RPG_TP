@@ -2,15 +2,6 @@ using System;
 using System.Collections.Generic;
 using PlayerEnums;
 
-[Serializable]
-public class Info
-{
-    public int id;
-    public byte type;
-    public int skill;
-    public string prefabs;
-}
-
 public partial class PlayerTable : BaseTable
 {
     // 플레이어의 정보를 저장한 테이블 데이터 : id가 key 값
@@ -19,19 +10,19 @@ public partial class PlayerTable : BaseTable
     // 누구의 스탯인지 확인하고 레벨에 맞게 스탯을 파싱 : 첫번째 키 값은 플레이어의 id이고 두번째 키 값은 level
     Dictionary<int, Dictionary<int, PlayerStatData>> playerStatDictionary = new Dictionary<int, Dictionary<int, PlayerStatData>>();
 
-    Dictionary<int, Dictionary<int, PlayerAttackData>> playerAttackDataGroup = new Dictionary<int, Dictionary<int, PlayerAttackData>>();
+    Dictionary<int, Dictionary<int, PlayerNormalAttackData>> playerAttackDataGroup = new Dictionary<int, Dictionary<int, PlayerNormalAttackData>>();
 
     #region PlayerDataClass
 
     [Serializable]
     public class PlayerTableData
     {
-        public int id;
+        public int id; // enum
         public string name;
-        public int stat;
-        public int attack;
-        public int skill;
-        public int ultimate;
+        public int stat; // enum
+        public int attack; // enum
+        public int skill; // enum
+        public int ultimate; // enum
         public float speed;
         public float dashSpeed;
         public float jumpSpeed;
@@ -48,14 +39,19 @@ public partial class PlayerTable : BaseTable
     }
 
     [Serializable]
-    public class PlayerAttackData
+    public class PlayerNormalAttackData
     {
         public int level;
         public string name;
         public string description;
         public int needGold;
-        public float[] multipliers = new float[3];
-        public int[] effects = new int[3];
+        public float[] multipliers;
+        public int[] effects;
+
+        public void SetNormalAttackCnt()
+        {
+            multipliers = new float[3];
+        }
     }
 
     #endregion
@@ -68,7 +64,7 @@ public partial class PlayerTable : BaseTable
         return null;
     }
 
-    public PlayerAttackData GetPlayerAttackData(TYPEID _typeID, int _level)
+    public PlayerNormalAttackData GetPlayerAttackData(TYPEID _typeID, int _level)
     {
         if (playerAttackDataGroup.ContainsKey((int)_typeID))
         {
@@ -80,11 +76,5 @@ public partial class PlayerTable : BaseTable
         return null;
     }
     #endregion
-
-    public void InitBinary(string _name)
-    {
-        LoadBinary<Dictionary<int, PlayerTableData>>(_name, ref playerTableGroup);
-    }
-
    
 }
