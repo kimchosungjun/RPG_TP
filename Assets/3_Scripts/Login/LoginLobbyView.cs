@@ -19,7 +19,7 @@ public class LoginLobbyView : MonoBehaviour
     #region Btn Function
     public void PressGameStart()
     {
-        SharedMgr.SceneMgr.LoadScene(E_SCENES.GAME, true);
+        SharedMgr.SceneMgr.LoadScene(SCENES.GAME, true);
     }
 
     public void PressGameExit()

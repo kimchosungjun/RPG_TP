@@ -152,18 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c1220217c2012429e47c874509e749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: /Mon.json
-  checkFileExist: 0
-  stat:
-    monsterID: 0
-    monsterType: 0
-    monsterName: 
-    monsterLV: 0
-    monsterHP: 0
-    monsterATK: 0
-    monsterDEF: 0
-    monsterEXP: 0
-    monsterSPD: 0
+  info:
+    id: 0
+    type: 0
+    skill: 0
+    prefabs: 
 --- !u!4 &212375256
 Transform:
   m_ObjectHideFlags: 0
@@ -1379,7 +1372,7 @@ MonoBehaviour:
   moveCoefficient: 10
   playerJumpForce: 10
   airMovementMultiplier: 0.2
-  playerDashForce: 3.5
+  playerDashForce: 5
   dashCoolTimer: 0.3
   playerBodyHeight: 0
   detectGroundDelta: 0.2

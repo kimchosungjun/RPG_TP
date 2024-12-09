@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class AnnoyBear : MonoBehaviour
 {
     Vector3 originalPosition;
-    int playerLayer = 1 << (int)E_LAYERS.PLAYER;
+    int playerLayer = 1 << (int)LAYERS.PLAYER;
     [SerializeField] Animator anim;
     enum AnnoyBearState
     {

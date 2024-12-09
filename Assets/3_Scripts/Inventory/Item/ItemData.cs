@@ -22,7 +22,7 @@ public class ItemData : Item
 
     public virtual void SetItemType()
     {
-        Enums.TryGetEnumValue(itemType, out E_ITEMTYPE result);
+        Enums.ConvertStringToEnum(itemType, out E_ITEMTYPE result);
         ItemType = result;
     }
 

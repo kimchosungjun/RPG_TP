@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public partial class SceneMgr : MonoBehaviour
 {
-    E_SCENES nextLoadScene = E_SCENES.LOADING;
-    E_SCENES currentScene = E_SCENES.TITLE;
+    SCENES nextLoadScene = SCENES.LOADING;
+    SCENES currentScene = SCENES.TITLE;
     AsyncOperation asyncOperation = null;
     public void Init() { SharedMgr.SceneMgr = this; }
 
-    public void LoadScene(E_SCENES _changeScene, bool _isLoading = false)
+    public void LoadScene(SCENES _changeScene, bool _isLoading = false)
     {
         if (currentScene == _changeScene)
             return;
@@ -29,7 +29,7 @@ public partial class SceneMgr : MonoBehaviour
                 return;
             }
             nextLoadScene = _changeScene;
-            SceneManager.LoadScene((int) E_SCENES.LOADING);
+            SceneManager.LoadScene((int) SCENES.LOADING);
         }
     }
 
@@ -57,7 +57,7 @@ public partial class SceneMgr : MonoBehaviour
         }
 
         currentScene = nextLoadScene;
-        nextLoadScene = E_SCENES.LOADING;
+        nextLoadScene = SCENES.LOADING;
 
         asyncOperation.allowSceneActivation = true; 
 

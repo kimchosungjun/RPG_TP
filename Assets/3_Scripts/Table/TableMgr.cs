@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class TableMgr 
 {
-    public Table_Character character = new Table_Character();
+    public PlayerTable character = new PlayerTable();
     public void Init()
     {
 #if UNITY_EDITOR

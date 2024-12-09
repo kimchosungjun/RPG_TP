@@ -15,7 +15,7 @@ public class Enums
         return System.Enum.GetValues(typeof(T)).Length;
     }
 
-    public static T TryGetEnumValue<T>(string _enumString, out T result) where T : struct, Enum
+    public static T ConvertStringToEnum<T>(string _enumString, out T result) where T : struct, Enum
     {
         try
         {
@@ -30,7 +30,38 @@ public class Enums
     }
 }
 
-public enum E_SCENES
+namespace PlayerEnums
+{
+    public enum STAT
+    {
+        WARRIOR=0,
+        ARCHER=1,
+        MAGE=2
+    }
+
+    public enum ATTACK
+    {
+        WARRIOR = 0,
+        ARCHER = 1,
+        MAGE = 2
+    }
+
+    public enum SKILL
+    {
+        WARRIOR = 0,
+        ARCHER = 1,
+        MAGE = 2
+    }
+
+    public enum ULTIMATE
+    {
+        WARRIOR = 0,
+        ARCHER = 1,
+        MAGE = 2
+    }
+}
+
+public enum SCENES
 {
     TITLE = 0,
     LOGIN =1,
@@ -38,7 +69,7 @@ public enum E_SCENES
     GAME=3,
 }
 
-public enum E_LAYERS
+public enum LAYERS
 {
     DEFAULT=0,
     WALL=3,

@@ -22,10 +22,10 @@ public class WeaponData : ItemData
 
     public void SetWeaponType()
     {
-        Enums.TryGetEnumValue(weaponType, out E_WEAPONTYPE weaponTypeResult);
+        Enums.ConvertStringToEnum(weaponType, out E_WEAPONTYPE weaponTypeResult);
         WeaponType = weaponTypeResult;
 
-        Enums.TryGetEnumValue(weaponEffect, out E_WEAPONEFFECT weaponEffectResult);
+        Enums.ConvertStringToEnum(weaponEffect, out E_WEAPONEFFECT weaponEffectResult);
         WeaponEffect = weaponEffectResult;
     }
 
