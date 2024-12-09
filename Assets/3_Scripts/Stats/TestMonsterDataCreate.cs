@@ -1,66 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class TestMonsterDataCreate : MonoBehaviour
 {
-    //[SerializeField] TextAsset asset;
-    //[SerializeField] PlayerLevelData playerLevelData;
-    //private void Start()
-    //{
-    //    var wrapper = JsonUtility.FromJson<PlayerLevelDataWrapper>(asset.text);
-    //    playerLevelData = wrapper.PlayerLevelData[0]; // 첫 번째 데이터를 사용
-    //}
-
-
-    //string pathRootName = string.Empty;
-    //[SerializeField] string fileName = string.Empty;
-    //[SerializeField] bool checkFileExist = false;
-    //[SerializeField] MonsterStat stat;
-    //private void Awake()
-    //{
-    //    pathRootName = Application.persistentDataPath;
-    //}
-
-    //private void Start()
-    //{
-    //    Debug.Log(pathRootName + fileName);
-
-    //    if (File.Exists(pathRootName + fileName))
-    //    {
-    //        checkFileExist = true;
-    //        MonsterStat loadStat = JsonUtility.FromJson<MonsterStat>(File.ReadAllText(pathRootName + fileName));
-    //        stat = loadStat;
-    //    }
-    //}
-
-    //private void OnGUI()
-    //{
-    //    if(GUI.Button(new Rect(0,0,100,100),"데이터 생성"))
-    //    {
-    //        CreateNSave();
-    //    }
-    //}
-
-    //public void CreateNSave()
-    //{
-    //    if (checkFileExist == false)
-    //    {
-    //        MonsterStat stat = new MonsterStat();
-    //        string texts = JsonUtility.ToJson(stat);
-    //        File.WriteAllText(pathRootName + fileName, texts);
-    //    }
-    //}
-
-    [SerializeField] Info info;
+    [SerializeField] PlayerTable.PlayerTableData[] tableData;
+    [SerializeField] PlayerTable.PlayerAttackData[] attackData;
     public void OnGUI()
     {
         if(GUI.Button(new Rect(0, 0, 100, 100), "테이블 읽기"))
         {
-            //TableMgr mgr = new TableMgr();
-            //mgr.Init();
-            //info = mgr.character.Get(2);
+            TableMgr mgr = new TableMgr();
+            mgr.Init();
+            tableData[0] = mgr.character.GetPlayerTableData(0);
+            tableData[1] = mgr.character.GetPlayerTableData(1);
+            tableData[2] = mgr.character.GetPlayerTableData(2);
+
+            attackData[0] = mgr.character.GetPlayerAttackData(PlayerEnums.TYPEID.WARRIOR, 1);
         }
     }
 }

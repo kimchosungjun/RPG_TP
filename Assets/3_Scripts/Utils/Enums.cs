@@ -32,6 +32,13 @@ public class Enums
 
 namespace PlayerEnums
 {
+    public enum TYPEID
+    {
+        WARRIOR = 0,
+        ARCHER = 1,
+        MAGE = 2
+    }
+
     public enum STAT
     {
         WARRIOR=0,
@@ -58,6 +65,15 @@ namespace PlayerEnums
         WARRIOR = 0,
         ARCHER = 1,
         MAGE = 2
+    }
+
+    public enum LOADDATA
+    {
+        TABLE,
+        STAT,
+        ATTACK,
+        NORMAL,
+        SKILL
     }
 }
 

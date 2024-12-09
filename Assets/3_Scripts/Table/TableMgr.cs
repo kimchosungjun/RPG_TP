@@ -10,7 +10,8 @@ public class TableMgr
     public void Init()
     {
 #if UNITY_EDITOR
-        character.Init_Csv("testCsv",1,0);
+        character.InitCsv("PlayerTableCsv", 1,0);
+        character.InitAttackCsv("WarriorAttackTableCsv", 1,0, PlayerEnums.TYPEID.WARRIOR);
 #else
         character.Init_Binary("testCsv");
 #endif
@@ -18,7 +19,7 @@ public class TableMgr
 
     public void Save()
     {
-        character.Save_Binary("testCsv");
+        character.SaveBinary("PlayerTableCsv");
 #if UNITY_EDITOR
         AssetDatabase.Refresh();
 #endif

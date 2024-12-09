@@ -244,6 +244,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c1220217c2012429e47c874509e749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tableData:
+  - id: 0
+    name: 
+    stat: 0
+    attack: 0
+    skill: 0
+    ultimate: 0
+    speed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+  - id: 0
+    name: 
+    stat: 0
+    attack: 0
+    skill: 0
+    ultimate: 0
+    speed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+  - id: 0
+    name: 
+    stat: 0
+    attack: 0
+    skill: 0
+    ultimate: 0
+    speed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+  attackData:
+  - level: 0
+    name: 
+    description: 
+    needGold: 0
+    multipliers: []
+    effects: 
 --- !u!4 &1700203861
 Transform:
   m_ObjectHideFlags: 0

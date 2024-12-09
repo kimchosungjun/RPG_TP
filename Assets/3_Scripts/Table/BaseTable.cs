@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 /// <summary>
 /// c# 바이너리는 쉽게 볼 수 없게 만듬 : 메모장의 경우 풀면 바로 보이는 형태이기에 변환이 불가피한 상황이다.
 /// </summary>
-public class Table_Base 
+public class BaseTable 
 {
     string GetTablePath()
     {
@@ -18,7 +18,7 @@ public class Table_Base
 #endif
     }
 
-    protected void Load_Binary<T>(string _name, ref T _object)
+    protected void LoadBinary<T>(string _name, ref T _object)
     {
         var binary = new BinaryFormatter();
         binary.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
@@ -29,7 +29,7 @@ public class Table_Base
         stream.Close();
     }
 
-    protected void Save_Binary(string _name, object _object)
+    protected void SaveBinary(string _name, object _object)
     {
         string path = GetTablePath() + "/Table/Resources/" + "Table_" + _name + ".txt";
         var binary = new BinaryFormatter();
