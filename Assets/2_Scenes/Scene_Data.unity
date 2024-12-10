@@ -278,7 +278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1700203860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tableData:
-  - id: 0
+    id: 0
     name: 
     speed: 0
     dashSpeed: 0
@@ -301,31 +301,12 @@ MonoBehaviour:
     skill: 0
     ultimate: 0
     stat: 0
-  - id: 0
-    name: 
-    speed: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-    normalAttack: 0
-    skill: 0
-    ultimate: 0
-    stat: 0
-  - id: 0
-    name: 
-    speed: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-    normalAttack: 0
-    skill: 0
-    ultimate: 0
-    stat: 0
-  attackData:
-  - level: 0
-    name: 
-    description: 
-    multipliers: []
-    effects: 
-    particle: 0
+  statData:
+    level: 0
+    maxHp: 0
+    attackValue: 0
+    defenceValue: 0
+    criticalValue: 0
 --- !u!4 &1700203861
 Transform:
   m_ObjectHideFlags: 0
@@ -459,3 +440,58 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1836415258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836415260}
+  - component: {fileID: 1836415259}
+  m_Layer: 0
+  m_Name: CsvSaver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1836415259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836415258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb78b5b98cee524d8282ae674153c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveData:
+    id: 123
+    lit: 0100000002000000
+    list: 040000000500000006000000
+    overlap:
+      overlist: f8c30400
+      overStrList:
+      - saveme
+      - saveus
+  inclass:
+    id: 0
+--- !u!4 &1836415260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836415258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

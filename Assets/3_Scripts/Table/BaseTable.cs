@@ -44,7 +44,7 @@ public class BaseTable
     #endregion
 
     #region Save & Load
-    protected void LoadBinary<T>(string _path, ref T _object)
+    public void LoadBinary<T>(string _path, ref T _object)
     {
         var binary = new BinaryFormatter();
         binary.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
@@ -54,7 +54,7 @@ public class BaseTable
         stream.Close();
     }
 
-    protected void SaveBinary(string _name, object _object)
+    public void SaveBinary(string _name, object _object)
     {
         string path = GetTablePath() + "/Table/Resources/" + "Table_" + _name + ".txt";
         var binary = new BinaryFormatter();
@@ -68,7 +68,7 @@ public class BaseTable
     /// </summary>
     /// <param name="_name"></param>
     /// <returns></returns>
-    protected CSVReader GetCSVReader(string _name, UtilEnums.TABLE_FOLDER_TYPES _folderTypes = UtilEnums.TABLE_FOLDER_TYPES.NONE)
+    public CSVReader GetCSVReader(string _name, UtilEnums.TABLE_FOLDER_TYPES _folderTypes = UtilEnums.TABLE_FOLDER_TYPES.NONE)
     {
         string ext = ".csv";
         FileStream file = new FileStream("Document/" + GetFolderPath(_folderTypes) +_name + ext, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);

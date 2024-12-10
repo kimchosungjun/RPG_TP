@@ -8,15 +8,15 @@ public partial class PlayerTable: BaseTable
     *************************************************************/
 
     #region Save & Load BinaryData
-    public void InitBinary<T>(string _name, T _t)
-    {
-        LoadBinary<T>(_name, ref _t);
-    }
+    //public void InitBinary<T>(string _name, T _t)
+    //{
+    //    LoadBinary<T>(_name, ref _t);
+    //}
 
-    public void SaveBinary<T>(string _name, T _t)  
-    {
-        SaveBinary(_name, _t);
-    }
+    //public void SaveBinary<T>(string _name, T _t)  
+    //{
+    //    SaveBinary(_name, _t);
+    //}
     #endregion
 
     /*************************************************************
