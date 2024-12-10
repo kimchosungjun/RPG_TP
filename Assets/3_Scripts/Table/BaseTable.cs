@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -9,6 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 /// </summary>
 public class BaseTable 
 {
+    #region GetPath
+    /// <summary>
+    /// 에디터에선 Assets폴더의 위치 반환, 그 외에는 PersistentDatapath 반환
+    /// </summary>
+    /// <returns></returns>
     string GetTablePath()
     {
 #if UNITY_EDITOR
@@ -17,7 +20,30 @@ public class BaseTable
         //return Application.persistentDataPath + "/Assets";
 #endif
     }
+    /// <summary>
+    /// 폴더 이름 반환
+    /// </summary>
+    /// <param name="_folderTypes"></param>
+    /// <returns></returns>
+    string GetFolderPath(UtilEnums.TABLE_FOLDER_TYPES _folderTypes)
+    {
+        string folderPath = string.Empty;
+        switch (_folderTypes)
+        {
+            case UtilEnums.TABLE_FOLDER_TYPES.NONE:
+                break;
+            case UtilEnums.TABLE_FOLDER_TYPES.PLAYER:
+                folderPath = "PlayerTableCsv/";
+                break;
+            case UtilEnums.TABLE_FOLDER_TYPES.MONSTER:
+                folderPath = "MonsterTableCsv/";
+                break;
+        }
+        return folderPath;
+    }
+    #endregion
 
+    #region Save & Load
     protected void LoadBinary<T>(string _path, ref T _object)
     {
         var binary = new BinaryFormatter();
@@ -37,14 +63,20 @@ public class BaseTable
         stream.Close();
     }
 
-    protected CSVReader GetCSVReader(string _name)
+    /// <summary>
+    /// 이름 : 경로 (확장자는 필요 없다. 예시 Player/PlayerTableCsv) 
+    /// </summary>
+    /// <param name="_name"></param>
+    /// <returns></returns>
+    protected CSVReader GetCSVReader(string _name, UtilEnums.TABLE_FOLDER_TYPES _folderTypes = UtilEnums.TABLE_FOLDER_TYPES.NONE)
     {
         string ext = ".csv";
-        FileStream file = new FileStream("Document/" + _name + ext, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        FileStream file = new FileStream("Document/" + GetFolderPath(_folderTypes) +_name + ext, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         StreamReader stream = new StreamReader(file, System.Text.Encoding.UTF8);
         CSVReader reader = new CSVReader();
         reader.parse(stream.ReadToEnd(), false, 1);
         stream.Close();
         return reader;
     }
+    #endregion
 }

@@ -134,12 +134,12 @@ GameObject:
   - component: {fileID: 365020596}
   - component: {fileID: 365020595}
   m_Layer: 0
-  m_Name: CsvFileMaker
+  m_Name: CsvFileConverter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &365020595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1700203860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,38 +294,38 @@ MonoBehaviour:
   tableData:
   - id: 0
     name: 
-    stat: 0
-    attack: 0
-    skill: 0
-    ultimate: 0
     speed: 0
     dashSpeed: 0
     jumpSpeed: 0
+    normalAttack: 0
+    skill: 0
+    ultimate: 0
+    stat: 0
   - id: 0
     name: 
-    stat: 0
-    attack: 0
-    skill: 0
-    ultimate: 0
     speed: 0
     dashSpeed: 0
     jumpSpeed: 0
+    normalAttack: 0
+    skill: 0
+    ultimate: 0
+    stat: 0
   - id: 0
     name: 
-    stat: 0
-    attack: 0
-    skill: 0
-    ultimate: 0
     speed: 0
     dashSpeed: 0
     jumpSpeed: 0
+    normalAttack: 0
+    skill: 0
+    ultimate: 0
+    stat: 0
   attackData:
   - level: 0
     name: 
     description: 
-    needGold: 0
     multipliers: []
     effects: 
+    particle: 0
 --- !u!4 &1700203861
 Transform:
   m_ObjectHideFlags: 0

@@ -2,19 +2,26 @@ using UnityEngine;
 
 public class TestMonsterDataCreate : MonoBehaviour
 {
-    [SerializeField] PlayerTable.PlayerTableData[] tableData;
-    [SerializeField] PlayerTable.PlayerNormalAttackData[] attackData;
+    [SerializeField] PlayerTable.PlayerTableData tableData;
+    [SerializeField] PlayerTable.PlayerStatTableData statData;
+
+    TableMgr tableMgr;
+    private void Awake()
+    {
+        tableMgr = new TableMgr();
+        tableMgr.Link();
+    }
+
     public void OnGUI()
     {
-        if(GUI.Button(new Rect(0, 0, 100, 100), "테이블 읽기"))
+        if(GUI.Button(new Rect(0, 0, 100, 100), "전사 테이블 읽기"))
         {
-            TableMgr mgr = new TableMgr();
-            mgr.Link();
-            tableData[0] = mgr.character.GetPlayerTableData(0);
-            tableData[1] = mgr.character.GetPlayerTableData(1);
-            tableData[2] = mgr.character.GetPlayerTableData(2);
+            tableData = tableMgr.character.GetPlayerTableData(PlayerEnums.TYPEID.WARRIOR);
+        }
 
-            attackData[0] = mgr.character.GetPlayerAttackData(PlayerEnums.TYPEID.WARRIOR, 1);
+        if (GUI.Button(new Rect(150, 0, 100, 100), "전사 스탯 읽기"))
+        {
+            statData = tableMgr.character.GetPlayerStatTableData(PlayerEnums.TYPEID.WARRIOR, 1);
         }
     }
 }

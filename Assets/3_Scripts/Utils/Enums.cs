@@ -30,6 +30,37 @@ public class Enums
     }
 }
 
+namespace UtilEnums
+{
+    public enum SCENES
+    {
+        TITLE = 0,
+        LOGIN = 1,
+        LOADING = 2,
+        GAME = 3,
+    }
+
+    public enum LAYERS
+    {
+        DEFAULT = 0,
+        WALL = 3,
+        WATER = 4,
+        UI = 5,
+        GROUND = 6,
+        MONSTER = 7,
+        PLAYER = 8,
+        NPC = 9,
+        INTERACTOBJECT = 10,
+    }
+
+    public enum TABLE_FOLDER_TYPES
+    {
+        NONE=0,
+        PLAYER=1,
+        MONSTER=2,
+    }
+}
+
 namespace PlayerEnums
 {
     public enum TYPEID
@@ -54,26 +85,9 @@ namespace PlayerEnums
     }
 }
 
-public enum SCENES
-{
-    TITLE = 0,
-    LOGIN =1,
-    LOADING = 2,
-    GAME=3,
-}
 
-public enum LAYERS
-{
-    DEFAULT=0,
-    WALL=3,
-    WATER=4,
-    UI=5,
-    GROUND=6,
-    MONSTER=7,
-    PLAYER=8,
-    NPC=9,
-    INTERACTOBJECT=10,
-}
+
+
 
 public enum E_PLAYER_STATES
 {
@@ -156,7 +170,7 @@ public enum E_BUFF_COUNTINUITIES
 }
 #endregion
 
-public enum E_ATTACK_EFFECT_TYPES
+public enum ATTACK_EFFECT_TYPES
 {
     NORMAL=0,
     KNOCKBACK=1,
