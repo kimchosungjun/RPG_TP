@@ -1,0 +1,4 @@
+E_ID,Name,Speed,DashSpeed,JumpSpeed,Combo,E_NormalAttack,E_Skill,E_Ultimate,E_Stat
+0,전사,6,10,10,3,1000,3000,2000,0
+1,궁수,8,12,15,5,1001,2001,2002,1
+2,마법사,5,8,10,4,1002,3001,2003,2
