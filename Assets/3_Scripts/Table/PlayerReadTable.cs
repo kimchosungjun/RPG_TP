@@ -23,6 +23,8 @@ public partial class PlayerTable: BaseTable
     ******** 읽어 온 데이터를 Dictionary에 저장 ************
    *************************************************************/
 
+    #region Only Load Player Data 
+
     /// <summary>
     /// 플레이어 테이블 데이터 등록
     /// </summary>
@@ -145,6 +147,7 @@ public partial class PlayerTable: BaseTable
         playerAttackSkillDataGroup.Add(_typeID, tableDictionary);
     }
 
+    #endregion
 
     /*************************************************************
     ****** 지정된 클래스의 데이터를 읽어서 파싱 **********

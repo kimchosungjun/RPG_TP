@@ -341,6 +341,14 @@ MonoBehaviour:
     effectMaintainTime: 0
     effectType: 0
     particle: 0
+  saveStat:
+    currentHP: 0
+    currentLevel: 0
+    currentExp: 0
+    currentNormalAttackLevel: 0
+    currentSkillLevel: 0
+    currentUltimateSkillLevel: 0
+  t: {fileID: 11400000, guid: f3b87103474028142a3e111b24089530, type: 2}
 --- !u!4 &1700203861
 Transform:
   m_ObjectHideFlags: 0
