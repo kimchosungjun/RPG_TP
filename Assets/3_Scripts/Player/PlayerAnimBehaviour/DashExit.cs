@@ -19,7 +19,7 @@ public class DashExit : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponentInParent<CharacterMovement>()?.DashCooling();
+        animator.GetComponentInParent<WarriorMovement>()?.DashCooling();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

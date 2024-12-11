@@ -51,8 +51,6 @@ public class QuaterView
         float tMouseY = Input.GetAxis("Mouse Y");
         mMouseXValue += tMouseX;
         mMouseYValue += tMouseY * (-1.0f);
-        mMouseYValue = Mathf.Clamp(mMouseYValue, -90f, 90f);
-        camTransform.rotation = Quaternion.Euler(mMouseYValue, mMouseXValue, 0f);        // 오일러 각에 의한 회전을 연산하고 이것을 사원수로 변환하여 적용
     }
 
     public void LateExecute()
@@ -60,6 +58,9 @@ public class QuaterView
         // 벡터끼리의 덧셈연산
         // 위치 = 위치 + 벡터
         // 위치 = 위치 + 사원수 * 벡터  <-- 사원수 * 벡터는 벡터의 결과를 내도록 유니티에 구현되어 있다.
+        mMouseYValue = Mathf.Clamp(mMouseYValue, -90f, 90f);
+        camTransform.rotation = Quaternion.Euler(mMouseYValue, mMouseXValue, 0f);        // 오일러 각에 의한 회전을 연산하고 이것을 사원수로 변환하여 적용
+
         RaycastHit hit;
         Vector3 deltaVec = camTransform.rotation * offset;
         if (Physics.Raycast(lookatTransform.position, deltaVec.normalized, out hit, deltaVec.magnitude, wallNGroundLayer)) // Layer는 나중에 변경

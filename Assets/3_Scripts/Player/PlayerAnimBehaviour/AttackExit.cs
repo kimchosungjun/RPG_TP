@@ -19,7 +19,7 @@ public class AttackExit : StateMachineBehaviour
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponentInParent<CharacterMovement>()?.AttackCooling();
+        animator.GetComponentInParent<WarriorMovement>()?.AttackCooling();
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine

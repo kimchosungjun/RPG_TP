@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerAnimationEvent : MonoBehaviour
 {
-    CharacterMovement characterCtrl = null;
+    WarriorMovement characterCtrl = null;
 
     void Awake()
     {
-        if(characterCtrl==null) characterCtrl = GetComponentInParent<CharacterMovement>();      
+        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMovement>();      
     }
 
     public void AttackCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.AttackCooling(); }

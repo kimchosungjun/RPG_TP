@@ -4,17 +4,29 @@ using UnityEngine;
 // ai 처리는 fixedupdate와 update가 좋다
 // 이유는 동기화 처리때문에
 
-public partial class CharacterMovement : MonoBehaviour
+public class WarriorMovement : CharacterMovement
 {
-    PlayerState[] playerStates;
-    PlayerStateMachine stateMachine;
-    PlayerAttackCombo attackCombo;
-    [SerializeField] E_PLAYER_STATES currentPlayerState = E_PLAYER_STATES.MAX;
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
 
     #region Unity Life Cycle
-    void Start()
+
+    #region Init
+    public override void Init()
+    {
+        LinkMyComponent();
+    }
+
+    public void LinkMyComponent()
+    {
+        if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
+        if (anim == null) anim = GetComponentInChildren<Animator>();
+        if (collide == null) collide = GetComponentInChildren<CapsuleCollider>();
+    }
+    #endregion
+
+    #region Setup
+    public override void Setup()
     {
         LinkComponent();
         InitValues();
@@ -23,9 +35,6 @@ public partial class CharacterMovement : MonoBehaviour
 
     public void LinkComponent()
     {
-        if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
-        if (anim == null) anim = GetComponentInChildren<Animator>();
-        if (collide == null) collide = GetComponentInChildren<CapsuleCollider>();
         if (camTransform == null) camTransform = Camera.main.transform;
         if (collide != null) playerBodyRadius = collide.radius;
     }
@@ -40,55 +49,42 @@ public partial class CharacterMovement : MonoBehaviour
         playerBodyHeight = collide.height;
     }
 
-    public void CreateStates()
+    protected override void CreateStates()
     {
         stateMachine = new PlayerStateMachine();
         attackCombo = new PlayerAttackCombo();
-
         playerStates = new PlayerState[(int)E_PLAYER_STATES.MAX];
         playerStates[(int)E_PLAYER_STATES.MOVEMENT] = new PlayerGroundMoveState(this);
         playerStates[(int)E_PLAYER_STATES.DASH] = new PlayerDashState(this);
         playerStates[(int)E_PLAYER_STATES.JUMP] = new PlayerJumpState(this);
         playerStates[(int)E_PLAYER_STATES.FALL] = new PlayerFallState(this);
         playerStates[(int)E_PLAYER_STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
-        playerStates[(int)E_PLAYER_STATES.SKILL] = new PlayerSkillState(this,attackCombo);
+        playerStates[(int)E_PLAYER_STATES.SKILL] = new PlayerSkillState(this, attackCombo);
         playerStates[(int)E_PLAYER_STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
         playerStates[(int)E_PLAYER_STATES.HIT] = new PlayerHitState(this);
         //playerStates[(int)E_PLAYER_FSM.DEATH] = new (this, rigid, anim);
         playerStates[(int)E_PLAYER_STATES.INTERACTION] = new PlayerInteractionState(this);
-
         currentPlayerState = E_PLAYER_STATES.MOVEMENT;
         stateMachine.InitStateMachine(playerStates[(int)E_PLAYER_STATES.MOVEMENT]);
     }
+    #endregion
 
-    public void ChangeState(E_PLAYER_STATES _E_PLAYER_NEW_FSM) { stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]); currentPlayerState = _E_PLAYER_NEW_FSM; }
-
-
-    void Update()
+    #region Execute
+    public override void Execute()
     {
-        if(canPlayerCtrl)
+        if (canPlayerCtrl)
             stateMachine.Execute();
-
-        //GroundCheck();
-        //InputMovementKey();
-        //LimitMovementSpeed();
-        //UpdateAnimation();
     }
 
-    void FixedUpdate()
+    public override void FixedExecute()
     {
         stateMachine.FixedExecute();
-
-        //Movement();
-        //SlopeMovement();
-        //AirBlock();
-        //SetGravity();
-        //SetRotation();
-        //ApplyMovementForce();
-        //ApplyMovementRotation();
     }
     #endregion
 
+    #endregion
+
+    #region DialogueTest Method
     public void TestDialogue(Transform _targetTransform)
     {
         if (!isOnGround) return;
@@ -127,9 +123,21 @@ public partial class CharacterMovement : MonoBehaviour
         }
         transform.rotation = targetRotation;
     }
+    #endregion
 
     public void MoveLock(bool _isMoveLock) 
     {
         canPlayerCtrl = _isMoveLock;
     }
+
+
+    #region Attack & Skill & UltimateSkill
+    public void AttackCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
+
+    public void SkillCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
+
+    public void UltimateSkillCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
+    #endregion
 }
+
+

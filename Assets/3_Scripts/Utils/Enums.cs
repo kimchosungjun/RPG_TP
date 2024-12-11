@@ -67,7 +67,8 @@ namespace PlayerEnums
     {
         WARRIOR = 0,
         ARCHER = 1,
-        MAGE = 2
+        MAGE = 2,
+        NONE
     }
 
     public enum BUFF_SKILL

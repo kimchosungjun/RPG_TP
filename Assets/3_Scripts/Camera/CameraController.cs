@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         quaterView.Execute();
+      
     }
 
     private void LateUpdate()
