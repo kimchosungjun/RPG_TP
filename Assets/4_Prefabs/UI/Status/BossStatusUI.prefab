@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1980a5029337440a1e1abbb6e424d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusCanvas: {fileID: 2770912117513649339}
+  statusCanvasObject: {fileID: 2537684636440753261}
   hpImage: {fileID: 4013853282605371239}
   effectImage: {fileID: 1042253895135580989}
   levelText: {fileID: 460645879411783706}

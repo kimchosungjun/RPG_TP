@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossMonster : BaseMonster
 {
-    [SerializeField] protected MonsterStatusUICtrl statusUICtrl = null;
+    [SerializeField] protected StatusUICtrl statusUICtrl = null;
 
     #region Override
     public override void Death()

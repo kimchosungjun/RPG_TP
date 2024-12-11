@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EliteMonsterStatusUICtrl : MonsterStatusUICtrl
+public class EliteMonsterStatusUICtrl : StatusUICtrl
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -24,7 +24,7 @@ public class EliteMonsterStatusUICtrl : MonsterStatusUICtrl
     #region Override Life Cycle
     public override void Init()
     {
-        if (statusCanvas.gameObject.activeSelf) statusCanvas.gameObject.SetActive(false);
+        if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
     public override void Setup(Transform _followTransform,int _level = 0)

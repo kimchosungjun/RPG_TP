@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class MonsterStatusUICtrl : MonoBehaviour
+public abstract class StatusUICtrl : MonoBehaviour
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -9,7 +9,7 @@ public abstract class MonsterStatusUICtrl : MonoBehaviour
 
     #region Link UI & Value
     [Header("Monster")]
-    [SerializeField] protected Canvas statusCanvas;
+    [SerializeField] protected GameObject statusCanvasObject;
     [SerializeField] protected Image hpImage;
     [SerializeField] protected Image effectImage;
     [SerializeField] protected Text levelText;
@@ -35,7 +35,7 @@ public abstract class MonsterStatusUICtrl : MonoBehaviour
     /******************************************/
     /**********  캔버스 활성화   ************/
     /******************************************/
-    public void DecideActiveCanvas(bool _isActive) { statusCanvas.gameObject.SetActive(_isActive); }
+    public void DecideActiveCanvas(bool _isActive) { statusCanvasObject.gameObject.SetActive(_isActive); }
 }
 
 

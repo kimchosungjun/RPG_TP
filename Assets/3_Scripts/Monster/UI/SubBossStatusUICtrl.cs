@@ -22,7 +22,7 @@ public class SubBossStatusUICtrl : EliteMonsterStatusUICtrl
     #region Override Life Cycle
     public override void Init()
     {
-        if (statusCanvas.gameObject.activeSelf) statusCanvas.gameObject.SetActive(false);
+        if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
     public override void Setup(Transform _followTransform, int _level = 0)
@@ -33,7 +33,7 @@ public class SubBossStatusUICtrl : EliteMonsterStatusUICtrl
         levelText.text = "Lv." + _level;
         // Link
         followTransform = _followTransform;
-        statusCanvas.worldCamera = Camera.main;
+        statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
         camTransform = Camera.main.transform;
     }
     public override void Execute()

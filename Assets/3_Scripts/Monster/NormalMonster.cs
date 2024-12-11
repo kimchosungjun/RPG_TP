@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NormalMonster : BaseMonster
 {
-    [SerializeField] protected MonsterStatusUICtrl statusUICtrl = null;
+    [SerializeField] protected StatusUICtrl statusUICtrl = null;
     public override void Death()
     {
         throw new System.NotImplementedException();

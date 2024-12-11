@@ -11,12 +11,12 @@ public class CowardMonster : NonCombatMonster
     protected float maxDistance = 5f;
     [SerializeField] protected float moveSpeed = 3f;
     [SerializeField] protected bool isIdleMove = false;
-    [SerializeField] protected MonsterStatusUICtrl statusUIController;
+    [SerializeField] protected StatusUICtrl statusUIController;
 
     protected override void Awake()
     {
         if(anim==null)  anim = GetComponent<Animator>();    
-        if(statusUIController==null) statusUIController = GetComponentInChildren<MonsterStatusUICtrl>();    
+        if(statusUIController==null) statusUIController = GetComponentInChildren<StatusUICtrl>();    
     }
 
     protected virtual void Update()
