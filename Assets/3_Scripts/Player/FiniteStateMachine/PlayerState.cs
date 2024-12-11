@@ -4,8 +4,8 @@
 /// </summary>
 public class PlayerState : State
 {
-    protected CharacterCtrl characterCtrl;
-    public PlayerState(CharacterCtrl _controller) { this.characterCtrl = _controller;}
+    protected CharacterMovement characterCtrl;
+    public PlayerState(CharacterMovement _controller) { this.characterCtrl = _controller;}
 
     public override void Enter() { }
     public override void Execute() { }

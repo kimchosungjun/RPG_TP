@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public partial class CharacterCtrl : MonoBehaviour
+public partial class CharacterMovement : MonoBehaviour
 {
     [SerializeField] int tempCombo;
     #region Component

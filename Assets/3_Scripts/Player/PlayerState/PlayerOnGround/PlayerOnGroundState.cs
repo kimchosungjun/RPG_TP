@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.XR;
 
 public class PlayerOnGroundState : PlayerState
 {
-    public PlayerOnGroundState(CharacterCtrl _controller) : base(_controller) { }
+    public PlayerOnGroundState(CharacterMovement _controller) : base(_controller) { }
 
     public override void Enter()
     {

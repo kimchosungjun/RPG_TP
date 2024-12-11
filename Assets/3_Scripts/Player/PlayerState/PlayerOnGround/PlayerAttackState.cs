@@ -13,7 +13,7 @@ public class PlayerAttackState : PlayerOnGroundState
     int currentCombo = -1;
     protected Animator anim = null;
     protected PlayerAttackCombo attackCombo = null;
-    public PlayerAttackState(CharacterCtrl _controller, PlayerAttackCombo _attackCombo) : base(_controller)
+    public PlayerAttackState(CharacterMovement _controller, PlayerAttackCombo _attackCombo) : base(_controller)
     {
         this.anim = _controller.Anim;
         this.attackCombo = _attackCombo;

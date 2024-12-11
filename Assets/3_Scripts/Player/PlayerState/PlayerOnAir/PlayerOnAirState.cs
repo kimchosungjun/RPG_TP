@@ -6,7 +6,7 @@ public class PlayerOnAirState : PlayerState
 {
     protected Rigidbody rigid = null;
     protected Animator anim = null;
-    public PlayerOnAirState(CharacterCtrl _controller) : base(_controller) 
+    public PlayerOnAirState(CharacterMovement _controller) : base(_controller) 
     {
         rigid = _controller.Rigid;
         anim = _controller.Anim;

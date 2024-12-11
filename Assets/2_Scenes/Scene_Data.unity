@@ -278,7 +278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1700203860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,12 +301,46 @@ MonoBehaviour:
     skill: 0
     ultimate: 0
     stat: 0
+  levelTable:
+    maxLevel: 0
+    actionMaxLevel: 0
+    needExps: 
+    normalAttackLevelupGolds: 
+    skillLevelupGolds: 
+    ultimateLevelupGolds: 
   statData:
     level: 0
     maxHp: 0
     attackValue: 0
     defenceValue: 0
     criticalValue: 0
+  attackData:
+    level: 0
+    name: 
+    description: 
+    multipliers: []
+    effects: 
+    particle: 0
+  skillTable:
+    level: 0
+    name: 
+    description: 
+    multipliers: []
+    coolTime: 0
+    effectMaintainTime: 0
+    useStatType: 
+    effectStatType: 
+    continuityType: 
+    particle: 0
+  attackSkillTable:
+    level: 0
+    name: 
+    description: 
+    multiplier: 0
+    coolTime: 0
+    effectMaintainTime: 0
+    effectType: 0
+    particle: 0
 --- !u!4 &1700203861
 Transform:
   m_ObjectHideFlags: 0
@@ -456,7 +490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1836415259
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -34,7 +34,11 @@ public class TableMgr
     {
 #if UNITY_EDITOR
         character.InitPlayerTableCsv("PlayerTable", 1, 0);
+        character.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
         character.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, PlayerEnums.TYPEID.WARRIOR);
+        character.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, PlayerEnums.TYPEID.WARRIOR, 3);
+        character.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1,0,PlayerEnums.BUFF_SKILL.WARRIOR_ROAR, 2);
+        character.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable",1,0,PlayerEnums.ATTACK_SKILL.WARRIOR_ULTIMATE);
 #else
         character.Init_Binary("testCsv");
 #endif
