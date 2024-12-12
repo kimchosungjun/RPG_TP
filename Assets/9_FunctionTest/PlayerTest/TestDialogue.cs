@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using PlayerEnums;
 
 public class TestDialogue : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class TestDialogue : MonoBehaviour
 
         if (GUI.Button(new Rect(100, 0, 100, 100), "대화풀기"))
         {
-            characterCtrl?.ChangeState(E_PLAYER_STATES.MOVEMENT);
+            characterCtrl?.ChangeState(PlayerEnums.STATES.MOVEMENT);
         }
     }
 }

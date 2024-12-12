@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using PlayerEnums;
 /// <summary>
 /// 위로 힘 가하기는 Y축 속도와 땅 체크 문제로 키가 눌리는 시점에 구현함
 /// </summary>
@@ -83,13 +83,13 @@ public class PlayerJumpState : PlayerOnAirState
     {
         if (characterCtrl.IsOnGround)
         {
-            characterCtrl.ChangeState(E_PLAYER_STATES.MOVEMENT);
+            characterCtrl.ChangeState(PlayerEnums.STATES.MOVEMENT);
         }
         else
         {
             if (rigid.velocity.y < 0)
             {
-                characterCtrl.ChangeState(E_PLAYER_STATES.FALL);
+                characterCtrl.ChangeState(PlayerEnums.STATES.FALL);
             }
         }
     }

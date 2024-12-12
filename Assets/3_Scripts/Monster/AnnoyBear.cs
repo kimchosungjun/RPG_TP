@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UtilEnums;
+using MonsterEnums;
 
 public class AnnoyBear : MonoBehaviour
 {
@@ -85,10 +86,10 @@ public class AnnoyBear : MonoBehaviour
     }
 
     #region 1
-    public E_BTS DoCheckCanMovable()
+    public BTS DoCheckCanMovable()
     {
-        if (isKnockBackState || isGroggyState) return E_BTS.FAIL;
-        else return E_BTS.SUCCESS;
+        if (isKnockBackState || isGroggyState) return BTS.FAIL;
+        else return BTS.SUCCESS;
     }
 
     public void SetHitState()
@@ -109,18 +110,18 @@ public class AnnoyBear : MonoBehaviour
     [SerializeField] float currentIdleTime = 10f;
     [SerializeField] float idleTimer = 5f;
     // selector
-    public E_BTS DoCheckInBattleField()
+    public BTS DoCheckInBattleField()
     {
-        return (IsInBattleField) ? E_BTS.SUCCESS : E_BTS.FAIL;
+        return (IsInBattleField) ? BTS.SUCCESS : BTS.FAIL;
     }
     // fail만 반환
-    public E_BTS DoIdle()
+    public BTS DoIdle()
     {
 
         if (currentIdleTime <= idleTimer)
         {
             currentIdleTime += Time.deltaTime;
-            return E_BTS.FAIL;
+            return BTS.FAIL;
         }
 
         currentIdleTime = 0f;
@@ -138,24 +139,24 @@ public class AnnoyBear : MonoBehaviour
                 break;
         }
 
-        return E_BTS.FAIL;
+        return BTS.FAIL;
     }
     #endregion
 
     #region 3
-    public E_BTS DoCheckInSight()
+    public BTS DoCheckInSight()
     {
         Collider[] colls = Physics.OverlapSphere(transform.position, 10f, playerLayer);
         if (colls.Length == 0)
         {
             Debug.Log("인식거리 안이 아닙니다!");
-            return E_BTS.FAIL;
+            return BTS.FAIL;
         }
         Debug.Log("인식거리 안입니다!");
-        return E_BTS.SUCCESS;
+        return BTS.SUCCESS;
     }
 
-    public E_BTS DoGuardIdle()
+    public BTS DoGuardIdle()
     {
         currentIdleTime += Time.deltaTime;
         return DoIdle();
@@ -163,10 +164,10 @@ public class AnnoyBear : MonoBehaviour
     #endregion
 
     #region 4
-    public E_BTS DoCheckAttackCool()
+    public BTS DoCheckAttackCool()
     {
         anim.SetInteger("State", (int)AnnoyBearState.Attack);
-        return E_BTS.SUCCESS;
+        return BTS.SUCCESS;
     }
     #endregion
 }

@@ -25,6 +25,8 @@ public class NearAttackAction : AttackAction
         colliderGroup.Clear();
     }
 
+    
+
 
     /// <summary>
     /// 콜리더에 이미 접촉한 상태인지 확인 : 이중 피격을 방지하기 위함

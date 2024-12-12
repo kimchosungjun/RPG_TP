@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorNormalAttack : MonoBehaviour
+public class WarriorUltimateSkill : MonoBehaviour
 {
     [SerializeField] LayerMask enemyLayerMask;
     [SerializeField] Collider attackCollider;
@@ -27,9 +29,9 @@ public class WarriorNormalAttack : MonoBehaviour
     public void DoNormalAttack()
     {
         isAttackState = true;
-        nearAttackAction.DoAttack();    
+        nearAttackAction.DoAttack();
     }
-    
+
     public void StopNormalAttack()
     {
         isAttackState = false;

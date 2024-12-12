@@ -8,7 +8,7 @@ public class PlayerStat : BaseStat
 {
     #region Protected
     // 플레이어 고유 스탯
-    [SerializeField] protected PlayerEnums.TYPEID typeID;
+    [SerializeField] protected PlayerEnums.TYPEIDS typeID;
     [SerializeField] protected float dashSpeed;
     [SerializeField] protected float jumpSpeed;
     [SerializeField] protected float attackSpeed;

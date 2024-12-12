@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using PlayerEnums;
 
 public abstract class CharacterMovement : MonoBehaviour
 {
@@ -123,7 +124,7 @@ public abstract class CharacterMovement : MonoBehaviour
     protected PlayerState[] playerStates;
     protected PlayerStateMachine stateMachine;
     protected PlayerAttackCombo attackCombo;
-    protected E_PLAYER_STATES currentPlayerState = E_PLAYER_STATES.MAX;
+    protected PlayerEnums.STATES currentPlayerState = PlayerEnums.STATES.MAX;
     #endregion
 
     /******************************************/
@@ -321,9 +322,9 @@ public abstract class CharacterMovement : MonoBehaviour
         isPlayerDashing = false;
 
         if (isOnGround)
-            ChangeState(E_PLAYER_STATES.MOVEMENT);
+            ChangeState(PlayerEnums.STATES.MOVEMENT);
         else
-            ChangeState(E_PLAYER_STATES.FALL);
+            ChangeState(PlayerEnums.STATES.FALL);
 
         StartCoroutine(CDashCooling());
     }
@@ -358,7 +359,7 @@ public abstract class CharacterMovement : MonoBehaviour
     /*===========================*/
 
     #region Relate State Mahcine
-    public virtual void ChangeState(E_PLAYER_STATES _E_PLAYER_NEW_FSM) 
+    public virtual void ChangeState(PlayerEnums.STATES _E_PLAYER_NEW_FSM) 
     { 
         stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]); 
         currentPlayerState = _E_PLAYER_NEW_FSM; 

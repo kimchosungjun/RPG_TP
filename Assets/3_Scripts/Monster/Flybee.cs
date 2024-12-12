@@ -1,4 +1,4 @@
-using System.Collections;
+using MonsterEnums;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,13 +38,13 @@ public class Flybee : PatrolMonster
         statusUICtrl.Execute();
     }
 
-    public E_BTS DoCheckHitState()
+    public BTS DoCheckHitState()
     {
-        if (isHitState) return E_BTS.SUCCESS;
-        else return E_BTS.FAIL;   
+        if (isHitState) return BTS.SUCCESS;
+        else return BTS.FAIL;   
     }
 
-    protected override E_BTS DoPatrol()
+    protected override BTS DoPatrol()
     {
         if (Vector3.Distance(transform.position, targetWay) < 0.2f)
         {
@@ -59,7 +59,7 @@ public class Flybee : PatrolMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return E_BTS.SUCCESS;
+        return BTS.SUCCESS;
     }
 
     #region 테스트용 메서드

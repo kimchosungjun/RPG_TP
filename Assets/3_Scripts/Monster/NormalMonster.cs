@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using MonsterEnums;
 using UnityEngine;
 
 public class NormalMonster : BaseMonster
@@ -10,17 +9,17 @@ public class NormalMonster : BaseMonster
         throw new System.NotImplementedException();
     }
 
-    public override E_BTS DetectMovement()
+    public override BTS DetectMovement()
     {
         throw new System.NotImplementedException();
     }
 
-    public override E_BTS DetectPlayer()
+    public override BTS DetectPlayer()
     {
         throw new System.NotImplementedException();
     }
 
-    public override E_BTS IdleMovement()
+    public override BTS IdleMovement()
     {
         throw new System.NotImplementedException();
     }

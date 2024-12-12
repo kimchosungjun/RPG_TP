@@ -10,22 +10,22 @@ public partial class PlayerTable : BaseTable
 
     #region Player Data Group : Dictionary 
     // 플레이어의 정보를 저장한 테이블 데이터 : TYPEID가 key 값(id는 enum TYPEID)
-    Dictionary<TYPEID, PlayerTableData> playerTableGroup = new Dictionary<TYPEID, PlayerTableData>();
+    Dictionary<TYPEIDS, PlayerTableData> playerTableGroup = new Dictionary<TYPEIDS, PlayerTableData>();
 
     // 플레이어 레벨 업 정보 (+ 강화 골드)
     PlayerLevelTableData levelupTableData = new PlayerLevelTableData();
 
     // 누구의 스탯인지 확인하고 레벨에 맞게 스탯을 파싱 : 첫번째 키 값은 플레이어의 TYPEID이고 두번째 키 값은 level
-    Dictionary<TYPEID, Dictionary<int, PlayerStatTableData>> playerStatGroup = new Dictionary<TYPEID, Dictionary<int, PlayerStatTableData>>();
+    Dictionary<TYPEIDS, Dictionary<int, PlayerStatTableData>> playerStatGroup = new Dictionary<TYPEIDS, Dictionary<int, PlayerStatTableData>>();
 
     // 누구의 일반공격인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 플레이어 TYPEID, 두번째 키 값은 level
-    Dictionary<TYPEID, Dictionary<int, PlayerNormalAttackTableData>> playerNormalAttackDataGroup = new Dictionary<TYPEID, Dictionary<int, PlayerNormalAttackTableData>>();
+    Dictionary<TYPEIDS, Dictionary<int, PlayerNormalAttackTableData>> playerNormalAttackDataGroup = new Dictionary<TYPEIDS, Dictionary<int, PlayerNormalAttackTableData>>();
 
     // 누구의 버프스킬인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 BUFF_SKILL, 두번째 키 값은 level
-    Dictionary<BUFF_SKILL, Dictionary<int, PlayerBuffSkillTableData>> playerBuffSkillDataGroup = new Dictionary<BUFF_SKILL, Dictionary<int, PlayerBuffSkillTableData>>();
+    Dictionary<BUFF_SKILLS, Dictionary<int, PlayerBuffSkillTableData>> playerBuffSkillDataGroup = new Dictionary<BUFF_SKILLS, Dictionary<int, PlayerBuffSkillTableData>>();
 
     // 누구의 공격스킬인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 ATTACK_SKILL, 두번째 키 값은 level
-    Dictionary<ATTACK_SKILL, Dictionary<int, PlayerAttackSkillTableData>> playerAttackSkillDataGroup = new Dictionary<ATTACK_SKILL, Dictionary<int, PlayerAttackSkillTableData>>();
+    Dictionary<ATTACK_SKILLS, Dictionary<int, PlayerAttackSkillTableData>> playerAttackSkillDataGroup = new Dictionary<ATTACK_SKILLS, Dictionary<int, PlayerAttackSkillTableData>>();
     #endregion
 
     /************************************************************
@@ -39,7 +39,7 @@ public partial class PlayerTable : BaseTable
     /// </summary>
     /// <param name="_typeID"></param>
     /// <returns></returns>
-    public PlayerTableData GetPlayerTableData(TYPEID _typeID)
+    public PlayerTableData GetPlayerTableData(TYPEIDS _typeID)
     {
         if(playerTableGroup.ContainsKey(_typeID))return playerTableGroup[_typeID];
         return null;
@@ -57,7 +57,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_typeID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerStatTableData GetPlayerStatTableData(TYPEID _typeID,int _level)
+    public PlayerStatTableData GetPlayerStatTableData(TYPEIDS _typeID,int _level)
     {
         if (playerStatGroup.ContainsKey(_typeID))
         {
@@ -73,7 +73,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_typeID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerNormalAttackTableData GetPlayerNormalAttackData(TYPEID _typeID, int _level)
+    public PlayerNormalAttackTableData GetPlayerNormalAttackData(TYPEIDS _typeID, int _level)
     {
         if (playerNormalAttackDataGroup.ContainsKey(_typeID))
         {
@@ -89,7 +89,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_buffSkillID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerBuffSkillTableData GetPlayerBuffSkillTableData(BUFF_SKILL _buffSkillID, int _level)
+    public PlayerBuffSkillTableData GetPlayerBuffSkillTableData(BUFF_SKILLS _buffSkillID, int _level)
     {
         if (playerBuffSkillDataGroup.ContainsKey(_buffSkillID))
         {
@@ -105,7 +105,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_attackSkillID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerAttackSkillTableData GetPlayerAttackSkillTableData(ATTACK_SKILL _attackSkillID,int _level)
+    public PlayerAttackSkillTableData GetPlayerAttackSkillTableData(ATTACK_SKILLS _attackSkillID,int _level)
     {
         if (playerAttackSkillDataGroup.ContainsKey(_attackSkillID)) 
         {

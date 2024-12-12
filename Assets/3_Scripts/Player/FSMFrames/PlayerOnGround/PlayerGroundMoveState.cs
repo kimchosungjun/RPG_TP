@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using PlayerEnums;
 public class PlayerGroundMoveState : PlayerOnGroundState
 {
     /******************************************/
@@ -63,35 +63,35 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         {
             rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
             rigid.AddForce(Vector3.up * characterCtrl.PlayerJumpForce, ForceMode.Impulse);
-            characterCtrl.ChangeState(E_PLAYER_STATES.JUMP);
+            characterCtrl.ChangeState(PlayerEnums.STATES.JUMP);
             return;
         }
 
         // 대쉬 입력
         if (Input.GetMouseButtonDown(1) && characterCtrl.IsOnGround && !characterCtrl.IsOnMaxAngleSlope)
         {
-            characterCtrl.ChangeState(E_PLAYER_STATES.DASH);
+            characterCtrl.ChangeState(PlayerEnums.STATES.DASH);
             return;
         }
 
         // 공격 입력
         if (/*Input.GetMouseButtonDown(0)*/ Input.GetKeyDown(KeyCode.Q))
         {
-            characterCtrl.ChangeState(E_PLAYER_STATES.ATTACK);
+            characterCtrl.ChangeState(PlayerEnums.STATES.ATTACK);
             return;
         }
 
         // 스킬 입력
         if (Input.GetKeyDown(KeyCode.E))
         {
-            characterCtrl.ChangeState(E_PLAYER_STATES.SKILL);
+            characterCtrl.ChangeState(PlayerEnums.STATES.SKILL);
             return;
         }
 
         // 궁극기 입력
         if (Input.GetKeyDown(KeyCode.R))
         {
-            characterCtrl.ChangeState(E_PLAYER_STATES.ULTIMATESKILL);
+            characterCtrl.ChangeState(PlayerEnums.STATES.ULTIMATESKILL);
             return;
         }
     }
@@ -108,9 +108,9 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         if(characterCtrl.IsOnGround == false)
         {
             if (rigid.velocity.y < -0.1f)
-                characterCtrl.ChangeState(E_PLAYER_STATES.FALL);
-            else 
-                characterCtrl.ChangeState(E_PLAYER_STATES.JUMP);
+                characterCtrl.ChangeState(PlayerEnums.STATES.FALL);
+            else
+                characterCtrl.ChangeState(PlayerEnums.STATES.JUMP);
         }
     }
     #endregion

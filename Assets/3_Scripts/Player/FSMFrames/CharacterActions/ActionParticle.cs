@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ParticleAction : MonoBehaviour
 {
-    [SerializeField] E_PARTICLES particleKey;
+    //[SerializeField] E_PARTICLES particleKey;
     [SerializeField] ParticleSystem particle;
 
-    public E_PARTICLES GetParticleKey { get { ResetParticleState(); return particleKey; } }
+    //public E_PARTICLES GetParticleKey { get { ResetParticleState(); return particleKey; } }
 
     public void ResetParticleState() 
     {

@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using PlayerEnums;
 // ai 처리는 fixedupdate와 update가 좋다
 // 이유는 동기화 처리때문에
 
@@ -53,19 +53,19 @@ public class WarriorMovement : CharacterMovement
     {
         stateMachine = new PlayerStateMachine();
         attackCombo = new PlayerAttackCombo();
-        playerStates = new PlayerState[(int)E_PLAYER_STATES.MAX];
-        playerStates[(int)E_PLAYER_STATES.MOVEMENT] = new PlayerGroundMoveState(this);
-        playerStates[(int)E_PLAYER_STATES.DASH] = new PlayerDashState(this);
-        playerStates[(int)E_PLAYER_STATES.JUMP] = new PlayerJumpState(this);
-        playerStates[(int)E_PLAYER_STATES.FALL] = new PlayerFallState(this);
-        playerStates[(int)E_PLAYER_STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
-        playerStates[(int)E_PLAYER_STATES.SKILL] = new PlayerSkillState(this, attackCombo);
-        playerStates[(int)E_PLAYER_STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
-        playerStates[(int)E_PLAYER_STATES.HIT] = new PlayerHitState(this);
+        playerStates = new PlayerState[(int)PlayerEnums.STATES.MAX];
+        playerStates[(int)PlayerEnums.STATES.MOVEMENT] = new PlayerGroundMoveState(this);
+        playerStates[(int)PlayerEnums.STATES.DASH] = new PlayerDashState(this);
+        playerStates[(int)PlayerEnums.STATES.JUMP] = new PlayerJumpState(this);
+        playerStates[(int)PlayerEnums.STATES.FALL] = new PlayerFallState(this);
+        playerStates[(int)PlayerEnums.STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
+        playerStates[(int)PlayerEnums.STATES.SKILL] = new PlayerSkillState(this, attackCombo);
+        playerStates[(int)PlayerEnums.STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
+        playerStates[(int)PlayerEnums.STATES.HIT] = new PlayerHitState(this);
         //playerStates[(int)E_PLAYER_FSM.DEATH] = new (this, rigid, anim);
-        playerStates[(int)E_PLAYER_STATES.INTERACTION] = new PlayerInteractionState(this);
-        currentPlayerState = E_PLAYER_STATES.MOVEMENT;
-        stateMachine.InitStateMachine(playerStates[(int)E_PLAYER_STATES.MOVEMENT]);
+        playerStates[(int)PlayerEnums.STATES.INTERACTION] = new PlayerInteractionState(this);
+        currentPlayerState = PlayerEnums.STATES.MOVEMENT;
+        stateMachine.InitStateMachine(playerStates[(int)PlayerEnums.STATES.MOVEMENT]);
     }
     #endregion
 
@@ -93,7 +93,7 @@ public class WarriorMovement : CharacterMovement
         direcition.y = 0f;
         float angle = Vector3.Angle(transform.forward, direcition);
 
-        ChangeState(E_PLAYER_STATES.INTERACTION);
+        base.ChangeState(PlayerEnums.STATES.INTERACTION);
         
         if (angle < 10f)
         {
@@ -132,11 +132,11 @@ public class WarriorMovement : CharacterMovement
 
 
     #region Attack & Skill & UltimateSkill
-    public void AttackCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
+    public void AttackCooling() { base.ChangeState(PlayerEnums.STATES.MOVEMENT); }
 
-    public void SkillCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
+    public void SkillCooling() { base.ChangeState(PlayerEnums.STATES.MOVEMENT); }
 
-    public void UltimateSkillCooling() { ChangeState(E_PLAYER_STATES.MOVEMENT); }
+    public void UltimateSkillCooling() { base.ChangeState(PlayerEnums.STATES.MOVEMENT); }
     #endregion
 }
 

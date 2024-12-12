@@ -30,6 +30,7 @@ public class Enums
     }
 }
 
+// 레이어, 씬, 테이블 ID
 namespace UtilEnums
 {
     public enum SCENES
@@ -61,9 +62,10 @@ namespace UtilEnums
     }
 }
 
+// 플레이어
 namespace PlayerEnums
 {
-    public enum TYPEID
+    public enum TYPEIDS
     {
         WARRIOR = 0,
         ARCHER = 1,
@@ -71,136 +73,128 @@ namespace PlayerEnums
         NONE
     }
 
-    public enum BUFF_SKILL
+    public enum BUFF_SKILLS
     {
         WARRIOR_ROAR = 0,
         MAGE_VITALITY_INCREASE = 1
     }
 
-    public enum ATTACK_SKILL
+    public enum ATTACK_SKILLS
     {
         WARRIOR_ULTIMATE = 0,
         ARCHER_FULL_BLOWN_SHOOT = 1,
         ARCHER_ULTIMATE = 2,
         MAGE_ULTIMATE = 3
     }
+
+    public enum STATES
+    {
+        MOVEMENT = 0,
+        DASH = 1,
+        JUMP = 2,
+        FALL = 3,
+        ATTACK = 4,
+        SKILL = 5,
+        ULTIMATESKILL = 6,
+        HIT = 7,
+        DEATH = 8,
+        INTERACTION = 9,
+        MAX = 10
+    }
+
+    public enum ENHANCES
+    {
+        NORMALATTACK,
+        SKILL,
+        ULTIMATESKILL,
+        LEVEL
+    }
 }
 
-
-
-
-
-public enum E_PLAYER_STATES
+// 몬스터
+namespace MonsterEnums 
 {
-    MOVEMENT=0,
-    DASH=1,
-    JUMP=2,
-    FALL=3,
-    ATTACK=4,
-    SKILL=5,
-    ULTIMATESKILL=6,
-    HIT=7,
-    DEATH=8,
-    INTERACTION=9,
-    MAX=10
+    public enum STATES
+    {
+        IDLE = 0,
+        MOVE = 1,
+        HIT = 2,
+        ATTACK = 3,
+        DEATH = 4,
+        GROGGY = 5
+    }
+
+    public enum BTS
+    {
+        SUCCESS = 0,
+        FAIL = 1,
+        RUNNING = 2
+    }
 }
 
-public enum E_ENHANCE_PLAYER
+// 버프, 상태이상
+namespace EffectEnums
 {
-    NORMALATTACK,
-    SKILL,
-    ULTIMATESKILL,
-    LEVEL
+    public enum HIT_EFFECTS
+    {
+        NORMAL = 0,
+        KNOCKBACK = 1,
+        STUN = 2,
+    }
+
+    public enum BUFF_USE_STATS
+    {
+        NONE = 0,
+        HP = 1,
+        ATK = 2,
+        DEF = 3,
+    }
+
+    public enum BUFF_APPLY_STATS
+    {
+        HP = 0,
+        SPD = 1,
+        ATK = 2,
+        DEF = 3,
+        ATKSPD = 4
+    }
+
+    public enum BUFF_COUNTINUITIES
+    {
+        IMMEDIATELY = 0, // 즉발
+        CONTINUOUS = 1 // 지속
+    }
+
+    public enum PARTICLES
+    {
+        BRUTE_ATK1,
+        BRUTE_ATK2,
+        BRUTE_ATK3,
+        HEAL,
+        HIT,
+        DAMAGED,
+        BUFF,
+        NONE
+    }
 }
 
-public enum E_PLAYER_ACTIONS
+// To Do ~~~~~
+// 아이템
+namespace ItemEnums
 {
-    NORMAL_ATK,
-    SKILL,
-    ULTIMATESKILL,
+    
 }
-
-public enum E_BTS
-{
-    SUCCESS=0,
-    FAIL=1,
-    RUNNING=2
-}
-
-public enum E_MONSTER_ANIMS
-{
-    IDLE=0,
-    MOVE=1,
-    HIT=2,
-    ATTACK=3,
-    DEATH=4,
-    GROGGY=5
-}
-
-#region 버프
-/// <summary>
-/// 버프를 주는 스탯에 사용한다.
-/// </summary>
-public enum E_BUFF_APPLY_STATS
-{
-    HP=0,
-    SPD=1,
-    ATK=2,
-    DEF=3,
-    ATKSPD=4
-}
-
-/// <summary>
-/// 버프에 영향을 주는 스탯을 의미한다.
-/// </summary>
-public enum E_BUFF_EFFECT_STATS
-{
-    NONE=0,
-    HP=1,
-    ATK=2,
-    DEF=3,
-}
-
-/// <summary>
-/// 버프 지속성
-/// </summary>
-public enum E_BUFF_COUNTINUITIES
-{
-    IMMEDIATELY=0, // 즉발
-    CONTINUOUS=1 // 지속
-}
-#endregion
-
-public enum ATTACK_EFFECT_TYPES
-{
-    NORMAL=0,
-    KNOCKBACK=1,
-    STUN=2,
-}
-
-public enum E_PARTICLES
-{
-    BRUTE_ATK1,
-    BRUTE_ATK2,
-    BRUTE_ATK3,
-    HEAL,
-    HIT,
-    DAMAGED,
-    BUFF,
-    NONE
-}
-
 #region ITEM
 
 public enum E_CAMERAVIEW
 {
-    CAMERA_QUATERVIEW=0,
-    CAMERA_CLOSEUP=1,
+    CAMERA_QUATERVIEW = 0,
+    CAMERA_CLOSEUP = 1,
 }
 
 public enum E_ITEMTYPE
 {
-    ITEM_NONE=0,
+    ITEM_NONE = 0,
     ITEM_WEAPON = 1,
     ITEM_COMSUMPTION = 2,
     ITEM_OTHERS = 3
@@ -217,7 +211,7 @@ public enum E_WEAPONTYPE
 public enum E_WEAPONEFFECT
 {
     WEAPON_NONE = 0,
-    WEAPON_CRITICAL = 1, 
+    WEAPON_CRITICAL = 1,
     WEAPON_ABSORPTION = 2
 }
 

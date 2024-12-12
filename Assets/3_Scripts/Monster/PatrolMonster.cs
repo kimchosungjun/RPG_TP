@@ -1,4 +1,4 @@
-using System.Collections;
+using MonsterEnums;
 using UnityEngine;
 
 public class PatrolMonster : NonCombatMonster
@@ -20,7 +20,7 @@ public class PatrolMonster : NonCombatMonster
     /// Success값만 반환
     /// </summary>
     /// <returns></returns>
-    protected virtual E_BTS DoPatrol()
+    protected virtual BTS DoPatrol()
     {
         if(Vector3.Distance(transform.position, targetWay) < 0.2f)
         {
@@ -33,6 +33,6 @@ public class PatrolMonster : NonCombatMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return E_BTS.SUCCESS;
+        return BTS.SUCCESS;
     }
 }
