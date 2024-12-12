@@ -267,13 +267,14 @@ GameObject:
   m_Component:
   - component: {fileID: 328993478}
   - component: {fileID: 328993479}
+  - component: {fileID: 328993480}
   m_Layer: 0
   m_Name: Ultimate_Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &328993478
 Transform:
   m_ObjectHideFlags: 0
@@ -310,6 +311,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &328993480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328993477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d7a625719a35e40950f22029a9c49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  attackCollider: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -3047,6 +3064,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalAttack_First
       objectReference: {fileID: 0}
+    - target: {fileID: 3670122044626269067, guid: 079f853abc24c314aaa0555fd61479de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7404896836900280006, guid: 079f853abc24c314aaa0555fd61479de,
         type: 3}
       propertyPath: m_RootOrder
@@ -3639,6 +3661,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalAttack_Second
       objectReference: {fileID: 0}
+    - target: {fileID: 4171179391747637083, guid: 318f3815b47bccb4d9f7d4041346da4e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3973,6 +4000,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NormalAttack_Third
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196104190183110863, guid: 4137bf4f78f5141428cdbe09b6394f96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
