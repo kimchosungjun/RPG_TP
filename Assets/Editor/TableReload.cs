@@ -10,7 +10,7 @@ public class TableReload : MonoBehaviour
     static public void ParseTableCsv()
     {
         TableMgr tableMgr = new TableMgr();
-        tableMgr.Link();
+        tableMgr.LinkPlayerTable();
         tableMgr.Save();
     }
 }

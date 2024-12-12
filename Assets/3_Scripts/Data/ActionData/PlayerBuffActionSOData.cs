@@ -1,16 +1,14 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerBuffSkillSO", menuName = "PlayerActionSOData/PlayerBuffSkillSO")]
-public class PlayerBuffActionSOData : PlayerBaseActionSOData
+public class PlayerBuffActionSOData : PlayerActionSkillSOData
 {
-    [SerializeField] protected float coolTime;
-    [SerializeField] protected float maintainEffectTime;
+    [SerializeField] protected float[] actionMultipliers;
     [SerializeField] protected int[] useStatTypes;
     [SerializeField] protected int[] effectStatTypes;
     [SerializeField] protected int[] continuityTypes;
     
-    public float GetCoolTime { get { return coolTime; } }
-    public float GetMaintainEffectTime { get {return maintainEffectTime; } }    
+
     
     public int GetUseStatType(int _combo)
     {
@@ -31,5 +29,19 @@ public class PlayerBuffActionSOData : PlayerBaseActionSOData
         if (continuityTypes.Length - 1 >= _combo)
             return continuityTypes[_combo];
         return -1;
+    }
+
+    public void SetSOData(PlayerTable.PlayerBuffSkillTableData _buffSkillTable)
+    {
+         actionName = _buffSkillTable.name;
+         actionDescription = _buffSkillTable.description;
+         actionMultipliers = _buffSkillTable.multipliers;
+         actionParticleID = _buffSkillTable.particle;
+
+        coolTime = _buffSkillTable.coolTime;
+        maintainEffectTime = _buffSkillTable.effectMaintainTime;
+        useStatTypes = _buffSkillTable.useStatTypes;
+        effectStatTypes = _buffSkillTable.effectStatTypes;
+        continuityTypes = _buffSkillTable.continuityTypes;
     }
 }

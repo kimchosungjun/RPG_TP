@@ -254,9 +254,9 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.multipliers, _tableData.multipliers.Length);
         _reader.get(_row, ref _tableData.coolTime);
         _reader.get(_row, ref _tableData.effectMaintainTime);
-        _reader.get(_row, ref _tableData.useStatType, _tableData.useStatType.Length);
-        _reader.get(_row, ref _tableData.effectStatType, _tableData.effectStatType.Length);
-        _reader.get(_row, ref _tableData.continuityType, _tableData.continuityType.Length);
+        _reader.get(_row, ref _tableData.useStatTypes, _tableData.useStatTypes.Length);
+        _reader.get(_row, ref _tableData.effectStatTypes, _tableData.effectStatTypes.Length);
+        _reader.get(_row, ref _tableData.continuityTypes, _tableData.continuityTypes.Length);
         _reader.get(_row, ref _tableData.particle);
         return true;
     }

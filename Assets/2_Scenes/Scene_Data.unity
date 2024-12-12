@@ -291,64 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c1220217c2012429e47c874509e749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tableData:
-    id: 0
-    name: 
-    speed: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-    normalAttack: 0
-    skill: 0
-    ultimate: 0
-    stat: 0
-  levelTable:
-    maxLevel: 0
-    actionMaxLevel: 0
-    needExps: 
-    normalAttackLevelupGolds: 
-    skillLevelupGolds: 
-    ultimateLevelupGolds: 
-  statData:
-    level: 0
-    maxHp: 0
-    attackValue: 0
-    defenceValue: 0
-    criticalValue: 0
-  attackData:
-    level: 0
-    name: 
-    description: 
-    multipliers: []
-    effects: 
-    particle: 0
-  skillTable:
-    level: 0
-    name: 
-    description: 
-    multipliers: []
-    coolTime: 0
-    effectMaintainTime: 0
-    useStatType: 
-    effectStatType: 
-    continuityType: 
-    particle: 0
-  attackSkillTable:
-    level: 0
-    name: 
-    description: 
-    multiplier: 0
-    coolTime: 0
-    effectMaintainTime: 0
-    effectType: 0
-    particle: 0
-  saveStat:
-    currentHP: 0
-    currentLevel: 0
-    currentExp: 0
-    currentNormalAttackLevel: 0
-    currentSkillLevel: 0
-    currentUltimateSkillLevel: 0
-  t: {fileID: 11400000, guid: f3b87103474028142a3e111b24089530, type: 2}
+  attackActionSO: {fileID: 11400000, guid: 3b09165b315f0e446b186de0f5b10333, type: 2}
+  skillActionSO: {fileID: 11400000, guid: a966cca1d5dcaf14f85634d310723565, type: 2}
+  buffActionSO: {fileID: 11400000, guid: 9c32aed444e645c43a0c1ab43d04aece, type: 2}
 --- !u!4 &1700203861
 Transform:
   m_ObjectHideFlags: 0

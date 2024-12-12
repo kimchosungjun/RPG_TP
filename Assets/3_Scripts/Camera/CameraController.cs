@@ -6,24 +6,35 @@ public class CameraController : MonoBehaviour
 {
     //[Header("카메라 View 종류"),SerializeField] E_CAMERAVIEW CURRENT_VIEW = E_CAMERAVIEW.CAMERA_QUATERVIEW;
     [Header("플레이어 몸통"),SerializeField] Transform playerBodyTransform;
-    
+    [SerializeField] E_CAMERAVIEW cameraView = E_CAMERAVIEW.CAMERA_CLOSEUP;
     QuaterView quaterView = null;
 
     private void Start()
-    { 
+    {
         //if (playerBodyTransform == null) playerBodyTransform = FindObjectOfType<PlayerController>().BodyTransform;
-        quaterView = new QuaterView(this.transform, playerBodyTransform);
-        quaterView.Setup();
+        if (cameraView == E_CAMERAVIEW.CAMERA_QUATERVIEW)
+        {
+            quaterView = new QuaterView(this.transform, playerBodyTransform);
+            quaterView.Setup();
+        }
     }
 
     private void Update()
     {
-        quaterView.Execute();
-      
+        if (cameraView == E_CAMERAVIEW.CAMERA_QUATERVIEW)
+            quaterView.Execute();
     }
 
     private void LateUpdate()
+    {   
+        if(cameraView==E_CAMERAVIEW.CAMERA_QUATERVIEW)
+            quaterView.LateExecute();
+    }
+
+    public void ChangeState()
     {
-        quaterView.LateExecute();
+        quaterView = new QuaterView(this.transform, playerBodyTransform);
+        quaterView.Setup();
+        cameraView = E_CAMERAVIEW.CAMERA_QUATERVIEW;
     }
 }

@@ -11,6 +11,7 @@ public class TableMgr
     public void Init() 
     {
         SharedMgr.TableMgr = this;
+        LinkPlayerTable();
         // To Do ~~ Load Player Game Data
     }
 
@@ -30,18 +31,23 @@ public class TableMgr
     /// <summary>
     /// Row : 행, Col : 열
     /// </summary>
-    public void Link()
+    public void LinkPlayerTable()
     {
 #if UNITY_EDITOR
         character.InitPlayerTableCsv("PlayerTable", 1, 0);
         character.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
-        character.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, PlayerEnums.TYPEID.WARRIOR);
-        character.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, PlayerEnums.TYPEID.WARRIOR, 3);
-        character.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1,0,PlayerEnums.BUFF_SKILL.WARRIOR_ROAR, 2);
-        character.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable",1,0,PlayerEnums.ATTACK_SKILL.WARRIOR_ULTIMATE);
+        LinkWarriorTable();
 #else
         character.Init_Binary("testCsv");
 #endif
+    }
+
+    public void LinkWarriorTable()
+    {
+        character.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, PlayerEnums.TYPEID.WARRIOR);
+        character.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, PlayerEnums.TYPEID.WARRIOR, 3);
+        character.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1, 0, PlayerEnums.BUFF_SKILL.WARRIOR_ROAR, 2);
+        character.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable", 1, 0, PlayerEnums.ATTACK_SKILL.WARRIOR_ULTIMATE);
     }
 
     public void LoadPlayerData(/*PlayerEnums.TYPEID _typeID*/)

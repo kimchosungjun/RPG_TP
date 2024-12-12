@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 670de761c7765a640b57fe3524d86aca, type: 3}
+  m_Script: {fileID: 11500000, guid: 244ff26c111172640adfd2458157256a, type: 3}
   m_Name: Warrior_NormalAttack_SO
   m_EditorClassIdentifier: 
   actionName: 
   actionDescription: 
-  actionMultipliers: []
   actionParticleID: 0
   attackEffectType: 
+  actionMultipliers: []

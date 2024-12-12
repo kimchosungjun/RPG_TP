@@ -195,16 +195,16 @@ public partial class PlayerTable : BaseTable
         public float[] multipliers;
         public float coolTime;
         public float effectMaintainTime;
-        public int[] useStatType; // enum : 사용(계수 비례)하는 스탯
-        public int[] effectStatType; // enum : 영향을 주는 스탯
-        public int[] continuityType; // enum : 즉발 여부
+        public int[] useStatTypes; // enum : 사용(계수 비례)하는 스탯
+        public int[] effectStatTypes; // enum : 영향을 주는 스탯
+        public int[] continuityTypes; // enum : 즉발 여부
         public int particle; // enum
         public void SetSize(int _buffTypeCnt)
         {
             multipliers = new float[_buffTypeCnt];
-            useStatType = new int[_buffTypeCnt];
-            effectStatType = new int[_buffTypeCnt];
-            continuityType = new int[_buffTypeCnt];
+            useStatTypes = new int[_buffTypeCnt];
+            effectStatTypes = new int[_buffTypeCnt];
+            continuityTypes = new int[_buffTypeCnt];
         }
     }
 
