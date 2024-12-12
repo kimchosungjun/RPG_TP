@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3ae2131f5b57f4685c809726d9b702, type: 3}
+  m_Name: Warrior_Ultimate_SO
+  m_EditorClassIdentifier: 
+  actionName: 
+  actionDescription: 
+  actionMultipliers: []
+  actionParticleID: 0
+  attackEffectType: 
+  coolTime: 0
+  effectMaintainTime: 0

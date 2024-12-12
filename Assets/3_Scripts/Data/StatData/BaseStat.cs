@@ -4,8 +4,7 @@ using UnityEngine;
 public class BaseStat 
 {
     #region Protected
-    // 행위자의 식별 정보
-    [SerializeField] protected int id;
+    // 행위자의 식별 정보 : ID는 몬스터와 플레이어를 나눠서 따로 저장할 생각
     [SerializeField] protected string actorName;
 
     // 행위자의 공통 변수
@@ -19,7 +18,6 @@ public class BaseStat
 
     #region Public : Property
     // 행위자의 식별 정보
-    public int ID { get { return id;} set { id = value; } }
     public string ActorName { get { return actorName; } set { actorName = value; } }
 
     // 행위자의 공통 변수
