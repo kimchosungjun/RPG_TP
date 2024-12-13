@@ -8,8 +8,6 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
     [SerializeField] protected int[] effectStatTypes;
     [SerializeField] protected int[] continuityTypes;
     
-
-    
     public int GetUseStatType(int _combo)
     {
         if (useStatTypes.Length - 1 >= _combo)
