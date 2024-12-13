@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using PlayerEnums;
 
-public abstract class CharacterMovement : MonoBehaviour
+public abstract class CharacterMoveCtrl : MonoBehaviour
 {
     /******************************************/
     /************* 캐릭터 이동 **************/
@@ -25,13 +25,12 @@ public abstract class CharacterMovement : MonoBehaviour
     /******************************************/
     /*********** 공통 이동 변수 *************/
     /******************************************/
-    [Header("이동"), SerializeField] protected float playerMoveLimitSpeed = 5f;
+    protected float playerMoveLimitSpeed = 5f;
 
     /******************************************/
     /************** 평면 이동 ****************/
     /******************************************/
-    [SerializeField] protected float playerWalkSpeed = 5f;
-    [SerializeField] protected float playerRotateSpeed = 12f;
+    [Header("이동"),SerializeField] protected float playerRotateSpeed = 12f;
     [SerializeField] protected float moveCoefficient = 10f;
     protected float xMove;
     protected float zMove;
@@ -358,11 +357,22 @@ public abstract class CharacterMovement : MonoBehaviour
     /*=========가상 메서드=========*/
     /*===========================*/
 
-    #region Relate State Mahcine
-    public virtual void ChangeState(PlayerEnums.STATES _E_PLAYER_NEW_FSM) 
-    { 
-        stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]); 
-        currentPlayerState = _E_PLAYER_NEW_FSM; 
+    #region Virtual
+    public virtual void ChangeState(PlayerEnums.STATES _E_PLAYER_NEW_FSM)
+    {
+        stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]);
+        currentPlayerState = _E_PLAYER_NEW_FSM;
+    }
+
+    /// <summary>
+    ///  Awake
+    /// </summary>
+    public virtual void Init(PlayerStat _playerStat)
+    {
+        playerMoveSpeed = _playerStat.Speed;
+        playerMoveLimitSpeed = playerMoveSpeed;
+        playerJumpForce = _playerStat.JumpSpeed;
+        playerDashForce = _playerStat.DashSpeed;
     }
     #endregion
 
@@ -370,11 +380,7 @@ public abstract class CharacterMovement : MonoBehaviour
     /*=========추상 메서드=========*/
     /*===========================*/
 
-    #region LifeCycle
-    /// <summary>
-    ///  Awake
-    /// </summary>
-    public abstract void Init();
+    #region Abstract
     /// <summary>
     /// Start
     /// </summary>
@@ -387,10 +393,9 @@ public abstract class CharacterMovement : MonoBehaviour
     /// FixedUpdate
     /// </summary>
     public abstract void FixedExecute();
-    #endregion
-    
     /// <summary>
     /// 상태 정의
     /// </summary>
     protected abstract void CreateStates();
+    #endregion
 }

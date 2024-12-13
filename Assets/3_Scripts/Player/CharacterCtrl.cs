@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterCtrl : MonoBehaviour
@@ -7,26 +8,26 @@ public class CharacterCtrl : MonoBehaviour
     float changeCharacterCoolTime = 1f; 
 
     int currentCharacter = 0; // 처음 시작 시 초기화 필요
-    [SerializeField] CharacterMovement[] characterMovements;
+    [SerializeField] List<BasePlayer> players;
 
     private void Awake()
     {
-        characterMovements[0].Init();
+        players[0].Init();
     }
 
     private void Start()
     {
-        characterMovements[0].Setup();
+        players[0].Setup();
     }
 
     private void Update()
     {
-        characterMovements[0].Execute();
+        players[0].Execute();
     }
 
     private void FixedUpdate()
     {
-        characterMovements[0].FixedExecute();
+        players[0].FixedExecute();
     }
 
     public void ChangeCharacter(int _index)

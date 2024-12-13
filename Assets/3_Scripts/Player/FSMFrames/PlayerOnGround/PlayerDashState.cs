@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerDashState : PlayerState
 {
     Animator anim = null;
-    public PlayerDashState(WarriorMovement _controller) : base(_controller)
+    public PlayerDashState(WarriorMoveCtrl _controller) : base(_controller)
     {
         anim = _controller.Anim ;
     }

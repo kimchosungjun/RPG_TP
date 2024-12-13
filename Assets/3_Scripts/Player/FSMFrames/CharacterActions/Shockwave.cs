@@ -12,6 +12,28 @@ public class Shockwave : MonoBehaviour
     // To Do ~~~~~~ 데미지 + 이펙트
     float damageValue = -1f;
 
+    private void Awake()
+    {
+        StartCoroutine(Cor());
+    }
+
+    IEnumerator Cor()
+    {
+        Vector3 startVec = transform.localScale;
+        Vector3 destVec = new Vector3(15, 15, 15);
+        float time = 0f;
+        while (true)
+        {
+            if (time > 3f)
+                break;
+            time += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startVec, destVec, time/2f);
+            yield return null;  
+        }
+
+        Destroy(this.gameObject);
+    }
+
     /// <summary>
     /// 시작, 끝 반지름, 생성위치, 적 레이어, 데미지, 이펙트
     /// </summary>

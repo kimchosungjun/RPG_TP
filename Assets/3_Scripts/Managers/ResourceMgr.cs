@@ -24,7 +24,7 @@ public partial class ResourceMgr
     /// </summary>
     /// <param name="_id"></param>
     /// <returns></returns>
-    public Character GetCharacter(int _id) 
+    public BaseCharacter GetCharacter(int _id) 
     {
         // switch에서 골라서 사용
         return null; 

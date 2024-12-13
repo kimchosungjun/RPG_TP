@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSkillState : PlayerAttackState
 {
-    public PlayerSkillState(WarriorMovement _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
+    public PlayerSkillState(WarriorMoveCtrl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
     public override void Enter() 
     {
         anim.SetBool("IsAttackEnd", false);

@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class PlayerAnimationEvent : MonoBehaviour
 {
-    WarriorMovement characterCtrl = null;
-
+    WarriorMoveCtrl characterCtrl = null;
+    [SerializeField] AttackAction[] attackActions;
+    [SerializeField] BuffAction[] buffActions;
     void Awake()
     {
-        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMovement>();      
+        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMoveCtrl>();      
     }
 
     public void AttackCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.AttackCooling(); }
     public void SkillCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.SkillCooling(); }
     public void UltimateSkillCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.UltimateSkillCooling(); }
     public void DashCooling() { characterCtrl.DashCooling(); }  
+
+    public void DoAction(int index)
+    {
+        attackActions[index].DoAction();
+    }
+
+    public void StopAction(int index)
+    {
+        attackActions[index].StopAttack();
+    }
 }

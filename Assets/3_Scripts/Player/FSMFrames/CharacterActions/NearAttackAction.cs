@@ -4,29 +4,20 @@ using UnityEngine;
 public class NearAttackAction : AttackAction
 {
     protected Dictionary<string, Collider> colliderGroup = new Dictionary<string, Collider>();
-    protected Collider collider = null;
-
-    public NearAttackAction() { }
-    public NearAttackAction(Collider _attackCollider) 
-    { 
-        this.collider = _attackCollider;  
-    }   
-
+    [SerializeField] protected Collider coll = null;
+    
     public override void DoAttack()
     {
-        if (collider != null)
-            collider.gameObject.SetActive(true);
+        if (coll != null)
+            coll.gameObject.SetActive(true);
     }
 
     public override void StopAttack()
     {
-        if(collider.gameObject !=null)
-            collider.gameObject.SetActive(false);
+        if(coll.gameObject !=null)
+            coll.gameObject.SetActive(false);
         colliderGroup.Clear();
     }
-
-    
-
 
     /// <summary>
     /// 콜리더에 이미 접촉한 상태인지 확인 : 이중 피격을 방지하기 위함

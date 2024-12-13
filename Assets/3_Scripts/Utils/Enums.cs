@@ -59,6 +59,7 @@ namespace UtilEnums
         NONE=0,
         PLAYER=1,
         MONSTER=2,
+        NPC=3
     }
 }
 

@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class AIBase 
 {
-    protected Character character;
+    protected BaseCharacter character;
     protected EAI state = EAI.EAI_CREATE;
 
-    public void Init(Character _character)
+    public void Init(BaseCharacter _character)
     {
         character = _character;
     }
@@ -48,13 +48,6 @@ public class AIBase
     }
 
 }
-
-
-public class Character
-{
-
-}
-
 public enum EAI
 {
     EAI_CREATE,

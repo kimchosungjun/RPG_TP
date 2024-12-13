@@ -1,21 +1,18 @@
 using UnityEngine;
 
-public class WarriorNormalAttack : MonoBehaviour
+public class WarriorNormalAttack : NearAttackAction
 {
     [SerializeField] LayerMask enemyLayerMask;
     [SerializeField] Collider attackCollider;
-    NearAttackAction nearAttackAction;
-
+    
     bool isAttackState;
     float attackValue;
-    //ATTACK_EFFECT_TYPES effectType;
 
-
+    #region SetValue
     public void SetupData(float _attackValue, int _effectIndex)
     {
         isAttackState = false;
         UpdateData(_attackValue, _effectIndex);
-        nearAttackAction = new NearAttackAction(attackCollider);
     }
 
     public void UpdateData(float _attackValue, int _effectIndex)
@@ -23,25 +20,25 @@ public class WarriorNormalAttack : MonoBehaviour
         this.attackValue = _attackValue;
         //effectType = (ATTACK_EFFECT_TYPES)_effectIndex;
     }
+    #endregion
 
-    public void DoNormalAttack()
+    public override void DoAction()
     {
         isAttackState = true;
-        nearAttackAction.DoAttack();    
+        base.DoAction(); // Do Attack
     }
     
-    public void StopNormalAttack()
+    public override void StopAttack()
     {
         isAttackState = false;
-        nearAttackAction.StopAttack();
+        base.StopAttack();
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
         if (isAttackState && other.gameObject.layer == enemyLayerMask)
         {
-            if (nearAttackAction.CheckCollider(other))
+            if (CheckCollider(other))
             {
                 // To Do ~~~~~~~
                 // 스탯에 맞는 공격력을 반환하여 적에게 데미지를 입힌다.

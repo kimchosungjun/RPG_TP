@@ -10,6 +10,7 @@ public class TestPlayerStatLoader : MonoBehaviour
     private void Start()
     {
         tableMgr = SharedMgr.TableMgr;
+        //tableMgr.LinkPlayerTable();
     }
 
     private void OnGUI()

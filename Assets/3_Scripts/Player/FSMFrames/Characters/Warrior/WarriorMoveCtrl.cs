@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using PlayerEnums;
 // ai 처리는 fixedupdate와 update가 좋다
 // 이유는 동기화 처리때문에
 
-public class WarriorMovement : CharacterMovement
+public class WarriorMoveCtrl : CharacterMoveCtrl
 {
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
@@ -12,11 +11,12 @@ public class WarriorMovement : CharacterMovement
     #region Unity Life Cycle
 
     #region Init
-    public override void Init()
+
+    public override void Init(PlayerStat _playerStat)
     {
+        base.Init(_playerStat);
         LinkMyComponent();
     }
-
     public void LinkMyComponent()
     {
         if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
@@ -43,7 +43,6 @@ public class WarriorMovement : CharacterMovement
     {
         moveDirection = Vector3.zero;
         moveRotation = transform.rotation;
-        playerMoveSpeed = playerWalkSpeed;
         groundDetectDistance = bodyTransform.position.y - playerBodyRadius + detectGroundDelta;
         slopeDetectDistance = stepHeight * 0.5f * 5f + playerBodyRadius;
         playerBodyHeight = collide.height;

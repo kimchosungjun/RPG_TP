@@ -10,7 +10,7 @@ public class PlayerGroundMoveState : PlayerOnGroundState
     #region Createor & Value
     Rigidbody rigid = null;
     Animator anim = null;
-    public PlayerGroundMoveState(WarriorMovement _controller) : base(_controller) 
+    public PlayerGroundMoveState(WarriorMoveCtrl _controller) : base(_controller) 
     {
         this.rigid = _controller.Rigid;
         this.anim = _controller.Anim;

@@ -1,15 +1,12 @@
 using System.Collections.Generic;
 
-public class BuffCtrl 
+public abstract class CharacterStatCtrl 
 {
-    int buffCnt = 0;
-    BaseStat baseStat = null;
+    protected int buffCnt = 0;
+    protected List<BuffData> currentBuffs = new List<BuffData>();
 
-    public BuffCtrl() { }
-    public BuffCtrl(BaseStat _baseStat) { this.baseStat = _baseStat; }  
-
-    List<BuffData> currentBuffs = new List<BuffData>();
-    public void AddBuffs(BuffData _buffData)
+    #region Control Buff
+    public virtual void AddBuffs(BuffData _buffData)
     {
         if (currentBuffs.Contains(_buffData))
         {
@@ -19,19 +16,19 @@ public class BuffCtrl
         _buffData.AddBuff();
     }
 
-    public void UpdateBuffs()
+    public virtual void UpdateBuffs()
     {
         // 현재 스탯을 보내 다시 값을 계산하여 기존값과의 차이만큼 더해준다.
     }
 
-    public void FixedExecute()
+    public virtual void FixedExecute()
     {
         // To Do ~~~~~
         // 버프 시간 체크
         if (buffCnt != 0)
         {
             // 뒤에서부터 체크하면 제거 후 생기는 재정렬에 의한 문제가 생기지 않음
-            for(int i = buffCnt-1; i >= 0; i--) 
+            for (int i = buffCnt - 1; i >= 0; i--)
             {
                 if (currentBuffs[i].IsMaintainBuff() == false)
                 {
@@ -41,4 +38,11 @@ public class BuffCtrl
             }
         }
     }
+    #endregion
+
+    #region Abstract
+    public abstract void TakeDamage(float _damage);
+    public abstract void Heal(float _heal);
+    public abstract void Recovery(float _percent);
+    #endregion
 }
