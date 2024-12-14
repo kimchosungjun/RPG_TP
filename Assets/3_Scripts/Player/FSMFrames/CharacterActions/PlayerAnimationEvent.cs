@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerAnimationEvent : MonoBehaviour
 {
     WarriorMoveCtrl characterCtrl = null;
-    [SerializeField] AttackAction[] attackActions;
-    [SerializeField] BuffAction[] buffActions;
+    [SerializeField] CharacterAction[] actions;
     void Awake()
     {
         if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMoveCtrl>();      
@@ -19,11 +18,13 @@ public class PlayerAnimationEvent : MonoBehaviour
 
     public void DoAction(int index)
     {
-        attackActions[index].DoAction();
+        if(actions[index].gameObject.activeSelf == false)
+            actions[index].gameObject.SetActive(true); 
+        actions[index].DoAction();
     }
 
     public void StopAction(int index)
     {
-        attackActions[index].StopAttack();
+        actions[index].StopAction();
     }
 }

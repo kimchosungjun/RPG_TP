@@ -4,21 +4,15 @@ public class WarriorNormalAttack : NearAttackAction
 {
     [SerializeField] LayerMask enemyLayerMask;
     [SerializeField] Collider attackCollider;
-    
+    [SerializeField] PlayerNormalAttackActionSOData soData;    
+
     bool isAttackState;
-    float attackValue;
 
     #region SetValue
-    public void SetupData(float _attackValue, int _effectIndex)
+    public void SetupData()
     {
         isAttackState = false;
-        UpdateData(_attackValue, _effectIndex);
-    }
-
-    public void UpdateData(float _attackValue, int _effectIndex)
-    {
-        this.attackValue = _attackValue;
-        //effectType = (ATTACK_EFFECT_TYPES)_effectIndex;
+     
     }
     #endregion
 

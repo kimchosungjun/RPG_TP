@@ -3,12 +3,16 @@ using UnityEngine;
 
 public class BuffData
 {
-    public BUFF_APPLY_STATS buffStat;
-    public BUFF_USE_STATS useStat;
-    public BUFF_COUNTINUITIES continuity;
-    public float buffValue;
-    public float buffTime;
-    public float doBuffTime;
+    [SerializeField] protected BUFF_APPLY_STATS buffStat;
+    [SerializeField] protected BUFF_USE_STATS useStat;
+    [SerializeField] protected BUFF_COUNTINUITIES continuity;
+    [SerializeField] protected float buffValue;
+    [SerializeField] protected float buffTime;
+    [SerializeField] protected float doBuffTime;
+
+    public BUFF_APPLY_STATS GetBuffStatType { get { return buffStat; } }
+    public BUFF_USE_STATS GetUseStatType { get { return useStat; } }
+    public BUFF_COUNTINUITIES GetBuffContinuity { get { return continuity; } }  
 
     public BuffData(int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime)
     {
