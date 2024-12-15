@@ -44,8 +44,8 @@ public class TableMgr
 
     public void LinkWarriorTable()
     {
-        character.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, PlayerEnums.TYPEIDS.WARRIOR);
-        character.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, PlayerEnums.TYPEIDS.WARRIOR, 3);
+        character.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, (int)PlayerEnums.TYPEIDS.WARRIOR);
+        character.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, (int)PlayerEnums.TYPEIDS.WARRIOR, 3);
         character.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1, 0, PlayerEnums.BUFF_SKILLS.WARRIOR_ROAR, 2);
         character.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable", 1, 0, PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE);
     }

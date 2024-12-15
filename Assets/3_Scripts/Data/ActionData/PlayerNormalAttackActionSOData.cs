@@ -8,12 +8,14 @@ public class PlayerNormalAttackActionSOData : PlayerBaseActionSOData
 {
     [SerializeField] protected int[] attackEffectType;
     [SerializeField] protected float[] actionMultipliers;
+  
     public int GetAttackEffectType(int _combo)
     {
         if (attackEffectType.Length - 1 >= _combo)
             return attackEffectType[_combo];
         return -1;
     }
+
     public float GetActionMultiplier(int _combo)
     {
         if (actionMultipliers.Length - 1 >= _combo)

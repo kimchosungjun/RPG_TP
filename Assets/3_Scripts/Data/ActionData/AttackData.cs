@@ -11,7 +11,9 @@ public class AttackData
     public float GetAttackValue { get { return attackValue; } } 
     public float EffectMaintainTime { get { return effectMaintainTime; } set { effectMaintainTime = value; } }
 
-    public AttackData(int _hitEffectType, float _attackValue, float _effectMaintainTime)
+    public AttackData() { }
+
+    public void SetData(int _hitEffectType, float _attackValue, float _effectMaintainTime)
     {
         this.hitEffectType = (HIT_EFFECTS)_hitEffectType;
         this.attackValue = _attackValue;

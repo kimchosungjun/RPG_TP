@@ -18,7 +18,7 @@ public class PlayerStat : BaseStat
     // 플레이어 고유 스탯
     public float DashSpeed { get { return dashSpeed; } set { dashSpeed = value; } }
     public float JumpSpeed { get { return jumpSpeed; } set { jumpSpeed = value; } }
-    public PlayerSaveStat CurrentStat { get { return currentStat; } }
+    public PlayerSaveStat GetSaveStat{ get { return currentStat; } }
     #endregion
 
     #region Load Stat
@@ -33,7 +33,7 @@ public class PlayerStat : BaseStat
     {
         TableMgr tableMgr = SharedMgr.TableMgr;
         PlayerTable.PlayerTableData tableData = new PlayerTable.PlayerTableData();
-        tableData = tableMgr.character.GetPlayerTableData((PlayerEnums.TYPEIDS)typeID);
+        tableData = tableMgr.character.GetPlayerTableData(typeID);
 
         actorName = tableData.name;
         speed = tableData.speed;
@@ -41,7 +41,7 @@ public class PlayerStat : BaseStat
         jumpSpeed = tableData.jumpSpeed;    
 
         PlayerTable.PlayerStatTableData statData = new PlayerTable.PlayerStatTableData();
-        statData = tableMgr.character.GetPlayerStatTableData((PlayerEnums.TYPEIDS)typeID, currentStat.currentLevel);
+        statData = tableMgr.character.GetPlayerStatTableData(typeID, currentStat.currentLevel);
         attackValue = statData.attackValue;
         defenceValue = statData.defenceValue;
         criticalValue = statData.criticalValue;

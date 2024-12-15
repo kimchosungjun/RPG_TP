@@ -7,6 +7,7 @@ public abstract class BasePlayer : BaseCharacter
     [SerializeField] protected PlayerStat playerStat;
     public PlayerStat GetPlayerStat { get { return playerStat; }  set { playerStat = value; } }
 
+    [SerializeField] protected PlayerDataLink playerDataLink;
     public override void SetCharacterType()
     {
         intLayer = (int)UtilEnums.LAYERS.MONSTER;

@@ -6,39 +6,31 @@ public class WarriorUltimateSkill : NearAttackShockwaveAction
 {
     [SerializeField] LayerMask enemyLayerMask;
     [SerializeField] Collider attackCollider;
+    PlayerAttackSkillActionSOData soData;
+    PlayerStat playerStat;
+    AttackData attackData = new AttackData();
 
-    bool isAttackState;
-    float attackValue;
-
-    #region SetValue
-    public void SetupData(float _attackValue, int _effectIndex)
+    public void SetStat(PlayerStat _playerStat, PlayerAttackSkillActionSOData _soData)
     {
-        isAttackState = false;
-        UpdateData(_attackValue, _effectIndex);
+        playerStat = _playerStat;
+        soData = _soData;
     }
-
-    public void UpdateData(float _attackValue, int _effectIndex)
-    {
-        this.attackValue = _attackValue;
-        //effectType = (ATTACK_EFFECT_TYPES)_effectIndex;
-    }
-    #endregion
 
     public override void DoAction()
     {
-        isAttackState = true;
+        float damageValue = soData.GetActionMultiplier * playerStat.Attack;
+        attackData.SetData(soData.GetAttackEffectType,damageValue,soData.GetMaintainEffectTime);
         base.DoAction(); // Do Attack
     }
 
     public override void StopAttack()
     {
-        isAttackState = false;
         base.StopAttack();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isAttackState && other.gameObject.layer == enemyLayerMask)
+        if (other.gameObject.layer == enemyLayerMask)
         {
             if (CheckCollider(other))
             {

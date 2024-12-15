@@ -10,16 +10,16 @@ public partial class PlayerTable : BaseTable
 
     #region Player Data Group : Dictionary 
     // 플레이어의 정보를 저장한 테이블 데이터 : TYPEID가 key 값(id는 enum TYPEID)
-    Dictionary<TYPEIDS, PlayerTableData> playerTableGroup = new Dictionary<TYPEIDS, PlayerTableData>();
+    Dictionary<int, PlayerTableData> playerTableGroup = new Dictionary<int, PlayerTableData>();
 
     // 플레이어 레벨 업 정보 (+ 강화 골드)
     PlayerLevelTableData levelupTableData = new PlayerLevelTableData();
 
     // 누구의 스탯인지 확인하고 레벨에 맞게 스탯을 파싱 : 첫번째 키 값은 플레이어의 TYPEID이고 두번째 키 값은 level
-    Dictionary<TYPEIDS, Dictionary<int, PlayerStatTableData>> playerStatGroup = new Dictionary<TYPEIDS, Dictionary<int, PlayerStatTableData>>();
+    Dictionary<int, Dictionary<int, PlayerStatTableData>> playerStatGroup = new Dictionary<int, Dictionary<int, PlayerStatTableData>>();
 
     // 누구의 일반공격인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 플레이어 TYPEID, 두번째 키 값은 level
-    Dictionary<TYPEIDS, Dictionary<int, PlayerNormalAttackTableData>> playerNormalAttackDataGroup = new Dictionary<TYPEIDS, Dictionary<int, PlayerNormalAttackTableData>>();
+    Dictionary<int, Dictionary<int, PlayerNormalAttackTableData>> playerNormalAttackDataGroup = new Dictionary<int, Dictionary<int, PlayerNormalAttackTableData>>();
 
     // 누구의 버프스킬인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 BUFF_SKILL, 두번째 키 값은 level
     Dictionary<BUFF_SKILLS, Dictionary<int, PlayerBuffSkillTableData>> playerBuffSkillDataGroup = new Dictionary<BUFF_SKILLS, Dictionary<int, PlayerBuffSkillTableData>>();
@@ -39,7 +39,7 @@ public partial class PlayerTable : BaseTable
     /// </summary>
     /// <param name="_typeID"></param>
     /// <returns></returns>
-    public PlayerTableData GetPlayerTableData(TYPEIDS _typeID)
+    public PlayerTableData GetPlayerTableData(int _typeID)
     {
         if(playerTableGroup.ContainsKey(_typeID))return playerTableGroup[_typeID];
         return null;
@@ -57,7 +57,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_typeID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerStatTableData GetPlayerStatTableData(TYPEIDS _typeID,int _level)
+    public PlayerStatTableData GetPlayerStatTableData(int _typeID,int _level)
     {
         if (playerStatGroup.ContainsKey(_typeID))
         {
@@ -73,7 +73,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_typeID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerNormalAttackTableData GetPlayerNormalAttackData(TYPEIDS _typeID, int _level)
+    public PlayerNormalAttackTableData GetPlayerNormalAttackData(int _typeID, int _level)
     {
         if (playerNormalAttackDataGroup.ContainsKey(_typeID))
         {

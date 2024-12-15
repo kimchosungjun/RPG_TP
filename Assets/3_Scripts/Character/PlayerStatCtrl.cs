@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerStatCtrl : CharacterStatCtrl
 {
     [SerializeField] PlayerStat playerStat = null;
-    public PlayerStatCtrl(PlayerStat _playerStat) { this.playerStat = _playerStat; }
+    public PlayerStat Stat { get { return playerStat; } }
+
+    public PlayerStatCtrl(PlayerStat _playerStat) { playerStat = _playerStat; }
 
     #region To Do ~~~~~~
     public override void Heal(float _heal)

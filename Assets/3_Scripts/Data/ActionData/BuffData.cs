@@ -14,7 +14,9 @@ public class BuffData
     public BUFF_USE_STATS GetUseStatType { get { return useStat; } }
     public BUFF_COUNTINUITIES GetBuffContinuity { get { return continuity; } }  
 
-    public BuffData(int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime)
+    public BuffData() { }
+
+    public void SetData(int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime)
     {
         this.buffStat = (BUFF_APPLY_STATS)_buffStat;
         this.useStat = (BUFF_USE_STATS)_useStat;

@@ -17,7 +17,7 @@ public class TestCsvReader : MonoBehaviour
         if(GUI.Button(new Rect(0, 0, 100, 100), "전사 테이블 읽기"))
         {
             skillActionSO.SetSOData(tableMgr.character.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, 1));
-            attackActionSO.SetSOData(tableMgr.character.GetPlayerNormalAttackData(PlayerEnums.TYPEIDS.WARRIOR, 2));
+            attackActionSO.SetSOData(tableMgr.character.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, 2));
             buffActionSO.SetSOData(tableMgr.character.GetPlayerBuffSkillTableData(PlayerEnums.BUFF_SKILLS.WARRIOR_ROAR, 3));
         }
 

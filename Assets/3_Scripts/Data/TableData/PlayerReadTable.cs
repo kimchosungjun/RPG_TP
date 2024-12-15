@@ -39,7 +39,7 @@ public partial class PlayerTable: BaseTable
             PlayerTableData data = new PlayerTableData();
             if (ReadPlayerTable(reader, data, row, _startCol) == false)
                 break;
-            playerTableGroup.Add((PlayerEnums.TYPEIDS)data.id, data);
+            playerTableGroup.Add(data.id, data);
         }
     }
 
@@ -65,7 +65,7 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startRow"></param>
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
-    public void InitPlayerStatTableCsv(string _name, int _startRow, int _startCol , PlayerEnums.TYPEIDS _typeID)
+    public void InitPlayerStatTableCsv(string _name, int _startRow, int _startCol , int _typeID)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         Dictionary<int, PlayerStatTableData> tableDictionary = new Dictionary<int, PlayerStatTableData> ();
@@ -87,7 +87,7 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerNormalAttackTableCsv(string _name, int _startRow, int _startCol, PlayerEnums.TYPEIDS _typeID, int _comboCnt)
+    public void InitPlayerNormalAttackTableCsv(string _name, int _startRow, int _startCol, int _typeID, int _comboCnt)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         Dictionary<int, PlayerNormalAttackTableData> tableDictionary = new Dictionary<int, PlayerNormalAttackTableData>();
