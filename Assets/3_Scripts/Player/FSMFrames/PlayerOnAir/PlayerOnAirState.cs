@@ -6,15 +6,15 @@ public class PlayerOnAirState : PlayerState
 {
     protected Rigidbody rigid = null;
     protected Animator anim = null;
-    public PlayerOnAirState(WarriorMoveCtrl _controller) : base(_controller) 
+    public PlayerOnAirState(WarriorMovementControl _controller) : base(_controller) 
     {
-        rigid = _controller.Rigid;
-        anim = _controller.Anim;
+        rigid = _controller.GetRigid;
+        anim = _controller.GetAnim;
     }
 
     public override void Enter()
     {
-        characterCtrl.Rigid.drag = characterCtrl.AirDrag;
+        characterCtrl.GetRigid.drag = characterCtrl.AirDrag;
         anim.SetFloat("VerticalVelocity", rigid.velocity.y);
     }
 }

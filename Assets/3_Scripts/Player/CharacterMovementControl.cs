@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using PlayerEnums;
 
-public abstract class CharacterMoveCtrl : MonoBehaviour
+public abstract class CharacterMovementControl : MonoBehaviour
 {
     /******************************************/
     /************* 캐릭터 이동 **************/
@@ -11,13 +11,13 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
 
     #region Component
     [Header("필수 연결 컴포넌트")]
-    [SerializeField] protected Transform camTransform;
     [SerializeField] protected Transform bodyTransform;
     [SerializeField] protected CapsuleCollider collide;
     [SerializeField] protected Rigidbody rigid;
     [SerializeField] protected Animator anim;
-    public Rigidbody Rigid { get { return rigid; } }
-    public Animator Anim { get { return anim; } }
+    protected Transform camTransform;
+    public Rigidbody GetRigid { get { return rigid; } }
+    public Animator GetAnim { get { return anim; } }
     #endregion
 
     #region Movement
@@ -31,7 +31,7 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     /************** 평면 이동 ****************/
     /******************************************/
     [Header("이동"),SerializeField] protected float playerRotateSpeed = 12f;
-    [SerializeField] protected float moveCoefficient = 10f;
+    protected float moveCoefficient = 10f; // 이동 계수
     protected float xMove;
     protected float zMove;
     protected float playerMoveSpeed;
@@ -47,7 +47,7 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     /******************************************/
     /***************** 점프  ******************/
     /******************************************/
-    [SerializeField] protected float playerJumpForce;
+    protected float playerJumpForce;
     [SerializeField, Range(0, 1f)] protected float airMovementMultiplier;
     public float PlayerJumpForce { get { return playerJumpForce; } }
     public float AirMovementMultiplier { get { return airMovementMultiplier; } }
@@ -55,8 +55,8 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     /******************************************/
     /***************** 대쉬  ******************/
     /******************************************/
-    [SerializeField] protected float playerDashForce;
     [SerializeField] protected float dashCoolTimer = 0.3f;
+    protected float playerDashForce;
     protected bool isPlayerDashing = false;
     protected bool canDash = true;
     #endregion
@@ -68,7 +68,7 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     protected int groundLayer = 1 << 3 | 1 << 6; // 3은 벽, 6은 땅
     protected int monsterLayer = 1 << 7;
     protected float playerBodyRadius;
-    [SerializeField] protected float playerBodyHeight;
+    protected float playerBodyHeight;
     public float PlayerBodyHegiht { get { return PlayerBodyHegiht; } }
 
     /******************************************/
@@ -83,10 +83,10 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     /******************************************/
     /**************** 땅 검출 ****************/
     /******************************************/
-    [Header("검출")]
-    [SerializeField, Tooltip("땅 검출 시, 추가 검출 거리")] protected float detectGroundDelta = 0.1f;
+    [Header("저항값")]
     [SerializeField, Tooltip("땅 저항 값")] protected float groundDrag = 6;
     [SerializeField, Tooltip("공기 저항 값")] protected float airDrag = 1;
+    protected float detectGroundDelta = 0.15f;
 
     public float GroundDrag { get { return groundDrag; } }
     public float AirDrag { get { return airDrag; } }
@@ -98,6 +98,7 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     /******************************************/
     /************ 경사로 검출 ***************/
     /******************************************/
+    [Header("경사로")]
     [SerializeField] protected float slopeMaxAngle = 50f;
     [SerializeField] protected float stepHeight = 0.2f;
 
@@ -107,16 +108,16 @@ public abstract class CharacterMoveCtrl : MonoBehaviour
     /******************************************/
     /************** 벽 검출 ******************/
     /******************************************/
-    [SerializeField] protected float wallCheckDistanceDelta;
+    protected float wallCheckDistanceDelta = 0.15f;
     #endregion
 
     #region Gravity
     [Header("중력")]
     [SerializeField] protected bool useGravity = true;
-    [SerializeField] protected float gravityIncreasemenet = -9.8f;
-    [SerializeField] protected float curGravity = 0f;
-    [SerializeField] protected float minGravity = 0f;
-    [SerializeField] protected float maxGravity = 0f;
+    protected float gravityIncreasemenet = -9.8f;
+    protected float curGravity = 0f;
+    protected float minGravity = -5f;
+    protected float maxGravity = -100f;
     #endregion
 
     #region State

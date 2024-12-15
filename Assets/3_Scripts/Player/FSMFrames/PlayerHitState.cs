@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHitState : PlayerState
 {
-    public PlayerHitState(WarriorMoveCtrl _controller) : base(_controller)
+    public PlayerHitState(WarriorMovementControl _controller) : base(_controller)
     {
     }
 }

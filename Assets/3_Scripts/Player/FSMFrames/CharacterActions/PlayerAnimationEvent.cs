@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimationEvent : MonoBehaviour
 {
-    WarriorMoveCtrl characterCtrl = null;
+    WarriorMovementControl characterCtrl = null;
     [SerializeField] CharacterAction[] actions;
     void Awake()
     {
-        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMoveCtrl>();      
+        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMovementControl>();      
     }
 
-    public void AttackCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.AttackCooling(); }
-    public void SkillCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.SkillCooling(); }
-    public void UltimateSkillCooling() { characterCtrl.Anim.SetBool("IsAttackEnd", true); characterCtrl.UltimateSkillCooling(); }
+    public void AttackCooling() { characterCtrl.GetAnim.SetBool("IsAttackEnd", true); characterCtrl.AttackCooling(); }
+    public void SkillCooling() { characterCtrl.GetAnim.SetBool("IsAttackEnd", true); characterCtrl.SkillCooling(); }
+    public void UltimateSkillCooling() { characterCtrl.GetAnim.SetBool("IsAttackEnd", true); characterCtrl.UltimateSkillCooling(); }
     public void DashCooling() { characterCtrl.DashCooling(); }  
 
     public void DoAction(int index)

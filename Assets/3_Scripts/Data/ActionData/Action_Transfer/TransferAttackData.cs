@@ -1,7 +1,7 @@
 using EffectEnums;
 using UnityEngine;
 
-public class AttackData 
+public class TransferAttackData 
 {
     [SerializeField] protected HIT_EFFECTS hitEffectType;
     [SerializeField] protected float attackValue;
@@ -11,7 +11,7 @@ public class AttackData
     public float GetAttackValue { get { return attackValue; } } 
     public float EffectMaintainTime { get { return effectMaintainTime; } set { effectMaintainTime = value; } }
 
-    public AttackData() { }
+    public TransferAttackData() { }
 
     public void SetData(int _hitEffectType, float _attackValue, float _effectMaintainTime)
     {

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UtilEnums;
 
@@ -10,6 +9,7 @@ public abstract class BaseCharacter : MonoBehaviour
     /**************************************/
 
     #region Protected
+    protected int noneInteractionLayer = 0; 
     protected int bitLayer;
     protected int intLayer;
     protected TABLE_FOLDER_TYPES characterTableType;
@@ -26,5 +26,6 @@ public abstract class BaseCharacter : MonoBehaviour
     /// Layer와 캐릭터 테이블 데이터 타입을 설정한다.
     /// </summary>
     public abstract void SetCharacterType();
-    #endregion
+    public virtual void SetNoneInteractionType() { this.gameObject.layer = noneInteractionLayer; }
+    #endregion 
 }

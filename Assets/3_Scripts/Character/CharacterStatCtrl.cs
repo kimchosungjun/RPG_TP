@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public abstract class CharacterStatCtrl 
+public abstract class CharacterStatCtrl : MonoBehaviour
 {
     protected int buffCnt = 0;
-    protected List<BuffData> currentBuffs = new List<BuffData>();
+    protected List<TransferBuffData> currentBuffs = new List<TransferBuffData>();
 
     #region Control Buff
-    public virtual void AddBuffs(BuffData _buffData)
+    public virtual void AddBuffs(TransferBuffData _buffData)
     {
         if (currentBuffs.Contains(_buffData))
         {

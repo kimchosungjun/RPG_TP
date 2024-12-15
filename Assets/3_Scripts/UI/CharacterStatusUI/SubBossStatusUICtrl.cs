@@ -62,13 +62,5 @@ public class SubBossStatusUICtrl : EliteMonsterStatusUI
         transform.position = followTransform.position + Vector3.up * heightDelta;
         transform.rotation = camTransform.rotation;
     }
-
-    public void HPEffect()
-    {
-        if (hpImage.fillAmount == effectImage.fillAmount) return;
-
-        if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
-        else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
-    }
     #endregion
 }

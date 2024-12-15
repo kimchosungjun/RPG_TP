@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerUltimateSkillState : PlayerAttackState
 {
-    public PlayerUltimateSkillState(WarriorMoveCtrl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
+    public PlayerUltimateSkillState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
 
     public override void Enter()
     {

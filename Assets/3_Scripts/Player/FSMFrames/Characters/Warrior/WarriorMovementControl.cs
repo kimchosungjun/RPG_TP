@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using PlayerEnums;
 // ai 처리는 fixedupdate와 update가 좋다
 // 이유는 동기화 처리때문에
 
-public class WarriorMoveCtrl : CharacterMoveCtrl
+public class WarriorMovementControl : CharacterMovementControl
 {
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
@@ -53,18 +54,18 @@ public class WarriorMoveCtrl : CharacterMoveCtrl
         stateMachine = new PlayerStateMachine();
         attackCombo = new PlayerAttackCombo();
         playerStates = new PlayerState[(int)PlayerEnums.STATES.MAX];
-        playerStates[(int)PlayerEnums.STATES.MOVEMENT] = new PlayerGroundMoveState(this);
-        playerStates[(int)PlayerEnums.STATES.DASH] = new PlayerDashState(this);
-        playerStates[(int)PlayerEnums.STATES.JUMP] = new PlayerJumpState(this);
-        playerStates[(int)PlayerEnums.STATES.FALL] = new PlayerFallState(this);
-        playerStates[(int)PlayerEnums.STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
-        playerStates[(int)PlayerEnums.STATES.SKILL] = new PlayerSkillState(this, attackCombo);
-        playerStates[(int)PlayerEnums.STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
-        playerStates[(int)PlayerEnums.STATES.HIT] = new PlayerHitState(this);
+        playerStates[(int)STATES.MOVEMENT] = new PlayerGroundMoveState(this);
+        playerStates[(int)STATES.DASH] = new PlayerDashState(this);
+        playerStates[(int)STATES.JUMP] = new PlayerJumpState(this);
+        playerStates[(int)STATES.FALL] = new PlayerFallState(this);
+        playerStates[(int)STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
+        playerStates[(int)STATES.SKILL] = new PlayerSkillState(this, attackCombo);
+        playerStates[(int)STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
+        playerStates[(int)STATES.HIT] = new PlayerHitState(this);
         //playerStates[(int)E_PLAYER_FSM.DEATH] = new (this, rigid, anim);
-        playerStates[(int)PlayerEnums.STATES.INTERACTION] = new PlayerInteractionState(this);
-        currentPlayerState = PlayerEnums.STATES.MOVEMENT;
-        stateMachine.InitStateMachine(playerStates[(int)PlayerEnums.STATES.MOVEMENT]);
+        playerStates[(int)STATES.INTERACTION] = new PlayerInteractionState(this);
+        currentPlayerState = STATES.MOVEMENT;
+        stateMachine.InitStateMachine(playerStates[(int)STATES.MOVEMENT]);
     }
     #endregion
 

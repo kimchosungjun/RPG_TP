@@ -3,10 +3,9 @@ using UnityEngine;
 public class WarriorNormalAttack : NearAttackAction
 {
     [SerializeField] LayerMask enemyLayerMask;
-    [SerializeField] Collider attackCollider;
-    PlayerNormalAttackActionSOData soData;
-    PlayerStat playerStat;
-    AttackData attackData = new AttackData();
+    PlayerStat playerStat = null;
+    PlayerNormalAttackActionSOData soData = null;
+    TransferAttackData attackData = new TransferAttackData();
     int combo;
 
     // DoAction이 작동하면 각자 SO에서 계수와 효과를 불러온다.

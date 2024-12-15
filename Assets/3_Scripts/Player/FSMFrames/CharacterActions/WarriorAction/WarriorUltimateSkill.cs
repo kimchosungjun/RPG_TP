@@ -8,7 +8,7 @@ public class WarriorUltimateSkill : NearAttackShockwaveAction
     [SerializeField] Collider attackCollider;
     PlayerAttackSkillActionSOData soData;
     PlayerStat playerStat;
-    AttackData attackData = new AttackData();
+    TransferAttackData attackData = new TransferAttackData();
 
     public void SetStat(PlayerStat _playerStat, PlayerAttackSkillActionSOData _soData)
     {

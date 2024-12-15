@@ -1608,6 +1608,7 @@ MonoBehaviour:
   - {fileID: 2208318250916822353}
   - {fileID: 3101733928643675674}
   - {fileID: 3745568157171023240}
+  - {fileID: 1268403683}
   - {fileID: 328993480}
 --- !u!1 &1501827523
 GameObject:
@@ -1724,9 +1725,10 @@ GameObject:
   - component: {fileID: 1554312472}
   - component: {fileID: 1554312471}
   - component: {fileID: 1554312470}
-  - component: {fileID: 1554312473}
   - component: {fileID: 1554312474}
   - component: {fileID: 1554312475}
+  - component: {fileID: 1554312477}
+  - component: {fileID: 1554312476}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Untagged
@@ -1802,41 +1804,6 @@ Transform:
   m_Father: {fileID: 241610176}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1554312473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554312468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19121bc3b49ae344d95cf08f44e76bf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camTransform: {fileID: 330585546}
-  bodyTransform: {fileID: 1813499420}
-  collide: {fileID: 1554312471}
-  rigid: {fileID: 1554312470}
-  anim: {fileID: 5866666020441516151}
-  playerRotateSpeed: 12
-  moveCoefficient: 10
-  playerJumpForce: 10
-  airMovementMultiplier: 0
-  playerDashForce: 0
-  dashCoolTimer: 0.3
-  playerBodyHeight: 0
-  detectGroundDelta: 0.1
-  groundDrag: 6
-  airDrag: 1
-  slopeMaxAngle: 50
-  stepHeight: 0.2
-  wallCheckDistanceDelta: 0
-  useGravity: 1
-  gravityIncreasemenet: -9.8
-  curGravity: 0
-  minGravity: -10
-  maxGravity: -100
 --- !u!114 &1554312474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1849,33 +1816,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30c2ce8317074f468021d0f91b5f72e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStat:
-    actorName: 
-    maxHp: 0
-    speed: 0
-    attackValue: 0
-    defenceValue: 0
-    criticalValue: 0
-    attackSpeed: 0
-    level: 0
-    typeID: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-  playerDataLink: {fileID: 1554312475}
-  warriorMovement: {fileID: 1554312473}
-  statCtrl:
-    playerStat:
-      actorName: 
-      maxHp: 0
-      speed: 0
-      attackValue: 0
-      defenceValue: 0
-      criticalValue: 0
-      attackSpeed: 0
-      level: 0
-      typeID: 0
-      dashSpeed: 0
-      jumpSpeed: 0
+  playerDataLinker: {fileID: 1554312475}
+  playerStatControl: {fileID: 1554312477}
+  characterMovementControl: {fileID: 1554312476}
 --- !u!114 &1554312475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,6 +1841,54 @@ MonoBehaviour:
   ultimateSkill: {fileID: 328993480}
   ultimateAttackSkillSOData: {fileID: 11400000, guid: a966cca1d5dcaf14f85634d310723565,
     type: 2}
+--- !u!114 &1554312476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554312468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d44f6efc4d78d4489fa38859488c40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyTransform: {fileID: 1813499420}
+  collide: {fileID: 1554312471}
+  rigid: {fileID: 1554312470}
+  anim: {fileID: 5866666020441516151}
+  playerRotateSpeed: 12
+  airMovementMultiplier: 0.1
+  dashCoolTimer: 0.3
+  groundDrag: 6
+  airDrag: 1
+  slopeMaxAngle: 50
+  stepHeight: 0.2
+  useGravity: 1
+--- !u!114 &1554312477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554312468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    attackValue: 0
+    defenceValue: 0
+    criticalValue: 0
+    attackSpeed: 0
+    level: 0
+    typeID: 0
+    dashSpeed: 0
+    jumpSpeed: 0
 --- !u!1 &1582736011
 GameObject:
   m_ObjectHideFlags: 0

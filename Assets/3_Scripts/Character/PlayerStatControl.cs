@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlayerStatCtrl : CharacterStatCtrl
+public class PlayerStatControl : CharacterStatCtrl
 {
     [SerializeField] PlayerStat playerStat = null;
-    public PlayerStat Stat { get { return playerStat; } }
-
-    public PlayerStatCtrl(PlayerStat _playerStat) { playerStat = _playerStat; }
+    public PlayerStat PlayerStat { get { return playerStat; } set { playerStat = value; } }
 
     #region To Do ~~~~~~
     public override void Heal(float _heal)

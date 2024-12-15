@@ -10,6 +10,13 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
     
     public int GetBuffCnt() { return actionMultipliers.Length; }
 
+    public float GetMultiplier(int _combo)
+    {
+        if (actionMultipliers.Length - 1 >= _combo)
+            return actionMultipliers[_combo];
+        return -1;
+    }
+
     public int GetUseStatType(int _combo)
     {
         if (useStatTypes.Length - 1 >= _combo)

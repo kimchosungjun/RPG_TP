@@ -3,7 +3,7 @@ using PlayerEnums;
 
 public class TestDialogue : MonoBehaviour
 {
-    [SerializeField] WarriorMoveCtrl characterCtrl;
+    [SerializeField] WarriorMovementControl characterCtrl;
     private void OnGUI()
     {
         if(GUI.Button(new Rect(0, 0, 100, 100), "대화하기"))

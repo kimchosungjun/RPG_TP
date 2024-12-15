@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Warrior : BasePlayer
 {
-    [SerializeField] WarriorMoveCtrl warriorMovement;
-    [SerializeField] PlayerStatCtrl statCtrl; // 스탯을 관리(버프도 관리)
     PlayerStatusUI playerStatusUICtrl; // HP, EXP, Level을 나타내는 UI
 
     public override void Init()
@@ -13,29 +11,32 @@ public class Warrior : BasePlayer
         playerStat = new PlayerStat();
         playerStat.LoadPlayerSaveStat(saveStat);
         playerStat.LoadPlayerStat();
-        statCtrl = new PlayerStatCtrl(playerStat);
-        playerDataLink.SetPlayerData(statCtrl);
+        playerStatControl.PlayerStat = playerStat;
+        playerDataLinker.SetPlayerData(playerStatControl);
         playerStatusUICtrl = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUICtrl;
         playerStatusUICtrl?.Init();
 
-        if (warriorMovement==null) warriorMovement = GetComponent<WarriorMoveCtrl>();
-        warriorMovement.Init(playerStat);
+        // 스크립트 연결
+        if (playerDataLinker == null) playerDataLinker = GetComponent<WarriorDataLinker>();
+        if (playerStatControl == null) playerStatControl = GetComponent<PlayerStatControl>();
+        if (characterMovementControl == null) characterMovementControl = GetComponent<WarriorMovementControl>();
+        characterMovementControl.Init(playerStat);
     }
 
     public override void Setup()
     {
         playerStatusUICtrl.Setup(playerStat);
-        warriorMovement.Setup();
+        characterMovementControl.Setup();
     }
 
     public override void Execute()
     {
         playerStatusUICtrl.Execute();
-        warriorMovement.Execute();
+        characterMovementControl.Execute();
     }
 
     public override void FixedExecute()
     {
-        warriorMovement.FixedExecute();
+        characterMovementControl.FixedExecute();
     }
 }

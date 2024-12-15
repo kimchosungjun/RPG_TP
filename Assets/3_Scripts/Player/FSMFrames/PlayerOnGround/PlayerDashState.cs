@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerDashState : PlayerState
 {
     Animator anim = null;
-    public PlayerDashState(WarriorMoveCtrl _controller) : base(_controller)
+    public PlayerDashState(WarriorMovementControl _controller) : base(_controller)
     {
-        anim = _controller.Anim ;
+        anim = _controller.GetAnim ;
     }
 
     public override void Enter()
     {
-        characterCtrl.Rigid.drag = 0f;
+        characterCtrl.GetRigid.drag = 0f;
         characterCtrl.Dash();
         anim.SetTrigger("Dash");
     }

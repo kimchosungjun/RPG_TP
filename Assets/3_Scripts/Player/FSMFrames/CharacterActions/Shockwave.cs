@@ -10,7 +10,7 @@ public class Shockwave : MonoBehaviour
     float destRadius = -1f;
     
     // To Do ~~~~~~ 데미지 + 이펙트
-    float damageValue = -1f;
+    //float damageValue = -1f;
 
     private void Awake()
     {
