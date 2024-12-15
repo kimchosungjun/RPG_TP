@@ -14,8 +14,8 @@ public class Flybee : PatrolMonster
     protected override void Start()
     {
         if (anim == null) anim = GetComponent<Animator>();
-        if (statusUICtrl == null) statusUICtrl = GetComponentInChildren<StatusUICtrl>();
-        statusUICtrl?.Setup(this.transform);
+        if (statusUI == null) statusUI = GetComponentInChildren<StatusUI>();
+        //statusUI?.Setup(this.transform);
 
 
         // Level1 
@@ -35,7 +35,7 @@ public class Flybee : PatrolMonster
     {
         flybeeRoot.Evaluate();
         if (Input.GetKeyDown(KeyCode.B)) MakeHitState();
-        statusUICtrl.Execute();
+        statusUI.Execute();
     }
 
     public BTS DoCheckHitState()

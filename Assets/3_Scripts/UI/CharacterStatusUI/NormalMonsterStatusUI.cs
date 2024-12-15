@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NormalMonsterStatusUICtrl : StatusUICtrl
+public class NormalMonsterStatusUI : StatusUI
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -22,12 +22,12 @@ public class NormalMonsterStatusUICtrl : StatusUICtrl
         if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
-    public override void Setup(Transform _followTransform, int _level = 0)
+    public void Setup(Transform _followTransform = null)
     {
         // Set
         hpImage.fillAmount = 1f;
         effectImage.fillAmount = 1f;
-        levelText.text = "Lv." + _level;
+        levelText.text = "Lv." + 1;
         // Link
         followTransform = _followTransform;
         statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
@@ -56,14 +56,6 @@ public class NormalMonsterStatusUICtrl : StatusUICtrl
     {
         transform.position = followTransform.position + Vector3.up * heightDelta;
         transform.rotation = camTransform.rotation;
-    }
-
-    public void HPEffect()
-    {
-        if (hpImage.fillAmount == effectImage.fillAmount) return;
-
-        if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
-        else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
     }
     #endregion
 }

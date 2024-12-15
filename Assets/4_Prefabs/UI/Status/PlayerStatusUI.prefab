@@ -1020,14 +1020,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4581639730664961998}
-  - component: {fileID: 7064078980760372339}
+  - component: {fileID: 4254006069132289482}
   m_Layer: 5
   m_Name: PlayerStatusUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4581639730664961998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1049,7 +1049,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7064078980760372339
+--- !u!114 &4254006069132289482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8335325284249710014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54365a9917e99134abe3adeb063a6501, type: 3}
+  m_Script: {fileID: 11500000, guid: 7954a5bc21fd70c43bb37594772e2352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statusCanvasObject: {fileID: 5100346707260330055}

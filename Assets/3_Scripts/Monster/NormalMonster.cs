@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NormalMonster : BaseMonster
 {
-    [SerializeField] protected StatusUICtrl statusUICtrl = null;
+    [SerializeField] protected StatusUI statusUI = null;
     public override void Death()
     {
         throw new System.NotImplementedException();

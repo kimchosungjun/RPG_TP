@@ -54,7 +54,7 @@ public class Rayfish : CowardMonster
     protected override void Start()
     {
         Collider coll = GetComponent<Collider>();
-        statusUIController.Setup(this.transform);
+        //statusUIController.Setup(this.transform);
 
         // 레벨 3
         ActionNode isHitByPlayer = new ActionNode(DoIsHitByPlayer);

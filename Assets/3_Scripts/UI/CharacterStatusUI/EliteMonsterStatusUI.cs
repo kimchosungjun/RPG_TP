@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EliteMonsterStatusUICtrl : StatusUICtrl
+public class EliteMonsterStatusUI : StatusUI
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -27,7 +27,7 @@ public class EliteMonsterStatusUICtrl : StatusUICtrl
         if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
-    public override void Setup(Transform _followTransform,int _level = 0)
+    public void Setup(Transform _followTransform = null)
     {
 
     }

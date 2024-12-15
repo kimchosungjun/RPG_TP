@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BossMonster : BaseMonster
 {
-    [SerializeField] protected StatusUICtrl statusUICtrl = null;
+    [SerializeField] protected StatusUI statusUICtrl = null;
 
     #region Override
     public override void Death()

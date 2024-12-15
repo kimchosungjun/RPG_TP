@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubBossStatusUICtrl : EliteMonsterStatusUICtrl 
+public class SubBossStatusUICtrl : EliteMonsterStatusUI 
 {
 
     /******************************************/
@@ -25,12 +25,14 @@ public class SubBossStatusUICtrl : EliteMonsterStatusUICtrl
         if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
-    public override void Setup(Transform _followTransform, int _level = 0)
+    // To Do ~~~ 
+    // 보스용 스탯을 따로 만들어서 전달
+    public void Setups(Transform _followTransform = null)
     {
         // Set
         hpImage.fillAmount = 1f;
         effectImage.fillAmount = 1f;
-        levelText.text = "Lv." + _level;
+        levelText.text = "Lv." + 1;
         // Link
         followTransform = _followTransform;
         statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class StatusUICtrl : MonoBehaviour
+public abstract class StatusUI : MonoBehaviour
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -22,13 +22,6 @@ public abstract class StatusUICtrl : MonoBehaviour
 
     #region Life Cycle
     public abstract void Init();
-    /// <summary>
-    /// Setup에서 받는 것은 몬스터의 스텟으로 변경할 예정
-    /// </summary>
-    /// <param name="_followTransform"></param>
-    /// <param name="_monsterHeight"></param>
-    /// <param name="_level"></param>
-    public abstract void Setup(Transform _followTransform, int _level = 0);
     public abstract void Execute();
     #endregion
 
@@ -36,6 +29,13 @@ public abstract class StatusUICtrl : MonoBehaviour
     /**********  캔버스 활성화   ************/
     /******************************************/
     public void DecideActiveCanvas(bool _isActive) { statusCanvasObject.gameObject.SetActive(_isActive); }
+    public virtual void HPEffect()
+    {
+        if (hpImage.fillAmount == effectImage.fillAmount) return;
+
+        if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
+        else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
+    }
 }
 
 
