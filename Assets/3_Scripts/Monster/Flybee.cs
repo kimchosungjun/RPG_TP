@@ -14,7 +14,7 @@ public class Flybee : PatrolMonster
     protected override void Start()
     {
         if (anim == null) anim = GetComponent<Animator>();
-        if (statusUI == null) statusUI = GetComponentInChildren<StatusUI>();
+        if (statusUI == null) statusUI = GetComponentInChildren<NormalMonsterStatusUI>();
         //statusUI?.Setup(this.transform);
 
 

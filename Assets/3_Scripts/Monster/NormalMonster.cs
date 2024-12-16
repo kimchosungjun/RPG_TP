@@ -3,16 +3,7 @@ using UnityEngine;
 
 public class NormalMonster : BaseMonster
 {
-    [SerializeField] protected StatusUI statusUI = null;
-    public override void Death()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override BTS DetectMovement()
-    {
-        throw new System.NotImplementedException();
-    }
+    [SerializeField] protected NormalMonsterStatusUI statusUI = null;
 
     public override BTS DetectPlayer()
     {
@@ -29,12 +20,7 @@ public class NormalMonster : BaseMonster
         throw new System.NotImplementedException();
     }
 
-    public override void Spawn()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void TakeDamage()
+    public override void Spawn(Vector3 _spawnPosition)
     {
         throw new System.NotImplementedException();
     }

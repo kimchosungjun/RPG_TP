@@ -87,12 +87,12 @@ public class Rayfish : CowardMonster
     /******************************************/
     /************ 애니메이션  ***************/
     /******************************************/
-    public override void TakeDamage()
-    {
-        isHitState = true;
-        anim.SetBool("IsEndHit", false);
-        anim.SetTrigger("Hit");
-    }
+    //public override void TakeDamage()
+    //{
+    //    isHitState = true;
+    //    anim.SetBool("IsEndHit", false);
+    //    anim.SetTrigger("Hit");
+    //}
 
     public void EndHitState()
     {

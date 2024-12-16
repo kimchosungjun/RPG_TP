@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]   
 public class PathNode 
 {
-    [SerializeField] Vector3 halfDetectSize = new Vector3(0.5f, 0.5f, 0.5f);
+    Vector3 halfDetectSize = new Vector3(0.5f, 0.5f, 0.5f);
     [SerializeField] Vector3 nodePosition = Vector3.zero;
     public Vector3 NodePosition { get { return nodePosition; } }    
 

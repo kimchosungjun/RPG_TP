@@ -44,11 +44,6 @@ public class NonCombatMonster : NormalMonster
         throw new System.NotImplementedException();
     }
 
-    public override BTS DetectMovement()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override BTS DetectPlayer()
     {
         throw new System.NotImplementedException();
@@ -64,14 +59,6 @@ public class NonCombatMonster : NormalMonster
         throw new System.NotImplementedException();
     }
 
-    public override void Spawn()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void TakeDamage()
-    {
-        throw new System.NotImplementedException();
-    }
     #endregion
 }
