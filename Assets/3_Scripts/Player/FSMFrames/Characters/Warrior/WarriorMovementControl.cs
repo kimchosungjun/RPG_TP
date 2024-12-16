@@ -4,7 +4,7 @@ using PlayerEnums;
 // ai 처리는 fixedupdate와 update가 좋다
 // 이유는 동기화 처리때문에
 
-public class WarriorMovementControl : CharacterMovementControl
+public class WarriorMovementControl : PlayerMovementControl
 {
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }

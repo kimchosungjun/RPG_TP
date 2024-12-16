@@ -1,4 +1,5 @@
 using UnityEngine;
+using PlayerTableClasses;
 
 /// <summary>
 /// 파일로부터 불러와 사용하는 스탯 데이터 : 고정 데이터
@@ -32,7 +33,7 @@ public class PlayerStat : BaseStat
     public void LoadPlayerStat()
     {
         TableMgr tableMgr = SharedMgr.TableMgr;
-        PlayerTable.PlayerTableData tableData = new PlayerTable.PlayerTableData();
+        PlayerTableData tableData = new PlayerTableData();
         tableData = tableMgr.character.GetPlayerTableData(typeID);
 
         actorName = tableData.name;
@@ -40,12 +41,13 @@ public class PlayerStat : BaseStat
         dashSpeed = tableData.dashSpeed;
         jumpSpeed = tableData.jumpSpeed;    
 
-        PlayerTable.PlayerStatTableData statData = new PlayerTable.PlayerStatTableData();
+        PlayerStatTableData statData = new PlayerStatTableData();
         statData = tableMgr.character.GetPlayerStatTableData(typeID, currentStat.currentLevel);
         attackValue = statData.attackValue;
         defenceValue = statData.defenceValue;
         criticalValue = statData.criticalValue;
         maxHp = statData.maxHp;
+        attackSpeed = statData.attackSpeed;
         level = currentStat.currentLevel;
     }
     #endregion

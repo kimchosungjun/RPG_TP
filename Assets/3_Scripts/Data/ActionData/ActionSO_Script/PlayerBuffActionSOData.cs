@@ -1,4 +1,5 @@
 using UnityEngine;
+using PlayerTableClasses;
 
 [CreateAssetMenu(fileName = "PlayerBuffSkillSO", menuName = "PlayerActionSOData/PlayerBuffSkillSO")]
 public class PlayerBuffActionSOData : PlayerActionSkillSOData
@@ -38,7 +39,7 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
         return -1;
     }
 
-    public void SetSOData(PlayerTable.PlayerBuffSkillTableData _buffSkillTable)
+    public void SetSOData(PlayerBuffSkillTableData _buffSkillTable)
     {
          actionName = _buffSkillTable.name;
          actionDescription = _buffSkillTable.description;

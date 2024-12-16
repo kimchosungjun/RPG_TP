@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CharacterStatCtrl : MonoBehaviour
+public abstract class CharacterStatControl : MonoBehaviour
 {
     protected int buffCnt = 0;
     protected List<TransferBuffData> currentBuffs = new List<TransferBuffData>();
@@ -42,8 +42,21 @@ public abstract class CharacterStatCtrl : MonoBehaviour
     #endregion
 
     #region Abstract
-    public abstract void TakeDamage(float _damage);
+    public abstract void TakeDamage(TransferAttackData _attackData);
     public abstract void Heal(float _heal);
     public abstract void Recovery(float _percent);
     #endregion
 }
+
+
+/*
+ 1. 공격 활성화
+ 2. 현재 공격을 받을 수 있는 상태인지 확인해야 함 => 죽은 상태일수도, 이미 맞은 상태일수도, 무적상태일수도 있음. 
+ 3. 데미지를 받으면 데미지 받은 상태임을 움직임 제어하는 코드에서도 알아야 한다.
+ 
+결론 : 한번에 정보를 전달이 필요하다.
+=> 방안1.
+1) BaseActor를 다시 생성하여 CanTakeDamage 메서드를 작성한다.
+2) CanTakeDamage가 True면 StatControl과 행동제어 코드에 데미지와 상태를 보낸다. 
+ 
+ */

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PlayerEnums;
+using PlayerTableClasses;
 public partial class PlayerTable: BaseTable
 {
 
@@ -214,6 +215,7 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.attackValue);
         _reader.get(_row, ref _tableData.defenceValue);
         _reader.get(_row, ref _tableData.criticalValue);
+        _reader.get(_row, ref _tableData.attackSpeed);
         return true;
     }
 
@@ -232,6 +234,7 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
         _reader.get(_row, ref _tableData.multipliers, _tableData.multipliers.Length);
+        _reader.get(_row, ref _tableData.effectMaintainTimes, _tableData.effectMaintainTimes.Length);
         _reader.get(_row, ref _tableData.effects, _tableData.effects.Length);
         _reader.get(_row, ref _tableData.particle);
         return true;

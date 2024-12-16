@@ -8,7 +8,7 @@ public abstract class BaseCharacter : MonoBehaviour
     /************** 테이블 ***************/
     /**************************************/
 
-    #region Protected
+    #region Protected : Layer Value
     protected int noneInteractionLayer = 0; 
     protected int bitLayer;
     protected int intLayer;
@@ -21,7 +21,7 @@ public abstract class BaseCharacter : MonoBehaviour
     public TABLE_FOLDER_TYPES GetCharacterTableType { get { return characterTableType; } }
     #endregion
 
-    #region Abstract Method
+    #region Abstract Method 
     /// <summary>
     /// Layer와 캐릭터 테이블 데이터 타입을 설정한다.
     /// </summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlayerStatControl : CharacterStatCtrl
+public class PlayerStatControl : CharacterStatControl
 {
     [SerializeField] PlayerStat playerStat = null;
     public PlayerStat PlayerStat { get { return playerStat; } set { playerStat = value; } }
@@ -19,7 +19,7 @@ public class PlayerStatControl : CharacterStatCtrl
         throw new NotImplementedException();
     }
 
-    public override void TakeDamage(float _damage)
+    public override void TakeDamage(TransferAttackData _attackData)
     {
            
     }

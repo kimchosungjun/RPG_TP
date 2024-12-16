@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterStatCtrl : CharacterStatCtrl
+public class MonsterStatControl : CharacterStatControl
 {
     public override void Heal(float _heal)
     {
@@ -14,8 +14,16 @@ public class MonsterStatCtrl : CharacterStatCtrl
         throw new System.NotImplementedException();
     }
 
-    public override void TakeDamage(float _damage)
+    public override void TakeDamage(TransferAttackData _attackData)
     {
         throw new System.NotImplementedException();
+    }
+
+    /// <summary>
+    /// 다시 태어날 때 리셋
+    /// </summary>
+    public void ResetStat()
+    {
+
     }
 }

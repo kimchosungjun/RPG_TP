@@ -1,4 +1,5 @@
 using UnityEngine;
+using PlayerTableClasses;
 
 [CreateAssetMenu(fileName = "PlayerAttackSkillSO", menuName = "PlayerActionSOData/PlayerAttackSkillSO")]
 public class PlayerAttackSkillActionSOData : PlayerActionSkillSOData
@@ -9,7 +10,7 @@ public class PlayerAttackSkillActionSOData : PlayerActionSkillSOData
     public float GetActionMultiplier { get { return actionMultiplier; } }
     public int GetAttackEffectType { get { return attackEffectType; } }
     
-    public void SetSOData(PlayerTable.PlayerAttackSkillTableData _attackSkillData)
+    public void SetSOData(PlayerAttackSkillTableData _attackSkillData)
     {
         actionName = _attackSkillData.name;
         actionDescription = _attackSkillData.description;

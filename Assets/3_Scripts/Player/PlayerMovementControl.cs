@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using PlayerEnums;
 
-public abstract class CharacterMovementControl : MonoBehaviour
+public abstract class PlayerMovementControl : MonoBehaviour
 {
     /******************************************/
     /************* 캐릭터 이동 **************/
@@ -124,7 +124,9 @@ public abstract class CharacterMovementControl : MonoBehaviour
     protected PlayerState[] playerStates;
     protected PlayerStateMachine stateMachine;
     protected PlayerAttackCombo attackCombo;
-    protected PlayerEnums.STATES currentPlayerState = PlayerEnums.STATES.MAX;
+    protected STATES currentPlayerState = STATES.MAX;
+    protected bool canTakeDamageState = true;
+    public bool CanTakeDamage { get { return canTakeDamageState; } }
     #endregion
 
     /******************************************/

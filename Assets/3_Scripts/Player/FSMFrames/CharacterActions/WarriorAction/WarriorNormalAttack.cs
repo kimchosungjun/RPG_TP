@@ -25,7 +25,7 @@ public class WarriorNormalAttack : NearAttackAction
     public override void DoAction()
     {
         float damageValue = soData.GetActionMultiplier(combo) * playerStat.Attack;
-        //attackData.SetData(soData.GetAttackEffectType(combo),damageValue, soData.get);
+        attackData.SetData(soData.GetAttackEffectType(combo),damageValue, soData.GetMaintainTime(combo));
         base.DoAction(); // Do Attack
     }
     
@@ -38,11 +38,9 @@ public class WarriorNormalAttack : NearAttackAction
     {
         if (other.gameObject.layer == enemyLayerMask)
         {
+            // 처음 닿는 물체라면 List에 추가해주고 데미지 
             if (CheckCollider(other))
-            {
-                // To Do ~~~~~~~
-                // 스탯에 맞는 공격력을 반환하여 적에게 데미지를 입힌다.
-            }
+                other.GetComponent<BaseActor>().TakeDamage(attackData);
         }
     }
 }

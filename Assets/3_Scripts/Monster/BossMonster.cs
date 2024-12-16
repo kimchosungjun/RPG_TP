@@ -40,5 +40,10 @@ public class BossMonster : BaseMonster
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void CreateBTStates()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
 }
