@@ -34,8 +34,7 @@ public class PlayerJumpState : PlayerOnAirState
         onceReset = true;
         maintainJumpState = true;
         characterCtrl.IsOnGround = false;
-        anim.SetBool("IsOnGround", false);
-        anim.SetTrigger("Jump");
+        anim.SetInteger("States", (int)STATES.JUMP);
     }
 
     public override void Execute()
@@ -83,13 +82,13 @@ public class PlayerJumpState : PlayerOnAirState
     {
         if (characterCtrl.IsOnGround)
         {
-            characterCtrl.ChangeState(PlayerEnums.STATES.MOVEMENT);
+            characterCtrl.ChangeState(STATES.MOVEMENT);
         }
         else
         {
             if (rigid.velocity.y < 0)
             {
-                characterCtrl.ChangeState(PlayerEnums.STATES.FALL);
+                characterCtrl.ChangeState(STATES.FALL);
             }
         }
     }

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerHitState : PlayerState
 {
-    public PlayerHitState(WarriorMovementControl _controller) : base(_controller)
+    public PlayerHitState(WarriorMovementControl _controller) : base(_controller) { }
+
+    public override void Enter()
     {
+        base.Enter();
+        anim.SetInteger("States", (int)PlayerEnums.STATES.HIT);
     }
 }

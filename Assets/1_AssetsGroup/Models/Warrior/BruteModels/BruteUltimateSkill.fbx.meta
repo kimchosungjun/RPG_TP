@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ecf6f4b05e108240aa3263abb787908
+guid: 81d1aeccb47c2f84f9779ff40c012b55
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: BruteJump
+      name: BruteUltimateSkill
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 18
+      lastFrame: 95
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -106,7 +106,8 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 308c8c12efb01e14eb3604e4a4adeebd
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

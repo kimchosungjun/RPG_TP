@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerState
 {
-    Animator anim = null;
-    public PlayerDashState(WarriorMovementControl _controller) : base(_controller)
-    {
-        anim = _controller.GetAnim ;
-    }
+    public PlayerDashState(WarriorMovementControl _controller) : base(_controller) { }
 
     public override void Enter()
     {
         characterCtrl.GetRigid.drag = 0f;
         characterCtrl.Dash();
-        anim.SetTrigger("Dash");
+        anim.SetInteger("States", (int)PlayerEnums.STATES.DASH);
     }
 
     public override void Execute()

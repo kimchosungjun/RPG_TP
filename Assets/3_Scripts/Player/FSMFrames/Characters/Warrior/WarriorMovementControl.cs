@@ -53,7 +53,7 @@ public class WarriorMovementControl : PlayerMovementControl
     {
         stateMachine = new PlayerStateMachine();
         attackCombo = new PlayerAttackCombo();
-        playerStates = new PlayerState[(int)PlayerEnums.STATES.MAX];
+        playerStates = new PlayerState[(int)STATES.MAX];
         playerStates[(int)STATES.MOVEMENT] = new PlayerGroundMoveState(this);
         playerStates[(int)STATES.DASH] = new PlayerDashState(this);
         playerStates[(int)STATES.JUMP] = new PlayerJumpState(this);

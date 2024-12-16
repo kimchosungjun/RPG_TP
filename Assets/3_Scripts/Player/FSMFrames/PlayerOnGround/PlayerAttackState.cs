@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerAttackState : PlayerOnGroundState
+public class PlayerAttackState : PlayerActionState
 {
     /******************************************/
     /*********** 생성자 & 변수  *************/
@@ -11,12 +7,9 @@ public class PlayerAttackState : PlayerOnGroundState
     #region Creator & Value
 
     int currentCombo = -1;
-    protected Animator anim = null;
-    protected PlayerAttackCombo attackCombo = null;
-    public PlayerAttackState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller)
+    public PlayerAttackState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) 
     {
-        this.anim = _controller.GetAnim;
-        this.attackCombo = _attackCombo;
+
     }
 
     #endregion
@@ -29,22 +22,25 @@ public class PlayerAttackState : PlayerOnGroundState
 
     public override void Enter()
     {
+        base.Enter();   
         currentCombo = attackCombo.GetCombo();
-        anim.SetBool("IsAttackEnd", false);
-        //anim.SetFloat("PlaneVelocity", 0f);
-        anim.SetInteger("AttackCombo", currentCombo);
-        anim.SetTrigger("Attack"); 
+        anim.SetInteger("Combo", currentCombo);
+        anim.SetFloat("AttackSpeed", 1f);
+        anim.SetInteger("States", (int)PlayerEnums.STATES.ATTACK);
     }
 
     public override void Execute()
     {
-        if (characterCtrl.CanPlayerCtrl == false) return;
         base.Execute();
     }
 
     public bool CanExecute() { return true; }
 
-    public override void Exit() { attackCombo.SetComboTime();  }
+    public override void Exit() 
+    {
+        base.Exit();
+        attackCombo.SetComboTime();  
+    }
 
     #endregion
 }

@@ -9,11 +9,9 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
     #region Createor & Value
     Rigidbody rigid = null;
-    Animator anim = null;
     public PlayerGroundMoveState(WarriorMovementControl _controller) : base(_controller) 
     {
         this.rigid = _controller.GetRigid;
-        this.anim = _controller.GetAnim;
     }
     #endregion
 
@@ -22,6 +20,12 @@ public class PlayerGroundMoveState : PlayerOnGroundState
     /******************************************/
 
     #region StateMachine Frame
+
+    public override void Enter()
+    {
+        base.Enter();
+        anim.SetInteger("States", (int)STATES.MOVEMENT);
+    }
 
     public override void Execute()
     {
@@ -63,35 +67,35 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         {
             rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
             rigid.AddForce(Vector3.up * characterCtrl.PlayerJumpForce, ForceMode.Impulse);
-            characterCtrl.ChangeState(PlayerEnums.STATES.JUMP);
+            characterCtrl.ChangeState(STATES.JUMP);
             return;
         }
 
         // 대쉬 입력
         if (Input.GetMouseButtonDown(1) && characterCtrl.IsOnGround && !characterCtrl.IsOnMaxAngleSlope)
         {
-            characterCtrl.ChangeState(PlayerEnums.STATES.DASH);
+            characterCtrl.ChangeState(STATES.DASH);
             return;
         }
 
         // 공격 입력
         if (/*Input.GetMouseButtonDown(0)*/ Input.GetKeyDown(KeyCode.Q))
         {
-            characterCtrl.ChangeState(PlayerEnums.STATES.ATTACK);
+            characterCtrl.ChangeState(STATES.ATTACK);
             return;
         }
 
         // 스킬 입력
         if (Input.GetKeyDown(KeyCode.E))
         {
-            characterCtrl.ChangeState(PlayerEnums.STATES.SKILL);
+            characterCtrl.ChangeState(STATES.SKILL);
             return;
         }
 
         // 궁극기 입력
         if (Input.GetKeyDown(KeyCode.R))
         {
-            characterCtrl.ChangeState(PlayerEnums.STATES.ULTIMATESKILL);
+            characterCtrl.ChangeState(STATES.ULTIMATESKILL);
             return;
         }
     }
@@ -108,9 +112,9 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         if(characterCtrl.IsOnGround == false)
         {
             if (rigid.velocity.y < -0.1f)
-                characterCtrl.ChangeState(PlayerEnums.STATES.FALL);
+                characterCtrl.ChangeState(STATES.FALL);
             else
-                characterCtrl.ChangeState(PlayerEnums.STATES.JUMP);
+                characterCtrl.ChangeState(STATES.JUMP);
         }
     }
     #endregion

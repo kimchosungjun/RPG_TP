@@ -15,6 +15,12 @@ public class PlayerFallState : PlayerOnAirState
 
     #region StateMachine Frame
 
+    public override void Enter()
+    {
+        base.Enter();
+        anim.SetInteger("States", (int)STATES.FALL);
+    }
+
     public override void Execute()
     {
         characterCtrl.MonsterCheck(); 

@@ -4,15 +4,17 @@ public class PlayerAnimationEvent : MonoBehaviour
 {
     WarriorMovementControl characterCtrl = null;
     [SerializeField] CharacterAction[] actions;
+    Animator anim = null;
     void Awake()
     {
-        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMovementControl>();      
+        if(characterCtrl==null) characterCtrl = GetComponentInParent<WarriorMovementControl>();
+        if (characterCtrl != null) anim = characterCtrl.GetAnim;
     }
 
-    public void AttackCooling() { characterCtrl.GetAnim.SetBool("IsAttackEnd", true); characterCtrl.AttackCooling(); }
-    public void SkillCooling() { characterCtrl.GetAnim.SetBool("IsAttackEnd", true); characterCtrl.SkillCooling(); }
-    public void UltimateSkillCooling() { characterCtrl.GetAnim.SetBool("IsAttackEnd", true); characterCtrl.UltimateSkillCooling(); }
-    public void DashCooling() { characterCtrl.DashCooling(); }  
+    public void AttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.AttackCooling(); }
+    public void SkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.SkillCooling(); }
+    public void UltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.UltimateSkillCooling(); }
+    public void DashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.DashCooling(); }  
 
     public void DoAction(int index)
     {

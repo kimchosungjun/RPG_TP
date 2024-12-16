@@ -124,7 +124,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     protected PlayerState[] playerStates;
     protected PlayerStateMachine stateMachine;
     protected PlayerAttackCombo attackCombo;
-    protected STATES currentPlayerState = STATES.MAX;
+    [SerializeField] protected STATES currentPlayerState = STATES.MAX;
     protected bool canTakeDamageState = true;
     public bool CanTakeDamage { get { return canTakeDamageState; } }
     #endregion
@@ -139,7 +139,6 @@ public abstract class PlayerMovementControl : MonoBehaviour
     {
         isOnGround = Physics.SphereCast(bodyTransform.position, playerBodyRadius, Vector3.down,
             out groundHit, groundDetectDistance, groundLayer);
-        anim.SetBool("IsOnGround", isOnGround);
     }
     public void LimitMovementSpeed()
     {

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f322afd657fc8eb42be68361ec5674e8
+guid: 1ec074c9fcaff114c823fdb80d224bbe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: BruteAttack_03
+      name: BruteTalk
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 95
+      lastFrame: 155
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -106,7 +106,8 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 308c8c12efb01e14eb3604e4a4adeebd
   importAnimation: 1
   humanDescription:
     serializedVersion: 3

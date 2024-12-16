@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a0031428014b4154a87c38aa51f5439f
+guid: ed2326df653034442af96541977d4cb5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: BruteAttack_01
+      name: BruteDash
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 68
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -106,7 +106,8 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 308c8c12efb01e14eb3604e4a4adeebd
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
