@@ -48,7 +48,6 @@ public class TableMgr
         Player.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
         LinkWarriorTable();
 #else
-        character.Init_Binary("testCsv");
 #endif
     }
 

@@ -17,7 +17,7 @@ public class BaseTable
 #if UNITY_EDITOR
         return Application.dataPath;
 #else
-        //return Application.persistentDataPath + "/Assets";
+        return Application.persistentDataPath + "/Assets";
 #endif
     }
     /// <summary>
@@ -78,5 +78,7 @@ public class BaseTable
         stream.Close();
         return reader;
     }
+
+
     #endregion
 }
