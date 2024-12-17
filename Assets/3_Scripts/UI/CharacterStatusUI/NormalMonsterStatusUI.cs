@@ -33,7 +33,7 @@ public class NormalMonsterStatusUI : StatusUI
         statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
         camTransform = Camera.main.transform;
     }
-    public override void Execute()
+    public override void FixedExecute()
     {
         UpdatePostion();
 

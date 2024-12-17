@@ -22,7 +22,7 @@ public abstract class StatusUI : MonoBehaviour
 
     #region Life Cycle
     public abstract void Init();
-    public abstract void Execute();
+    public abstract void FixedExecute();
     #endregion
 
     /******************************************/

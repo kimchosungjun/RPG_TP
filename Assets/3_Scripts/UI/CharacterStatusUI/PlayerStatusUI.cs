@@ -60,7 +60,7 @@ public class PlayerStatusUI : StatusUI
 
 
 
-    public override void Execute()
+    public override void FixedExecute()
     {
         HPEffect();
         EXPEffect();

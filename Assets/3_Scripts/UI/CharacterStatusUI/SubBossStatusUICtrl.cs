@@ -38,7 +38,7 @@ public class SubBossStatusUICtrl : EliteMonsterStatusUI
         statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
         camTransform = Camera.main.transform;
     }
-    public override void Execute()
+    public override void FixedExecute()
     {
         UpdatePostion();
 

@@ -31,7 +31,7 @@ public class Warrior : BasePlayer
 
     public override void Execute()
     {
-        playerStatusUICtrl.Execute();
+        playerStatusUICtrl.FixedExecute();
         characterMovementControl.Execute();
     }
 

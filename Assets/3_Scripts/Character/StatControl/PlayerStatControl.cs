@@ -14,7 +14,7 @@ public class PlayerStatControl : CharacterStatControl
         throw new NotImplementedException();
     }
 
-    public override void Recovery(float _percent)
+    public override void Recovery(float _percent = 10f, float _time = 0.2f)
     {
         throw new NotImplementedException();
     }

@@ -27,6 +27,7 @@ public class BattleField : MonoBehaviour
                 {
                     spawnMonsters[i].Spawn(pathNodes[randomNum].NodePosition);
                     spawnMonsters[i].MonsterArea = this;
+                    spawnMonsters[i].SetPathNodes(pathNodes);
                     spawnIndexes.Add(randomNum);
                     break;
                 }

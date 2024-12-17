@@ -8,15 +8,19 @@ using PlayerTableClasses;
 public class PlayerStat : BaseStat
 {
     #region Protected
-    // 플레이어 고유 스탯
     [SerializeField] protected int typeID;
+    [SerializeField] protected float attackValue;
+    [SerializeField] protected float criticalValue;
+    [SerializeField] protected float attackSpeed; // 공격속도는 애니메이션 속도에 영향을 준다.
     [SerializeField] protected float dashSpeed;
     [SerializeField] protected float jumpSpeed;
     protected PlayerSaveStat currentStat = null;
     #endregion
 
     #region Public
-    // 플레이어 고유 스탯
+    public float Attack { get { return attackValue; } set { attackValue = value; } }
+    public float Critical { get { return criticalValue; } set { criticalValue = value; } }
+    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
     public float DashSpeed { get { return dashSpeed; } set { dashSpeed = value; } }
     public float JumpSpeed { get { return jumpSpeed; } set { jumpSpeed = value; } }
     public PlayerSaveStat GetSaveStat{ get { return currentStat; } }

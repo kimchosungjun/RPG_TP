@@ -6,6 +6,7 @@ public abstract class BaseActor : BaseCharacter
     /***********  피격 가능  *************/
     /********** 상태인지 확인 **********/
     /**************************************/
+    #region Relate Take Damage
     public virtual void TakeDamage(TransferAttackData _attackData)
     {
         if (CanTakeDamageState() == false)
@@ -16,4 +17,5 @@ public abstract class BaseActor : BaseCharacter
     public abstract bool CanTakeDamageState();
     public abstract void ApplyMovementTakeDamage(TransferAttackData _attackData);
     public abstract void ApplyStatTakeDamage(TransferAttackData _attackData);
+    #endregion
 }

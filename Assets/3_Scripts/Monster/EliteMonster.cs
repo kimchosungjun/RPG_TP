@@ -21,7 +21,7 @@ public class EliteMonster : BaseMonster
         throw new System.NotImplementedException();
     }
 
-    public override void Recovery()
+    public override void Recovery(float _percent = 10f, float _time = 0.2f)
     {
         throw new System.NotImplementedException();
     }

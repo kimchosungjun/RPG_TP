@@ -5,13 +5,13 @@ using MonsterEnums;
 
 public class Rayfish : CowardMonster
 {
-    protected List<PathNode> pathNodes = new List<PathNode>();
+    protected List<PathNode> pathNodeGroup = new List<PathNode>();
     public PathNode GetFarPath()
     {
         PathNode bestNode = null;
         float bestDistance = float.MaxValue;
         float maxDistanceSqr = maxDistance * maxDistance;
-        foreach (var node in pathNodes)
+        foreach (var node in pathNodeGroup)
         {
             float distanceToAI = (node.NodePosition - transform.position).sqrMagnitude;
             if (distanceToAI > maxDistanceSqr) continue;
@@ -45,7 +45,7 @@ public class Rayfish : CowardMonster
             float x = _centerPosition.x + Mathf.Cos(angle) * _pathRadius;
             float z = _centerPosition.z + Mathf.Sin(angle) * _pathRadius;
             Vector3 nodePosition = new Vector3(x, 0, z); 
-            pathNodes.Add(new PathNode(nodePosition)); 
+            pathNodeGroup.Add(new PathNode(nodePosition)); 
         }
     }
 
@@ -167,7 +167,7 @@ public class Rayfish : CowardMonster
         int randomNodeIndex = 0;
         int randomNum = 0;
         randomNum = Random.Range(0, 2);
-        randomNodeIndex = Random.Range(0, pathNodes.Count);
+        randomNodeIndex = Random.Range(0, pathNodeGroup.Count);
         switch (randomNum)
         {
             // 유휴상태
@@ -180,7 +180,7 @@ public class Rayfish : CowardMonster
                 {
                     isIdleMove = true;
                     anim.SetBool("IsMove", true);
-                    DoMove(pathNodes[randomNodeIndex].NodePosition);
+                    DoMove(pathNodeGroup[randomNodeIndex].NodePosition);
                 }
                 break;
         }

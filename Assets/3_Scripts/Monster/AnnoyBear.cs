@@ -81,7 +81,7 @@ public class AnnoyBear : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ctrl.Execute();
+        ctrl.FixedExecute();
         bearBehaviourState.Evaluate();
     }
 

@@ -5,28 +5,31 @@ public class NormalMonster : BaseMonster
 {
     [SerializeField] protected NormalMonsterStatusUI statusUI = null;
 
-    public override BTS DetectPlayer()
+    public override void Recovery(float _percent = 10f, float _time = 0.2f) { monsterStatControl.Recovery(10f); }
+
+
+    #region Override Life Cycle
+    protected override void Awake()
     {
-        throw new System.NotImplementedException();
+        base.Awake();
+        statusUI.Init();
+        // 스탯 불러와서 넣기
     }
 
-    public override BTS IdleMovement()
+    protected override void Start()
     {
-        throw new System.NotImplementedException();
+        base.Start();
     }
 
-    public override void Recovery()
+    protected override void FixedUpdate()
     {
-        throw new System.NotImplementedException();
+        statusUI.FixedExecute();
     }
+    #endregion
 
-    public override void Spawn(Vector3 _spawnPosition)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void CreateBTStates()
-    {
-        throw new System.NotImplementedException();
-    }
+    #region Empty Override Metohd 
+    public override BTS IdleMovement() { return BTS.SUCCESS; }
+    public override BTS DetectPlayer() { return BTS.SUCCESS; }
+    protected override void CreateBTStates() { }
+    #endregion
 }

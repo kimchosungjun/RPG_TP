@@ -3,13 +3,19 @@ using MonsterEnums;
 
 public abstract class BaseMonster : BaseActor
 {
+    /******************************************/
+    /************ 연결 컴포넌트  ************/
+    /********** 시야 감지 & 영역  ***********/
+    /******************************************/
+
     #region Value : Animator, StatControl
-    protected int playerLayer = 1 << 8;
     [SerializeField] protected Animator anim = null;
     [SerializeField] protected MonsterStatControl monsterStatControl;
     #endregion
 
     #region Value : Notice
+    protected int playerLayer = 1 << 8;
+    protected PathNode[] pathNodes;
     protected bool isInMonsterArea = false;
     public BattleField MonsterArea { protected get; set; }  
     #endregion
@@ -28,6 +34,7 @@ public abstract class BaseMonster : BaseActor
     /************* 레이어 설정  *************/
     /************* 피격 메서드  *************/
     /******************************************/
+
     #region Override : Set Layer & Take Damage
     public override void SetCharacterType()
     {
@@ -46,20 +53,30 @@ public abstract class BaseMonster : BaseActor
     #region Virtual Method : Announce Area & Spawn 
     public virtual void AnnounceInMonsterArea() { isInMonsterArea = true; } 
     public virtual void AnnounceOutMonsterArea() { isInMonsterArea = false; }
+    public virtual void SetPathNodes(PathNode[] _pathNodes) { pathNodes = _pathNodes; } 
     public virtual void Spawn(Vector3 _spawnPosition) { this.transform.position = _spawnPosition; this.gameObject.SetActive(true); }
     public virtual void Death() { /*anim.SetInteger("States", 9);*/ } // 애니메이션 설정하기
     public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject); this.gameObject.SetActive(false); } // 스탯 원래대로 만들기 추가 
     #endregion
 
     #region Abstract Method 
-
     /// <summary>
-    /// Create BT Tree
+    /// 몬스터에 맞는 BT 구조 생성하기
     /// </summary>
     protected abstract void CreateBTStates();
-
+    /// <summary>
+    /// 플레이어 감지를 거리로 할 것인지, 트리거로 할 것인지.. 등을 정한 후 재정의해서 사용할 것
+    /// </summary>
+    /// <returns></returns>
     public abstract BTS DetectPlayer();
+    /// <summary>
+    /// 정해진 Pathnode에서 돌아다니거나 가만히 있거나.. 등 평상시의 AI
+    /// </summary>
+    /// <returns></returns>
     public abstract BTS IdleMovement();
-    public abstract void Recovery();
+    /// <summary>
+    /// 공격받은지 오래되거나 본래의 자리로 돌아갈 때 호출 : 자동 치유
+    /// </summary>
+    public abstract void Recovery(float _percent = 10f, float _time = 0.2f);
     #endregion
 }

@@ -44,7 +44,7 @@ public abstract class CharacterStatControl : MonoBehaviour
     #region Abstract
     public abstract void TakeDamage(TransferAttackData _attackData);
     public abstract void Heal(float _heal);
-    public abstract void Recovery(float _percent);
+    public abstract void Recovery(float _percent = 10f, float _time = 0.2f);
     #endregion
 }
 

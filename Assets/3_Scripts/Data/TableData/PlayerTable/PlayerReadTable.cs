@@ -111,7 +111,7 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerBuffSkillTableCsv(string _name, int _startRow, int _startCol, PlayerEnums.BUFF_SKILLS _typeID, int _comboCnt)
+    public void InitPlayerBuffSkillTableCsv(string _name, int _startRow, int _startCol,BUFF_SKILLS _typeID, int _comboCnt)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         Dictionary<int, PlayerBuffSkillTableData> tableDictionary = new Dictionary<int, PlayerBuffSkillTableData>();
@@ -134,7 +134,7 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerAttackSkillTableCsv(string _name, int _startRow, int _startCol, PlayerEnums.ATTACK_SKILLS _typeID)
+    public void InitPlayerAttackSkillTableCsv(string _name, int _startRow, int _startCol, ATTACK_SKILLS _typeID)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         Dictionary<int, PlayerAttackSkillTableData> tableDictionary = new Dictionary<int, PlayerAttackSkillTableData>();

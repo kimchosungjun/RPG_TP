@@ -35,7 +35,7 @@ public class Flybee : PatrolMonster
     {
         flybeeRoot.Evaluate();
         if (Input.GetKeyDown(KeyCode.B)) MakeHitState();
-        statusUI.Execute();
+        statusUI.FixedExecute();
     }
 
     public BTS DoCheckHitState()

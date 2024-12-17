@@ -32,7 +32,7 @@ public class EliteMonsterStatusUI : StatusUI
 
     }
 
-    public override void Execute()
+    public override void FixedExecute()
     {
 
     }

@@ -37,28 +37,4 @@ public class NonCombatMonster : NormalMonster
         canRecovery = false;
     }
     #endregion
-
-    #region Override
-    public override void Death()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override BTS DetectPlayer()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override BTS IdleMovement()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Recovery()
-    {
-        throw new System.NotImplementedException();
-    }
-
-
-    #endregion
 }
