@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using MonsterTableClasses;
+using MonsterEnums;
 
 public partial class MonsterTable : BaseTable
 {
-    /*************************************************************
+    /********************************************************
     *********** 몬스터 데이터 저장 Dictionary ***************
-    *************************************************************/
+    ********************************************************/
 
     #region Monster Data Group : Dictionary 
+
     // 몬스터 ID와 Table Data로 이루어짐
     Dictionary<int, MonsterInfoTableData> monsterInfoTableGroup = new Dictionary<int, MonsterInfoTableData>();
    
@@ -24,15 +26,22 @@ public partial class MonsterTable : BaseTable
 
     #endregion
 
-    /************************************************************
+    /*****************************************************
     ********* 플레이어 데이터 반환 Methods ***************
-    ************************************************************/
+    *****************************************************/
 
     #region Get Monster Data
-
-    public MonsterInfoTableData GetMonsterTableData(int _typeID)
+    
+    public MonsterInfoTableData GetMonsterInfoTableData(int _typeID)
     {
         if (monsterInfoTableGroup.ContainsKey(_typeID)) return monsterInfoTableGroup[_typeID];
+        return null;
+    }
+
+    public MonsterInfoTableData GetMonsterInfoTableData(TYPEIDS _typeID)
+    {
+        int typeID = (int)_typeID;
+        if (monsterInfoTableGroup.ContainsKey(typeID)) return monsterInfoTableGroup[typeID];
         return null;
     }
 
@@ -54,6 +63,19 @@ public partial class MonsterTable : BaseTable
         }
         return null;
     }
+    
+    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(TYPEIDS _typeID, int _level)
+    {
+        int typeID = (int)_typeID;
+        if (nonCombatMonsterStatGroup.ContainsKey(typeID))
+        {
+            if (nonCombatMonsterStatGroup[typeID].ContainsKey(_level))
+            {
+                return nonCombatMonsterStatGroup[typeID][_level];
+            }
+        }
+        return null;
+    }
 
     public CombatMonsterStatTableData GetCombatMonsterStatTableData(int _typeID, int _level)
     {
@@ -66,5 +88,19 @@ public partial class MonsterTable : BaseTable
         }
         return null;
     }
+
+    public CombatMonsterStatTableData GetCombatMonsterStatTableData(TYPEIDS _typeID, int _level)
+    {
+        int typeID = (int)_typeID;
+        if (combatMonsterStatGroup.ContainsKey(typeID))
+        {
+            if (combatMonsterStatGroup[typeID].ContainsKey(_level))
+            {
+                return combatMonsterStatGroup[typeID][_level];
+            }
+        }
+        return null;
+    }
+   
     #endregion
 }

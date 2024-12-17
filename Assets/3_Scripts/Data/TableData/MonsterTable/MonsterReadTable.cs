@@ -44,6 +44,20 @@ public partial class MonsterTable : BaseTable
         }
         nonCombatMonsterStatGroup.Add(_typeID, tableDictionary);
     }
+
+    public void InitCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol, int _typeID)
+    {
+        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
+        Dictionary<int, CombatMonsterStatTableData> tableDictionary = new Dictionary<int, CombatMonsterStatTableData>();
+        for (int row = _startRow; row < reader.row; row++)
+        {
+            CombatMonsterStatTableData data = new CombatMonsterStatTableData();
+            if (ReadNonCombatMonsterDrop(reader, data, row, _startCol) == false)
+                break;
+            tableDictionary.Add(data.monsterLevel, data);
+        }
+        combatMonsterStatGroup.Add(_typeID, tableDictionary);
+    }
     #endregion
 
     /*************************************************************
@@ -90,6 +104,21 @@ public partial class MonsterTable : BaseTable
         _reader.get(_row, ref _tableData.monsterMaxHP);
         _reader.get(_row, ref _tableData.monsterSpeed);
         _reader.get(_row, ref _tableData.monsterBoostSpeed);
+        _reader.get(_row, ref _tableData.monsterDefence);
+        _reader.get(_row, ref _tableData.monsterDropID);
+        return true;
+    }
+
+    protected bool ReadCombatMonsterDrop(CSVReader _reader, CombatMonsterStatTableData _tableData, int _row, int _col)
+    {
+        if (_reader.reset_row(_row, _col) == false) return false;
+        _reader.get(_row, ref _tableData.monsterID);
+        _reader.get(_row, ref _tableData.monsterLevel);
+        _reader.get(_row, ref _tableData.monsterMaxHP);
+        _reader.get(_row, ref _tableData.monsterSpeed);
+        _reader.get(_row, ref _tableData.monsterBoostSpeed);
+        _reader.get(_row, ref _tableData.monsterAttack);
+        _reader.get(_row, ref _tableData.monsterCritical);
         _reader.get(_row, ref _tableData.monsterDefence);
         _reader.get(_row, ref _tableData.monsterDropID);
         return true;

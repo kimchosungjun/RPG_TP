@@ -117,8 +117,9 @@ public partial class PlayerTable: BaseTable
     /// <param name="_comboCnt"></param>
     public void InitPlayerBuffSkillTableCsv(string _name, int _startRow, int _startCol,BUFF_SKILLS _skillID, TYPEIDS _typeID)
     {
-        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         int typeID = (int)_typeID;
+        int skillTypeID = (int)_skillID;
+        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         int combo = playerTableGroup.ContainsKey(typeID) ? playerTableGroup[typeID].skillCombo : 1;
         Dictionary<int, PlayerBuffSkillTableData> tableDictionary = new Dictionary<int, PlayerBuffSkillTableData>();
         for (int row = _startRow; row < reader.row; row++)
@@ -130,7 +131,7 @@ public partial class PlayerTable: BaseTable
                 break;
             tableDictionary.Add(data.level, data);
         }
-        playerBuffSkillDataGroup.Add(_skillID, tableDictionary);
+        playerBuffSkillDataGroup.Add(skillTypeID, tableDictionary);
     }
 
     /// <summary>
@@ -143,6 +144,7 @@ public partial class PlayerTable: BaseTable
     /// <param name="_comboCnt"></param>
     public void InitPlayerAttackSkillTableCsv(string _name, int _startRow, int _startCol, ATTACK_SKILLS _typeID)
     {
+        int skillTypeID = (int)_typeID;
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         Dictionary<int, PlayerAttackSkillTableData> tableDictionary = new Dictionary<int, PlayerAttackSkillTableData>();
         for (int row = _startRow; row < reader.row; row++)
@@ -152,7 +154,7 @@ public partial class PlayerTable: BaseTable
                 break;
             tableDictionary.Add(data.level, data);
         }
-        playerAttackSkillDataGroup.Add(_typeID, tableDictionary);
+        playerAttackSkillDataGroup.Add(skillTypeID, tableDictionary);
     }
 
     #endregion

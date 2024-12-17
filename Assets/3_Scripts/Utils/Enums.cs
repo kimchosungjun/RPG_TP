@@ -131,6 +131,17 @@ namespace MonsterEnums
         FAIL = 1,
         RUNNING = 2
     }
+
+    public enum TYPEIDS
+    {
+        RAYFISH=0,
+        FLYBEE=1,
+        HORNSLIME=2,
+        SLIME=3,
+        ANNOYBEAR=4,
+        BULLTANK=5,
+        DRAGON=6
+    }
 }
 
 // 버프, 상태이상
