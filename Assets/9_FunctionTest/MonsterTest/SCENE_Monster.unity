@@ -671,7 +671,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1529704926}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1467277096911013437, guid: 586a8fad78c64d758ef4b7e17ea63960,
         type: 3}
@@ -711,7 +711,7 @@ PrefabInstance:
     - target: {fileID: 2240259419076222087, guid: 586a8fad78c64d758ef4b7e17ea63960,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2240259419076222087, guid: 586a8fad78c64d758ef4b7e17ea63960,
         type: 3}
@@ -919,6 +919,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 618783839}
+    - targetCorrespondingSourceObject: {fileID: 1467277096911013437, guid: 586a8fad78c64d758ef4b7e17ea63960,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 618783843}
   m_SourcePrefab: {fileID: 100100000, guid: 586a8fad78c64d758ef4b7e17ea63960, type: 3}
 --- !u!1 &618783838 stripped
 GameObject:
@@ -938,12 +942,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3352695d30b793b409fb12aa4f503250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  monsterStatControl: {fileID: 0}
-  statusUI: {fileID: 0}
-  tempHP: 0
-  tempCurHp: 0
-  recoveryTimer: 10
+  anim: {fileID: 618783841}
+  monsterStatControl: {fileID: 618783843}
+  monsterType: 0
+  monsterLevelIndex: 0
+  monsterLevel: 0
+  statusUI: {fileID: 1998907494}
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    monsterID: 0
+    monsterLevel: 0
+    monsterCurHP: 0
+    boostSpeed: 0
   pathWays:
   - {x: 0, y: 5, z: 7.5}
   - {x: -7.5, y: 5, z: 0}
@@ -972,12 +985,30 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.75
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!95 &618783841 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1773777715135941878, guid: 586a8fad78c64d758ef4b7e17ea63960,
+    type: 3}
+  m_PrefabInstance: {fileID: 618783837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &618783842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2240259419076222087, guid: 586a8fad78c64d758ef4b7e17ea63960,
     type: 3}
   m_PrefabInstance: {fileID: 618783837}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &618783843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618783838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &712481623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,18 +1346,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80eafa1b32c46734fbb27476693f164d, type: 3}
---- !u!114 &991217766 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7926936411174285934, guid: 80eafa1b32c46734fbb27476693f164d,
-    type: 3}
-  m_PrefabInstance: {fileID: 991217765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e854de7bb092d245b662e7e985020d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &991217767 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1028189660566494355, guid: 80eafa1b32c46734fbb27476693f164d,
@@ -1590,15 +1609,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   monsterStatControl: {fileID: 0}
+  monsterType: 0
+  monsterLevelIndex: 0
+  monsterLevel: 0
   statusUI: {fileID: 0}
-  tempHP: 0
-  tempCurHp: 0
-  recoveryTimer: 10
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    monsterID: 0
+    monsterLevel: 0
+    monsterCurHP: 0
+    boostSpeed: 0
   player: {fileID: 1554312472}
   isHitState: 1
   moveSpeed: 3
   isIdleMove: 0
-  statusUIController: {fileID: 6234455948484650840}
+  statusUIController: {fileID: 0}
 --- !u!1 &1104404108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,15 +1915,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   monsterStatControl: {fileID: 0}
+  monsterType: 0
+  monsterLevelIndex: 0
+  monsterLevel: 0
   statusUI: {fileID: 0}
-  tempHP: 0
-  tempCurHp: 0
-  recoveryTimer: 10
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    monsterID: 0
+    monsterLevel: 0
+    monsterCurHP: 0
+    boostSpeed: 0
   player: {fileID: 1554312472}
   isHitState: 1
   moveSpeed: 3
   isIdleMove: 0
-  statusUIController: {fileID: 991217766}
+  statusUIController: {fileID: 0}
 --- !u!1 &1268403681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,7 +2128,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 618783842}
   - {fileID: 212375256}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2185,8 +2221,6 @@ MonoBehaviour:
     maxHp: 0
     speed: 0
     defenceValue: 0
-    level: 0
-    typeID: 0
     attackValue: 0
     criticalValue: 0
     attackSpeed: 0
@@ -2586,15 +2620,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   monsterStatControl: {fileID: 0}
+  monsterType: 0
+  monsterLevelIndex: 0
+  monsterLevel: 0
   statusUI: {fileID: 0}
-  tempHP: 0
-  tempCurHp: 0
-  recoveryTimer: 10
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    monsterID: 0
+    monsterLevel: 0
+    monsterCurHP: 0
+    boostSpeed: 0
   player: {fileID: 1554312472}
   isHitState: 1
   moveSpeed: 3
   isIdleMove: 0
-  statusUIController: {fileID: 2146517777}
+  statusUIController: {fileID: 0}
 --- !u!1 &1813499419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,6 +2876,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80eafa1b32c46734fbb27476693f164d, type: 3}
+--- !u!114 &1998907494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2189717757727938636, guid: 80eafa1b32c46734fbb27476693f164d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1998907493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d22e085e7b9794b887cfce74a804a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2146517776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2916,18 +2971,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80eafa1b32c46734fbb27476693f164d, type: 3}
---- !u!114 &2146517777 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7926936411174285934, guid: 80eafa1b32c46734fbb27476693f164d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2146517776}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e854de7bb092d245b662e7e985020d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2146517778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1028189660566494355, guid: 80eafa1b32c46734fbb27476693f164d,
@@ -6259,18 +6302,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80eafa1b32c46734fbb27476693f164d, type: 3}
---- !u!114 &6234455948484650840 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7926936411174285934, guid: 80eafa1b32c46734fbb27476693f164d,
-    type: 3}
-  m_PrefabInstance: {fileID: 6234455948484650839}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e854de7bb092d245b662e7e985020d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6240733294009497527
 GameObject:
   m_ObjectHideFlags: 0

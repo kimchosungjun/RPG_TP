@@ -1,12 +1,13 @@
 
 using System;
+using System.Diagnostics;
 
 namespace MonsterTableClasses
 {
     /************************************************************
     ********** 몬스터 데이터를 저장할 클래스 **************
     ************************************************************/
-    public class MonsterClasses { }
+    public class MonsterTableClasses { }
 
     #region MonsterDataClasses : 테이블, 레벨, 스탯, 일반공격, 버프스킬, 공격스킬
     [Serializable]
@@ -16,6 +17,12 @@ namespace MonsterTableClasses
         public string monsterName;
         public string monsterDescription;
         public string monsterFeature;
+        public int[] monsterLevels;
+
+        public void SetSize(int _size)
+        {
+            monsterLevels = new int[_size]; 
+        }
     }
 
     [Serializable]
@@ -23,7 +30,7 @@ namespace MonsterTableClasses
     {
         public int dropID;
         public int[] itemIDs;
-        public int[] itemDropProbabilities;
+        public float[] itemDropProbabilities;
         public int dropGold;
         public int dropExp;
         public int minQuantity;
@@ -33,7 +40,7 @@ namespace MonsterTableClasses
         public void SetSize(int _dropCnt, int _quantityCnt)
         {
             itemIDs = new int[_dropCnt];    
-            itemDropProbabilities = new int[_dropCnt];  
+            itemDropProbabilities = new float[_dropCnt];
             quantityProbabilities  = new float[_quantityCnt];
         }
     }

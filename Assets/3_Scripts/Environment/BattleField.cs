@@ -32,7 +32,6 @@ public class BattleField : MonoBehaviour
                     break;
                 }
             }
-          
         }
     }
 

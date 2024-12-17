@@ -9,8 +9,7 @@ public class Warrior : BasePlayer
         // 스탯 연결
         PlayerSaveStat saveStat = new PlayerSaveStat();
         playerStat = new PlayerStat();
-        playerStat.LoadPlayerSaveStat(saveStat);
-        playerStat.LoadPlayerStat();
+        playerStat.LoadPlayerStat(saveStat);
         playerStatControl.PlayerStat = playerStat;
         playerDataLinker.SetPlayerData(playerStatControl);
         playerStatusUICtrl = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUICtrl;

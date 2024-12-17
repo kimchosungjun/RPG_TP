@@ -22,8 +22,18 @@ public class TableMgr
     {
         SharedMgr.TableMgr = this;
         LinkPlayerTable();
-        // To Do ~~ Load Player Game Data
+        ParseMonsterData();
     }
+
+    private void ParseMonsterData()
+    {
+        Monster.InitMonsterDropTableCsv("MonsterDropTable", 1, 0);
+        Monster.InitMonsterInfoTableCsv("MonsterInfoTable", 1, 0);
+        Monster.InitNonCombatMonsterStatTableCsv("NonCombatMonsterStatTable", 1, 0);
+        Monster.InitCombatMonsterStatTableCsv("CombatMonsterStatTable", 1, 0);
+    }
+
+    #region Test Function
 
     public void LoadTableData(TABLE_FOLDER_TYPES _tableType)
     {
@@ -37,7 +47,6 @@ public class TableMgr
         }
     }
 
-    #region Test Function
     /// <summary>
     /// Row : 행, Col : 열
     /// </summary>

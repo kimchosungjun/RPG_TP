@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NormalMonsterStatusUI : StatusUI
+public class StandardMonsterStatusUI : StatusUI
 {
     /******************************************/
     /*****************  변수  *****************/

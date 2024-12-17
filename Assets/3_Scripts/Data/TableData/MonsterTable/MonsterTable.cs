@@ -5,7 +5,7 @@ using MonsterEnums;
 public partial class MonsterTable : BaseTable
 {
     /********************************************************
-    *********** 몬스터 데이터 저장 Dictionary ***************
+    *********** 몬스터 데이터 저장 Dictionary **********
     ********************************************************/
 
     #region Monster Data Group : Dictionary 
@@ -27,7 +27,7 @@ public partial class MonsterTable : BaseTable
     #endregion
 
     /*****************************************************
-    ********* 플레이어 데이터 반환 Methods ***************
+    ********* 플레이어 데이터 반환 Methods ********
     *****************************************************/
 
     #region Get Monster Data

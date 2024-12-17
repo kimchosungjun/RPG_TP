@@ -371,9 +371,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1028189660566494355}
-  - component: {fileID: 7926936411174285934}
+  - component: {fileID: 2189717757727938636}
   m_Layer: 0
-  m_Name: NormalMonsterStatusUI
+  m_Name: StandardMonsterStatusUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,9 +393,9 @@ Transform:
   m_Children:
   - {fileID: 6646927495751389946}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7926936411174285934
+--- !u!114 &2189717757727938636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,14 +404,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4323910794320429977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e854de7bb092d245b662e7e985020d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 70d22e085e7b9794b887cfce74a804a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statusCanvasObject: {fileID: 9119940530335833499}
   hpImage: {fileID: 3718283173862718729}
   effectImage: {fileID: 3505413558212541397}
   levelText: {fileID: 3633098944620233986}
-  heightDelta: -0.5
+  heightDelta: 0.2
 --- !u!1 &4938534677707785235
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using MonsterEnums;
 
+[RequireComponent(typeof(MonsterStatControl))]
 public abstract class BaseMonster : BaseActor
 {
     /******************************************/
@@ -9,7 +10,7 @@ public abstract class BaseMonster : BaseActor
     /******************************************/
 
     #region Value : Animator, StatControl
-    [SerializeField] protected Animator anim = null;
+    [Header("컴포넌트"),SerializeField] protected Animator anim = null;
     [SerializeField] protected MonsterStatControl monsterStatControl;
     #endregion
 
@@ -17,7 +18,13 @@ public abstract class BaseMonster : BaseActor
     protected int playerLayer = 1 << 8;
     protected PathNode[] pathNodes;
     protected bool isInMonsterArea = false;
-    public BattleField MonsterArea { protected get; set; }  
+    public BattleField MonsterArea { protected get; set; }
+    #endregion
+
+    #region Value : Monster Information
+    [Header("몬스터의 정보"),SerializeField] protected TYPEIDS monsterType;
+    [SerializeField] protected int monsterLevelIndex;
+    [SerializeField] protected int monsterLevel;
     #endregion
 
     /******************************************/

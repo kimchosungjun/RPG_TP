@@ -32,9 +32,9 @@ public class PlayerStatusUI : StatusUI
         hpImage.fillAmount = currentHP/maxHp;
         effectImage.fillAmount = hpImage.fillAmount;
         hpText.text = (int)currentHP + "/" + (int)maxHp;
-        levelText.text = "Lv."+_playerStat.Level;
+        levelText.text = "Lv."+_playerStat.GetSaveStat.currentLevel;
 
-        maxExp = SharedMgr.TableMgr.Player.GetPlayerLevelTableData().needExps[_playerStat.Level - 1];
+        maxExp = SharedMgr.TableMgr.Player.GetPlayerLevelTableData().needExps[_playerStat.GetSaveStat.currentLevel - 1];
         if(maxExp < 0f)
         {
             // 최대레벨에 도달했음
@@ -55,7 +55,7 @@ public class PlayerStatusUI : StatusUI
         float maxHp = _playerStat.HP;
         hpImage.fillAmount = currentHP / maxHp;
         hpText.text = (int)currentHP + "/" + (int)maxHp;
-        levelText.text = "Lv." + _playerStat.Level;
+        levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
     }
 
 

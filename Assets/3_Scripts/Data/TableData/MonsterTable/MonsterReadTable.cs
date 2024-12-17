@@ -10,7 +10,7 @@ public partial class MonsterTable : BaseTable
     *************************************************************/
   
     #region Only Load Monster Data 
-    public void InitMonsterTableCsv(string _name, int _startRow, int _startCol)
+    public void InitMonsterInfoTableCsv(string _name, int _startRow, int _startCol)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
         for (int row = _startRow; row < reader.row; row++)
@@ -31,32 +31,33 @@ public partial class MonsterTable : BaseTable
         monsterDropGroup.Add(data.dropID, data);
     }
 
-    public void InitNonCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol, int _typeID)
+    public void InitNonCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
-        Dictionary<int, NonCombatMonsterStatTableData> tableDictionary = new Dictionary<int, NonCombatMonsterStatTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
             NonCombatMonsterStatTableData data = new NonCombatMonsterStatTableData();
             if (ReadNonCombatMonsterDrop(reader, data, row, _startCol) == false)
                 break;
-            tableDictionary.Add(data.monsterLevel, data);
-        }
-        nonCombatMonsterStatGroup.Add(_typeID, tableDictionary);
+
+            if(nonCombatMonsterStatGroup.ContainsKey(data.monsterID) == false)
+                nonCombatMonsterStatGroup[data.monsterID] = new Dictionary<int, NonCombatMonsterStatTableData>();
+            nonCombatMonsterStatGroup[data.monsterID][data.monsterLevel] = data;
+        }    
     }
 
-    public void InitCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol, int _typeID)
+    public void InitCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
-        Dictionary<int, CombatMonsterStatTableData> tableDictionary = new Dictionary<int, CombatMonsterStatTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
             CombatMonsterStatTableData data = new CombatMonsterStatTableData();
-            if (ReadNonCombatMonsterDrop(reader, data, row, _startCol) == false)
+            if (ReadCombatMonsterDrop(reader, data, row, _startCol) == false)
                 break;
-            tableDictionary.Add(data.monsterLevel, data);
+            if (combatMonsterStatGroup.ContainsKey(data.monsterID) == false)
+                combatMonsterStatGroup[data.monsterID] = new Dictionary<int, CombatMonsterStatTableData>();
+            combatMonsterStatGroup[data.monsterID][data.monsterLevel] = data;
         }
-        combatMonsterStatGroup.Add(_typeID, tableDictionary);
     }
     #endregion
 
@@ -68,10 +69,14 @@ public partial class MonsterTable : BaseTable
     protected bool ReadMonsterTable(CSVReader _reader, MonsterInfoTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
+        int levelSize = 0;
         _reader.get(_row, ref _tableData.monsterID);
         _reader.get(_row, ref _tableData.monsterName);
         _reader.get(_row, ref _tableData.monsterDescription);
         _reader.get(_row, ref _tableData.monsterFeature);
+        _reader.get(_row, ref levelSize);
+        _tableData.SetSize(levelSize);
+        _reader.get(_row, ref _tableData.monsterLevels, levelSize);
         return true;
     }
 

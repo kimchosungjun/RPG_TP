@@ -1,5 +1,6 @@
 using UnityEngine;
 using PlayerTableClasses;
+using MonsterEnums;
 
 /// <summary>
 /// 파일로부터 불러와 사용하는 스탯 데이터 : 고정 데이터
@@ -8,7 +9,6 @@ using PlayerTableClasses;
 public class PlayerStat : BaseStat
 {
     #region Protected
-    [SerializeField] protected int typeID;
     [SerializeField] protected float attackValue;
     [SerializeField] protected float criticalValue;
     [SerializeField] protected float attackSpeed; // 공격속도는 애니메이션 속도에 영향을 준다.
@@ -28,17 +28,13 @@ public class PlayerStat : BaseStat
 
     #region Load Stat
     
-    /// <summary>
-    /// 가장 먼저 호출되어야 하는 코드 
-    /// </summary>
-    /// <param name="_currentStat"></param>
-    public void LoadPlayerSaveStat(PlayerSaveStat _currentStat) { this.currentStat = _currentStat; typeID = 0; }
-
-    public void LoadPlayerStat()
+    public void LoadPlayerStat(PlayerSaveStat _currentStat)
     {
+        this.currentStat = _currentStat;
+
         TableMgr tableMgr = SharedMgr.TableMgr;
         PlayerTableData tableData = new PlayerTableData();
-        tableData = tableMgr.Player.GetPlayerTableData(typeID);
+        tableData = tableMgr.Player.GetPlayerTableData(currentStat.playerTypeID);
 
         actorName = tableData.name;
         speed = tableData.speed;
@@ -46,13 +42,12 @@ public class PlayerStat : BaseStat
         jumpSpeed = tableData.jumpSpeed;    
 
         PlayerStatTableData statData = new PlayerStatTableData();
-        statData = tableMgr.Player.GetPlayerStatTableData(typeID, currentStat.currentLevel);
+        statData = tableMgr.Player.GetPlayerStatTableData(currentStat.playerTypeID, currentStat.currentLevel);
         attackValue = statData.attackValue;
         defenceValue = statData.defenceValue;
         criticalValue = statData.criticalValue;
         maxHp = statData.maxHp;
         attackSpeed = statData.attackSpeed;
-        level = currentStat.currentLevel;
     }
     #endregion
 }
@@ -64,6 +59,7 @@ public class PlayerStat : BaseStat
 [System.Serializable]
 public class PlayerSaveStat
 {
+    [SerializeField] public int playerTypeID;
     [SerializeField] public float currentHP;
     [SerializeField] public int currentLevel;
     [SerializeField] public int currentExp;
@@ -78,7 +74,13 @@ public class PlayerSaveStat
         currentExp = 0;
         currentNormalAttackLevel = 1;
         currentSkillLevel = 1;
-        currentUltimateSkillLevel = 1;  
+        currentUltimateSkillLevel = 1;
+        playerTypeID = 0;
+    }
+
+    public PlayerSaveStat(TYPEIDS _playerType)
+    {
+        
     }
 }
 
