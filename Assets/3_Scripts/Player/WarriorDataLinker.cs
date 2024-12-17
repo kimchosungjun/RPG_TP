@@ -14,7 +14,7 @@ public class WarriorDataLinker : PlayerDataLinker
     public override void SetPlayerData(PlayerStatControl _statCtrl)
     {
         stat = _statCtrl.PlayerStat;
-        PlayerTable playerTable = SharedMgr.TableMgr.character;
+        PlayerTable playerTable = SharedMgr.TableMgr.Player;
 
         // 행동의 데이터를 불러오고 그 데이터 지정된 SO에 설정한다.
         normalAttackSOData.SetSOData(playerTable.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, stat.GetSaveStat.currentNormalAttackLevel));

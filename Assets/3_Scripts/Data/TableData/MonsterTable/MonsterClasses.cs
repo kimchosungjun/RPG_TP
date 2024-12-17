@@ -10,12 +10,12 @@ namespace MonsterTableClasses
 
     #region MonsterDataClasses : 테이블, 레벨, 스탯, 일반공격, 버프스킬, 공격스킬
     [Serializable]
-    public class MonsterTableData
+    public class MonsterInfoTableData
     {
-        public int monsterType; // 전투, 비전투 스탯을 나누기 위함
-        public int id; // enum
-        public string name;
-        public int statID;
+        public int monsterID; 
+        public string monsterName;
+        public string monsterDescription;
+        public string monsterFeature;
     }
 
     [Serializable]
@@ -50,5 +50,12 @@ namespace MonsterTableClasses
         public int monsterDropID;
     }
 
+
+    [Serializable]
+    public class CombatMonsterStatTableData : NonCombatMonsterStatTableData
+    {
+        public float monsterAttack;
+        public float monsterCritical;
+    }
     #endregion
 }

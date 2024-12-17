@@ -1,13 +1,23 @@
 using UnityEngine;
 using UtilEnums;
+using PlayerEnums;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 public class TableMgr 
 {
-    public PlayerTable character = new PlayerTable();
+    #region Private Table
+    private PlayerTable player = new PlayerTable();
     
+    private MonsterTable monster = new MonsterTable();
+    #endregion
+
+    #region Property
+    public PlayerTable Player { get { return player; } }
+    public MonsterTable Monster { get {  return monster; } }
+    #endregion
+
     public void Init() 
     {
         SharedMgr.TableMgr = this;
@@ -34,8 +44,8 @@ public class TableMgr
     public void LinkPlayerTable()
     {
 #if UNITY_EDITOR
-        character.InitPlayerTableCsv("PlayerTable", 1, 0);
-        character.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
+        Player.InitPlayerTableCsv("PlayerTable", 1, 0);
+        Player.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
         LinkWarriorTable();
 #else
         character.Init_Binary("testCsv");
@@ -44,15 +54,15 @@ public class TableMgr
 
     public void LinkWarriorTable()
     {
-        character.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, (int)PlayerEnums.TYPEIDS.WARRIOR);
-        character.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, (int)PlayerEnums.TYPEIDS.WARRIOR, 3);
-        character.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1, 0, PlayerEnums.BUFF_SKILLS.WARRIOR_ROAR, 2);
-        character.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable", 1, 0, PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE);
+        Player.InitPlayerStatTableCsv("WarriorStatTable", 1, 0, TYPEIDS.WARRIOR);
+        Player.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, TYPEIDS.WARRIOR);
+        Player.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1, 0, BUFF_SKILLS.WARRIOR_ROAR, TYPEIDS.WARRIOR);
+        Player.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable", 1, 0, ATTACK_SKILLS.WARRIOR_ULTIMATE);
     }
 
     public void LoadPlayerData(/*PlayerEnums.TYPEID _typeID*/)
     {
-        character.InitPlayerTableCsv("PlayerTableCsv", 1, 0);
+        Player.InitPlayerTableCsv("PlayerTableCsv", 1, 0);
         
         //.InitAttackCsv("WarriorAttackTableCsv", 1, 0, PlayerEnums.TYPEID.WARRIOR);
     }

@@ -33,12 +33,12 @@ public class CsvSaver : MonoBehaviour
 
     public void LoadData()
     {
-        tableMgr.character.LoadBinary<TestSaveData>("TestSaveData", ref saveData);
+        tableMgr.Player.LoadBinary<TestSaveData>("TestSaveData", ref saveData);
     }
 
     public void SaveData()
     {
-        tableMgr.character.SaveBinary("TestSaveData", saveData);
+        tableMgr.Player.SaveBinary("TestSaveData", saveData);
     }
 }
 

@@ -15,10 +15,9 @@ namespace PlayerTableClasses
         public float speed;
         public float dashSpeed;
         public float jumpSpeed;
-        public int normalAttack; // enum
-        public int skill; // enum
-        public int ultimate; // enum
-        public int stat; // enum
+        public int normalAttackCombo;
+        public int skillCombo;
+        public int ultimateCombo;
     }
 
     [Serializable]

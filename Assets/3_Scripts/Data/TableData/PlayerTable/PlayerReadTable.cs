@@ -5,7 +5,7 @@ public partial class PlayerTable: BaseTable
 {
 
     /*************************************************************
-    ********* Binary 형식의 데이터 저장 & 로드 *************
+    ************ Binary 형식의 데이터 저장 & 로드 ****************
     *************************************************************/
 
     #region Save & Load BinaryData
@@ -21,8 +21,8 @@ public partial class PlayerTable: BaseTable
     #endregion
 
     /*************************************************************
-    ******** 읽어 온 데이터를 Dictionary에 저장 ************
-   *************************************************************/
+    *********** 읽어 온 데이터를 Dictionary에 저장 ***************
+    *************************************************************/
 
     #region Only Load Player Data 
 
@@ -66,8 +66,9 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startRow"></param>
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
-    public void InitPlayerStatTableCsv(string _name, int _startRow, int _startCol , int _typeID)
+    public void InitPlayerStatTableCsv(string _name, int _startRow, int _startCol , TYPEIDS _typeID)
     {
+        int typeID = (int)_typeID;
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
         Dictionary<int, PlayerStatTableData> tableDictionary = new Dictionary<int, PlayerStatTableData> ();
         for (int row = _startRow; row < reader.row; row++)
@@ -77,7 +78,7 @@ public partial class PlayerTable: BaseTable
                 break;
             tableDictionary.Add(data.level, data);
         }
-        playerStatGroup.Add(_typeID, tableDictionary);
+        playerStatGroup.Add(typeID, tableDictionary);
     }
 
     /// <summary>
@@ -88,19 +89,22 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerNormalAttackTableCsv(string _name, int _startRow, int _startCol, int _typeID, int _comboCnt)
+    public void InitPlayerNormalAttackTableCsv(string _name, int _startRow, int _startCol, TYPEIDS _typeID)
     {
+        int typeID = (int)_typeID;
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
+        int combo = playerTableGroup.ContainsKey(typeID) ? playerTableGroup[typeID].normalAttackCombo : 1;
         Dictionary<int, PlayerNormalAttackTableData> tableDictionary = new Dictionary<int, PlayerNormalAttackTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
             PlayerNormalAttackTableData data = new PlayerNormalAttackTableData();
-            data.SetSize(_comboCnt);    
+
+            data.SetSize(combo);    
             if (ReadPlayerNormalAttack(reader, data, row, _startCol) == false)
                 break;
             tableDictionary.Add(data.level, data);
         }
-        playerNormalAttackDataGroup.Add(_typeID, tableDictionary);
+        playerNormalAttackDataGroup.Add(typeID, tableDictionary);
     }
 
     /// <summary>
@@ -111,19 +115,22 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerBuffSkillTableCsv(string _name, int _startRow, int _startCol,BUFF_SKILLS _typeID, int _comboCnt)
+    public void InitPlayerBuffSkillTableCsv(string _name, int _startRow, int _startCol,BUFF_SKILLS _skillID, TYPEIDS _typeID)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
+        int typeID = (int)_typeID;
+        int combo = playerTableGroup.ContainsKey(typeID) ? playerTableGroup[typeID].skillCombo : 1;
         Dictionary<int, PlayerBuffSkillTableData> tableDictionary = new Dictionary<int, PlayerBuffSkillTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
             PlayerBuffSkillTableData data = new PlayerBuffSkillTableData();
-            data.SetSize(_comboCnt);
+
+            data.SetSize(combo);
             if (ReadPlayerBuffSkill(reader, data, row, _startCol) == false)
                 break;
             tableDictionary.Add(data.level, data);
         }
-        playerBuffSkillDataGroup.Add(_typeID, tableDictionary);
+        playerBuffSkillDataGroup.Add(_skillID, tableDictionary);
     }
 
     /// <summary>
@@ -151,7 +158,7 @@ public partial class PlayerTable: BaseTable
     #endregion
 
     /*************************************************************
-    ****** 지정된 클래스의 데이터를 읽어서 파싱 **********
+    *********** 지정된 클래스의 데이터를 읽어서 파싱 *************
     *************************************************************/
 
     #region Link CsvData to ClassData
@@ -171,10 +178,9 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.speed);
         _reader.get(_row, ref _tableData.dashSpeed);
         _reader.get(_row, ref _tableData.jumpSpeed);
-        _reader.get(_row, ref _tableData.normalAttack);
-        _reader.get(_row, ref _tableData.skill);
-        _reader.get(_row, ref _tableData.ultimate);
-        _reader.get(_row, ref _tableData.stat);
+        _reader.get(_row, ref _tableData.normalAttackCombo);
+        _reader.get(_row, ref _tableData.skillCombo);
+        _reader.get(_row, ref _tableData.ultimateCombo);
         return true;
     }
 

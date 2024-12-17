@@ -38,7 +38,7 @@ public class PlayerStat : BaseStat
     {
         TableMgr tableMgr = SharedMgr.TableMgr;
         PlayerTableData tableData = new PlayerTableData();
-        tableData = tableMgr.character.GetPlayerTableData(typeID);
+        tableData = tableMgr.Player.GetPlayerTableData(typeID);
 
         actorName = tableData.name;
         speed = tableData.speed;
@@ -46,7 +46,7 @@ public class PlayerStat : BaseStat
         jumpSpeed = tableData.jumpSpeed;    
 
         PlayerStatTableData statData = new PlayerStatTableData();
-        statData = tableMgr.character.GetPlayerStatTableData(typeID, currentStat.currentLevel);
+        statData = tableMgr.Player.GetPlayerStatTableData(typeID, currentStat.currentLevel);
         attackValue = statData.attackValue;
         defenceValue = statData.defenceValue;
         criticalValue = statData.criticalValue;

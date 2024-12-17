@@ -6,18 +6,19 @@ using MonsterTableClasses;
 public partial class MonsterTable : BaseTable
 {
     /*************************************************************
-    ******** 읽어 온 데이터를 Dictionary에 저장 ************
-   *************************************************************/
-
+    *********** 읽어 온 데이터를 Dictionary에 저장 ***************
+    *************************************************************/
+  
+    #region Only Load Monster Data 
     public void InitMonsterTableCsv(string _name, int _startRow, int _startCol)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
         for (int row = _startRow; row < reader.row; row++)
         {
-            MonsterTableData data = new MonsterTableData();
+            MonsterInfoTableData data = new MonsterInfoTableData();
             if (ReadMonsterTable(reader, data, row, _startCol) == false)
                 break;
-            monsterTableGroup.Add(data.id, data);
+            monsterInfoTableGroup.Add(data.monsterID, data);
         }
     }
 
@@ -43,14 +44,20 @@ public partial class MonsterTable : BaseTable
         }
         nonCombatMonsterStatGroup.Add(_typeID, tableDictionary);
     }
+    #endregion
 
+    /*************************************************************
+    *********** 지정된 클래스의 데이터를 읽어서 파싱 *************
+    *************************************************************/
 
-    protected bool ReadMonsterTable(CSVReader _reader, MonsterTableData _tableData, int _row, int _col)
+    #region Link CsvData to ClassData
+    protected bool ReadMonsterTable(CSVReader _reader, MonsterInfoTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
-        _reader.get(_row, ref _tableData.id);
-        _reader.get(_row, ref _tableData.name);
-        _reader.get(_row, ref _tableData.statID);
+        _reader.get(_row, ref _tableData.monsterID);
+        _reader.get(_row, ref _tableData.monsterName);
+        _reader.get(_row, ref _tableData.monsterDescription);
+        _reader.get(_row, ref _tableData.monsterFeature);
         return true;
     }
 
@@ -87,4 +94,5 @@ public partial class MonsterTable : BaseTable
         _reader.get(_row, ref _tableData.monsterDropID);
         return true;
     }
+    #endregion
 }

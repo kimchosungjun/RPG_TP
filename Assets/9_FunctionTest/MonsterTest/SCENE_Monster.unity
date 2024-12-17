@@ -1113,7 +1113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &783838980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,6 +1142,7 @@ MonoBehaviour:
   - nodePosition: {x: -2, y: 0, z: 0}
   - nodePosition: {x: -2, y: 0, z: 1}
   - nodePosition: {x: -2, y: 0, z: 2}
+  respawnTime: 0
 --- !u!135 &783838981
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2183,12 +2184,12 @@ MonoBehaviour:
     actorName: 
     maxHp: 0
     speed: 0
-    attackValue: 0
     defenceValue: 0
-    criticalValue: 0
-    attackSpeed: 0
     level: 0
     typeID: 0
+    attackValue: 0
+    criticalValue: 0
+    attackSpeed: 0
     dashSpeed: 0
     jumpSpeed: 0
 --- !u!1 &1582736011
