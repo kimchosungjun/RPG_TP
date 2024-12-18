@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 3309786654644649927}
   - component: {fileID: 2975288283615019485}
   m_Layer: 0
-  m_Name: Rayfish
+  m_Name: P_Rayfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

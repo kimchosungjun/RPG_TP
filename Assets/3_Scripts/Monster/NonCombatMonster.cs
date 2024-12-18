@@ -1,6 +1,8 @@
-using MonsterEnums;
 using UnityEngine;
 
+/// <summary>
+/// 스탯을 정하는 클래스
+/// </summary>
 public class NonCombatMonster : StandardMonster
 {
     /******************************************/

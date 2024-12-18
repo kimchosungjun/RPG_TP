@@ -2001,7 +2001,7 @@ GameObject:
   - component: {fileID: 5548014777875326752}
   - component: {fileID: 7168078453510582595}
   m_Layer: 7
-  m_Name: AnnoyBear
+  m_Name: P_AnnoyBear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
