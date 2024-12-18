@@ -3,27 +3,27 @@ using UnityEngine;
 
 public class ActionNode : Node
 {
-    public delegate BTS ActionNodeReturn();
+    public delegate NODESTATES ActionNodeReturn();
     private ActionNodeReturn btAction = null;
 
     public ActionNode(ActionNodeReturn btAction) { this.btAction = btAction; }
 
-    public override BTS Evaluate()
+    public override NODESTATES Evaluate()
     {
         switch (btAction())
         {
-            case BTS.SUCCESS:
-                nodeState = BTS.SUCCESS;
+            case NODESTATES.SUCCESS:
+                nodeState = NODESTATES.SUCCESS;
                 return nodeState;
-            case BTS.FAIL:
-                nodeState = BTS.FAIL;
+            case NODESTATES.FAIL:
+                nodeState = NODESTATES.FAIL;
                 return nodeState;
-            case BTS.RUNNING:
-                nodeState = BTS.RUNNING;
+            case NODESTATES.RUNNING:
+                nodeState = NODESTATES.RUNNING;
                 return nodeState;
             default:
                 Debug.LogError("잘못된 행동 상태!");
-                return BTS.FAIL;
+                return NODESTATES.FAIL;
         }
     }
 }

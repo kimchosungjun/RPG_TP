@@ -125,7 +125,7 @@ namespace MonsterEnums
         GROGGY = 5
     }
 
-    public enum BTS
+    public enum NODESTATES
     {
         SUCCESS = 0,
         FAIL = 1,

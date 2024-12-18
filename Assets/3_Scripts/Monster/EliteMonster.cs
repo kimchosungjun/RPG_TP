@@ -10,13 +10,7 @@ public class EliteMonster : BaseMonster
     {
         throw new System.NotImplementedException();
     }
-
-    public override BTS DetectPlayer()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override BTS IdleMovement()
+    public override NODESTATES IdleMovement()
     {
         throw new System.NotImplementedException();
     }

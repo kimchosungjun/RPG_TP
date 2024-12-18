@@ -32,8 +32,7 @@ public class StandardMonster : BaseMonster
     // 추후에 할 것
     #region Empty Override Metohd 
     public override void Recovery(float _percent = 10f, float _time = 0.2f) { monsterStatControl.Recovery(10f); }
-    public override BTS IdleMovement() { return BTS.SUCCESS; }
-    public override BTS DetectPlayer() { return BTS.SUCCESS; }
+    public override NODESTATES IdleMovement() { return NODESTATES.SUCCESS; }
     protected override void CreateBTStates() { }
     #endregion
 }

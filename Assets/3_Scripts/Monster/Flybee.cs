@@ -41,13 +41,13 @@ public class Flybee : PatrolMonster
         statusUI.FixedExecute();
     }
 
-    public BTS DoCheckHitState()
+    public NODESTATES DoCheckHitState()
     {
-        if (isHitState) return BTS.SUCCESS;
-        else return BTS.FAIL;   
+        if (isHitState) return NODESTATES.SUCCESS;
+        else return NODESTATES.FAIL;   
     }
 
-    protected override BTS DoPatrol()
+    protected override NODESTATES DoPatrol()
     {
         anim.SetInteger("MState", (int)STATES.MOVE);
         if (Vector3.Distance(transform.position, targetWay) < 0.2f)
@@ -63,7 +63,7 @@ public class Flybee : PatrolMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
 
     public override void ApplyMovementTakeDamage(TransferAttackData _attackData)

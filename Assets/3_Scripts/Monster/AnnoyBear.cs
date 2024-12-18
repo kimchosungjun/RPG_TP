@@ -86,10 +86,10 @@ public class AnnoyBear : MonoBehaviour
     }
 
     #region 1
-    public BTS DoCheckCanMovable()
+    public NODESTATES DoCheckCanMovable()
     {
-        if (isKnockBackState || isGroggyState) return BTS.FAIL;
-        else return BTS.SUCCESS;
+        if (isKnockBackState || isGroggyState) return NODESTATES.FAIL;
+        else return NODESTATES.SUCCESS;
     }
 
     public void SetHitState()
@@ -110,18 +110,18 @@ public class AnnoyBear : MonoBehaviour
     [SerializeField] float currentIdleTime = 10f;
     [SerializeField] float idleTimer = 5f;
     // selector
-    public BTS DoCheckInBattleField()
+    public NODESTATES DoCheckInBattleField()
     {
-        return (IsInBattleField) ? BTS.SUCCESS : BTS.FAIL;
+        return (IsInBattleField) ? NODESTATES.SUCCESS : NODESTATES.FAIL;
     }
     // fail만 반환
-    public BTS DoIdle()
+    public NODESTATES DoIdle()
     {
 
         if (currentIdleTime <= idleTimer)
         {
             currentIdleTime += Time.deltaTime;
-            return BTS.FAIL;
+            return NODESTATES.FAIL;
         }
 
         currentIdleTime = 0f;
@@ -139,24 +139,24 @@ public class AnnoyBear : MonoBehaviour
                 break;
         }
 
-        return BTS.FAIL;
+        return NODESTATES.FAIL;
     }
     #endregion
 
     #region 3
-    public BTS DoCheckInSight()
+    public NODESTATES DoCheckInSight()
     {
         Collider[] colls = Physics.OverlapSphere(transform.position, 10f, playerLayer);
         if (colls.Length == 0)
         {
             Debug.Log("인식거리 안이 아닙니다!");
-            return BTS.FAIL;
+            return NODESTATES.FAIL;
         }
         Debug.Log("인식거리 안입니다!");
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
 
-    public BTS DoGuardIdle()
+    public NODESTATES DoGuardIdle()
     {
         currentIdleTime += Time.deltaTime;
         return DoIdle();
@@ -164,10 +164,10 @@ public class AnnoyBear : MonoBehaviour
     #endregion
 
     #region 4
-    public BTS DoCheckAttackCool()
+    public NODESTATES DoCheckAttackCool()
     {
         anim.SetInteger("State", (int)AnnoyBearState.Attack);
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
     #endregion
 }

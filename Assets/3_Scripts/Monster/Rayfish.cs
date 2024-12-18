@@ -103,15 +103,15 @@ public class Rayfish : CowardMonster
     /******************************************/
     /****************  행동  ******************/
     /******************************************/
-    public BTS DoIsHitByPlayer() { return (isHitState) ? BTS.SUCCESS : BTS.FAIL; }
+    public NODESTATES DoIsHitByPlayer() { return (isHitState) ? NODESTATES.SUCCESS : NODESTATES.FAIL; }
 
-    public BTS DoHitRunAway()
+    public NODESTATES DoHitRunAway()
     {
         Debug.Log("맞아서 도망중");
-        if (isMoving) return BTS.SUCCESS;
+        if (isMoving) return NODESTATES.SUCCESS;
         StopCoroutine(CDoRunAway());
         StartCoroutine(CDoRunAway());
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
 
     IEnumerator CDoRunAway()
@@ -146,23 +146,23 @@ public class Rayfish : CowardMonster
 
     #region Detect
 
-    public BTS DoIsDetectPlayer()
+    public NODESTATES DoIsDetectPlayer()
     {
 
         float distance = Vector3.Distance(player.position, transform.position);
         if (2f > distance)
         {
-            return BTS.SUCCESS;
+            return NODESTATES.SUCCESS;
         }
         else
         {
-            return BTS.FAIL;
+            return NODESTATES.FAIL;
         }
     }
 
 
 
-    public BTS DoIdleBehaviour()
+    public NODESTATES DoIdleBehaviour()
     {
         int randomNodeIndex = 0;
         int randomNum = 0;
@@ -184,7 +184,7 @@ public class Rayfish : CowardMonster
                 }
                 break;
         }
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
 
     public void DoMove(Vector3 _targetPosition) { StartCoroutine(CDoMove(_targetPosition)); }
@@ -204,9 +204,9 @@ public class Rayfish : CowardMonster
 
     #endregion
 
-    public BTS TestMove()
+    public NODESTATES TestMove()
     {
         Debug.Log("이동중!!");
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
 }

@@ -9,24 +9,24 @@ public class Sequence : Node
     private List<Node> nodes = new List<Node>();
     public Sequence(List<Node> btNodes) { this.nodes = btNodes; }
 
-    public override BTS Evaluate()
+    public override NODESTATES Evaluate()
     {
         int listCnt = nodes.Count;
         for (int i = 0; i < listCnt; i++)
         {
             switch (nodes[i].Evaluate())
             {
-                case BTS.SUCCESS:
+                case NODESTATES.SUCCESS:
                     continue;
-                case BTS.FAIL:
-                    nodeState = BTS.FAIL;
+                case NODESTATES.FAIL:
+                    nodeState = NODESTATES.FAIL;
                     return nodeState;
-                case BTS.RUNNING:
-                    nodeState = BTS.RUNNING;
+                case NODESTATES.RUNNING:
+                    nodeState = NODESTATES.RUNNING;
                     return nodeState;
             }
         }
-        nodeState = BTS.SUCCESS;
+        nodeState = NODESTATES.SUCCESS;
         return nodeState;
     }
 }

@@ -77,15 +77,10 @@ public abstract class BaseMonster : BaseActor
     /// </summary>
     protected abstract void CreateBTStates();
     /// <summary>
-    /// 플레이어 감지를 거리로 할 것인지, 트리거로 할 것인지.. 등을 정한 후 재정의해서 사용할 것
-    /// </summary>
-    /// <returns></returns>
-    public abstract BTS DetectPlayer();
-    /// <summary>
     /// 정해진 Pathnode에서 돌아다니거나 가만히 있거나.. 등 평상시의 AI
     /// </summary>
     /// <returns></returns>
-    public abstract BTS IdleMovement();
+    public abstract NODESTATES IdleMovement();
     /// <summary>
     /// 공격받은지 오래되거나 본래의 자리로 돌아갈 때 호출 : 자동 치유
     /// </summary>

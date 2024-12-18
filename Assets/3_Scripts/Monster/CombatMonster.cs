@@ -12,6 +12,9 @@ public class CombatMonster : StandardMonster
     #region Value : Stat
     [SerializeField] protected CombatMonsterStat monsterStat = null;
     public CombatMonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
+
+    [Header("거리")]
+    [SerializeField] protected float detectRange;
     #endregion
 
     /******************************************/

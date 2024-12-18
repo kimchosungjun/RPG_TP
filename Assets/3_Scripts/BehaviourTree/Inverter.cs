@@ -8,21 +8,21 @@ public class Inverter : Node
 
     public Inverter(Node btNode) { this.btNode = btNode; } 
 
-    public override BTS Evaluate()
+    public override NODESTATES Evaluate()
     {
         switch (btNode.Evaluate())
         {
-            case BTS.SUCCESS:
-                nodeState = BTS.FAIL;
+            case NODESTATES.SUCCESS:
+                nodeState = NODESTATES.FAIL;
                 return nodeState;
-            case BTS.FAIL:
-                nodeState = BTS.SUCCESS;
+            case NODESTATES.FAIL:
+                nodeState = NODESTATES.SUCCESS;
                 return nodeState;
-            case BTS.RUNNING:
-                nodeState = BTS.RUNNING;
+            case NODESTATES.RUNNING:
+                nodeState = NODESTATES.RUNNING;
                 return nodeState;
         }
         Debug.LogError("잘못된 행동 상태!");
-        return BTS.FAIL;
+        return NODESTATES.FAIL;
     }
 }

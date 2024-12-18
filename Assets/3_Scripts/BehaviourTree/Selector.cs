@@ -9,24 +9,24 @@ public class Selector : Node
     private List<Node> nodes = new List<Node>();
 
     public Selector(List<Node> btNodes) { this.nodes = btNodes; }
-    public override BTS Evaluate()
+    public override NODESTATES Evaluate()
     {
         int listCnt = nodes.Count;
         for (int i = 0; i < listCnt; i++)
         {
             switch (nodes[i].Evaluate())
             {
-                case BTS.SUCCESS:
-                    nodeState = BTS.SUCCESS;
+                case NODESTATES.SUCCESS:
+                    nodeState = NODESTATES.SUCCESS;
                     return nodeState;
-                case BTS.FAIL:
+                case NODESTATES.FAIL:
                     continue;    
-                case BTS.RUNNING:
-                    nodeState = BTS.RUNNING;
+                case NODESTATES.RUNNING:
+                    nodeState = NODESTATES.RUNNING;
                     return nodeState;
             }
         }
-        nodeState = BTS.FAIL;
+        nodeState = NODESTATES.FAIL;
         return nodeState;
     }
 }

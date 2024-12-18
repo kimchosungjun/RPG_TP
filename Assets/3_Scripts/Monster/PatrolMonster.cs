@@ -21,7 +21,7 @@ public class PatrolMonster : NonCombatMonster
     /// Success값만 반환
     /// </summary>
     /// <returns></returns>
-    protected virtual BTS DoPatrol()
+    protected virtual NODESTATES DoPatrol()
     {
         if(Vector3.Distance(transform.position, targetWay) < 0.2f)
         {
@@ -34,6 +34,6 @@ public class PatrolMonster : NonCombatMonster
         Vector3 moveDirection = (targetWay - transform.position).normalized;
         transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
-        return BTS.SUCCESS;
+        return NODESTATES.SUCCESS;
     }
 }
