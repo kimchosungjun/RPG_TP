@@ -12,6 +12,7 @@ public class PatrolMonster : NonCombatMonster
 
     protected override void Awake()
     {
+        base.Awake();
         maxWayPoint = pathWays.Length;
         targetWay = pathWays[0];
     }

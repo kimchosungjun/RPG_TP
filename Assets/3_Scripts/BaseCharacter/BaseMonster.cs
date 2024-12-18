@@ -32,7 +32,13 @@ public abstract class BaseMonster : BaseActor
     /******************************************/
 
     #region Virtual : Life Cycle
-    protected virtual void Awake() { SetCharacterType(); if (monsterStatControl == null) monsterStatControl = GetComponent<MonsterStatControl>(); }
+    protected virtual void Awake() 
+    {
+        SetCharacterType(); 
+        if (monsterStatControl == null) 
+            monsterStatControl = GetComponent<MonsterStatControl>();
+        monsterStatControl?.SetBaseMonster(this);
+    }
     protected virtual void Start() { CreateBTStates(); }
     protected virtual void FixedUpdate() { }
     #endregion
@@ -61,7 +67,7 @@ public abstract class BaseMonster : BaseActor
     public virtual void AnnounceOutMonsterArea() { isInMonsterArea = false; }
     public virtual void SetPathNodes(PathNode[] _pathNodes) { pathNodes = _pathNodes; } 
     public virtual void Spawn(Vector3 _spawnPosition) { this.transform.position = _spawnPosition; this.gameObject.SetActive(true); }
-    public virtual void Death() { /*anim.SetInteger("States", 9);*/ } // 애니메이션 설정하기
+    public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); } // 애니메이션 설정하기
     public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject); this.gameObject.SetActive(false); } // 스탯 원래대로 만들기 추가 
     #endregion
 

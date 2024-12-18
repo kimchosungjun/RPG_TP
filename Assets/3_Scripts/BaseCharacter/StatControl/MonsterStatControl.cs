@@ -5,7 +5,10 @@ using UnityEngine;
 public class MonsterStatControl : ActorStatControl
 {
     MonsterStat monsterStat = null;
+    BaseMonster baseMonster = null;
+    
     public MonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
+    public void SetBaseMonster(BaseMonster _baseMonster) { this.baseMonster = _baseMonster; }
     public override void Heal(float _heal)
     {
         base.Heal(_heal);
@@ -29,8 +32,20 @@ public class MonsterStatControl : ActorStatControl
         // 방어력이 공격력보다 높은 경우 데미지 1이라도 들어가도록 
         float allDamage = _attackData.GetAttackValue - monsterStat.Defence;
         allDamage = (allDamage) <= 0 ? 1 : allDamage;
-        // fillAmount가 음수가 되는것을 방지
-        monsterStat.MonsterCurHP = (monsterStat.MonsterCurHP-allDamage<=0) ? 0f : monsterStat.MonsterCurHP - allDamage;
+
+        // 체력을 계산하여 죽은 상태인지 확인
+        float curHp = monsterStat.MonsterCurHP - allDamage;
+        if (curHp <= 0)
+        {
+            monsterStat.MonsterCurHP = 0f;
+            baseMonster.Death();
+        }
+        else
+        {
+            monsterStat.MonsterCurHP = curHp;
+        }
+
+        // 데미지를 스탯에 적용 후 UI에 표기
         base.TakeDamage(_attackData);
     }
 

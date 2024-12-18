@@ -928,6 +928,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 618783843}
+    - targetCorrespondingSourceObject: {fileID: 1467277096911013437, guid: 586a8fad78c64d758ef4b7e17ea63960,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 618783844}
   m_SourcePrefab: {fileID: 100100000, guid: 586a8fad78c64d758ef4b7e17ea63960, type: 3}
 --- !u!1 &618783838 stripped
 GameObject:
@@ -963,12 +967,14 @@ MonoBehaviour:
     monsterCurHP: 0
     boostSpeed: 0
   pathWays:
-  - {x: 0, y: 5, z: 7.5}
-  - {x: -7.5, y: 5, z: 0}
-  - {x: 0, y: 5, z: -7.5}
-  - {x: 7.5, y: 5, z: 0}
+  - {x: 0, y: 1, z: 7.5}
+  - {x: -7.5, y: 1, z: 0}
+  - {x: 0, y: 1, z: -7.5}
+  - {x: 7.5, y: 1, z: 0}
   moveSpeed: 3
   isHitState: 0
+  isDeathState: 0
+  rigid: {fileID: 618783844}
 --- !u!135 &618783840
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1014,6 +1020,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &618783844
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618783838}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &712481623
 GameObject:
   m_ObjectHideFlags: 0

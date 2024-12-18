@@ -21,7 +21,7 @@ public class StandardMonsterStatusUI : StatusUI
     #region Override Life Cycle
     public override void Init()
     {
-        if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
+        //if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
     public void Setup(Transform _followTransform, MonsterStat _monsterStat)

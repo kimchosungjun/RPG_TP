@@ -7,7 +7,8 @@ public class Flybee : PatrolMonster
     // 맞은 상태에서는 움직이지 말아야한다. 
     // Hit 애니메이션 도중 이동하면 문워크하는 느낌이 나기 때문
     [SerializeField] protected bool isHitState = false;
-
+    [SerializeField] protected bool isDeathState = false;
+    [SerializeField] Rigidbody rigid;
     // 하나라도 참이면 바로 참을 반환 
     Selector flybeeRoot = null;
 
@@ -16,16 +17,17 @@ public class Flybee : PatrolMonster
         base.Start();
         if (anim == null) anim = GetComponent<Animator>();
         if (statusUI == null) statusUI = GetComponentInChildren<StandardMonsterStatusUI>();
-        //statusUI?.Setup(this.transform);
+    }
 
-
+    protected override void CreateBTStates()
+    {
         // Level1 
         ActionNode checkCurrentStateAction = new ActionNode(DoCheckHitState);
         ActionNode patrolAction = new ActionNode(DoPatrol);
         List<Node> level1 = new List<Node>();
 
         // Link Level1 : 피격상태 확인 후 패트롤
-        level1.Add(checkCurrentStateAction);    
+        level1.Add(checkCurrentStateAction);
         level1.Add(patrolAction);
 
         // Root
@@ -34,8 +36,8 @@ public class Flybee : PatrolMonster
 
     protected override void FixedUpdate()
     {
-        //flybeeRoot.Evaluate();
-        //if (Input.GetKeyDown(KeyCode.B)) MakeHitState();
+        if (isDeathState) return;
+        flybeeRoot.Evaluate();
         statusUI.FixedExecute();
     }
 
@@ -47,6 +49,7 @@ public class Flybee : PatrolMonster
 
     protected override BTS DoPatrol()
     {
+        anim.SetInteger("MState", (int)STATES.MOVE);
         if (Vector3.Distance(transform.position, targetWay) < 0.2f)
         {
             currentWayPoint += 1;
@@ -63,17 +66,27 @@ public class Flybee : PatrolMonster
         return BTS.SUCCESS;
     }
 
-    #region 테스트용 메서드
-    public void MakeHitState()
+    public override void ApplyMovementTakeDamage(TransferAttackData _attackData)
     {
-        isHitState= true;
-        anim.SetBool("IsHit", true);
+        switch (_attackData.GetHitEffect)
+        {
+            case EffectEnums.HIT_EFFECTS.STUN:
+                break;
+            default:
+                isHitState = true;
+                anim.SetInteger("MState", (int)STATES.HIT);
+                break;
+        }
     }
 
-    public void ReturnHitState()
+    public override void Death()
     {
-        isHitState = false;
-        anim.SetBool("IsHit", false);
+        base.Death();
+        rigid.isKinematic = false;
+        statusUI.gameObject.SetActive(false);   
+        isDeathState = true;
+        rigid.useGravity = true;
     }
-    #endregion
+
+    public void EscapeHitState() { isHitState = false; anim.SetInteger("MState", (int)STATES.MOVE); }
 }
