@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UIEnums;
 
 public class PlayerStatusUI : StatusUI
 {
@@ -28,7 +29,7 @@ public class PlayerStatusUI : StatusUI
     public void Setup(PlayerStat _playerStat)
     {
         float currentHP = _playerStat.GetSaveStat.currentHP;
-        float maxHp = _playerStat.HP;
+        float maxHp = _playerStat.MaxHP;
         hpImage.fillAmount = currentHP/maxHp;
         effectImage.fillAmount = hpImage.fillAmount;
         hpText.text = (int)currentHP + "/" + (int)maxHp;
@@ -52,7 +53,7 @@ public class PlayerStatusUI : StatusUI
     public void UpdateData(PlayerStat _playerStat)
     {
         float currentHP = _playerStat.GetSaveStat.currentHP;
-        float maxHp = _playerStat.HP;
+        float maxHp = _playerStat.MaxHP;
         hpImage.fillAmount = currentHP / maxHp;
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
@@ -72,6 +73,11 @@ public class PlayerStatusUI : StatusUI
 
         if (expImage.fillAmount < expTarget) expImage.fillAmount += Time.deltaTime / effectTime;
         else if (expImage.fillAmount > expTarget) effectImage.fillAmount = expTarget;
+    }
+
+    public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
+    {
+        throw new System.NotImplementedException();
     }
     #endregion
 }

@@ -1,15 +1,17 @@
 using UnityEngine;
+using UIEnums;
 
 public class StandardMonsterStatusUI : StatusUI
 {
     /******************************************/
-    /*****************  변수  *****************/
+    /************* UI 위치 변수  ************/
     /******************************************/
 
     #region Variable
     [SerializeField, Tooltip("HP바의 위치 : 머리에서 좀 더 떨어지도록 설정")] float heightDelta = 0.2f;
-    protected Transform followTransform = null;
+    [SerializeField] protected Transform followTransform = null;
     protected Transform camTransform = null;
+    protected MonsterStat monsterStat = null;
     #endregion
 
     /******************************************/
@@ -22,25 +24,23 @@ public class StandardMonsterStatusUI : StatusUI
         if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
-    public void Setup(Transform _followTransform = null)
+    public void Setup(Transform _followTransform, MonsterStat _monsterStat)
     {
-        // Set
-        hpImage.fillAmount = 1f;
-        effectImage.fillAmount = 1f;
-        levelText.text = "Lv." + 1;
         // Link
+        monsterStat = _monsterStat;
         followTransform = _followTransform;
         statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
         camTransform = Camera.main.transform;
+        
+        // Set
+        hpImage.fillAmount = 1f;
+        effectImage.fillAmount = 1f;
+        levelText.text = "Lv." + monsterStat.MonsterLevel;
     }
+
     public override void FixedExecute()
     {
         UpdatePostion();
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            hpImage.fillAmount -= 0.1f;
-        }
         HPEffect();
     }
 
@@ -56,6 +56,11 @@ public class StandardMonsterStatusUI : StatusUI
     {
         transform.position = followTransform.position + Vector3.up * heightDelta;
         transform.rotation = camTransform.rotation;
+    }
+
+    public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
+    {
+        hpImage.fillAmount = (monsterStat.MonsterCurHP / monsterStat.MaxHP);
     }
     #endregion
 }

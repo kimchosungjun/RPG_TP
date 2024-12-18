@@ -132,11 +132,11 @@ public class WarriorMovementControl : PlayerMovementControl
 
 
     #region Attack & Skill & UltimateSkill
-    public void AttackCooling() { base.ChangeState(PlayerEnums.STATES.MOVEMENT); }
+    public void AttackCooling() { base.ChangeState(STATES.MOVEMENT); }
 
-    public void SkillCooling() { base.ChangeState(PlayerEnums.STATES.MOVEMENT); }
+    public void SkillCooling() { base.ChangeState(STATES.MOVEMENT); }
 
-    public void UltimateSkillCooling() { base.ChangeState(PlayerEnums.STATES.MOVEMENT); }
+    public void UltimateSkillCooling() { base.ChangeState(STATES.MOVEMENT); }
     #endregion
 }
 

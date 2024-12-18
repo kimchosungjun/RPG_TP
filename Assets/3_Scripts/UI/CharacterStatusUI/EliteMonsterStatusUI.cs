@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UIEnums;
 
 public class EliteMonsterStatusUI : StatusUI
 {
@@ -35,6 +36,11 @@ public class EliteMonsterStatusUI : StatusUI
     public override void FixedExecute()
     {
 
+    }
+
+    public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
+    {
+        throw new System.NotImplementedException();
     }
 
     #endregion

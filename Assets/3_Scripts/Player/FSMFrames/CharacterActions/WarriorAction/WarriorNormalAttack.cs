@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WarriorNormalAttack : NearAttackAction
 {
-    [SerializeField] LayerMask enemyLayerMask;
+    [SerializeField, Tooltip("Int형 레이어")] int enemyLayer = 7;
     PlayerStat playerStat = null;
     PlayerNormalAttackActionSOData soData = null;
     TransferAttackData attackData = new TransferAttackData();
@@ -24,11 +24,12 @@ public class WarriorNormalAttack : NearAttackAction
 
     public override void DoAction()
     {
-        float damageValue = soData.GetActionMultiplier(combo) * playerStat.Attack;
+        float damageValue = soData.GetActionMultiplier(combo) * playerStat.Attack * Randoms.GetCritical(playerStat.Critical);
         attackData.SetData(soData.GetAttackEffectType(combo),damageValue, soData.GetMaintainTime(combo));
         base.DoAction(); // Do Attack
     }
     
+
     public override void StopAttack()
     {
         base.StopAttack();
@@ -36,7 +37,7 @@ public class WarriorNormalAttack : NearAttackAction
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == enemyLayerMask)
+        if (other.gameObject.layer == enemyLayer)
         {
             // 처음 닿는 물체라면 List에 추가해주고 데미지 
             if (CheckCollider(other))

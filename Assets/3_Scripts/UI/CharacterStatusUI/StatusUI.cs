@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UIEnums;
 
 public abstract class StatusUI : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public abstract class StatusUI : MonoBehaviour
         if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
         else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
     }
+    public abstract void AnnounceChangeStat(STATUS _statusType = STATUS.HP);
 }
 
 

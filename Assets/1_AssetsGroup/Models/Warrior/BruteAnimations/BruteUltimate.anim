@@ -112824,7 +112824,7 @@ AnimationClip:
     intParameter: 4
     messageOptions: 0
   - time: 2.9666667
-    functionName: UltimateSkillCooling
+    functionName: AnimUltimateSkillCooling
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

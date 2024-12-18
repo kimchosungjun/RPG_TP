@@ -17,12 +17,17 @@ public class MonsterStat : BaseStat
     #region Property_StatValue
     public int GetMonsterID { get { return monsterID; } }
     public int MonsterLevel { get {return monsterLevel; } set { monsterLevel = value; } } 
-    public float GetMonsterCurHP { get { return monsterCurHP; } }
-    public float GetBoostSpeed { get { return boostSpeed; } }
+    public float MonsterCurHP { get { return monsterCurHP; } set { monsterCurHP = value; } }
+    public float BoostSpeed { get { return boostSpeed; }  set { boostSpeed = value; } }
 
+    /// <summary>
+    /// 스탯을 초기화할때 호출 (처음 생성시, 혹은 스탯 리셋시)
+    /// </summary>
+    /// <param name="_nonCombatMonsterStat"></param>
     public void SetMonsterStat(MonsterTableClasses.NonCombatMonsterStatTableData _nonCombatMonsterStat)
     {
         maxHp = _nonCombatMonsterStat.monsterMaxHP;
+        monsterCurHP = maxHp;
         speed = _nonCombatMonsterStat.monsterSpeed;
         defenceValue = _nonCombatMonsterStat.monsterDefence;
         monsterID = _nonCombatMonsterStat.monsterID;    

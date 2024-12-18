@@ -71280,7 +71280,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.5
-    functionName: AttackCooling
+    functionName: AnimAttackCooling
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

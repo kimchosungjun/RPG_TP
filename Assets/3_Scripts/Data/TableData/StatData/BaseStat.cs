@@ -17,7 +17,7 @@ public class BaseStat
     public string GetActorName { get { return actorName; } }
 
     // 행위자의 공통 변수
-    public float HP { get { return maxHp; } set { maxHp = value; } }
+    public float MaxHP { get { return maxHp; } set { maxHp = value; } }
     public float Speed { get { return speed; } set { speed = value; } }
     public float Defence { get { return defenceValue; } set { defenceValue = value; } }
     #endregion

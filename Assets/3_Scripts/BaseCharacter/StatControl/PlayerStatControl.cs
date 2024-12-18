@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class PlayerStatControl : CharacterStatControl
+public class PlayerStatControl : ActorStatControl
 {
     [SerializeField] PlayerStat playerStat = null;
     public PlayerStat PlayerStat { get { return playerStat; } set { playerStat = value; } }

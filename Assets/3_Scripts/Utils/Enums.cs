@@ -229,4 +229,12 @@ public enum E_WEAPONEFFECT
 
 #endregion
 
-
+namespace UIEnums
+{
+    public enum STATUS
+    {
+        HP,
+        EXP,
+        LEVEL
+    }
+}

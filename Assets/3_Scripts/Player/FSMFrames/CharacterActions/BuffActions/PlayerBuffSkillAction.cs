@@ -6,7 +6,7 @@ public class PlayerBuffSkillAction : BuffAction
     PlayerStat playerStat = null;
     PlayerBuffActionSOData soData = null;
     TransferBuffData[] buffDatas;
-    public virtual void SetStat(PlayerStat _playerStat, PlayerBuffActionSOData _soData, CharacterStatControl _statCtrl)
+    public virtual void SetStat(PlayerStat _playerStat, PlayerBuffActionSOData _soData, ActorStatControl _statCtrl)
     {
         playerStat = _playerStat;
         soData = _soData;

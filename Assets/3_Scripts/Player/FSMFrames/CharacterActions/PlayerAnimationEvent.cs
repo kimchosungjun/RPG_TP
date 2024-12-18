@@ -11,10 +11,10 @@ public class PlayerAnimationEvent : MonoBehaviour
         if (characterCtrl != null) anim = characterCtrl.GetAnim;
     }
 
-    public void AttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.AttackCooling(); }
-    public void SkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.SkillCooling(); }
-    public void UltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.UltimateSkillCooling(); }
-    public void DashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.DashCooling(); }  
+    public void AnimAttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.AttackCooling(); }
+    public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.SkillCooling(); }
+    public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.UltimateSkillCooling(); }
+    public void AnimDashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); characterCtrl.DashCooling(); }  
 
     public void DoAction(int index)
     {

@@ -77534,17 +77534,17 @@ AnimationClip:
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 1
     messageOptions: 0
   - time: 1.3333334
     functionName: StopAction
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 1
     messageOptions: 0
   - time: 1.6666666
-    functionName: AttackCooling
+    functionName: AnimAttackCooling
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

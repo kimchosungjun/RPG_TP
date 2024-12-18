@@ -11,6 +11,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
 
     #region Component
     [Header("필수 연결 컴포넌트")]
+    [SerializeField, Tooltip("현재 애니메이션이 작동하는 모델에 연결")] protected Transform modelTransform;
     [SerializeField] protected Transform bodyTransform;
     [SerializeField] protected CapsuleCollider collide;
     [SerializeField] protected Rigidbody rigid;
@@ -250,8 +251,8 @@ public abstract class PlayerMovementControl : MonoBehaviour
     }
     public void ApplyGroundRotation()
     {
-        if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
-            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
+        if (Quaternion.Angle(modelTransform.rotation, moveRotation) > 1f)
+            modelTransform.rotation = Quaternion.Slerp(modelTransform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
     }
     #endregion
 

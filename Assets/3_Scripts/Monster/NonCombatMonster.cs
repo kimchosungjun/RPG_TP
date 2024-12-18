@@ -26,6 +26,8 @@ public class NonCombatMonster : StandardMonster
         MonsterTableClasses.NonCombatMonsterStatTableData statTableData = table.GetNonCombatMonsterStatTableData(monsterType, monsterLevel);
         monsterStat.SetMonsterStat(statTableData);
         monsterStatControl.MonsterStat = monsterStat;
+        monsterStatControl.SetStatusUI(statusUI);
+        statusUI.Setup(this.transform, monsterStat);
         base.Start();
     }
     #endregion
