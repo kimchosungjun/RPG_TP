@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GroupActions : CharacterAction
 {
+
     [SerializeField] CharacterAction[] actions;
     public override void DoAction()
     {
@@ -10,6 +11,7 @@ public class GroupActions : CharacterAction
         {
             actions[i].DoAction();  
         }
+        actions[0].StartCoolDown();
     }
 
     public override void StopAction()
@@ -20,4 +22,11 @@ public class GroupActions : CharacterAction
             actions[i].StopAction();
         }
     }
+
+    public override bool IsCoolDown()
+    {
+       return actions[0].IsCoolDown();   
+    }
+
+    public override float GetActionCoolTime() { return actions[0].GetActionCoolTime();}
 }

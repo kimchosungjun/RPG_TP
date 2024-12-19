@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WarriorNormalAttack : NearAttackAction
+public class WarriorNormalAttack : NearTriggerAttackAction
 {
     [SerializeField, Tooltip("Int형 레이어")] int enemyLayer = 7;
     PlayerStat playerStat = null;

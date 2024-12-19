@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NearAttackAction : AttackAction
+public class NearTriggerAttackAction : AttackAction
 {
     protected Dictionary<string, Collider> colliderGroup = new Dictionary<string, Collider>();
     [SerializeField] protected Collider coll = null;
