@@ -9,7 +9,7 @@ namespace MonsterTableClasses
     ************************************************************/
     public class MonsterTableClasses { }
 
-    #region MonsterDataClasses : 테이블, 레벨, 스탯, 일반공격, 버프스킬, 공격스킬
+    #region Info Table
     [Serializable]
     public class MonsterInfoTableData
     {
@@ -24,7 +24,9 @@ namespace MonsterTableClasses
             monsterLevels = new int[_size]; 
         }
     }
+    #endregion
 
+    #region Drop Table
     [Serializable]
     public class MonsterDropTableData
     {
@@ -44,7 +46,9 @@ namespace MonsterTableClasses
             quantityProbabilities  = new float[_quantityCnt];
         }
     }
+    #endregion
 
+    #region Non Combat Table
     [Serializable]
     public class NonCombatMonsterStatTableData
     {
@@ -56,13 +60,22 @@ namespace MonsterTableClasses
         public float monsterDefence;
         public int monsterDropID;
     }
+    #endregion
 
-
+    #region Combat Table
     [Serializable]
     public class CombatMonsterStatTableData : NonCombatMonsterStatTableData
     {
         public float monsterAttack;
         public float monsterCritical;
     }
+    #endregion
+
+    #region Action Table
+    public class MonsterActionTableData
+    {
+
+    }
+
     #endregion
 }

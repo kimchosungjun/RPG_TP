@@ -142,6 +142,17 @@ namespace MonsterEnums
         BULLTANK=5,
         DRAGON=6
     }
+
+    public enum ATTACK_ACTIONS
+    {
+        VIRUS_RUSH=0,
+        VIRUS_THROW=1,
+    }
+
+    public enum BUFF_ACTIONS
+    {
+        VIRUS_SLOW=0
+    }
 }
 
 // 버프, 상태이상
@@ -149,12 +160,16 @@ namespace EffectEnums
 {
     public enum HIT_EFFECTS
     {
-        NORMAL = 0,
+        NONE = 0,
         KNOCKBACK = 1,
         STUN = 2,
+        SLOW=3,
     }
 
-    public enum BUFF_USE_STATS
+    /// <summary>
+    /// 계수와 같이 사용
+    /// </summary>
+    public enum BUFF_ATTRIBUTE_STATS
     {
         NONE = 0,
         HP = 1,
@@ -168,13 +183,15 @@ namespace EffectEnums
         SPD = 1,
         ATK = 2,
         DEF = 3,
-        ATKSPD = 4
+        ATKSPD = 4,
+        SPEED=5,
     }
 
-    public enum BUFF_COUNTINUITIES
+    public enum BUFF_TYPES
     {
-        IMMEDIATELY = 0, // 즉발
-        CONTINUOUS = 1 // 지속
+        IMMEDIATELY = 0, 
+        BUFF = 1, 
+        DEBUFF= 2 // 즉발 디버프는 없음
     }
 
     public enum PARTICLES

@@ -4,23 +4,23 @@ using UnityEngine;
 public class TransferBuffData
 {
     [SerializeField] protected BUFF_APPLY_STATS buffStat;
-    [SerializeField] protected BUFF_USE_STATS useStat;
-    [SerializeField] protected BUFF_COUNTINUITIES continuity;
+    [SerializeField] protected BUFF_ATTRIBUTE_STATS useStat;
+    [SerializeField] protected BUFF_TYPES continuity;
     [SerializeField] protected float buffValue;
     [SerializeField] protected float buffTime;
     [SerializeField] protected float doBuffTime;
 
     public BUFF_APPLY_STATS GetBuffStatType { get { return buffStat; } }
-    public BUFF_USE_STATS GetUseStatType { get { return useStat; } }
-    public BUFF_COUNTINUITIES GetBuffContinuity { get { return continuity; } }  
+    public BUFF_ATTRIBUTE_STATS GetUseStatType { get { return useStat; } }
+    public BUFF_TYPES GetBuffContinuity { get { return continuity; } }  
 
     public TransferBuffData() { }
 
     public void SetData(int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime)
     {
         this.buffStat = (BUFF_APPLY_STATS)_buffStat;
-        this.useStat = (BUFF_USE_STATS)_useStat;
-        this.continuity = (BUFF_COUNTINUITIES)_buffContinuity;
+        this.useStat = (BUFF_ATTRIBUTE_STATS)_useStat;
+        this.continuity = (BUFF_TYPES)_buffContinuity;
         this.buffValue = _buffValue;
         this.buffTime = _buffTime;
     }
