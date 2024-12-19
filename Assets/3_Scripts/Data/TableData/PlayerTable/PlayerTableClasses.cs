@@ -108,7 +108,7 @@ namespace PlayerTableClasses
     }
     #endregion
 
-    public class PlayerClasses {  }
+    public class PlayerTableClasses {  }
 }
 
 

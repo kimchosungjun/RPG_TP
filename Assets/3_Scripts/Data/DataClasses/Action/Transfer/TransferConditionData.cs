@@ -1,7 +1,7 @@
 using EffectEnums;
 using UnityEngine;
 
-public class TransferBuffData
+public class TransferConditionData
 {
     [SerializeField] protected BUFF_APPLY_STATS buffStat;
     [SerializeField] protected BUFF_ATTRIBUTE_STATS useStat;
@@ -14,7 +14,7 @@ public class TransferBuffData
     public BUFF_ATTRIBUTE_STATS GetUseStatType { get { return useStat; } }
     public BUFF_TYPES GetBuffContinuity { get { return continuity; } }  
 
-    public TransferBuffData() { }
+    public TransferConditionData() { }
 
     public void SetData(int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime)
     {

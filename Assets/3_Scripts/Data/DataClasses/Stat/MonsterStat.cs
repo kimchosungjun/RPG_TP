@@ -8,16 +8,16 @@ using System;
 public class MonsterStat : BaseStat
 {
     #region Protected_StatValue 
-    [SerializeField] protected int monsterID;
-    [SerializeField] protected int monsterLevel;
-    [SerializeField] protected float monsterCurHP;
+    [SerializeField] protected int ID;
+    [SerializeField] protected int level;
+    [SerializeField] protected float currentHP;
     [SerializeField] protected float boostSpeed;
     #endregion
 
     #region Property_StatValue
-    public int GetMonsterID { get { return monsterID; } }
-    public int MonsterLevel { get {return monsterLevel; } set { monsterLevel = value; } } 
-    public float MonsterCurHP { get { return monsterCurHP; } set { monsterCurHP = value; } }
+    public int GetID { get { return ID; } }
+    public int Level { get {return level; } set { level = value; } } 
+    public float CurrentHP { get { return currentHP; } set { currentHP = value; } }
     public float BoostSpeed { get { return boostSpeed; }  set { boostSpeed = value; } }
 
     /// <summary>
@@ -26,14 +26,15 @@ public class MonsterStat : BaseStat
     /// <param name="_nonCombatMonsterStat"></param>
     public void SetMonsterStat(MonsterTableClasses.NonCombatMonsterStatTableData _nonCombatMonsterStat, int _level)
     {
-        maxHp = _nonCombatMonsterStat.maxHP;
-        monsterCurHP = maxHp;
+        int levelDiff = _level - _nonCombatMonsterStat.startLevel;
+        maxHp = _nonCombatMonsterStat.maxHP + _nonCombatMonsterStat.hpIncrease*levelDiff;
+        currentHP = maxHp;
         speed = _nonCombatMonsterStat.speed;
-        defenceValue = _nonCombatMonsterStat.defence;
-        monsterID = _nonCombatMonsterStat.ID;    
-        monsterLevel = _level;
+        defenceValue = _nonCombatMonsterStat.defence + _nonCombatMonsterStat.defenceIncrease*levelDiff;
+        ID = _nonCombatMonsterStat.ID;    
+        level = _level;
         boostSpeed = _nonCombatMonsterStat.boostSpeed;
-        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(monsterID).name;
+        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(ID).name;
     }
 
     #endregion

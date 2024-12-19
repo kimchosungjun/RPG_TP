@@ -9,7 +9,7 @@ public abstract class ActorStatControl : MonoBehaviour
 
     #region Value : Buff & StatusUI
     protected int buffCnt = 0;
-    protected List<TransferBuffData> currentBuffs = new List<TransferBuffData>();
+    protected List<TransferConditionData> currentBuffs = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
 
     public void SetStatusUI(StatusUI _statusUI) { this.statusUI = _statusUI; }
@@ -20,7 +20,7 @@ public abstract class ActorStatControl : MonoBehaviour
     /******************************************/
 
     #region Control Buff
-    public virtual void AddBuffs(TransferBuffData _buffData)
+    public virtual void AddBuffs(TransferConditionData _buffData)
     {
         if (currentBuffs.Contains(_buffData))
         {

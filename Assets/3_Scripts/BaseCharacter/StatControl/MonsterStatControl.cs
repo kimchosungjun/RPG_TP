@@ -34,15 +34,15 @@ public class MonsterStatControl : ActorStatControl
         allDamage = (allDamage) <= 0 ? 1 : allDamage;
 
         // 체력을 계산하여 죽은 상태인지 확인
-        float curHp = monsterStat.MonsterCurHP - allDamage;
+        float curHp = monsterStat.CurrentHP - allDamage;
         if (curHp <= 0)
         {
-            monsterStat.MonsterCurHP = 0f;
+            monsterStat.CurrentHP = 0f;
             baseMonster.Death();
         }
         else
         {
-            monsterStat.MonsterCurHP = curHp;
+            monsterStat.CurrentHP = curHp;
         }
 
         // 데미지를 스탯에 적용 후 UI에 표기

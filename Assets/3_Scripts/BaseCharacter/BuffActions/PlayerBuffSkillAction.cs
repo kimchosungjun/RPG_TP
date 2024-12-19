@@ -5,7 +5,7 @@ public class PlayerBuffSkillAction : BuffAction
 {
     PlayerStat playerStat = null;
     PlayerBuffActionSOData soData = null;
-    TransferBuffData[] buffDatas;
+    TransferConditionData[] buffDatas;
     public virtual void SetStat(PlayerStat _playerStat, PlayerBuffActionSOData _soData, ActorStatControl _statCtrl)
     {
         playerStat = _playerStat;
@@ -13,10 +13,10 @@ public class PlayerBuffSkillAction : BuffAction
         statCtrl = _statCtrl;
 
         int buffCnt = _soData.GetBuffCnt(); 
-        buffDatas = new TransferBuffData[buffCnt];
+        buffDatas = new TransferConditionData[buffCnt];
         for(int i = 0; i < buffCnt; i++)
         {
-            buffDatas[i] = new TransferBuffData();
+            buffDatas[i] = new TransferConditionData();
             buffDatas[i].SetData(_soData.GetEffectStatType(i), _soData.GetUseStatType(i),
                 _soData.GetContinuityType(i), _soData.GetMultiplier(i), _soData.GetMaintainEffectTime);
         }

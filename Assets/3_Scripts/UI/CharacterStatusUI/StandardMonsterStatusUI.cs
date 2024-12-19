@@ -35,7 +35,7 @@ public class StandardMonsterStatusUI : StatusUI
         // Set
         hpImage.fillAmount = 1f;
         effectImage.fillAmount = 1f;
-        levelText.text = "Lv." + monsterStat.MonsterLevel;
+        levelText.text = "Lv." + monsterStat.Level;
     }
 
     public override void FixedExecute()
@@ -60,7 +60,7 @@ public class StandardMonsterStatusUI : StatusUI
 
     public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
     {
-        hpImage.fillAmount = (monsterStat.MonsterCurHP / monsterStat.MaxHP);
+        hpImage.fillAmount = (monsterStat.CurrentHP / monsterStat.MaxHP);
     }
     #endregion
 }
