@@ -1,4 +1,4 @@
-DropID,DropItemCnt,QuantityCnt,ItemID,DropProbability,DropGold,DropExp,MinQuantity,MaxQuantity,QuantityProbability
+드랍ID,아이템배열수,개수배열수,아이템IDs,드랍확률,골드,경험치,최소개수,최대개수,개수확률
 0,3,1,0,1,2,0.9,0.075,0.025,5,5,1,1,1
 1,3,1,0,1,2,0.89,0.085,0.025,6,6,1,1,1
 2,3,2,0,1,2,0.88,0.095,0.025,7,7,1,2,0.9,0.1

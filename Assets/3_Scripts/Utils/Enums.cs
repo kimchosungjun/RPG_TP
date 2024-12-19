@@ -136,8 +136,8 @@ namespace MonsterEnums
     {
         RAYFISH=0,
         FLYBEE=1,
-        HORNSLIME=2,
-        SLIME=3,
+        SLIME=2,
+        VIRUS=3,
         ANNOYBEAR=4,
         BULLTANK=5,
         DRAGON=6

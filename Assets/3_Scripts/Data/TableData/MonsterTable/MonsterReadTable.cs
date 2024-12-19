@@ -16,9 +16,9 @@ public partial class MonsterTable : BaseTable
         for (int row = _startRow; row < reader.row; row++)
         {
             MonsterInfoTableData data = new MonsterInfoTableData();
-            if (ReadMonsterTable(reader, data, row, _startCol) == false)
+            if (ReadMonsterInfo(reader, data, row, _startCol) == false)
                 break;
-            monsterInfoTableGroup.Add(data.monsterID, data);
+            monsterInfoTableGroup.Add(data.ID, data);
         }
     }
 
@@ -37,12 +37,9 @@ public partial class MonsterTable : BaseTable
         for (int row = _startRow; row < reader.row; row++)
         {
             NonCombatMonsterStatTableData data = new NonCombatMonsterStatTableData();
-            if (ReadNonCombatMonsterDrop(reader, data, row, _startCol) == false)
+            if (ReadNonCombatMonsterStat(reader, data, row, _startCol) == false)
                 break;
-
-            if(nonCombatMonsterStatGroup.ContainsKey(data.monsterID) == false)
-                nonCombatMonsterStatGroup[data.monsterID] = new Dictionary<int, NonCombatMonsterStatTableData>();
-            nonCombatMonsterStatGroup[data.monsterID][data.monsterLevel] = data;
+            nonCombatMonsterStatGroup.Add(data.ID, data);
         }    
     }
 
@@ -52,11 +49,9 @@ public partial class MonsterTable : BaseTable
         for (int row = _startRow; row < reader.row; row++)
         {
             CombatMonsterStatTableData data = new CombatMonsterStatTableData();
-            if (ReadCombatMonsterDrop(reader, data, row, _startCol) == false)
+            if (ReadCombatMonsterStat(reader, data, row, _startCol) == false)
                 break;
-            if (combatMonsterStatGroup.ContainsKey(data.monsterID) == false)
-                combatMonsterStatGroup[data.monsterID] = new Dictionary<int, CombatMonsterStatTableData>();
-            combatMonsterStatGroup[data.monsterID][data.monsterLevel] = data;
+            combatMonsterStatGroup.Add(data.ID, data);
         }
     }
     #endregion
@@ -66,20 +61,17 @@ public partial class MonsterTable : BaseTable
     *************************************************************/
 
     #region Link CsvData to ClassData
-    protected bool ReadMonsterTable(CSVReader _reader, MonsterInfoTableData _tableData, int _row, int _col)
+    protected bool ReadMonsterInfo(CSVReader _reader, MonsterInfoTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
-        int levelSize = 0;
-        _reader.get(_row, ref _tableData.monsterID);
-        _reader.get(_row, ref _tableData.monsterName);
-        _reader.get(_row, ref _tableData.monsterDescription);
-        _reader.get(_row, ref _tableData.monsterFeature);
-        _reader.get(_row, ref levelSize);
-        _tableData.SetSize(levelSize);
-        _reader.get(_row, ref _tableData.monsterLevels, levelSize);
+        _reader.get(_row, ref _tableData.ID);
+        _reader.get(_row, ref _tableData.name);
+        _reader.get(_row, ref _tableData.description);
+        _reader.get(_row, ref _tableData.feature);
+        _reader.get(_row, ref _tableData.type);
         return true;
     }
-
+    
     protected bool ReadMonsterDrop(CSVReader _reader, MonsterDropTableData _tableData, int _row, int _col)
     {
         int dropCnt = 0;
@@ -101,31 +93,67 @@ public partial class MonsterTable : BaseTable
         _reader.get(_row, ref _tableData.quantityProbabilities, _tableData.quantityProbabilities.Length);
         return true;
     }
-    protected bool ReadNonCombatMonsterDrop(CSVReader _reader, NonCombatMonsterStatTableData _tableData, int _row, int _col)
+    
+    protected bool ReadNonCombatMonsterStat(CSVReader _reader, NonCombatMonsterStatTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
-        _reader.get(_row, ref _tableData.monsterID);
-        _reader.get(_row, ref _tableData.monsterLevel);
-        _reader.get(_row, ref _tableData.monsterMaxHP);
-        _reader.get(_row, ref _tableData.monsterSpeed);
-        _reader.get(_row, ref _tableData.monsterBoostSpeed);
-        _reader.get(_row, ref _tableData.monsterDefence);
-        _reader.get(_row, ref _tableData.monsterDropID);
+        _reader.get(_row, ref _tableData.ID);
+        _reader.get(_row, ref _tableData.maxHP);
+        _reader.get(_row, ref _tableData.speed);
+        _reader.get(_row, ref _tableData.boostSpeed);
+        _reader.get(_row, ref _tableData.defence);
+        _reader.get(_row, ref _tableData.dropID);
+        _reader.get(_row, ref _tableData.hpIncrease);
+        _reader.get(_row, ref _tableData.defenceIncrease);
+        _reader.get(_row, ref _tableData.startLevel);
         return true;
     }
 
-    protected bool ReadCombatMonsterDrop(CSVReader _reader, CombatMonsterStatTableData _tableData, int _row, int _col)
+    protected bool ReadCombatMonsterStat(CSVReader _reader, CombatMonsterStatTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
-        _reader.get(_row, ref _tableData.monsterID);
-        _reader.get(_row, ref _tableData.monsterLevel);
-        _reader.get(_row, ref _tableData.monsterMaxHP);
-        _reader.get(_row, ref _tableData.monsterSpeed);
-        _reader.get(_row, ref _tableData.monsterBoostSpeed);
-        _reader.get(_row, ref _tableData.monsterAttack);
-        _reader.get(_row, ref _tableData.monsterCritical);
-        _reader.get(_row, ref _tableData.monsterDefence);
-        _reader.get(_row, ref _tableData.monsterDropID);
+        _reader.get(_row, ref _tableData.ID);
+        _reader.get(_row, ref _tableData.maxHP);
+        _reader.get(_row, ref _tableData.speed);
+        _reader.get(_row, ref _tableData.boostSpeed);
+        _reader.get(_row, ref _tableData.attack);
+        _reader.get(_row, ref _tableData.defence);
+        _reader.get(_row, ref _tableData.critical);
+        _reader.get(_row, ref _tableData.dropID);
+        _reader.get(_row, ref _tableData.hpIncrease);
+        _reader.get(_row, ref _tableData.attackIncrease);
+        _reader.get(_row, ref _tableData.defenceIncrease);
+        _reader.get(_row, ref _tableData.criticalIncrease);
+        _reader.get(_row, ref _tableData.startLevel);
+        return true;
+    }
+
+    protected bool ReadMonsterAttackTable(CSVReader _reader, MonsterAttackTableData _tableData, int _row, int _col)
+    {
+        if (_reader.reset_row(_row, _col) == false) return false;
+        _reader.get(_row, ref _tableData.ID);
+        _reader.get(_row, ref _tableData.attribute);
+        _reader.get(_row, ref _tableData.multiplier);
+        _reader.get(_row, ref _tableData.effect);
+        _reader.get(_row, ref _tableData.maintainTime);
+        _reader.get(_row, ref _tableData.coolTime);
+        _reader.get(_row, ref _tableData.defaultDamage);
+        _reader.get(_row, ref _tableData.damageIncrease);
+        return true;
+    }
+
+    protected bool ReadMonsterConditionTable(CSVReader _reader, MonsterConditionTableData _tableData, int _row, int _col)
+    {
+        if (_reader.reset_row(_row, _col) == false) return false;
+        _reader.get(_row, ref _tableData.ID);
+        _reader.get(_row, ref _tableData.attribute);
+        _reader.get(_row, ref _tableData.multiplier);
+        _reader.get(_row, ref _tableData.effect);
+        _reader.get(_row, ref _tableData.maintainTime);
+        _reader.get(_row, ref _tableData.coolTime);
+        _reader.get(_row, ref _tableData.defaultConditionValue);
+        _reader.get(_row, ref _tableData.conditionType);
+        _reader.get(_row, ref _tableData.conditionValueIncrease);
         return true;
     }
     #endregion

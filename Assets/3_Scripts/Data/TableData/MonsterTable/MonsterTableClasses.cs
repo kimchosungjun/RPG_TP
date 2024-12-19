@@ -13,16 +13,11 @@ namespace MonsterTableClasses
     [Serializable]
     public class MonsterInfoTableData
     {
-        public int monsterID; 
-        public string monsterName;
-        public string monsterDescription;
-        public string monsterFeature;
-        public int[] monsterLevels;
-
-        public void SetSize(int _size)
-        {
-            monsterLevels = new int[_size]; 
-        }
+        public int ID; 
+        public string name;
+        public string description;
+        public string feature;
+        public string type;
     }
     #endregion
 
@@ -52,13 +47,15 @@ namespace MonsterTableClasses
     [Serializable]
     public class NonCombatMonsterStatTableData
     {
-        public int monsterID;
-        public int monsterLevel;
-        public float monsterMaxHP;
-        public float monsterSpeed;
-        public float monsterBoostSpeed;
-        public float monsterDefence;
-        public int monsterDropID;
+        public int ID;
+        public float maxHP;
+        public float speed;
+        public float boostSpeed;
+        public float defence;
+        public int dropID;
+        public float hpIncrease;
+        public float defenceIncrease;
+        public int startLevel;
     }
     #endregion
 
@@ -66,15 +63,39 @@ namespace MonsterTableClasses
     [Serializable]
     public class CombatMonsterStatTableData : NonCombatMonsterStatTableData
     {
-        public float monsterAttack;
-        public float monsterCritical;
+        public float attack;
+        public float critical;
+        public float attackIncrease;
+        public float criticalIncrease;
     }
     #endregion
 
     #region Action Table
-    public class MonsterActionTableData
+    [Serializable]
+    public class MonsterAttackTableData
     {
+        public int ID;
+        public int attribute;
+        public float multiplier;
+        public float effect;
+        public float maintainTime;
+        public float coolTime;
+        public float defaultDamage;
+        public float damageIncrease;
+    }
 
+    [Serializable]
+    public class MonsterConditionTableData
+    {
+        public int ID;
+        public int attribute;
+        public float multiplier;
+        public float effect;
+        public float maintainTime;
+        public float coolTime;
+        public float defaultConditionValue;
+        public int conditionType;
+        public float conditionValueIncrease;
     }
 
     #endregion

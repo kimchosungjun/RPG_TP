@@ -11,14 +11,14 @@ public class CombatMonsterStat : MonsterStat
 
     public void SetMonsterStat(MonsterTableClasses.CombatMonsterStatTableData _combatMonsterStat)
     {
-        maxHp = _combatMonsterStat.monsterMaxHP;
-        speed = _combatMonsterStat.monsterSpeed;
-        defenceValue = _combatMonsterStat.monsterDefence;
-        monsterID = _combatMonsterStat.monsterID;
-        monsterLevel = _combatMonsterStat.monsterLevel;
-        boostSpeed = _combatMonsterStat.monsterBoostSpeed;
-        attackValue = _combatMonsterStat.monsterAttack;
-        criticalValue = _combatMonsterStat.monsterCritical; 
-        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(monsterID).monsterName;
+        maxHp = _combatMonsterStat.maxHP;
+        speed = _combatMonsterStat.speed;
+        defenceValue = _combatMonsterStat.defence;
+        monsterID = _combatMonsterStat.ID;
+        //monsterLevel = _combatMonsterStat.;
+        boostSpeed = _combatMonsterStat.boostSpeed;
+        attackValue = _combatMonsterStat.attack;
+        criticalValue = _combatMonsterStat.critical; 
+        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(monsterID).name;
     }
 }

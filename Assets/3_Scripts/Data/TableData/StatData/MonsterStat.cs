@@ -26,14 +26,14 @@ public class MonsterStat : BaseStat
     /// <param name="_nonCombatMonsterStat"></param>
     public void SetMonsterStat(MonsterTableClasses.NonCombatMonsterStatTableData _nonCombatMonsterStat)
     {
-        maxHp = _nonCombatMonsterStat.monsterMaxHP;
+        maxHp = _nonCombatMonsterStat.maxHP;
         monsterCurHP = maxHp;
-        speed = _nonCombatMonsterStat.monsterSpeed;
-        defenceValue = _nonCombatMonsterStat.monsterDefence;
-        monsterID = _nonCombatMonsterStat.monsterID;    
-        monsterLevel = _nonCombatMonsterStat.monsterLevel;
-        boostSpeed = _nonCombatMonsterStat.monsterBoostSpeed;
-        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(monsterID).monsterName;
+        speed = _nonCombatMonsterStat.speed;
+        defenceValue = _nonCombatMonsterStat.defence;
+        monsterID = _nonCombatMonsterStat.ID;    
+        //monsterLevel = _nonCombatMonsterStat.monsterLevel;
+        boostSpeed = _nonCombatMonsterStat.boostSpeed;
+        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(monsterID).name;
     }
 
     #endregion

@@ -27,7 +27,7 @@ public class CombatMonster : StandardMonster
     {
         MonsterTable table = SharedMgr.TableMgr.Monster;
         MonsterTableClasses.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
-        monsterLevel = infoTableData.monsterLevels[monsterLevelIndex];
+        //monsterLevel = infoTableData.monsterLevels[monsterLevelIndex];
         MonsterTableClasses.CombatMonsterStatTableData statTableData = table.GetCombatMonsterStatTableData(monsterType, monsterLevel);
         monsterStat.SetMonsterStat(statTableData);
         monsterStatControl.MonsterStat = monsterStat;

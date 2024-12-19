@@ -17,12 +17,10 @@ public partial class MonsterTable : BaseTable
     Dictionary<int, MonsterDropTableData> monsterDropGroup = new Dictionary<int, MonsterDropTableData>();
 
     // 비전투 몬스터 데이터
-    // 첫번째 키 값은 몬스터 ID, 두번째 키 값은 Level 
-    Dictionary<int,Dictionary<int,NonCombatMonsterStatTableData>> nonCombatMonsterStatGroup  = new Dictionary<int, Dictionary<int, NonCombatMonsterStatTableData>>();
+    Dictionary<int,NonCombatMonsterStatTableData> nonCombatMonsterStatGroup  = new Dictionary<int, NonCombatMonsterStatTableData>();
 
     // 전투 몬스터 데이터
-    // 첫번째 키 값은 몬스터 ID, 두번째 키 값은 Level
-    Dictionary<int, Dictionary<int, CombatMonsterStatTableData>> combatMonsterStatGroup = new Dictionary<int, Dictionary<int, CombatMonsterStatTableData>>();
+    Dictionary<int, CombatMonsterStatTableData> combatMonsterStatGroup = new Dictionary<int, CombatMonsterStatTableData>();
 
     #endregion
 
@@ -31,7 +29,7 @@ public partial class MonsterTable : BaseTable
     *****************************************************/
 
     #region Get Monster Data
-    
+
     public MonsterInfoTableData GetMonsterInfoTableData(int _typeID)
     {
         if (monsterInfoTableGroup.ContainsKey(_typeID)) return monsterInfoTableGroup[_typeID];
@@ -55,12 +53,7 @@ public partial class MonsterTable : BaseTable
     public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(int _typeID, int _level)
     {
         if (nonCombatMonsterStatGroup.ContainsKey(_typeID))
-        {
-            if (nonCombatMonsterStatGroup[_typeID].ContainsKey(_level))
-            {
-                return nonCombatMonsterStatGroup[_typeID][_level];
-            }
-        }
+            return nonCombatMonsterStatGroup[_typeID];  
         return null;
     }
     
@@ -68,24 +61,14 @@ public partial class MonsterTable : BaseTable
     {
         int typeID = (int)_typeID;
         if (nonCombatMonsterStatGroup.ContainsKey(typeID))
-        {
-            if (nonCombatMonsterStatGroup[typeID].ContainsKey(_level))
-            {
-                return nonCombatMonsterStatGroup[typeID][_level];
-            }
-        }
+            return nonCombatMonsterStatGroup[typeID];
         return null;
     }
 
     public CombatMonsterStatTableData GetCombatMonsterStatTableData(int _typeID, int _level)
     {
         if (combatMonsterStatGroup.ContainsKey(_typeID))
-        {
-            if (combatMonsterStatGroup[_typeID].ContainsKey(_level))
-            {
-                return combatMonsterStatGroup[_typeID][_level];
-            }
-        }
+            return combatMonsterStatGroup[_typeID];
         return null;
     }
 
@@ -93,12 +76,7 @@ public partial class MonsterTable : BaseTable
     {
         int typeID = (int)_typeID;
         if (combatMonsterStatGroup.ContainsKey(typeID))
-        {
-            if (combatMonsterStatGroup[typeID].ContainsKey(_level))
-            {
-                return combatMonsterStatGroup[typeID][_level];
-            }
-        }
+            return combatMonsterStatGroup[typeID];
         return null;
     }
    
