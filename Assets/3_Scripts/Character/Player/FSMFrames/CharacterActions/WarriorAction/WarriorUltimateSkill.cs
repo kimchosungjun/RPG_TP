@@ -20,7 +20,7 @@ public class WarriorUltimateSkill : NearAttackShockwaveAction
     {
         float damageValue = soData.GetActionMultiplier * playerStat.Attack;
         attackData.SetData(soData.GetAttackEffectType,damageValue,soData.GetMaintainEffectTime);
-        base.DoAction(); // Do Attack
+        base.DoAction();
     }
 
     public override void StopAttack()

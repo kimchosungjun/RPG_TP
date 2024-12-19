@@ -16,33 +16,33 @@ public class VirusFarAttack : NearTriggerAttackAction
     // MovementCtrl에서 해당 Action을 관리하는게 좋을듯하다.
     // 애니메이션에서 설정을 관리하는건 아닌거같음. 그냥 활성화만 하는게 나을듯.
 
-    public void SetStat(CombatMonsterStat _monsterStat, MonsterAttackActionData _actionData)
-    {
-        enemyLayer = (int)UtilEnums.LAYERS.PLAYER;
-        monsterStat = _monsterStat;
-        actionData = _actionData;
-    }
+    //public void SetStat(CombatMonsterStat _monsterStat, MonsterAttackActionData _actionData)
+    //{
+    //    enemyLayer = (int)UtilEnums.LAYERS.PLAYER;
+    //    monsterStat = _monsterStat;
+    //    actionData = _actionData;
+    //}
 
-    public override void DoAction()
-    {
-        float damageValue = actionData.GetMultiplier * monsterStat.Attack * Randoms.GetCritical(monsterStat.Critical);
-        attackData.SetData(actionData.GetEffect, damageValue, actionData.GetMultiplier);
-        base.DoAction(); // Do Attack
-    }
+    //public override void DoAction()
+    //{
+    //    float damageValue = actionData.GetMultiplier * monsterStat.Attack * Randoms.GetCritical(monsterStat.Critical);
+    //    attackData.SetData(actionData.GetEffect, damageValue, actionData.GetMultiplier);
+    //    base.DoAction(); // Do Attack
+    //}
 
 
-    public override void StopAttack()
-    {
-        base.StopAttack();
-    }
+    //public override void StopAttack()
+    //{
+    //    base.StopAttack();
+    //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == enemyLayer)
-        {
-            // 처음 닿는 물체라면 List에 추가해주고 데미지 
-            if (CheckCollider(other))
-                other.GetComponent<BaseActor>().TakeDamage(attackData);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.layer == enemyLayer)
+    //    {
+    //        // 처음 닿는 물체라면 List에 추가해주고 데미지 
+    //        if (CheckCollider(other))
+    //            other.GetComponent<BaseActor>().TakeDamage(attackData);
+    //    }
+    //}
 }

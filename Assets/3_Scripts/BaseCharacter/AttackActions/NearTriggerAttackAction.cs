@@ -5,13 +5,12 @@ public class NearTriggerAttackAction : AttackAction
 {
     protected Dictionary<string, Collider> colliderGroup = new Dictionary<string, Collider>();
     [SerializeField] protected Collider coll = null;
-    
+
     public override void DoAttack()
     {
         if (coll != null)
             coll.gameObject.SetActive(true);
     }
-
     public override void StopAttack()
     {
         if(coll.gameObject !=null)

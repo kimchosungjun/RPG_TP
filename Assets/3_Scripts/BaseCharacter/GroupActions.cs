@@ -9,7 +9,7 @@ public class GroupActions : CharacterAction
         int cnt = actions.Length;
         for(int i=0; i<cnt; i++)
         {
-            actions[i].DoAction();  
+            actions[i].DoAction();
         }
         actions[0].StartCoolDown();
     }

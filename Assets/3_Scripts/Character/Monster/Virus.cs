@@ -86,6 +86,12 @@ public partial class Virus : CombatMonster
     #region Behaviours : Method
 
     #region First BT : Idle
+    NODESTATES DoAnimation()
+    {
+        if (isDoAnimation) return NODESTATES.FAIL;
+        return NODESTATES.SUCCESS;
+    }
+
     NODESTATES DoDetectPlayer()
     {
         if(detecter.IsDetect())

@@ -20,7 +20,7 @@ public class PlayerAnimationEvent : MonoBehaviour
     {
         if(actions[index].gameObject.activeSelf == false)
             actions[index].gameObject.SetActive(true); 
-        actions[index].DoAction();
+        //actions[index].DoAction();
     }
 
     public void StopAction(int index)

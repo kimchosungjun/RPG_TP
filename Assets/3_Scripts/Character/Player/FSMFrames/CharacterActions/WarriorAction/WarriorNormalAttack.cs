@@ -26,7 +26,7 @@ public class WarriorNormalAttack : NearTriggerAttackAction
     {
         float damageValue = soData.GetActionMultiplier(combo) * playerStat.Attack * Randoms.GetCritical(playerStat.Critical);
         attackData.SetData(soData.GetAttackEffectType(combo),damageValue, soData.GetMaintainTime(combo));
-        base.DoAction(); // Do Attack
+        base.DoAction();
     }
     
 
