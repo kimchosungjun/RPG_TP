@@ -24,14 +24,14 @@ public class MonsterStat : BaseStat
     /// 스탯을 초기화할때 호출 (처음 생성시, 혹은 스탯 리셋시)
     /// </summary>
     /// <param name="_nonCombatMonsterStat"></param>
-    public void SetMonsterStat(MonsterTableClasses.NonCombatMonsterStatTableData _nonCombatMonsterStat)
+    public void SetMonsterStat(MonsterTableClasses.NonCombatMonsterStatTableData _nonCombatMonsterStat, int _level)
     {
         maxHp = _nonCombatMonsterStat.maxHP;
         monsterCurHP = maxHp;
         speed = _nonCombatMonsterStat.speed;
         defenceValue = _nonCombatMonsterStat.defence;
         monsterID = _nonCombatMonsterStat.ID;    
-        //monsterLevel = _nonCombatMonsterStat.monsterLevel;
+        monsterLevel = _level;
         boostSpeed = _nonCombatMonsterStat.boostSpeed;
         actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(monsterID).name;
     }

@@ -23,7 +23,6 @@ public abstract class BaseMonster : BaseActor
 
     #region Value : Monster Information
     [Header("몬스터의 정보"),SerializeField, Tooltip("몬스터의 스탯을 불러오기 위해 필요")] protected TYPEIDS monsterType;
-    [SerializeField, Tooltip("CSV 파일에서 저장된 레벨 인덱스로 레벨 정보를 불러오는 역할")] protected int monsterLevelIndex;
     [SerializeField, Tooltip("현재는 인덱스로 불러오기 때문에 모든 기능이 완성되면 인스펙터에서 보이지 않게 하기")] protected int monsterLevel;
     #endregion
 

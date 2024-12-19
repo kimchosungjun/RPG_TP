@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using MonsterTableClasses;
 
-public class MonsterAttackActionData : MonoBehaviour
+[System.Serializable]
+public class MonsterAttackActionData : MonsterBaseActionData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected int actionID;
+    [SerializeField] protected float defaultValueIncrease;
 
-    // Update is called once per frame
-    void Update()
+    public MonsterAttackActionData(MonsterAttackTableData _tableData)
     {
-        
+        actionID = _tableData.ID;
+        attribute = _tableData.attribute;
+        multiplier = _tableData.multiplier;
+        effect = _tableData.effect;
+        maintainTime = _tableData.maintainTime;
+        coolTime = _tableData.coolTime;
+        defaultValue = _tableData.defaultDamage;
+        defaultValueIncrease = _tableData.damageIncrease;
+    }
+    public void SetConditionData(MonsterAttackTableData _tableData)
+    {
+        actionID = _tableData.ID;
+        attribute = _tableData.attribute;
+        multiplier = _tableData.multiplier;
+        effect = _tableData.effect;
+        maintainTime = _tableData.maintainTime;
+        coolTime = _tableData.coolTime;
+        defaultValue = _tableData.defaultDamage;
+        defaultValueIncrease = _tableData.damageIncrease;
     }
 }

@@ -31,6 +31,8 @@ public class TableMgr
         Monster.InitMonsterInfoTableCsv("MonsterInfoTable", 1, 0);
         Monster.InitNonCombatMonsterStatTableCsv("NonCombatMonsterStatTable", 1, 0);
         Monster.InitCombatMonsterStatTableCsv("CombatMonsterStatTable", 1, 0);
+        Monster.InitMonsterAttackTableCsv("MonsterAttackTable", 1, 0);
+        Monster.InitMonsterConditionTableCsv("MonsterConditionTable", 1, 0);
     }
 
     #region Test Function

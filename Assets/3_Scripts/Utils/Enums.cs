@@ -147,11 +147,13 @@ namespace MonsterEnums
     {
         VIRUS_RUSH=0,
         VIRUS_THROW=1,
+        SLIME_RUSH=3,
     }
 
-    public enum BUFF_ACTIONS
+    public enum CONDITION_ACTIONS
     {
-        VIRUS_SLOW=0
+        VIRUS_SLOW=0,
+        VIRUS_HEAL=1,
     }
 }
 

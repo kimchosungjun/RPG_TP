@@ -5,7 +5,7 @@ using EffectEnums;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Virus : CombatMonster
+public partial class Virus : CombatMonster
 {
     [SerializeField] float nearCombatRange;
     [SerializeField] float farCombatRange;
@@ -37,6 +37,7 @@ public class Virus : CombatMonster
         base.Start();
         detecter.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
         nav.speed = monsterStat.Speed;
+        SetAttackData();
     }
 
     protected override void CreateBTStates()
@@ -75,7 +76,7 @@ public class Virus : CombatMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        virusRoot.Evaluate();
+        //virusRoot.Evaluate();
         statusUI.FixedExecute();
     }
     #endregion

@@ -22,6 +22,11 @@ public partial class MonsterTable : BaseTable
     // 전투 몬스터 데이터
     Dictionary<int, CombatMonsterStatTableData> combatMonsterStatGroup = new Dictionary<int, CombatMonsterStatTableData>();
 
+    // 몬스터 공격 데이터
+    Dictionary<int, MonsterAttackTableData> monsterAttackGroup = new Dictionary<int, MonsterAttackTableData>();
+
+    // 몬스터 상태 변경 데이터
+    Dictionary<int, MonsterConditionTableData> monsterConditionGroup = new Dictionary<int, MonsterConditionTableData>();
     #endregion
 
     /*****************************************************
@@ -79,6 +84,35 @@ public partial class MonsterTable : BaseTable
             return combatMonsterStatGroup[typeID];
         return null;
     }
-   
+
+    public MonsterAttackTableData GetMonsterAttackTableData(int _typeID, int _level)
+    {
+        if (monsterAttackGroup.ContainsKey(_typeID))
+            return monsterAttackGroup[_typeID];
+        return null;
+    }
+
+    public MonsterAttackTableData GetMonsterAttackTableData(ATTACK_ACTIONS _typeID, int _level)
+    {
+        int typeID = (int)_typeID;
+        if (monsterAttackGroup.ContainsKey(typeID))
+            return monsterAttackGroup[typeID];
+        return null;
+    }
+
+    public MonsterConditionTableData GetMonsterConditionTableData(int _typeID, int _level)
+    {
+        if (monsterConditionGroup.ContainsKey(_typeID))
+            return monsterConditionGroup[_typeID];
+        return null;
+    }
+
+    public MonsterConditionTableData GetMonsterConditionTableData(ATTACK_ACTIONS _typeID, int _level)
+    {
+        int typeID = (int)_typeID;
+        if (monsterConditionGroup.ContainsKey(typeID))
+            return monsterConditionGroup[typeID];
+        return null;
+    }
     #endregion
 }

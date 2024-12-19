@@ -54,6 +54,30 @@ public partial class MonsterTable : BaseTable
             combatMonsterStatGroup.Add(data.ID, data);
         }
     }
+
+    public void InitMonsterAttackTableCsv(string _name, int _startRow, int _startCol)
+    {
+        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
+        for (int row = _startRow; row < reader.row; row++)
+        {
+            MonsterAttackTableData data = new MonsterAttackTableData();
+            if (ReadMonsterAttackTable(reader, data, row, _startCol) == false)
+                break;
+            monsterAttackGroup.Add(data.ID, data);
+        }
+    }
+
+    public void InitMonsterConditionTableCsv(string _name, int _startRow, int _startCol)
+    {
+        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
+        for (int row = _startRow; row < reader.row; row++)
+        {
+            MonsterConditionTableData data = new MonsterConditionTableData();
+            if (ReadMonsterConditionTable(reader, data, row, _startCol) == false)
+                break;
+            monsterConditionGroup.Add(data.ID, data);
+        }
+    }
     #endregion
 
     /*************************************************************

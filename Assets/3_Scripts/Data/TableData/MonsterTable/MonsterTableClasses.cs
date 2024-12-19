@@ -77,7 +77,7 @@ namespace MonsterTableClasses
         public int ID;
         public int attribute;
         public float multiplier;
-        public float effect;
+        public int effect;
         public float maintainTime;
         public float coolTime;
         public float defaultDamage;
@@ -90,7 +90,7 @@ namespace MonsterTableClasses
         public int ID;
         public int attribute;
         public float multiplier;
-        public float effect;
+        public int effect;
         public float maintainTime;
         public float coolTime;
         public float defaultConditionValue;
