@@ -30,6 +30,7 @@ public class PlayerStat : BaseStat
     
     public void LoadPlayerStat(PlayerSaveStat _currentStat)
     {
+        int level = _currentStat.currentLevel - 1; // 시작레벨 1을 뺀다.
         this.currentStat = _currentStat;
 
         TableMgr tableMgr = SharedMgr.TableMgr;
@@ -39,15 +40,13 @@ public class PlayerStat : BaseStat
         actorName = tableData.name;
         speed = tableData.speed;
         dashSpeed = tableData.dashSpeed;
-        jumpSpeed = tableData.jumpSpeed;    
+        jumpSpeed = tableData.jumpSpeed;
 
-        PlayerStatTableData statData = new PlayerStatTableData();
-        statData = tableMgr.Player.GetPlayerStatTableData(currentStat.playerTypeID, currentStat.currentLevel);
-        attackValue = statData.attackValue;
-        defenceValue = statData.defenceValue;
-        criticalValue = statData.criticalValue;
-        maxHp = statData.maxHp;
-        attackSpeed = statData.attackSpeed;
+        maxHp = tableData.defaultHP + level * tableData.increaseHP;
+        attackValue = tableData.defaultAttack + level * tableData.increaseAttack;
+        defenceValue = tableData.defaultDefence + level * tableData.increaseDefence;
+        criticalValue = tableData.defaultCritical + level * tableData.increaseCritical;
+        attackSpeed = tableData.defaultAttackSpeed+ level * tableData.increaseAttackSpeed;
     }
     #endregion
 }

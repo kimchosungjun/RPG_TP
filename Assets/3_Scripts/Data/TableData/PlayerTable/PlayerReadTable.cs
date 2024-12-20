@@ -60,28 +60,6 @@ public partial class PlayerTable: BaseTable
     }
 
     /// <summary>
-    /// 플레이어 스탯 데이터 등록
-    /// </summary>
-    /// <param name="_name"></param>
-    /// <param name="_startRow"></param>
-    /// <param name="_startCol"></param>
-    /// <param name="_typeID"></param>
-    public void InitPlayerStatTableCsv(string _name, int _startRow, int _startCol , TYPEIDS _typeID)
-    {
-        int typeID = (int)_typeID;
-        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
-        Dictionary<int, PlayerStatTableData> tableDictionary = new Dictionary<int, PlayerStatTableData> ();
-        for (int row = _startRow; row < reader.row; row++)
-        {
-            PlayerStatTableData data = new PlayerStatTableData();
-            if (ReadPlayerStat(reader, data, row, _startCol) == false)
-                break;
-            tableDictionary.Add(data.level, data);
-        }
-        playerStatGroup.Add(typeID, tableDictionary);
-    }
-
-    /// <summary>
     /// 플레이어 기본공격 데이터 등록
     /// </summary>
     /// <param name="_name"></param>
@@ -183,6 +161,16 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.normalAttackCombo);
         _reader.get(_row, ref _tableData.skillCombo);
         _reader.get(_row, ref _tableData.ultimateCombo);
+        _reader.get(_row, ref _tableData.defaultHP);
+        _reader.get(_row, ref _tableData.defaultAttack);
+        _reader.get(_row, ref _tableData.defaultDefence);
+        _reader.get(_row, ref _tableData.defaultCritical);
+        _reader.get(_row, ref _tableData.defaultAttackSpeed);
+        _reader.get(_row, ref _tableData.increaseHP);
+        _reader.get(_row, ref _tableData.increaseAttack);
+        _reader.get(_row, ref _tableData.increaseDefence);
+        _reader.get(_row, ref _tableData.increaseCritical);
+        _reader.get(_row, ref _tableData.increaseAttackSpeed);
         return true;
     }
 
@@ -204,26 +192,6 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.normalAttackLevelupGolds, _tableData.actionMaxLevel-1);
         _reader.get(_row, ref _tableData.skillLevelupGolds, _tableData.actionMaxLevel - 1);
         _reader.get(_row, ref _tableData.ultimateLevelupGolds, _tableData.actionMaxLevel - 1);
-        return true;
-    }
-
-    /// <summary>
-    /// 플레이어 스탯 데이터 읽기
-    /// </summary>
-    /// <param name="_reader"></param>
-    /// <param name="_tableData"></param>
-    /// <param name="_row"></param>
-    /// <param name="_col"></param>
-    /// <returns></returns>
-    protected bool ReadPlayerStat(CSVReader _reader, PlayerStatTableData _tableData, int _row, int _col)
-    {
-        if (_reader.reset_row(_row, _col) == false) return false;
-        _reader.get(_row, ref _tableData.level);
-        _reader.get(_row, ref _tableData.maxHp);
-        _reader.get(_row, ref _tableData.attackValue);
-        _reader.get(_row, ref _tableData.defenceValue);
-        _reader.get(_row, ref _tableData.criticalValue);
-        _reader.get(_row, ref _tableData.attackSpeed);
         return true;
     }
 

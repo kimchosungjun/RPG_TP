@@ -16,9 +16,6 @@ public partial class PlayerTable : BaseTable
     // 플레이어 레벨 업 정보 (+ 강화 골드)
     PlayerLevelTableData levelupTableData = new PlayerLevelTableData();
 
-    // 누구의 스탯인지 확인하고 레벨에 맞게 스탯을 파싱 : 첫번째 키 값은 플레이어의 TYPEID이고 두번째 키 값은 level
-    Dictionary<int, Dictionary<int, PlayerStatTableData>> playerStatGroup = new Dictionary<int, Dictionary<int, PlayerStatTableData>>();
-
     // 누구의 일반공격인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 플레이어 TYPEID, 두번째 키 값은 level
     Dictionary<int, Dictionary<int, PlayerNormalAttackTableData>> playerNormalAttackDataGroup = new Dictionary<int, Dictionary<int, PlayerNormalAttackTableData>>();
 
@@ -58,33 +55,6 @@ public partial class PlayerTable : BaseTable
     /// </summary>
     /// <returns></returns>
     public PlayerLevelTableData GetPlayerLevelTableData() {  return levelupTableData; }
-
-    /// <summary>
-    /// 플레이어 스탯 정보 반환
-    /// </summary>
-    /// <param name="_typeID"></param>
-    /// <param name="_level"></param>
-    /// <returns></returns>
-    public PlayerStatTableData GetPlayerStatTableData(int _typeID,int _level)
-    {
-        if (playerStatGroup.ContainsKey(_typeID))
-        {
-            if (playerStatGroup[_typeID].ContainsKey(_level))
-                return playerStatGroup[_typeID][_level];
-        }
-        return null;
-    }
-
-    public PlayerStatTableData GetPlayerStatTableData(TYPEIDS _typeID, int _level)
-    {
-        int typeID = (int)_typeID;
-        if (playerStatGroup.ContainsKey(typeID))
-        {
-            if (playerStatGroup[typeID].ContainsKey(_level))
-                return playerStatGroup[typeID][_level];
-        }
-        return null;
-    }
 
     /// <summary>
     /// 플레이어 기본공격 반환

@@ -18,6 +18,16 @@ namespace PlayerTableClasses
         public int normalAttackCombo;
         public int skillCombo;
         public int ultimateCombo;
+        public float defaultHP;
+        public float defaultAttack;
+        public float defaultDefence;
+        public float defaultCritical;
+        public float defaultAttackSpeed;
+        public float increaseHP;
+        public float increaseAttack;
+        public float increaseDefence;
+        public float increaseCritical;  
+        public float increaseAttackSpeed;
     }
 
     [Serializable]
@@ -40,17 +50,6 @@ namespace PlayerTableClasses
             skillLevelupGolds = new int[actionMaxLevel - 1];
             ultimateLevelupGolds = new int[actionMaxLevel - 1];
         }
-    }
-
-    [Serializable]
-    public class PlayerStatTableData
-    {
-        public int level;
-        public float maxHp;
-        public float attackValue;
-        public float defenceValue;
-        public float criticalValue;
-        public float attackSpeed;
     }
 
     [Serializable]
