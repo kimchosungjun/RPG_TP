@@ -24,7 +24,7 @@ public class NonCombatMonster : StandardMonster
     {
         MonsterTable table = SharedMgr.TableMgr.Monster;
         MonsterTableClasses.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
-        MonsterTableClasses.NonCombatMonsterStatTableData statTableData = table.GetNonCombatMonsterStatTableData(monsterType, monsterLevel);
+        MonsterTableClasses.NonCombatMonsterStatTableData statTableData = table.GetNonCombatMonsterStatTableData(monsterType);
         monsterStat.SetMonsterStat(statTableData, monsterLevel);
         monsterStatControl.MonsterStat = monsterStat;
         monsterStatControl.SetStatusUI(statusUI);

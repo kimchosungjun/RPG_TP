@@ -55,14 +55,14 @@ public partial class MonsterTable : BaseTable
         return null;
     }
 
-    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(int _typeID, int _level)
+    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(int _typeID)
     {
         if (nonCombatMonsterStatGroup.ContainsKey(_typeID))
             return nonCombatMonsterStatGroup[_typeID];  
         return null;
     }
     
-    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(TYPEIDS _typeID, int _level)
+    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(TYPEIDS _typeID)
     {
         int typeID = (int)_typeID;
         if (nonCombatMonsterStatGroup.ContainsKey(typeID))
@@ -70,14 +70,14 @@ public partial class MonsterTable : BaseTable
         return null;
     }
 
-    public CombatMonsterStatTableData GetCombatMonsterStatTableData(int _typeID, int _level)
+    public CombatMonsterStatTableData GetCombatMonsterStatTableData(int _typeID)
     {
         if (combatMonsterStatGroup.ContainsKey(_typeID))
             return combatMonsterStatGroup[_typeID];
         return null;
     }
 
-    public CombatMonsterStatTableData GetCombatMonsterStatTableData(TYPEIDS _typeID, int _level)
+    public CombatMonsterStatTableData GetCombatMonsterStatTableData(TYPEIDS _typeID)
     {
         int typeID = (int)_typeID;
         if (combatMonsterStatGroup.ContainsKey(typeID))
@@ -85,14 +85,14 @@ public partial class MonsterTable : BaseTable
         return null;
     }
 
-    public MonsterAttackTableData GetMonsterAttackTableData(int _typeID, int _level)
+    public MonsterAttackTableData GetMonsterAttackTableData(int _typeID)
     {
         if (monsterAttackGroup.ContainsKey(_typeID))
             return monsterAttackGroup[_typeID];
         return null;
     }
 
-    public MonsterAttackTableData GetMonsterAttackTableData(ATTACK_ACTIONS _typeID, int _level)
+    public MonsterAttackTableData GetMonsterAttackTableData(ATTACK_ACTIONS _typeID)
     {
         int typeID = (int)_typeID;
         if (monsterAttackGroup.ContainsKey(typeID))
@@ -100,14 +100,14 @@ public partial class MonsterTable : BaseTable
         return null;
     }
 
-    public MonsterConditionTableData GetMonsterConditionTableData(int _typeID, int _level)
+    public MonsterConditionTableData GetMonsterConditionTableData(int _typeID)
     {
         if (monsterConditionGroup.ContainsKey(_typeID))
             return monsterConditionGroup[_typeID];
         return null;
     }
 
-    public MonsterConditionTableData GetMonsterConditionTableData(ATTACK_ACTIONS _typeID, int _level)
+    public MonsterConditionTableData GetMonsterConditionTableData(CONDITION_ACTIONS _typeID)
     {
         int typeID = (int)_typeID;
         if (monsterConditionGroup.ContainsKey(typeID))

@@ -146,7 +146,7 @@ namespace MonsterEnums
     public enum ATTACK_ACTIONS
     {
         VIRUS_RUSH=0,
-        VIRUS_THROW=1,
+        VIRUS_SPREAD=1,
         SLIME_RUSH=3,
     }
 
@@ -174,7 +174,7 @@ namespace EffectEnums
     public enum BUFF_ATTRIBUTE_STATS
     {
         NONE = 0,
-        HP = 1,
+        MAXHP = 1,
         ATK = 2,
         DEF = 3,
     }

@@ -5,14 +5,11 @@ using MonsterEnums;
 
 public partial class Virus : CombatMonster
 {
-    [SerializeField] VirusNearAttack nearAttack;
-    [SerializeField] VirusFarAttack farAttack;
-
     public void SetAttackData()
     {
-        MonsterAttackActionData actionData = new MonsterAttackActionData(SharedMgr.TableMgr.Monster.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_RUSH, monsterLevel));
+        //MonsterAttackActionData actionData = new MonsterAttackActionData(SharedMgr.TableMgr.Monster.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_RUSH, monsterLevel));
         //nearAttack.SetStat( monsterStat, actionData);
-        MonsterAttackActionData actionData2 = new MonsterAttackActionData(SharedMgr.TableMgr.Monster.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_THROW, monsterLevel));
+        //MonsterAttackActionData actionData2 = new MonsterAttackActionData(SharedMgr.TableMgr.Monster.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_SPREAD, monsterLevel));
         //farAttack.SetStat(monsterStat, actionData2);    
     }
 }

@@ -17,6 +17,7 @@ public partial class Virus : CombatMonster
     bool isDoHitEffect = false; // 그로기.. 등 조작 불능 상태인 경우 넉백같은 효과가 작동하지 않도록 방지하는 변수
     bool isDoAnimation = false; // 피격, 공격.. 등 특정 행동 애니메이션 도중에는 작동하지 않도록 방지하는 변수
 
+    [SerializeField] VirusSpread spread;
     Sequence virusRoot = null;
 
     #region Life Cycle
@@ -37,7 +38,7 @@ public partial class Virus : CombatMonster
         base.Start();
         detecter.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
         nav.speed = monsterStat.Speed;
-        SetAttackData();
+        spread.SetData(monsterStat);
     }
 
     protected override void CreateBTStates()

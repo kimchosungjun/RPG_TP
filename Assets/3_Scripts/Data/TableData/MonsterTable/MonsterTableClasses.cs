@@ -82,6 +82,7 @@ namespace MonsterTableClasses
         public float coolTime;
         public float defaultDamage;
         public float damageIncrease;
+        public int startLevel;
     }
 
     [Serializable]
@@ -96,6 +97,7 @@ namespace MonsterTableClasses
         public float defaultConditionValue;
         public int conditionType;
         public float conditionValueIncrease;
+        public int startLevel;
     }
 
     #endregion

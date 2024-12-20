@@ -163,6 +163,7 @@ public partial class MonsterTable : BaseTable
         _reader.get(_row, ref _tableData.coolTime);
         _reader.get(_row, ref _tableData.defaultDamage);
         _reader.get(_row, ref _tableData.damageIncrease);
+        _reader.get(_row, ref _tableData.startLevel);
         return true;
     }
 
@@ -178,6 +179,7 @@ public partial class MonsterTable : BaseTable
         _reader.get(_row, ref _tableData.defaultConditionValue);
         _reader.get(_row, ref _tableData.conditionType);
         _reader.get(_row, ref _tableData.conditionValueIncrease);
+        _reader.get(_row, ref _tableData.startLevel);
         return true;
     }
     #endregion

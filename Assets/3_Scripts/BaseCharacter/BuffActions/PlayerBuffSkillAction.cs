@@ -17,8 +17,8 @@ public class PlayerBuffSkillAction : BuffAction
         for(int i = 0; i < buffCnt; i++)
         {
             buffDatas[i] = new TransferConditionData();
-            buffDatas[i].SetData(_soData.GetEffectStatType(i), _soData.GetUseStatType(i),
-                _soData.GetContinuityType(i), _soData.GetMultiplier(i), _soData.GetMaintainEffectTime);
+            //buffDatas[i].SetData(_soData.GetEffectStatType(i), _soData.GetUseStatType(i),
+            //    _soData.GetContinuityType(i), _soData.GetMultiplier(i), _soData.GetMaintainEffectTime);
         }
     }
 
