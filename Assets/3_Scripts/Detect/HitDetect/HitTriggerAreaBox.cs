@@ -18,7 +18,7 @@ public class HitTriggerAreaBox : HitBox
     {
         if (other.gameObject.layer == (int)enemyLayer)
         {
-            other.GetComponent<BaseActor>().TakeDamage(attackData);
+            other.GetComponent<BaseActor>()?.TakeDamage(attackData);
             if (isMultiAttack == false) InActive();
         }
     }

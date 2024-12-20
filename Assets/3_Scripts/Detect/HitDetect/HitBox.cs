@@ -6,6 +6,7 @@ public abstract class HitBox : MonoBehaviour
     [SerializeField, Tooltip("적 레이어")] protected UtilEnums.LAYERS enemyLayer;
     protected TransferAttackData attackData = null;
     protected TransferConditionData conditionData = null;
+    protected Vector3 moveDirection;
     public virtual void SetHitData(TransferAttackData _attackData, TransferConditionData _conditionData) 
     {
         this.attackData= _attackData;
@@ -13,12 +14,13 @@ public abstract class HitBox : MonoBehaviour
         Active(); 
     }
     
-    public virtual void SetHitData(TransferAttackData _attackData, TransferConditionData _conditionData, Quaternion _lookRotate, Vector3 _position) 
+    public virtual void SetHitData(TransferAttackData _attackData, TransferConditionData _conditionData, Quaternion _lookRotate, Vector3 _position , Vector3 _direction) 
     {
         this.attackData = _attackData;
         this.conditionData = _conditionData;    
         transform.position = _position;
         transform.rotation = _lookRotate;
+        moveDirection = _direction;
         Active();
     }
 

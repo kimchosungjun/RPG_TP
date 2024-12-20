@@ -4,7 +4,7 @@ using UnityEngine;
 public class HitThrowBox : HitBox
 {
     [SerializeField, Tooltip("투사체가 유지되는 시간")] protected float visibleTime = 10f;
-    [SerializeField, Tooltip("날라가는 속도")] protected float speed = 5f;
+    [SerializeField, Tooltip("날라가는 속도")] protected float speed = 10f;
     [SerializeField, Tooltip("관통 여부")] protected bool isPenetrate;
     public override void Active()
     {
@@ -19,7 +19,7 @@ public class HitThrowBox : HitBox
         while (ctime <= visibleTime) 
         {
             ctime += Time.deltaTime;
-            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += moveDirection* speed * Time.deltaTime;
             yield return null;
         }
         InActive();
@@ -34,7 +34,7 @@ public class HitThrowBox : HitBox
     {
         if(other.gameObject.layer == (int)enemyLayer)
         {
-            other.GetComponent<BaseActor>().TakeDamage(attackData);
+            other.GetComponent<BaseActor>()?.TakeDamage(attackData);
             if (isPenetrate == false) InActive();
         }
     }

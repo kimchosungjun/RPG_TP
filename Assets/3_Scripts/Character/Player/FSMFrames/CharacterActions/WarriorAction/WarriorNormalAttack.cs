@@ -22,12 +22,12 @@ public class WarriorNormalAttack : NearTriggerAttackAction
         soData = _soData;
     }
 
-    public override void DoAction()
-    {
-        float damageValue = soData.GetActionMultiplier(combo) * playerStat.Attack * Randoms.GetCritical(playerStat.Critical);
-        attackData.SetData(soData.GetAttackEffectType(combo),damageValue, soData.GetMaintainTime(combo));
-        base.DoAction();
-    }
+    //public override void DoAction()
+    //{
+    //    float damageValue = soData.GetActionMultiplier(combo) * playerStat.Attack * Randoms.GetCritical(playerStat.Critical);
+    //    attackData.SetData(soData.GetAttackEffectType(combo),damageValue, soData.GetMaintainTime(combo));
+    //    base.DoAction();
+    //}
     
 
     public override void StopAttack()
@@ -40,8 +40,8 @@ public class WarriorNormalAttack : NearTriggerAttackAction
         if (other.gameObject.layer == enemyLayer)
         {
             // 처음 닿는 물체라면 List에 추가해주고 데미지 
-            if (CheckCollider(other))
-                other.GetComponent<BaseActor>().TakeDamage(attackData);
+            //if (CheckCollider(other))
+            //    other.GetComponent<BaseActor>().TakeDamage(attackData);
         }
     }
 }

@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9060782215717829019}
-  - component: {fileID: 6732194816024566532}
+  - component: {fileID: 1477926776206634081}
+  - component: {fileID: 301405614838744649}
   m_Layer: 0
   m_Name: Virus_FarAttack
   m_TagString: Untagged
@@ -34,7 +35,40 @@ Transform:
   m_Father: {fileID: 4530003306004526970}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6732194816024566532
+--- !u!114 &1477926776206634081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259449044351756696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5da9fc9b4eb3f4469983842e01701ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackActionData:
+    attribute: 0
+    multiplier: 0
+    effect: 0
+    maintainTime: 0
+    coolTime: 0
+    defaultValue: 0
+    defaultValueIncrease: 0
+    startLevel: 0
+  conditionActionData:
+    attribute: 0
+    multiplier: 0
+    effect: 0
+    maintainTime: 0
+    coolTime: 0
+    defaultValue: 0
+    conditionType: 0
+    defaultValueIncrease: 0
+    startLevel: 0
+  spredAttack: {fileID: 301405614838744649}
+  coolTime: 0
+--- !u!114 &301405614838744649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1803,7 +1837,7 @@ Transform:
   - {fileID: 9060782215717829019}
   - {fileID: 2300183799017922984}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4530003305994672282
 Animator:
@@ -1872,8 +1906,7 @@ MonoBehaviour:
   nav: {fileID: 5295230655071613870}
   detecter: {fileID: 1064942359646457851}
   maintainIdleTime: 0
-  nearAttack: {fileID: 0}
-  farAttack: {fileID: 0}
+  spread: {fileID: 1477926776206634081}
 --- !u!195 &5295230655071613870
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2011,7 +2044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2898362573000730015
 Transform:
   m_ObjectHideFlags: 0
@@ -2418,13 +2451,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2300183799017922984}
+  - component: {fileID: 5508482153903166494}
   m_Layer: 0
   m_Name: Virus_NearAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2300183799017922984
 Transform:
   m_ObjectHideFlags: 0
@@ -2440,6 +2474,18 @@ Transform:
   m_Father: {fileID: 4530003306004526970}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5508482153903166494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8782969323940049982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745bf4a4fafc99a46bff8cf37cfc82c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7959627963729571134
 PrefabInstance:
   m_ObjectHideFlags: 0

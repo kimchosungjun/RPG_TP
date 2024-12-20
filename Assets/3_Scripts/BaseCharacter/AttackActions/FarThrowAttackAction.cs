@@ -9,12 +9,16 @@ public class FarThrowAttackAction : AttackAction
         int projectileCnt = throwPositions.Length;
         for(int i = 0; i < projectileCnt; i++) 
         {
-           // projectiles[i].SetHitData();
+            projectiles[i].SetHitData(attackDatas[0], conditionDatas[0], throwPositions[i].rotation, throwPositions[i].position, transform.forward);
         }
     }
 
-    public override void StopAttack()
+    public override void StopAttack() 
     {
-        throw new System.NotImplementedException();
+        int projectileCnt = throwPositions.Length;
+        for (int i = 0; i < projectileCnt; i++)
+        {
+            projectiles[i].gameObject.SetActive(false);
+        }
     }
 }

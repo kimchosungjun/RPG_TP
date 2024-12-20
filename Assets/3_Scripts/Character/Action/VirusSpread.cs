@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using MonsterEnums;
-using MonsterTableClasses;
 
 public class VirusSpread : MonoBehaviour
 {
@@ -10,8 +8,10 @@ public class VirusSpread : MonoBehaviour
     [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
     [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
     [SerializeField] FarThrowAttackAction spredAttack = null;
-    public float coolTime = 0;
-    
+    protected bool isCoolDown = true;
+
+    public bool GetCoolDown { get { return isCoolDown; } }
+
     // 생성시 한번만 호출 : 몬스터의 레벨을 바꿀 생각 없기 때문이다.
     public void SetData(CombatMonsterStat _stat)
     {
@@ -26,6 +26,7 @@ public class VirusSpread : MonoBehaviour
 
     public void Spread()
     {
+        StartCoroutine(CStartCoolDown(attackActionData.GetCoolTime));
         // 전달할 데이터 가공 후, 전달
         TransferAttackData[] attackData = new TransferAttackData[1];
         attackData[0] = new TransferAttackData();
@@ -34,7 +35,17 @@ public class VirusSpread : MonoBehaviour
         conditionData[0] = new TransferConditionData();
         conditionData[0].SetData(stat, conditionActionData.GetEffect, conditionActionData.GetAttribute,
             conditionActionData.GetConditionType, conditionActionData.GetDefaultValue, conditionActionData.GetMaintainTime, conditionActionData.GetMultiplier);
+        spredAttack.SetTransferData(attackData, conditionData);
+    }
+    IEnumerator CStartCoolDown(float _coolTime)
+    {
+        isCoolDown = false;
+        yield return new WaitForSeconds(_coolTime);
+        isCoolDown = true;
+    }
 
-        //throwBox.SetHitData(attackData, conditionData);
+    private void OnDisable()
+    {
+        isCoolDown = true;
     }
 }

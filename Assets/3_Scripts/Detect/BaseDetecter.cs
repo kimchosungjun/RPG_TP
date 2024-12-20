@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BaseDetecter : MonoBehaviour
 {
-    protected LayerMask bit_DetectLayer;
-    protected int int_DetectLayer;
-    protected float detectRange;
-    protected bool isDetect =false;
-    Transform targetTransform = null;
+    [SerializeField] protected LayerMask bit_DetectLayer;
+    [SerializeField] protected int int_DetectLayer;
+    [SerializeField] protected float detectRange;
+    [SerializeField] protected bool isDetect =false;
+    [SerializeField] Transform targetTransform = null;
     public Transform GetTransform { get { return targetTransform; } }
 
     public void Setup(float _detectRange, int _int_DetectLayer)
@@ -28,6 +28,8 @@ public class BaseDetecter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
+
         if(other.gameObject.layer == int_DetectLayer)
         {
             if(targetTransform == null)
