@@ -14,7 +14,7 @@ public class PlayerStat : BaseStat
     [SerializeField] protected float attackSpeed; // 공격속도는 애니메이션 속도에 영향을 준다.
     [SerializeField] protected float dashSpeed;
     [SerializeField] protected float jumpSpeed;
-    protected PlayerSaveStat currentStat = null;
+    [SerializeField] protected PlayerSaveStat currentStat = null;
     #endregion
 
     #region Public
@@ -75,11 +75,6 @@ public class PlayerSaveStat
         currentSkillLevel = 1;
         currentUltimateSkillLevel = 1;
         playerTypeID = 0;
-    }
-
-    public PlayerSaveStat(TYPEIDS _playerType)
-    {
-        
     }
 }
 

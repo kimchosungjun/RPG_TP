@@ -361,7 +361,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /*===========================*/
 
     #region Virtual
-    public virtual void ChangeState(PlayerEnums.STATES _E_PLAYER_NEW_FSM)
+    public virtual void ChangeState(STATES _E_PLAYER_NEW_FSM)
     {
         stateMachine.ChangeState(playerStates[(int)_E_PLAYER_NEW_FSM]);
         currentPlayerState = _E_PLAYER_NEW_FSM;
@@ -400,5 +400,15 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /// 상태 정의
     /// </summary>
     protected abstract void CreateStates();
+    #endregion
+
+
+
+    #region Attack & Skill & UltimateSkill
+    public void AttackCooling() { ChangeState(STATES.MOVEMENT); }
+
+    public void SkillCooling() { ChangeState(STATES.MOVEMENT); }
+
+    public void UltimateSkillCooling() { ChangeState(STATES.MOVEMENT); }
     #endregion
 }

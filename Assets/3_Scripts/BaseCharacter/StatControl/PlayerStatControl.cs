@@ -21,7 +21,7 @@ public class PlayerStatControl : ActorStatControl
 
     public override void TakeDamage(TransferAttackData _attackData)
     {
-           
+        playerStat.GetSaveStat.currentHP -= (_attackData.GetAttackValue-playerStat.Defence);
     }
     #endregion
 }

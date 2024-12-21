@@ -129,15 +129,6 @@ public class WarriorMovementControl : PlayerMovementControl
     {
         canPlayerCtrl = _isMoveLock;
     }
-
-
-    #region Attack & Skill & UltimateSkill
-    public void AttackCooling() { base.ChangeState(STATES.MOVEMENT); }
-
-    public void SkillCooling() { base.ChangeState(STATES.MOVEMENT); }
-
-    public void UltimateSkillCooling() { base.ChangeState(STATES.MOVEMENT); }
-    #endregion
 }
 
 

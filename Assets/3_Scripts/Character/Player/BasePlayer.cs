@@ -4,7 +4,7 @@ public abstract class BasePlayer : BaseActor
 {
     /*[SerializeField] */protected PlayerStat playerStat; // 확인을 위해 serialize로 설정 : 나중엔 없애기
 
-    [Header("플레이어 스탯 연결"), SerializeField] protected PlayerDataLinker playerDataLinker;
+    [Header("플레이어 스탯 연결"), SerializeField] protected PlayerActionControl playerDataLinker;
     [Header("플레이어 스탯 컨트롤"),SerializeField] protected PlayerStatControl playerStatControl; // 스탯을 관리(버프도 관리)
     [Header("플레이어 움직임 제어"), SerializeField] protected PlayerMovementControl characterMovementControl;
     
@@ -28,7 +28,7 @@ public abstract class BasePlayer : BaseActor
     }
 
     public override bool CanTakeDamageState()  { return characterMovementControl.CanTakeDamage; }
-    public override void ApplyStatTakeDamage(TransferAttackData _attackData) { }
+    public override void ApplyStatTakeDamage(TransferAttackData _attackData) { playerStatControl.TakeDamage(_attackData); }
     public override void ApplyMovementTakeDamage(TransferAttackData _attackData) {  }
 
     #endregion

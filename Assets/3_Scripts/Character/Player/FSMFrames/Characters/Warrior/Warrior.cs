@@ -11,12 +11,12 @@ public class Warrior : BasePlayer
         playerStat = new PlayerStat();
         playerStat.LoadPlayerStat(saveStat);
         playerStatControl.PlayerStat = playerStat;
-        playerDataLinker.SetPlayerData(playerStatControl);
+        playerDataLinker.SetPlayerData(playerStatControl, characterMovementControl);
         playerStatusUICtrl = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUICtrl;
         playerStatusUICtrl?.Init();
 
         // 스크립트 연결
-        if (playerDataLinker == null) playerDataLinker = GetComponent<WarriorDataLinker>();
+        if (playerDataLinker == null) playerDataLinker = GetComponent<WarriorActionControl>();
         if (playerStatControl == null) playerStatControl = GetComponent<PlayerStatControl>();
         if (characterMovementControl == null) characterMovementControl = GetComponent<WarriorMovementControl>();
         characterMovementControl.Init(playerStat);
