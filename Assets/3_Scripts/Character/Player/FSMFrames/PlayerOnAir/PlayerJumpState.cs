@@ -16,7 +16,7 @@ public class PlayerJumpState : PlayerOnAirState
     bool onceReset = true;
     bool maintainJumpState = true;
 
-    public PlayerJumpState(WarriorMovementControl _controller) : base(_controller) { }
+    public PlayerJumpState(PlayerMovementControl _controller) : base(_controller) { }
 
     #endregion
 

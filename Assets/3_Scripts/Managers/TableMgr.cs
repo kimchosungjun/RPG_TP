@@ -57,23 +57,16 @@ public class TableMgr
 #if UNITY_EDITOR
         Player.InitPlayerTableCsv("PlayerTable", 1, 0);
         Player.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
-        LinkWarriorActionTable();
+        Player.InitPlayerNormalAttackTableCsv("PlayerNormalAttackTable", 1, 0);
+        Player.InitPlayerConditionSkillTableCsv("PlayerConditionSkillTable", 1, 0);
+        Player.InitPlayerAttackSkillTableCsv("PlayerAttackSkillTable", 1,0);
 #else
 #endif
-    }
-
-    public void LinkWarriorActionTable()
-    {
-        Player.InitPlayerNormalAttackTableCsv("WarriorNormalAttackTable", 1, 0, TYPEIDS.WARRIOR);
-        Player.InitPlayerBuffSkillTableCsv("WarriorBuffSkillTable", 1, 0, BUFF_SKILLS.WARRIOR_ROAR, TYPEIDS.WARRIOR);
-        Player.InitPlayerAttackSkillTableCsv("WarriorAttackUltimateSkillTable", 1, 0, ATTACK_SKILLS.WARRIOR_ULTIMATE);
     }
 
     public void LoadPlayerData(/*PlayerEnums.TYPEID _typeID*/)
     {
         Player.InitPlayerTableCsv("PlayerTableCsv", 1, 0);
-        
-        //.InitAttackCsv("WarriorAttackTableCsv", 1, 0, PlayerEnums.TYPEID.WARRIOR);
     }
 
     public void Save()

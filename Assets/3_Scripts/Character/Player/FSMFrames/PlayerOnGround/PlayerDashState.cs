@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerState
 {
-    public PlayerDashState(WarriorMovementControl _controller) : base(_controller) { }
+    public PlayerDashState(PlayerMovementControl _controller) : base(_controller) { }
 
     public override void Enter()
     {

@@ -16,9 +16,8 @@ public class PlayerAttackSkillActionSOData : PlayerActionSkillSOData
         actionDescription = _attackSkillData.description;
         actionParticleID = _attackSkillData.particle;
         coolTime = _attackSkillData.coolTime;
-        maintainEffectTime = _attackSkillData.effectMaintainTime;
-
-        actionMultiplier = _attackSkillData.multiplier;
-        attackEffectType = _attackSkillData.effectType; 
+        maintainEffectTime = _attackSkillData.effectMaintainTime[0];
+        actionMultiplier = _attackSkillData.multiplier[0];
+        attackEffectType = _attackSkillData.effectType[0]; 
     }
 }

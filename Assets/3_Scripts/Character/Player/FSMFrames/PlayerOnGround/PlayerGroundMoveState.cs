@@ -9,7 +9,7 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
     #region Createor & Value
     Rigidbody rigid = null;
-    public PlayerGroundMoveState(WarriorMovementControl _controller) : base(_controller) 
+    public PlayerGroundMoveState(PlayerMovementControl _controller) : base(_controller) 
     {
         this.rigid = _controller.GetRigid;
     }

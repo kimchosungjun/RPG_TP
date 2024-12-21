@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerOnAirState : PlayerState
 {
     protected Rigidbody rigid = null;
-    public PlayerOnAirState(WarriorMovementControl _controller) : base(_controller) 
+    public PlayerOnAirState(PlayerMovementControl _controller) : base(_controller) 
     {
         rigid = _controller.GetRigid;
     }

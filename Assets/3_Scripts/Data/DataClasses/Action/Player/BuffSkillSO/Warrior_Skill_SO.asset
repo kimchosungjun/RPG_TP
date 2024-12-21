@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50b17d411cdb7454db4bd9693955fb07, type: 3}
-  m_Name: Warrior_BuffSkill_SO
+  m_Name: Warrior_Skill_SO
   m_EditorClassIdentifier: 
   actionName: "\uD3EC\uD6A8"
   actionDescription: "\uC804\uBC29\uC744 \uD5A5\uD574 \uD3EC\uD6A8\uD569\uB2C8\uB2E4.\n\uACF5\uACA9\uC18D\uB3C4

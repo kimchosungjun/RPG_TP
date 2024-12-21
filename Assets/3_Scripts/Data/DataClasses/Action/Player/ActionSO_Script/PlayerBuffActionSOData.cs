@@ -39,7 +39,7 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
         return -1;
     }
 
-    public void SetSOData(PlayerBuffSkillTableData _buffSkillTable)
+    public void SetSOData(PlayerConditionSkillTableData _buffSkillTable)
     {
          actionName = _buffSkillTable.name;
          actionDescription = _buffSkillTable.description;

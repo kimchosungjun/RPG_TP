@@ -15,9 +15,6 @@ namespace PlayerTableClasses
         public float speed;
         public float dashSpeed;
         public float jumpSpeed;
-        public int normalAttackCombo;
-        public int skillCombo;
-        public int ultimateCombo;
         public float defaultHP;
         public float defaultAttack;
         public float defaultDefence;
@@ -40,9 +37,6 @@ namespace PlayerTableClasses
         public int[] skillLevelupGolds;
         public int[] ultimateLevelupGolds;
 
-        /// <summary>
-        /// 최대레벨과 최대행동 레벨을 파싱한 후에 반드시 호출할 것
-        /// </summary>
         public void SetSize()
         {
             needExps = new int[maxLevel - 1];
@@ -55,7 +49,9 @@ namespace PlayerTableClasses
     [Serializable]
     public class PlayerNormalAttackTableData
     {
+        public int id;
         public int level;
+        public int combo;
         public string name;
         public string description;
         public float[] multipliers;
@@ -63,18 +59,20 @@ namespace PlayerTableClasses
         public int[] effects;
         public int particle; // enum
 
-        public void SetSize(int _combo)
+        public void SetSize()
         {
-            multipliers = new float[_combo];
-            effectMaintainTimes = new float[_combo];
-            effects = new int[_combo];
+            multipliers = new float[combo];
+            effectMaintainTimes = new float[combo];
+            effects = new int[combo];
         }
     }
 
     [Serializable]
-    public class PlayerBuffSkillTableData
+    public class PlayerConditionSkillTableData
     {
+        public int id;
         public int level;
+        public int combo;
         public string name;
         public string description;
         public float[] multipliers;
@@ -84,26 +82,35 @@ namespace PlayerTableClasses
         public int[] effectStatTypes; // enum : 영향을 주는 스탯
         public int[] continuityTypes; // enum : 즉발 여부
         public int particle; // enum
-        public void SetSize(int _buffTypeCnt)
+        public void SetSize()
         {
-            multipliers = new float[_buffTypeCnt];
-            useStatTypes = new int[_buffTypeCnt];
-            effectStatTypes = new int[_buffTypeCnt];
-            continuityTypes = new int[_buffTypeCnt];
+            multipliers = new float[combo];
+            useStatTypes = new int[combo];
+            effectStatTypes = new int[combo];
+            continuityTypes = new int[combo];
         }
     }
 
     [Serializable]
     public class PlayerAttackSkillTableData
     {
+        public int id;
         public int level;
+        public int combo;
         public string name;
         public string description;
-        public float multiplier;
+        public float[] multiplier;
         public float coolTime;
-        public float effectMaintainTime;
-        public int effectType; // enum : ATTACK_EFFECT_TYPES
+        public float[] effectMaintainTime;
+        public int[] effectType; // enum : ATTACK_EFFECT_TYPES
         public int particle; // enum
+
+        public void SetSize()
+        {
+            multiplier = new float[combo];
+            effectMaintainTime = new float[combo];
+            effectType = new int[combo];
+        }
     }
     #endregion
 

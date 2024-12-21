@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerStatControl : ActorStatControl
 {
-    [SerializeField] PlayerStat playerStat = null;
+    PlayerStat playerStat = null;
     public PlayerStat PlayerStat { get { return playerStat; } set { playerStat = value; } }
 
     #region To Do ~~~~~~

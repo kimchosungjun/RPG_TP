@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public abstract class BasePlayer : BaseActor
+public class BasePlayer : BaseActor
 {
-    /*[SerializeField] */protected PlayerStat playerStat; // 확인을 위해 serialize로 설정 : 나중엔 없애기
+    [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUICtrl; // HP, EXP, Level을 나타내는 UI
+    [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; // 확인을 위해 serialize로 설정 : 나중엔 없애기
+    [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
+    [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; // 스탯을 관리(버프도 관리)
+    [Header("플레이어 움직임 관리"), SerializeField] protected PlayerMovementControl characterMovementControl;
 
-    [Header("플레이어 스탯 연결"), SerializeField] protected PlayerActionControl playerDataLinker;
-    [Header("플레이어 스탯 컨트롤"),SerializeField] protected PlayerStatControl playerStatControl; // 스탯을 관리(버프도 관리)
-    [Header("플레이어 움직임 제어"), SerializeField] protected PlayerMovementControl characterMovementControl;
-    
     #region Property
     public PlayerStat PlayerStat { get { return playerStat; }  set { playerStat = value; } }
     public PlayerStatControl GetPlayerStatControl { get { return playerStatControl; } }
@@ -37,10 +37,40 @@ public abstract class BasePlayer : BaseActor
     /************ 라이프 사이클  ************/
     /******************************************/
 
-    #region Abstract Method
-    public abstract void Init();
-    public abstract void Setup();
-    public abstract void Execute();
-    public abstract void FixedExecute();
+    #region Life Cycle : Virtual
+    public virtual void Init()
+    {
+        // 스탯 연결
+        PlayerSaveStat saveStat = new PlayerSaveStat();
+        playerStat = new PlayerStat();
+        playerStat.LoadPlayerStat(saveStat);
+        playerStatControl.PlayerStat = playerStat;
+        playerActionControl.SetPlayerData(playerStatControl, characterMovementControl);
+        playerStatusUICtrl = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUICtrl;
+        playerStatusUICtrl?.Init();
+
+        // 스크립트 연결
+        if (playerActionControl == null) playerActionControl = GetComponent<WarriorActionControl>();
+        if (playerStatControl == null) playerStatControl = GetComponent<PlayerStatControl>();
+        if (characterMovementControl == null) characterMovementControl = GetComponent<WarriorMovementControl>();
+        characterMovementControl.Init(playerStat);
+    }
+
+    public virtual void Setup()
+    {
+        playerStatusUICtrl.Setup(playerStat);
+        characterMovementControl.Setup();
+    }
+
+    public virtual void Execute()
+    {
+        playerStatusUICtrl.FixedExecute();
+        characterMovementControl.Execute();
+    }
+
+    public virtual void FixedExecute()
+    {
+        characterMovementControl.FixedExecute();
+    }
     #endregion
 }

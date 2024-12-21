@@ -2,7 +2,7 @@
 public class PlayerActionState : PlayerOnGroundState
 {
     protected PlayerAttackCombo attackCombo = null;
-    public PlayerActionState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller) { attackCombo = _attackCombo; }
+    public PlayerActionState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller) { attackCombo = _attackCombo; }
 
     public override void Enter()
     {

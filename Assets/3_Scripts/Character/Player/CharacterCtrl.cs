@@ -12,7 +12,7 @@ public class CharacterCtrl : MonoBehaviour
     [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
     bool canChangeCharacter = true; // 처음 시작 시 초기화 필요
     float changeCharacterCoolTime = 1f; 
-    int currentCharacter = 0; // 처음 시작 시 초기화 필요
+    int currentCharacter = 1; // 처음 시작 시 초기화 필요
     #endregion
 
     #region Life Cycle

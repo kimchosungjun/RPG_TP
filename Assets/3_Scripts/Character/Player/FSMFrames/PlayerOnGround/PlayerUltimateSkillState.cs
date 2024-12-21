@@ -1,6 +1,6 @@
 public class PlayerUltimateSkillState : PlayerActionState
 {
-    public PlayerUltimateSkillState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
+    public PlayerUltimateSkillState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
 
     public override void Enter()
     {

@@ -1,4 +1,0 @@
-Level,Name,Description,Multipliers,CoolTime,MaintainTime,E_UseStatType,E_EffectStatType,E_ContinuityType,E_Particle
-1,포효,전방을 향해 포효합니다.\n공격속도 50%와 공격력 10%가 증가됩니다.,0.5,0.1,15,7,0,0,4,2,1,1,0
-2,포효,전방을 향해 포효합니다.\n공격속도 50%와 공격력 20%가 증가됩니다.,0.5,0.2,15,7,0,0,4,2,1,1,0
-3,포효,전방을 향해 포효합니다.\n공격속도 50%와 공격력 30%가 증가됩니다.,0.5,0.3,15,7,0,0,4,2,1,1,0

@@ -20,7 +20,7 @@ public partial class PlayerTable : BaseTable
     Dictionary<int, Dictionary<int, PlayerNormalAttackTableData>> playerNormalAttackDataGroup = new Dictionary<int, Dictionary<int, PlayerNormalAttackTableData>>();
 
     // 누구의 버프스킬인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 BUFF_SKILL, 두번째 키 값은 level
-    Dictionary<int, Dictionary<int, PlayerBuffSkillTableData>> playerBuffSkillDataGroup = new Dictionary<int, Dictionary<int, PlayerBuffSkillTableData>>();
+    Dictionary<int, Dictionary<int, PlayerConditionSkillTableData>> playerBuffSkillDataGroup = new Dictionary<int, Dictionary<int, PlayerConditionSkillTableData>>();
 
     // 누구의 공격스킬인지 확인 후, 레벨에 맞는 공격 데이터 전달 : 첫번째 키 값은 ATTACK_SKILL, 두번째 키 값은 level
     Dictionary<int, Dictionary<int, PlayerAttackSkillTableData>> playerAttackSkillDataGroup = new Dictionary<int, Dictionary<int, PlayerAttackSkillTableData>>();
@@ -89,7 +89,7 @@ public partial class PlayerTable : BaseTable
     /// <param name="_buffSkillID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerBuffSkillTableData GetPlayerBuffSkillTableData(BUFF_SKILLS _buffSkillID, int _level)
+    public PlayerConditionSkillTableData GetPlayerBuffSkillTableData(BUFF_SKILLS _buffSkillID, int _level)
     {
         int skillType = (int)_buffSkillID;
         if (playerBuffSkillDataGroup.ContainsKey(skillType))

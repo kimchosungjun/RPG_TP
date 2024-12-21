@@ -7,7 +7,7 @@ public class PlayerAttackState : PlayerActionState
     #region Creator & Value
 
     int currentCombo = -1;
-    public PlayerAttackState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) 
+    public PlayerAttackState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) 
     {
 
     }

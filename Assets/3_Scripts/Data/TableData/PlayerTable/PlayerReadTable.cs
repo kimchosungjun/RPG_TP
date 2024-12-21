@@ -1,25 +1,7 @@
 using System.Collections.Generic;
-using PlayerEnums;
 using PlayerTableClasses;
 public partial class PlayerTable: BaseTable
-{
-
-    /*************************************************************
-    ************ Binary 형식의 데이터 저장 & 로드 ****************
-    *************************************************************/
-
-    #region Save & Load BinaryData
-    //public void InitBinary<T>(string _name, T _t)
-    //{
-    //    LoadBinary<T>(_name, ref _t);
-    //}
-
-    //public void SaveBinary<T>(string _name, T _t)  
-    //{
-    //    SaveBinary(_name, _t);
-    //}
-    #endregion
-
+{ 
     /*************************************************************
     *********** 읽어 온 데이터를 Dictionary에 저장 ***************
     *************************************************************/
@@ -67,49 +49,42 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerNormalAttackTableCsv(string _name, int _startRow, int _startCol, TYPEIDS _typeID)
+    public void InitPlayerNormalAttackTableCsv(string _name, int _startRow, int _startCol)
     {
-        int typeID = (int)_typeID;
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
-        int combo = playerTableGroup.ContainsKey(typeID) ? playerTableGroup[typeID].normalAttackCombo : 1;
-        Dictionary<int, PlayerNormalAttackTableData> tableDictionary = new Dictionary<int, PlayerNormalAttackTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
             PlayerNormalAttackTableData data = new PlayerNormalAttackTableData();
-
-            data.SetSize(combo);    
             if (ReadPlayerNormalAttack(reader, data, row, _startCol) == false)
                 break;
-            tableDictionary.Add(data.level, data);
+            if (playerNormalAttackDataGroup.ContainsKey(data.id) == false)
+                playerNormalAttackDataGroup[data.id] = new Dictionary<int, PlayerNormalAttackTableData>();
+
+            playerNormalAttackDataGroup[data.id].Add(data.level, data); 
         }
-        playerNormalAttackDataGroup.Add(typeID, tableDictionary);
     }
 
     /// <summary>
-    /// 플레이어 버프스킬 데이터 등록
+    /// 플레이어 상태스킬 데이터 등록
     /// </summary>
     /// <param name="_name"></param>
     /// <param name="_startRow"></param>
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerBuffSkillTableCsv(string _name, int _startRow, int _startCol,BUFF_SKILLS _skillID, TYPEIDS _typeID)
+    public void InitPlayerConditionSkillTableCsv(string _name, int _startRow, int _startCol)
     {
-        int typeID = (int)_typeID;
-        int skillTypeID = (int)_skillID;
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
-        int combo = playerTableGroup.ContainsKey(typeID) ? playerTableGroup[typeID].skillCombo : 1;
-        Dictionary<int, PlayerBuffSkillTableData> tableDictionary = new Dictionary<int, PlayerBuffSkillTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
-            PlayerBuffSkillTableData data = new PlayerBuffSkillTableData();
+            PlayerConditionSkillTableData data = new PlayerConditionSkillTableData();
 
-            data.SetSize(combo);
-            if (ReadPlayerBuffSkill(reader, data, row, _startCol) == false)
+            if (ReadPlayerConditionSkill(reader, data, row, _startCol) == false)
                 break;
-            tableDictionary.Add(data.level, data);
+            if (playerBuffSkillDataGroup.ContainsKey(data.id) == false)
+                playerBuffSkillDataGroup[data.id] = new Dictionary<int, PlayerConditionSkillTableData>();
+            playerBuffSkillDataGroup[data.id].Add(data.level, data);
         }
-        playerBuffSkillDataGroup.Add(skillTypeID, tableDictionary);
     }
 
     /// <summary>
@@ -120,19 +95,18 @@ public partial class PlayerTable: BaseTable
     /// <param name="_startCol"></param>
     /// <param name="_typeID"></param>
     /// <param name="_comboCnt"></param>
-    public void InitPlayerAttackSkillTableCsv(string _name, int _startRow, int _startCol, ATTACK_SKILLS _typeID)
+    public void InitPlayerAttackSkillTableCsv(string _name, int _startRow, int _startCol)
     {
-        int skillTypeID = (int)_typeID;
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.PLAYER);
-        Dictionary<int, PlayerAttackSkillTableData> tableDictionary = new Dictionary<int, PlayerAttackSkillTableData>();
         for (int row = _startRow; row < reader.row; row++)
         {
             PlayerAttackSkillTableData data = new PlayerAttackSkillTableData();
             if (ReadPlayerAttackSkill(reader, data, row, _startCol) == false)
                 break;
-            tableDictionary.Add(data.level, data);
+            if (playerAttackSkillDataGroup.ContainsKey(data.id) == false)
+                playerAttackSkillDataGroup[data.id] = new Dictionary<int, PlayerAttackSkillTableData>();
+            playerAttackSkillDataGroup[data.id].Add(data.level, data);
         }
-        playerAttackSkillDataGroup.Add(skillTypeID, tableDictionary);
     }
 
     #endregion
@@ -158,9 +132,6 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.speed);
         _reader.get(_row, ref _tableData.dashSpeed);
         _reader.get(_row, ref _tableData.jumpSpeed);
-        _reader.get(_row, ref _tableData.normalAttackCombo);
-        _reader.get(_row, ref _tableData.skillCombo);
-        _reader.get(_row, ref _tableData.ultimateCombo);
         _reader.get(_row, ref _tableData.defaultHP);
         _reader.get(_row, ref _tableData.defaultAttack);
         _reader.get(_row, ref _tableData.defaultDefence);
@@ -206,36 +177,42 @@ public partial class PlayerTable: BaseTable
     protected bool ReadPlayerNormalAttack(CSVReader _reader, PlayerNormalAttackTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
+        _reader.get(_row, ref _tableData.id);
         _reader.get(_row, ref _tableData.level);
+        _reader.get(_row, ref _tableData.combo);
+        _tableData.SetSize();
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
-        _reader.get(_row, ref _tableData.multipliers, _tableData.multipliers.Length);
-        _reader.get(_row, ref _tableData.effectMaintainTimes, _tableData.effectMaintainTimes.Length);
+        _reader.get(_row, ref _tableData.multipliers, _tableData.combo);
+        _reader.get(_row, ref _tableData.effectMaintainTimes, _tableData.combo);
         _reader.get(_row, ref _tableData.effects, _tableData.effects.Length);
         _reader.get(_row, ref _tableData.particle);
         return true;
     }
 
     /// <summary>
-    /// 플레이어 버프스킬 데이터 읽기
+    /// 플레이어 상태스킬 데이터 읽기
     /// </summary>
     /// <param name="_reader"></param>
     /// <param name="_tableData"></param>
     /// <param name="_row"></param>
     /// <param name="_col"></param>
     /// <returns></returns>
-    protected bool ReadPlayerBuffSkill(CSVReader _reader, PlayerBuffSkillTableData _tableData, int _row, int _col)
+    protected bool ReadPlayerConditionSkill(CSVReader _reader, PlayerConditionSkillTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
+        _reader.get(_row, ref _tableData.id);
         _reader.get(_row, ref _tableData.level);
+        _reader.get(_row, ref _tableData.combo);
+        _tableData.SetSize();   
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
-        _reader.get(_row, ref _tableData.multipliers, _tableData.multipliers.Length);
+        _reader.get(_row, ref _tableData.multipliers, _tableData.combo);
         _reader.get(_row, ref _tableData.coolTime);
         _reader.get(_row, ref _tableData.effectMaintainTime);
-        _reader.get(_row, ref _tableData.useStatTypes, _tableData.useStatTypes.Length);
-        _reader.get(_row, ref _tableData.effectStatTypes, _tableData.effectStatTypes.Length);
-        _reader.get(_row, ref _tableData.continuityTypes, _tableData.continuityTypes.Length);
+        _reader.get(_row, ref _tableData.useStatTypes, _tableData.combo);
+        _reader.get(_row, ref _tableData.effectStatTypes, _tableData.combo);
+        _reader.get(_row, ref _tableData.continuityTypes, _tableData.combo);
         _reader.get(_row, ref _tableData.particle);
         return true;
     }
@@ -251,13 +228,16 @@ public partial class PlayerTable: BaseTable
     protected bool ReadPlayerAttackSkill(CSVReader _reader, PlayerAttackSkillTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
+        _reader.get(_row, ref _tableData.id);
         _reader.get(_row, ref _tableData.level);
+        _reader.get(_row, ref _tableData.combo);
+        _tableData.SetSize();
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
-        _reader.get(_row, ref _tableData.multiplier);
+        _reader.get(_row, ref _tableData.multiplier, _tableData.combo);
         _reader.get(_row, ref _tableData.coolTime);
-        _reader.get(_row, ref _tableData.effectMaintainTime);
-        _reader.get(_row, ref _tableData.effectType);
+        _reader.get(_row, ref _tableData.effectMaintainTime, _tableData.combo);
+        _reader.get(_row, ref _tableData.effectType, _tableData.combo);
         _reader.get(_row, ref _tableData.particle);
         return true;
     }

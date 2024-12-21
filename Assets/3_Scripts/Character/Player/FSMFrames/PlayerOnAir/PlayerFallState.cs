@@ -7,7 +7,7 @@ public class PlayerFallState : PlayerOnAirState
     /*********** 생성자 & 변수  *************/
     /******************************************/
 
-    public PlayerFallState(WarriorMovementControl _controller) : base(_controller) { }
+    public PlayerFallState(PlayerMovementControl _controller) : base(_controller) { }
 
     /******************************************/
     /********** 상태머신 재정의  ***********/

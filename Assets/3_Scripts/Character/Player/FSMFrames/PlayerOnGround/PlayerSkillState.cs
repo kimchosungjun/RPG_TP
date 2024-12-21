@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSkillState : PlayerActionState
 {
-    public PlayerSkillState(WarriorMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
+    public PlayerSkillState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) { }
     public override void Enter() 
     {
         base.Enter();
