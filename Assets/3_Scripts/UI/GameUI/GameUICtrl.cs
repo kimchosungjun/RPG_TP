@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 public class GameUICtrl : MonoBehaviour
 {
-    [SerializeField] PlayerStatusUI playerStatusUICtrl;
-    public PlayerStatusUI GetPlayerStatusUICtrl { get { return playerStatusUICtrl; } }
-
+    [SerializeField] PlayerStatusUI playerStatusUI;
+    [SerializeField] PlayerChangeUI playerChangeUI;
+    public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
+    public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
     private void Start()
     {
         UIInit();
@@ -15,6 +16,6 @@ public class GameUICtrl : MonoBehaviour
     public void UIInit()
     {
         SharedMgr.UIMgr.GameUICtrl = this;
-        if(playerStatusUICtrl==null) playerStatusUICtrl = GetComponentInChildren<PlayerStatusUI>();
+        if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
     }
 }

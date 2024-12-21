@@ -54,7 +54,7 @@ public class ArcherMovementControl : PlayerMovementControl
         playerStates = new PlayerState[(int)STATES.MAX];
         playerStates[(int)STATES.MOVEMENT] = new PlayerGroundMoveState(this);
         playerStates[(int)STATES.DASH] = new PlayerDashState(this);
-        playerStates[(int)STATES.JUMP] = new PlayerJumpState(this);
+        playerStates[(int)STATES.JUMP] = new ArcherJumpState(this);
         playerStates[(int)STATES.FALL] = new PlayerFallState(this);
         playerStates[(int)STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
         playerStates[(int)STATES.SKILL] = new PlayerSkillState(this, attackCombo);

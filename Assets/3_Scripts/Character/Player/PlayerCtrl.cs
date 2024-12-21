@@ -9,9 +9,10 @@ public class PlayerCtrl : MonoBehaviour
     /**********************************************/
 
     #region Value
+    [Header("카메라 컨트롤러 : 필수 연결 요소"),SerializeField] CameraController cameraCtrl;
     [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
-    bool canChangeCharacter = true; // 처음 시작 시 초기화 필요
-    float changeCharacterCoolTime = 1f; 
+    bool canChangePlayer = true; // 처음 시작 시 초기화 필요
+    float changePlayerCoolTime = 1f; 
     [SerializeField] int currentPlayer = 0; // 처음 시작 시 초기화 필요
     #endregion
 
@@ -59,7 +60,10 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < partyCnt; i++)
         {
             if (players[i].GetIsAlive)
+            {
+                cameraCtrl.QuaterViewChangeTarget(players[i].GetPlayerMovementControl.GetBodyTransform);
                 ChangePlayer(i, false);
+            }
         }
 
         // To Do ~~~~~
@@ -76,13 +80,15 @@ public class PlayerCtrl : MonoBehaviour
         if (currentPlayer == _index) return;
 
         // 쿨타임과 죽은 상태일때는 바로 return; => UI 추가해야 함
-        if (_checkCoolTime && canChangeCharacter == false) return;
+        if (_checkCoolTime && canChangePlayer == false) return;
         if (players[_index].GetIsAlive == false) return;
 
         players[currentPlayer].gameObject.SetActive(false);
+        cameraCtrl.QuaterViewChangeTarget(players[_index].GetPlayerMovementControl.GetBodyTransform);
         players[_index].gameObject.SetActive(true);
         currentPlayer = _index;
 
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetCoolTime(changePlayerCoolTime);
         StartCoroutine(CMeasureChangeCoolTime());
     }
 
@@ -92,14 +98,14 @@ public class PlayerCtrl : MonoBehaviour
     /// <returns></returns>
     IEnumerator CMeasureChangeCoolTime()
     {
-        canChangeCharacter = false;
+        canChangePlayer = false;
         float time = 0f;
-        while(time< changeCharacterCoolTime)
+        while(time< changePlayerCoolTime)
         {
             time += Time.deltaTime;
             yield return null;
         }
-        canChangeCharacter = true;
+        canChangePlayer = true;
     }
     #endregion
 
@@ -165,8 +171,11 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < cnt; i++)
         {
             _party[i].Setup();
-            if(currentPlayer==i)
+            if (currentPlayer == i)
+            {
+                cameraCtrl.QuaterViewChangeTarget(_party[i].GetPlayerMovementControl.GetBodyTransform);
                 _party[i].gameObject.SetActive(true); 
+            }
             else
                 _party[i].gameObject.SetActive(false); 
         }

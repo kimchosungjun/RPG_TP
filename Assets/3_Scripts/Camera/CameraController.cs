@@ -37,4 +37,6 @@ public class CameraController : MonoBehaviour
         quaterView.Setup();
         cameraView = E_CAMERAVIEW.CAMERA_QUATERVIEW;
     }
+
+    public void QuaterViewChangeTarget(Transform _newTarget) { quaterView.ChangeTarget(_newTarget); }
 }

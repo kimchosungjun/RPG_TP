@@ -54,6 +54,7 @@ public class PlayerStatusUI : StatusUI
     {
         float currentHP = _playerStat.GetSaveStat.currentHP;
         float maxHp = _playerStat.MaxHP;
+        if (currentHP <= 0) currentHP = 0;
         hpImage.fillAmount = currentHP / maxHp;
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;

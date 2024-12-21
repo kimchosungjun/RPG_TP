@@ -76,5 +76,16 @@ public class PlayerSaveStat
         currentUltimateSkillLevel = 1;
         playerTypeID = 0;
     }
+
+    public PlayerSaveStat(int _id, int _curHP, int _curLevel, int _curExp, int _curNormalAttackLevel, int _curSkillLevel, int _currentUltimateSkillLevel)
+    {
+        playerTypeID = _id;
+        currentHP = _curHP; 
+        currentLevel = _curLevel;   
+        currentExp = _curExp;       
+        currentNormalAttackLevel= _curNormalAttackLevel;    
+        currentSkillLevel = _curSkillLevel;
+        currentUltimateSkillLevel = _currentUltimateSkillLevel;
+    }
 }
 

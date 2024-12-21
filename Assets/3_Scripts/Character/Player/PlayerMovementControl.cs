@@ -19,6 +19,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     protected Transform camTransform;
     public Rigidbody GetRigid { get { return rigid; } }
     public Animator GetAnim { get { return anim; } }
+    public Transform GetBodyTransform { get { return bodyTransform; } }
     #endregion
 
     #region Movement
@@ -353,6 +354,14 @@ public abstract class PlayerMovementControl : MonoBehaviour
         if (isOnGround) return;
         rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
         rigid.AddForce(Vector3.up * curGravity * rigid.mass, ForceMode.Force);
+    }
+    #endregion
+
+    #region Jump
+    public void AddforceForJump()
+    {
+        rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
+        rigid.AddForce(Vector3.up * playerJumpForce, ForceMode.Impulse);
     }
     #endregion
 

@@ -1,23 +1,16 @@
 using UnityEngine;
 using PlayerEnums;
-/// <summary>
-/// 위로 힘 가하기는 Y축 속도와 땅 체크 문제로 키가 눌리는 시점에 구현함
-/// </summary>
-public class PlayerJumpState : PlayerOnAirState
+
+public class ArcherJumpState : PlayerJumpState
 {
+    public ArcherJumpState(PlayerMovementControl _controller) : base(_controller) { }
+
     /******************************************/
     /*********** 생성자 & 변수  *************/
     /******************************************/
 
-    #region Guarantee Jump State (0.1f)
-
-    protected float time = 0f;
-    protected float jumpTimer = 0.1f;
-    protected bool onceReset = true;
-    protected bool maintainJumpState = true;
-
-    public PlayerJumpState(PlayerMovementControl _controller) : base(_controller) { }
-
+    #region Double Jump
+    bool isDoubleJump = false;
     #endregion
 
     /******************************************/
@@ -65,32 +58,23 @@ public class PlayerJumpState : PlayerOnAirState
         characterCtrl.ApplyAirRotation();
     }
 
-    #endregion
 
-    /******************************************/
-    /********** 업데이트 메서드 ************/
-    /******************************************/
-
-    #region Execute
-    public virtual void InputKey()
+    public override void InputKey()
     {
-        characterCtrl.XMove = Input.GetAxisRaw("Horizontal");
-        characterCtrl.ZMove = Input.GetAxisRaw("Vertical");
-    }
-
-    public void CheckTransitionState()
-    {
-        if (characterCtrl.IsOnGround)
+        base.InputKey();
+        if (Input.GetKeyDown(KeyCode.Space) && isDoubleJump == false) 
         {
-            characterCtrl.ChangeState(STATES.MOVEMENT);
-        }
-        else
-        {
-            if (rigid.velocity.y < 0)
-            {
-                characterCtrl.ChangeState(STATES.FALL);
-            }
+            isDoubleJump = true;
+            characterCtrl.AddforceForJump();
         }
     }
+
+    public override void Exit()
+    {
+        base.Exit();
+        isDoubleJump = false;
+    }
     #endregion
+
+
 }

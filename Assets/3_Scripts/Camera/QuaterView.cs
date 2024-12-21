@@ -17,7 +17,7 @@ public class QuaterView
     float mMouseYValue = 0f; // 마우스 Y값, 카메라를 X축을 회전축으로 상하 회전
     Vector3 offset = Vector3.zero;   // 캐릭터로부터 얼마나 떨어져 있는지에 대한 변위(위치)
 
-    #region 생성자
+    #region Creator & Change Target
     public QuaterView(Transform _camTransform, Transform _lookatTransform) 
     {
         camTransform = _camTransform;
@@ -31,6 +31,8 @@ public class QuaterView
         lookatTransform = _lookatTransform;
         deltaDistance = _deltaDistance;
     }
+
+    public void ChangeTarget(Transform _newTarget) { lookatTransform = _newTarget; }
     #endregion
 
     #region Unity Life Cycle : Must Call By Camera Controller

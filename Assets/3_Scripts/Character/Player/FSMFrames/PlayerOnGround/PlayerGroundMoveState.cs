@@ -65,8 +65,7 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         // 점프 입력
         if (Input.GetKeyDown(KeyCode.Space) && characterCtrl.IsOnGround && !characterCtrl.IsOnMaxAngleSlope)
         {
-            rigid.velocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
-            rigid.AddForce(Vector3.up * characterCtrl.PlayerJumpForce, ForceMode.Impulse);
+            characterCtrl.AddforceForJump();
             characterCtrl.ChangeState(STATES.JUMP);
             return;
         }
@@ -99,6 +98,7 @@ public class PlayerGroundMoveState : PlayerOnGroundState
             return;
         }
     }
+
 
     public void SetPlaneVelocityAnimation()
     {
