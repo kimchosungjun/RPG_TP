@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BasePlayer : BaseActor
 {
+    protected bool isAlive = true;
+
     [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUICtrl; // HP, EXP, Level을 나타내는 UI
     [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; // 확인을 위해 serialize로 설정 : 나중엔 없애기
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
@@ -12,6 +14,14 @@ public class BasePlayer : BaseActor
     public PlayerStat PlayerStat { get { return playerStat; }  set { playerStat = value; } }
     public PlayerStatControl GetPlayerStatControl { get { return playerStatControl; } }
     public PlayerMovementControl GetCharacterMovementControl { get { return characterMovementControl; } }
+    
+    public bool GetIsAlive { get { return isAlive; } }
+    public void AnnounceDeath()
+    {
+        isAlive = false;
+        PlayerCtrl playerCtrl = GetComponentInParent<PlayerCtrl>();
+        playerCtrl?.DeathChangePlayer();
+    }
     #endregion
 
     #region Override : Set Layer

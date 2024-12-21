@@ -72,7 +72,7 @@ public partial class Virus : CombatMonster
         checkFarAttackRangeGroup.Add(doMoveToPlayer);
         #endregion
 
-        #region Third BT States : Check Far Attack Cool Time & Check Near Attack Range
+        # region Third BT States : Check Far Attack Cool Time & Check Near Attack Range
         List<Node> checkFarAttackCoolTimeGroup = new List<Node>();
         
         ActionNode checkFarAttackCoolTime = new ActionNode(DoCheckCanFarAttack);
@@ -186,16 +186,17 @@ public partial class Virus : CombatMonster
     #endregion
 
     #region Third BT : Far Attack
-    NODESTATES DoCheckCanFarAttack() 
+    NODESTATES DoCheckCanFarAttack()
     {
-        if(spread.GetCoolDown)
-        {
-            isDoAnimation = true;
-            anim.SetInteger("Attack", 1);
-            anim.SetInteger("MState",(int) STATES.ATTACK);
-            return NODESTATES.FAIL;
-        }
         return NODESTATES.SUCCESS;
+
+        //if (spread.GetCoolDown)
+        //{
+        //    isDoAnimation = true;
+        //    anim.SetInteger("Attack", 1);
+        //    anim.SetInteger("MState",(int) STATES.ATTACK);
+        //    return NODESTATES.FAIL;
+        //}
     }
     NODESTATES DoCheckNearAttackRange()
     {
@@ -215,6 +216,7 @@ public partial class Virus : CombatMonster
     {
         if (rush.GetCoolDown)
         {
+            transform.LookAt(detecter.GetTransform);
             isDoAnimation = true;
             anim.SetInteger("Attack",0);
             anim.SetInteger("MState", (int)STATES.ATTACK);

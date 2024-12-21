@@ -266,6 +266,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 4186091309769744043, guid: e830911b82f1f6c429d42a08f1589d75,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4321233236069091381, guid: e830911b82f1f6c429d42a08f1589d75,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -285,6 +290,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_Virus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530003306004163418, guid: e830911b82f1f6c429d42a08f1589d75,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4530003306004526880, guid: e830911b82f1f6c429d42a08f1589d75,
         type: 3}
@@ -1694,7 +1704,7 @@ PrefabInstance:
     - target: {fileID: 5295230655071613870, guid: e830911b82f1f6c429d42a08f1589d75,
         type: 3}
       propertyPath: m_StoppingDistance
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5418262378649258458, guid: e830911b82f1f6c429d42a08f1589d75,
         type: 3}
@@ -1710,6 +1720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: monsterLevel
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5418262378649258458, guid: e830911b82f1f6c429d42a08f1589d75,
+        type: 3}
+      propertyPath: nearCombatRange
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 5418262378649258458, guid: e830911b82f1f6c429d42a08f1589d75,
         type: 3}
@@ -2105,7 +2120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &241610176
 Transform:
   m_ObjectHideFlags: 0
@@ -2136,8 +2151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players:
-  - {fileID: 696611787}
-  - {fileID: 1318774962}
+  - {fileID: 5866666020441516156}
+  - {fileID: 6621925900300702760}
+  currentPlayer: 0
 --- !u!1 &289095829
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,7 +2685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c486e99aba9fa44a501e211cbe901a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBodyTransform: {fileID: 1656154419}
+  playerBodyTransform: {fileID: 1813499420}
   cameraView: 1
 --- !u!1 &330658681
 GameObject:
@@ -3725,7 +3741,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 696611784}
-  - component: {fileID: 696611787}
   - component: {fileID: 696611786}
   - component: {fileID: 696611785}
   m_Layer: 8
@@ -3788,40 +3803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &696611787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696611783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ed4e9b6b96ea047a44e4cc1ff7f1e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStatusUICtrl: {fileID: 0}
-  playerStat:
-    actorName: 
-    maxHp: 0
-    speed: 0
-    defenceValue: 0
-    attackValue: 0
-    criticalValue: 0
-    attackSpeed: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-    currentStat:
-      playerTypeID: 0
-      currentHP: 100
-      currentLevel: 1
-      currentExp: 0
-      currentNormalAttackLevel: 1
-      currentSkillLevel: 1
-      currentUltimateSkillLevel: 1
-  playerActionControl: {fileID: 5866666020441516154}
-  playerStatControl: {fileID: 696611786}
-  characterMovementControl: {fileID: 696611785}
 --- !u!1 &712481623
 GameObject:
   m_ObjectHideFlags: 0
@@ -5611,7 +5592,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1318774959}
-  - component: {fileID: 1318774962}
   - component: {fileID: 1318774961}
   - component: {fileID: 1318774960}
   m_Layer: 0
@@ -5674,40 +5654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1318774962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318774958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ed4e9b6b96ea047a44e4cc1ff7f1e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStatusUICtrl: {fileID: 0}
-  playerStat:
-    actorName: 
-    maxHp: 0
-    speed: 0
-    defenceValue: 0
-    attackValue: 0
-    criticalValue: 0
-    attackSpeed: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-    currentStat:
-      playerTypeID: 0
-      currentHP: 100
-      currentLevel: 1
-      currentExp: 0
-      currentNormalAttackLevel: 1
-      currentSkillLevel: 1
-      currentUltimateSkillLevel: 1
-  playerActionControl: {fileID: 6621925900300702759}
-  playerStatControl: {fileID: 1318774961}
-  characterMovementControl: {fileID: 1318774960}
 --- !u!1 &1336342102
 GameObject:
   m_ObjectHideFlags: 0
@@ -8977,13 +8923,14 @@ GameObject:
   - component: {fileID: 5866666020441516153}
   - component: {fileID: 5866666020441516152}
   - component: {fileID: 5866666020441516154}
+  - component: {fileID: 5866666020441516156}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &990930288886820417
 GameObject:
   m_ObjectHideFlags: 0
@@ -9125,7 +9072,8 @@ GameObject:
   - component: {fileID: 6621925900300702757}
   - component: {fileID: 6621925900300702758}
   - component: {fileID: 6621925900300702759}
-  m_Layer: 0
+  - component: {fileID: 6621925900300702760}
+  m_Layer: 8
   m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12918,6 +12866,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666020441516156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148475685047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ed4e9b6b96ea047a44e4cc1ff7f1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatusUICtrl: {fileID: 0}
+  playerStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    attackValue: 0
+    criticalValue: 0
+    attackSpeed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+    currentStat:
+      playerTypeID: 0
+      currentHP: 100
+      currentLevel: 1
+      currentExp: 0
+      currentNormalAttackLevel: 1
+      currentSkillLevel: 1
+      currentUltimateSkillLevel: 1
+  playerActionControl: {fileID: 5866666020441516154}
+  playerStatControl: {fileID: 696611786}
+  characterMovementControl: {fileID: 696611785}
 --- !u!4 &5887129122176389289
 Transform:
   m_ObjectHideFlags: 0
@@ -13467,6 +13449,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7724ea6f673429d44aeb89d2c0a6be9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6621925900300702760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415804813711535009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ed4e9b6b96ea047a44e4cc1ff7f1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatusUICtrl: {fileID: 0}
+  playerStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    attackValue: 0
+    criticalValue: 0
+    attackSpeed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+    currentStat:
+      playerTypeID: 0
+      currentHP: 100
+      currentLevel: 1
+      currentExp: 0
+      currentNormalAttackLevel: 1
+      currentSkillLevel: 1
+      currentUltimateSkillLevel: 1
+  playerActionControl: {fileID: 6621925900300702759}
+  playerStatControl: {fileID: 1318774961}
+  characterMovementControl: {fileID: 1318774960}
 --- !u!1 &6641388797953320112
 GameObject:
   m_ObjectHideFlags: 0
