@@ -9,7 +9,7 @@ public class CombatMonsterStat : MonsterStat
     public float Attack { get { return attackValue; } set { attackValue = value; } }
     public float Critical { get { return criticalValue; } set { criticalValue = value; } }
 
-    public void SetMonsterStat(MonsterTableClasses.CombatMonsterStatTableData _combatMonsterStat, int _level)
+    public virtual void SetMonsterStat(MonsterTableClasses.CombatMonsterStatTableData _combatMonsterStat, int _level)
     {
         level = _level;
         int levelDiff = _level - _combatMonsterStat.startLevel;

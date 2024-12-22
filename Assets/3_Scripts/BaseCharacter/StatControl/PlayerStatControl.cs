@@ -26,3 +26,8 @@ public class PlayerStatControl : ActorStatControl
     }
     #endregion
 }
+
+
+
+// To do ~~ 
+// 캐릭터 변경될 때, 

@@ -3809,77 +3809,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.020034786, y: 0.6568703, z: 0.18637067}
     m_Extent: {x: 0.09608589, y: 0.06278151, z: 0.071044795}
   m_DirtyAABB: 0
---- !u!1 &696611783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 696611784}
-  - component: {fileID: 696611786}
-  - component: {fileID: 696611785}
-  m_Layer: 8
-  m_Name: WarriorControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &696611784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696611783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 543450652130980365}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &696611785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696611783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d44f6efc4d78d4489fa38859488c40a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelTransform: {fileID: 543450652130980365}
-  bodyTransform: {fileID: 1813499420}
-  collide: {fileID: 5866666020441516153}
-  rigid: {fileID: 5866666020441516152}
-  anim: {fileID: 5866666020441516155}
-  playerRotateSpeed: 12
-  airMovementMultiplier: 0.1
-  dashCoolTimer: 0.3
-  groundDrag: 6
-  airDrag: 1
-  slopeMaxAngle: 50
-  stepHeight: 0.2
-  useGravity: 1
-  currentPlayerState: 10
---- !u!114 &696611786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696611783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &712481623
 GameObject:
   m_ObjectHideFlags: 0
@@ -5867,77 +5796,6 @@ Transform:
   m_Father: {fileID: 547810354}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1318774958
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1318774959}
-  - component: {fileID: 1318774961}
-  - component: {fileID: 1318774960}
-  m_Layer: 0
-  m_Name: ArcherControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1318774959
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318774958}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6621925900300702756}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1318774960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318774958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439c6c78c1fa2a047b3bce7657253cd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelTransform: {fileID: 6621925900300702756}
-  bodyTransform: {fileID: 1656154419}
-  collide: {fileID: 6621925900300702758}
-  rigid: {fileID: 6621925900300702757}
-  anim: {fileID: 3474444263565165518}
-  playerRotateSpeed: 12
-  airMovementMultiplier: 0.1
-  dashCoolTimer: 0.3
-  groundDrag: 6
-  airDrag: 1
-  slopeMaxAngle: 50
-  stepHeight: 0.2
-  useGravity: 1
-  currentPlayerState: 10
---- !u!114 &1318774961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1318774958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1336342102
 GameObject:
   m_ObjectHideFlags: 0
@@ -9202,7 +9060,6 @@ Transform:
   - {fileID: 392932610}
   - {fileID: 330658682}
   - {fileID: 1883710963}
-  - {fileID: 696611784}
   m_Father: {fileID: 241610176}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9364,6 +9221,8 @@ GameObject:
   - component: {fileID: 5866666020441516152}
   - component: {fileID: 5866666020441516154}
   - component: {fileID: 5866666020441516156}
+  - component: {fileID: 5866666020441516158}
+  - component: {fileID: 5866666020441516157}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Untagged
@@ -9513,6 +9372,8 @@ GameObject:
   - component: {fileID: 6621925900300702758}
   - component: {fileID: 6621925900300702759}
   - component: {fileID: 6621925900300702760}
+  - component: {fileID: 6621925900300702762}
+  - component: {fileID: 6621925900300702761}
   m_Layer: 8
   m_Name: Archer
   m_TagString: Untagged
@@ -13339,8 +13200,46 @@ MonoBehaviour:
       currentSkillLevel: 1
       currentUltimateSkillLevel: 1
   playerActionControl: {fileID: 5866666020441516154}
-  playerStatControl: {fileID: 696611786}
-  playerMovementControl: {fileID: 696611785}
+  playerStatControl: {fileID: 5866666020441516157}
+  playerMovementControl: {fileID: 5866666020441516158}
+--- !u!114 &5866666020441516157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148475685047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5866666020441516158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148475685047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d44f6efc4d78d4489fa38859488c40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelTransform: {fileID: 543450652130980365}
+  bodyTransform: {fileID: 1813499420}
+  collide: {fileID: 5866666020441516153}
+  rigid: {fileID: 5866666020441516152}
+  anim: {fileID: 5866666020441516155}
+  playerRotateSpeed: 12
+  airMovementMultiplier: 0.1
+  dashCoolTimer: 0.3
+  groundDrag: 6
+  airDrag: 1
+  slopeMaxAngle: 50
+  stepHeight: 0.2
+  useGravity: 1
+  currentPlayerState: 10
 --- !u!4 &5887129122176389289
 Transform:
   m_ObjectHideFlags: 0
@@ -13824,7 +13723,6 @@ Transform:
   - {fileID: 355653127}
   - {fileID: 8815040691215427077}
   - {fileID: 5064313551274864298}
-  - {fileID: 1318774959}
   m_Father: {fileID: 241610176}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13923,8 +13821,46 @@ MonoBehaviour:
       currentSkillLevel: 1
       currentUltimateSkillLevel: 1
   playerActionControl: {fileID: 6621925900300702759}
-  playerStatControl: {fileID: 1318774961}
-  playerMovementControl: {fileID: 1318774960}
+  playerStatControl: {fileID: 6621925900300702761}
+  playerMovementControl: {fileID: 6621925900300702762}
+--- !u!114 &6621925900300702761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415804813711535009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6621925900300702762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415804813711535009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439c6c78c1fa2a047b3bce7657253cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelTransform: {fileID: 6621925900300702756}
+  bodyTransform: {fileID: 1656154419}
+  collide: {fileID: 6621925900300702758}
+  rigid: {fileID: 6621925900300702757}
+  anim: {fileID: 3474444263565165518}
+  playerRotateSpeed: 12
+  airMovementMultiplier: 0.1
+  dashCoolTimer: 0.3
+  groundDrag: 6
+  airDrag: 1
+  slopeMaxAngle: 50
+  stepHeight: 0.2
+  useGravity: 1
+  currentPlayerState: 10
 --- !u!1 &6641388797953320112
 GameObject:
   m_ObjectHideFlags: 0
