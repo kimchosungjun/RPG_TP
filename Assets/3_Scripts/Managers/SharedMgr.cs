@@ -9,6 +9,7 @@ public static class SharedMgr
     public static UIMgr UIMgr = null;
     public static ResourceMgr ResourceMgr = null;
     public static TableMgr TableMgr = null;
+    public static SoundMgr SoundMgr = null;
 
     // 아직 안씀
     public static HoldItemMgr HoldItemMgr = null;

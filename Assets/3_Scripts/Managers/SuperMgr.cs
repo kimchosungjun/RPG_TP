@@ -4,6 +4,7 @@ public class SuperMgr : MonoBehaviour
 {
     #region Link Manager
     [SerializeField] SceneMgr sceneMgr;
+    [SerializeField] SoundMgr soundMgr;
     #endregion
     
     #region Not Link Manager
@@ -28,6 +29,7 @@ public class SuperMgr : MonoBehaviour
             resourceMgr.Init();
             uiMgr.Init();
             tableMgr.Init();
+            soundMgr.Init();
             // 아이템 정보 : 아직 안씀 
             holdItemMgr.Init();
         }
