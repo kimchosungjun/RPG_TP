@@ -1,3 +1,4 @@
+using EffectEnums;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public abstract class ActorStatControl : MonoBehaviour
 
     #region Value : Buff & StatusUI
     protected int buffCnt = 0;
+    Dictionary<BUFF_APPLY_STATS, int> overlapBuffGroup = new Dictionary<BUFF_APPLY_STATS, int>();
     protected List<TransferConditionData> currentBuffs = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
 
@@ -22,12 +24,15 @@ public abstract class ActorStatControl : MonoBehaviour
     #region Control Buff
     public virtual void AddBuffs(TransferConditionData _buffData)
     {
-        if (currentBuffs.Contains(_buffData))
+        if (overlapBuffGroup.ContainsKey(_buffData.GetBuffStatType))
         {
-            _buffData.OverlapBuff();
+            // 중복이면 최신꺼로 대체하자
+            int index = overlapBuffGroup[_buffData.GetBuffStatType];
+            currentBuffs[index] = _buffData;
             return;
         }
-        _buffData.AddBuff();
+        overlapBuffGroup.Add(_buffData.GetBuffStatType, currentBuffs.Count);
+        currentBuffs.Add(_buffData);
     }
 
     public virtual void UpdateBuffs()
@@ -46,12 +51,19 @@ public abstract class ActorStatControl : MonoBehaviour
             {
                 if (currentBuffs[i].IsMaintainBuff() == false)
                 {
-                    currentBuffs[i].DeleteBuff();
+                    //currentBuffs[i].DeleteBuff();
+                    overlapBuffGroup.Remove(currentBuffs[i].GetBuffStatType);
                     currentBuffs.RemoveAt(i);
                 }
             }
         }
     }
+
+    public virtual void RemoveAllBuffs()
+    {
+
+    }
+
     #endregion
 
     /******************************************/

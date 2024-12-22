@@ -62,7 +62,6 @@ public class TransferConditionData
                 statValue = _monsterStat.Defence;
                 break;
         }
-
         this.buffValue = _buffValue + statValue * _multiplier;
     }
 

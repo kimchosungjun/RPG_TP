@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MonsterStatControl : ActorStatControl
 {
+    // To Do ~~~~~~
+    // => 비전투, 전투 몬스터 구분 없애기
+
     MonsterStat monsterStat = null;
     BaseMonster baseMonster = null;
     
@@ -19,7 +22,7 @@ public class MonsterStatControl : ActorStatControl
     {
         base.Recovery(_percent, _time); 
         // 현재 체력과 최대체력 비교
-        //monsterStat.HP = 
+        // monsterStat.HP = 
     }
 
     IEnumerator CRecovery(float _percent)
