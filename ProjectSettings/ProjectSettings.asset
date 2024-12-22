@@ -799,7 +799,23 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: KAMGAM_UGUI_WORLD_IMAGE
+    Bratwurst: KAMGAM_UGUI_WORLD_IMAGE
+    EmbeddedLinux: KAMGAM_UGUI_WORLD_IMAGE
+    GameCoreXboxOne: KAMGAM_UGUI_WORLD_IMAGE
+    LinuxHeadlessSimulation: KAMGAM_UGUI_WORLD_IMAGE
+    Nintendo Switch: KAMGAM_UGUI_WORLD_IMAGE
+    PS4: KAMGAM_UGUI_WORLD_IMAGE
+    PS5: KAMGAM_UGUI_WORLD_IMAGE
+    QNX: KAMGAM_UGUI_WORLD_IMAGE
+    Stadia: KAMGAM_UGUI_WORLD_IMAGE
+    Standalone: KAMGAM_UGUI_WORLD_IMAGE
+    WebGL: KAMGAM_UGUI_WORLD_IMAGE
+    Windows Store Apps: KAMGAM_UGUI_WORLD_IMAGE
+    XboxOne: KAMGAM_UGUI_WORLD_IMAGE
+    iPhone: KAMGAM_UGUI_WORLD_IMAGE
+    tvOS: KAMGAM_UGUI_WORLD_IMAGE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
