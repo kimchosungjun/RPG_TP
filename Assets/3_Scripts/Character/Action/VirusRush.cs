@@ -3,7 +3,7 @@ using MonsterEnums;
 using System.Collections;
 public class VirusRush : MonoBehaviour
 {
-    CombatMonsterStat stat = null;
+    MonsterStat stat;
     [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
     [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
     [SerializeField] NearTriggerAttackAction nearAttack = null;
@@ -12,7 +12,7 @@ public class VirusRush : MonoBehaviour
     public bool GetCoolDown { get { return isCoolDown; } }
 
     // 생성시 한번만 호출 : 몬스터의 레벨을 바꿀 생각 없기 때문이다.
-    public void SetData(CombatMonsterStat _stat)
+    public void SetData(MonsterStat _stat)
     {
         if (nearAttack == null) nearAttack = GetComponentInChildren<NearTriggerAttackAction>();
 

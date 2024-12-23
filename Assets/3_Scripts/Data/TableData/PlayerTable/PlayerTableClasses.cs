@@ -78,15 +78,18 @@ namespace PlayerTableClasses
         public float[] multipliers;
         public float coolTime;
         public float effectMaintainTime;
-        public int[] useStatTypes; // enum : 사용(계수 비례)하는 스탯
+        public int[] attributeStatTypes; // enum : 사용(계수 비례)하는 스탯
         public int[] effectStatTypes; // enum : 영향을 주는 스탯
         public int[] continuityTypes; // enum : 즉발 여부
+        public float[] defaultValues;
+        public int partyType;
         public int particle; // enum
         public void SetSize()
         {
             multipliers = new float[combo];
-            useStatTypes = new int[combo];
+            attributeStatTypes = new int[combo];
             effectStatTypes = new int[combo];
+            defaultValues = new float[combo];
             continuityTypes = new int[combo];
         }
     }
@@ -104,12 +107,14 @@ namespace PlayerTableClasses
         public float[] effectMaintainTime;
         public int[] effectType; // enum : ATTACK_EFFECT_TYPES
         public int particle; // enum
+        public int[] defaultValues;
 
         public void SetSize()
         {
             multiplier = new float[combo];
             effectMaintainTime = new float[combo];
             effectType = new int[combo];
+            defaultValues = new int[combo];
         }
     }
     #endregion

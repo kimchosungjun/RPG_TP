@@ -31,28 +31,16 @@ public partial class MonsterTable : BaseTable
         monsterDropGroup.Add(data.dropID, data);
     }
 
-    public void InitNonCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol)
+    public void InitMonsterStatTableCsv(string _name, int _startRow, int _startCol)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
         for (int row = _startRow; row < reader.row; row++)
         {
-            NonCombatMonsterStatTableData data = new NonCombatMonsterStatTableData();
-            if (ReadNonCombatMonsterStat(reader, data, row, _startCol) == false)
+            MonsterStatTableData data = new MonsterStatTableData();
+            if (ReadMonsterStat(reader, data, row, _startCol) == false)
                 break;
             nonCombatMonsterStatGroup.Add(data.ID, data);
         }    
-    }
-
-    public void InitCombatMonsterStatTableCsv(string _name, int _startRow, int _startCol)
-    {
-        CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
-        for (int row = _startRow; row < reader.row; row++)
-        {
-            CombatMonsterStatTableData data = new CombatMonsterStatTableData();
-            if (ReadCombatMonsterStat(reader, data, row, _startCol) == false)
-                break;
-            combatMonsterStatGroup.Add(data.ID, data);
-        }
     }
 
     public void InitMonsterAttackTableCsv(string _name, int _startRow, int _startCol)
@@ -118,22 +106,7 @@ public partial class MonsterTable : BaseTable
         return true;
     }
     
-    protected bool ReadNonCombatMonsterStat(CSVReader _reader, NonCombatMonsterStatTableData _tableData, int _row, int _col)
-    {
-        if (_reader.reset_row(_row, _col) == false) return false;
-        _reader.get(_row, ref _tableData.ID);
-        _reader.get(_row, ref _tableData.maxHP);
-        _reader.get(_row, ref _tableData.speed);
-        _reader.get(_row, ref _tableData.boostSpeed);
-        _reader.get(_row, ref _tableData.defence);
-        _reader.get(_row, ref _tableData.dropID);
-        _reader.get(_row, ref _tableData.hpIncrease);
-        _reader.get(_row, ref _tableData.defenceIncrease);
-        _reader.get(_row, ref _tableData.startLevel);
-        return true;
-    }
-
-    protected bool ReadCombatMonsterStat(CSVReader _reader, CombatMonsterStatTableData _tableData, int _row, int _col)
+    protected bool ReadMonsterStat(CSVReader _reader, MonsterStatTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;
         _reader.get(_row, ref _tableData.ID);

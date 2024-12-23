@@ -4,7 +4,7 @@ using MonsterEnums;
 
 public class VirusSpread : MonoBehaviour
 {
-    CombatMonsterStat stat = null;
+    MonsterStat stat = null;
     [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
     [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
     [SerializeField] FarThrowAttackAction spredAttack = null;
@@ -13,7 +13,7 @@ public class VirusSpread : MonoBehaviour
     public bool GetCoolDown { get { return isCoolDown; } }
 
     // 생성시 한번만 호출 : 몬스터의 레벨을 바꿀 생각 없기 때문이다.
-    public void SetData(CombatMonsterStat _stat)
+    public void SetData(MonsterStat _stat)
     {
         if (spredAttack == null) spredAttack = GetComponentInChildren<FarThrowAttackAction>();
 

@@ -115,7 +115,7 @@ public partial class Virus : CombatMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        virusRoot.Evaluate();
+        //virusRoot.Evaluate();
         statusUI.FixedExecute();
     }
     #endregion

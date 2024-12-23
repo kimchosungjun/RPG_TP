@@ -48,7 +48,7 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
 
         coolTime = _buffSkillTable.coolTime;
         maintainEffectTime = _buffSkillTable.effectMaintainTime;
-        useStatTypes = _buffSkillTable.useStatTypes;
+        useStatTypes = _buffSkillTable.attributeStatTypes;
         effectStatTypes = _buffSkillTable.effectStatTypes;
         continuityTypes = _buffSkillTable.continuityTypes;
     }

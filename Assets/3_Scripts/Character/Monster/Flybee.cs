@@ -37,7 +37,7 @@ public class Flybee : PatrolMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        flybeeRoot.Evaluate();
+        //flybeeRoot.Evaluate();
         statusUI.FixedExecute();
     }
 

@@ -45,28 +45,21 @@ namespace MonsterTableClasses
 
     #region Non Combat Table
     [Serializable]
-    public class NonCombatMonsterStatTableData
+    public class MonsterStatTableData
     {
         public int ID;
         public float maxHP;
         public float speed;
         public float boostSpeed;
+        public float attack;
         public float defence;
+        public float critical;
         public int dropID;
         public float hpIncrease;
-        public float defenceIncrease;
-        public int startLevel;
-    }
-    #endregion
-
-    #region Combat Table
-    [Serializable]
-    public class CombatMonsterStatTableData : NonCombatMonsterStatTableData
-    {
-        public float attack;
-        public float critical;
         public float attackIncrease;
+        public float defenceIncrease;
         public float criticalIncrease;
+        public int startLevel;
     }
     #endregion
 

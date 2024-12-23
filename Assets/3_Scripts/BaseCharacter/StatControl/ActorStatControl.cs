@@ -10,7 +10,7 @@ public abstract class ActorStatControl : MonoBehaviour
 
     #region Value : Buff & StatusUI
     protected int buffCnt = 0;
-    Dictionary<BUFF_APPLY_STATS, int> overlapBuffGroup = new Dictionary<BUFF_APPLY_STATS, int>();
+    Dictionary<CONDITION_EFFECT_STATS, int> overlapBuffGroup = new Dictionary<CONDITION_EFFECT_STATS, int>();
     protected List<TransferConditionData> currentBuffs = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
 

@@ -5,7 +5,8 @@ public class StandardMonster : BaseMonster
 {
     // 스탯은 하위 클래스에서 생성
     [Header("스탯 UI"),SerializeField] protected StandardMonsterStatusUI statusUI = null;
-    
+    [SerializeField] protected MonsterStat monsterStat = null;
+    public MonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
     /******************************************/
     /************ 재정의 메서드  ************/
     /******************************************/

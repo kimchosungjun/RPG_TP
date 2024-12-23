@@ -29,8 +29,7 @@ public class TableMgr
     {
         Monster.InitMonsterDropTableCsv("MonsterDropTable", 1, 0);
         Monster.InitMonsterInfoTableCsv("MonsterInfoTable", 1, 0);
-        Monster.InitNonCombatMonsterStatTableCsv("NonCombatMonsterStatTable", 1, 0);
-        Monster.InitCombatMonsterStatTableCsv("CombatMonsterStatTable", 1, 0);
+        Monster.InitMonsterStatTableCsv("MonsterStatTable", 1, 0);
         Monster.InitMonsterAttackTableCsv("MonsterAttackTable", 1, 0);
         Monster.InitMonsterConditionTableCsv("MonsterConditionTable", 1, 0);
     }

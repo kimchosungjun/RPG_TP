@@ -145,9 +145,13 @@ namespace MonsterEnums
 
     public enum ATTACK_ACTIONS
     {
-        VIRUS_RUSH=0,
-        VIRUS_SPREAD=1,
-        SLIME_RUSH=3,
+        SLIME_RUSH=0,
+        VIRUS_RUSH=1,
+        VIRUS_SPREAD=2,
+        BEAR_SMASH01=3,
+        BEAR_SMASH02=4,
+        BEAR_SMASH03=5,
+        BEAR_STAMP=6
     }
 
     public enum CONDITION_ACTIONS
@@ -165,13 +169,12 @@ namespace EffectEnums
         NONE = 0,
         KNOCKBACK = 1,
         STUN = 2,
-        SLOW=3,
     }
 
     /// <summary>
     /// 계수와 같이 사용
     /// </summary>
-    public enum BUFF_ATTRIBUTE_STATS
+    public enum CONDITION_ATTRIBUTE_STATS
     {
         NONE = 0,
         MAXHP = 1,
@@ -179,7 +182,7 @@ namespace EffectEnums
         DEF = 3,
     }
 
-    public enum BUFF_APPLY_STATS
+    public enum CONDITION_EFFECT_STATS
     {
         HP = 0,
         SPD = 1,
@@ -189,11 +192,16 @@ namespace EffectEnums
         SPEED=5,
     }
 
-    public enum BUFF_TYPES
+    public enum CONDITION_CONTINUITY
     {
         IMMEDIATELY = 0, 
         BUFF = 1, 
         DEBUFF= 2 // 즉발 디버프는 없음
+    }
+    public enum CONDITION_PARTY
+    {
+        NONE,
+        PARTY
     }
 
     public enum PARTICLES

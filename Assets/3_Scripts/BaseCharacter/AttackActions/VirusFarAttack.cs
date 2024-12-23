@@ -5,7 +5,7 @@ using UnityEngine;
 public class VirusFarAttack : NearTriggerAttackAction
 {
     [SerializeField, Tooltip("Int형 레이어")] int enemyLayer = (int)UtilEnums.LAYERS.PLAYER;
-    [SerializeField] CombatMonsterStat monsterStat = null;
+    [SerializeField] MonsterStat monsterStat = null;
     [SerializeField] MonsterAttackActionData actionData = null;
     [SerializeField] TransferAttackData attackData = new TransferAttackData();
 

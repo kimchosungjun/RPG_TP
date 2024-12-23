@@ -9,11 +9,6 @@ public class NonCombatMonster : StandardMonster
     /****** 비전투 유닛 공통 변수  ********/
     /******************************************/
 
-    #region Value : Stat
-    [SerializeField] protected MonsterStat monsterStat = null;
-    public MonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
-    #endregion
-
     /******************************************/
     /*****************  변수  *****************/
     /******************************************/
@@ -24,7 +19,7 @@ public class NonCombatMonster : StandardMonster
     {
         MonsterTable table = SharedMgr.TableMgr.Monster;
         MonsterTableClasses.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
-        MonsterTableClasses.NonCombatMonsterStatTableData statTableData = table.GetNonCombatMonsterStatTableData(monsterType);
+        MonsterTableClasses.MonsterStatTableData statTableData = table.GetMonsterStatTableData(monsterType);
         monsterStat.SetMonsterStat(statTableData, monsterLevel);
         monsterStatControl.MonsterStat = monsterStat;
         monsterStatControl.SetStatusUI(statusUI);

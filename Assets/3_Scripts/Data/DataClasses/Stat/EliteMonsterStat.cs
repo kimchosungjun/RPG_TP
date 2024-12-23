@@ -2,11 +2,11 @@ using MonsterTableClasses;
 using System;
 using UnityEngine;
 
-public class EliteMonsterStat : CombatMonsterStat
+public class EliteMonsterStat : MonsterStat
 {
-    public override void SetMonsterStat(CombatMonsterStatTableData _combatMonsterStat, int _level)
+    public override void SetMonsterStat(MonsterStatTableData _monsterStat, int _level)
     {
-        base.SetMonsterStat(_combatMonsterStat, _level);
+        base.SetMonsterStat(_monsterStat, _level);
         groggyValue = 100f;
     }
 

@@ -210,9 +210,11 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.multipliers, _tableData.combo);
         _reader.get(_row, ref _tableData.coolTime);
         _reader.get(_row, ref _tableData.effectMaintainTime);
-        _reader.get(_row, ref _tableData.useStatTypes, _tableData.combo);
+        _reader.get(_row, ref _tableData.attributeStatTypes, _tableData.combo);
         _reader.get(_row, ref _tableData.effectStatTypes, _tableData.combo);
         _reader.get(_row, ref _tableData.continuityTypes, _tableData.combo);
+        _reader.get(_row, ref _tableData.defaultValues, _tableData.combo);
+        _reader.get(_row, ref _tableData.partyType);
         _reader.get(_row, ref _tableData.particle);
         return true;
     }
@@ -239,6 +241,7 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.effectMaintainTime, _tableData.combo);
         _reader.get(_row, ref _tableData.effectType, _tableData.combo);
         _reader.get(_row, ref _tableData.particle);
+        _reader.get(_row, ref _tableData.defaultValues, _tableData.combo);
         return true;
     }
     #endregion

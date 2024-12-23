@@ -16,11 +16,8 @@ public partial class MonsterTable : BaseTable
     // 몬스터의 StatID의 DropID를 통해 접근 가능
     Dictionary<int, MonsterDropTableData> monsterDropGroup = new Dictionary<int, MonsterDropTableData>();
 
-    // 비전투 몬스터 데이터
-    Dictionary<int,NonCombatMonsterStatTableData> nonCombatMonsterStatGroup  = new Dictionary<int, NonCombatMonsterStatTableData>();
-
-    // 전투 몬스터 데이터
-    Dictionary<int, CombatMonsterStatTableData> combatMonsterStatGroup = new Dictionary<int, CombatMonsterStatTableData>();
+    // 몬스터 스탯 데이터
+    Dictionary<int,MonsterStatTableData> nonCombatMonsterStatGroup  = new Dictionary<int, MonsterStatTableData>();
 
     // 몬스터 공격 데이터
     Dictionary<int, MonsterAttackTableData> monsterAttackGroup = new Dictionary<int, MonsterAttackTableData>();
@@ -55,33 +52,18 @@ public partial class MonsterTable : BaseTable
         return null;
     }
 
-    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(int _typeID)
+    public MonsterStatTableData GetMonsterStatTableData(int _typeID)
     {
         if (nonCombatMonsterStatGroup.ContainsKey(_typeID))
             return nonCombatMonsterStatGroup[_typeID];  
         return null;
     }
     
-    public NonCombatMonsterStatTableData GetNonCombatMonsterStatTableData(TYPEIDS _typeID)
+    public MonsterStatTableData GetMonsterStatTableData(TYPEIDS _typeID)
     {
         int typeID = (int)_typeID;
         if (nonCombatMonsterStatGroup.ContainsKey(typeID))
             return nonCombatMonsterStatGroup[typeID];
-        return null;
-    }
-
-    public CombatMonsterStatTableData GetCombatMonsterStatTableData(int _typeID)
-    {
-        if (combatMonsterStatGroup.ContainsKey(_typeID))
-            return combatMonsterStatGroup[_typeID];
-        return null;
-    }
-
-    public CombatMonsterStatTableData GetCombatMonsterStatTableData(TYPEIDS _typeID)
-    {
-        int typeID = (int)_typeID;
-        if (combatMonsterStatGroup.ContainsKey(typeID))
-            return combatMonsterStatGroup[typeID];
         return null;
     }
 

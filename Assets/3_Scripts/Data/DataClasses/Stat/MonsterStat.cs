@@ -12,6 +12,8 @@ public class MonsterStat : BaseStat
     [SerializeField] protected int level;
     [SerializeField] protected float currentHP;
     [SerializeField] protected float boostSpeed;
+    [SerializeField] protected float attackValue;
+    [SerializeField] protected float criticalValue;
     #endregion
 
     #region Property_StatValue
@@ -19,21 +21,25 @@ public class MonsterStat : BaseStat
     public int Level { get {return level; } set { level = value; } } 
     public float CurrentHP { get { return currentHP; } set { currentHP = value; } }
     public float BoostSpeed { get { return boostSpeed; }  set { boostSpeed = value; } }
+    public float Attack { get { return attackValue; } set { attackValue = value; } }
+    public float Critical { get { return criticalValue; } set { criticalValue = value; } }
 
     /// <summary>
     /// 스탯을 초기화할때 호출 (처음 생성시, 혹은 스탯 리셋시)
     /// </summary>
     /// <param name="_nonCombatMonsterStat"></param>
-    public void SetMonsterStat(MonsterTableClasses.NonCombatMonsterStatTableData _nonCombatMonsterStat, int _level)
+    public virtual void SetMonsterStat(MonsterTableClasses.MonsterStatTableData _combatMonsterStat, int _level)
     {
-        int levelDiff = _level - _nonCombatMonsterStat.startLevel;
-        maxHp = _nonCombatMonsterStat.maxHP + _nonCombatMonsterStat.hpIncrease*levelDiff;
-        currentHP = maxHp;
-        speed = _nonCombatMonsterStat.speed;
-        defenceValue = _nonCombatMonsterStat.defence + _nonCombatMonsterStat.defenceIncrease*levelDiff;
-        ID = _nonCombatMonsterStat.ID;    
         level = _level;
-        boostSpeed = _nonCombatMonsterStat.boostSpeed;
+        int levelDiff = _level - _combatMonsterStat.startLevel;
+        maxHp = _combatMonsterStat.maxHP + _combatMonsterStat.hpIncrease * levelDiff;
+        currentHP = maxHp;
+        speed = _combatMonsterStat.speed;
+        defenceValue = _combatMonsterStat.defence + _combatMonsterStat.defenceIncrease * levelDiff;
+        ID = _combatMonsterStat.ID;
+        boostSpeed = _combatMonsterStat.boostSpeed;
+        attackValue = _combatMonsterStat.attack + _combatMonsterStat.attackIncrease * levelDiff;
+        criticalValue = _combatMonsterStat.critical + _combatMonsterStat.criticalIncrease * levelDiff;
         actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(ID).name;
     }
 
