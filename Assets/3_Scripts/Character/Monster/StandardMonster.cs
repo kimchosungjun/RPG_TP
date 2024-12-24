@@ -32,7 +32,11 @@ public class StandardMonster : BaseMonster
 
     // 추후에 할 것
     #region Empty Override Metohd 
-    public override void ApplyStatTakeDamage(TransferAttackData _attackData) { monsterStatControl.TakeDamage(_attackData);  statusUI.AnnounceChangeStat(UIEnums.STATUS.HP); }
+    public override void ApplyStatTakeDamage(TransferAttackData _attackData)
+    { 
+        monsterStatControl.TakeDamage(_attackData);  
+        statusUI.AnnounceChangeStat(UIEnums.STATUS.HP); 
+    }
     public override void Recovery(float _percent = 10f, float _time = 0.2f) { monsterStatControl.Recovery(10f); }
     public override NODESTATES IdleMovement() { return NODESTATES.SUCCESS; }
     protected override void CreateBTStates() { }

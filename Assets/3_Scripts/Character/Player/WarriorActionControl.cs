@@ -16,11 +16,11 @@ public class WarriorActionControl : PlayerActionControl
         stat = _statCtrl.PlayerStat;
         movementControl = _movementControl;
         anim = GetComponent<Animator>();    
-        PlayerTable playerTable = SharedMgr.TableMgr.Player;
+        PlayerTable playerTable = SharedMgr.TableMgr.GetPlayer;
 
         // 행동의 데이터를 불러오고 그 데이터 지정된 SO에 설정한다.
         normalAttackSOData.SetSOData(playerTable.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, stat.GetSaveStat.currentNormalAttackLevel));
-        buffActionSOData.SetSOData(playerTable.GetPlayerBuffSkillTableData((int)PlayerEnums.BUFF_SKILLS.WARRIOR_ROAR, stat.GetSaveStat.currentSkillLevel));
+        buffActionSOData.SetSOData(playerTable.GetPlayerBuffSkillTableData((int)PlayerEnums.CONDITION_SKILLS.WARRIOR_ROAR, stat.GetSaveStat.currentSkillLevel));
         ultimateAttackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, stat.GetSaveStat.currentUltimateSkillLevel));
     }
     #endregion

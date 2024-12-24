@@ -11,7 +11,6 @@ public abstract class PlayerMovementControl : MonoBehaviour
 
     #region Component
     [Header("필수 연결 컴포넌트")]
-    [SerializeField, Tooltip("현재 애니메이션이 작동하는 모델에 연결")] protected Transform modelTransform;
     [SerializeField] protected Transform bodyTransform;
     [SerializeField] protected CapsuleCollider collide;
     [SerializeField] protected Rigidbody rigid;
@@ -32,7 +31,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /************** 평면 이동 ****************/
     /******************************************/
-    [Header("이동"),SerializeField] protected float playerRotateSpeed = 12f;
+    protected float playerRotateSpeed = 12f;
     protected float moveCoefficient = 10f; // 이동 계수
     protected float xMove;
     protected float zMove;
@@ -50,14 +49,14 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /***************** 점프  ******************/
     /******************************************/
     protected float playerJumpForce;
-    [SerializeField, Range(0, 1f)] protected float airMovementMultiplier;
+    protected float airMovementMultiplier = 0.2f;
     public float PlayerJumpForce { get { return playerJumpForce; } }
     public float AirMovementMultiplier { get { return airMovementMultiplier; } }
 
     /******************************************/
     /***************** 대쉬  ******************/
     /******************************************/
-    [SerializeField] protected float dashCoolTimer = 0.3f;
+    protected float dashCoolTimer = 0.3f;
     protected float playerDashForce;
     protected bool isPlayerDashing = false;
     protected bool canDash = true;
@@ -252,8 +251,8 @@ public abstract class PlayerMovementControl : MonoBehaviour
     }
     public void ApplyGroundRotation()
     {
-        if (Quaternion.Angle(modelTransform.rotation, moveRotation) > 1f)
-            modelTransform.rotation = Quaternion.Slerp(modelTransform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
+        if (Quaternion.Angle(transform.rotation, moveRotation) > 1f)
+            transform.rotation = Quaternion.Slerp(transform.rotation, moveRotation, Time.fixedDeltaTime * playerRotateSpeed);
     }
     #endregion
 

@@ -17,7 +17,7 @@ public class NonCombatMonster : StandardMonster
 
     protected override void Start()
     {
-        MonsterTable table = SharedMgr.TableMgr.Monster;
+        MonsterTable table = SharedMgr.TableMgr.GetMonster;
         MonsterTableClasses.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
         MonsterTableClasses.MonsterStatTableData statTableData = table.GetMonsterStatTableData(monsterType);
         monsterStat.SetMonsterStat(statTableData, monsterLevel);

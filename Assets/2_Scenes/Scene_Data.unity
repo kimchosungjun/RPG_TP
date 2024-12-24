@@ -693,7 +693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1836415259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,14 +707,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData:
-    id: 123
-    lit: 0100000002000000
-    list: 040000000500000006000000
-    overlap:
-      overlist: f8c30400
-      overStrList:
-      - saveme
-      - saveus
+    playerTypeID: 0
+    currentHP: 100
+    currentLevel: 1
+    currentExp: 0
+    currentNormalAttackLevel: 1
+    currentSkillLevel: 1
+    currentUltimateSkillLevel: 1
   inclass:
     id: 0
 --- !u!4 &1836415260
@@ -1701,7 +1700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4835597129401034998
 GameObject:
   m_ObjectHideFlags: 0

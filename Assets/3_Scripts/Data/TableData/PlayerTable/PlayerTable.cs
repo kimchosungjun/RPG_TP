@@ -6,7 +6,7 @@ using PlayerTableClasses;
 public partial class PlayerTable : BaseTable
 {
     /*************************************************************
-    ************** 플레이어 데이터 저장 Dictionary ***************
+    ************** 플레이어 데이터 저장 Dictionary **********
     *************************************************************/
 
     #region Player Data Group : Dictionary 
@@ -27,7 +27,7 @@ public partial class PlayerTable : BaseTable
     #endregion
 
     /************************************************************
-    ************** 플레이어 데이터 반환 Methods *****************
+    ************** 플레이어 데이터 반환 Methods **********
     ************************************************************/
 
     #region Get Player Data : Key값은 ID (PlayerEnunms.TYPEID, BUFF_SKILL, ATTACK_SKILL) 그리고 Level
@@ -84,12 +84,12 @@ public partial class PlayerTable : BaseTable
     }
 
     /// <summary>
-    /// 플레이어 버프 스킬 반환
+    /// 플레이어 상태 스킬 반환
     /// </summary>
     /// <param name="_buffSkillID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
-    public PlayerConditionSkillTableData GetPlayerBuffSkillTableData(BUFF_SKILLS _buffSkillID, int _level)
+    public PlayerConditionSkillTableData GetPlayerBuffSkillTableData(CONDITION_SKILLS _buffSkillID, int _level)
     {
         int skillType = (int)_buffSkillID;
         if (playerBuffSkillDataGroup.ContainsKey(skillType))

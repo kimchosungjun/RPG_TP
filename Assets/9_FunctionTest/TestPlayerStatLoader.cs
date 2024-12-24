@@ -7,6 +7,7 @@ public class TestPlayerStatLoader : MonoBehaviour
     TableMgr tableMgr;
     [SerializeField] GameObject playerObjeet;
     [SerializeField] CameraController cameraController;
+    [SerializeField] Transform gos;
     private void Start()
     {
         tableMgr = SharedMgr.TableMgr;
@@ -21,7 +22,14 @@ public class TestPlayerStatLoader : MonoBehaviour
             {
                 playerObjeet.SetActive(true);
                 cameraController.ChangeState();
+                TestSlash();
             }
         }
+    }
+
+    public void TestSlash()
+    {
+        Transform go = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH);
+        gos = go;
     }
 }

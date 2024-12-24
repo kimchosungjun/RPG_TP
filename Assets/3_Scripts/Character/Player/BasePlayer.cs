@@ -55,7 +55,7 @@ public class BasePlayer : BaseActor
         if (id == 0)
             saveStat = new PlayerSaveStat();
         else
-            saveStat = new PlayerSaveStat(1,100,1,0,1,1,1);
+            saveStat = new PlayerSaveStat(1,100);
         
         playerStat = new PlayerStat();
         playerStat.LoadPlayerStat(saveStat);

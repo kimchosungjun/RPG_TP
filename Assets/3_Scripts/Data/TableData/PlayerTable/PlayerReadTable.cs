@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using PlayerTableClasses;
 public partial class PlayerTable: BaseTable
 { 
-    /*************************************************************
+    /*******************************************************************
     *********** 읽어 온 데이터를 Dictionary에 저장 ***************
-    *************************************************************/
+    *******************************************************************/
 
     #region Only Load Player Data 
 
@@ -108,12 +108,13 @@ public partial class PlayerTable: BaseTable
             playerAttackSkillDataGroup[data.id].Add(data.level, data);
         }
     }
+    
 
     #endregion
 
-    /*************************************************************
-    *********** 지정된 클래스의 데이터를 읽어서 파싱 *************
-    *************************************************************/
+    /********************************************************************
+    *********** 지정된 클래스의 데이터를 읽어서 파싱 ************
+    ********************************************************************/
 
     #region Link CsvData to ClassData
     /// <summary>
@@ -173,7 +174,7 @@ public partial class PlayerTable: BaseTable
     /// <param name="_tableData"></param>
     /// <param name="_row"></param>
     /// <param name="_col"></param>
-    /// <returns></returns>
+    /// <returns></returns>-
     protected bool ReadPlayerNormalAttack(CSVReader _reader, PlayerNormalAttackTableData _tableData, int _row, int _col)
     {
         if (_reader.reset_row(_row, _col) == false) return false;

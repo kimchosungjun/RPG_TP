@@ -35,7 +35,7 @@ public class PlayerStatusUI : StatusUI
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv."+_playerStat.GetSaveStat.currentLevel;
 
-        maxExp = SharedMgr.TableMgr.Player.GetPlayerLevelTableData().needExps[_playerStat.GetSaveStat.currentLevel - 1];
+        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[_playerStat.GetSaveStat.currentLevel - 1];
         if(maxExp < 0f)
         {
             // 최대레벨에 도달했음

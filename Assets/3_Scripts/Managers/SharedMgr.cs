@@ -4,19 +4,25 @@ using UnityEngine;
 
 public static class SharedMgr 
 {
+    #region Stick Super Mgr  
     public static SuperMgr SuperMgr = null;
     public static SceneMgr SceneMgr = null;
     public static UIMgr UIMgr = null;
     public static ResourceMgr ResourceMgr = null;
     public static TableMgr TableMgr = null;
     public static SoundMgr SoundMgr = null;
+    #endregion
 
     // 아직 안씀
     public static HoldItemMgr HoldItemMgr = null;
 
     //public static TableMgr InitTableMgr()
     //{
-        // tablemgr==null이면 table을 만들어서 연결할때 return 한다.
-        // 프로그래머가 메모리를 원할때 할당, 해제하고 싶다면 monobehaviour를 상속받으면 안된다.
+    // tablemgr==null이면 table을 만들어서 연결할때 return 한다.
+    // 프로그래머가 메모리를 원할때 할당, 해제하고 싶다면 monobehaviour를 상속받으면 안된다.
     //}
+
+    #region Stick Game Scene
+    public static PoolMgr PoolMgr = null;
+    #endregion
 }

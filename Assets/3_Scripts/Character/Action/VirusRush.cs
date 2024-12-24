@@ -18,7 +18,7 @@ public class VirusRush : MonoBehaviour
 
         // 스탯과 행동 데이터 불러오기
         this.stat = _stat;
-        MonsterTable monsterTable = SharedMgr.TableMgr.Monster;
+        MonsterTable monsterTable = SharedMgr.TableMgr.GetMonster;
         attackActionData.SetConditionData(monsterTable.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_RUSH), stat.Level);
         conditionActionData.SetConditionData(monsterTable.GetMonsterConditionTableData(CONDITION_ACTIONS.VIRUS_SLOW), stat.Level);
     }

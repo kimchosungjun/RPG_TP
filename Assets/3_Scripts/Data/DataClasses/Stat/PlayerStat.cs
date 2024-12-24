@@ -35,7 +35,7 @@ public class PlayerStat : BaseStat
 
         TableMgr tableMgr = SharedMgr.TableMgr;
         PlayerTableData tableData = new PlayerTableData();
-        tableData = tableMgr.Player.GetPlayerTableData(currentStat.playerTypeID);
+        tableData = tableMgr.GetPlayer.GetPlayerTableData(currentStat.playerTypeID);
 
         actorName = tableData.name;
         speed = tableData.speed;
@@ -77,15 +77,15 @@ public class PlayerSaveStat
         playerTypeID = 0;
     }
 
-    public PlayerSaveStat(int _id, int _curHP, int _curLevel, int _curExp, int _curNormalAttackLevel, int _curSkillLevel, int _currentUltimateSkillLevel)
+    public PlayerSaveStat(int _id, float _curHP)
     {
         playerTypeID = _id;
         currentHP = _curHP; 
-        currentLevel = _curLevel;   
-        currentExp = _curExp;       
-        currentNormalAttackLevel= _curNormalAttackLevel;    
-        currentSkillLevel = _curSkillLevel;
-        currentUltimateSkillLevel = _currentUltimateSkillLevel;
+        currentLevel = 1;   
+        currentExp = 0;       
+        currentNormalAttackLevel= 1;    
+        currentSkillLevel = 1;
+        currentUltimateSkillLevel = 1;
     }
 }
 

@@ -16,9 +16,9 @@ public class TestCsvReader : MonoBehaviour
     {
         if(GUI.Button(new Rect(0, 0, 100, 100), "전사 테이블 읽기"))
         {
-            skillActionSO.SetSOData(tableMgr.Player.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, 1));
-            attackActionSO.SetSOData(tableMgr.Player.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, 2));
-            buffActionSO.SetSOData(tableMgr.Player.GetPlayerBuffSkillTableData(PlayerEnums.BUFF_SKILLS.WARRIOR_ROAR, 3));
+            skillActionSO.SetSOData(tableMgr.GetPlayer.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, 1));
+            attackActionSO.SetSOData(tableMgr.GetPlayer.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, 2));
+            buffActionSO.SetSOData(tableMgr.GetPlayer.GetPlayerBuffSkillTableData(PlayerEnums.CONDITION_SKILLS.WARRIOR_ROAR, 3));
         }
 
         if (GUI.Button(new Rect(150, 0, 100, 100), "전사 저장\n 스탯 저장하기"))

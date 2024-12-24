@@ -38,6 +38,11 @@ public class BaseTable
             case UtilEnums.TABLE_FOLDER_TYPES.MONSTER:
                 folderPath = "MonsterTableCsv/";
                 break;
+            case UtilEnums.TABLE_FOLDER_TYPES.ITEM:
+                folderPath = "ItemTableCsv/";
+                break;
+            case UtilEnums.TABLE_FOLDER_TYPES.NPC:
+                break;
         }
         return folderPath;
     }
@@ -48,7 +53,7 @@ public class BaseTable
     {
         var binary = new BinaryFormatter();
         binary.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
-        TextAsset asset = Resources.Load("Table_" + _path) as TextAsset;
+        TextAsset asset = Resources.Load("SaveData/" + _path) as TextAsset;
         Stream stream = new MemoryStream(asset.bytes);
         _object = (T)binary.Deserialize(stream);
         stream.Close();
@@ -56,7 +61,7 @@ public class BaseTable
 
     public void SaveBinary(string _name, object _object)
     {
-        string path = GetTablePath() + "/Table/Resources/" + "Table_" + _name + ".txt";
+        string path = GetTablePath() + "/Resources/SaveData/" +_name + ".txt";
         var binary = new BinaryFormatter();
         Stream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write);
         binary.Serialize(stream, _object);

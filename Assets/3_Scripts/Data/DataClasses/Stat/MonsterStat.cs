@@ -40,7 +40,7 @@ public class MonsterStat : BaseStat
         boostSpeed = _combatMonsterStat.boostSpeed;
         attackValue = _combatMonsterStat.attack + _combatMonsterStat.attackIncrease * levelDiff;
         criticalValue = _combatMonsterStat.critical + _combatMonsterStat.criticalIncrease * levelDiff;
-        actorName = SharedMgr.TableMgr.Monster.GetMonsterInfoTableData(ID).name;
+        actorName = SharedMgr.TableMgr.GetMonster.GetMonsterInfoTableData(ID).name;
     }
 
     #endregion

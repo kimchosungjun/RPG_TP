@@ -8,14 +8,16 @@ using UnityEditor;
 public class TableMgr 
 {
     #region Private Table
+    private AccountSaveData accountSaveData;
     private PlayerTable player = new PlayerTable();
     
     private MonsterTable monster = new MonsterTable();
     #endregion
 
     #region Property
-    public PlayerTable Player { get { return player; } }
-    public MonsterTable Monster { get {  return monster; } }
+    public PlayerTable GetPlayer { get { return player; } }
+    public MonsterTable GetMonster { get {  return monster; } }
+    public AccountSaveData AccountSaveData { get { return accountSaveData; } set { accountSaveData = value; } }
     #endregion
 
     public void Init() 
@@ -27,11 +29,11 @@ public class TableMgr
 
     private void ParseMonsterData()
     {
-        Monster.InitMonsterDropTableCsv("MonsterDropTable", 1, 0);
-        Monster.InitMonsterInfoTableCsv("MonsterInfoTable", 1, 0);
-        Monster.InitMonsterStatTableCsv("MonsterStatTable", 1, 0);
-        Monster.InitMonsterAttackTableCsv("MonsterAttackTable", 1, 0);
-        Monster.InitMonsterConditionTableCsv("MonsterConditionTable", 1, 0);
+        GetMonster.InitMonsterDropTableCsv("MonsterDropTable", 1, 0);
+        GetMonster.InitMonsterInfoTableCsv("MonsterInfoTable", 1, 0);
+        GetMonster.InitMonsterStatTableCsv("MonsterStatTable", 1, 0);
+        GetMonster.InitMonsterAttackTableCsv("MonsterAttackTable", 1, 0);
+        GetMonster.InitMonsterConditionTableCsv("MonsterConditionTable", 1, 0);
     }
 
     #region Test Function
@@ -54,18 +56,18 @@ public class TableMgr
     public void LinkPlayerTable()
     {
 #if UNITY_EDITOR
-        Player.InitPlayerTableCsv("PlayerTable", 1, 0);
-        Player.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
-        Player.InitPlayerNormalAttackTableCsv("PlayerNormalAttackTable", 1, 0);
-        Player.InitPlayerConditionSkillTableCsv("PlayerConditionSkillTable", 1, 0);
-        Player.InitPlayerAttackSkillTableCsv("PlayerAttackSkillTable", 1,0);
+        GetPlayer.InitPlayerTableCsv("PlayerTable", 1, 0);
+        GetPlayer.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
+        GetPlayer.InitPlayerNormalAttackTableCsv("PlayerNormalAttackTable", 1, 0);
+        GetPlayer.InitPlayerConditionSkillTableCsv("PlayerConditionSkillTable", 1, 0);
+        GetPlayer.InitPlayerAttackSkillTableCsv("PlayerAttackSkillTable", 1,0);
 #else
 #endif
     }
 
     public void LoadPlayerData(/*PlayerEnums.TYPEID _typeID*/)
     {
-        Player.InitPlayerTableCsv("PlayerTableCsv", 1, 0);
+        GetPlayer.InitPlayerTableCsv("PlayerTableCsv", 1, 0);
     }
 
     public void Save()
