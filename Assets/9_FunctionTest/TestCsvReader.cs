@@ -5,7 +5,7 @@ public class TestCsvReader : MonoBehaviour
     TableMgr tableMgr;
     [SerializeField] PlayerNormalAttackActionSOData attackActionSO;
     [SerializeField] PlayerAttackSkillActionSOData skillActionSO;
-    [SerializeField] PlayerBuffActionSOData buffActionSO;
+    [SerializeField] PlayerConditionActionSOData buffActionSO;
     private void Awake()
     {
         tableMgr = new TableMgr();

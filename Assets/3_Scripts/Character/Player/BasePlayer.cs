@@ -4,7 +4,7 @@ public class BasePlayer : BaseActor
 {
     protected bool isAlive = true;
     [SerializeField] int id;
-    [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUICtrl; // HP, EXP, Level을 나타내는 UI
+    [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUI; // HP, EXP, Level을 나타내는 UI
     [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; // 확인을 위해 serialize로 설정 : 나중엔 없애기
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
     [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; // 스탯을 관리(버프도 관리)
@@ -22,6 +22,8 @@ public class BasePlayer : BaseActor
         PlayerCtrl playerCtrl = GetComponentInParent<PlayerCtrl>();
         playerCtrl?.DeathChangePlayer();
     }
+
+    public void DoDeathState() { playerMovementControl.Death(); }
     #endregion
 
     #region Override : Set Layer
@@ -59,27 +61,34 @@ public class BasePlayer : BaseActor
         
         playerStat = new PlayerStat();
         playerStat.LoadPlayerStat(saveStat);
-        playerStatControl.PlayerStat = playerStat;
-        playerActionControl.SetPlayerData(playerStatControl, playerMovementControl);
-        playerStatusUICtrl = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
-        playerStatusUICtrl?.Init();
 
-        // 스크립트 연결
         if (playerActionControl == null) playerActionControl = GetComponent<WarriorActionControl>();
         if (playerStatControl == null) playerStatControl = GetComponent<PlayerStatControl>();
         if (playerMovementControl == null) playerMovementControl = GetComponent<WarriorMovementControl>();
+
+        // Link Stat & Player => Check Death State
+        playerStatControl.PlayerStat = playerStat;
+        playerStatControl.Player = this;
+        isAlive = !playerStatControl.CheckDeathState();
+        
+        playerActionControl.SetPlayerData(playerStatControl, playerMovementControl);
+        playerStatusUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
+        playerStatusUI?.Init();
+
+        // 스크립트 연결
+       
         playerMovementControl.Init(playerStat);
     }
 
     public virtual void Setup()
     {
-        playerStatusUICtrl.Setup(playerStat);
+        playerStatusUI.Setup(playerStat);
         playerMovementControl.Setup();
     }
 
     public virtual void Execute()
     {
-        playerStatusUICtrl.FixedExecute();
+        playerStatusUI.FixedExecute();
         playerMovementControl.Execute();
     }
 

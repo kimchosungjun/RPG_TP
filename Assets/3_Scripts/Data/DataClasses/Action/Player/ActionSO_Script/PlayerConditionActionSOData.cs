@@ -2,13 +2,13 @@ using UnityEngine;
 using PlayerTableClasses;
 
 [CreateAssetMenu(fileName = "PlayerBuffSkillSO", menuName = "PlayerActionSOData/PlayerBuffSkillSO")]
-public class PlayerBuffActionSOData : PlayerActionSkillSOData
+public class PlayerConditionActionSOData : PlayerActionSkillSOData
 {
     [SerializeField] protected float[] actionMultipliers;
-    [SerializeField] protected int[] useStatTypes;
+    [SerializeField] protected int[] attributeStatTypes;
     [SerializeField] protected int[] effectStatTypes;
     [SerializeField] protected int[] continuityTypes;
-    
+    [SerializeField] protected float[] defaultValues;
     public int GetBuffCnt() { return actionMultipliers.Length; }
 
     public float GetMultiplier(int _combo)
@@ -18,10 +18,10 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
         return -1;
     }
 
-    public int GetUseStatType(int _combo)
+    public int GetAttributeStatType(int _combo)
     {
-        if (useStatTypes.Length - 1 >= _combo)
-            return useStatTypes[_combo];
+        if (attributeStatTypes.Length - 1 >= _combo)
+            return attributeStatTypes[_combo];
         return -1;
     }
 
@@ -39,17 +39,24 @@ public class PlayerBuffActionSOData : PlayerActionSkillSOData
         return -1;
     }
 
+    public float GetDefaultValue(int _combo)
+    {
+        if (defaultValues.Length - 1 >= _combo)
+            return defaultValues[_combo];
+        return -1;
+    }
+
     public void SetSOData(PlayerConditionSkillTableData _buffSkillTable)
     {
          actionName = _buffSkillTable.name;
          actionDescription = _buffSkillTable.description;
          actionMultipliers = _buffSkillTable.multipliers;
          actionParticleID = _buffSkillTable.particle;
-
         coolTime = _buffSkillTable.coolTime;
         maintainEffectTime = _buffSkillTable.effectMaintainTime;
-        useStatTypes = _buffSkillTable.attributeStatTypes;
+        attributeStatTypes = _buffSkillTable.attributeStatTypes;
         effectStatTypes = _buffSkillTable.effectStatTypes;
         continuityTypes = _buffSkillTable.continuityTypes;
+        defaultValues = _buffSkillTable.defaultValues;
     }
 }

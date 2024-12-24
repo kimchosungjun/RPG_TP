@@ -7,10 +7,7 @@ public class PlayerAttackState : PlayerActionState
     #region Creator & Value
 
     int currentCombo = -1;
-    public PlayerAttackState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) 
-    {
-
-    }
+    public PlayerAttackState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo)  {  }
 
     #endregion
 
@@ -19,7 +16,6 @@ public class PlayerAttackState : PlayerActionState
     /******************************************/
 
     #region StateMachine Frame 
-
     public override void Enter()
     {
         base.Enter();   
@@ -41,6 +37,5 @@ public class PlayerAttackState : PlayerActionState
         base.Exit();
         attackCombo.SetComboTime();  
     }
-
     #endregion
 }

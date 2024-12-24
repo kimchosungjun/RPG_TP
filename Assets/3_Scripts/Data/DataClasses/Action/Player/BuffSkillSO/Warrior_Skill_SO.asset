@@ -9,18 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50b17d411cdb7454db4bd9693955fb07, type: 3}
+  m_Script: {fileID: 11500000, guid: d7c4273d462822248a8d1c36eaeb3948, type: 3}
   m_Name: Warrior_Skill_SO
   m_EditorClassIdentifier: 
-  actionName: "\uD3EC\uD6A8"
-  actionDescription: "\uC804\uBC29\uC744 \uD5A5\uD574 \uD3EC\uD6A8\uD569\uB2C8\uB2E4.\n\uACF5\uACA9\uC18D\uB3C4
-    50%\uC640 \uACF5\uACA9\uB825 10%\uAC00 \uC99D\uAC00\uB429\uB2C8\uB2E4."
+  actionName: 
+  actionDescription: 
   actionParticleID: 0
-  coolTime: 15
-  maintainEffectTime: 7
-  actionMultipliers:
-  - 0.5
-  - 0.1
-  useStatTypes: 0000000000000000
-  effectStatTypes: 0400000002000000
-  continuityTypes: 0100000001000000
+  coolTime: 0
+  maintainEffectTime: 0
+  actionMultipliers: []
+  attributeStatTypes: 
+  effectStatTypes: 
+  continuityTypes: 
+  defaultValues: []

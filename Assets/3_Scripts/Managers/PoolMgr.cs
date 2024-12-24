@@ -30,9 +30,8 @@ public class PoolMgr : MonoBehaviour
 
             result = SharedMgr.ResourceMgr.LoadResource<Transform>("Pools/"+Enums.GetEnumString<OBJECTS>(_poolObject));
             originalGroup.Add(_poolObject, result);
-
-            if(result == null) { Debug.LogError("없음"); return null; }
             result = Instantiate(result.gameObject).transform;
+            result.SetParent(go.transform , true);
 
             objectPoolGroup[_poolObject] = new List<Transform>();
             objectPoolGroup[_poolObject].Add(result);
@@ -55,7 +54,8 @@ public class PoolMgr : MonoBehaviour
         }
 
         GameObject result = Instantiate(originalGroup[_poolObject].gameObject);
-        list.Add(result.transform);   
+        list.Add(result.transform);
+        result.transform.SetParent(poolParentGroup[_poolObject], true);
         return result.transform;
     }
 }

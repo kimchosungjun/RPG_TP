@@ -410,13 +410,11 @@ public abstract class PlayerMovementControl : MonoBehaviour
     protected abstract void CreateStates();
     #endregion
 
-
-
-    #region Attack & Skill & UltimateSkill
+    #region Change State By Animation
     public void AttackCooling() { ChangeState(STATES.MOVEMENT); }
-
     public void SkillCooling() { ChangeState(STATES.MOVEMENT); }
-
     public void UltimateSkillCooling() { ChangeState(STATES.MOVEMENT); }
+    public virtual void Death() { ChangeState(STATES.DEATH); }
     #endregion
+
 }

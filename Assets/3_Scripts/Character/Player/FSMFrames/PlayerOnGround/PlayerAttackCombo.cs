@@ -23,10 +23,10 @@ public class PlayerAttackCombo
         currentTime = -1f;
     }
 
-    public PlayerAttackCombo(int _maxAttackCombo, float _resetComboTime)
+    public PlayerAttackCombo(int _maxAttackCombo, float _resetComboTime = 1f)
     {
         attackCombo = 0;
-        maxAttackCombo = _maxAttackCombo;
+        maxAttackCombo = _maxAttackCombo-1;
         resetComboTime = _resetComboTime;
         currentTime = -1f;
     }

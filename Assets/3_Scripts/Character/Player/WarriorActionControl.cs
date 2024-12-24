@@ -4,7 +4,7 @@ public class WarriorActionControl : PlayerActionControl
 {
     [Header("플레이어 행동 데이터")]
     [SerializeField, Tooltip("기본공격")] PlayerNormalAttackActionSOData normalAttackSOData;
-    [SerializeField, Tooltip("스킬")] PlayerBuffActionSOData buffActionSOData;
+    [SerializeField, Tooltip("스킬")] PlayerConditionActionSOData buffActionSOData;
     [SerializeField, Tooltip("궁극기")] PlayerAttackSkillActionSOData ultimateAttackSkillSOData;
 
     [Header("플레이어 행동")]
@@ -13,7 +13,8 @@ public class WarriorActionControl : PlayerActionControl
     #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
     {
-        stat = _statCtrl.PlayerStat;
+        this.statControl = _statCtrl;
+        stat = statControl.PlayerStat;
         movementControl = _movementControl;
         anim = GetComponent<Animator>();    
         PlayerTable playerTable = SharedMgr.TableMgr.GetPlayer;
@@ -40,6 +41,33 @@ public class WarriorActionControl : PlayerActionControl
         normalAttacks[_combo].SetTransferData(attackData, null);
     }
 
-    public void StopNormalAttack(int _combo) { normalAttacks[_combo].StopAttack(); }
+    public void StopNormalAttack(int _combo) 
+    { 
+        normalAttacks[_combo].StopAttack();
+        AnimAttackCooling();
+    }
+
+    public void DoBuffSkill()
+    {
+        int buffCnt = buffActionSOData.GetBuffCnt();
+        for(int i = 0; i < buffCnt; i++)
+        {
+            TransferConditionData transferConditionData = new TransferConditionData();
+            transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i), 
+                buffActionSOData.GetContinuityType(i), buffActionSOData.GetDefaultValue(i), 
+                buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i));
+            statControl.AddBuffs(transferConditionData);
+        }
+    }
+
+    public void DoUltimateAttack()
+    {
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH);
+    }
+
+    public void DoAnnounceDeathState() 
+    {
+        SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
+    }
     #endregion
 }

@@ -5882,6 +5882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObjeet: {fileID: 241610175}
   cameraController: {fileID: 330585548}
+  gos: {fileID: 0}
 --- !u!4 &754815633
 Transform:
   m_ObjectHideFlags: 0
@@ -7040,6 +7041,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 919103583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &919375367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 919375369}
+  - component: {fileID: 919375368}
+  m_Layer: 0
+  m_Name: EnvironmentMgr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &919375368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919375367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72452d226c8e01645b5b41fb7c8aa482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCtrl: {fileID: 0}
+--- !u!4 &919375369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919375367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &991217765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19170,7 +19216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  playerStatusUICtrl: {fileID: 5227916172924713511}
+  playerStatusUI: {fileID: 0}
   playerStat:
     actorName: 
     maxHp: 0
@@ -19226,6 +19272,7 @@ MonoBehaviour:
   stepHeight: 0.2
   useGravity: 1
   currentPlayerState: 10
+  warriorActionControl: {fileID: 5866666020441516154}
 --- !u!95 &5866666020441516159
 Animator:
   serializedVersion: 5
@@ -19239,7 +19286,7 @@ Animator:
   m_Controller: {fileID: 22100000, guid: bcd3018f9fdbde24387e958095c70666, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -19881,7 +19928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  playerStatusUICtrl: {fileID: 0}
+  playerStatusUI: {fileID: 0}
   playerStat:
     actorName: 
     maxHp: 0

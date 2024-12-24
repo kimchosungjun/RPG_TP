@@ -14,6 +14,8 @@ public class PlayerCtrl : MonoBehaviour
     bool canChangePlayer = true; // 처음 시작 시 초기화 필요
     float changePlayerCoolTime = 1f; 
     [SerializeField] int currentPlayer = 0; // 처음 시작 시 초기화 필요
+
+    public BasePlayer GetPlayer { get { return players[currentPlayer]; } }
     #endregion
 
     #region Life Cycle

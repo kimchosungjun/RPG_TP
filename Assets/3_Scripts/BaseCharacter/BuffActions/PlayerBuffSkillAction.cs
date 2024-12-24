@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerBuffSkillAction : BuffAction
 {
     PlayerStat playerStat = null;
-    PlayerBuffActionSOData soData = null;
+    PlayerConditionActionSOData soData = null;
     TransferConditionData[] buffDatas;
-    public virtual void SetStat(PlayerStat _playerStat, PlayerBuffActionSOData _soData, ActorStatControl _statCtrl)
+    public virtual void SetStat(PlayerStat _playerStat, PlayerConditionActionSOData _soData, ActorStatControl _statCtrl)
     {
         playerStat = _playerStat;
         soData = _soData;

@@ -24,5 +24,6 @@ public static class SharedMgr
 
     #region Stick Game Scene
     public static PoolMgr PoolMgr = null;
+    public static EnvironmentMgr EnvironmentMgr = null;
     #endregion
 }
