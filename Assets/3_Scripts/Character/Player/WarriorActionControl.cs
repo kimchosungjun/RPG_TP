@@ -51,7 +51,7 @@ public class WarriorActionControl : PlayerActionControl
 
     public void DoBuffSkill()
     {
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_ROAR).GetComponent<ParticleAction>().
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ATTACK_BUFF).GetComponent<ParticleAction>().
            SetParticlePosition(transform.position, transform.rotation, 1f);
         int buffCnt = buffActionSOData.GetBuffCnt();
         for(int i = 0; i < buffCnt; i++)

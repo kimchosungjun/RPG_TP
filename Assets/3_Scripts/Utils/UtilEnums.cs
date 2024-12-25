@@ -37,11 +37,13 @@ namespace PoolEnums
     public enum  OBJECTS
     {
         WARRIOR_NORMAL=0,
-        WARRIOR_ROAR=1,
+        ATTACK_BUFF=1,
         WARRIOR_SLASH = 2,
         ARCHER_NORMAL=3,
         ARCHER_ATTACK_SKILL=4,
-        ARCHER_ULTIMATE=5,
+        ARCHER_POP=5,
+        ARCHER_ULTIMATE = 6,
+        MAGICIAN_NORMAL =7
     }
 }
 

@@ -11,6 +11,7 @@ public class ArcherActionControl : PlayerActionControl
     [SerializeField] FarThrowAttackAction[] normalAttacks;
     [SerializeField] FarThrowAttackAction[] skillAttacks;
     [SerializeField] FarThrowAttackAction ultimateAttack;
+    [SerializeField] Transform popTransform;
 
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
     {
@@ -43,8 +44,8 @@ public class ArcherActionControl : PlayerActionControl
             (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitThrowBox>());
 
         // Particle
-        //SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_NORMAL).GetComponent<ParticleAction>().
-        //    SetParticlePosition(normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation, 1.5f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
+            SetParticlePosition(popTransform.position, popTransform.rotation, 1f);
     }
 
     public void DoSkillAttack(int _combo)
@@ -57,8 +58,8 @@ public class ArcherActionControl : PlayerActionControl
             (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitThrowBox>());
 
         // Particle
-        //SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_NORMAL).GetComponent<ParticleAction>().
-        //    SetParticlePosition(normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation, 1.5f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
+            SetParticlePosition(popTransform.position, popTransform.rotation, 1f);
     }
 
     public void DoUltimateAttack()
@@ -67,7 +68,11 @@ public class ArcherActionControl : PlayerActionControl
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        ultimateAttack.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH).GetComponent<HitThrowBox>());
+        ultimateAttack.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_ULTIMATE).GetComponent<HitThrowBox>());
+
+        // Particle
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
+            SetParticlePosition(popTransform.position, popTransform.rotation, 1f);
     }
 
     public void DoAnnounceDeathState()
