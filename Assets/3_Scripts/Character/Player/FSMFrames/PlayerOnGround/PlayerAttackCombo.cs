@@ -26,7 +26,7 @@ public class PlayerAttackCombo
     public PlayerAttackCombo(int _maxAttackCombo, float _resetComboTime = 1f)
     {
         attackCombo = 0;
-        maxAttackCombo = _maxAttackCombo-1;
+        maxAttackCombo = _maxAttackCombo;
         resetComboTime = _resetComboTime;
         currentTime = -1f;
     }

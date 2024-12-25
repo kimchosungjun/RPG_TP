@@ -26,7 +26,7 @@ public class ArcherJumpState : PlayerJumpState
         time = 0f;
         onceReset = true;
         maintainJumpState = true;
-        characterCtrl.IsOnGround = false;
+        characterControl.IsOnGround = false;
         anim.SetInteger("States", (int)STATES.JUMP);
     }
 
@@ -40,22 +40,22 @@ public class ArcherJumpState : PlayerJumpState
         else
             time += Time.deltaTime;
 
-        characterCtrl.MonsterCheck();
+        characterControl.MonsterCheck();
         if (maintainJumpState == true) return;
-        characterCtrl.LimitMovementSpeed();
-        characterCtrl.GroundCheck();
+        characterControl.LimitMovementSpeed();
+        characterControl.GroundCheck();
         InputKey();
         CheckTransitionState();
     }
 
     public override void FixedExecute()
     {
-        characterCtrl.SetMoveDirection();
-        characterCtrl.AirBlock();
-        characterCtrl.SetGravity();
-        characterCtrl.SetRotation();
-        characterCtrl.ApplyAirForce();
-        characterCtrl.ApplyAirRotation();
+        characterControl.SetMoveDirection();
+        characterControl.AirBlock();
+        characterControl.SetGravity();
+        characterControl.SetRotation();
+        characterControl.ApplyAirForce();
+        characterControl.ApplyAirRotation();
     }
 
 
@@ -65,7 +65,7 @@ public class ArcherJumpState : PlayerJumpState
         if (Input.GetKeyDown(KeyCode.Space) && isDoubleJump == false) 
         {
             isDoubleJump = true;
-            characterCtrl.AddforceForJump();
+            characterControl.AddforceForJump();
         }
     }
 

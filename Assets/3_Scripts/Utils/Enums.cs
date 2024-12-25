@@ -106,6 +106,7 @@ namespace EffectEnums
         NONE = 0,
         KNOCKBACK = 1,
         STUN = 2,
+        FALLDOWN=3,
     }
 
     /// <summary>

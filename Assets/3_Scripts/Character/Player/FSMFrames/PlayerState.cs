@@ -7,8 +7,8 @@ using UnityEngine;
 public class PlayerState : State
 {
     protected Animator anim = null;
-    protected PlayerMovementControl characterCtrl = null;
-    public PlayerState(PlayerMovementControl _controller) { this.anim = _controller.GetAnim; this.characterCtrl = _controller;}
+    protected PlayerMovementControl characterControl = null;
+    public PlayerState(PlayerMovementControl _controller) { this.anim = _controller.GetAnim; this.characterControl = _controller;}
 
     public override void Enter() { }
     public override void Execute() { }

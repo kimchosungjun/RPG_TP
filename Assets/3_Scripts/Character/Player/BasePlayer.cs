@@ -26,12 +26,12 @@ public class BasePlayer : BaseActor
     public void DoDeathState() { playerMovementControl.Death(); }
     #endregion
 
-    #region Override : Set Layer
-
     /******************************************/
     /************* 레이어 설정  *************/
+    /************* 데미지 설정  *************/
     /******************************************/
 
+    #region Override  
     public override void SetCharacterType()
     {
         intLayer = (int)UtilEnums.LAYERS.MONSTER;

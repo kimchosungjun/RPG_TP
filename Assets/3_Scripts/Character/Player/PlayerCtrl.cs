@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    [SerializeField] EffectEnums.HIT_EFFECTS effect;
     /**********************************************/
     /************ 캐릭터 변경 변수 *************/
     /**********************************************/
@@ -54,6 +55,15 @@ public class PlayerCtrl : MonoBehaviour
             ChangePlayer(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangePlayer(2);
+
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            // Test Damage
+            TransferAttackData attackData = new TransferAttackData();
+            attackData.SetData((int)effect, 3, 2f);
+            players[currentPlayer].TakeDamage(attackData);
+        }
     }
 
     public void DeathChangePlayer()

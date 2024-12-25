@@ -23,21 +23,21 @@ public class PlayerFallState : PlayerOnAirState
 
     public override void Execute()
     {
-        characterCtrl.MonsterCheck(); 
-        characterCtrl.LimitMovementSpeed();
-        characterCtrl.GroundCheck();
+        characterControl.MonsterCheck(); 
+        characterControl.LimitMovementSpeed();
+        characterControl.GroundCheck();
         InputKey();
         CheckTransitionMovementState();
     }
 
     public override void FixedExecute()
     {
-        characterCtrl.SetMoveDirection();
-        characterCtrl.AirBlock();
-        characterCtrl.SetGravity();
-        characterCtrl.SetRotation();
-        characterCtrl.ApplyAirForce();
-        characterCtrl.ApplyAirRotation();
+        characterControl.SetMoveDirection();
+        characterControl.AirBlock();
+        characterControl.SetGravity();
+        characterControl.SetRotation();
+        characterControl.ApplyAirForce();
+        characterControl.ApplyAirRotation();
     }
 
     #endregion
@@ -49,14 +49,14 @@ public class PlayerFallState : PlayerOnAirState
     #region Execute
     public void InputKey()
     {
-        characterCtrl.XMove = Input.GetAxisRaw("Horizontal");
-        characterCtrl.ZMove = Input.GetAxisRaw("Vertical");
+        characterControl.XMove = Input.GetAxisRaw("Horizontal");
+        characterControl.ZMove = Input.GetAxisRaw("Vertical");
     }
 
     public void CheckTransitionMovementState()
     {
-        if (characterCtrl.IsOnGround)
-            characterCtrl.ChangeState(PlayerEnums.STATES.MOVEMENT);
+        if (characterControl.IsOnGround)
+            characterControl.ChangeState(PlayerEnums.STATES.MOVEMENT);
     }
     #endregion
 }

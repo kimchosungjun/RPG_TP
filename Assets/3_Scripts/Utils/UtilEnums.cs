@@ -39,6 +39,9 @@ namespace PoolEnums
         WARRIOR_NORMAL=0,
         WARRIOR_ROAR=1,
         WARRIOR_SLASH = 2,
+        ARCHER_NORMAL=3,
+        ARCHER_ATTACK_SKILL=4,
+        ARCHER_ULTIMATE=5,
     }
 }
 

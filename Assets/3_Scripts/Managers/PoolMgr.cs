@@ -49,7 +49,7 @@ public class PoolMgr : MonoBehaviour
         int cnt = list.Count;
         for(int i = 0; i < cnt; i++)
         {
-            if (list[i].gameObject.activeSelf == true)
+            if (list[i].gameObject.activeSelf == false)
                 return list[i];
         }
 

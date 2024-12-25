@@ -33,7 +33,7 @@ public class PlayerJumpState : PlayerOnAirState
         time = 0f;
         onceReset = true;
         maintainJumpState = true;
-        characterCtrl.IsOnGround = false;
+        characterControl.IsOnGround = false;
         anim.SetInteger("States", (int)STATES.JUMP);
     }
 
@@ -47,22 +47,22 @@ public class PlayerJumpState : PlayerOnAirState
         else
             time += Time.deltaTime;
 
-        characterCtrl.MonsterCheck();
+        characterControl.MonsterCheck();
         if (maintainJumpState == true) return;
-        characterCtrl.LimitMovementSpeed();
-        characterCtrl.GroundCheck();
+        characterControl.LimitMovementSpeed();
+        characterControl.GroundCheck();
         InputKey();
         CheckTransitionState();
     }
 
     public override void FixedExecute()
     {
-        characterCtrl.SetMoveDirection();
-        characterCtrl.AirBlock();
-        characterCtrl.SetGravity();
-        characterCtrl.SetRotation();
-        characterCtrl.ApplyAirForce();
-        characterCtrl.ApplyAirRotation();
+        characterControl.SetMoveDirection();
+        characterControl.AirBlock();
+        characterControl.SetGravity();
+        characterControl.SetRotation();
+        characterControl.ApplyAirForce();
+        characterControl.ApplyAirRotation();
     }
 
     #endregion
@@ -74,21 +74,21 @@ public class PlayerJumpState : PlayerOnAirState
     #region Execute
     public virtual void InputKey()
     {
-        characterCtrl.XMove = Input.GetAxisRaw("Horizontal");
-        characterCtrl.ZMove = Input.GetAxisRaw("Vertical");
+        characterControl.XMove = Input.GetAxisRaw("Horizontal");
+        characterControl.ZMove = Input.GetAxisRaw("Vertical");
     }
 
     public void CheckTransitionState()
     {
-        if (characterCtrl.IsOnGround)
+        if (characterControl.IsOnGround)
         {
-            characterCtrl.ChangeState(STATES.MOVEMENT);
+            characterControl.ChangeState(STATES.MOVEMENT);
         }
         else
         {
             if (rigid.velocity.y < 0)
             {
-                characterCtrl.ChangeState(STATES.FALL);
+                characterControl.ChangeState(STATES.FALL);
             }
         }
     }

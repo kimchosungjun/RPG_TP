@@ -8,19 +8,26 @@ public class PlayerDashState : PlayerState
 
     public override void Enter()
     {
-        characterCtrl.GetRigid.drag = 0f;
-        characterCtrl.Dash();
+        characterControl.GetRigid.drag = 0f;
+        characterControl.Dash();
         anim.SetInteger("States", (int)PlayerEnums.STATES.DASH);
+        characterControl.CanTakeDamage = false;
     }
 
     public override void Execute()
     {
-        characterCtrl.GroundCheck();
+        characterControl.GroundCheck();
     }
 
     public override void FixedExecute()
     {
-        characterCtrl.SetGravity();
-        characterCtrl.ApplyGravityForce();
+        characterControl.SetGravity();
+        characterControl.ApplyGravityForce();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        characterControl.CanTakeDamage = true;
     }
 }

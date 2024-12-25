@@ -12,6 +12,13 @@ public class PlayerOnAirState : PlayerState
 
     public override void Enter()
     {
-        characterCtrl.GetRigid.drag = characterCtrl.AirDrag;
+        characterControl.GetRigid.drag = characterControl.AirDrag;
+        characterControl.IsOnAirState = true;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        characterControl.IsOnAirState = false;
     }
 }

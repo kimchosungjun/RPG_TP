@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using PlayerEnums;
+using Unity.VisualScripting;
 
 public abstract class PlayerMovementControl : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /************* 캐릭터 이동 **************/
     /**************   변수들    ***************/
     /******************************************/
+
+    #region Relate Hit
+    public EffectEnums.HIT_EFFECTS HitCombo { get; set; } = EffectEnums.HIT_EFFECTS.NONE;
+    public float HitEffectTime { get; set; } = 0f;
+    #endregion
 
     #region Component
     [Header("필수 연결 컴포넌트")]
@@ -127,7 +133,10 @@ public abstract class PlayerMovementControl : MonoBehaviour
     protected PlayerAttackCombo attackCombo;
     [SerializeField] protected STATES currentPlayerState = STATES.MAX;
     protected bool canTakeDamageState = true;
-    public bool CanTakeDamage { get { return canTakeDamageState; } }
+    public bool CanTakeDamage { get { return canTakeDamageState; } set { canTakeDamageState = value; } }
+
+    protected bool isOnAirState = false;
+    public bool IsOnAirState { get { return isOnAirState; }  set { isOnAirState = value; } }
     #endregion
 
     /******************************************/
@@ -365,7 +374,9 @@ public abstract class PlayerMovementControl : MonoBehaviour
     #endregion
 
     /*===========================*/
-    /*=========가상 메서드=========*/
+    /*========= 상태 변경 ==========*/
+    /*========= 값 초기 설정 ========*/
+    /*========== 피격 설정 =========*/
     /*===========================*/
 
     #region Virtual
@@ -384,6 +395,34 @@ public abstract class PlayerMovementControl : MonoBehaviour
         playerMoveLimitSpeed = playerMoveSpeed;
         playerJumpForce = _playerStat.JumpSpeed;
         playerDashForce = _playerStat.DashSpeed;
+    }
+
+
+    public virtual void ApplyTakeDamageState(EffectEnums.HIT_EFFECTS _hitEffect, float _maintainTime)
+    {
+        if (isOnAirState)
+        {
+            switch (_hitEffect)
+            {
+                case EffectEnums.HIT_EFFECTS.NONE:
+                    break;
+                default:
+                    HitCombo = EffectEnums.HIT_EFFECTS.FALLDOWN;
+                    anim.SetInteger("HitCombo", (int)EffectEnums.HIT_EFFECTS.FALLDOWN);
+                    ChangeState(STATES.HIT);
+                    break;
+            }
+        }
+        else
+        {
+            if (_hitEffect == EffectEnums.HIT_EFFECTS.NONE)
+                return;
+
+            anim.SetInteger("HitCombo", (int)_hitEffect);
+            HitCombo = _hitEffect;
+            HitEffectTime = _maintainTime;
+            ChangeState(STATES.HIT);
+        }
     }
     #endregion
 

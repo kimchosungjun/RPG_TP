@@ -29,8 +29,8 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
     public override void Execute()
     {
-        characterCtrl.LimitMovementSpeed();
-        characterCtrl.GroundCheck();
+        characterControl.LimitMovementSpeed();
+        characterControl.GroundCheck();
         SetPlaneVelocityAnimation();
         CheckTransitionFallState();
         InputKey();
@@ -38,12 +38,12 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
     public override void FixedExecute()
     {
-        characterCtrl.SetMoveDirection();
-        characterCtrl.SetSlopeMoveDirection();
-        characterCtrl.SetGravity();
-        characterCtrl.SetRotation();
-        characterCtrl.ApplyGroundForce();
-        characterCtrl.ApplyGroundRotation();
+        characterControl.SetMoveDirection();
+        characterControl.SetSlopeMoveDirection();
+        characterControl.SetGravity();
+        characterControl.SetRotation();
+        characterControl.ApplyGroundForce();
+        characterControl.ApplyGroundRotation();
     }
 
     public override void Exit()
@@ -59,42 +59,42 @@ public class PlayerGroundMoveState : PlayerOnGroundState
     #region Excute
     public void InputKey()
     {
-        characterCtrl.XMove = Input.GetAxisRaw("Horizontal");
-        characterCtrl.ZMove = Input.GetAxisRaw("Vertical");
+        characterControl.XMove = Input.GetAxisRaw("Horizontal");
+        characterControl.ZMove = Input.GetAxisRaw("Vertical");
 
         // 점프 입력
-        if (Input.GetKeyDown(KeyCode.Space) && characterCtrl.IsOnGround && !characterCtrl.IsOnMaxAngleSlope)
+        if (Input.GetKeyDown(KeyCode.Space) && characterControl.IsOnGround && !characterControl.IsOnMaxAngleSlope)
         {
-            characterCtrl.AddforceForJump();
-            characterCtrl.ChangeState(STATES.JUMP);
+            characterControl.AddforceForJump();
+            characterControl.ChangeState(STATES.JUMP);
             return;
         }
 
         // 대쉬 입력
-        if (Input.GetMouseButtonDown(1) && characterCtrl.IsOnGround && !characterCtrl.IsOnMaxAngleSlope)
+        if (Input.GetMouseButtonDown(1) && characterControl.IsOnGround && !characterControl.IsOnMaxAngleSlope)
         {
-            characterCtrl.ChangeState(STATES.DASH);
+            characterControl.ChangeState(STATES.DASH);
             return;
         }
 
         // 공격 입력
         if (/*Input.GetMouseButtonDown(0)*/ Input.GetKeyDown(KeyCode.Q))
         {
-            characterCtrl.ChangeState(STATES.ATTACK);
+            characterControl.ChangeState(STATES.ATTACK);
             return;
         }
 
         // 스킬 입력
         if (Input.GetKeyDown(KeyCode.E))
         {
-            characterCtrl.ChangeState(STATES.SKILL);
+            characterControl.ChangeState(STATES.SKILL);
             return;
         }
 
         // 궁극기 입력
         if (Input.GetKeyDown(KeyCode.R))
         {
-            characterCtrl.ChangeState(STATES.ULTIMATESKILL);
+            characterControl.ChangeState(STATES.ULTIMATESKILL);
             return;
         }
     }
@@ -109,12 +109,12 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
     public void CheckTransitionFallState()
     {
-        if(characterCtrl.IsOnGround == false)
+        if(characterControl.IsOnGround == false)
         {
             if (rigid.velocity.y < -0.1f)
-                characterCtrl.ChangeState(STATES.FALL);
+                characterControl.ChangeState(STATES.FALL);
             else
-                characterCtrl.ChangeState(STATES.JUMP);
+                characterControl.ChangeState(STATES.JUMP);
         }
     }
     #endregion

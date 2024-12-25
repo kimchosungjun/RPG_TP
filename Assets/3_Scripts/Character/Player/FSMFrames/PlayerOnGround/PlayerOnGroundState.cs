@@ -9,6 +9,6 @@ public class PlayerOnGroundState : PlayerState
 
     public override void Enter()
     {
-        characterCtrl.GetRigid.drag = characterCtrl.GroundDrag;
+        characterControl.GetRigid.drag = characterControl.GroundDrag;
     }
 }
