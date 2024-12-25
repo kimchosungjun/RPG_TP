@@ -9,7 +9,7 @@ public class NearTriggerAttackAction : AttackAction
     {
         if (triggerAttack != null)
         {
-            triggerAttack.SetHitData(attackDatas[0],null);
+            triggerAttack.SetHitData(attackData , conditionData);
             triggerAttack.gameObject.SetActive(true);
         }
     }

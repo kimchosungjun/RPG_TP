@@ -36,8 +36,9 @@ namespace PoolEnums
 {
     public enum  OBJECTS
     {
-        WARRIOR_SLASH = 0,
-
+        WARRIOR_NORMAL=0,
+        WARRIOR_ROAR=1,
+        WARRIOR_SLASH = 2,
     }
 }
 

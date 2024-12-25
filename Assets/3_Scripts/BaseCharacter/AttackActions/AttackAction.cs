@@ -2,13 +2,13 @@ using UnityEngine;
 
 public abstract class AttackAction : MonoBehaviour
 {
-    [SerializeField] protected TransferAttackData[] attackDatas;
-    [SerializeField] protected TransferConditionData[] conditionDatas;
+    [SerializeField] protected TransferAttackData attackData;
+    [SerializeField] protected TransferConditionData conditionData;
     
-    public virtual void SetTransferData(TransferAttackData[] _attackDatas, TransferConditionData[] _conditionDatas) 
+    public virtual void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData) 
     {
-        this.attackDatas = _attackDatas;
-        this.conditionDatas = _conditionDatas;  
+        this.attackData = _attackData;
+        this.conditionData = _conditionData;  
         DoAttack();
     }
 

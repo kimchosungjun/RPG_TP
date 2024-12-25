@@ -2,23 +2,24 @@ using UnityEngine;
 
 public class FarThrowAttackAction : AttackAction
 {
-    [SerializeField] Transform[] throwPositions;
-    [SerializeField] HitThrowBox[] projectiles;
-    public override void DoAttack()
+    [SerializeField] Transform throwPosition;
+    [SerializeField] HitThrowBox projectile;
+
+    public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData, HitThrowBox _projectile)
     {
-        int projectileCnt = throwPositions.Length;
-        for(int i = 0; i < projectileCnt; i++) 
-        {
-            projectiles[i].SetHitData(attackDatas[0], conditionDatas[0], throwPositions[i].rotation, throwPositions[i].position, transform.forward);
-        }
+        this.projectile = _projectile;
+        this.attackData = _attackData;
+        this.conditionData = _conditionData;
+        DoAttack();
+    }
+
+    public override void DoAttack() 
+    {
+        projectile.SetHitData( attackData,  conditionData,  throwPosition.rotation, throwPosition.position, transform.forward);
     }
 
     public override void StopAttack() 
     {
-        int projectileCnt = throwPositions.Length;
-        for (int i = 0; i < projectileCnt; i++)
-        {
-            projectiles[i].gameObject.SetActive(false);
-        }
+        projectile.gameObject.SetActive(false);
     }
 }

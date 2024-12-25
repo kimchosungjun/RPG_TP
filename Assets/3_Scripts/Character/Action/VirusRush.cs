@@ -27,12 +27,11 @@ public class VirusRush : MonoBehaviour
     {
         StartCoroutine(CStartCoolDown(2f));
         // 전달할 데이터 가공 후, 전달
-        TransferAttackData[] attackData = new TransferAttackData[1];
-        attackData[0] = new TransferAttackData();
-        attackData[0].SetData(attackActionData.GetEffect, stat.Attack * Randoms.GetCritical(stat.Critical) * attackActionData.GetMultiplier, attackActionData.GetMaintainTime);
-        TransferConditionData[] conditionData = new TransferConditionData[1];
-        conditionData[0] = new TransferConditionData();
-        conditionData[0].SetData(stat, conditionActionData.GetEffect, conditionActionData.GetAttribute,
+        TransferAttackData attackData = new TransferAttackData();
+        attackData = new TransferAttackData();
+        attackData.SetData(attackActionData.GetEffect, stat.Attack * Randoms.GetCritical(stat.Critical) * attackActionData.GetMultiplier, attackActionData.GetMaintainTime);
+        TransferConditionData conditionData = new TransferConditionData();
+        conditionData.SetData(stat, conditionActionData.GetEffect, conditionActionData.GetAttribute,
             conditionActionData.GetConditionType, conditionActionData.GetDefaultValue, conditionActionData.GetMaintainTime, conditionActionData.GetMultiplier);
         nearAttack.SetTransferData(attackData, conditionData);
     }

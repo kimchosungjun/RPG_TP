@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class ParticleAction : MonoBehaviour
 {
-    //[SerializeField] E_PARTICLES particleKey;
-    [SerializeField] ParticleSystem particle;
+    [SerializeField] Transform particleParent;
+    [SerializeField] ParticleSystem[] particles;
 
-    //public E_PARTICLES GetParticleKey { get { ResetParticleState(); return particleKey; } }
-
-    public void ResetParticleState() 
+    public void DoParticle(float _maintainTime)
     {
-        if (particle.gameObject.activeSelf == true) 
-            particle.gameObject.SetActive(false); 
+        particleParent.gameObject.SetActive(true);
+        int cnt = particles.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            particles[i].Play();
+        }
+        StartCoroutine(CParticleMaintainTime(_maintainTime));
     }
 
-    public void DoParticle()
+    IEnumerator CParticleMaintainTime(float _maintainTime) 
     {
-        particle.gameObject.SetActive(true);
-        particle.Play();
+        yield return new WaitForSeconds(_maintainTime);
+        StopParticle();
     }
 
     public void StopParticle()
     {
-        particle.Stop();
-        particle.gameObject.SetActive(false);
+        int cnt = particles.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            particles[i].Stop();
+        }
+        particleParent.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -32,15 +39,10 @@ public class ParticleAction : MonoBehaviour
     /// </summary>
     /// <param name="_position"></param>
     /// <param name="_rotation"></param>
-    public void SetParticlePosition(Vector3 _position, Quaternion _rotation)
+    public void SetParticlePosition(Vector3 _position, Quaternion _rotation, float _maintainTime = 1f)
     {
         transform.position = _position;
         transform.rotation = _rotation;
-        DoParticle();
+        DoParticle(_maintainTime);
     }
-
-    //public void SetParticleState(bool _isLoop)
-    //{
-    //    particle.loop = _isLoop;
-    //}
 }

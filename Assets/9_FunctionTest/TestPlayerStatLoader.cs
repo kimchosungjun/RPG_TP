@@ -22,14 +22,7 @@ public class TestPlayerStatLoader : MonoBehaviour
             {
                 playerObjeet.SetActive(true);
                 cameraController.ChangeState();
-                TestSlash();
             }
         }
-    }
-
-    public void TestSlash()
-    {
-        Transform go = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH);
-        gos = go;
     }
 }

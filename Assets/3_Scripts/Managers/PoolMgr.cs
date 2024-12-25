@@ -6,7 +6,7 @@ public class PoolMgr : MonoBehaviour
 {
     // Pool Parent Group
     Dictionary<OBJECTS, Transform> poolParentGroup = new Dictionary<OBJECTS, Transform>();
-    // Object Pool Group
+    // Object Pool Groupww
     Dictionary<OBJECTS, List<Transform>> objectPoolGroup = new Dictionary<OBJECTS, List<Transform>>();    
     // Pool Original Group
     Dictionary<OBJECTS, Transform> originalGroup = new Dictionary<OBJECTS, Transform>();
