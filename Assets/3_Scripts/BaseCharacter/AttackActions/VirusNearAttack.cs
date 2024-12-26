@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VirusNearAttack : NearTriggerAttackAction
+public class VirusNearAttack : TriggerAttackAction
 {
     [SerializeField, Tooltip("Int형 레이어")] int enemyLayer = (int)UtilEnums.LAYERS.PLAYER;
     [SerializeField]MonsterStat monsterStat = null;

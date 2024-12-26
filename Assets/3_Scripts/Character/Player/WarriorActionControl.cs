@@ -8,8 +8,8 @@ public class WarriorActionControl : PlayerActionControl
     [SerializeField, Tooltip("궁극기")] PlayerAttackSkillActionSOData ultimateAttackSkillSOData;
 
     [Header("플레이어 행동")]
-    [SerializeField] NearTriggerAttackAction[] normalAttacks;
-    [SerializeField] FarThrowAttackAction farThrowAttacks;
+    [SerializeField] TriggerAttackAction[] normalAttacks;
+    [SerializeField] ProjectileAttackAction farThrowAttacks;
     
     #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)

@@ -6,7 +6,7 @@ public class VirusRush : MonoBehaviour
     MonsterStat stat;
     [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
     [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
-    [SerializeField] NearTriggerAttackAction nearAttack = null;
+    [SerializeField] TriggerAttackAction nearAttack = null;
     public float coolTime = 0; 
     [SerializeField] protected bool isCoolDown = true;
     public bool GetCoolDown { get { return isCoolDown; } }
@@ -14,7 +14,7 @@ public class VirusRush : MonoBehaviour
     // 생성시 한번만 호출 : 몬스터의 레벨을 바꿀 생각 없기 때문이다.
     public void SetData(MonsterStat _stat)
     {
-        if (nearAttack == null) nearAttack = GetComponentInChildren<NearTriggerAttackAction>();
+        if (nearAttack == null) nearAttack = GetComponentInChildren<TriggerAttackAction>();
 
         // 스탯과 행동 데이터 불러오기
         this.stat = _stat;

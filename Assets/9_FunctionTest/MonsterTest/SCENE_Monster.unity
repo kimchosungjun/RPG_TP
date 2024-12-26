@@ -2036,7 +2036,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 111610474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 111610475}
@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 118998961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93dae47fb7ae6b4e86f46dc77dbfe81, type: 3}
+  m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerAttack: {fileID: 2208318250916822355}
@@ -2569,7 +2569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 215275891}
-  - component: {fileID: 215275890}
+  - component: {fileID: 215275892}
   m_Layer: 0
   m_Name: NormalAttack_03
   m_TagString: Untagged
@@ -2577,19 +2577,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &215275890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215275889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93dae47fb7ae6b4e86f46dc77dbfe81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerAttack: {fileID: 3745568157171023242}
 --- !u!4 &215275891
 Transform:
   m_ObjectHideFlags: 0
@@ -2606,6 +2593,19 @@ Transform:
   m_Father: {fileID: 392932610}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &215275892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215275889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerAttack: {fileID: 3745568157171023242}
 --- !u!1 &215532060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 225540797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 225540798}
@@ -2881,7 +2881,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 253279782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 253279783}
@@ -3365,7 +3365,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 328993477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 328993478}
@@ -4646,7 +4646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93dae47fb7ae6b4e86f46dc77dbfe81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerAttack: {fileID: 1937734599}
 --- !u!1 &472211365
 GameObject:
   m_ObjectHideFlags: 0
@@ -5527,7 +5526,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 699382646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 699382647}
@@ -9549,7 +9548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1275362582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 1275362583}
@@ -10156,10 +10155,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1402905060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwPosition: {fileID: 1402905061}
+  throwPosition: {fileID: 0}
   projectile: {fileID: 0}
 --- !u!1 &1407317235
 GameObject:
@@ -10857,7 +10856,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1526401102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93dae47fb7ae6b4e86f46dc77dbfe81, type: 3}
+  m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerAttack: {fileID: 1196556366}
@@ -13392,10 +13391,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1812362745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwPosition: {fileID: 1812362746}
+  throwPosition: {fileID: 0}
   projectile: {fileID: 0}
 --- !u!1 &1813499419
 GameObject:
@@ -13640,10 +13639,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1847430854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwPosition: {fileID: 1847430855}
+  throwPosition: {fileID: 0}
   projectile: {fileID: 0}
 --- !u!1 &1856673951
 GameObject:
@@ -15157,7 +15156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118310320}
-  - component: {fileID: 2118310319}
+  - component: {fileID: 2118310321}
   m_Layer: 0
   m_Name: NormalAttack_02
   m_TagString: Untagged
@@ -15165,19 +15164,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2118310319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118310318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93dae47fb7ae6b4e86f46dc77dbfe81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerAttack: {fileID: 3101733928643675676}
 --- !u!4 &2118310320
 Transform:
   m_ObjectHideFlags: 0
@@ -15194,6 +15180,19 @@ Transform:
   m_Father: {fileID: 392932610}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &2118310321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118310318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerAttack: {fileID: 3101733928643675676}
 --- !u!1 &2125530869
 GameObject:
   m_ObjectHideFlags: 0
@@ -19816,8 +19815,8 @@ MonoBehaviour:
     type: 2}
   normalAttacks:
   - {fileID: 118998963}
-  - {fileID: 2118310319}
-  - {fileID: 215275890}
+  - {fileID: 2118310321}
+  - {fileID: 215275892}
   - {fileID: 1526401104}
   farThrowAttacks: {fileID: 328993479}
 --- !u!114 &5866666020441516156

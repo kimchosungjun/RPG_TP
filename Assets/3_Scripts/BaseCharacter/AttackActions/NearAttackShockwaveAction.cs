@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NearAttackShockwaveAction : NearTriggerAttackAction
+public class NearAttackShockwaveAction : TriggerAttackAction
 {
     [SerializeField] protected GameObject shockWave;
     //    public override void StopAttack()

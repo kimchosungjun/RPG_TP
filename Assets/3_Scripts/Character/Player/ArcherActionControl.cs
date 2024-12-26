@@ -8,9 +8,9 @@ public class ArcherActionControl : PlayerActionControl
     [SerializeField, Tooltip("스킬")] PlayerAttackSkillActionSOData attackSkillSOData;
     [SerializeField, Tooltip("궁극기")] PlayerAttackSkillActionSOData ultimateAttackSkillSOData;
 
-    [SerializeField] FarThrowAttackAction[] normalAttacks;
-    [SerializeField] FarThrowAttackAction[] skillAttacks;
-    [SerializeField] FarThrowAttackAction ultimateAttack;
+    [SerializeField] ProjectileAttackAction[] normalAttacks;
+    [SerializeField] ProjectileAttackAction[] skillAttacks;
+    [SerializeField] ProjectileAttackAction ultimateAttack;
     [SerializeField] Transform popTransform;
 
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)

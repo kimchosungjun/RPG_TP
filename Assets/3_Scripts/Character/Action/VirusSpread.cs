@@ -7,7 +7,7 @@ public class VirusSpread : MonoBehaviour
     MonsterStat stat = null;
     [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
     [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
-    [SerializeField] FarThrowAttackAction spredAttack = null;
+    [SerializeField] ProjectileAttackAction spredAttack = null;
     protected bool isCoolDown = true;
 
     public bool GetCoolDown { get { return isCoolDown; } }
@@ -15,7 +15,7 @@ public class VirusSpread : MonoBehaviour
     // 생성시 한번만 호출 : 몬스터의 레벨을 바꿀 생각 없기 때문이다.
     public void SetData(MonsterStat _stat)
     {
-        if (spredAttack == null) spredAttack = GetComponentInChildren<FarThrowAttackAction>();
+        if (spredAttack == null) spredAttack = GetComponentInChildren<ProjectileAttackAction>();
 
         // 스탯과 행동 데이터 불러오기
         this.stat= _stat;
