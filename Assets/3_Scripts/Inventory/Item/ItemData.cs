@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using ItemEnums; 
 
 public interface Item 
 {
@@ -18,11 +18,11 @@ public class ItemData : Item
     public int itemPrice;
     public int itemSellPrice;
 
-    public E_ITEMTYPE ItemType{ get; private set; }
+    public ITEMTYPE ItemType{ get; private set; }
 
     public virtual void SetItemType()
     {
-        Enums.ConvertStringToEnum(itemType, out E_ITEMTYPE result);
+        Enums.ConvertStringToEnum(itemType, out ITEMTYPE result);
         ItemType = result;
     }
 

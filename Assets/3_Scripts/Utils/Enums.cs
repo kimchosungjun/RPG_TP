@@ -159,8 +159,29 @@ namespace EffectEnums
 // 아이템
 namespace ItemEnums
 {
-    
+    public enum ITEMTYPE
+    {
+        ITEM_NONE = 0,
+        ITEM_ETC = 1,
+        ITEM_COMSUMPTION = 1,
+        ITEM_WEAPON = 2,
+    }
+
+    public enum WEAPONTYPE
+    {
+        WEAPON_NONE = 0,
+        WEAPON_SWORD = 1,
+        WEAPON_BOW = 2,
+        WEAPON_STAFF = 3,
+    }
+
+    public enum WEAPONEFFECT
+    {
+        WEAPON_ATTACK = 0,
+        WEAPON_CRITICAL = 1,
+    }
 }
+
 #region ITEM
 
 public enum E_CAMERAVIEW
@@ -169,27 +190,6 @@ public enum E_CAMERAVIEW
     CAMERA_CLOSEUP = 1,
 }
 
-public enum E_ITEMTYPE
-{
-    ITEM_NONE = 0,
-    ITEM_WEAPON = 1,
-    ITEM_COMSUMPTION = 2,
-    ITEM_OTHERS = 3
-}
 
-public enum E_WEAPONTYPE
-{
-    WEAPON_NONE = 0,
-    WEAPON_SWORD = 1,
-    WEAPON_BOW = 2,
-    WEAPON_STAFF = 3,
-}
-
-public enum E_WEAPONEFFECT
-{
-    WEAPON_NONE = 0,
-    WEAPON_CRITICAL = 1,
-    WEAPON_ABSORPTION = 2
-}
 
 #endregion

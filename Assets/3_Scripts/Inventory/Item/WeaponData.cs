@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ItemEnums;
 
 public class WeaponData : ItemData
 {
@@ -16,16 +17,16 @@ public class WeaponData : ItemData
     public string weaponType;
   
     // Enum 값으로 변환 후 저장할 속성
-    public E_WEAPONTYPE WeaponType { get; private set; }
-    public E_WEAPONEFFECT WeaponEffect { get; private set; }
+    public WEAPONTYPE WeaponType { get; private set; }
+    public WEAPONEFFECT WeaponEffect { get; private set; }
     public bool IsHoldWeapon { get; private set; } = false; // Check For Sell
 
     public void SetWeaponType()
     {
-        Enums.ConvertStringToEnum(weaponType, out E_WEAPONTYPE weaponTypeResult);
+        Enums.ConvertStringToEnum(weaponType, out WEAPONTYPE weaponTypeResult);
         WeaponType = weaponTypeResult;
 
-        Enums.ConvertStringToEnum(weaponEffect, out E_WEAPONEFFECT weaponEffectResult);
+        Enums.ConvertStringToEnum(weaponEffect, out WEAPONEFFECT weaponEffectResult);
         WeaponEffect = weaponEffectResult;
     }
 
