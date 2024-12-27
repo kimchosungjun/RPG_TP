@@ -169,10 +169,9 @@ namespace ItemEnums
 
     public enum WEAPONTYPE
     {
-        WEAPON_NONE = 0,
-        WEAPON_SWORD = 1,
-        WEAPON_BOW = 2,
-        WEAPON_STAFF = 3,
+        WEAPON_KNUCKLE = 0,
+        WEAPON_BOW = 1,
+        WEAPON_STAFF = 2,
     }
 
     public enum WEAPONEFFECT

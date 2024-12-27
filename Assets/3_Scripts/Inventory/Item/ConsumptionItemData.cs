@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConsumptionItemData : ItemData 
 { 
-    public override void Sell()
+    public override void Remove()
     {
         throw new System.NotImplementedException();
     }

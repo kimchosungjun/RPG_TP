@@ -10,13 +10,14 @@ public class TableMgr
     #region Private Table
     private AccountSaveData accountSaveData;
     private PlayerTable player = new PlayerTable();
-    
     private MonsterTable monster = new MonsterTable();
+    private ItemTable item = new ItemTable();
     #endregion
 
     #region Property
     public PlayerTable GetPlayer { get { return player; } }
     public MonsterTable GetMonster { get {  return monster; } }
+    public ItemTable GetItem { get { return item; } }
     public AccountSaveData AccountSaveData { get { return accountSaveData; } set { accountSaveData = value; } }
     #endregion
 
@@ -34,6 +35,14 @@ public class TableMgr
         GetMonster.InitMonsterStatTableCsv("MonsterStatTable", 1, 0);
         GetMonster.InitMonsterAttackTableCsv("MonsterAttackTable", 1, 0);
         GetMonster.InitMonsterConditionTableCsv("MonsterConditionTable", 1, 0);
+    }
+
+    private void ParseItemData()
+    {
+        GetMonster.InitMonsterDropTableCsv("EtcTable", 1, 0);
+        GetMonster.InitMonsterInfoTableCsv("ComsumeTable", 1, 0);
+        GetMonster.InitMonsterStatTableCsv("WeaponTable", 1, 0);
+        GetMonster.InitMonsterAttackTableCsv("WeaponUpgradeTable", 1, 0);
     }
 
     #region Test Function

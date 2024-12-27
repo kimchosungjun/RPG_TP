@@ -11,24 +11,15 @@ public class WeaponData : ItemData
     public int weaponCurrentLevel;
     public int weaponMaxLevel;
     // Stat
-    public float weaponPower;
-    public float weaponEffectValue;
-    public string weaponEffect;
-    public string weaponType;
+    public float attackValue;
+    public float effectValue;
+    public int weaponEffect;
+    public int weaponType; // staff, bow..
   
     // Enum 값으로 변환 후 저장할 속성
     public WEAPONTYPE WeaponType { get; private set; }
     public WEAPONEFFECT WeaponEffect { get; private set; }
     public bool IsHoldWeapon { get; private set; } = false; // Check For Sell
-
-    public void SetWeaponType()
-    {
-        Enums.ConvertStringToEnum(weaponType, out WEAPONTYPE weaponTypeResult);
-        WeaponType = weaponTypeResult;
-
-        Enums.ConvertStringToEnum(weaponEffect, out WEAPONEFFECT weaponEffectResult);
-        WeaponEffect = weaponEffectResult;
-    }
 
     public override void Use()
     {

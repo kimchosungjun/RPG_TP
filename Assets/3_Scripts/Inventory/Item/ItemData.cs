@@ -6,7 +6,7 @@ using ItemEnums;
 public interface Item 
 {
     public void Use();
-    public void Sell();
+    public void Remove();
 }
 
 public class ItemData : Item
@@ -14,26 +14,17 @@ public class ItemData : Item
     public int itemID;
     public string itemName;
     public string itemDescription;
-    public string itemType;
-    public int itemPrice;
-    public int itemSellPrice;
-
-    public ITEMTYPE ItemType{ get; private set; }
-
-    public virtual void SetItemType()
-    {
-        Enums.ConvertStringToEnum(itemType, out ITEMTYPE result);
-        ItemType = result;
-    }
-
-    public virtual void Sell()
-    {
-        // Earn Money : item Sell Price
-        
-    }
+    public Sprite itemIcon;
+    public Sprite itemTypeIcon;
+    public int itemType;
 
     public virtual void Use()
     {
      
+    }
+
+    public virtual void Remove()
+    {
+
     }
 }
