@@ -10,7 +10,12 @@ public class PoolMgr : MonoBehaviour
     Dictionary<OBJECTS, List<Transform>> objectPoolGroup = new Dictionary<OBJECTS, List<Transform>>();    
     // Pool Original Group
     Dictionary<OBJECTS, Transform> originalGroup = new Dictionary<OBJECTS, Transform>();
-    
+
+    [Header("Float Damage Text")]
+    [SerializeField] Transform floatDamageParent;
+    [SerializeField] FloatDamageTextUI floatDamageOriginal;
+    [SerializeField] List <FloatDamageTextUI> floatDamageTexts = new List<FloatDamageTextUI>();
+
     private void Awake()
     {
         SharedMgr.PoolMgr = this;
@@ -57,5 +62,24 @@ public class PoolMgr : MonoBehaviour
         list.Add(result.transform);
         result.transform.SetParent(poolParentGroup[_poolObject], true);
         return result.transform;
+    }
+
+
+    public FloatDamageTextUI GetFloatDamageText()
+    {
+        int cnt = floatDamageTexts.Count;
+        for (int i = 0; i < cnt; i++)
+        {
+            if (floatDamageTexts[i].gameObject.activeSelf == false)
+            {
+                floatDamageTexts[i].gameObject.SetActive(true);
+                return floatDamageTexts[i];
+            }
+        }
+
+        FloatDamageTextUI instText = Instantiate(floatDamageOriginal);
+        instText.transform.SetParent(floatDamageParent, true);
+        floatDamageTexts.Add(instText);
+        return instText;
     }
 }

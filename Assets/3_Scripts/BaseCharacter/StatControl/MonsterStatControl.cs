@@ -36,6 +36,7 @@ public class MonsterStatControl : ActorStatControl
         float allDamage = _attackData.GetAttackValue - monsterStat.Defence;
         allDamage = (allDamage) <= 0 ? 1 : allDamage;
 
+        SharedMgr.PoolMgr.GetFloatDamageText().SetFloat(this.transform, allDamage);
         // 체력을 계산하여 죽은 상태인지 확인
         float curHp = monsterStat.CurrentHP - allDamage;
         if (curHp <= 0)
