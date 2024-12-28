@@ -4414,7 +4414,7 @@ GameObject:
   - component: {fileID: 6633012565769460494}
   - component: {fileID: 1276757079029200115}
   m_Layer: 5
-  m_Name: Inventory_UI
+  m_Name: InventoryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

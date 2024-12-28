@@ -16,6 +16,8 @@ public class PoolMgr : MonoBehaviour
     [SerializeField] FloatDamageTextUI floatDamageOriginal;
     [SerializeField] List <FloatDamageTextUI> floatDamageTexts = new List<FloatDamageTextUI>();
 
+    [Header("Float Get Item")]
+    [SerializeField] ShowGetItemSlot[] getItemSlot;
     private void Awake()
     {
         SharedMgr.PoolMgr = this;
@@ -81,5 +83,18 @@ public class PoolMgr : MonoBehaviour
         instText.transform.SetParent(floatDamageParent, true);
         floatDamageTexts.Add(instText);
         return instText;
+    }
+
+    public ShowGetItemSlot GetItemSlot()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (getItemSlot[i].gameObject.activeSelf == false)
+            {
+                getItemSlot[i].transform.SetAsLastSibling();
+                return getItemSlot[i];
+            }
+        }
+        return null;
     }
 }

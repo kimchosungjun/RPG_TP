@@ -75,8 +75,8 @@ public partial class ItemTable : BaseTable
         if (_reader.reset_row(_row, _col) == false) return false;
         _reader.get(_row, ref _tableData.maxLevel);
         _tableData.SetSize();
-        _reader.get(_row, ref _tableData.needGolds, _tableData.maxLevel);
-        _reader.get(_row, ref _tableData.needExps, _tableData.maxLevel);
+        _reader.get(_row, ref _tableData.needGolds, _tableData.needGolds.Length);
+        _reader.get(_row, ref _tableData.needExps, _tableData.needExps.Length);
         return true;
     }
 

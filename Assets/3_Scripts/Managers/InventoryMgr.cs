@@ -22,6 +22,8 @@ public class InventoryMgr
     public List<EtcData> GetEtcInventory()  {  return etcDatas; }
     public List<ConsumeData> GetConsumeInventory() { return consumeDatas; }
     public List<WeaponData> GetWeaponInventory() { return weaponDatas; }
+
+    Queue<ItemData> getItemQueue = new Queue<ItemData>();
     #endregion
 
 
@@ -42,6 +44,7 @@ public class InventoryMgr
                 if (datas[i].itemCnt + itemCnt <= _etcData.GetMaxCnt)
                 {
                     datas[i].itemCnt += itemCnt;
+                    ShowGetSlot(_etcData);
                     return;
                 }
                 else
@@ -58,6 +61,7 @@ public class InventoryMgr
                     _etcData.itemCnt = itemCnt;
                     etcDatas.Add(_etcData);
                     etcGroup[_etcData.itemID].Add(_etcData);
+                    ShowGetSlot(_etcData);
                 }
                 else
                 {
@@ -73,6 +77,7 @@ public class InventoryMgr
                 etcGroup[_etcData.itemID]= new List<EtcData> ();
                 etcGroup[_etcData.itemID].Add(_etcData);
                 etcDatas.Add(_etcData);
+                ShowGetSlot(_etcData);
             }
             else
             {
@@ -97,6 +102,7 @@ public class InventoryMgr
                 if (datas[i].itemCnt + itemCnt <= _consumeData.GetMaxCnt)
                 {
                     datas[i].itemCnt += itemCnt;
+                    ShowGetSlot(_consumeData);
                     return;
                 }
                 else
@@ -113,6 +119,7 @@ public class InventoryMgr
                     _consumeData.itemCnt = itemCnt;
                     consumeDatas.Add(_consumeData);
                     consumeGroup[_consumeData.itemID].Add(_consumeData);
+                    ShowGetSlot(_consumeData);
                 }
                 else
                 {
@@ -128,6 +135,7 @@ public class InventoryMgr
                 consumeGroup[_consumeData.itemID] = new List<ConsumeData>();
                 consumeGroup[_consumeData.itemID].Add(_consumeData);
                 consumeDatas.Add(_consumeData);
+                ShowGetSlot(_consumeData);
             }
             else
             {
@@ -147,6 +155,7 @@ public class InventoryMgr
             return;
         }    
         weaponDatas.Add(_weaponData);
+        ShowGetSlot(_weaponData);
     }
 
     #endregion
@@ -218,6 +227,23 @@ public class InventoryMgr
         }
     }
 
+    #endregion
+
+    #region Link Show Get Item UI
+    public void ShowGetSlot(ItemData _itemData)
+    {
+        getItemQueue.Enqueue(_itemData);
+        ShowGetItemSlot slot = SharedMgr.PoolMgr.GetItemSlot();
+        if (slot != null)
+            slot.ShowSlot(getItemQueue.Dequeue());
+    }
+
+    public void ShowNextGetItemSlot()
+    {
+        if (getItemQueue.Count == 0)
+            return;
+        SharedMgr.PoolMgr.GetItemSlot().ShowSlot(getItemQueue.Dequeue());
+    }
     #endregion
 
     public void Init()

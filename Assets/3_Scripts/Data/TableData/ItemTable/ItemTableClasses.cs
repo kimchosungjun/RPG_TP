@@ -52,8 +52,8 @@ namespace ItemTableClasses
         
         public void SetSize()
         {
-            needExps = new int[maxLevel];   
-            needGolds = new int[maxLevel];  
+            needExps = new int[maxLevel - 1];   
+            needGolds = new int[maxLevel - 1];  
         }
     }
 }
