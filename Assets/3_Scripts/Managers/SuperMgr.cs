@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class SuperMgr : MonoBehaviour
 {
-    #region Link Manager
+    #region Reference Link
     [SerializeField] SceneMgr sceneMgr;
     [SerializeField] SoundMgr soundMgr;
     #endregion
     
-    #region Not Link Manager
+    #region Use Heap Memory
     HoldItemMgr holdItemMgr = new HoldItemMgr();
     UIMgr uiMgr = new UIMgr();
     ResourceMgr resourceMgr = new ResourceMgr();
     TableMgr tableMgr = new TableMgr();
+    InventoryMgr inventoryMgr = new InventoryMgr();
     #endregion
 
     private void Awake()
@@ -25,11 +26,12 @@ public class SuperMgr : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
             SharedMgr.SuperMgr = this;
+            tableMgr.Init();
             sceneMgr.Init();
             resourceMgr.Init();
             uiMgr.Init();
-            tableMgr.Init();
             soundMgr.Init();
+            inventoryMgr.Init();
             // 아이템 정보 : 아직 안씀 
             holdItemMgr.Init();
         }

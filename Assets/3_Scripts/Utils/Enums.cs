@@ -161,9 +161,8 @@ namespace ItemEnums
 {
     public enum ITEMTYPE
     {
-        ITEM_NONE = 0,
-        ITEM_ETC = 1,
-        ITEM_COMSUMPTION = 1,
+        ITEM_ETC = 0,
+        ITEM_COMSUME = 1,
         ITEM_WEAPON = 2,
     }
 

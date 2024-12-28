@@ -11,6 +11,7 @@ public static class SharedMgr
     public static ResourceMgr ResourceMgr = null;
     public static TableMgr TableMgr = null;
     public static SoundMgr SoundMgr = null;
+    public static InventoryMgr InventoryMgr = null; 
     #endregion
 
     // 아직 안씀

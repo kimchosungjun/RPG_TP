@@ -17,14 +17,9 @@ public class ItemData : Item
     public Sprite itemIcon;
     public Sprite itemTypeIcon;
     public int itemType;
+    public int itemCnt;
 
-    public virtual void Use()
-    {
-     
-    }
+    public virtual void Use() {  }
 
-    public virtual void Remove()
-    {
-
-    }
+    public virtual void Remove() { }
 }

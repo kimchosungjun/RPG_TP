@@ -26,7 +26,7 @@ public class GameUICtrl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-
+            inventoyUI.InputInventoryKey();
         }
     }
 }
