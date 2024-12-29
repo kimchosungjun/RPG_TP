@@ -67,8 +67,7 @@ namespace UtilEnums
         GROUND = 6,
         MONSTER = 7,
         PLAYER = 8,
-        NPC = 9,
-        INTERACTOBJECT = 10,
+        INTERACTOR = 9,
     }
 
     public enum TABLE_FOLDER_TYPES

@@ -8,7 +8,7 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] Image itemImage;
     [SerializeField] Text numberText;
-
+    [SerializeField] Button slotButton;
     EtcData etcData = null;
     ConsumeData consumeData = null;
     WeaponData weaponData = null;
@@ -18,6 +18,7 @@ public class InventorySlot : MonoBehaviour
     {
         itemImage.sprite = null;
         numberText.text = string.Empty;
+        slotButton.interactable = false;
     }
 
     public void ChangeSlot(EtcData _etcData)
@@ -25,6 +26,7 @@ public class InventorySlot : MonoBehaviour
         itemImage.sprite = _etcData.itemIcon;
         numberText.text = _etcData.itemCnt+"개";
         etcData = _etcData;
+        slotButton.interactable = true;
     }
 
     public void ChangeSlot(ConsumeData _consumeData)
@@ -32,13 +34,15 @@ public class InventorySlot : MonoBehaviour
         itemImage.sprite = _consumeData.itemIcon;
         numberText.text = _consumeData.itemCnt + "개";
         consumeData = _consumeData;
+        slotButton.interactable = true;
     }
 
     public void ChangeSlot(WeaponData _weaponData)
     {
         itemImage.sprite = _weaponData.itemIcon;
         numberText.text = "Lv."+_weaponData.weaponCurrentLevel;
-        weaponData = _weaponData;   
+        weaponData = _weaponData;
+        slotButton.interactable = true;
     }
 
     public void PressSlot()

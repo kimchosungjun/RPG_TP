@@ -57,13 +57,13 @@ public class PlayerCtrl : MonoBehaviour
             ChangePlayer(2);
 
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            // Test Damage
-            TransferAttackData attackData = new TransferAttackData();
-            attackData.SetData((int)effect, 3, 2f);
-            players[currentPlayer].TakeDamage(attackData);
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    // Test Damage
+        //    TransferAttackData attackData = new TransferAttackData();
+        //    attackData.SetData((int)effect, 3, 2f);
+        //    players[currentPlayer].TakeDamage(attackData);
+        //}
     }
 
     public void DeathChangePlayer()

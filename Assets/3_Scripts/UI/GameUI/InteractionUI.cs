@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractionUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Text interactionText;
+    [SerializeField] GameObject interactionObject;
+
+    public void Active(string _text)
     {
-        
+        interactionText.text = _text;
+        interactionObject.SetActive(true);  
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InActive()
     {
-        
+        interactionObject.SetActive(false);  
     }
 }

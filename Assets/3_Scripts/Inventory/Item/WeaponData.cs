@@ -32,4 +32,19 @@ public class WeaponData : ItemData
         IsHoldWeapon = false;
 
     }
+
+    public void SetData(ItemTableClasses.WeaponTableData _tableData)
+    {
+        itemID = _tableData.ID;
+        itemName = _tableData.name;
+        itemDescription = _tableData.description;
+        itemIcon = null;
+        itemTypeIcon = null;
+        itemType = (int)ITEMTYPE.ITEM_ETC;
+        itemCnt = 1;
+        
+        attackValue = _tableData.attackValue;
+        effectValue = _tableData.additionEffectValue;
+        weaponEffect = _tableData.additionalEffect;
+    }
 }

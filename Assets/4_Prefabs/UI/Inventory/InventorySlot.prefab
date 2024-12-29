@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 208559094820548540}
   numberText: {fileID: 5080237322312216626}
+  slotButton: {fileID: 2411979179905057254}
 --- !u!114 &2411979179905057254
 MonoBehaviour:
   m_ObjectHideFlags: 0

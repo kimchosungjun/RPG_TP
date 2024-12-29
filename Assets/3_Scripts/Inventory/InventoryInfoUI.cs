@@ -80,7 +80,10 @@ public class InventoryInfoUI : MonoBehaviour
         weaponName.text = _itemData.itemName;
         weaponDescriptionText.text = _itemData.itemDescription;
         weaponLevelText.text = "Lv."+_itemData.weaponCurrentLevel;
-        weaponLevelSlide.value = _itemData.weaponCurrentExp / _itemData.weaponMaxExp;
+        if (_itemData.weaponMaxExp == 0)
+            weaponLevelSlide.value = 1;
+        else
+            weaponLevelSlide.value = _itemData.weaponCurrentExp / _itemData.weaponMaxExp;
         weaponAttackText.text = _itemData.attackValue.ToString();
      
         switch (_itemData.WeaponEffect)

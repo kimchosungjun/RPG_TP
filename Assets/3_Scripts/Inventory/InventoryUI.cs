@@ -14,11 +14,6 @@ public class InventoryUI : MonoBehaviour
     public ITEMTYPE GetCurrentType { get { return currentShowType; } }
     int inventoryCurrentIndex = 0;
 
-    public void Init()
-    {
-        
-    }
-
     public void InputInventoryKey()
     {
         if (inventoryObject.activeSelf == true)
@@ -34,23 +29,28 @@ public class InventoryUI : MonoBehaviour
 
     public void ChangeShowItemType(ITEMTYPE _itemType)
     {
+        if(currentShowType != _itemType) 
+            inventoryInfoUI.TurnOffCurrentInfo();
+
         currentShowType = _itemType;
         inventoryListUI.ChangeItemType(currentShowType);
+
     }
 
     #region Info UI
     public void ShowItemInfo(EtcData _itemData)
     {
-        //inventoryInfoUI
+        inventoryInfoUI.ShowInfo(_itemData);
     }
 
     public void ShowItemInfo(ConsumeData _itemData)
     {
-
+        inventoryInfoUI.ShowInfo(_itemData);
     }
+
     public void ShowItemInfo(WeaponData _itemData)
     {
-
+        inventoryInfoUI.ShowInfo(_itemData);
     }
     #endregion
 
