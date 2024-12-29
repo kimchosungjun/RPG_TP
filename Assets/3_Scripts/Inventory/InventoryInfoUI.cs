@@ -55,7 +55,7 @@ public class InventoryInfoUI : MonoBehaviour
 
     public void PressUse()
     {
-        SharedMgr.UIMgr.GameUICtrl.InventoyUI.DecideUse(consumeData);
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.DecideUse(consumeData);
     }
 
     #endregion

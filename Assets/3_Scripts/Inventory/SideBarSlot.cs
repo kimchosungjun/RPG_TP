@@ -12,6 +12,6 @@ public class SideBarSlot : MonoBehaviour, ISlot
     [SerializeField] ITEMTYPE slotType; 
     public void PressSlot() 
     {
-        SharedMgr.UIMgr.GameUICtrl.InventoyUI.ChangeShowItemType(slotType);
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.ChangeShowItemType(slotType);
     }
 }

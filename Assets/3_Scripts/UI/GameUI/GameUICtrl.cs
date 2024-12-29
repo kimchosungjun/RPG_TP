@@ -7,9 +7,12 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] PlayerStatusUI playerStatusUI;
     [SerializeField] PlayerChangeUI playerChangeUI;
     [SerializeField] InventoryUI inventoyUI;
+    [SerializeField] DashGaugeUI dashGaugeUI;
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
     public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
-    public InventoryUI InventoyUI { get { return inventoyUI; } }    
+    public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
+    public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
+
     private void Start()
     {
         UIInit();

@@ -196,4 +196,43 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     #endregion
+
+    #region Player Dash Gauge
+    float dashGauge = 1f;
+    bool showDashGauge = false;
+    float lastDashTime = 0f;
+    [SerializeField] float increaseDashGaugePerSecond = 0.05f;
+    public bool CanDash()
+    {
+        if (dashGauge - 0.2f > 0f)
+            return true;
+        return false;
+    }
+
+    public void DoDash()
+    {
+        dashGauge -= 0.2f;
+        lastDashTime = Time.time;
+        if (showDashGauge == false)
+            StartCoroutine(CRecoveryDashGauge());
+        showDashGauge = true;
+        SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.UseDashGauge();
+        
+    }
+
+    IEnumerator CRecoveryDashGauge()
+    {
+        while (true)
+        {
+            dashGauge += increaseDashGaugePerSecond * Time.deltaTime; 
+            SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.SetGaugeAmount(dashGauge);
+            if (Time.time - lastDashTime > 3f || dashGauge >=0.99f)
+                break;
+            yield return null;
+        }
+        SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.InActiveGauge();
+        showDashGauge = false;
+    }
+
+    #endregion
 }

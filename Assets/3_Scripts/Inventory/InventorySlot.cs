@@ -43,7 +43,7 @@ public class InventorySlot : MonoBehaviour
 
     public void PressSlot()
     {
-        InventoryUI invenUI = SharedMgr.UIMgr.GameUICtrl.InventoyUI;
+        InventoryUI invenUI = SharedMgr.UIMgr.GameUICtrl.GetInventoyUI;
         switch (invenUI.GetCurrentType)
         {
             case ITEMTYPE.ITEM_ETC:
