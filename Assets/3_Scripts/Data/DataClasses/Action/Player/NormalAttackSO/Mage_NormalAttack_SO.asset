@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244ff26c111172640adfd2458157256a, type: 3}
+  m_Name: Mage_NormalAttack_SO
+  m_EditorClassIdentifier: 
+  actionName: "\uAE30\uBCF8\uACF5\uACA9"
+  actionDescription: "\uC801\uC5D0\uAC8C \uB454\uAE30\uB97C \uD718\uB450\uB985\uB2C8\uB2E4.\n1\uB2E8:
+    100%\uC758 \uACF5\uACA9\uB825\uC73C\uB85C  \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C
+    \uC785\uD799\uB2C8\uB2E4.\n2\uB2E8: 120%\uC758 \uACF5\uACA9\uB825\uC73C\uB85C 
+    \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4.\n3\uB2E8: 130%\uC758
+    \uACF5\uACA9\uB825\uC73C\uB85C  \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
+  actionParticleID: 0
+  effectMaintatinTimes:
+  - 0
+  - 0
+  - 0
+  attackEffectType: 000000000000000000000000
+  actionMultipliers:
+  - 5
+  - 6
+  - 7

@@ -89,6 +89,16 @@ public partial class PlayerTable : BaseTable
     /// <param name="_buffSkillID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
+    public PlayerConditionSkillTableData GetPlayerBuffSkillTableData(int _buffSkillID, int _level)
+    {
+        if (playerBuffSkillDataGroup.ContainsKey(_buffSkillID))
+        {
+            if (playerBuffSkillDataGroup[_buffSkillID].ContainsKey(_level))
+                return playerBuffSkillDataGroup[_buffSkillID][_level];
+        }
+        return null;
+    }
+
     public PlayerConditionSkillTableData GetPlayerBuffSkillTableData(CONDITION_SKILLS _buffSkillID, int _level)
     {
         int skillType = (int)_buffSkillID;
@@ -100,12 +110,24 @@ public partial class PlayerTable : BaseTable
         return null;
     }
 
+
+
     /// <summary>
     /// 플레이어 공격 스킬 반환
     /// </summary>
     /// <param name="_attackSkillID"></param>
     /// <param name="_level"></param>
     /// <returns></returns>
+    public PlayerAttackSkillTableData GetPlayerAttackSkillTableData(int _attackSkillID, int _level)
+    {
+        if (playerAttackSkillDataGroup.ContainsKey(_attackSkillID))
+        {
+            if (playerAttackSkillDataGroup[_attackSkillID].ContainsKey(_level))
+                return playerAttackSkillDataGroup[_attackSkillID][_level];
+        }
+        return null;
+    }
+
     public PlayerAttackSkillTableData GetPlayerAttackSkillTableData(ATTACK_SKILLS _attackSkillID,int _level)
     {
         int skillType = (int)_attackSkillID;
@@ -116,6 +138,5 @@ public partial class PlayerTable : BaseTable
         }
         return null;
     }
-
     #endregion
 }

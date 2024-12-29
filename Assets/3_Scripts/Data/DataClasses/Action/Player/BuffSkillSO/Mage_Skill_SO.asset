@@ -9,13 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b3ae2131f5b57f4685c809726d9b702, type: 3}
-  m_Name: Archer_Ultimate_SO
+  m_Script: {fileID: 11500000, guid: d7c4273d462822248a8d1c36eaeb3948, type: 3}
+  m_Name: Mage_Skill_SO
   m_EditorClassIdentifier: 
   actionName: 
   actionDescription: 
-  actionMultipliers: []
   actionParticleID: 0
-  attackEffectType: 
   coolTime: 0
-  effectMaintainTime: 0
+  maintainEffectTime: 0
+  actionMultipliers: []
+  attributeStatTypes: 
+  effectStatTypes: 
+  continuityTypes: 
+  defaultValues: []
