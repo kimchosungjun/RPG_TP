@@ -13,6 +13,9 @@ public class MageActionControl : PlayerActionControl
     [SerializeField] TriggerAttackAction[] normalAttacks;
     [SerializeField] ProjectileAttackAction farThrowAttacks;
 
+    [SerializeField] Transform[] normalAttackParticleTransforms;
+    [SerializeField] Transform ultimateMeteorSpellTransform;
+
     #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
     {
@@ -41,8 +44,8 @@ public class MageActionControl : PlayerActionControl
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo) * stat.Attack * Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
         normalAttacks[_combo].SetTransferData(attackData, null);
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_NORMAL).GetComponent<ParticleAction>().
-            SetParticlePosition(normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation, 1.5f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGICIAN_NORMAL).GetComponent<ParticleAction>().
+            SetParticlePosition(normalAttackParticleTransforms[_combo].transform.position, normalAttackParticleTransforms[_combo].transform.rotation, 1.5f);
     }
 
     public void StopNormalAttack(int _combo)
@@ -78,6 +81,12 @@ public class MageActionControl : PlayerActionControl
     public void DoAnnounceDeathState()
     {
         SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
+    }
+
+    public void MeteorSpell()
+    {
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGIC_CIRCLE_SPELL).GetComponent<ParticleAction>().
+          SetParticlePosition(ultimateMeteorSpellTransform.transform.position, ultimateMeteorSpellTransform.transform.rotation, 1.5f);
     }
     #endregion
 }

@@ -43,7 +43,9 @@ namespace PoolEnums
         ARCHER_ATTACK_SKILL=4,
         ARCHER_POP=5,
         ARCHER_ULTIMATE = 6,
-        MAGICIAN_NORMAL =7
+        MAGICIAN_NORMAL =7,
+        MAGIC_CIRCLE_SPELL = 8,
+        MAGICIAN_METEOR =9,
     }
 }
 

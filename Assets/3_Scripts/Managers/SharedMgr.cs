@@ -12,6 +12,7 @@ public static class SharedMgr
     public static TableMgr TableMgr = null;
     public static SoundMgr SoundMgr = null;
     public static InventoryMgr InventoryMgr = null; 
+    public static PhotonMgr PhotonMgr = null;   
     #endregion
 
     // 아직 안씀
