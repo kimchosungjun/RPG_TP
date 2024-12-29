@@ -16,10 +16,12 @@ public class InventoryMgr
     List<EtcData> etcDatas = new List<EtcData>();
     List<ConsumeData> consumeDatas = new List<ConsumeData>();   
     List<WeaponData> weaponDatas = new List<WeaponData>();
+
+    Dictionary<int,WeaponData> holdWeaponGroup = new Dictionary<int, WeaponData>();
     #endregion
 
     #region Get List
-    public List<EtcData> GetEtcInventory()  {  return etcDatas; }
+    public List<EtcData> GetEtcInventory()  { return etcDatas; }
     public List<ConsumeData> GetConsumeInventory() { return consumeDatas; }
     public List<WeaponData> GetWeaponInventory() { return weaponDatas; }
 

@@ -1368,6 +1368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 241610176}
   - component: {fileID: 241610177}
+  - component: {fileID: 241610178}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1413,6 +1414,18 @@ MonoBehaviour:
   - {fileID: 919103588}
   currentPlayer: 1
   increaseDashGaugePerSecond: 0.05
+--- !u!114 &241610178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241610175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6fcb2a85271684b97e34f63e726d7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &244185379
 GameObject:
   m_ObjectHideFlags: 0
