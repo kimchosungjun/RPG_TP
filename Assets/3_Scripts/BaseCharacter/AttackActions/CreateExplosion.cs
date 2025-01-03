@@ -5,6 +5,7 @@ using UnityEngine;
 public class CreateExplosion : MonoBehaviour
 {
     #region Set Data
+    [SerializeField] Collider thisCollider;
     [SerializeField] float moveSpeed;
     int groundLayer = (int)UtilEnums.LAYERS.GROUND;
     int enemyLayer = 0;
@@ -13,6 +14,7 @@ public class CreateExplosion : MonoBehaviour
     Vector3 explosionPosition;
     Quaternion explosionRotation;
 
+    bool isCollide = false;
     PoolEnums.OBJECTS poolIndex;
 
     public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData,
@@ -24,6 +26,9 @@ public class CreateExplosion : MonoBehaviour
         if (this.gameObject.activeSelf == false)
             this.gameObject.SetActive(true);
 
+        thisCollider.enabled = true;
+        isCollide = false;
+
         attackData = _attackData;   
         conditionData = _conditionData; 
         enemyLayer = (int)_enemyLayer;
@@ -34,20 +39,6 @@ public class CreateExplosion : MonoBehaviour
         MoveTimer(_direction, _timer);
     }
 
-    public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData,
-    Vector3 _position, Quaternion _rotation, Vector3 _explosionPosition, Quaternion _explosionRotation, float _timer, PoolEnums.OBJECTS _poolIndex, UtilEnums.LAYERS _enemyLayer = UtilEnums.LAYERS.MONSTER)
-    {
-        if (this.gameObject.activeSelf == false)
-            this.gameObject.SetActive(true);
-
-        attackData = _attackData;
-        conditionData = _conditionData;
-        enemyLayer = (int)_enemyLayer;
-        transform.position = _position;
-        transform.rotation = _rotation;
-        poolIndex = _poolIndex;
-        NotMoveTimer(_timer);
-    }
     #endregion
 
     #region Explosion
@@ -63,25 +54,17 @@ public class CreateExplosion : MonoBehaviour
             transform.position += _direction * moveSpeed * Time.deltaTime;
             yield return null;
         }
+        if (isCollide)
+            yield break;
         DoExplosion();
-    }
-
-    public void NotMoveTimer(float _timer)
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != null)
-        {
-            Debug.Log(other.gameObject.layer);
-            Debug.Log(other.gameObject.name);
-        }
-
         if (other.gameObject.layer == enemyLayer || other.gameObject.layer == groundLayer)
-        {           
-
+        {
+            isCollide = true;
+            thisCollider.enabled = false;
             DoExplosion();
         }
     }
