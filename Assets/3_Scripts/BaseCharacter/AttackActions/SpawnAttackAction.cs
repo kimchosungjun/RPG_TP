@@ -7,7 +7,7 @@ public class SpawnAttackAction : AttackAction
     [SerializeField] Transform throwPosition;
     [SerializeField] HitBox spawnHitBox;
 
-    public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData, HitThrowBox _projectile)
+    public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData, HitTriggerProjectile _projectile)
     {
         this.spawnHitBox = _projectile;
         this.attackData = _attackData;

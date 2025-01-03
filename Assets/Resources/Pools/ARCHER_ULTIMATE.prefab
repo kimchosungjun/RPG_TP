@@ -9859,8 +9859,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8921568500199165955}
-  - component: {fileID: 3403697065410355399}
   - component: {fileID: 7973298889014697582}
+  - component: {fileID: 6992539509457813619}
   m_Layer: 0
   m_Name: ARCHER_ULTIMATE
   m_TagString: Untagged
@@ -9882,24 +9882,8 @@ Transform:
   m_Children:
   - {fileID: 8042382999954104580}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3403697065410355399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2344006910818587920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b834ff68635a9e04f990106ca686b8fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer: 7
-  visibleTime: 10
-  speed: 10
-  isPenetrate: 1
 --- !u!65 &7973298889014697582
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9921,6 +9905,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: -1.5}
+--- !u!114 &6992539509457813619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344006910818587920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53c2c9f8125c2843a857fce4e08418d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer: 0
+  visibleTime: 10
+  speed: 10
+  isPenetrate: 1
 --- !u!1 &2649442227770944356
 GameObject:
   m_ObjectHideFlags: 0

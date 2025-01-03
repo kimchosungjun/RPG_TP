@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HitTriggerAreaBox : HitBox
+public class HitTrigger : HitBox
 {
     [SerializeField, Tooltip("다중 공격 여부")] protected bool isMultiAttack;
     public override void Active()

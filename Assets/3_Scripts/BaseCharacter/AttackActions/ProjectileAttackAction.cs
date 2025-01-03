@@ -3,9 +3,9 @@ using UnityEngine;
 public class ProjectileAttackAction : AttackAction
 {
     [SerializeField] Transform throwPosition;
-    [SerializeField] HitThrowBox projectile;
+    [SerializeField] HitTriggerProjectile projectile;
 
-    public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData, HitThrowBox _projectile)
+    public void SetTransferData(TransferAttackData _attackData, TransferConditionData _conditionData, HitTriggerProjectile _projectile)
     {
         this.projectile = _projectile;
         this.attackData = _attackData;

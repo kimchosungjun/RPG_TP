@@ -41,7 +41,7 @@ public class ArcherActionControl : PlayerActionControl
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo) * stat.Attack * Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
         normalAttacks[_combo].SetTransferData
-            (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitThrowBox>());
+            (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitTriggerProjectile>());
 
         // Particle
         SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
@@ -55,7 +55,7 @@ public class ArcherActionControl : PlayerActionControl
         attackData.SetData(attackSkillSOData.GetAttackEffectType,
             attackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), attackSkillSOData.GetMaintainEffectTime);
         skillAttacks[_combo].SetTransferData
-            (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitThrowBox>());
+            (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitTriggerProjectile>());
 
         // Particle
         SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
@@ -68,7 +68,7 @@ public class ArcherActionControl : PlayerActionControl
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        ultimateAttack.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_ULTIMATE).GetComponent<HitThrowBox>());
+        ultimateAttack.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_ULTIMATE).GetComponent<HitTriggerProjectile>());
 
         // Particle
         SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().

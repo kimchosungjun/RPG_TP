@@ -11,10 +11,11 @@ public class MageActionControl : PlayerActionControl
 
     [Header("플레이어 행동")]
     [SerializeField] TriggerAttackAction[] normalAttacks;
-    [SerializeField] ProjectileAttackAction farThrowAttacks;
 
     [SerializeField] Transform[] normalAttackParticleTransforms;
     [SerializeField] Transform ultimateMeteorSpellTransform;
+    [SerializeField] Transform meteorTransform;
+    [SerializeField] Transform ultimateExplosionTransofrm;
 
     #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
@@ -75,7 +76,9 @@ public class MageActionControl : PlayerActionControl
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        farThrowAttacks.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH).GetComponent<HitThrowBox>());
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGICIAN_METEOR).GetComponent<CreateExplosion>
+            ().SetTransferData(attackData, null, meteorTransform.position, meteorTransform.rotation, Vector3.down, 
+            ultimateExplosionTransofrm.position, ultimateExplosionTransofrm.rotation, 2f, PoolEnums.OBJECTS.EXPLOSION);
     }
 
     public void DoAnnounceDeathState()

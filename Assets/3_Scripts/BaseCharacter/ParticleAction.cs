@@ -6,7 +6,7 @@ public class ParticleAction : MonoBehaviour
 {
     [SerializeField] Transform particleParent;
     [SerializeField] ParticleSystem[] particles;
-
+    [SerializeField] float maintainTime;
     public void DoParticle(float _maintainTime)
     {
         particleParent.gameObject.SetActive(true);
@@ -22,6 +22,16 @@ public class ParticleAction : MonoBehaviour
     {
         yield return new WaitForSeconds(_maintainTime);
         StopParticle();
+    }
+
+    public void DoParticleLoop()
+    {
+        particleParent.gameObject.SetActive(true);
+        int cnt = particles.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            particles[i].Play();
+        }
     }
 
     public void StopParticle()
@@ -45,4 +55,25 @@ public class ParticleAction : MonoBehaviour
         transform.rotation = _rotation;
         DoParticle(_maintainTime);
     }
+
+    public void SetParticlePosition(Vector3 _position, Quaternion _rotation)
+    {
+        transform.position = _position;
+        transform.rotation = _rotation;
+        DoParticle(maintainTime);
+    }
+
+    public void SetParticleTime() { StartCoroutine(CSetParticleTime()); }
+
+    IEnumerator CSetParticleTime() 
+    {
+        yield return new WaitForSeconds(maintainTime);
+        int cnt = particles.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            particles[i].Stop();
+        }
+        particleParent.gameObject.SetActive(false);
+    }
+
 }

@@ -70,7 +70,7 @@ public class WarriorActionControl : PlayerActionControl
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        farThrowAttacks.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH).GetComponent<HitThrowBox>());
+        farThrowAttacks.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH).GetComponent<HitTriggerProjectile>());
     }
 
     public void DoAnnounceDeathState() 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3747466993840392999}
   - component: {fileID: 7527576567449981817}
-  - component: {fileID: 4458634373432590671}
+  - component: {fileID: 93971740488623583}
   m_Layer: 0
   m_Name: ARCHER_NORMAL
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 3858355985004127068}
   - {fileID: 4794405881907151433}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7527576567449981817
 BoxCollider:
@@ -56,7 +56,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
---- !u!114 &4458634373432590671
+--- !u!114 &93971740488623583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,10 +65,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 240657461693963336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b834ff68635a9e04f990106ca686b8fd, type: 3}
+  m_Script: {fileID: 11500000, guid: a53c2c9f8125c2843a857fce4e08418d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer: 7
+  enemyLayer: 0
   visibleTime: 10
   speed: 10
   isPenetrate: 0

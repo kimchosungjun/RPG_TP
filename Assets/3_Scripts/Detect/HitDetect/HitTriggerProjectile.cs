@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class HitThrowBox : HitBox
+public class HitTriggerProjectile : HitBox
 {
     [SerializeField, Tooltip("투사체가 유지되는 시간")] protected float visibleTime = 10f;
     [SerializeField, Tooltip("날라가는 속도")] protected float speed = 10f;

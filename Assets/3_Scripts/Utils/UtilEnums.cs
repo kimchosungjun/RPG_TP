@@ -46,6 +46,7 @@ namespace PoolEnums
         MAGICIAN_NORMAL =7,
         MAGIC_CIRCLE_SPELL = 8,
         MAGICIAN_METEOR =9,
+        EXPLOSION=10,
     }
 }
 

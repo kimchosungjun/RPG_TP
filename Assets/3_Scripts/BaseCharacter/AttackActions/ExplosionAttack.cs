@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerAttackAction : AttackAction
+public class ExplosionAttack : AttackAction
 {
     [SerializeField] protected HitTrigger triggerAttack = null;
 
@@ -9,14 +10,14 @@ public class TriggerAttackAction : AttackAction
     {
         if (triggerAttack != null)
         {
-            triggerAttack.SetHitData(attackData , conditionData);
+            triggerAttack.SetHitData(attackData, conditionData);
             triggerAttack.gameObject.SetActive(true);
         }
     }
 
     public override void StopAttack()
     {
-        if(triggerAttack!=null)
+        if (triggerAttack != null)
             triggerAttack.gameObject.SetActive(false);
     }
 }
