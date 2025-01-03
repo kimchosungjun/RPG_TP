@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using PlayerEnums;
-using Unity.VisualScripting;
-
 public abstract class PlayerMovementControl : MonoBehaviour
 {
     /******************************************/
@@ -44,6 +42,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     protected float playerMoveSpeed;
     protected Vector3 moveDirection;
     protected Quaternion moveRotation;
+    public Quaternion SetMoveRotation { set { moveRotation = value; } } 
 
     public float XMove { get { return xMove; } set { xMove = value; } }
     public float ZMove { get { return zMove; } set { zMove = value; } }
@@ -128,6 +127,8 @@ public abstract class PlayerMovementControl : MonoBehaviour
     #endregion
 
     #region State
+    [SerializeField] protected float attackRange;
+
     protected PlayerState[] playerStates;
     protected PlayerStateMachine stateMachine;
     protected PlayerAttackCombo attackCombo;

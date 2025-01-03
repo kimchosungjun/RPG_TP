@@ -20,7 +20,7 @@ public class WarriorMovementControl : PlayerMovementControl
         base.Init(_playerStat);
         int typeID = _playerStat.GetSaveStat.playerTypeID;
         attackCombo = new PlayerAttackCombo(SharedMgr.TableMgr.GetPlayer.GetPlayerNormalAttackData
-            (typeID, _playerStat.GetSaveStat.currentNormalAttackLevel).combo);
+            (typeID, _playerStat.GetSaveStat.currentNormalAttackLevel).combo, attackRange);
         LinkMyComponent();
     }
 

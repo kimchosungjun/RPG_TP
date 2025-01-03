@@ -18108,6 +18108,11 @@ PrefabInstance:
       propertyPath: normalAttackParticleTransforms.Array.data[2]
       value: 
       objectReference: {fileID: 479418198}
+    - target: {fileID: 4141476038577328447, guid: e0946db2431a6d24fa6daca16efad591,
+        type: 3}
+      propertyPath: attackRange
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7714048276709154375, guid: e0946db2431a6d24fa6daca16efad591,
         type: 3}
       propertyPath: m_Controller
@@ -48725,6 +48730,7 @@ MonoBehaviour:
   slopeMaxAngle: 50
   stepHeight: 0.2
   useGravity: 1
+  attackRange: 3
   currentPlayerState: 10
   warriorActionControl: {fileID: 5866666020441516154}
 --- !u!95 &5866666020441516159
@@ -49525,6 +49531,7 @@ MonoBehaviour:
   slopeMaxAngle: 50
   stepHeight: 0.2
   useGravity: 1
+  attackRange: 10
   currentPlayerState: 10
 --- !u!1 &6641388797953320112
 GameObject:

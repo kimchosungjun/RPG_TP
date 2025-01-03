@@ -14,6 +14,9 @@ public class PlayerAttackCombo
     int maxAttackCombo;
     float currentTime;
     float resetComboTime;
+    float attackRange;
+
+    public float GetAttackRange { get { return attackRange; } } 
 
     public PlayerAttackCombo()
     {
@@ -21,14 +24,16 @@ public class PlayerAttackCombo
         maxAttackCombo = 3;
         resetComboTime = 1f;
         currentTime = -1f;
+        attackRange = 3f;
     }
 
-    public PlayerAttackCombo(int _maxAttackCombo, float _resetComboTime = 1f)
+    public PlayerAttackCombo(int _maxAttackCombo, float _attackRange, float _resetComboTime = 1f)
     {
         attackCombo = 0;
         maxAttackCombo = _maxAttackCombo;
         resetComboTime = _resetComboTime;
         currentTime = -1f;
+        attackRange = _attackRange;
     }
 
     #endregion

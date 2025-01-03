@@ -14,6 +14,7 @@ public class PlayerActionState : PlayerOnGroundState
     {
         base.Exit();
         anim.applyRootMotion = false;
+        characterControl.SetMoveRotation = characterControl.transform.rotation;
         attackCombo.SetComboTime();
     }
 }
