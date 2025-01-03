@@ -66,13 +66,12 @@ public class MageActionControl : PlayerActionControl
             transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i),
                 buffActionSOData.GetContinuityType(i), buffActionSOData.GetDefaultValue(i),
                 buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i));
-            statControl.AddBuffs(transferConditionData);
+            statControl.AddCondition(transferConditionData);
         }
     }
 
     public void DoUltimateAttack()
     {
-        TransferConditionData transferConditionData = new TransferConditionData();
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);

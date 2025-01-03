@@ -39,4 +39,72 @@ public class PlayerStatControl : ActorStatControl
         return false;
     }
     #endregion
+
+    #region Apply Condition Data
+    public override void ApplyConditionData(TransferConditionData _conditionData)
+    {
+        float conditionValue = _conditionData.GetConditionValue;
+        switch (_conditionData.GetConditionContinuity)
+        {
+            case EffectEnums.CONDITION_CONTINUITY.DEBUFF:
+                conditionValue *= -1;
+                break;
+            default:
+                break;
+        }
+
+        switch (_conditionData.GetConditionStat)
+        {
+            case EffectEnums.CONDITION_EFFECT_STATS.HP:
+                Heal(conditionValue);
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.SPD:
+                playerStat.Speed += conditionValue;
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.ATK:
+                playerStat.Attack += conditionValue;
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.DEF:
+                playerStat.Defence += conditionValue;
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.ATKSPD:
+                playerStat.AttackSpeed += conditionValue;   
+                break;
+            default:
+                break;
+        }
+    }
+
+    public override void DeleteConditionData(TransferConditionData _conditionData)
+    {
+        float conditionValue = _conditionData.GetConditionValue;
+        switch (_conditionData.GetConditionContinuity)
+        {
+            case EffectEnums.CONDITION_CONTINUITY.DEBUFF:
+                conditionValue *= -1;
+                break;
+            default:
+                break;
+        }
+
+        switch (_conditionData.GetConditionStat)
+        {
+            case EffectEnums.CONDITION_EFFECT_STATS.SPD:
+                playerStat.Speed -= conditionValue;
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.ATK:
+                playerStat.Attack -= conditionValue;
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.DEF:
+                playerStat.Defence -= conditionValue;
+                break;
+            case EffectEnums.CONDITION_EFFECT_STATS.ATKSPD:
+                playerStat.AttackSpeed -= conditionValue;
+                break;
+            default:
+                break;
+        }
+    }
+
+    #endregion
 }

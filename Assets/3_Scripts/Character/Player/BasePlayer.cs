@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BasePlayer : BaseActor
 {
+    #region Value
     protected bool isAlive = true;
     [SerializeField] int id;
     [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUI; // HP, EXP, Level을 나타내는 UI
@@ -9,6 +10,7 @@ public class BasePlayer : BaseActor
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
     [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; // 스탯을 관리(버프도 관리)
     [Header("플레이어 움직임 관리"), SerializeField] protected PlayerMovementControl playerMovementControl;
+    #endregion
 
     #region Property
     public PlayerStat PlayerStat { get { return playerStat; }  set { playerStat = value; } }
@@ -42,6 +44,7 @@ public class BasePlayer : BaseActor
     public override bool CanTakeDamageState()  { return playerMovementControl.CanTakeDamage; }
     public override void ApplyStatTakeDamage(TransferAttackData _attackData) { playerStatControl.TakeDamage(_attackData); }
     public override void ApplyMovementTakeDamage(TransferAttackData _attackData) {  }
+    public override void ApplyCondition(TransferConditionData _conditionData) { playerStatControl.AddCondition(_conditionData);  }
 
     #endregion
 

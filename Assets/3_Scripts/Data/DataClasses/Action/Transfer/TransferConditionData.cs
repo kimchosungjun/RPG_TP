@@ -4,24 +4,31 @@ using UnityEngine.Events;
 
 public class TransferConditionData
 {
+    #region Value
     [SerializeField] protected CONDITION_EFFECT_STATS conditionStat;
-    [SerializeField] protected CONDITION_CONTINUITY continuity;
+    [SerializeField] protected CONDITION_CONTINUITY conditionContinuity;
     [SerializeField] protected float conditionValue;
     [SerializeField] protected float maxConditionTime;
     [SerializeField] protected float effectConditionTime = 0f;
-    
-    bool isEndConditionTime = false;
+    [SerializeField] bool isEndConditionTime = false;
+
+    public CONDITION_EFFECT_STATS GetConditionStat { get { return conditionStat; } }
+    public CONDITION_CONTINUITY GetConditionContinuity { get { return conditionContinuity; } }
+    public float GetConditionValue { get { return conditionValue; } }
     public bool GetIsEndConditionTime { get { return isEndConditionTime; } }
-    public CONDITION_EFFECT_STATS GetConditionStatType { get { return conditionStat; } }
-    public CONDITION_CONTINUITY GetConditionContinuity { get { return continuity; } }  
+    #endregion
 
+    #region Creator
     public TransferConditionData() { }
+    #endregion
 
+    #region Set Transfer Data
     public void SetData(PlayerStat _playerStat, int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime, float _multiplier)
     {
         this.conditionStat = (CONDITION_EFFECT_STATS)_buffStat;
-        this.continuity = (CONDITION_CONTINUITY)_buffContinuity;
+        this.conditionContinuity = (CONDITION_CONTINUITY)_buffContinuity;
         this.maxConditionTime = _buffTime;
+        this.effectConditionTime = 0f;
 
         CONDITION_ATTRIBUTE_STATS attribute = (CONDITION_ATTRIBUTE_STATS)_useStat;
         float statValue = 0f;
@@ -39,15 +46,15 @@ public class TransferConditionData
                 statValue = _playerStat.Defence;
                 break;
         }
-
         this.conditionValue = _buffValue + statValue*_multiplier;
     }
 
     public void SetData(MonsterStat _monsterStat, int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime, float _multiplier)
     {
         this.conditionStat = (CONDITION_EFFECT_STATS)_buffStat;
-        this.continuity = (CONDITION_CONTINUITY)_buffContinuity;
+        this.conditionContinuity = (CONDITION_CONTINUITY)_buffContinuity;
         this.maxConditionTime = _buffTime;
+        this.effectConditionTime = 0f;
 
         CONDITION_ATTRIBUTE_STATS attribute = (CONDITION_ATTRIBUTE_STATS)_useStat;
         float statValue = 0f;
@@ -67,44 +74,16 @@ public class TransferConditionData
         }
         this.conditionValue = _buffValue + statValue * _multiplier;
     }
+    #endregion
 
-    public void UpdateStatData()
-    {
+    #region Manage Condition Stat
 
-    }
-
-    public void AddBuff()
-    {
-        effectConditionTime = 0f;
-
-        switch (conditionStat)
-        {
-            case CONDITION_EFFECT_STATS.HP:
-                
-                break;
-            case CONDITION_EFFECT_STATS.SPD:
-                break;
-            case CONDITION_EFFECT_STATS.ATK:
-                break;
-            case CONDITION_EFFECT_STATS.DEF:
-                break;
-            case CONDITION_EFFECT_STATS.ATKSPD:
-                break;
-        }
-        //if (_playerBuff != null)
-        //    _playerBuff.Invoke();
-    }
-
-    public void CheckConditionTime()
+    public void UpdateConditionTime()
     {
         if (isEndConditionTime == true)
             return;
         effectConditionTime += Time.fixedDeltaTime;
         isEndConditionTime = (effectConditionTime>=maxConditionTime) ? true : false;
     }
-
-    public void DeleteBuff()
-    {
-
-    }
+    #endregion
 }

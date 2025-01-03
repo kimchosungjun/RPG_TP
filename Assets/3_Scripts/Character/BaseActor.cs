@@ -17,5 +17,13 @@ public abstract class BaseActor : BaseCharacter
     public abstract bool CanTakeDamageState();
     public abstract void ApplyMovementTakeDamage(TransferAttackData _attackData);
     public abstract void ApplyStatTakeDamage(TransferAttackData _attackData);
+
+    public virtual void TakeCondition(TransferConditionData _conditionData)
+    {
+        if (_conditionData == null) return;
+        ApplyCondition(_conditionData);
+    }
+
+    public abstract void ApplyCondition(TransferConditionData _conditionData);
     #endregion
 }

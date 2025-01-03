@@ -27,6 +27,25 @@ public abstract class BaseMonster : BaseActor
     #endregion
 
     /******************************************/
+    /************* 레이어 설정  *************/
+    /************* 피격 메서드  *************/
+    /******************************************/
+
+    #region Override : Set Layer & Take Damage
+    public override void SetCharacterType()
+    {
+        intLayer = (int)UtilEnums.LAYERS.MONSTER;
+        bitLayer = 1 << (int)UtilEnums.LAYERS.MONSTER;
+        characterTableType = UtilEnums.TABLE_FOLDER_TYPES.MONSTER;
+    }
+
+    public override bool CanTakeDamageState() { return true; }
+    public override void ApplyStatTakeDamage(TransferAttackData _attackData) { monsterStatControl.TakeDamage(_attackData); }
+    public override void ApplyMovementTakeDamage(TransferAttackData _attackData) { }
+    public override void ApplyCondition(TransferConditionData _conditionData) { monsterStatControl.AddCondition(_conditionData); }
+    #endregion
+
+    /******************************************/
     /************ 라이프 사이클  ************/
     /******************************************/
 
@@ -43,23 +62,8 @@ public abstract class BaseMonster : BaseActor
     #endregion
 
     /******************************************/
-    /************* 레이어 설정  *************/
-    /************* 피격 메서드  *************/
+    /************* 가상 메서드  *************/
     /******************************************/
-
-    #region Override : Set Layer & Take Damage
-    public override void SetCharacterType()
-    {
-        intLayer = (int)UtilEnums.LAYERS.MONSTER;
-        bitLayer = 1 << (int)UtilEnums.LAYERS.MONSTER;
-        characterTableType = UtilEnums.TABLE_FOLDER_TYPES.MONSTER;
-    }
-
-    public override bool CanTakeDamageState() { return true; }
-    public override void ApplyStatTakeDamage(TransferAttackData _attackData) { monsterStatControl.TakeDamage(_attackData); }
-    public override void ApplyMovementTakeDamage(TransferAttackData _attackData) { }
-
-    #endregion
 
     #region Virtual Method : Announce Area & Spawn 
     public virtual void AnnounceInMonsterArea() { isInMonsterArea = true; } 

@@ -11,7 +11,7 @@ public abstract class ActorStatControl : MonoBehaviour
     #region Value : Buff & StatusUI
     protected int buffCnt = 0;
     Dictionary<CONDITION_EFFECT_STATS, int> overlapBuffGroup = new Dictionary<CONDITION_EFFECT_STATS, int>();
-    protected List<TransferConditionData> currentBuffs = new List<TransferConditionData>();
+    protected List<TransferConditionData> currentConditions = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
     public void SetStatusUI(StatusUI _statusUI) { this.statusUI = _statusUI; }
     #endregion
@@ -21,38 +21,39 @@ public abstract class ActorStatControl : MonoBehaviour
     /******************************************/
 
     #region Control Buff
-    public virtual void AddBuffs(TransferConditionData _buffData)
-    {
-        if (overlapBuffGroup.ContainsKey(_buffData.GetConditionStatType))
+    // Get Condition Data : MySelf (Direct)
+    public virtual void AddCondition(TransferConditionData _conditionData)
+    { 
+        if (overlapBuffGroup.ContainsKey(_conditionData.GetConditionStat))
         {
-            // 중복이면 최신꺼로 대체하자
-            int index = overlapBuffGroup[_buffData.GetConditionStatType];
-            currentBuffs[index] = _buffData;
+            // Overlap => Replace Recent Condition Data
+            int index = overlapBuffGroup[_conditionData.GetConditionStat];
+            DeleteConditionData(currentConditions[index]);
+            currentConditions[index] = _conditionData;
+            ApplyConditionData(_conditionData);
             return;
         }
-        overlapBuffGroup.Add(_buffData.GetConditionStatType, currentBuffs.Count);
-        currentBuffs.Add(_buffData);
+        overlapBuffGroup.Add(_conditionData.GetConditionStat, currentConditions.Count);
+        currentConditions.Add(_conditionData);
+        ApplyConditionData(_conditionData);
+        buffCnt = currentConditions.Count;
     }
 
-    public virtual void UpdateBuffs()
-    {
-        // 현재 스탯을 보내 다시 값을 계산하여 기존값과의 차이만큼 더해준다.
-    }
-
+    public abstract void ApplyConditionData(TransferConditionData _conditionData);
+    public abstract void DeleteConditionData(TransferConditionData _conditionData);
     public virtual void FixedExecute()
     {
-        // To Do ~~~~~
-        // 버프 시간 체크
         if (buffCnt != 0)
         {
-            // 뒤에서부터 체크하면 제거 후 생기는 재정렬에 의한 문제가 생기지 않음
+            // Check Back to Front (Cause : Empty Index)
             for (int i = buffCnt - 1; i >= 0; i--)
             {
-                if (currentBuffs[i].GetIsEndConditionTime)
+                currentConditions[i].UpdateConditionTime();
+                if (currentConditions[i].GetIsEndConditionTime)
                 {
-                    currentBuffs[i].DeleteBuff();
-                    overlapBuffGroup.Remove(currentBuffs[i].GetConditionStatType);
-                    currentBuffs.RemoveAt(i);
+                    DeleteConditionData(currentConditions[i]);
+                    overlapBuffGroup.Remove(currentConditions[i].GetConditionStat);
+                    currentConditions.RemoveAt(i);
                 }
             }
         }
@@ -60,15 +61,14 @@ public abstract class ActorStatControl : MonoBehaviour
 
     public virtual void RemoveAllBuffs()
     {
-        int buffCnt = currentBuffs.Count;
+        int buffCnt = currentConditions.Count;
         if (buffCnt != 0)
         {
             for(int i= buffCnt-1; i>=0; i--)
             {
-                currentBuffs[i].DeleteBuff();
+                DeleteConditionData(currentConditions[i]);
             }
-
-            currentBuffs.Clear();
+            currentConditions.Clear();
             overlapBuffGroup.Clear();
         }
     }
@@ -85,4 +85,6 @@ public abstract class ActorStatControl : MonoBehaviour
     public virtual void Heal(float _heal) { statusUI.AnnounceChangeStat(); }
     public virtual void Recovery(float _percent = 10f, float _time = 0.2f) { statusUI.AnnounceChangeStat(); }
     #endregion
+
+    
 }

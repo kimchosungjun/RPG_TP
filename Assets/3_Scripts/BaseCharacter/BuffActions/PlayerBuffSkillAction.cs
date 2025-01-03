@@ -27,7 +27,7 @@ public class PlayerBuffSkillAction : BuffAction
         int buffCnt = soData.GetBuffCnt();
         for(int i = 0; i < buffCnt; i++) 
         {
-            statCtrl.AddBuffs(buffDatas[i]);
+            statCtrl.AddCondition(buffDatas[i]);
         }
     }
 
