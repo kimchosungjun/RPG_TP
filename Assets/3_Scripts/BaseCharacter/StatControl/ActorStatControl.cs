@@ -13,7 +13,6 @@ public abstract class ActorStatControl : MonoBehaviour
     Dictionary<CONDITION_EFFECT_STATS, int> overlapBuffGroup = new Dictionary<CONDITION_EFFECT_STATS, int>();
     protected List<TransferConditionData> currentBuffs = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
-
     public void SetStatusUI(StatusUI _statusUI) { this.statusUI = _statusUI; }
     #endregion
 
@@ -24,14 +23,14 @@ public abstract class ActorStatControl : MonoBehaviour
     #region Control Buff
     public virtual void AddBuffs(TransferConditionData _buffData)
     {
-        if (overlapBuffGroup.ContainsKey(_buffData.GetBuffStatType))
+        if (overlapBuffGroup.ContainsKey(_buffData.GetConditionStatType))
         {
             // 중복이면 최신꺼로 대체하자
-            int index = overlapBuffGroup[_buffData.GetBuffStatType];
+            int index = overlapBuffGroup[_buffData.GetConditionStatType];
             currentBuffs[index] = _buffData;
             return;
         }
-        overlapBuffGroup.Add(_buffData.GetBuffStatType, currentBuffs.Count);
+        overlapBuffGroup.Add(_buffData.GetConditionStatType, currentBuffs.Count);
         currentBuffs.Add(_buffData);
     }
 
@@ -49,10 +48,10 @@ public abstract class ActorStatControl : MonoBehaviour
             // 뒤에서부터 체크하면 제거 후 생기는 재정렬에 의한 문제가 생기지 않음
             for (int i = buffCnt - 1; i >= 0; i--)
             {
-                if (currentBuffs[i].IsMaintainBuff() == false)
+                if (currentBuffs[i].GetIsEndConditionTime)
                 {
-                    //currentBuffs[i].DeleteBuff();
-                    overlapBuffGroup.Remove(currentBuffs[i].GetBuffStatType);
+                    currentBuffs[i].DeleteBuff();
+                    overlapBuffGroup.Remove(currentBuffs[i].GetConditionStatType);
                     currentBuffs.RemoveAt(i);
                 }
             }
@@ -61,7 +60,17 @@ public abstract class ActorStatControl : MonoBehaviour
 
     public virtual void RemoveAllBuffs()
     {
+        int buffCnt = currentBuffs.Count;
+        if (buffCnt != 0)
+        {
+            for(int i= buffCnt-1; i>=0; i--)
+            {
+                currentBuffs[i].DeleteBuff();
+            }
 
+            currentBuffs.Clear();
+            overlapBuffGroup.Clear();
+        }
     }
 
     #endregion

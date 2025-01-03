@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Interactable 
+public abstract class Interactable : MonoBehaviour
 {
-    public abstract void Detect();
+    public abstract string Detect();
     public abstract void Interact();
 }
 

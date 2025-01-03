@@ -12,9 +12,9 @@ public class PlayerCtrl : MonoBehaviour
     #region Value
     [Header("카메라 컨트롤러 : 필수 연결 요소"),SerializeField] CameraController cameraCtrl;
     [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
-    bool canChangePlayer = true; // 처음 시작 시 초기화 필요
+    bool canChangePlayer = true; // when start : must init
     float changePlayerCoolTime = 1f; 
-    [SerializeField] int currentPlayer = 0; // 처음 시작 시 초기화 필요
+    [SerializeField] int currentPlayer = 0; // when start : must init
 
     public BasePlayer GetPlayer { get { return players[currentPlayer]; } }
     #endregion
@@ -38,7 +38,10 @@ public class PlayerCtrl : MonoBehaviour
 #endif
     }
 
-    private void FixedUpdate() { players[currentPlayer].FixedExecute(); }
+    private void FixedUpdate() 
+    {
+        players[currentPlayer].FixedExecute(); 
+    }
     #endregion
 
     /**********************************************/
@@ -55,15 +58,6 @@ public class PlayerCtrl : MonoBehaviour
             ChangePlayer(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangePlayer(2);
-
-
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    // Test Damage
-        //    TransferAttackData attackData = new TransferAttackData();
-        //    attackData.SetData((int)effect, 3, 2f);
-        //    players[currentPlayer].TakeDamage(attackData);
-        //}
     }
 
     public void DeathChangePlayer()
@@ -102,25 +96,11 @@ public class PlayerCtrl : MonoBehaviour
         players[_index].gameObject.SetActive(true);
         currentPlayer = _index;
 
-        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetCoolTime(changePlayerCoolTime);
-        StartCoroutine(CMeasureChangeCoolTime());
+        canChangePlayer = false;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetCoolTime(changePlayerCoolTime, CoolDown);
     }
 
-    /// <summary>
-    /// 1초간 바꿀 수 없도록 조건 변경
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator CMeasureChangeCoolTime()
-    {
-        canChangePlayer = false;
-        float time = 0f;
-        while(time< changePlayerCoolTime)
-        {
-            time += Time.deltaTime;
-            yield return null;
-        }
-        canChangePlayer = true;
-    }
+    public void CoolDown() { canChangePlayer = true; }
     #endregion
 
 

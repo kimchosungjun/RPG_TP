@@ -11,16 +11,16 @@ public class PlayerStatControl : ActorStatControl
     public BasePlayer Player { get { return player;  } set { player = value; } }    
     #region To Do ~~~~~~
 
-    public override void Death() { player.DoDeathState(); }
+   
 
     public override void Heal(float _heal)
     {
-        throw new NotImplementedException();
+
     }
 
     public override void Recovery(float _percent = 10f, float _time = 0.2f)
     {
-        throw new NotImplementedException();
+        
     }
 
     public override void TakeDamage(TransferAttackData _attackData)
@@ -29,7 +29,10 @@ public class PlayerStatControl : ActorStatControl
         SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(playerStat);    
         if(playerStat.GetSaveStat.currentHP<=0.01f) Death();    
     }
+    #endregion
 
+    #region Death
+    public override void Death() { player.DoDeathState(); }
     public bool CheckDeathState()
     {
         if (playerStat.GetSaveStat.currentHP <= 0.01f) return true;
@@ -37,8 +40,3 @@ public class PlayerStatControl : ActorStatControl
     }
     #endregion
 }
-
-
-
-// To do ~~ 
-// 캐릭터 변경될 때, 

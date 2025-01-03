@@ -127,7 +127,6 @@ namespace EffectEnums
         ATK = 2,
         DEF = 3,
         ATKSPD = 4,
-        SPEED=5,
     }
 
     public enum CONDITION_CONTINUITY
@@ -177,6 +176,27 @@ namespace ItemEnums
     {
         WEAPON_ATTACK = 0,
         WEAPON_CRITICAL = 1,
+    }
+
+    public enum ITEMID
+    {
+        // ETC
+        LOW_CORE=0,
+        MID_CORE=1,
+        HIGH_CORE=2,
+
+        // CONSUME
+        HP_PORTION=100,
+        ATTACK_PORTION=101,
+        SPEED_PORTION=102,
+
+        // WEAPON
+        KNUCKLE=200,
+        IRON_BLOOD_KNUCKLE=201,
+        BOW=202,
+        SONG_OF_WIND=203,
+        STAFF=204,
+        STARLIGHT_STAFF=205,
     }
 }
 

@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerChangeUI : MonoBehaviour
 {
     [SerializeField] Image[] changePictures;
 
-    public void SetCoolTime(float _coolTime)
+    public void SetCoolTime(float _coolTime, UnityAction _announceCoolDown)
     {
-        StartCoroutine(CChangeCoolDown(_coolTime));
+        StartCoroutine(CChangeCoolDown(_coolTime, _announceCoolDown));
     }
 
-    IEnumerator CChangeCoolDown(float _coolTime)
+    IEnumerator CChangeCoolDown(float _coolTime, UnityAction _announceCoolDown)
     {
         float time = 0f;
         int cnt = changePictures.Length;
@@ -33,5 +34,8 @@ public class PlayerChangeUI : MonoBehaviour
         {
             changePictures[i].fillAmount = 1;
         }
+
+        if (_announceCoolDown != null)
+            _announceCoolDown.Invoke();
     }
 }
