@@ -12,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     #region Value
     [Header("카메라 컨트롤러 : 필수 연결 요소"),SerializeField] CameraController cameraCtrl;
     [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
+    [Header("파티 버프 관리"), SerializeField] PartyConditionControl partyConditionControl;
     bool canChangePlayer = true; // when start : must init
     float changePlayerCoolTime = 1f; 
     [SerializeField] int currentPlayer = 0; // when start : must init
@@ -97,6 +98,7 @@ public class PlayerCtrl : MonoBehaviour
         currentPlayer = _index;
 
         canChangePlayer = false;
+        partyConditionControl.ChangePlayer(players[currentPlayer].PlayerStat);
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetCoolTime(changePlayerCoolTime, CoolDown);
     }
 
@@ -194,24 +196,50 @@ public class PlayerCtrl : MonoBehaviour
         dashGauge -= 0.2f;
         lastDashTime = Time.time;
         if (showDashGauge == false)
+        {
+            showDashGauge = true;
             StartCoroutine(CRecoveryDashGauge());
-        showDashGauge = true;
-        SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.UseDashGauge();
+        }
+        else
+            SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.UseDashGauge();
         
     }
 
     IEnumerator CRecoveryDashGauge()
     {
+        bool isInActiveUI = false;
         while (true)
         {
             dashGauge += increaseDashGaugePerSecond * Time.deltaTime; 
             SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.SetGaugeAmount(dashGauge);
-            if (Time.time - lastDashTime > 3f || dashGauge >=0.99f)
+            if (dashGauge >=0.99f)
                 break;
+
+            if(isInActiveUI == false && Time.time - lastDashTime > 3f )
+            {
+                SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.InActiveGauge();
+                isInActiveUI = true;
+            }
             yield return null;
         }
-        SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.InActiveGauge();
+
+        if(isInActiveUI == false)
+            SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.InActiveGauge();
         showDashGauge = false;
+    }
+
+    public void DecreaseDashGauge(float _dashGaugePercent)
+    {
+        float decreaseValue = dashGauge - _dashGaugePercent > 0f ? _dashGaugePercent: dashGauge - _dashGaugePercent;
+        lastDashTime = Time.time;
+        if (showDashGauge == false)
+        {
+            showDashGauge = true;
+            StartCoroutine(CRecoveryDashGauge());
+        }
+        else
+            SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.UseDashGauge(decreaseValue);
+       
     }
 
     #endregion

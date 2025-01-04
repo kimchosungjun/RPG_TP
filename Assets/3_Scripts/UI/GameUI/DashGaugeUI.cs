@@ -27,6 +27,8 @@ public class DashGaugeUI : MonoBehaviour
 
     public void SetGaugeAmount(float _amount)
     {
+        if(dashGauge.gameObject.activeSelf==false)
+            dashGauge.gameObject.SetActive(true);
         dashGauge.fillAmount = _amount;
         CheckGaugeColor();
     }

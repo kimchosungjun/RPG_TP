@@ -10,7 +10,7 @@ public abstract class ActorStatControl : MonoBehaviour
 
     #region Value : Buff & StatusUI
     protected int buffCnt = 0;
-    Dictionary<CONDITION_EFFECT_STATS, int> overlapBuffGroup = new Dictionary<CONDITION_EFFECT_STATS, int>();
+    protected Dictionary<CONDITION_EFFECT_STATS, int> overlapBuffGroup = new Dictionary<CONDITION_EFFECT_STATS, int>();
     protected List<TransferConditionData> currentConditions = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
     public void SetStatusUI(StatusUI _statusUI) { this.statusUI = _statusUI; }
@@ -59,7 +59,7 @@ public abstract class ActorStatControl : MonoBehaviour
         }
     }
 
-    public virtual void RemoveAllBuffs()
+    public virtual void RemoveAllConditionDatas()
     {
         int buffCnt = currentConditions.Count;
         if (buffCnt != 0)
@@ -77,9 +77,10 @@ public abstract class ActorStatControl : MonoBehaviour
 
     /******************************************/
     /********** 직접 스탯을 변경  **********/
+    /********** 객체의 생존 여부  **********/
     /******************************************/
 
-    #region Virtual Stat Control Method 
+    #region Virtual Stat Control Method : Relate Entity Alive State
     public virtual void Death() { }
     public virtual void TakeDamage(TransferAttackData _attackData) { statusUI.AnnounceChangeStat(); }
     public virtual void Heal(float _heal) { statusUI.AnnounceChangeStat(); }

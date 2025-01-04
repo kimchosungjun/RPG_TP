@@ -5071,6 +5071,7 @@ MonoBehaviour:
   - {fileID: 5866666020441516156}
   - {fileID: 6621925900300702760}
   - {fileID: 919103588}
+  partyConditionControl: {fileID: 241610178}
   currentPlayer: 1
   increaseDashGaugePerSecond: 0.05
 --- !u!114 &241610178
@@ -5085,6 +5086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6fcb2a85271684b97e34f63e726d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCtrl: {fileID: 241610177}
 --- !u!1 &241869173
 GameObject:
   m_ObjectHideFlags: 0

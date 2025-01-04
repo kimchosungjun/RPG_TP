@@ -5,8 +5,8 @@ using UnityEngine;
 [Serializable]
 public class PlayerStatControl : ActorStatControl
 {
-    PlayerStat playerStat = null;
-    BasePlayer player = null;
+    protected PlayerStat playerStat = null;
+    protected BasePlayer player = null;
     public PlayerStat PlayerStat { get { return playerStat; } set { playerStat = value; } }
     public BasePlayer Player { get { return player;  } set { player = value; } }    
     #region To Do ~~~~~~

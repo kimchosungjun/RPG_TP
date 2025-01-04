@@ -110,7 +110,7 @@ namespace EffectEnums
     }
 
     /// <summary>
-    /// 계수와 같이 사용
+    /// Use With Multiplier
     /// </summary>
     public enum CONDITION_ATTRIBUTE_STATS
     {
@@ -127,14 +127,16 @@ namespace EffectEnums
         ATK = 2,
         DEF = 3,
         ATKSPD = 4,
+        DASH=100,
     }
 
     public enum CONDITION_CONTINUITY
     {
         IMMEDIATELY = 0, 
         BUFF = 1, 
-        DEBUFF= 2 // 즉발 디버프는 없음
+        DEBUFF= 2
     }
+
     public enum CONDITION_PARTY
     {
         NONE,
