@@ -29,15 +29,15 @@ public class MonsterStatControl : ActorStatControl
     public override void TakeDamage(TransferAttackData _attackData)
     {
         // Min Damage = 1
-        float allDamage = _attackData.GetAttackValue - monsterStat.Defence;
+        int allDamage = _attackData.GetAttackValue - monsterStat.Defence;
         allDamage = (allDamage) <= 0 ? 1 : allDamage;
         // Float Damage
         SharedMgr.PoolMgr.GetFloatDamageText().SetFloat(this.transform, allDamage);
         // Check Death
-        float curHp = monsterStat.CurrentHP - allDamage;
+        int curHp = monsterStat.CurrentHP - (int)allDamage;
         if (curHp <= 0)
         {
-            monsterStat.CurrentHP = 0f;
+            monsterStat.CurrentHP = 0;
             baseMonster.Death();
         }
         else
@@ -79,10 +79,10 @@ public class MonsterStatControl : ActorStatControl
                 monsterStat.BoostSpeed += conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.ATK:
-                monsterStat.Attack += conditionValue;
+                monsterStat.Attack += (int)conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.DEF:
-                monsterStat.Defence += conditionValue;
+                monsterStat.Defence += (int)conditionValue;
                 break;
             default :
                 // monster dosen't have attack speed stat
@@ -109,10 +109,10 @@ public class MonsterStatControl : ActorStatControl
                 monsterStat.BoostSpeed -= conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.ATK:
-                monsterStat.Attack -= conditionValue;
+                monsterStat.Attack -= (int)conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.DEF:
-                monsterStat.Defence -= conditionValue;
+                monsterStat.Defence -= (int)conditionValue;
                 break;
             default:
                 // monster dosen't have attack speed stat

@@ -15,14 +15,14 @@ namespace PlayerTableClasses
         public float speed;
         public float dashSpeed;
         public float jumpSpeed;
-        public float defaultHP;
-        public float defaultAttack;
-        public float defaultDefence;
+        public int defaultHP;
+        public int defaultAttack;
+        public int defaultDefence;
         public float defaultCritical;
         public float defaultAttackSpeed;
-        public float increaseHP;
-        public float increaseAttack;
-        public float increaseDefence;
+        public int increaseHP;
+        public int increaseAttack;
+        public int increaseDefence;
         public float increaseCritical;  
         public float increaseAttackSpeed;
     }

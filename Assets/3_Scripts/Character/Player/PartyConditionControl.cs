@@ -11,8 +11,14 @@ public class PartyConditionControl : PlayerStatControl
     /******************************************/
 
     #region Player Ctrl : Stat Control
+    public void SetPlayerStat(PlayerStat _playerStat)
+    {
+        playerStat = _playerStat;
+    }
+
     public void ChangePlayer(PlayerStat _nextPlayer)
     {
+        
         if (buffCnt != 0)
         {
             // Remove Legacy Player Condition
@@ -27,13 +33,15 @@ public class PartyConditionControl : PlayerStatControl
             {
                 ApplyConditionData(currentConditions[i]);
             }
+            return;
         }
+        playerStat = _nextPlayer;
     }
 
     //  + Dash Gauge
     public override void ApplyConditionData(TransferConditionData _conditionData)
     {
-        float conditionValue = _conditionData.ConditionValue;
+        float conditionValue = 0f;
         switch (_conditionData.GetConditionContinuity)
         {
             case CONDITION_CONTINUITY.DEBUFF:
@@ -42,27 +50,70 @@ public class PartyConditionControl : PlayerStatControl
             default:
                 break;
         }
-
-        switch (_conditionData.GetConditionStat)
+        switch (_conditionData.GetConditionApplyType)
         {
-            case CONDITION_EFFECT_STATS.HP:
-                Heal(conditionValue);
+            #region Value
+            case CONDITION_APPLY_TYPE.VALUE:
+                conditionValue = Mathf.Round(_conditionData.ConditionValue);
+                switch (_conditionData.GetConditionStat)
+                {
+                    case CONDITION_EFFECT_STATS.HP:
+                        PartyHeal(conditionValue);
+                        break;
+                    case CONDITION_EFFECT_STATS.SPD:
+                        playerStat.Speed += conditionValue;
+                        break;
+                    case CONDITION_EFFECT_STATS.ATK:
+                        playerStat.Attack += _conditionData.GetConditionIntValue();
+                        break;
+                    case CONDITION_EFFECT_STATS.DEF:
+                        playerStat.Defence += _conditionData.GetConditionIntValue();
+                        break;
+                    case CONDITION_EFFECT_STATS.ATKSPD:
+                        playerStat.AttackSpeed += conditionValue;
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case CONDITION_EFFECT_STATS.SPD:
-                playerStat.Speed += conditionValue;
+            #endregion
+            #region Percent
+            case CONDITION_APPLY_TYPE.OWN_PERCENT:
+                conditionValue = _conditionData.GetMuliplier;
+                switch (_conditionData.GetConditionStat)
+                {
+                    case CONDITION_EFFECT_STATS.HP:
+                        PartyHeal(conditionValue, true);
+                        _conditionData.ConditionValue = 0f;
+                        break;
+                    case CONDITION_EFFECT_STATS.SPD:
+                        float spdValue = conditionValue * playerStat.Speed;
+                        playerStat.Speed += spdValue;
+                        _conditionData.ConditionValue = spdValue;
+                        break;
+                    case CONDITION_EFFECT_STATS.ATK:
+                        int atkValue = (int)(Mathf.Round(conditionValue * playerStat.Attack));
+                        playerStat.Attack += atkValue;
+                        _conditionData.ConditionValue = atkValue;
+                        break;
+                    case CONDITION_EFFECT_STATS.DEF:
+                        int defValue = (int)(Mathf.Round(conditionValue * playerStat.Defence));
+                        playerStat.Defence += defValue;
+                        _conditionData.ConditionValue = defValue;
+                        break;
+                    case CONDITION_EFFECT_STATS.ATKSPD:
+                        float atkSpdValue = conditionValue * playerStat.AttackSpeed;
+                        playerStat.AttackSpeed += atkSpdValue;
+                        _conditionData.ConditionValue = atkSpdValue;
+                        break;
+                    case CONDITION_EFFECT_STATS.DASH:
+                        playerCtrl.DecreaseDashGauge(conditionValue);
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case CONDITION_EFFECT_STATS.ATK:
-                playerStat.Attack += conditionValue;
-                break;
-            case CONDITION_EFFECT_STATS.DEF:
-                playerStat.Defence += conditionValue;
-                break;
-            case CONDITION_EFFECT_STATS.ATKSPD:
-                playerStat.AttackSpeed += conditionValue;
-                break;
-            case CONDITION_EFFECT_STATS.DASH:
-                playerCtrl.DecreaseDashGauge(conditionValue);
-                break;
+            #endregion
             default:
                 break;
         }
@@ -77,6 +128,16 @@ public class PartyConditionControl : PlayerStatControl
         for(int i=0; i<playerCnt; i++)
         {
             players[i].GetPlayerStatControl.GetExp(_exp);
+        }
+    }
+
+    public void PartyHeal(float _heal, bool _isPercent = false)
+    {
+        List< BasePlayer> players = playerCtrl.GetPlayers;
+        int playerCnt = players.Count;
+        for(int i=0; i<playerCnt; i++)
+        {
+            players[i].GetPlayerStatControl.Heal(_heal);    
         }
     }
     #endregion

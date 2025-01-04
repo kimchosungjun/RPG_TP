@@ -35,9 +35,8 @@ public class PlayerCtrl : MonoBehaviour
     private void Update()
     {
         players[currentPlayer].Execute();
-#if UNITY_EDITOR
         InputChangeKey();
-#endif
+
     }
 
     private void FixedUpdate() 
@@ -55,12 +54,14 @@ public class PlayerCtrl : MonoBehaviour
 
     public void InputChangeKey()
     {
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1))
             ChangePlayer(0);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
             ChangePlayer(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangePlayer(2);
+#endif
     }
 
     public void DeathChangePlayer()
@@ -107,52 +108,10 @@ public class PlayerCtrl : MonoBehaviour
     public void CoolDown() { canChangePlayer = true; }
     #endregion
 
-
-    /**********************************************/
-    /*************** 파티 변경 ******************/
-    /**********************************************/
-
-    #region Change Party
-
-    public bool CanChangeParty(List<BasePlayer> _newParty)
-    {
-        int newPartyCnt = _newParty.Count;
-        for (int i = 0; i < newPartyCnt; i++)
-        {
-            if (_newParty[i].GetIsAlive)
-                return true;
-        }
-        return false;
-    }
-
-    public void ChangeParty(List<BasePlayer> _newParty)
-    {
-        players = _newParty;
-        int newPartyCnt = _newParty.Count;
-        for(int i = 0;i < newPartyCnt;i++)
-        {
-            if (_newParty[i].GetIsAlive)
-            {
-                currentPlayer = i;
-                InitPartyData(_newParty);
-                SetPartyData(_newParty);
-                players = _newParty;
-                int legacyPartyCnt = players.Count;
-                for(int k=0; k< legacyPartyCnt; k++)
-                {
-                    players[k].gameObject.SetActive(false); 
-                }
-                return;
-            }
-        }
-    }
-
-    #endregion
-
-
     /**********************************************/
     /*************** 파티 설정 ******************/
     /**********************************************/
+
     #region Set Player Data
     public void InitPartyData(List<BasePlayer> _party)
     {
@@ -172,7 +131,8 @@ public class PlayerCtrl : MonoBehaviour
             if (currentPlayer == i)
             {
                 cameraCtrl.QuaterViewChangeTarget(_party[i].GetPlayerMovementControl.GetBodyTransform);
-                _party[i].gameObject.SetActive(true); 
+                _party[i].gameObject.SetActive(true);
+                partyConditionControl.SetPlayerStat(_party[i].GetPlayerStatControl.PlayerStat);
             }
             else
                 _party[i].gameObject.SetActive(false); 
@@ -245,4 +205,49 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     #endregion
+
+
+    /**********************************************/
+    /*************** 파티 변경 ******************/
+    /************ 현재 버전 사용 X *************/
+    /**********************************************/
+
+    #region Change Party : Not Use
+
+    public bool CanChangeParty(List<BasePlayer> _newParty)
+    {
+        int newPartyCnt = _newParty.Count;
+        for (int i = 0; i < newPartyCnt; i++)
+        {
+            if (_newParty[i].GetIsAlive)
+                return true;
+        }
+        return false;
+    }
+
+    public void ChangeParty(List<BasePlayer> _newParty)
+    {
+        players = _newParty;
+        int newPartyCnt = _newParty.Count;
+        for (int i = 0; i < newPartyCnt; i++)
+        {
+            if (_newParty[i].GetIsAlive)
+            {
+                currentPlayer = i;
+                InitPartyData(_newParty);
+                SetPartyData(_newParty);
+                players = _newParty;
+                int legacyPartyCnt = players.Count;
+                for (int k = 0; k < legacyPartyCnt; k++)
+                {
+                    players[k].gameObject.SetActive(false);
+                }
+                return;
+            }
+        }
+    }
+
+    #endregion
 }
+
+

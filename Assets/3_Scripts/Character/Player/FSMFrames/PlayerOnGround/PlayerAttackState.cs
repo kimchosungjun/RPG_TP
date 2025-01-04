@@ -9,7 +9,11 @@ public class PlayerAttackState : PlayerActionState
     #region Creator & Value
 
     int currentCombo = -1;
-    public PlayerAttackState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo)  {  }
+    PlayerStat playerStat = null;
+    public PlayerAttackState(PlayerMovementControl _controller, PlayerAttackCombo _attackCombo) : base(_controller, _attackCombo) 
+    {
+        playerStat = _controller.GetComponent<PlayerStatControl>()?.PlayerStat;
+    }
 
     #endregion
 
@@ -24,7 +28,7 @@ public class PlayerAttackState : PlayerActionState
         currentCombo = attackCombo.GetCombo();
         characterControl.transform.rotation = CheckColliderRotate();
         anim.SetInteger("Combo", currentCombo);
-        anim.SetFloat("AttackSpeed", 1f);
+        anim.SetFloat("AttackSpeed", playerStat.AttackSpeed);
         anim.SetInteger("States", (int)PlayerEnums.STATES.ATTACK);
     }
 

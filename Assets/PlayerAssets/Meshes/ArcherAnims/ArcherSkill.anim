@@ -51608,7 +51608,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 4
     messageOptions: 0
-  - time: 1.2666667
+  - time: 1.0666667
     functionName: AnimSkillCooling
     data: 
     objectReferenceParameter: {fileID: 0}

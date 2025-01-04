@@ -66268,7 +66268,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 1.3333334
+  - time: 0.93333334
     functionName: StopNormalAttack
     data: 
     objectReferenceParameter: {fileID: 0}

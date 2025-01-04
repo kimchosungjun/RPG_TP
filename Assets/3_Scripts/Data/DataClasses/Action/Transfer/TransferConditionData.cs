@@ -23,6 +23,13 @@ public class TransferConditionData
     public float ConditionValue { get { return conditionValue; } set { conditionValue = value; } }
     public float GetMuliplier { get { return multiplier; } }
     public bool GetIsEndConditionTime { get { return isEndConditionTime; } }
+
+    public int GetConditionIntValue()
+    {
+        int value = (int)conditionValue;
+        conditionValue = value;
+        return value;
+    }
     #endregion
 
     #region Creator
@@ -56,7 +63,7 @@ public class TransferConditionData
                 break;
         }
         this.multiplier = _multiplier;
-        this.conditionValue = _buffValue + statValue*_multiplier;
+        this.conditionValue = Mathf.Round(_buffValue + statValue*_multiplier);
     }
 
     public void SetData(MonsterStat _monsterStat, int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime, float _multiplier)

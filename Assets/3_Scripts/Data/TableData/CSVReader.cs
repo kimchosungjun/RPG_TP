@@ -129,7 +129,7 @@ public class CSVReader
             return;
         }
 
-        val = (int)System.Convert.ToInt32(s);
+        val = (int)System.Convert.ToInt32(s);   
     }
 
     public void get(int row, ref byte val)

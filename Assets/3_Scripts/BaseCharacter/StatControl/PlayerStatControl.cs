@@ -15,13 +15,14 @@ public class PlayerStatControl : ActorStatControl
     public override void Heal(float _heal, bool _isPercent = false)
     {
         float increaseHP = 0f;
+        if (CheckDeathState()) return; // Death State
         if (_isPercent)
             increaseHP = playerStat.MaxHP * _heal;
         else
             increaseHP = playerStat.GetSaveStat.currentHP + _heal;
 
         playerStat.GetSaveStat.currentHP = increaseHP > playerStat.MaxHP
-                ? playerStat.MaxHP : increaseHP;
+                ? playerStat.MaxHP : (int)increaseHP;
     }
 
     public override void Recovery(float _percent = 10f, float _time = 0.2f)
@@ -31,7 +32,7 @@ public class PlayerStatControl : ActorStatControl
 
     public override void TakeDamage(TransferAttackData _attackData)
     {
-        playerStat.GetSaveStat.currentHP -= (_attackData.GetAttackValue - playerStat.Defence);
+        playerStat.GetSaveStat.currentHP -= (int)(Mathf.Round(_attackData.GetAttackValue - playerStat.Defence));
         SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(playerStat);
         if (playerStat.GetSaveStat.currentHP <= 0.01f) Death();
     }
@@ -108,10 +109,10 @@ public class PlayerStatControl : ActorStatControl
                         playerStat.Speed += conditionValue;
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.ATK:
-                        playerStat.Attack += conditionValue;
+                        playerStat.Attack += _conditionData.GetConditionIntValue();
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.DEF:
-                        playerStat.Defence += conditionValue;
+                        playerStat.Defence += _conditionData.GetConditionIntValue();
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.ATKSPD:
                         playerStat.AttackSpeed += conditionValue;
@@ -131,20 +132,24 @@ public class PlayerStatControl : ActorStatControl
                         _conditionData.ConditionValue = 0f;
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.SPD:
-                        playerStat.Speed += conditionValue * playerStat.Speed;
-                        _conditionData.ConditionValue = conditionValue * playerStat.Speed;
+                        float spdValue = conditionValue * playerStat.Speed;
+                        playerStat.Speed += spdValue;
+                        _conditionData.ConditionValue = spdValue;
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.ATK:
-                        playerStat.Attack += conditionValue * playerStat.Attack;
-                        _conditionData.ConditionValue = conditionValue * playerStat.Attack;
+                        int atkValue = (int)(Mathf.Round(conditionValue * playerStat.Attack));
+                        playerStat.Attack += atkValue;
+                        _conditionData.ConditionValue = atkValue;
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.DEF:
-                        playerStat.Defence += conditionValue * playerStat.Defence;
-                        _conditionData.ConditionValue = conditionValue * playerStat.Defence;
+                        int defValue = (int)(Mathf.Round(conditionValue * playerStat.Defence));
+                        playerStat.Defence += defValue;
+                        _conditionData.ConditionValue = defValue;
                         break;
                     case EffectEnums.CONDITION_EFFECT_STATS.ATKSPD:
-                        playerStat.AttackSpeed += conditionValue * playerStat.AttackSpeed;
-                        _conditionData.ConditionValue = conditionValue * playerStat.AttackSpeed;
+                        float atkSpdValue = conditionValue* playerStat.AttackSpeed;
+                        playerStat.AttackSpeed += atkSpdValue;
+                        _conditionData.ConditionValue = atkSpdValue;
                         break;
                     default:
                         break;
@@ -173,10 +178,10 @@ public class PlayerStatControl : ActorStatControl
                 playerStat.Speed -= conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.ATK:
-                playerStat.Attack -= conditionValue;
+                playerStat.Attack -= (int)conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.DEF:
-                playerStat.Defence -= conditionValue;
+                playerStat.Defence -= (int)conditionValue;
                 break;
             case EffectEnums.CONDITION_EFFECT_STATS.ATKSPD:
                 playerStat.AttackSpeed -= conditionValue;

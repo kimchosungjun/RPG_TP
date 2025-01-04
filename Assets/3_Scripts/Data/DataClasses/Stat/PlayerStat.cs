@@ -9,7 +9,7 @@ using MonsterEnums;
 public class PlayerStat : BaseStat
 {
     #region Protected
-    [SerializeField] protected float attackValue;
+    [SerializeField] protected int attackValue;
     [SerializeField] protected float criticalValue;
     [SerializeField] protected float attackSpeed; // 공격속도는 애니메이션 속도에 영향을 준다.
     [SerializeField] protected float dashSpeed;
@@ -18,7 +18,7 @@ public class PlayerStat : BaseStat
     #endregion
 
     #region Public
-    public float Attack { get { return attackValue; } set { attackValue = value; } }
+    public int Attack { get { return attackValue; } set { attackValue = value; } }
     public float Critical { get { return criticalValue; } set { criticalValue = value; } }
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
     public float DashSpeed { get { return dashSpeed; } set { dashSpeed = value; } }
@@ -59,7 +59,7 @@ public class PlayerStat : BaseStat
 public class PlayerSaveStat
 {
     [SerializeField] public int playerTypeID;
-    [SerializeField] public float currentHP;
+    [SerializeField] public int currentHP;
     [SerializeField] public int currentLevel;
     [SerializeField] public int currentExp;
     [SerializeField] public int currentNormalAttackLevel;
@@ -77,7 +77,7 @@ public class PlayerSaveStat
         playerTypeID = 0;
     }
 
-    public PlayerSaveStat(int _id, float _curHP)
+    public PlayerSaveStat(int _id, int _curHP)
     {
         playerTypeID = _id;
         currentHP = _curHP; 

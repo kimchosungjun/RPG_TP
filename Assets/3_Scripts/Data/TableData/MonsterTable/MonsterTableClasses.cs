@@ -47,16 +47,16 @@ namespace MonsterTableClasses
     public class MonsterStatTableData
     {
         public int ID;
-        public float maxHP;
+        public int maxHP;
         public float speed;
         public float boostSpeed;
-        public float attack;
-        public float defence;
+        public int attack;
+        public int defence;
         public float critical;
         public int dropID;
-        public float hpIncrease;
-        public float attackIncrease;
-        public float defenceIncrease;
+        public int hpIncrease;
+        public int attackIncrease;
+        public int defenceIncrease;
         public float criticalIncrease;
         public int startLevel;
     }

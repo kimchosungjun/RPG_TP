@@ -10,18 +10,18 @@ public class MonsterStat : BaseStat
     #region Protected_StatValue 
     [SerializeField] protected int ID;
     [SerializeField] protected int level;
-    [SerializeField] protected float currentHP;
+    [SerializeField] protected int currentHP;
     [SerializeField] protected float boostSpeed;
-    [SerializeField] protected float attackValue;
+    [SerializeField] protected int attackValue;
     [SerializeField] protected float criticalValue;
     #endregion
 
     #region Property_StatValue
     public int GetID { get { return ID; } }
     public int Level { get {return level; } set { level = value; } } 
-    public float CurrentHP { get { return currentHP; } set { currentHP = value; } }
+    public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     public float BoostSpeed { get { return boostSpeed; }  set { boostSpeed = value; } }
-    public float Attack { get { return attackValue; } set { attackValue = value; } }
+    public int Attack { get { return attackValue; } set { attackValue = value; } }
     public float Critical { get { return criticalValue; } set { criticalValue = value; } }
 
     /// <summary>

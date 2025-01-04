@@ -24,6 +24,12 @@ public abstract class ActorStatControl : MonoBehaviour
     // Get Condition Data : MySelf (Direct)
     public virtual void AddCondition(TransferConditionData _conditionData)
     { 
+        if(_conditionData.GetConditionContinuity == CONDITION_CONTINUITY.IMMEDIATELY)
+        {
+            ApplyConditionData(_conditionData);
+            return;
+        }
+
         if (overlapBuffGroup.ContainsKey(_conditionData.GetConditionStat))
         {
             // Overlap => Replace Recent Condition Data

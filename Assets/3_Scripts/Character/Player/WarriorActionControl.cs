@@ -49,10 +49,14 @@ public class WarriorActionControl : PlayerActionControl
         AnimAttackCooling();
     }
 
-    public void DoBuffSkill()
+    public void DoBuffParticle()
     {
         SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ATTACK_BUFF).GetComponent<ParticleAction>().
            SetParticlePosition(transform.position, transform.rotation, 1f);
+    }
+
+    public void DoBuffSkill()
+    {
         int buffCnt = buffActionSOData.GetBuffCnt();
         for(int i = 0; i < buffCnt; i++)
         {
