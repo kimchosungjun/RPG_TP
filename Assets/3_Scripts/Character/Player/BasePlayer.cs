@@ -59,9 +59,11 @@ public class BasePlayer : BaseActor
         // 스탯 연결
         if (id == 0)
             saveStat = new PlayerSaveStat();
-        else
+        else if(id==1)
             saveStat = new PlayerSaveStat(1,100);
-        
+        else
+            saveStat = new PlayerSaveStat(2,100);
+
         playerStat = new PlayerStat();
         playerStat.LoadPlayerStat(saveStat);
 
@@ -92,6 +94,7 @@ public class BasePlayer : BaseActor
     public virtual void Execute()
     {
         playerStatusUI.FixedExecute();
+        playerStatControl.FixedExecute();
         playerMovementControl.Execute();
     }
 

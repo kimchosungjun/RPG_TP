@@ -2,19 +2,26 @@ using EffectEnums;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
 public class TransferConditionData
 {
     #region Value
+    // Condition Value
     [SerializeField] protected CONDITION_EFFECT_STATS conditionStat;
     [SerializeField] protected CONDITION_CONTINUITY conditionContinuity;
+    [SerializeField] protected CONDITION_APPLY_TYPE applyType;
     [SerializeField] protected float conditionValue;
+    [SerializeField] protected float multiplier;
+    // Time
     [SerializeField] protected float maxConditionTime;
     [SerializeField] protected float effectConditionTime = 0f;
     [SerializeField] bool isEndConditionTime = false;
 
     public CONDITION_EFFECT_STATS GetConditionStat { get { return conditionStat; } }
     public CONDITION_CONTINUITY GetConditionContinuity { get { return conditionContinuity; } }
-    public float GetConditionValue { get { return conditionValue; } }
+    public CONDITION_APPLY_TYPE GetConditionApplyType { get { return applyType; } } 
+    public float ConditionValue { get { return conditionValue; } set { conditionValue = value; } }
+    public float GetMuliplier { get { return multiplier; } }
     public bool GetIsEndConditionTime { get { return isEndConditionTime; } }
     #endregion
 
@@ -23,12 +30,14 @@ public class TransferConditionData
     #endregion
 
     #region Set Transfer Data
-    public void SetData(PlayerStat _playerStat, int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime, float _multiplier)
+    public void SetData(PlayerStat _playerStat, int _buffStat, int _useStat, int _buffContinuity, 
+        float _buffValue, float _buffTime, float _multiplier, int _applyType)
     {
         this.conditionStat = (CONDITION_EFFECT_STATS)_buffStat;
         this.conditionContinuity = (CONDITION_CONTINUITY)_buffContinuity;
         this.maxConditionTime = _buffTime;
         this.effectConditionTime = 0f;
+        this.applyType = (CONDITION_APPLY_TYPE)_applyType;    
 
         CONDITION_ATTRIBUTE_STATS attribute = (CONDITION_ATTRIBUTE_STATS)_useStat;
         float statValue = 0f;
@@ -46,6 +55,7 @@ public class TransferConditionData
                 statValue = _playerStat.Defence;
                 break;
         }
+        this.multiplier = _multiplier;
         this.conditionValue = _buffValue + statValue*_multiplier;
     }
 
@@ -72,6 +82,7 @@ public class TransferConditionData
                 statValue = _monsterStat.Defence;
                 break;
         }
+        this.multiplier = _multiplier;
         this.conditionValue = _buffValue + statValue * _multiplier;
     }
     #endregion

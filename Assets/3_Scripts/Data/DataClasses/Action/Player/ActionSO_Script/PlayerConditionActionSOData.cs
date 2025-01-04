@@ -9,13 +9,29 @@ public class PlayerConditionActionSOData : PlayerActionSkillSOData
     [SerializeField] protected int[] effectStatTypes;
     [SerializeField] protected int[] continuityTypes;
     [SerializeField] protected float[] defaultValues;
+    [SerializeField] protected int[] applyType;
+    [SerializeField] protected int[] partyType;
     public int GetBuffCnt() { return actionMultipliers.Length; }
 
     public float GetMultiplier(int _combo)
     {
-        if (actionMultipliers.Length - 1 >= _combo)
-            return actionMultipliers[_combo];
-        return -1;
+        float result = 0f;
+        if (applyType.Length - 1 >= _combo)
+        {
+            switch (applyType[_combo])
+            {
+                case (int)EffectEnums.CONDITION_APPLY_TYPE.VALUE:
+                    if (actionMultipliers.Length - 1 >= _combo)
+                        result = actionMultipliers[_combo];
+                    break;
+                case (int)EffectEnums.CONDITION_APPLY_TYPE.OWN_PERCENT:
+                    result = GetDefaultValue(_combo);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return result;
     }
 
     public int GetAttributeStatType(int _combo)
@@ -43,6 +59,20 @@ public class PlayerConditionActionSOData : PlayerActionSkillSOData
     {
         if (defaultValues.Length - 1 >= _combo)
             return defaultValues[_combo];
+        return 0;
+    }
+
+    public int GetApplyType(int _combo)
+    {
+        if (applyType.Length - 1 >= _combo)
+            return applyType[_combo];
+        return -1;
+    }
+
+    public int GetPartyType(int _combo)
+    {
+        if (partyType.Length - 1 >= _combo)
+            return partyType[_combo];
         return -1;
     }
 
@@ -58,5 +88,7 @@ public class PlayerConditionActionSOData : PlayerActionSkillSOData
         effectStatTypes = _buffSkillTable.effectStatTypes;
         continuityTypes = _buffSkillTable.continuityTypes;
         defaultValues = _buffSkillTable.defaultValues;
+        applyType = _buffSkillTable.applyType;
+        partyType = _buffSkillTable.partyType;  
     }
 }

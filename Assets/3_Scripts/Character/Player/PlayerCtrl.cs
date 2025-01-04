@@ -43,6 +43,7 @@ public class PlayerCtrl : MonoBehaviour
     private void FixedUpdate() 
     {
         players[currentPlayer].FixedExecute(); 
+        partyConditionControl.FixedExecute();
     }
     #endregion
 

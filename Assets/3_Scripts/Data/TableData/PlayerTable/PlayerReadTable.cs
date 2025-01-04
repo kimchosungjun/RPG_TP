@@ -215,7 +215,8 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.effectStatTypes, _tableData.combo);
         _reader.get(_row, ref _tableData.continuityTypes, _tableData.combo);
         _reader.get(_row, ref _tableData.defaultValues, _tableData.combo);
-        _reader.get(_row, ref _tableData.partyType);
+        _reader.get(_row, ref _tableData.applyType, _tableData.combo);
+        _reader.get(_row, ref _tableData.partyType, _tableData.combo);
         _reader.get(_row, ref _tableData.particle);
         return true;
     }

@@ -59,7 +59,7 @@ public class WarriorActionControl : PlayerActionControl
             TransferConditionData transferConditionData = new TransferConditionData();
             transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i), 
                 buffActionSOData.GetContinuityType(i), buffActionSOData.GetDefaultValue(i), 
-                buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i));
+                buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffActionSOData.GetApplyType(i));
             statControl.AddCondition(transferConditionData);
         }
     }

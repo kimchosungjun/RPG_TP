@@ -44405,7 +44405,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.96666664
+  - time: 0.8333333
     functionName: AnimAttackCooling
     data: 
     objectReferenceParameter: {fileID: 0}

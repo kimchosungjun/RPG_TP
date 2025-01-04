@@ -1943,6 +1943,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 111610475}
   projectile: {fileID: 0}
 --- !u!1 &113173099
@@ -2193,6 +2202,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 2208318250916822357}
 --- !u!1 &119783218
 GameObject:
@@ -5298,6 +5316,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 3745568157171023244}
 --- !u!1 &215532060
 GameObject:
@@ -5376,6 +5403,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 225540798}
   projectile: {fileID: 0}
 --- !u!4 &227638445 stripped
@@ -5598,6 +5634,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6fcb2a85271684b97e34f63e726d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
+  playerStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    attackValue: 0
+    criticalValue: 0
+    attackSpeed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+    currentStat:
+      playerTypeID: 0
+      currentHP: 100
+      currentLevel: 1
+      currentExp: 0
+      currentNormalAttackLevel: 1
+      currentSkillLevel: 1
+      currentUltimateSkillLevel: 1
   playerCtrl: {fileID: 241610177}
 --- !u!1 &241869173
 GameObject:
@@ -5834,6 +5889,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 253279783}
   projectile: {fileID: 0}
 --- !u!1 &260337524
@@ -6459,6 +6523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 1924035775}
 --- !u!1 &285639966
 GameObject:
@@ -7614,6 +7687,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 328993478}
   projectile: {fileID: 0}
 --- !u!1 &330072953
@@ -15454,6 +15536,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 699382647}
   projectile: {fileID: 0}
 --- !u!1 &707050238
@@ -20461,6 +20552,11 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 820060188921091454, guid: e0946db2431a6d24fa6daca16efad591,
         type: 3}
+      propertyPath: partyConditionControl
+      value: 
+      objectReference: {fileID: 241610178}
+    - target: {fileID: 820060188921091454, guid: e0946db2431a6d24fa6daca16efad591,
+        type: 3}
       propertyPath: normalAttacks.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -20526,6 +20622,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: abbf323f611a1ce4e8df17a24d6d01cf,
         type: 2}
+    - target: {fileID: 8090566266744317987, guid: e0946db2431a6d24fa6daca16efad591,
+        type: 3}
+      propertyPath: id
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8090566266744317987, guid: e0946db2431a6d24fa6daca16efad591,
         type: 3}
       propertyPath: playerStatusUICtrl
@@ -20703,6 +20804,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 1960462785}
 --- !u!1 &923575781
 GameObject:
@@ -22043,6 +22153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
 --- !u!1 &1002235388
 GameObject:
   m_ObjectHideFlags: 0
@@ -26917,6 +27028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
 --- !u!1 &1196229574
 GameObject:
   m_ObjectHideFlags: 0
@@ -28681,6 +28793,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 1275362583}
   projectile: {fileID: 0}
 --- !u!1 &1275400750
@@ -29925,6 +30046,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 267205091}
 --- !u!1 &1352340146
 GameObject:
@@ -30734,6 +30864,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 0}
   projectile: {fileID: 0}
 --- !u!1 &1407317235
@@ -33173,6 +33312,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 1196556368}
 --- !u!1 &1527754487
 GameObject:
@@ -38856,6 +39004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
 --- !u!1 &1779156297
 GameObject:
   m_ObjectHideFlags: 0
@@ -39492,6 +39641,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 0}
   projectile: {fileID: 0}
 --- !u!1 &1812911014
@@ -40458,6 +40616,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   throwPosition: {fileID: 0}
   projectile: {fileID: 0}
 --- !u!1 &1849135836
@@ -40849,7 +41016,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -50}
+  m_AnchoredPosition: {x: 200, y: 0}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1876398205
@@ -42781,7 +42948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -50}
+  m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1960724432
@@ -46808,6 +46975,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   triggerAttack: {fileID: 3101733928643675678}
 --- !u!1 &2125530869
 GameObject:
@@ -53686,6 +53862,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
+  playerStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    attackValue: 0
+    criticalValue: 0
+    attackSpeed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+    currentStat:
+      playerTypeID: 0
+      currentHP: 100
+      currentLevel: 1
+      currentExp: 0
+      currentNormalAttackLevel: 1
+      currentSkillLevel: 1
+      currentUltimateSkillLevel: 1
 --- !u!114 &5866666020441516158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54478,6 +54673,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
+  playerStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    attackValue: 0
+    criticalValue: 0
+    attackSpeed: 0
+    dashSpeed: 0
+    jumpSpeed: 0
+    currentStat:
+      playerTypeID: 0
+      currentHP: 100
+      currentLevel: 1
+      currentExp: 0
+      currentNormalAttackLevel: 1
+      currentSkillLevel: 1
+      currentUltimateSkillLevel: 1
 --- !u!114 &6621925900300702762
 MonoBehaviour:
   m_ObjectHideFlags: 0

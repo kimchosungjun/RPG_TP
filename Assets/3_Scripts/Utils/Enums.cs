@@ -130,6 +130,12 @@ namespace EffectEnums
         DASH=100,
     }
 
+    public enum CONDITION_APPLY_TYPE
+    {
+        VALUE = 0,
+        OWN_PERCENT = 1, 
+    }
+
     public enum CONDITION_CONTINUITY
     {
         IMMEDIATELY = 0, 

@@ -82,7 +82,8 @@ namespace PlayerTableClasses
         public int[] effectStatTypes; // enum : 영향을 주는 스탯
         public int[] continuityTypes; // enum : 즉발 여부
         public float[] defaultValues;
-        public int partyType;
+        public int[] applyType;
+        public int[] partyType;
         public int particle; // enum
         public void SetSize()
         {
@@ -91,6 +92,8 @@ namespace PlayerTableClasses
             effectStatTypes = new int[combo];
             defaultValues = new float[combo];
             continuityTypes = new int[combo];
+            applyType = new int[combo]; 
+            partyType = new int[combo];
         }
     }
 

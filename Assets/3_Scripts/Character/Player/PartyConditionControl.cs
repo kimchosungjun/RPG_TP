@@ -33,7 +33,7 @@ public class PartyConditionControl : PlayerStatControl
     //  + Dash Gauge
     public override void ApplyConditionData(TransferConditionData _conditionData)
     {
-        float conditionValue = _conditionData.GetConditionValue;
+        float conditionValue = _conditionData.ConditionValue;
         switch (_conditionData.GetConditionContinuity)
         {
             case CONDITION_CONTINUITY.DEBUFF:

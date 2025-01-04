@@ -17,6 +17,14 @@ public class MageActionControl : PlayerActionControl
     [SerializeField] Transform meteorTransform;
     [SerializeField] Transform ultimateExplosionTransofrm;
 
+    [SerializeField, Tooltip("플레이어 파티 버프 관리")] PartyConditionControl partyConditionControl;
+
+    public PartyConditionControl GetPartyConditionControl()
+    {
+        if(partyConditionControl != null) return partyConditionControl; 
+        partyConditionControl = GetComponentInParent<PartyConditionControl>();
+        return partyConditionControl;
+    }
     #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
     {
@@ -63,10 +71,23 @@ public class MageActionControl : PlayerActionControl
         for (int i = 0; i < buffCnt; i++)
         {
             TransferConditionData transferConditionData = new TransferConditionData();
-            transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i),
-                buffActionSOData.GetContinuityType(i), buffActionSOData.GetDefaultValue(i),
-                buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i));
-            statControl.AddCondition(transferConditionData);
+
+            if((int)EffectEnums.CONDITION_PARTY.NONE == buffActionSOData.GetPartyType(i))
+            {
+                // Add Player Own Stat Control
+                transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i),
+    buffActionSOData.GetContinuityType(i), buffActionSOData.GetDefaultValue(i),
+    buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffActionSOData.GetApplyType(i));
+                statControl.AddCondition(transferConditionData);
+            }
+            else
+            {
+                // Add Party Stat Control
+                transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i),
+buffActionSOData.GetContinuityType(i), buffActionSOData.GetDefaultValue(i),
+buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffActionSOData.GetApplyType(i));
+                GetPartyConditionControl()?.AddCondition(transferConditionData);
+            }     
         }
     }
 

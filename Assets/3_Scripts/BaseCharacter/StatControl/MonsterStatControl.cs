@@ -9,10 +9,9 @@ public class MonsterStatControl : ActorStatControl
     
     public MonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
     public void SetBaseMonster(BaseMonster _baseMonster) { this.baseMonster = _baseMonster; }
-    public override void Heal(float _heal)
+    public override void Heal(float _heal, bool _isPercent = false)
     {
         base.Heal(_heal);
-        throw new System.NotImplementedException();
     }
 
     public override void Recovery(float _percent = 10f, float _time = 0.2f)
@@ -60,7 +59,7 @@ public class MonsterStatControl : ActorStatControl
     #region Apply Condition Data
     public override void ApplyConditionData(TransferConditionData _conditionData)
     {
-        float conditionValue = _conditionData.GetConditionValue;
+        float conditionValue = _conditionData.ConditionValue;
         switch (_conditionData.GetConditionContinuity)
         {
             case EffectEnums.CONDITION_CONTINUITY.DEBUFF:
@@ -93,7 +92,7 @@ public class MonsterStatControl : ActorStatControl
 
     public override void DeleteConditionData(TransferConditionData _conditionData)
     {
-        float conditionValue = _conditionData.GetConditionValue;
+        float conditionValue = _conditionData.ConditionValue;
         switch (_conditionData.GetConditionContinuity)
         {
             case EffectEnums.CONDITION_CONTINUITY.DEBUFF:
