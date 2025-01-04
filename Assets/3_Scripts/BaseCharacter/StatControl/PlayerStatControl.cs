@@ -1,3 +1,4 @@
+using PlayerTableClasses;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,18 +10,19 @@ public class PlayerStatControl : ActorStatControl
     protected BasePlayer player = null;
     public PlayerStat PlayerStat { get { return playerStat; } set { playerStat = value; } }
     public BasePlayer Player { get { return player;  } set { player = value; } }    
-    #region To Do ~~~~~~
-
-   
+    
+    #region Hp
 
     public override void Heal(float _heal)
     {
-
+        float increaseHP = playerStat.GetSaveStat.currentHP + _heal;
+        playerStat.GetSaveStat.currentHP = increaseHP > playerStat.MaxHP
+            ? playerStat.MaxHP : increaseHP;  
     }
 
     public override void Recovery(float _percent = 10f, float _time = 0.2f)
     {
-        
+        playerStat.GetSaveStat.currentHP = playerStat.MaxHP;       
     }
 
     public override void TakeDamage(TransferAttackData _attackData)
@@ -38,6 +40,42 @@ public class PlayerStatControl : ActorStatControl
         if (playerStat.GetSaveStat.currentHP <= 0.01f) return true;
         return false;
     }
+    #endregion
+
+    #region Exp : To Do Link UI
+    public void GetExp(int _exp)
+    {
+        PlayerSaveStat saveStat = playerStat.GetSaveStat;
+        PlayerLevelTableData levelTableData = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData();
+        int currentLevel = saveStat.currentLevel;
+        int maxLevel = levelTableData.maxLevel;
+        int currentMaxExp = levelTableData.needExps[currentLevel - 1]; 
+        int exp = _exp;
+        if (currentLevel == maxLevel)
+            return;
+
+        for(; ; )
+        {
+            if (exp + saveStat.currentExp < currentMaxExp)
+            {
+                saveStat.currentExp += exp;
+                return;
+            }
+            else
+            {
+                saveStat.currentExp = 0;
+                saveStat.currentLevel += 1;
+                exp = currentMaxExp - saveStat.currentExp;
+                currentLevel += 1; 
+
+                if (currentLevel == maxLevel || exp ==0)
+                    return;
+
+                currentMaxExp = levelTableData.needExps[currentLevel - 1];
+            }
+        }
+    }
+
     #endregion
 
     #region Apply Condition Data

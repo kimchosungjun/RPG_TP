@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SuperMgr : MonoBehaviour
+public class MgrCreator : MonoBehaviour
 {
     #region Reference Link
     [SerializeField] SceneMgr sceneMgr;
@@ -13,6 +13,7 @@ public class SuperMgr : MonoBehaviour
     ResourceMgr resourceMgr = new ResourceMgr();
     TableMgr tableMgr = new TableMgr();
     InventoryMgr inventoryMgr = new InventoryMgr();
+    DialogueMgr dialogueMgr = new DialogueMgr();
     #endregion
 
     private void Awake()
@@ -32,6 +33,7 @@ public class SuperMgr : MonoBehaviour
             uiMgr.Init();
             soundMgr.Init();
             inventoryMgr.Init();
+            dialogueMgr.Init();
             // 아이템 정보 : 아직 안씀 
             holdItemMgr.Init();
         }

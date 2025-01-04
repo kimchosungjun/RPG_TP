@@ -5,14 +5,15 @@ using UnityEngine;
 public static class SharedMgr 
 {
     #region Stick Super Mgr  
-    public static SuperMgr SuperMgr = null;
+    public static MgrCreator SuperMgr = null;
     public static SceneMgr SceneMgr = null;
     public static UIMgr UIMgr = null;
     public static ResourceMgr ResourceMgr = null;
     public static TableMgr TableMgr = null;
     public static SoundMgr SoundMgr = null;
     public static InventoryMgr InventoryMgr = null; 
-    public static PhotonMgr PhotonMgr = null;   
+    public static PhotonMgr PhotonMgr = null;
+    public static DialogueMgr DialogueMgr = null;
     #endregion
 
     // 아직 안씀

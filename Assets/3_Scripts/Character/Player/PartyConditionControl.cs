@@ -67,5 +67,17 @@ public class PartyConditionControl : PlayerStatControl
                 break;
         }
     }
+
+    public void AddAllPartyExp(int _exp)
+    {
+        List<BasePlayer> players = playerCtrl.GetPlayers;
+        if (players == null) return;
+
+        int playerCnt = players.Count;  
+        for(int i=0; i<playerCnt; i++)
+        {
+            players[i].GetPlayerStatControl.GetExp(_exp);
+        }
+    }
     #endregion
 }

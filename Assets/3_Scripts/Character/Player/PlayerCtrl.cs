@@ -18,6 +18,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] int currentPlayer = 0; // when start : must init
 
     public BasePlayer GetPlayer { get { return players[currentPlayer]; } }
+    public List<BasePlayer> GetPlayers { get { return players; } }
     #endregion
 
     #region Life Cycle

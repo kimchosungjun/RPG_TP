@@ -165,6 +165,7 @@ namespace ItemEnums
         ITEM_ETC = 0,
         ITEM_COMSUME = 1,
         ITEM_WEAPON = 2,
+        ITEM_GOLD=3,
     }
 
     public enum WEAPONTYPE
@@ -213,3 +214,13 @@ public enum E_CAMERAVIEW
 
 
 #endregion
+
+namespace QuestEnums
+{
+    public enum TYPES
+    {
+        ITEM,
+        KILL,
+        HELP,
+    }
+}

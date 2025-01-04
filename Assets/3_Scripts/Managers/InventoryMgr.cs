@@ -6,12 +6,17 @@ using UnityEngine.Rendering;
 
 public class InventoryMgr  
 {
-    // To Do ~~~ Gold
+    /**********************************************/
+    /************ 인벤토리 변수 ****************/
+    /**********************************************/
+    
+    #region Hold Item : Private
+    int gold = 0;
 
-    #region List
     Dictionary<int, List<EtcData>> etcGroup = new Dictionary<int, List<EtcData>>();
     Dictionary<int, List<ConsumeData>> consumeGroup = new Dictionary<int, List<ConsumeData>>();
-    
+
+    int maxGold = 9999999;
     int inventoryMaxCnt = 25;
     List<EtcData> etcDatas = new List<EtcData>();
     List<ConsumeData> consumeDatas = new List<ConsumeData>();   
@@ -20,16 +25,122 @@ public class InventoryMgr
     Dictionary<int,WeaponData> holdWeaponGroup = new Dictionary<int, WeaponData>();
     #endregion
 
-    #region Get List
+    #region Hold Item : Property
+    public int GetGold { get { return gold; } }
     public List<EtcData> GetEtcInventory()  { return etcDatas; }
     public List<ConsumeData> GetConsumeInventory() { return consumeDatas; }
     public List<WeaponData> GetWeaponInventory() { return weaponDatas; }
 
     Queue<ItemData> getItemQueue = new Queue<ItemData>();
+
+    public ItemData GetItemData(int _itemID)
+    {
+        int etcCnt = etcDatas.Count;
+        for(int i=0; i<etcCnt; i++)
+        {
+            if (etcDatas[i].itemID == _itemID)
+                return etcDatas[i]; 
+        }
+
+        int consumeCnt = etcDatas.Count;
+        for (int i = 0; i < consumeCnt; i++)
+        {
+            if (etcDatas[i].itemID == _itemID)
+                return etcDatas[i];
+        }
+        return null;
+    }
     #endregion
 
+    /**********************************************/
+    /************ 인벤토리 관리 ****************/
+    /**********************************************/
+
+    #region Check Can Add Item : Check Inventory Size
+    public bool CanUseGold(int _gold) { return (gold - _gold >= 0); }
+
+    public bool CanAddItem(EtcData _etcData)
+    {
+        if (etcGroup.ContainsKey(_etcData.itemID))
+        {
+            List<EtcData> datas = etcGroup[_etcData.itemID];
+            int cnt = etcGroup[_etcData.itemID].Count;
+            int itemCnt = _etcData.itemCnt;
+
+            for (int i = 0; i < cnt; i++)
+            {
+                if (datas[i].itemCnt == _etcData.GetMaxCnt)
+                    continue;
+                if (datas[i].itemCnt + itemCnt <= _etcData.GetMaxCnt)
+                    return true;
+                else
+                    itemCnt = _etcData.GetMaxCnt - datas[i].itemCnt;
+            }
+
+            if (itemCnt != 0)
+            {
+                if (etcDatas.Count < inventoryMaxCnt)
+                    return true;
+               return false;
+            }
+            return true;
+        }
+        else
+        {
+            if (etcDatas.Count < inventoryMaxCnt)
+                return true;
+            return false;
+        }
+    }
+
+    public bool CanAddItem(ConsumeData _consumeData)
+    {
+        if (consumeGroup.ContainsKey(_consumeData.itemID))
+        {
+            List<ConsumeData> datas = consumeGroup[_consumeData.itemID];
+            int cnt = consumeGroup[_consumeData.itemID].Count;
+            int itemCnt = _consumeData.itemCnt;
+
+            for (int i = 0; i < cnt; i++)
+            {
+                if (datas[i].itemCnt == _consumeData.GetMaxCnt)
+                    continue;
+                if (datas[i].itemCnt + itemCnt <= _consumeData.GetMaxCnt)
+                    return true;
+                else
+                    itemCnt = _consumeData.GetMaxCnt - datas[i].itemCnt;
+            }
+
+            if (itemCnt != 0)
+            {
+                if (consumeDatas.Count < inventoryMaxCnt)
+                    return true;
+                return false;
+            }
+            return true;
+        }
+        else
+        {
+            if (consumeDatas.Count < inventoryMaxCnt)
+                return true;
+            return false;
+        }
+    }
+
+    public bool CanAddItem(WeaponData _weaponData)
+    {
+        int cnt = weaponDatas.Count;
+        if (cnt >= inventoryMaxCnt)
+            return false;
+        return true;
+    }
+    #endregion
 
     #region Add Item
+    public void AddGold(int _gold)
+    {
+        gold = (gold + _gold) > maxGold ? maxGold : gold + _gold;
+    }
 
     public void AddItem(EtcData _etcData)
     {
@@ -163,6 +274,7 @@ public class InventoryMgr
     #endregion
 
     #region Remove Item
+    public void RemoveGold(int _gold) { if (CanUseGold(_gold) == false) return; gold -= _gold; }
 
     public void RemoveItem(EtcData _etcData)
     {
@@ -248,6 +360,19 @@ public class InventoryMgr
     }
     #endregion
 
+
+
+
+
+
+
+
+
+
+
+
+    #region To Do
+
     public void Init()
     {
         SharedMgr.InventoryMgr = this;
@@ -260,4 +385,6 @@ public class InventoryMgr
         // 2) Load
         // * Call LoginScene 
     }
+    #endregion
+
 }
