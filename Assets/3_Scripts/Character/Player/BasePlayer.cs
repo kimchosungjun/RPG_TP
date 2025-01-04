@@ -16,7 +16,6 @@ public class BasePlayer : BaseActor
     public PlayerStat PlayerStat { get { return playerStat; }  set { playerStat = value; } }
     public PlayerStatControl GetPlayerStatControl { get { return playerStatControl; } }
     public PlayerMovementControl GetPlayerMovementControl { get { return playerMovementControl; } }
-    
     public bool GetIsAlive { get { return isAlive; } }
     public void AnnounceDeath()
     {
@@ -43,7 +42,12 @@ public class BasePlayer : BaseActor
 
     public override bool CanTakeDamageState()  { return playerMovementControl.CanTakeDamage; }
     public override void ApplyStatTakeDamage(TransferAttackData _attackData) { playerStatControl.TakeDamage(_attackData); }
-    public override void ApplyMovementTakeDamage(TransferAttackData _attackData) {  }
+    public override void ApplyMovementTakeDamage(TransferAttackData _attackData) 
+    {
+        if (_attackData.GetHitEffect == EffectEnums.HIT_EFFECTS.NONE)
+            return;
+        playerMovementControl.ApplyTakeDamageState(_attackData.GetHitEffect, _attackData.EffectMaintainTime);
+    }
     public override void ApplyCondition(TransferConditionData _conditionData) { playerStatControl.AddCondition(_conditionData);  }
 
     #endregion

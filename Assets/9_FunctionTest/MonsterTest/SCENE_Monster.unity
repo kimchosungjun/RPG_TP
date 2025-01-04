@@ -1942,6 +1942,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -2201,6 +2205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -2446,6 +2454,7 @@ GameObject:
   - component: {fileID: 132187976}
   - component: {fileID: 132187975}
   - component: {fileID: 132187974}
+  - component: {fileID: 132187978}
   m_Layer: 9
   m_Name: NPC
   m_TagString: Untagged
@@ -2468,7 +2477,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2532,13 +2541,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132187973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.96, y: 1, z: 1.96}
+  m_LocalPosition: {x: 3.96, y: 1.5, z: 1.96}
   m_LocalScale: {x: 0.5, y: 2, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &132187978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132187973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fce44c4308165f449a86cd400176a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 3
+    attackValue: 2
+    effectMaintainTime: 1
 --- !u!1 &132428890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5315,6 +5340,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -5402,6 +5431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -5888,6 +5921,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -6522,6 +6559,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -7686,6 +7727,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -15535,6 +15580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -21935,6 +21984,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.03078748
       objectReference: {fileID: 0}
+    - target: {fileID: 6625594345267973144, guid: e0946db2431a6d24fa6daca16efad591,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625594345267973144, guid: e0946db2431a6d24fa6daca16efad591,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625594345267973144, guid: e0946db2431a6d24fa6daca16efad591,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 6645701885468448606, guid: e0946db2431a6d24fa6daca16efad591,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22708,6 +22772,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -30697,6 +30765,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -31950,6 +32022,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -32768,6 +32844,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -35216,6 +35296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -41545,6 +41629,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -42520,6 +42608,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d032e1cd5aea694baaa5c75def458d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0
@@ -48879,6 +48971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
   conditionData:
     conditionStat: 0
     conditionContinuity: 0

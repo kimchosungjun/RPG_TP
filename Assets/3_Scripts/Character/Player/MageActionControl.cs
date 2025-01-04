@@ -19,12 +19,14 @@ public class MageActionControl : PlayerActionControl
 
     [SerializeField, Tooltip("플레이어 파티 버프 관리")] PartyConditionControl partyConditionControl;
 
+    // Party Buff
     public PartyConditionControl GetPartyConditionControl()
     {
         if(partyConditionControl != null) return partyConditionControl; 
         partyConditionControl = GetComponentInParent<PartyConditionControl>();
         return partyConditionControl;
     }
+
     #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
     {
@@ -41,11 +43,7 @@ public class MageActionControl : PlayerActionControl
     }
     #endregion
 
-    #region Animations 
-    public void AnimAttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.AttackCooling(); }
-    public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.SkillCooling(); }
-    public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.UltimateSkillCooling(); }
-    public void AnimDashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.DashCooling(); }
+    #region Action : Relate Animation 
 
     public void DoNormalAttack(int _combo)
     {
@@ -117,5 +115,13 @@ buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffA
         SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGIC_CIRCLE_SPELL).GetComponent<ParticleAction>().
           SetParticlePosition(ultimateMeteorSpellTransform.transform.position, ultimateMeteorSpellTransform.transform.rotation, 1.5f);
     }
+    #endregion
+
+    #region Common Animation Exit
+    public void AnimAttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.AttackCooling(); }
+    public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.SkillCooling(); }
+    public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.UltimateSkillCooling(); }
+    public void AnimDashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.DashCooling(); }
+    public void AnimFallDownCooling() { movementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
     #endregion
 }

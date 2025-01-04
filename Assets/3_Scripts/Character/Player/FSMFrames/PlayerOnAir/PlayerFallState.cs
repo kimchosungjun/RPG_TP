@@ -56,7 +56,7 @@ public class PlayerFallState : PlayerOnAirState
     public void CheckTransitionMovementState()
     {
         if (characterControl.IsOnGround)
-            characterControl.ChangeState(PlayerEnums.STATES.MOVEMENT);
+            characterControl.ChangeState(STATES.MOVEMENT);
     }
     #endregion
 }

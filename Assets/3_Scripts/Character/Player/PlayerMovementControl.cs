@@ -61,10 +61,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /***************** 대쉬  ******************/
     /******************************************/
-    protected float dashCoolTimer = 0.3f;
     protected float playerDashForce;
-    protected bool isPlayerDashing = false;
-    protected bool canDash = true;
     #endregion
 
     #region Common Detect
@@ -153,8 +150,6 @@ public abstract class PlayerMovementControl : MonoBehaviour
     }
     public void LimitMovementSpeed()
     {
-        if (isPlayerDashing) return;
-
         Vector3 planeVelocity = new Vector3(rigid.velocity.x, 0f, rigid.velocity.z);
         if (isOnGround)
         {
@@ -313,49 +308,21 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /// </summary>
     public void Dash()
     {
-        if (canDash)
-        {
-            canDash = false;
-            isPlayerDashing = true;
-            Vector3 dashDirection = transform.forward;
-            dashDirection.y = 0;
-            dashDirection = dashDirection.normalized;
-            if (isOnGround)
-                dashDirection = Vector3.ProjectOnPlane(dashDirection, groundHit.normal);
-            rigid.AddForce(dashDirection * playerDashForce, ForceMode.Impulse);
-        }
+        Vector3 dashDirection = transform.forward;
+        dashDirection.y = 0;
+        dashDirection = dashDirection.normalized;
+        rigid.velocity = Vector3.zero;
+        rigid.AddForce(dashDirection * playerDashForce, ForceMode.Impulse);
+        //if (isOnGround)
+        //    dashDirection = Vector3.ProjectOnPlane(dashDirection, groundHit.normal);
     }
 
-    /// <summary>
-    /// 대쉬 쿨타임은 코루틴으로 구현
-    /// </summary>
     public void DashCooling()
     {
-        isPlayerDashing = false;
-
         if (isOnGround)
-            ChangeState(PlayerEnums.STATES.MOVEMENT);
+            ChangeState(STATES.MOVEMENT);
         else
-            ChangeState(PlayerEnums.STATES.FALL);
-
-        StartCoroutine(CDashCooling());
-    }
-
-    IEnumerator CDashCooling()
-    {
-        float time = 0f;
-        // To Do ~~~~~ 
-        // 스테미나 줄어들게 만드는 기능 추가
-        while (true)
-        {
-            time += Time.deltaTime;
-            if (time > dashCoolTimer)
-            {
-                canDash = true;
-                break;
-            }
-            yield return null;
-        }
+            ChangeState(STATES.FALL);
     }
 
     public void ApplyGravityForce()
@@ -429,6 +396,8 @@ public abstract class PlayerMovementControl : MonoBehaviour
 
     /*===========================*/
     /*=========추상 메서드=========*/
+    /*========= Life Cycle =========*/
+    /*======= State Machine ========*/
     /*===========================*/
 
     #region Abstract
@@ -450,11 +419,15 @@ public abstract class PlayerMovementControl : MonoBehaviour
     protected abstract void CreateStates();
     #endregion
 
-    #region Change State By Animation
+    /*===========================*/
+    /*========= 애니메이션 =========*/
+    /*========= 상태 탈출 ==========*/
+    /*===========================*/
+
+    #region Change State By Animation 
     public void AttackCooling() { ChangeState(STATES.MOVEMENT); }
     public void SkillCooling() { ChangeState(STATES.MOVEMENT); }
     public void UltimateSkillCooling() { ChangeState(STATES.MOVEMENT); }
     public virtual void Death() { ChangeState(STATES.DEATH); }
     #endregion
-
 }

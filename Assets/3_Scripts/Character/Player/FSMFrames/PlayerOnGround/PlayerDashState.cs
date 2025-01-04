@@ -8,9 +8,10 @@ public class PlayerDashState : PlayerState
 
     public override void Enter()
     {
+        anim.SetInteger("States", (int)PlayerEnums.STATES.DASH);
         characterControl.GetRigid.drag = 0f;
         characterControl.Dash();
-        anim.SetInteger("States", (int)PlayerEnums.STATES.DASH);
+        characterControl.GetRigid.useGravity= true;
         characterControl.CanTakeDamage = false;
     }
 
@@ -27,7 +28,7 @@ public class PlayerDashState : PlayerState
 
     public override void Exit()
     {
-        base.Exit();
         characterControl.CanTakeDamage = true;
+        characterControl.GetRigid.useGravity = false;
     }
 }

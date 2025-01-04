@@ -13,6 +13,7 @@ public class ArcherActionControl : PlayerActionControl
     [SerializeField] ProjectileAttackAction ultimateAttack;
     [SerializeField] Transform popTransform;
 
+    #region Set Data
     public override void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl)
     {
         this.statControl = _statCtrl;
@@ -26,13 +27,9 @@ public class ArcherActionControl : PlayerActionControl
         attackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.ARCHER_FULL_BLOWN_SHOOT, stat.GetSaveStat.currentSkillLevel));
         ultimateAttackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE, stat.GetSaveStat.currentUltimateSkillLevel));
     }
+    #endregion
 
-
-    #region Animations 
-    public void AnimAttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.AttackCooling(); }
-    public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.SkillCooling(); }
-    public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.UltimateSkillCooling(); }
-    public void AnimDashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.DashCooling(); }
+    #region  Action : Relate Animation
 
     public void DoNormalAttack(int _combo)
     {
@@ -79,5 +76,13 @@ public class ArcherActionControl : PlayerActionControl
     {
         SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
     }
+    #endregion
+
+    #region Common Animation Exit
+    public void AnimAttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.AttackCooling(); }
+    public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.SkillCooling(); }
+    public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.UltimateSkillCooling(); }
+    public void AnimDashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.DashCooling(); }
+    public void AnimFallDownCooling() { movementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
     #endregion
 }

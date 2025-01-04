@@ -32,9 +32,11 @@ public class PlayerStatControl : ActorStatControl
 
     public override void TakeDamage(TransferAttackData _attackData)
     {
-        playerStat.GetSaveStat.currentHP -= (int)(Mathf.Round(_attackData.GetAttackValue - playerStat.Defence));
+        int allDamage = _attackData.GetAttackValue - playerStat.Defence;
+        allDamage = (allDamage <= 0) ? 1 : allDamage;
+        playerStat.GetSaveStat.currentHP -= allDamage;
         SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(playerStat);
-        if (playerStat.GetSaveStat.currentHP <= 0.01f) Death();
+        if (playerStat.GetSaveStat.currentHP <= 0) Death();
     }
     #endregion
 

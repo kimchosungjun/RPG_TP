@@ -1,6 +1,8 @@
 using EffectEnums;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class TransferAttackData 
 {
     [SerializeField] protected HIT_EFFECTS hitEffectType;
