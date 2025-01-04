@@ -14,6 +14,7 @@ public class MgrCreator : MonoBehaviour
     TableMgr tableMgr = new TableMgr();
     InventoryMgr inventoryMgr = new InventoryMgr();
     DialogueMgr dialogueMgr = new DialogueMgr();
+    QuestMgr questMgr = new QuestMgr(); 
     #endregion
 
     private void Awake()
@@ -34,6 +35,7 @@ public class MgrCreator : MonoBehaviour
             soundMgr.Init();
             inventoryMgr.Init();
             dialogueMgr.Init();
+            questMgr.Init();    
             // 아이템 정보 : 아직 안씀 
             holdItemMgr.Init();
         }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d077e093e23304aa1fea2bef12f266, type: 3}
+  m_Name: Quest_0_SO
+  m_EditorClassIdentifier: 
+  questID: 0
+  questName: "\uACE0\uC591\uC774 \uAD6C\uCD9C"
+  questDescription: "\uB192\uC740 \uACF3\uC5D0\uC11C \uB0B4\uB824\uC624\uC9C0 \uBABB\uD558\uB294
+    \uACE0\uC591\uC774\uB97C \uAD6C\uCD9C\uD574\uC57C \uD569\uB2C8\uB2E4.\n\uACE0\uC591\uC774\uB97C
+    \uC544\uC774\uC5D0\uAC8C \uBB34\uC0AC\uD788 \uB370\uB824\uB2E4 \uC8FC\uC138\uC694."
+  questConditions:
+  - type: 0
+    targetName: "\uACE0\uC591\uC774"
+    targetID: 999
+    targetCnt: 1
+    currentCnt: 0
+  itemAwards:
+  - itemType: 3
+    itemID: -1
+    itemAmount: 200
+  - itemType: 0
+    itemID: 0
+    itemAmount: 5
+  expAwards:
+  - awardAmount: 300

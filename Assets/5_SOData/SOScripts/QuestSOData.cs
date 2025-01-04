@@ -17,6 +17,9 @@ public class QuestSOData : ScriptableObject
     [Header("Quest Awards")]
     [SerializeField] List<ItemAward> itemAwards;
     [SerializeField] List<ExpAward> expAwards;
+
+    QuestConditionSaveData saveData;
+    public QuestConditionSaveData GetSaveData { get { if (saveData == null) return null; return saveData; } }
     #endregion
 
     #region Property
@@ -24,6 +27,12 @@ public class QuestSOData : ScriptableObject
     public string GetQuestName { get { return questName; } }
     public string GetQuestDescription { get { return questDescription; } }
     #endregion
+
+    #region Achieve Quest
+    public void AcceptQuest()
+    {
+        saveData = new QuestConditionSaveData(questID, questConditions);
+    }
 
     public bool IsAchieveQuestCondition()
     {
@@ -59,4 +68,5 @@ public class QuestSOData : ScriptableObject
             itemAwards[i].GetAward();
         }
     }
+    #endregion
 }

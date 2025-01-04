@@ -183,6 +183,8 @@ namespace ItemEnums
 
     public enum ITEMID
     {
+        GOLD=-1,
+
         // ETC
         LOW_CORE=0,
         MID_CORE=1,

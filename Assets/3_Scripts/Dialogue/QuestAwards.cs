@@ -7,6 +7,7 @@ public interface IQuestAwards
 }
 
 
+[Serializable]
 public class ExpAward : IQuestAwards
 {
     public int awardAmount;
@@ -18,6 +19,7 @@ public class ExpAward : IQuestAwards
     }
 }
 
+[Serializable]
 public class ItemAward : IQuestAwards
 {
     public ItemEnums.ITEMTYPE itemType;

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using QuestEnums;
+using UnityEngine;
 
 [Serializable]
 public class QuestConditionData
@@ -64,5 +66,19 @@ public class QuestConditionData
         }
 
         return string.Empty;
+    }
+}
+
+[Serializable]
+public class QuestConditionSaveData
+{
+    [SerializeField] int questID; 
+    [SerializeField] List<QuestConditionData> conditions = new List<QuestConditionData>();
+
+    public QuestConditionSaveData() { }
+    public QuestConditionSaveData(int _questID, List<QuestConditionData> _datas)
+    {
+        questID = _questID;
+        conditions = _datas;
     }
 }
