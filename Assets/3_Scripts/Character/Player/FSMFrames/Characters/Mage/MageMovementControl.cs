@@ -8,10 +8,7 @@ public class MageMovementControl : PlayerMovementControl
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
 
-    #region Unity Life Cycle
-
     #region Init
-
     public override void Init(PlayerStat _playerStat)
     {
         base.Init(_playerStat);
@@ -20,12 +17,13 @@ public class MageMovementControl : PlayerMovementControl
             (typeID, _playerStat.GetSaveStat.currentNormalAttackLevel).combo, attackRange);
         LinkMyComponent();
     }
-    public void LinkMyComponent()
+    public virtual void LinkMyComponent()
     {
         if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
         if (anim == null) anim = GetComponentInChildren<Animator>();
         if (collide == null) collide = GetComponentInChildren<CapsuleCollider>();
     }
+
     #endregion
 
     #region Setup
@@ -42,7 +40,7 @@ public class MageMovementControl : PlayerMovementControl
         if (collide != null) playerBodyRadius = collide.radius;
     }
 
-    public void InitValues()
+    public virtual void InitValues()
     {
         moveDirection = Vector3.zero;
         moveRotation = transform.rotation;
@@ -81,7 +79,5 @@ public class MageMovementControl : PlayerMovementControl
     {
         stateMachine.FixedExecute();
     }
-    #endregion
-
     #endregion
 }
