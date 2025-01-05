@@ -1,5 +1,5 @@
 using UnityEngine;
-using PlayerTableClasses;
+using PlayerTableClassGroup;
 
 [CreateAssetMenu(fileName = "PlayerAttackSkillSO", menuName = "PlayerActionSOData/PlayerAttackSkillSO")]
 public class PlayerAttackSkillActionSOData : PlayerActionSkillSOData

@@ -16,7 +16,7 @@ public class AccountSaveData
         {
             playerSaveStatList = new List<PlayerSaveStat>();
             playerPartyList = new List<int>();
-            PlayerTableClasses.PlayerTableData playerTableData =
+            PlayerTableClassGroup.PlayerTableData playerTableData =
                 SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(PlayerEnums.TYPEIDS.WARRIOR);
             PlayerSaveStat playerSaveStat = new PlayerSaveStat(playerTableData.id, playerTableData.defaultHP);
 

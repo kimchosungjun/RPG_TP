@@ -1,5 +1,5 @@
 using UnityEngine;
-using PlayerTableClasses;
+using PlayerTableClassGroup;
 using MonsterEnums;
 
 /// <summary>

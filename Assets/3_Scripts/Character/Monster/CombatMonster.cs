@@ -25,8 +25,8 @@ public class CombatMonster : StandardMonster
     protected override void Start()
     {
         MonsterTable table = SharedMgr.TableMgr.GetMonster;
-        MonsterTableClasses.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
-        MonsterTableClasses.MonsterStatTableData statTableData = table.GetMonsterStatTableData(monsterType);
+        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
+        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(monsterType);
         monsterStat.SetMonsterStat(statTableData ,monsterLevel);
         monsterStatControl.MonsterStat = monsterStat;
         monsterStatControl.SetStatusUI(statusUI);

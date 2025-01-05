@@ -1,5 +1,5 @@
 using UnityEngine;
-using MonsterTableClasses;
+using MonsterTableClassGroup;
 
 [System.Serializable]
 public class MonsterAttackActionData : MonsterBaseActionData

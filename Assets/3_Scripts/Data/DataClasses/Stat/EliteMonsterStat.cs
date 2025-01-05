@@ -1,4 +1,4 @@
-using MonsterTableClasses;
+using MonsterTableClassGroup;
 using System;
 using UnityEngine;
 

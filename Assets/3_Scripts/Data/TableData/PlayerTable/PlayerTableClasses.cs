@@ -1,6 +1,6 @@
 using System;
 
-namespace PlayerTableClasses
+namespace PlayerTableClassGroup
 {
     /************************************************************
     ******** 플레이어 데이터를 저장할 클래스 *************

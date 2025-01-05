@@ -1,4 +1,4 @@
-using PlayerTableClasses;
+using PlayerTableClassGroup;
 using System;
 using UnityEngine;
 

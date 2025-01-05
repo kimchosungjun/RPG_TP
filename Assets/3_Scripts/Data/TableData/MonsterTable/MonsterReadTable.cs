@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MonsterTableClasses;
+using MonsterTableClassGroup;
 
 public partial class MonsterTable : BaseTable
 {

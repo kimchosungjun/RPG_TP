@@ -79,7 +79,8 @@ namespace UtilEnums
         PLAYER = 1,
         MONSTER = 2,
         ITEM = 3,
-        NPC = 4
+        NPC = 4,
+        CAMERA=5,
     }
 }
 

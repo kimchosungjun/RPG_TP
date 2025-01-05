@@ -33,7 +33,7 @@ public class WeaponData : ItemData
 
     }
 
-    public void SetData(ItemTableClasses.WeaponTableData _tableData)
+    public void SetData(ItemTableClassGroup.WeaponTableData _tableData)
     {
         itemID = _tableData.ID;
         itemName = _tableData.name;

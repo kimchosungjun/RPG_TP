@@ -105,8 +105,8 @@ public class PlayerCtrl : MonoBehaviour
         players[currentPlayer].InitState();
         players[currentPlayer].gameObject.SetActive(false);
         cameraCtrl.QuaterViewChangeTarget(players[_index].GetPlayerMovementControl.GetBodyTransform);
-        players[_index].transform.position = players[currentPlayer].transform.position;
-        players[_index].transform.rotation = players[currentPlayer].transform.rotation;
+        players[_index].SetTransform(players[currentPlayer].transform.position, players[currentPlayer].transform.rotation, 
+            players[currentPlayer].GetPlayerMovementControl.GetRigid.velocity);
         players[_index].gameObject.SetActive(true);
         currentPlayer = _index;
 

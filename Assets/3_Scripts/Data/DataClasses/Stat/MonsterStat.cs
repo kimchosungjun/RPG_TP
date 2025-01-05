@@ -28,7 +28,7 @@ public class MonsterStat : BaseStat
     /// 스탯을 초기화할때 호출 (처음 생성시, 혹은 스탯 리셋시)
     /// </summary>
     /// <param name="_nonCombatMonsterStat"></param>
-    public virtual void SetMonsterStat(MonsterTableClasses.MonsterStatTableData _combatMonsterStat, int _level)
+    public virtual void SetMonsterStat(MonsterTableClassGroup.MonsterStatTableData _combatMonsterStat, int _level)
     {
         level = _level;
         int levelDiff = _level - _combatMonsterStat.startLevel;

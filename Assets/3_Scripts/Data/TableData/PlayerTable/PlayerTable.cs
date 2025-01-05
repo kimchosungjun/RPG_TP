@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using PlayerEnums;
-using PlayerTableClasses;
+using PlayerTableClassGroup;
 
 public partial class PlayerTable : BaseTable
 {

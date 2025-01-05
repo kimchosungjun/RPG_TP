@@ -1,5 +1,5 @@
 using UnityEngine;
-using PlayerTableClasses;
+using PlayerTableClassGroup;
 
 /// <summary>
 /// Normal Attack

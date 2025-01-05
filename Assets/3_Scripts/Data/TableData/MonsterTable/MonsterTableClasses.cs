@@ -1,10 +1,10 @@
 
 using System;
 
-namespace MonsterTableClasses
+namespace MonsterTableClassGroup
 {
     /************************************************************
-    ********** 몬스터 데이터를 저장할 클래스 **************
+    ************** 몬스터 데이터를 저장할 클래스 ****************
     ************************************************************/
     public class MonsterTableClasses { }
 

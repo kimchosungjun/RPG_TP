@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class QuestMgr 
 {
-    List<QuestSOData> questDatas;
-    Dictionary<int, int> questIndexes; // First QuestID, Second List Index
+    List <QuestSOData> questDatas;
+    Dictionary <int,int> questIndexes; // First QuestID, Second List Index
+
     public void Init()
     {
         SharedMgr.QuestMgr = this;

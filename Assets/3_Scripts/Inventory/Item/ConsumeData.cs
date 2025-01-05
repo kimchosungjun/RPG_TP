@@ -1,4 +1,4 @@
-using ItemTableClasses;
+using ItemTableClassGroup;
 using ItemEnums;
 
 public class ConsumeData : ItemData

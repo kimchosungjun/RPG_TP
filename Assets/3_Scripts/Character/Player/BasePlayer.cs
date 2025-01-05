@@ -6,10 +6,10 @@ public class BasePlayer : BaseActor
     #region Value
     protected bool isAlive = true;
     [SerializeField] int id;
-    [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUI; // HP, EXP, Level을 나타내는 UI
-    [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; // 확인을 위해 serialize로 설정 : 나중엔 없애기
+    [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUI; 
+    [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; 
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
-    [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; // 스탯을 관리(버프도 관리)
+    [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; 
     [Header("플레이어 움직임 관리"), SerializeField] protected PlayerMovementControl playerMovementControl;
     #endregion
 
@@ -31,12 +31,20 @@ public class BasePlayer : BaseActor
     public void DoRevival() { InitState(); isAlive = true; }
     public void InitState() { playerMovementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
     public bool GetCanChangeState { get { return playerMovementControl.CanChangePlayer; } }
+    public void SetTransform(Vector3 _position, Quaternion _rotation, Vector3 _velocity)
+    {
+        
+        playerMovementControl.SetMoveRotation = _rotation;
+        playerMovementControl.GetRigid.velocity = _velocity;
+        transform.position = _position;
+        transform.rotation = _rotation;
+    }
     #endregion
 
-    /******************************************/
-    /************* 레이어 설정  *************/
-    /************* 데미지 설정  *************/
-    /******************************************/
+    /***************************************/
+    /************* Set Layer  **************/
+    /************* Set Damage  *************/
+    /***************************************/
 
     #region Override  
     public override void SetCharacterType()
@@ -58,9 +66,9 @@ public class BasePlayer : BaseActor
 
     #endregion
 
-    /******************************************/
-    /************ 라이프 사이클  ************/
-    /******************************************/
+    /****************************************/
+    /************ Life Cycle  ***************/
+    /****************************************/
 
     #region Life Cycle : Virtual
     public virtual void Init()

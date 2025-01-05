@@ -31,7 +31,7 @@ public class MainCamera : MonoBehaviour
     // 보정 값
     // Fov : Field Of View (물체를 볼 수 있는 영역)
     float FovX = 0.2f;
-    float FovY = 0.2f;
+    //float FovY = 0.2f;
     float Left = 1.0f;
     float Right = -1.0f;
 

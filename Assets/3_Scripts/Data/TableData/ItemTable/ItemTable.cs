@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ItemTableClasses;
+using ItemTableClassGroup;
 
 public partial class ItemTable : BaseTable
 {

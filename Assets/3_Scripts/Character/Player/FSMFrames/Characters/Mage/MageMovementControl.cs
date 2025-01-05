@@ -17,36 +17,13 @@ public class MageMovementControl : PlayerMovementControl
             (typeID, _playerStat.GetSaveStat.currentNormalAttackLevel).combo, attackRange);
         LinkMyComponent();
     }
-    public virtual void LinkMyComponent()
-    {
-        if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
-        if (anim == null) anim = GetComponentInChildren<Animator>();
-        if (collide == null) collide = GetComponentInChildren<CapsuleCollider>();
-    }
-
     #endregion
 
     #region Setup
     public override void Setup()
     {
-        LinkComponent();
-        InitValues();
+        SetupValues();
         CreateStates();
-    }
-
-    public void LinkComponent()
-    {
-        if (camTransform == null) camTransform = Camera.main.transform;
-        if (collide != null) playerBodyRadius = collide.radius;
-    }
-
-    public virtual void InitValues()
-    {
-        moveDirection = Vector3.zero;
-        moveRotation = transform.rotation;
-        groundDetectDistance = bodyTransform.position.y - playerBodyRadius + detectGroundDelta;
-        slopeDetectDistance = stepHeight * 0.5f * 5f + playerBodyRadius;
-        playerBodyHeight = collide.height;
     }
 
     protected override void CreateStates()

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MonsterTableClasses;
+using MonsterTableClassGroup;
 using MonsterEnums;
 
 public partial class MonsterTable : BaseTable

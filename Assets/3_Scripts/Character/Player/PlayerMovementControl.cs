@@ -371,6 +371,24 @@ public abstract class PlayerMovementControl : MonoBehaviour
         playerDashForce = _playerStat.DashSpeed;
     }
 
+    public virtual void LinkMyComponent()
+    {
+        if (rigid == null) rigid = GetComponentInChildren<Rigidbody>();
+        if (anim == null) anim = GetComponentInChildren<Animator>();
+        if (collide == null) collide = GetComponentInChildren<CapsuleCollider>();
+    }
+
+    public virtual void SetupValues()
+    {
+        if (camTransform == null) camTransform = Camera.main.transform;
+        if (collide != null) playerBodyRadius = collide.radius;
+
+        moveDirection = Vector3.zero;
+        moveRotation = transform.rotation;
+        groundDetectDistance = bodyTransform.position.y - playerBodyRadius + detectGroundDelta;
+        slopeDetectDistance = stepHeight * 0.5f * 5f + playerBodyRadius;
+        playerBodyHeight = collide.height;
+    }
 
     public virtual void ApplyTakeDamageState(EffectEnums.HIT_EFFECTS _hitEffect, float _maintainTime)
     {

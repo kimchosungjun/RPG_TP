@@ -12,8 +12,8 @@ public class Server : MonoBehaviour
     string Http = "http://58.78.211.182:3000/"; //ip와 port(통로)로 이루어짐 => domain과 연결
 
     string ConnectUrl = "process/dbconnect";
-    string DisConnectUrl = "process/dbdisconnect";
-    string UserSelectUrl = "process/userselect";
+    //string DisConnectUrl = "process/dbdisconnect";
+    //string UserSelectUrl = "process/userselect";
 
     IEnumerator DBPost(string url, string num) 
     {

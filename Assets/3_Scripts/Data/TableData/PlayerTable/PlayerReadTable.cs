@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using PlayerTableClasses;
+using PlayerTableClassGroup;
 public partial class PlayerTable: BaseTable
 { 
     /*******************************************************************
