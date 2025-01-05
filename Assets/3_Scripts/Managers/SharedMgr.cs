@@ -17,7 +17,7 @@ public static class SharedMgr
     public static SoundMgr SoundMgr = null;
     public static InventoryMgr InventoryMgr = null; 
     public static PhotonMgr PhotonMgr = null;
-    public static DialogueMgr DialogueMgr = null;
+    public static InteractionMgr InteractionMgr = null;
     public static QuestMgr QuestMgr = null; 
     #endregion
 

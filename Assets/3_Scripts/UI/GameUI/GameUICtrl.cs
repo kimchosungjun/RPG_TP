@@ -21,12 +21,14 @@ public class GameUICtrl : MonoBehaviour
     public InteractionUI GetInteractionUI { get { return interactionUI; } }
     public QuestUI GetQuestUI { get {return questUI;} }
     
+    // 나중에 Awake로 변경
     private void Start()
     {
+        UILink();
         UIInit();
     }
 
-    public void UIInit()
+    public void UILink()
     {
         SharedMgr.UIMgr.GameUICtrl = this;
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
@@ -35,6 +37,11 @@ public class GameUICtrl : MonoBehaviour
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
         if(interactionUI==null) interactionUI = GetComponentInChildren<InteractionUI>();
         if(questUI==null) questUI = GetComponentInChildren<QuestUI>();  
+    }
+
+    public void UIInit()
+    {
+        //interactionUI?.Init();
     }
 
     private void Update()

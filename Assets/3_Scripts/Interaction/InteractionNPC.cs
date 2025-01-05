@@ -9,11 +9,13 @@ public class InteractionNPC : Interactable
 
     public override string Detect()
     {
-        throw new System.NotImplementedException();
+        return "테스트용 NPC 입니다.";
     }
 
     public override void Interact()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("성공적인 상호작용 입니다.");
+        SharedMgr.InteractionMgr.RemoveInteractable(this);  
+        Destroy(this.gameObject);
     }
 }

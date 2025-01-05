@@ -2,27 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueMgr 
+public partial class InteractionMgr 
 {
+    #region Dialogue Data Value
     Dictionary<int, Dialogue> dialogueGroup = new Dictionary<int, Dialogue>();
     DialogueLoader loader;
-    
-    public void Init()
-    {
-        loader = new DialogueLoader();
-        SharedMgr.DialogueMgr = this;
-    }
+    #endregion
 
-    // Call By NPC
+    #region Load & Get Dialouge Data
     public void LoadDialogue(string _name)
     {
         DialogueData data = loader.LoadDialogueData(_name);
         int dialogueCnt = data.dialogues.Count;
-        for(int i = 0; i < dialogueCnt; i++)
+        for (int i = 0; i < dialogueCnt; i++)
         {
             if (dialogueGroup.ContainsKey(data.dialogues[i].storyID))
                 continue;
-            dialogueGroup.Add(data.dialogues[i].storyID, data.dialogues[i]);    
+            dialogueGroup.Add(data.dialogues[i].storyID, data.dialogues[i]);
         }
     }
 
@@ -32,4 +28,5 @@ public class DialogueMgr
             return null;
         return dialogueGroup[_dialougeID];
     }
+    #endregion
 }

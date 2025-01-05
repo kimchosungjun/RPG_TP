@@ -13,7 +13,7 @@ public class MgrCreator : MonoBehaviour
     ResourceMgr resourceMgr = new ResourceMgr();
     TableMgr tableMgr = new TableMgr();
     InventoryMgr inventoryMgr = new InventoryMgr();
-    DialogueMgr dialogueMgr = new DialogueMgr();
+    InteractionMgr dialogueMgr = new InteractionMgr();
     QuestMgr questMgr = new QuestMgr(); 
     #endregion
 
