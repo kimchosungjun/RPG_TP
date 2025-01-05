@@ -8,6 +8,7 @@ public class PlayerHitState : PlayerState
 
     public override void Enter()
     {
+        characterControl.CanChangePlayer = false;
         enterTime = Time.time;
         anim.applyRootMotion = true;
         anim.SetInteger("States", (int)PlayerEnums.STATES.HIT);
@@ -38,6 +39,7 @@ public class PlayerHitState : PlayerState
 
     public override void Exit()
     {
+        characterControl.CanChangePlayer = true;
         anim.applyRootMotion = false;
         anim.SetBool("IsFallDownGround", false);
     }

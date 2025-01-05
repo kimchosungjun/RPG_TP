@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class BasePlayer : BaseActor
 {
@@ -16,15 +17,20 @@ public class BasePlayer : BaseActor
     public PlayerStat PlayerStat { get { return playerStat; }  set { playerStat = value; } }
     public PlayerStatControl GetPlayerStatControl { get { return playerStatControl; } }
     public PlayerMovementControl GetPlayerMovementControl { get { return playerMovementControl; } }
-    public bool GetIsAlive { get { return isAlive; } }
+    public bool IsAlive { get { return isAlive; } set { isAlive = value; } }
+    
+    // Call After Death Animation 
     public void AnnounceDeath()
     {
-        isAlive = false;
         PlayerCtrl playerCtrl = GetComponentInParent<PlayerCtrl>();
         playerCtrl?.DeathChangePlayer();
     }
 
-    public void DoDeathState() { playerMovementControl.Death(); }
+    // Call Immediately : Show Animation
+    public void DoDeathState() { playerMovementControl.Death(); isAlive = false; }
+    public void DoRevival() { InitState(); isAlive = true; }
+    public void InitState() { playerMovementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
+    public bool GetCanChangeState { get { return playerMovementControl.CanChangePlayer; } }
     #endregion
 
     /******************************************/

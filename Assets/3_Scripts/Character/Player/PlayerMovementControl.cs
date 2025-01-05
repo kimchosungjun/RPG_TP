@@ -137,6 +137,12 @@ public abstract class PlayerMovementControl : MonoBehaviour
     public bool IsOnAirState { get { return isOnAirState; }  set { isOnAirState = value; } }
     #endregion
 
+    #region Change Player
+    [SerializeField] bool canChangePlayer = true;
+    public bool CanChangePlayer { get { return canChangePlayer; } 
+        set { canChangePlayer = value; } }
+    #endregion
+
     /******************************************/
     /************** 속도 조절  ***************/
     /**************   땅 검출   ***************/
@@ -341,11 +347,11 @@ public abstract class PlayerMovementControl : MonoBehaviour
     }
     #endregion
 
-    /*===========================*/
+    /*==============================*/
     /*========= 상태 변경 ==========*/
-    /*========= 값 초기 설정 ========*/
+    /*========= 값 초기 설정 =======*/
     /*========== 피격 설정 =========*/
-    /*===========================*/
+    /*==============================*/
 
     #region Virtual
     public virtual void ChangeState(STATES _E_PLAYER_NEW_FSM)
@@ -425,9 +431,10 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /*===========================*/
 
     #region Change State By Animation 
-    public void AttackCooling() { ChangeState(STATES.MOVEMENT); }
-    public void SkillCooling() { ChangeState(STATES.MOVEMENT); }
-    public void UltimateSkillCooling() { ChangeState(STATES.MOVEMENT); }
+    public void SetActionCooling() { anim.applyRootMotion = false; canChangePlayer = true; }
+    public void AttackCooling() { ChangeState(STATES.MOVEMENT); SetActionCooling(); }
+    public void SkillCooling() { ChangeState(STATES.MOVEMENT); SetActionCooling(); }
+    public void UltimateSkillCooling() { ChangeState(STATES.MOVEMENT); SetActionCooling(); }
     public virtual void Death() { ChangeState(STATES.DEATH); }
     #endregion
 }

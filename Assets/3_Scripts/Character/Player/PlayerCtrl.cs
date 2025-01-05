@@ -69,7 +69,7 @@ public class PlayerCtrl : MonoBehaviour
         int partyCnt = players.Count;
         for (int i = 0; i < partyCnt; i++)
         {
-            if (players[i].GetIsAlive)
+            if (players[i].IsAlive)
             {
                 cameraCtrl.QuaterViewChangeTarget(players[i].GetPlayerMovementControl.GetBodyTransform);
                 ChangePlayer(i, false);
@@ -91,8 +91,18 @@ public class PlayerCtrl : MonoBehaviour
 
         // 쿨타임과 죽은 상태일때는 바로 return; => UI 추가해야 함
         if (_checkCoolTime && canChangePlayer == false) return;
-        if (players[_index].GetIsAlive == false) return;
+        if (_checkCoolTime && players[_index].IsAlive == false) return;
+        if(_checkCoolTime == false)
+        {
+            players[currentPlayer].InitState();
+        }
+        else
+        {
+              if (players[currentPlayer].GetCanChangeState == false)
+                return;
+        }
 
+        players[currentPlayer].InitState();
         players[currentPlayer].gameObject.SetActive(false);
         cameraCtrl.QuaterViewChangeTarget(players[_index].GetPlayerMovementControl.GetBodyTransform);
         players[_index].transform.position = players[currentPlayer].transform.position;
@@ -169,24 +179,30 @@ public class PlayerCtrl : MonoBehaviour
 
     IEnumerator CRecoveryDashGauge()
     {
+        DashGaugeUI dashGaugeUI = SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI;
+        if (dashGaugeUI == null) yield break;
         bool isInActiveUI = false;
         while (true)
         {
-            dashGauge += increaseDashGaugePerSecond * Time.deltaTime; 
-            SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.SetGaugeAmount(dashGauge);
-            if (dashGauge >=0.99f)
+            dashGauge += increaseDashGaugePerSecond * Time.deltaTime;
+            dashGaugeUI.SetGaugeAmount(dashGauge);
+            if (dashGauge >= 0.99f)
+            {
+                dashGaugeUI.SetGaugeAmount(1f);
+                dashGaugeUI.InActiveGauge();
                 break;
+            }
 
             if(isInActiveUI == false && Time.time - lastDashTime > 3f )
             {
-                SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.InActiveGauge();
+                dashGaugeUI.InActiveGauge();
                 isInActiveUI = true;
             }
             yield return null;
         }
 
         if(isInActiveUI == false)
-            SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.InActiveGauge();
+            dashGaugeUI.InActiveGauge();
         showDashGauge = false;
     }
 
@@ -219,7 +235,7 @@ public class PlayerCtrl : MonoBehaviour
         int newPartyCnt = _newParty.Count;
         for (int i = 0; i < newPartyCnt; i++)
         {
-            if (_newParty[i].GetIsAlive)
+            if (_newParty[i].IsAlive)
                 return true;
         }
         return false;
@@ -231,7 +247,7 @@ public class PlayerCtrl : MonoBehaviour
         int newPartyCnt = _newParty.Count;
         for (int i = 0; i < newPartyCnt; i++)
         {
-            if (_newParty[i].GetIsAlive)
+            if (_newParty[i].IsAlive)
             {
                 currentPlayer = i;
                 InitPartyData(_newParty);

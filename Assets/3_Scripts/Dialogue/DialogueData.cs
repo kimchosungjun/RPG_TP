@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class Choice
@@ -20,6 +18,7 @@ public class Dialogue
     public List<Choice> choiceLine;
 }
 
+[Serializable]
 public class DialogueData
 {
     public List<Dialogue> dialogues;

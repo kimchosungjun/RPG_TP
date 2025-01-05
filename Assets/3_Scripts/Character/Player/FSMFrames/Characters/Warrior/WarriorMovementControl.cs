@@ -65,7 +65,7 @@ public class WarriorMovementControl : PlayerMovementControl
         playerStates[(int)STATES.JUMP] = new PlayerJumpState(this);
         playerStates[(int)STATES.FALL] = new PlayerFallState(this);
         playerStates[(int)STATES.ATTACK] = new PlayerAttackState(this, attackCombo);
-        playerStates[(int)STATES.SKILL] = new WarriorBuffSkillState(this, attackCombo);
+        playerStates[(int)STATES.SKILL] = new PlayerSkillState(this, attackCombo);
         playerStates[(int)STATES.ULTIMATESKILL] = new PlayerUltimateSkillState(this, attackCombo);
         playerStates[(int)STATES.HIT] = new PlayerHitState(this);
         playerStates[(int)STATES.DEATH] = new PlayerDeathState(this);

@@ -7,13 +7,14 @@ public class PlayerActionState : PlayerOnGroundState
     public override void Enter()
     {
         base.Enter();
+        characterControl.CanChangePlayer = false;
         anim.applyRootMotion = true;
     }
 
     public override void Exit()
     {
         base.Exit();
-        anim.applyRootMotion = false;
+        anim.applyRootMotion = true;
         characterControl.SetMoveRotation = characterControl.transform.rotation;
         attackCombo.SetComboTime();
     }

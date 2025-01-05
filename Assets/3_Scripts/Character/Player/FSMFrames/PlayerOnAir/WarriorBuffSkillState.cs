@@ -14,7 +14,7 @@ public class WarriorBuffSkillState : PlayerSkillState
     public override void Enter()
     {
         base.Enter();
-        warriorMovement.GetWarriorActionControl.DoBuffSkill();
+        //warriorMovement.GetWarriorActionControl.DoBuffSkill();
     }
 
     public override void Exit() { base.Exit(); }

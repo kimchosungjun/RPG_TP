@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueMgr : MonoBehaviour
+public class DialogueMgr 
 {
     Dictionary<int, Dialogue> dialogueGroup = new Dictionary<int, Dialogue>();
     DialogueLoader loader;
@@ -16,7 +16,7 @@ public class DialogueMgr : MonoBehaviour
     // Call By NPC
     public void LoadDialogue(string _name)
     {
-        DialogueData data = loader.LoadDialogueData(name);
+        DialogueData data = loader.LoadDialogueData(_name);
         int dialogueCnt = data.dialogues.Count;
         for(int i = 0; i < dialogueCnt; i++)
         {
