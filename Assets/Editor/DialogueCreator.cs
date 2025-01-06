@@ -13,6 +13,6 @@ public class DialogueCreator : Editor
         if(GUILayout.Button("Generate DialogueData"))
         {
             holder.CreateData();    
-        }   
+        }
     }
 }

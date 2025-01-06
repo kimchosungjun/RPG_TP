@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class InteractionNPC : Interactable
 {
-    // 대사 로드 만들기
-    // 그 이후 구현하기
+    
+    private void Awake()
+    {
+        //SharedMgr.InteractionMgr.LoadDialogue(this.gameObject.name);
+        DialogueData data = new DialogueData();
+
+        if(data.dialogues== null)
+        {
+            Debug.Log("아무것도 없습니다.");
+        }
+    }
 
     public override string Detect()
     {

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public partial class InteractionMgr 
 {
+    InteractionNPC currentInteractNpc = null;
+    public InteractionNPC CurrentInteractNPC { get { return currentInteractNpc; } set { currentInteractNpc = value; } }
+
     #region Dialogue Data Value
     Dictionary<int, Dialogue> dialogueGroup = new Dictionary<int, Dialogue>();
     DialogueLoader loader;
@@ -16,9 +19,9 @@ public partial class InteractionMgr
         int dialogueCnt = data.dialogues.Count;
         for (int i = 0; i < dialogueCnt; i++)
         {
-            if (dialogueGroup.ContainsKey(data.dialogues[i].storyID))
+            if (dialogueGroup.ContainsKey(data.dialogues[i].dialogueID))
                 continue;
-            dialogueGroup.Add(data.dialogues[i].storyID, data.dialogues[i]);
+            dialogueGroup.Add(data.dialogues[i].dialogueID, data.dialogues[i]);
         }
     }
 

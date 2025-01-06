@@ -38,4 +38,11 @@ public class QuestMgr
         questIndexes.Remove(_questID);
         // To Do ~~ Quest UI
     }
+
+    public QuestSOData GetQuestData(int _id)
+    {
+        if (questIndexes.ContainsKey(_id))
+            return questDatas[questIndexes[_id]];
+        return null;
+    }
 }

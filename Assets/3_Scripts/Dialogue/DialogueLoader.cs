@@ -40,7 +40,7 @@ public class DialogueLoader
         int dataCnt = data.dialogues.Count;
         for (int i = 0; i < dataCnt; i++)
         {
-            dialogueGroup.Add(data.dialogues[i].storyID, data.dialogues[i]);
+            dialogueGroup.Add(data.dialogues[i].dialogueID, data.dialogues[i]);
         }
         return dialogueGroup;
     }
