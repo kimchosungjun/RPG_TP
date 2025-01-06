@@ -3,28 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//#if UNITY_STANDALONE_WIN
+//#if UNITY_EDITOR
+//#endif
+
 public class InteractionUI : MonoBehaviour
 {
-    int currentIndex = 0;
-    int activeSlotCnt = 0;
-    [SerializeField] List<InteractionSlot> slots;
+    [SerializeField] int currentIndex = 0;
+    [SerializeField] int activeSlotCnt = 0;
+    [SerializeField] InteractionSlot[] slots;
+    List<InteractionSlot> activeSlots = new List<InteractionSlot>();
     
-    public void Show()
+    public bool IsActive()
     {
+        if (activeSlotCnt == 0) return false;
+        return true;
+    }
 
+    public void Interaction()
+    {
+        if (activeSlotCnt == 0) return;
+        activeSlots[currentIndex].PressInteractSlot();   
     }
 
     public void AddInteractable(Interactable _interactable)
     {
         InteractionSlot slot = GetInActiveSlot();
         if (slot == null) return;
-        slot.Active(_interactable);
+#if UNITY_EDITOR
+        if (activeSlotCnt == 0) AddChangeDirecionIndex(slot);
+#endif
+        activeSlots.Add(slot);
+         slot.Active(_interactable);
+
         activeSlotCnt += 1;
     }
 
     public InteractionSlot GetInActiveSlot()
     {
-        int slotCnt = slots.Count;
+        int slotCnt = slots.Length;
         for (int i = 0; i < slotCnt; i++)
         {
             if (slots[i].gameObject.activeSelf == false)
@@ -35,11 +52,16 @@ public class InteractionUI : MonoBehaviour
 
     public void RemoveInteractable(Interactable _interactable)
     {
-        activeSlotCnt -= 1;
-        int slotCnt = slots.Count;
+        int slotCnt = activeSlots.Count;
         for(int i=0; i<slotCnt; i++)
         {
-            slots[i].IsSameData(_interactable);
+            if (activeSlots[i].IsSameData(_interactable))
+            {
+                activeSlotCnt -= 1;
+                activeSlots.RemoveAt(i);
+                RemoveChangeDirectionIndex();
+                return;
+            }
         }
     }
 
@@ -48,18 +70,35 @@ public class InteractionUI : MonoBehaviour
     {
         if (currentIndex == 0)
             return;
-        slots[currentIndex].InActiveDirection();
+        activeSlots[currentIndex].InActiveDirection();
         currentIndex -= 1;
-        slots[currentIndex].ActiveDirection();
+        activeSlots[currentIndex].ActiveDirection();
     }
 
-    public void DownKey()
+    public void InputDownKey()
     {
-        if (currentIndex == activeSlotCnt)
+        if (currentIndex == activeSlotCnt - 1)
             return;
-        slots[currentIndex].InActiveDirection();
+        activeSlots[currentIndex].InActiveDirection();
         currentIndex += 1;
-        slots[currentIndex].ActiveDirection();
+        activeSlots[currentIndex].ActiveDirection();
+    }
+
+    public void AddChangeDirecionIndex(InteractionSlot _slot)
+    {
+        currentIndex = 0;
+        _slot.ActiveDirection();
+    }
+
+    public void RemoveChangeDirectionIndex()
+    {
+        if (currentIndex >= activeSlotCnt)
+        {
+            if (currentIndex >= 1)
+                currentIndex -= 1;
+        }
+        if(activeSlotCnt >= 1)
+            activeSlots[currentIndex].ActiveDirection();
     }
     #endregion
 }

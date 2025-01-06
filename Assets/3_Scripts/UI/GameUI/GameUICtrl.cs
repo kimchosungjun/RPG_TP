@@ -50,5 +50,23 @@ public class GameUICtrl : MonoBehaviour
         {
             inventoyUI.InputInventoryKey();
         }
+
+#if UNITY_EDITOR
+        if (interactionUI.IsActive())
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                    interactionUI.Interaction();
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad8))
+            {
+                    interactionUI.InputUpKey();
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                    interactionUI.InputDownKey();
+            }
+        }
+#endif
     }
 }

@@ -16,6 +16,7 @@ public class InteractionNPC : Interactable
     {
         Debug.Log("성공적인 상호작용 입니다.");
         SharedMgr.InteractionMgr.RemoveInteractable(this);  
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);   
     }
 }
