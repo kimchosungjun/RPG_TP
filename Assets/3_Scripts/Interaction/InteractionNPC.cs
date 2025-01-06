@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class InteractionNPC : Interactable
 {
-    
+    public void AddQuestData(QuestSOData _soData)
+    {
+
+    }
+
+
     private void Awake()
     {
         //SharedMgr.InteractionMgr.LoadDialogue(this.gameObject.name);

@@ -13,6 +13,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] InventoryUI inventoyUI;
     [SerializeField] InteractionUI interactionUI;
     [SerializeField] QuestUI questUI;
+    [SerializeField] DialogueUI dialogueUI;
 
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
@@ -20,7 +21,7 @@ public class GameUICtrl : MonoBehaviour
     public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
     public InteractionUI GetInteractionUI { get { return interactionUI; } }
     public QuestUI GetQuestUI { get {return questUI;} }
-    
+    public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     // 나중에 Awake로 변경
     private void Start()
     {
@@ -37,6 +38,7 @@ public class GameUICtrl : MonoBehaviour
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
         if(interactionUI==null) interactionUI = GetComponentInChildren<InteractionUI>();
         if(questUI==null) questUI = GetComponentInChildren<QuestUI>();  
+        if(dialogueUI ==null) dialogueUI = GetComponentInChildren<DialogueUI>();    
     }
 
     public void UIInit()
@@ -52,6 +54,7 @@ public class GameUICtrl : MonoBehaviour
         }
 
 #if UNITY_EDITOR
+        // Interaction
         if (interactionUI.IsActive())
         {
             if (Input.GetKeyDown(KeyCode.F))
@@ -65,6 +68,22 @@ public class GameUICtrl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Keypad2))
             {
                     interactionUI.InputDownKey();
+            }
+        }
+        // Dialouge
+        if (dialogueUI.GetIsChoiceActive)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                dialogueUI.SelectChoice();
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad8))
+            {
+                dialogueUI.InputUpKey();
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                dialogueUI.InputDownKey();
             }
         }
 #endif

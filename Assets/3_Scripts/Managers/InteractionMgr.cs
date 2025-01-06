@@ -7,7 +7,6 @@ public partial class InteractionMgr
 
     public void Init()
     {
-        loader = new DialogueLoader();
         SharedMgr.InteractionMgr = this;
         interactableSet = new HashSet<Interactable>();  
     }

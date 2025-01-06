@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Choice
 {
     public int nextDialogueID;
-    public string choiceText;
+    public string[] choiceTexts;
     public bool continueDialouge;
     public int haveQuestID = -1;
 }
@@ -16,7 +16,7 @@ public class Dialogue
     public int dialogueID;
     public string speakerName;
     public List<string> storyLines;
-    public List<Choice> choiceLine;
+    public List<Choice> choiceLines;
 }
 
 [Serializable]
