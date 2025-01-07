@@ -1,19 +1,26 @@
+using SaveDataGroup;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionNPC : Interactable
 {
-    [SerializeField] int id;
-    public void AddQuestData(QuestSOData _soData)
-    {
+    [SerializeField] int dialogueIndex;
+    NPCSaveData saveData = new NPCSaveData();
+    QuestSOData currentQuestData = null;
 
-    }
-
+    #region Manage Quest Data
     public void LoadNpcData()
     {
-
+        
     }
+
+    public void AddQuestData(int _id)
+    {
+        saveData.currentQuestIndex = _id;
+        currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
+    }
+    #endregion
 
     public void Start()
     {
@@ -27,7 +34,7 @@ public class InteractionNPC : Interactable
 
     public override void Interact()
     {
-        SharedMgr.InteractionMgr.StartConversation(id);
+        SharedMgr.InteractionMgr.StartConversation(dialogueIndex);
         SharedMgr.InteractionMgr.RemoveInteractable(this);
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);

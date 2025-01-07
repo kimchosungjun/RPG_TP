@@ -18,7 +18,8 @@ public static class SharedMgr
     public static InventoryMgr InventoryMgr = null; 
     public static PhotonMgr PhotonMgr = null;
     public static InteractionMgr InteractionMgr = null;
-    public static QuestMgr QuestMgr = null; 
+    public static QuestMgr QuestMgr = null;
+    public static SaveMgr SaveMgr = null;
     #endregion
 
     // 아직 안씀
