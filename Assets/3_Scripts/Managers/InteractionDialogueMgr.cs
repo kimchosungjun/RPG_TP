@@ -40,9 +40,11 @@ public partial class InteractionMgr
 
     public void StartConversation(int _id)
     {
-        if (isConversation == false) return;
+        if (isConversation) 
+            return;
         Dialogue data = GetDialouge(_id);
-        if (data == null) return;
+        if (data == null)
+            return;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.StartConversation(data);
 
         // To Do ~~~

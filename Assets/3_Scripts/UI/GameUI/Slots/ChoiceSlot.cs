@@ -18,8 +18,9 @@ public class ChoiceSlot : MonoBehaviour
 
     public void Active(Choice _choice)
     {
+        choice = _choice;
         choiceText.text = SharedMgr.InteractionMgr.GetDialogueReader.ReadChoiceText(_choice.choiceTexts, this);
-        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(true);
     }
 
     public void InActive()
@@ -33,8 +34,6 @@ public class ChoiceSlot : MonoBehaviour
     
     public void PressSlot()
     {
-        if (slotEventID == -1) return;
-        
         if(choiceAction !=null)
             choiceAction(slotEventID);
 

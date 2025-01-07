@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class InteractionNPC : Interactable
 {
+    [SerializeField] int id;
     public void AddQuestData(QuestSOData _soData)
     {
 
     }
 
-
-    private void Awake()
+    public void LoadNpcData()
     {
-        //SharedMgr.InteractionMgr.LoadDialogue(this.gameObject.name);
-        DialogueData data = new DialogueData();
 
-        if(data.dialogues== null)
-        {
-            Debug.Log("아무것도 없습니다.");
-        }
     }
+
+    public void Start()
+    {
+        SharedMgr.InteractionMgr.LoadDialogue("Girl");
+     }
 
     public override string Detect()
     {
@@ -28,9 +27,14 @@ public class InteractionNPC : Interactable
 
     public override void Interact()
     {
-        Debug.Log("성공적인 상호작용 입니다.");
-        SharedMgr.InteractionMgr.RemoveInteractable(this);  
+        SharedMgr.InteractionMgr.StartConversation(id);
+        SharedMgr.InteractionMgr.RemoveInteractable(this);
         //Destroy(this.gameObject);
-        this.gameObject.SetActive(false);   
+        this.gameObject.SetActive(false);
+    }
+
+    public void BlockConversation()
+    {
+        // index나 layer 변경
     }
 }

@@ -7,7 +7,7 @@ public class DialogueReader
     #region Load
     public DialogueData LoadDialogueData(string _name)
     {
-        string path = Application.dataPath + "/Dialogues/" + _name;
+        string path = "Dialogues/" + _name + "Dialogue";
         string texts = SharedMgr.ResourceMgr.LoadResource<TextAsset>(path).text;
         DialogueData data = new DialogueData();
         data = JsonUtility.FromJson<DialogueData>(texts);
@@ -65,6 +65,24 @@ public class DialogueReader
         return text;
     }
 
+    // Dialogue
+    public void Event(string _text)
+    {
+        char eventType = _text[1];
+        switch (eventType)
+        {
+            case 'Q':
+                AcceptQuest(GetEventID(_text));
+                break;
+            case 'A':
+                AcceptAward(GetEventID(_text));
+                break;
+            case 'E':
+                EndConversation();
+                break;
+        }
+    }
+
     public string ReadChoiceText(string[] _texts, ChoiceSlot _slot)
     {
         if (_texts.Length ==2)
@@ -80,33 +98,17 @@ public class DialogueReader
         }
     }
 
-
-    public void Event(string _text)
-    {
-        int textLen = _text.Length;
-        string eventType = string.Empty + _text[0] + _text[1];
-        switch (eventType)
-        {
-            case "$Q":
-                AcceptQuest(GetEventID(_text));
-                break;
-            case "$A":
-                AcceptAward(GetEventID(_text));
-                break;
-        }
-    }
-
+    // Choice
     public void Event(string _text, UnityAction<int> _action)
     {
         UnityAction<int> action = null;
-        int textLen = _text.Length;
-        string eventType = string.Empty + _text[0] + _text[1];
+        char eventType = _text[1];
         switch (eventType)
         {
-            case "$Q":
+            case 'Q':
                 action += AcceptQuest;
                 break;
-            case "$A":
+            case 'A':
                 action += AcceptAward;
                 break;
         }
@@ -127,6 +129,11 @@ public class DialogueReader
     public void AcceptAward(int _id)
     {
 
+    }
+
+    public void EndConversation()
+    {
+        SharedMgr.InteractionMgr.CurrentInteractNPC.BlockConversation();
     }
     #endregion
 }

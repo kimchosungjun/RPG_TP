@@ -88,4 +88,14 @@ public class GameUICtrl : MonoBehaviour
         }
 #endif
     }
+
+    public void StartConversation()
+    {
+
+    }
+
+    public void EndConversation()
+    {
+
+    }
 }

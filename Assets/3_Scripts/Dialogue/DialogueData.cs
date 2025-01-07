@@ -7,7 +7,6 @@ public class Choice
     public int nextDialogueID;
     public string[] choiceTexts;
     public bool continueDialouge;
-    public int haveQuestID = -1;
 }
 
 [Serializable]

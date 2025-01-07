@@ -71,6 +71,7 @@ namespace UtilEnums
         MONSTER = 7,
         PLAYER = 8,
         INTERACTOR = 9,
+        UNINTERACTOR = 10,
     }
 
     public enum TABLE_FOLDER_TYPES

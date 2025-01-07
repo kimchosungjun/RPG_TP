@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class DialogueUI : MonoBehaviour
     public bool SetAutoMode { set { isAuto = value; } }   
     [SerializeField] bool isAuto = false;
     [SerializeField, Header("Text Speed"), Range(0.2f, 5f)] float typeSpeed;
+    [SerializeField, Header("Delay Speed"), Range(0.2f, 1f)] float delayNextDialougeSpeed;
     #endregion
 
     /******************************************/
@@ -44,7 +46,8 @@ public class DialogueUI : MonoBehaviour
         if (_dialogue == null) return;
         
         ActiveUI();
-     
+
+        dialogueTexts[0].text = _dialogue.speakerName;
         if (_dialogue.storyLines.Count == 0)
             ShowChoiceDialogue(_dialogue.choiceLines);
         else
@@ -71,7 +74,10 @@ public class DialogueUI : MonoBehaviour
         }
         string text  = SharedMgr.InteractionMgr.GetDialogueReader.ReadText(dialogue.storyLines[currentDialogueIndex], out haveEvent);
         if (haveEvent)
+        {
+            currentDialogueIndex += 1;
             ShowDialogue();
+        }
         else
             StartCoroutine(CTypeDialogueText(text));
     }
@@ -84,6 +90,7 @@ public class DialogueUI : MonoBehaviour
             return;
         }
 
+        isChoiceActive = true;
         int choiceCnt = _choiceLines.Count;
 
         ActiveDirectionIndicator(choiceCnt);
@@ -105,12 +112,15 @@ public class DialogueUI : MonoBehaviour
         {
             text+= _text[i];
             dialogueTexts[1].text = text;
-            yield return typeSpeed;
+            yield return new WaitForSeconds(typeSpeed);
         }
         isTypeText = false;
         currentDialogueIndex += 1;
         if (isAuto)
+        {
+            yield return new WaitForSeconds(delayNextDialougeSpeed);
             ShowDialogue();
+        }
     }
 
     public void SkipText()
@@ -128,6 +138,7 @@ public class DialogueUI : MonoBehaviour
     {
         ClearDialogueTexts();
         CloseAllChoiceSlots();
+        isChoiceActive = false;
         StartConversation(_dialogue);
     }
     public void ClearDialogueTexts()
@@ -141,6 +152,7 @@ public class DialogueUI : MonoBehaviour
     public void EndConversation()
     {
         CloseAllChoiceSlots();
+        isChoiceActive = false;
         conversationUIParentObject.SetActive(false);
     }
 

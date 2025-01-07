@@ -16,8 +16,8 @@ TagManager:
   - Monster
   - Player
   - Interactor
+  - UnInteractor
   - UIModel
-  - 
   - 
   - 
   - 
