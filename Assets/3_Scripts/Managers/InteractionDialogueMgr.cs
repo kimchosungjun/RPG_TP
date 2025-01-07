@@ -18,13 +18,13 @@ public partial class InteractionMgr
     #region Load & Get Dialouge Data
     public void LoadDialogue(string _name)
     {
-        DialogueData data = reader.LoadDialogueData(_name);
-        int dialogueCnt = data.dialogues.Count;
+        DialogueDataSet data = reader.LoadDialogueData(_name);
+        int dialogueCnt = data.dialogueSet.Count;
         for (int i = 0; i < dialogueCnt; i++)
         {
-            if (dialogueGroup.ContainsKey(data.dialogues[i].dialogueID))
+            if (dialogueGroup.ContainsKey(data.dialogueSet[i].dialogueID))
                 continue;
-            dialogueGroup.Add(data.dialogues[i].dialogueID, data.dialogues[i]);
+            dialogueGroup.Add(data.dialogueSet[i].dialogueID, data.dialogueSet[i]);
         }
     }
 
@@ -53,11 +53,9 @@ public partial class InteractionMgr
         // None Control Player
     }
 
-    public void ContinueConversation(int _id)
+    public void ContinueConversation(int _nextDialogueIndex)
     {
-        Dialogue data = GetDialouge(_id);
-        if ( data == null) return;
-        SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.ContinueConversation(data);
+        SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.ContinueConversation(_nextDialogueIndex);
     }
 
     public void EndConversation()

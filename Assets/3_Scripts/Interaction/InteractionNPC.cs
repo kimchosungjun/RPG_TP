@@ -6,24 +6,27 @@ using UnityEngine;
 public class InteractionNPC : Interactable
 {
     [SerializeField] int dialogueIndex;
-    NPCSaveData saveData = new NPCSaveData();
+    NPCSaveData saveData = null;
     QuestSOData currentQuestData = null;
 
     #region Manage Quest Data
     public void LoadNpcData()
     {
-        
+        SharedMgr.SaveMgr.LoadNPCSaveData(this.gameObject.name, ref saveData);
     }
 
     public void AddQuestData(int _id)
     {
         saveData.currentQuestIndex = _id;
         currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
+      
     }
+
     #endregion
 
     public void Start()
     {
+        LoadNpcData();
         SharedMgr.InteractionMgr.LoadDialogue("Girl");
      }
 
@@ -42,6 +45,7 @@ public class InteractionNPC : Interactable
 
     public void BlockConversation()
     {
-        // index나 layer 변경
+        ChangeToDisable();
     }
+
 }

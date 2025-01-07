@@ -3239,46 +3239,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialougeData:
-    dialogues:
-    - dialogueID: 0
+    dialogueSet:
+    - questID: 0
+      dialogueID: 0
       speakerName: "\uC5B4\uB9B0 \uC18C\uB140"
-      storyLines:
-      - "\uC6B0\uC5D0\uC5D0\uC5D0\uC5E5... "
-      - "\uACE0\uC591\uC774.. \uACE0\uC591\uC774.."
-      - "\uC800\uAE30\uC694.. \uB3C4\uC640\uC8FC\uC138\uC694.."
-      choiceLines:
-      - nextDialogueID: 1
-        choiceTexts:
-        - "\uBB34\uC2A8 \uC77C\uC774\uB2C8?"
-        continueDialouge: 1
-      - nextDialogueID: 0
-        choiceTexts:
-        - "(\uC790\uB9AC\uB97C \uD53C\uD55C\uB2E4.)"
-        continueDialouge: 0
-    - dialogueID: 1
-      speakerName: "\uC5B4\uB9B0 \uC18C\uB140"
-      storyLines:
-      - "\uC81C \uACE0\uC591\uC774\uAC00 \uB192\uC740 \uACF3\uC73C\uB85C \uC62C\uB77C\uAC00\uBC84\uB838\uC5B4\uC694."
-      - "\uACE0\uC591\uC774\uB97C \uB370\uB824\uB2E4\uC8FC\uC138\uC694.."
-      choiceLines:
-      - nextDialogueID: 2
-        choiceTexts:
-        - $Q0
-        - "\uC751 \uB0B4\uAC00 \uB3C4\uC640\uC904\uAC8C \uAE30\uB2E4\uB9AC\uB834."
-        continueDialouge: 0
-      - nextDialogueID: 0
-        choiceTexts:
-        - "\uBC14\uBE60\uC11C \uBABB\uB3C4\uC640\uC904\uAC70 \uAC19\uC544. \uBBF8\uC548."
-        continueDialouge: 0
-    - dialogueID: 2
-      speakerName: "\uC5B4\uB9B0 \uC18C\uB140"
-      storyLines:
-      - "\uB0B4 \uACE0\uC591\uC774...!"
-      - "\uB3C4\uC640\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-      - $A0
-      - $E
-      choiceLines: []
-  dialogueName: GirlDialogue
+      dialogueContentSet:
+      - dialogueIndex: 0
+        storyLines:
+        - "\uC6B0\uC5D0\uC5D0\uC5D0\uC5E5...."
+        - "\uACE0\uC591\uC774...\uACE0\uC591\uC774.."
+        - "\uC800\uAE30\uC694.. \uB3C4\uC640\uC8FC\uC138\uC694.."
+        choiceLines:
+        - continueDialouge: 1
+          nextDialogueID: 1
+          choiceTexts:
+          - "\uBB34\uC2A8 \uC77C\uC774\uB2C8?"
+        - continueDialouge: 0
+          nextDialogueID: 0
+          choiceTexts:
+          - "(\uBABB\uBCF8 \uCC99 \uD55C\uB2E4.)"
+      - dialogueIndex: 1
+        storyLines:
+        - "\uC81C \uACE0\uC591\uC774\uAC00 \uC9C0\uBD95\uC5D0\uC11C \uBABB\uB0B4\uB824\uC624\uACE0
+          \uC788\uC5B4\uC694.."
+        - "\uACE0\uC591\uC774\uB97C \uAD6C\uD574\uC8FC\uC138\uC694..!"
+        choiceLines:
+        - continueDialouge: 1
+          nextDialogueID: 2
+          choiceTexts:
+          - $Q0
+          - "\uC751 \uB0B4\uAC00 \uB3C4\uC640\uC904\uAC8C \uAE30\uB2E4\uB9AC\uB834."
+        - continueDialouge: 0
+          nextDialogueID: 0
+          choiceTexts:
+          - "\uB0B4\uAC00 \uC9C0\uAE08 \uBC14\uBE60\uC11C.. \uB2E4\uB978 \uC0AC\uB78C\uC5D0\uAC8C
+            \uBD80\uD0C1\uD558\uB834."
+      - dialogueIndex: 2
+        storyLines:
+        - "\uAC10\uC0AC\uD569\uB2C8\uB2E4!! "
+        - "\uACE0\uC591\uC774\uB294 \uC624\uB978\uCABD \uC9C0\uBD95\uC73C\uB85C \uC62C\uB77C\uAC14\uC5B4\uC694!"
+        choiceLines: []
+      - dialogueIndex: 3
+        storyLines:
+        - "\uACE0\uC591\uC774\uB294 \uC624\uB978\uCABD \uC9C0\uBD95 \uC704\uC5D0
+          \uC788\uC744\uAC70\uC608\uC694..!"
+        choiceLines: []
+      - dialogueIndex: 4
+        storyLines:
+        - "\uB0B4 \uACE0\uC591\uC774...!\""
+        - "\uB3C4\uC640\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
+        - $A0
+        choiceLines: []
+  dialogueName: YoungGirl
 --- !u!1 &956414217
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,12 +5,12 @@ using System.Collections.Generic;
 public class DialogueReader
 {
     #region Load
-    public DialogueData LoadDialogueData(string _name)
+    public DialogueDataSet LoadDialogueData(string _name)
     {
         string path = "Dialogues/" + _name + "Dialogue";
         string texts = SharedMgr.ResourceMgr.LoadResource<TextAsset>(path).text;
-        DialogueData data = new DialogueData();
-        data = JsonUtility.FromJson<DialogueData>(texts);
+        DialogueDataSet data = new DialogueDataSet();
+        data = JsonUtility.FromJson<DialogueDataSet>(texts);
         return (data == null) ? null : data;
     }
 
@@ -19,13 +19,13 @@ public class DialogueReader
         List<Dialogue> dialogues = new List<Dialogue>();
         string path = Application.dataPath + "/Dialogues/" + _name;
         string texts = SharedMgr.ResourceMgr.LoadResource<TextAsset>(path).text;
-        DialogueData data = new DialogueData();
-        data = JsonUtility.FromJson<DialogueData>(texts);
+        DialogueDataSet data = new DialogueDataSet();
+        data = JsonUtility.FromJson<DialogueDataSet>(texts);
         if (data == null) return null;
-        int dataCnt = data.dialogues.Count;
+        int dataCnt = data.dialogueSet.Count;
         for (int i = 0; i < dataCnt; i++)
         {
-            dialogues.Add(data.dialogues[i]);
+            dialogues.Add(data.dialogueSet[i]);
         }
         return dialogues;
     }
@@ -35,13 +35,13 @@ public class DialogueReader
         Dictionary<int, Dialogue> dialogueGroup = new Dictionary<int, Dialogue>();
         string path = Application.dataPath + "/Dialogues/" + _name;
         string texts = SharedMgr.ResourceMgr.LoadResource<TextAsset>(path).text;
-        DialogueData data = new DialogueData();
-        data = JsonUtility.FromJson<DialogueData>(texts);
+        DialogueDataSet data = new DialogueDataSet();
+        data = JsonUtility.FromJson<DialogueDataSet>(texts);
         if (data == null) return null;
-        int dataCnt = data.dialogues.Count;
+        int dataCnt = data.dialogueSet.Count;
         for (int i = 0; i < dataCnt; i++)
         {
-            dialogueGroup.Add(data.dialogues[i].dialogueID, data.dialogues[i]);
+            dialogueGroup.Add(data.dialogueSet[i].dialogueID, data.dialogueSet[i]);
         }
         return dialogueGroup;
     }
@@ -136,12 +136,3 @@ public class DialogueReader
     }
     #endregion
 }
-
-
-/*
-대화를 선택해야 퀘스트를 주는 방식
-=> 선택지에서 구현
-대화만 하면 퀘스트를 주는 방식
- 
- 
- */

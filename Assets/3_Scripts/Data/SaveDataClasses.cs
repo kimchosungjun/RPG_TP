@@ -17,7 +17,7 @@ namespace SaveDataGroup
     {
         public int dialogueIndex;
         public int currentQuestIndex = -1;
-        public List<int> clearQuestIDSet;
+        public List<int> clearDialogues;
     }
 }
 

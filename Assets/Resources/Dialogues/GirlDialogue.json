@@ -1,1 +1,44 @@
-{"dialogues":[{"dialogueID":0,"speakerName":"어린 소녀","storyLines":["우에에에엥... ","고양이.. 고양이..","저기요.. 도와주세요.."],"choiceLines":[{"nextDialogueID":1,"choiceTexts":["무슨 일이니?"],"continueDialouge":true},{"nextDialogueID":0,"choiceTexts":["(자리를 피한다.)"],"continueDialouge":false}]},{"dialogueID":1,"speakerName":"어린 소녀","storyLines":["제 고양이가 높은 곳으로 올라가버렸어요.","고양이를 데려다주세요.."],"choiceLines":[{"nextDialogueID":2,"choiceTexts":["$Q0","응 내가 도와줄게 기다리렴."],"continueDialouge":false},{"nextDialogueID":0,"choiceTexts":["바빠서 못도와줄거 같아. 미안."],"continueDialouge":false}]},{"dialogueID":2,"speakerName":"어린 소녀","storyLines":["내 고양이...!","도와주셔서 감사합니다!","$A0","$E"],"choiceLines":[]}]}
+{
+  "dialogues": [
+    {
+      "dialogueID": 0,
+      "speakerName": "어린 소녀",
+      "storyLines": [ "우에에에엥... ", "고양이.. 고양이..", "저기요.. 도와주세요.." ],
+      "choiceLines": [
+        {
+          "nextDialogueID": 1,
+          "choiceTexts": [ "무슨 일이니?" ],
+          "continueDialouge": true
+        },
+        {
+          "nextDialogueID": 0,
+          "choiceTexts": [ "(자리를 피한다.)" ],
+          "continueDialouge": false
+        }
+      ]
+    },
+    {
+      "dialogueID": 1,
+      "speakerName": "어린 소녀",
+      "storyLines": [ "제 고양이가 높은 곳으로 올라가버렸어요.", "고양이를 데려다주세요.." ],
+      "choiceLines": [
+        {
+          "nextDialogueID": 2,
+          "choiceTexts": [ "$Q0", "응 내가 도와줄게 기다리렴." ],
+          "continueDialouge": false
+        },
+        {
+          "nextDialogueID": 0,
+          "choiceTexts": [ "바빠서 못도와줄거 같아. 미안." ],
+          "continueDialouge": false
+        }
+      ]
+    },
+    {
+      "dialogueID": 2,
+      "speakerName": "어린 소녀",
+      "storyLines": [ "내 고양이...!", "도와주셔서 감사합니다!", "$A0", "$E" ],
+      "choiceLines": []
+    }
+  ]
+}

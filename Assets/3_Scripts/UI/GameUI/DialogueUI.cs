@@ -18,7 +18,8 @@ public class DialogueUI : MonoBehaviour
     #endregion
 
     #region Dialogue Data
-    int currentDialogueIndex = 0;
+    int curContentIndex = 0;
+    int curStoryLineIndex = 0;
     bool haveEvent = false;
     Dialogue dialogue = null;
     bool isChoiceActive = false;
@@ -44,16 +45,20 @@ public class DialogueUI : MonoBehaviour
     public void StartConversation(Dialogue _dialogue, bool _isContinueConversation = false)
     {
         if (_dialogue == null) return;
-        
         ActiveUI();
-
         dialogueTexts[0].text = _dialogue.speakerName;
-        if (_dialogue.storyLines.Count == 0)
-            ShowChoiceDialogue(_dialogue.choiceLines);
+        dialogue = _dialogue;
+        SetConversation();
+    }
+
+    public void SetConversation(int _curContentIndex = 0)
+    {
+        if (dialogue.dialogueContentSet[curContentIndex].choiceLines.Count == 0)
+            ShowChoiceDialogue(dialogue.dialogueContentSet[curContentIndex].choiceLines);
         else
         {
-            currentDialogueIndex = 0;
-            dialogue = _dialogue;
+            curContentIndex = _curContentIndex;
+            curStoryLineIndex = 0;
             ShowDialogue();
         }
     }
@@ -67,15 +72,15 @@ public class DialogueUI : MonoBehaviour
     
     public void ShowDialogue()
     {
-        if(currentDialogueIndex >= dialogue.storyLines.Count)
+        if(curStoryLineIndex >= dialogue.dialogueContentSet[curContentIndex].storyLines.Count)
         {
-            ShowChoiceDialogue(dialogue.choiceLines);
+            ShowChoiceDialogue(dialogue.dialogueContentSet[curContentIndex].choiceLines);
             return;
         }
-        string text  = SharedMgr.InteractionMgr.GetDialogueReader.ReadText(dialogue.storyLines[currentDialogueIndex], out haveEvent);
+        string text  = SharedMgr.InteractionMgr.GetDialogueReader.ReadText(dialogue.dialogueContentSet[curContentIndex].storyLines[curStoryLineIndex], out haveEvent);
         if (haveEvent)
         {
-            currentDialogueIndex += 1;
+            curStoryLineIndex += 1;
             ShowDialogue();
         }
         else
@@ -115,7 +120,7 @@ public class DialogueUI : MonoBehaviour
             yield return new WaitForSeconds(typeSpeed);
         }
         isTypeText = false;
-        currentDialogueIndex += 1;
+        curStoryLineIndex += 1;
         if (isAuto)
         {
             yield return new WaitForSeconds(delayNextDialougeSpeed);
@@ -134,12 +139,13 @@ public class DialogueUI : MonoBehaviour
     #endregion
 
     #region Maintain Conversation
-    public void ContinueConversation(Dialogue _dialogue)
+    public void ContinueConversation(int _nextDialogueIndex)
     {
         ClearDialogueTexts();
         CloseAllChoiceSlots();
+        curContentIndex = _nextDialogueIndex;
         isChoiceActive = false;
-        StartConversation(_dialogue);
+        SetConversation(curContentIndex);
     }
     public void ClearDialogueTexts()
     {
