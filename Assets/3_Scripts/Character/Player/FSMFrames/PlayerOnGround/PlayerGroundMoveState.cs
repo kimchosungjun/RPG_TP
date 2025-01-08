@@ -72,9 +72,9 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
         // 대쉬 입력
         if (Input.GetMouseButtonDown(1) && characterControl.IsOnGround &&
-            !characterControl.IsOnMaxAngleSlope && SharedMgr.EnvironmentMgr.GetPlayerCtrl.CanDash())
+            !characterControl.IsOnMaxAngleSlope && SharedMgr.GameCtrlMgr.GetPlayerCtrl.CanDash())
         {
-            SharedMgr.EnvironmentMgr.GetPlayerCtrl.DoDash();
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.DoDash();
             characterControl.ChangeState(STATES.DASH);
             return;
         }

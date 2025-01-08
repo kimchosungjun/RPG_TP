@@ -6,6 +6,7 @@ using UnityEngine;
 public class InteractionNPC : Interactable
 {
     [SerializeField] int dialogueIndex;
+    public int GetDialogueIndex { get { return dialogueIndex; } }
     NPCSaveData saveData = null;
     QuestSOData currentQuestData = null;
 
@@ -36,7 +37,7 @@ public class InteractionNPC : Interactable
 
     public override void Interact()
     {
-        SharedMgr.InteractionMgr.StartConversation(dialogueIndex);
+        SharedMgr.InteractionMgr.StartConversation(this);
         SharedMgr.InteractionMgr.RemoveInteractable(this);
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);

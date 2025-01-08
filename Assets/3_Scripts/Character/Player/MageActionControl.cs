@@ -107,7 +107,7 @@ buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffA
 
     public void DoAnnounceDeathState()
     {
-        SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
     }
 
     public void MeteorSpell()

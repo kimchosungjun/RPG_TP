@@ -14,7 +14,7 @@ public class ExpAward : IQuestAwards
 
     public void GetAward()
     {
-        SharedMgr.EnvironmentMgr.GetPlayerCtrl.
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.
             GetComponent<PartyConditionControl>()?.GetExp(awardAmount);
     }
 }

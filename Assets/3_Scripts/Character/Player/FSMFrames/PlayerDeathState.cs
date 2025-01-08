@@ -10,11 +10,11 @@ public class PlayerDeathState : PlayerState
     {
         // no longer interact any actions : attack, buff .. ect
         anim.SetInteger("States", (int)PlayerEnums.STATES.DEATH);
-        SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.SetNoneInteractionType();
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.SetNoneInteractionType();
     }
 
     public override void Exit()
     {
-        SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.SetCharacterType();
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.SetCharacterType();
     }
 }

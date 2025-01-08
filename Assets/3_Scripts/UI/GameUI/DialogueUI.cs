@@ -137,6 +137,8 @@ public class DialogueUI : MonoBehaviour
         string text = string.Empty;
         for(int i=0; i<_textCnt; i++)
         {
+            if (_textCnt - i <= 1)
+                isTypeText = false;
             text+= _text[i];
             dialogueTexts[1].text = text;
             yield return typeSecond;
@@ -163,7 +165,8 @@ public class DialogueUI : MonoBehaviour
     {
         if (isTypeText)
             StopAllCoroutines();
-
+        else
+            return;
         dialogueTexts[1].text = currentText;
         isTypeText = false;
         isWaitingInput = true;

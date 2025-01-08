@@ -39,16 +39,17 @@ public partial class InteractionMgr
 
     #region Conversation
 
-    public void StartConversation(int _id)
+    public void StartConversation(InteractionNPC _npc)
     {
         if (isConversation) 
             return;
-        Dialogue data = GetDialouge(_id);
+        Dialogue data = GetDialouge(_npc.GetDialogueIndex);
         if (data == null)
             return;
         isConversation = true;
+        currentInteractNpc = _npc;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.StartConversation(data);
-
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetTalkCamerView(currentInteractNpc.transform);
         // To Do ~~~
         // Camera
         // InActive UI

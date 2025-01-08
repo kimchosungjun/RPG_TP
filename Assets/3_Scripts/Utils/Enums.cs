@@ -213,10 +213,11 @@ namespace ItemEnums
 
 #region ITEM
 
-public enum E_CAMERAVIEW
+public enum CAMERAVIEW
 {
-    CAMERA_QUATERVIEW = 0,
-    CAMERA_CLOSEUP = 1,
+    QUATERVIEW = 0,
+    TALK =1,
+    NONE=2,
 }
 
 

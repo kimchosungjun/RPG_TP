@@ -10,7 +10,6 @@ public class PlayerCtrl : MonoBehaviour
     /**********************************************/
 
     #region Value
-    [Header("카메라 컨트롤러 : 필수 연결 요소"),SerializeField] CameraController cameraCtrl;
     [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
     [Header("파티 버프 관리"), SerializeField] PartyConditionControl partyConditionControl;
     bool canChangePlayer = true; // when start : must init
@@ -29,14 +28,14 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Start() 
     {
-       SetPartyData(players);
+        SetPartyData(players);
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[currentPlayer].GetPlayerMovementControl.GetBodyTransform);
     }
 
     private void Update()
     {
         players[currentPlayer].Execute();
         InputChangeKey();
-
     }
 
     private void FixedUpdate() 
@@ -71,7 +70,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (players[i].IsAlive)
             {
-                cameraCtrl.QuaterViewChangeTarget(players[i].GetPlayerMovementControl.GetBodyTransform);
+                SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[i].GetPlayerMovementControl.GetBodyTransform);
                 ChangePlayer(i, false);
             }
         }
@@ -104,7 +103,7 @@ public class PlayerCtrl : MonoBehaviour
 
         players[currentPlayer].InitState();
         players[currentPlayer].gameObject.SetActive(false);
-        cameraCtrl.QuaterViewChangeTarget(players[_index].GetPlayerMovementControl.GetBodyTransform);
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[_index].GetPlayerMovementControl.GetBodyTransform);
         players[_index].SetTransform(players[currentPlayer].transform.position, players[currentPlayer].transform.rotation, 
             players[currentPlayer].GetPlayerMovementControl.GetRigid.velocity);
         players[_index].gameObject.SetActive(true);
@@ -140,8 +139,8 @@ public class PlayerCtrl : MonoBehaviour
             _party[i].Setup();
             if (currentPlayer == i)
             {
-                cameraCtrl.QuaterViewChangeTarget(_party[i].GetPlayerMovementControl.GetBodyTransform);
                 _party[i].gameObject.SetActive(true);
+                SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(_party[i].GetPlayerMovementControl.GetBodyTransform);
                 partyConditionControl.SetPlayerStat(_party[i].GetPlayerStatControl.PlayerStat);
             }
             else

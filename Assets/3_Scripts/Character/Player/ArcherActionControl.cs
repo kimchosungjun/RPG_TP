@@ -74,7 +74,7 @@ public class ArcherActionControl : PlayerActionControl
 
     public void DoAnnounceDeathState()
     {
-        SharedMgr.EnvironmentMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.AnnounceDeath();
     }
     #endregion
 

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+public class CameraShakeView : MonoBehaviour
 {
+    #region Shake Value
     bool isCameraShake = false;
     Transform shakeTransform;
 
@@ -34,13 +35,12 @@ public class MainCamera : MonoBehaviour
     //float FovY = 0.2f;
     float Left = 1.0f;
     float Right = -1.0f;
+    #endregion
 
-    #region Life Cycle
-    private void Awake()
+    #region Set Data
+    public void Setup()
     {
-        SharedMgr.MainCamera = this;
         originalPosition = transform.position;
-
         InitShake();
     }
 
@@ -56,6 +56,9 @@ public class MainCamera : MonoBehaviour
         isCameraShake = false;
         CameraLimit();
     }
+    #endregion
+
+    #region Shake Function
 
     private void CameraLimit(bool _isOriginalPositionY = false)
     {
@@ -181,6 +184,7 @@ public class MainCamera : MonoBehaviour
         }
 
         ResetShakeTransform();
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.ResetMoveLockView();
         yield break;
     }
     #endregion

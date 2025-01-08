@@ -6,7 +6,6 @@ public class TestPlayerStatLoader : MonoBehaviour
 {
     TableMgr tableMgr;
     [SerializeField] GameObject playerObjeet;
-    [SerializeField] CameraController cameraController;
     [SerializeField] Transform gos;
     private void Start()
     {
@@ -21,7 +20,6 @@ public class TestPlayerStatLoader : MonoBehaviour
             if(playerObjeet.activeSelf == false)
             {
                 playerObjeet.SetActive(true);
-                cameraController.ChangeState();
             }
         }
     }
