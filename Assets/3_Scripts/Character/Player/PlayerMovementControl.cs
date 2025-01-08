@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using PlayerEnums;
+
 public abstract class PlayerMovementControl : MonoBehaviour
 {
     /******************************************/
@@ -415,6 +416,34 @@ public abstract class PlayerMovementControl : MonoBehaviour
             HitEffectTime = _maintainTime;
             ChangeState(STATES.HIT);
         }
+    }
+
+    public void StartConversation(Vector3 _targetPosition)
+    {
+        ChangeState(STATES.INTERACTION);
+        StartCoroutine(CRotate(_targetPosition));
+    }
+
+    IEnumerator CRotate(Vector3 _targetPosition)
+    {
+        float time = 0f;
+        Vector3 direction = _targetPosition - transform.position;
+        direction.y = 0;
+        Quaternion startRotate = transform.rotation;
+        Quaternion endRotate = Quaternion.LookRotation(direction);
+        while (time < 1f)
+        {
+            time += Time.fixedDeltaTime;
+            transform.rotation = Quaternion.Slerp(startRotate, endRotate, time / 1f);
+            yield return new WaitForFixedUpdate();
+        }
+        transform.rotation = endRotate;
+     }
+
+    public void EndConversation()
+    {
+        moveRotation = transform.rotation;
+        ChangeState(STATES.MOVEMENT);
     }
     #endregion
 

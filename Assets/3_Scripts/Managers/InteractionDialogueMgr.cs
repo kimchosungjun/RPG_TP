@@ -50,10 +50,10 @@ public partial class InteractionMgr
         currentInteractNpc = _npc;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.StartConversation(data);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetTalkCamerView(currentInteractNpc.transform);
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.StartConversation(currentInteractNpc.transform.position);
+        
         // To Do ~~~
-        // Camera
         // InActive UI
-        // None Control Player
     }
 
     public void ContinueConversation(int _nextDialogueIndex)
@@ -66,13 +66,13 @@ public partial class InteractionMgr
         isConversation = false;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.EndConversation();
         currentInteractNpc = null;
-
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.ReSetTalkCameraView();
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.EndConversation();
+        
         // To Do ~~~
         // Reverse
         //=========
-        // Camera
         // InActive UI
-        // None Control Player
     }
 
     #endregion

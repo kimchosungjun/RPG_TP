@@ -30,7 +30,7 @@ public class CombatMonster : StandardMonster
         monsterStat.SetMonsterStat(statTableData ,monsterLevel);
         monsterStatControl.MonsterStat = monsterStat;
         monsterStatControl.SetStatusUI(statusUI);
-        statusUI.Setup(this.transform, monsterStat);
+        //statusUI.Setup(this.transform, monsterStat);
         base.Start();
     }
     #endregion

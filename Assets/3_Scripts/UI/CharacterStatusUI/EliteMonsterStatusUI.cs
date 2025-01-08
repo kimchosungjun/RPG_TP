@@ -33,15 +33,15 @@ public class EliteMonsterStatusUI : StatusUI
 
     }
 
-    public override void FixedExecute()
-    {
+    //public override void FixedExecute()
+    //{
 
-    }
+    //}
 
-    public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
     #endregion
 }

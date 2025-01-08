@@ -105,13 +105,12 @@ public class BasePlayer : BaseActor
 
     public virtual void Setup()
     {
-        playerStatusUI.Setup(playerStat);
+        playerStatusUI.UpdateData(playerStat);
         playerMovementControl.Setup();
     }
 
     public virtual void Execute()
     {
-        playerStatusUI.FixedExecute();
         playerStatControl.FixedExecute();
         playerMovementControl.Execute();
     }

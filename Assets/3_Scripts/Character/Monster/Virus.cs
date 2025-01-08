@@ -116,7 +116,7 @@ public partial class Virus : CombatMonster
     {
         if (isDeathState) return;
         //virusRoot.Evaluate();
-        statusUI.FixedExecute();
+       // statusUI.FixedExecute();
     }
     #endregion
 

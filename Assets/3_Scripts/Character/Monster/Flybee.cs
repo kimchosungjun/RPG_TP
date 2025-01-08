@@ -38,7 +38,7 @@ public class Flybee : PatrolMonster
     {
         if (isDeathState) return;
         //flybeeRoot.Evaluate();
-        statusUI.FixedExecute();
+        //statusUI.FixedExecute();
     }
 
     public NODESTATES DoCheckHitState()

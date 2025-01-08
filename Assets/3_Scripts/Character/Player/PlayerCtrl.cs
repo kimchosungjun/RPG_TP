@@ -10,6 +10,9 @@ public class PlayerCtrl : MonoBehaviour
     /**********************************************/
 
     #region Value
+    [SerializeField] bool isLockPlayerControl = false;
+    public bool SetIsLockPlayerContro { set { isLockPlayerControl = value; } }
+
     [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
     [Header("파티 버프 관리"), SerializeField] PartyConditionControl partyConditionControl;
     bool canChangePlayer = true; // when start : must init
@@ -34,12 +37,14 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Update()
     {
+        if (isLockPlayerControl) return;
         players[currentPlayer].Execute();
         InputChangeKey();
     }
 
     private void FixedUpdate() 
     {
+        if (isLockPlayerControl) return;
         players[currentPlayer].FixedExecute(); 
         partyConditionControl.FixedExecute();
     }
@@ -221,6 +226,15 @@ public class PlayerCtrl : MonoBehaviour
 
     #endregion
 
+    /**********************************************/
+    /*************** 대화 설정 ******************/
+    /**********************************************/
+
+    #region Conversation Control
+    public void StartConversation(Vector3 _targetPosition) { players[currentPlayer].GetPlayerMovementControl.StartConversation(_targetPosition); }
+    public void EndConversation() { players[currentPlayer].GetPlayerMovementControl.EndConversation(); }
+
+    #endregion
 
     /**********************************************/
     /*************** 파티 변경 ******************/

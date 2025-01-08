@@ -89,9 +89,9 @@ public abstract class ActorStatControl : MonoBehaviour
 
     #region Virtual Stat Control Method : Relate Entity Alive State
     public virtual void Death() { }
-    public virtual void TakeDamage(TransferAttackData _attackData) { statusUI.AnnounceChangeStat(); }
-    public virtual void Heal(float _heal, bool _isPercent = false) { statusUI.AnnounceChangeStat(); }
-    public virtual void Recovery(float _percent = 10f, float _time = 0.2f) { statusUI.AnnounceChangeStat(); }
+    public virtual void TakeDamage(TransferAttackData _attackData) {  }
+    public virtual void Heal(float _heal, bool _isPercent = false) { /*statusUI.AnnounceChangeStat(); */}
+    public virtual void Recovery(float _percent = 10f, float _time = 0.2f) {  }
     #endregion
 
     

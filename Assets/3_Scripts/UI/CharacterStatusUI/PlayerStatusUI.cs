@@ -1,84 +1,179 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UIEnums;
+using System.Collections;
 
-public class PlayerStatusUI : StatusUI
+public class PlayerStatusUI : StatusUI, ICommonSetUI
 {
     /******************************************/
     /*****************  변수  *****************/
     /******************************************/
 
     #region Variable
-    [SerializeField] Text hpText;
-    [SerializeField] Image expImage;
-    float expTarget = 0f;
-    float maxExp = 0f;
+    [SerializeField, Header("HP Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] hpImages;
+    [SerializeField, Header("Exp Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] expImages;
+
+
+    float hpTarget = -1;
+    float expTarget = -1;
+    PlayerStat stat = null;
+    float maxExp = -1f;
     #endregion
 
-
     /******************************************/
-    /******* 라이프 사이클 재정의 *********/
+    /**************  Interface  ***************/
     /******************************************/
 
-    #region Override Life Cycle
+    #region Interface Method
+    bool isActive = true;
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
+    public void Active()
+    {
+        isActive = true;
+        statusCanvasObject.SetActive(true);
+    }
+
+    public void InActive()
+    {
+        isActive = false;
+        statusCanvasObject.SetActive(false);
+    }
+
+    public void SetImages()
+    {
+        ResourceMgr resource = SharedMgr.ResourceMgr;
+        hpImages[0].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Bar");
+        hpImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Line");
+        hpImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Line");
+
+        expImages[0].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Bar");
+        expImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
+        expImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
+    }
+    #endregion
+
+    /****************************/
+    /******* Set Data**********/
+    /****************************/
+
+    #region Set Data & Link UI 
     public override void Init()
     {
         if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
+        SetImages();
     }
 
     public void Setup(PlayerStat _playerStat)
     {
+        if (isActive == false)
+            return;
+        //set hp
+        stat = _playerStat;
         float currentHP = _playerStat.GetSaveStat.currentHP;
         float maxHp = _playerStat.MaxHP;
-        hpImage.fillAmount = currentHP/maxHp;
-        effectImage.fillAmount = hpImage.fillAmount;
-        hpText.text = (int)currentHP + "/" + (int)maxHp;
+        hpImages[1].fillAmount = currentHP/maxHp;
+        hpImages[2].fillAmount = hpImages[1].fillAmount;
+        hpText.text = _playerStat.GetSaveStat.currentHP + "/" + _playerStat.MaxHP;
         levelText.text = "Lv."+_playerStat.GetSaveStat.currentLevel;
-
-        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[_playerStat.GetSaveStat.currentLevel - 1];
-        if(maxExp < 0f)
-        {
-            // 최대레벨에 도달했음
-            expImage.fillAmount = 1f;
-        }
-        else
-        {
-            expTarget = _playerStat.GetSaveStat.currentExp;
-            expImage.fillAmount = expTarget / maxExp;
-        }
-         
-        if (statusCanvasObject.activeSelf == false) statusCanvasObject.SetActive(true);
     }
 
     public void UpdateData(PlayerStat _playerStat)
     {
+        if (isActive == false)
+            return;
+        // update bool init
+        updateExp = false;
+        updateHp = false;
+        //set hp
+        stat = _playerStat;
         float currentHP = _playerStat.GetSaveStat.currentHP;
         float maxHp = _playerStat.MaxHP;
         if (currentHP <= 0) currentHP = 0;
-        hpImage.fillAmount = currentHP / maxHp;
+        hpImages[1].fillAmount = currentHP / maxHp;
+        hpImages[2].fillAmount = hpImages[1].fillAmount;
+        // set exp
+        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[_playerStat.GetSaveStat.currentLevel - 1];
+        if (maxExp < 0f)
+            expImages[1].fillAmount = 1f;
+        else
+        {
+            expImages[1].fillAmount = _playerStat.GetSaveStat.currentExp / maxExp;
+            expImages[2].fillAmount = expImages[1].fillAmount;
+        }
+        // set text
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
+        // turn on
+        if (statusCanvasObject.activeSelf == false) statusCanvasObject.SetActive(true);
+    }
+    #endregion
+
+    /****************************/
+    /****** Update Data ******/
+    /****************************/
+
+    #region Update UI
+
+    bool updateHp = false;
+    public void UpdateHP()
+    {
+        hpTarget = stat.GetSaveStat.currentHP;
+        if (updateHp == false)
+        {
+            updateHp = true;    
+            StartCoroutine(CUpdateHP());
+        }
     }
 
-
-
-    public override void FixedExecute()
+    IEnumerator CUpdateHP()
     {
-        HPEffect();
-        EXPEffect();
+        hpImages[1].fillAmount = (float)stat.GetSaveStat.currentHP / stat.MaxHP;
+        while (true)
+        {
+            if (hpImages[2].fillAmount <= hpImages[1].fillAmount)
+            {
+                updateHp = false;
+                break;
+            }
+            hpImages[2].fillAmount -= Time.fixedDeltaTime/effectTime;
+            yield return new WaitForFixedUpdate();
+        }   
     }
 
-    public virtual void EXPEffect()
+    bool updateExp = false;
+    public void UpdateExp()
     {
-        if (expImage.fillAmount == expTarget) return;
-
-        if (expImage.fillAmount < expTarget) expImage.fillAmount += Time.deltaTime / effectTime;
-        else if (expImage.fillAmount > expTarget) effectImage.fillAmount = expTarget;
+        expTarget = stat.GetSaveStat.currentExp;
+        if (updateExp == false)
+        {
+            updateExp = true;
+            StartCoroutine(CUpdateExp());
+        }
     }
-
-    public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
+    IEnumerator CUpdateExp()
     {
-        throw new System.NotImplementedException();
+        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[stat.GetSaveStat.currentLevel - 1];
+        
+        if(maxExp < 0)
+        {
+            expImages[1].fillAmount = 1;
+            expImages[2].fillAmount = 1;
+            yield break;
+        }
+        while (true)
+        {
+            if (expImages[2].fillAmount <= expImages[1].fillAmount)
+            {
+                updateExp = false;
+                break;
+            }
+            expImages[2].fillAmount -= Time.fixedDeltaTime / effectTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
     #endregion
 }

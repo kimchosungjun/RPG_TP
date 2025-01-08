@@ -24,25 +24,25 @@ public class StandardMonsterStatusUI : StatusUI
         //if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
     }
 
-    public void Setup(Transform _followTransform, MonsterStat _monsterStat)
-    {
-        // Link
-        monsterStat = _monsterStat;
-        followTransform = _followTransform;
-        statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
-        camTransform = Camera.main.transform;
+    //public void Setup(Transform _followTransform, MonsterStat _monsterStat)
+    //{
+    //    // Link
+    //    monsterStat = _monsterStat;
+    //    followTransform = _followTransform;
+    //    statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
+    //    camTransform = Camera.main.transform;
         
-        // Set
-        hpImage.fillAmount = 1f;
-        effectImage.fillAmount = 1f;
-        levelText.text = "Lv." + monsterStat.Level;
-    }
+    //    // Set
+    //    hpImage.fillAmount = 1f;
+    //    effectImage.fillAmount = 1f;
+    //    levelText.text = "Lv." + monsterStat.Level;
+    //}
 
-    public override void FixedExecute()
-    {
-        UpdatePostion();
-        HPEffect();
-    }
+    //public override void FixedExecute()
+    //{
+    //    UpdatePostion();
+    //    HPEffect();
+    //}
 
     #endregion
 
@@ -58,9 +58,9 @@ public class StandardMonsterStatusUI : StatusUI
         transform.rotation = camTransform.rotation;
     }
 
-    public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
-    {
-        hpImage.fillAmount = (monsterStat.CurrentHP / monsterStat.MaxHP);
-    }
+    //public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
+    //{
+    //    hpImage.fillAmount = (monsterStat.CurrentHP / monsterStat.MaxHP);
+    //}
     #endregion
 }

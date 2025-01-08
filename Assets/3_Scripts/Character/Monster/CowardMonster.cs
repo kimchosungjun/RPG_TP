@@ -21,6 +21,6 @@ public class CowardMonster : NonCombatMonster
 
     protected virtual void Update()
     {
-        statusUIController.FixedExecute();
+      //  statusUIController.FixedExecute();
     }
 }

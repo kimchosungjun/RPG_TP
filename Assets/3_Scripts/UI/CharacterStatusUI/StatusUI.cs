@@ -11,33 +11,32 @@ public abstract class StatusUI : MonoBehaviour
     #region Link UI & Value
     [Header("Monster")]
     [SerializeField] protected GameObject statusCanvasObject;
-    [SerializeField] protected Image hpImage;
-    [SerializeField] protected Image effectImage;
+    [SerializeField] protected Text hpText;
     [SerializeField] protected Text levelText;
     protected float effectTime = 5f;
     #endregion
 
-    /******************************************/
-    /********  몬스터에 의해 호출   ********/
-    /******************************************/
+    ///******************************************/
+    ///********  몬스터에 의해 호출   ********/
+    ///******************************************/
 
-    #region Life Cycle
+    //#region Life Cycle
     public abstract void Init();
-    public abstract void FixedExecute();
-    #endregion
+    //public abstract void FixedExecute();
+    //#endregion
 
-    /******************************************/
-    /**********  캔버스 활성화   ************/
-    /******************************************/
+    ///******************************************/
+    ///**********  캔버스 활성화   ************/
+    ///******************************************/
     public void DecideActiveCanvas(bool _isActive) { statusCanvasObject.gameObject.SetActive(_isActive); }
-    public virtual void HPEffect()
-    {
-        if (hpImage.fillAmount == effectImage.fillAmount) return;
+    //public virtual void HPEffect()
+    //{
+    //    if (hpImage.fillAmount == effectImage.fillAmount) return;
 
-        if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
-        else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
-    }
-    public abstract void AnnounceChangeStat(STATUS _statusType = STATUS.HP);
+    //    if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
+    //    else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
+    //}
+    //public abstract void AnnounceChangeStat(STATUS _statusType = STATUS.HP);
 }
 
 

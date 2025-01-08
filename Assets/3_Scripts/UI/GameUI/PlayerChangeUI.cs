@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerChangeUI : MonoBehaviour
 {
     [SerializeField] Image[] changePictures;
+    [SerializeField] GameObject uiFrameParent;
 
     public void SetCoolTime(float _coolTime, UnityAction _announceCoolDown)
     {
@@ -37,5 +38,15 @@ public class PlayerChangeUI : MonoBehaviour
 
         if (_announceCoolDown != null)
             _announceCoolDown.Invoke();
+    }
+
+    public void Active()
+    {
+        uiFrameParent.SetActive(true);
+    }
+
+    public void InActive()
+    {
+        uiFrameParent.SetActive(false);
     }
 }
