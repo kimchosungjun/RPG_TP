@@ -44,6 +44,8 @@ public class GameUICtrl : MonoBehaviour
     public void UIInit()
     {
         //interactionUI?.Init();
+        playerStatusUI.Init();
+        playerChangeUI.Init();
     }
 
     private void Update()

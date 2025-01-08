@@ -17,9 +17,9 @@ public class PlayerCtrl : MonoBehaviour
     [Header("파티 버프 관리"), SerializeField] PartyConditionControl partyConditionControl;
     bool canChangePlayer = true; // when start : must init
     float changePlayerCoolTime = 1f; 
-    [SerializeField] int currentPlayer = 0; // when start : must init
-
-    public BasePlayer GetPlayer { get { return players[currentPlayer]; } }
+    [SerializeField] int currentPlayerIndex = 0; // when start : must init
+    public int GetCurrentPlayerIndex { get { return currentPlayerIndex; } }
+    public BasePlayer GetPlayer { get { return players[currentPlayerIndex]; } }
     public List<BasePlayer> GetPlayers { get { return players; } }
     #endregion
 
@@ -32,20 +32,20 @@ public class PlayerCtrl : MonoBehaviour
     private void Start() 
     {
         SetPartyData(players);
-        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[currentPlayer].GetPlayerMovementControl.GetBodyTransform);
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[currentPlayerIndex].GetPlayerMovementControl.GetBodyTransform);
     }
 
     private void Update()
     {
         if (isLockPlayerControl) return;
-        players[currentPlayer].Execute();
+        players[currentPlayerIndex].Execute();
         InputChangeKey();
     }
 
     private void FixedUpdate() 
     {
         if (isLockPlayerControl) return;
-        players[currentPlayer].FixedExecute(); 
+        players[currentPlayerIndex].FixedExecute(); 
         partyConditionControl.FixedExecute();
     }
     #endregion
@@ -85,37 +85,40 @@ public class PlayerCtrl : MonoBehaviour
         Debug.Log("모든 플레이어가 사망..");
     }
 
+    public void PressChangePlayer(int _index) { ChangePlayer(_index); }
+
     public void ChangePlayer(int _index, bool _checkCoolTime = true)
     {
         // 할당되지 않는 파티원을 불러올 순 없다.
         int partyCnt = players.Count-1;
         if (_index > partyCnt) return;
 
-        if (currentPlayer == _index) return;
+        if (currentPlayerIndex == _index) return;
 
         // 쿨타임과 죽은 상태일때는 바로 return; => UI 추가해야 함
         if (_checkCoolTime && canChangePlayer == false) return;
         if (_checkCoolTime && players[_index].IsAlive == false) return;
         if(_checkCoolTime == false)
         {
-            players[currentPlayer].InitState();
+            players[currentPlayerIndex].InitState();
         }
         else
         {
-              if (players[currentPlayer].GetCanChangeState == false)
+              if (players[currentPlayerIndex].GetCanChangeState == false)
                 return;
         }
 
-        players[currentPlayer].InitState();
-        players[currentPlayer].gameObject.SetActive(false);
+        players[currentPlayerIndex].InitState();
+        players[currentPlayerIndex].gameObject.SetActive(false);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[_index].GetPlayerMovementControl.GetBodyTransform);
-        players[_index].SetTransform(players[currentPlayer].transform.position, players[currentPlayer].transform.rotation, 
-            players[currentPlayer].GetPlayerMovementControl.GetRigid.velocity);
+        players[_index].SetTransform(players[currentPlayerIndex].transform.position, players[currentPlayerIndex].transform.rotation, 
+            players[currentPlayerIndex].GetPlayerMovementControl.GetRigid.velocity);
         players[_index].gameObject.SetActive(true);
-        currentPlayer = _index;
+        currentPlayerIndex = _index;
 
         canChangePlayer = false;
-        partyConditionControl.ChangePlayer(players[currentPlayer].PlayerStat);
+        partyConditionControl.ChangePlayer(players[currentPlayerIndex].PlayerStat);
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.ControlButtonEffect(currentPlayerIndex);
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetCoolTime(changePlayerCoolTime, CoolDown);
     }
 
@@ -134,6 +137,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             _party[i].Init();
         }
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData();
     }
 
     public void SetPartyData(List<BasePlayer> _party)
@@ -142,7 +146,7 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < cnt; i++)
         {
             _party[i].Setup();
-            if (currentPlayer == i)
+            if (currentPlayerIndex == i)
             {
                 _party[i].gameObject.SetActive(true);
                 SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(_party[i].GetPlayerMovementControl.GetBodyTransform);
@@ -231,8 +235,8 @@ public class PlayerCtrl : MonoBehaviour
     /**********************************************/
 
     #region Conversation Control
-    public void StartConversation(Vector3 _targetPosition) { players[currentPlayer].GetPlayerMovementControl.StartConversation(_targetPosition); }
-    public void EndConversation() { players[currentPlayer].GetPlayerMovementControl.EndConversation(); }
+    public void StartConversation(Vector3 _targetPosition) { players[currentPlayerIndex].GetPlayerMovementControl.StartConversation(_targetPosition); }
+    public void EndConversation() { players[currentPlayerIndex].GetPlayerMovementControl.EndConversation(); }
 
     #endregion
 
@@ -262,7 +266,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (_newParty[i].IsAlive)
             {
-                currentPlayer = i;
+                currentPlayerIndex = i;
                 InitPartyData(_newParty);
                 SetPartyData(_newParty);
                 players = _newParty;

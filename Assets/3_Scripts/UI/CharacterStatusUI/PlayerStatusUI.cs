@@ -20,42 +20,6 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     float maxExp = -1f;
     #endregion
 
-    /******************************************/
-    /**************  Interface  ***************/
-    /******************************************/
-
-    #region Interface Method
-    bool isActive = true;
-    public bool IsActive()
-    {
-        return isActive;
-    }
-
-    public void Active()
-    {
-        isActive = true;
-        statusCanvasObject.SetActive(true);
-    }
-
-    public void InActive()
-    {
-        isActive = false;
-        statusCanvasObject.SetActive(false);
-    }
-
-    public void SetImages()
-    {
-        ResourceMgr resource = SharedMgr.ResourceMgr;
-        hpImages[0].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Bar");
-        hpImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Line");
-        hpImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Line");
-
-        expImages[0].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Bar");
-        expImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
-        expImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
-    }
-    #endregion
-
     /****************************/
     /******* Set Data**********/
     /****************************/
@@ -174,6 +138,42 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
             expImages[2].fillAmount -= Time.fixedDeltaTime / effectTime;
             yield return new WaitForFixedUpdate();
         }
+    }
+    #endregion
+
+    /******************************************/
+    /**************  Interface  ***************/
+    /******************************************/
+
+    #region Interface Method
+    bool isActive = true;
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
+    public void Active()
+    {
+        isActive = true;
+        statusCanvasObject.SetActive(true);
+    }
+
+    public void InActive()
+    {
+        isActive = false;
+        statusCanvasObject.SetActive(false);
+    }
+
+    public void SetImages()
+    {
+        ResourceMgr resource = SharedMgr.ResourceMgr;
+        hpImages[0].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Bar");
+        hpImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Line");
+        hpImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "HP_Line");
+
+        expImages[0].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Bar");
+        expImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
+        expImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
     }
     #endregion
 }

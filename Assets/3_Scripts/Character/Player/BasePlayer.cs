@@ -96,8 +96,7 @@ public class BasePlayer : BaseActor
         
         playerActionControl.SetPlayerData(playerStatControl, playerMovementControl);
         playerStatusUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
-        playerStatusUI?.Init();
-
+        
         // 스크립트 연결
        
         playerMovementControl.Init(playerStat);

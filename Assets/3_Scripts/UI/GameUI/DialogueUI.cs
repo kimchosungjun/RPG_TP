@@ -99,6 +99,7 @@ public class DialogueUI : MonoBehaviour
             ShowChoiceDialogue(dialogue.dialogueContentSet[curContentIndex].choiceLines);
             return;
         }
+
         string text  = SharedMgr.InteractionMgr.GetDialogueReader.ReadText(dialogue.dialogueContentSet[curContentIndex].storyLines[curStoryLineIndex], out haveEvent);
         if (haveEvent)
         {
@@ -113,7 +114,7 @@ public class DialogueUI : MonoBehaviour
     {
         if(_choiceLines == null || _choiceLines.Count == 0)
         {
-            EndConversation();  
+            SharedMgr.InteractionMgr.EndConversation();
             return;
         }
 
@@ -177,7 +178,6 @@ public class DialogueUI : MonoBehaviour
     #region Maintain Conversation
     public void ContinueConversation(int _nextDialogueIndex)
     {
-        //ClearDialogueTexts();
         CloseAllChoiceSlots();
         curContentIndex = _nextDialogueIndex;
         isChoiceActive = false;

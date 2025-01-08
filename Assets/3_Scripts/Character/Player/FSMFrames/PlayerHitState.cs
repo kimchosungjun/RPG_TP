@@ -8,6 +8,7 @@ public class PlayerHitState : PlayerState
 
     public override void Enter()
     {
+        characterControl.GetRigid.useGravity = true;
         characterControl.CanChangePlayer = false;
         enterTime = Time.time;
         anim.applyRootMotion = true;
@@ -39,6 +40,7 @@ public class PlayerHitState : PlayerState
 
     public override void Exit()
     {
+        characterControl.GetRigid.useGravity = false;
         characterControl.CanChangePlayer = true;
         anim.applyRootMotion = false;
         anim.SetBool("IsFallDownGround", false);
