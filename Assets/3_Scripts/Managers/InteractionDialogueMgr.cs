@@ -8,6 +8,7 @@ public partial class InteractionMgr
     public InteractionNPC CurrentInteractNPC { get { return currentInteractNpc; } set { currentInteractNpc = value; } }
 
     bool isConversation = false;
+    public bool GetIsConversation { get { return isConversation; } }
 
     #region Dialogue Data Value
     Dictionary<int, Dialogue> dialogueGroup = new Dictionary<int, Dialogue>();
@@ -45,6 +46,7 @@ public partial class InteractionMgr
         Dialogue data = GetDialouge(_id);
         if (data == null)
             return;
+        isConversation = true;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.StartConversation(data);
 
         // To Do ~~~
@@ -60,6 +62,7 @@ public partial class InteractionMgr
 
     public void EndConversation()
     {
+        isConversation = false;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.EndConversation();
         currentInteractNpc = null;
 

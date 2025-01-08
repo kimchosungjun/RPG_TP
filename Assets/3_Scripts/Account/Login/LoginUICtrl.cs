@@ -12,18 +12,21 @@ public class LoginUICtrl : MonoBehaviour
 
     [Header("UI의 정보를 표기하는 View")]
     [SerializeField] LoginInputView inputView;
-    [SerializeField] LoginFadeInView fadeInView;
     [SerializeField] LoginLobbyView lobbyView;
+    [SerializeField] LoginGateView gateView;    
+    [SerializeField] LoginFadeInView fadeInView;
 
     private void Awake()
     {
         inputView.Init();
-        fadeInView.Init();
         lobbyView.Init();
-
+        gateView.Init();
+        fadeInView.Init();
         if (sceneCtrl == null) sceneCtrl = FindObjectOfType<LoginSceneCtrl>();
+        SharedMgr.UIMgr.LoginUICtrl = this;
     }
 
+    public void DoOpenGate() { gateView.OpenGate(); }
     public void DoLogin() { inputView.ActiveView(); }
     public void DoFadeIn() { fadeInView.FadeIn(); }
     public void DoLobby() { lobbyView.ActiveView(); }

@@ -86,6 +86,11 @@ public class GameUICtrl : MonoBehaviour
                 dialogueUI.InputDownKey();
             }
         }
+        
+        if(SharedMgr.InteractionMgr.GetIsConversation && Input.GetKeyDown(KeyCode.Space))
+        {
+            dialogueUI.InputNext();
+        }
 #endif
     }
 

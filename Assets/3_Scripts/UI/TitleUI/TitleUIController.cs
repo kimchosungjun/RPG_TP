@@ -18,5 +18,5 @@ public class TitleUIController : MonoBehaviour
     }
 
     public void CarryOnGameName() { titleGameNameView.FadeInfo(); }
-    public void CarryOnNextGameScene() { SharedMgr.SceneMgr.LoadScene(SCENES.LOGIN, true); }    
+    public void CarryOnNextGameScene() { SharedMgr.SceneMgr.LoadScene(SCENES.LOGIN, false); }    
 }

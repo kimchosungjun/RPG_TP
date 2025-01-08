@@ -33,7 +33,7 @@
             {
               "continueDialouge": false,
               "nextDialogueID": 0,
-              "choiceTexts": [ "내가 지금 바빠서.." ]
+              "choiceTexts": [ "내가 지금 바빠서.. 다른 사람에게 부탁하렴." ]
             }
           ]
         },

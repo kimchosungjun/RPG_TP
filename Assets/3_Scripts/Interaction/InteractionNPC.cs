@@ -12,14 +12,13 @@ public class InteractionNPC : Interactable
     #region Manage Quest Data
     public void LoadNpcData()
     {
-        SharedMgr.SaveMgr.LoadNPCSaveData(this.gameObject.name, ref saveData);
+        //SharedMgr.SaveMgr.LoadNPCSaveData(this.gameObject.name, ref saveData);
     }
 
     public void AddQuestData(int _id)
     {
         saveData.currentQuestIndex = _id;
         currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
-      
     }
 
     #endregion
@@ -27,7 +26,7 @@ public class InteractionNPC : Interactable
     public void Start()
     {
         LoadNpcData();
-        SharedMgr.InteractionMgr.LoadDialogue("Girl");
+        SharedMgr.InteractionMgr.LoadDialogue(this.gameObject.name);
      }
 
     public override string Detect()

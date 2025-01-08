@@ -38,5 +38,6 @@ public class LoginFadeInView : MonoBehaviour
         color.a = 0f;
         fadeInImage.color = color;
         fadeInImage.gameObject.SetActive(false);
+        SharedMgr.UIMgr.LoginUICtrl.DoOpenGate();
     }
 }

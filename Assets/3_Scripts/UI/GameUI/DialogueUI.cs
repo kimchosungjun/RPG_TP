@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Properties;
@@ -15,6 +16,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] ChoiceSlot[] choiceSlots;
     [SerializeField, Header("0:Name, 1:Dialogue")] Text[] dialogueTexts;
     [SerializeField] Image textDivisionImage;
+    [SerializeField] ConversationAutoButton autoButton;
     #endregion
 
     #region Dialogue Data
@@ -29,12 +31,19 @@ public class DialogueUI : MonoBehaviour
     #endregion
 
     #region Type
+    bool isWaitingInput = false;
     bool isTypeText = false;
     string currentText = string.Empty;
-    public bool SetAutoMode { set { isAuto = value; } }   
+    
     [SerializeField] bool isAuto = false;
-    [SerializeField, Header("Text Speed"), Range(0.2f, 5f)] float typeSpeed;
-    [SerializeField, Header("Delay Speed"), Range(0.2f, 1f)] float delayNextDialougeSpeed;
+    
+    float typeSpeed = 0.125f;
+    WaitForSeconds typeSecond = new WaitForSeconds(0.125f);
+    WaitForSeconds delayAutoDialogueSecond = new WaitForSeconds(1f);
+
+    public void SetLowTypeSpeed() { typeSpeed = 0.2f; typeSecond = new WaitForSeconds(typeSpeed); }
+    public void SetMidTypeSpeed() { typeSpeed = 0.125f; typeSecond = new WaitForSeconds(typeSpeed); }
+    public void SetHighTypeSpeed() { typeSpeed = 0.05f; typeSecond = new WaitForSeconds(typeSpeed); }
     #endregion
 
     /******************************************/
@@ -46,14 +55,26 @@ public class DialogueUI : MonoBehaviour
     {
         if (_dialogue == null) return;
         ActiveUI();
-        dialogueTexts[0].text = _dialogue.speakerName;
         dialogue = _dialogue;
+        if (autoButton.gameObject.activeSelf == false)
+            autoButton.gameObject.SetActive(true);
+        autoButton.OnOffEffect(isAuto);
+        dialogueTexts[0].text = dialogue.speakerName;
         SetConversation();
+    }
+
+    public void ReverseAutoButton()
+    {
+        isAuto = !isAuto;
+        autoButton.OnOffEffect(isAuto);
+
+        if (isWaitingInput && isAuto)
+            ShowDialogue();
     }
 
     public void SetConversation(int _curContentIndex = 0)
     {
-        if (dialogue.dialogueContentSet[curContentIndex].choiceLines.Count == 0)
+        if (dialogue.dialogueContentSet[curContentIndex].storyLines.Count == 0)
             ShowChoiceDialogue(dialogue.dialogueContentSet[curContentIndex].choiceLines);
         else
         {
@@ -72,7 +93,8 @@ public class DialogueUI : MonoBehaviour
     
     public void ShowDialogue()
     {
-        if(curStoryLineIndex >= dialogue.dialogueContentSet[curContentIndex].storyLines.Count)
+        isWaitingInput = false;
+        if (curStoryLineIndex >= dialogue.dialogueContentSet[curContentIndex].storyLines.Count)
         {
             ShowChoiceDialogue(dialogue.dialogueContentSet[curContentIndex].choiceLines);
             return;
@@ -117,15 +139,24 @@ public class DialogueUI : MonoBehaviour
         {
             text+= _text[i];
             dialogueTexts[1].text = text;
-            yield return new WaitForSeconds(typeSpeed);
+            yield return typeSecond;
         }
         isTypeText = false;
+        isWaitingInput = true;
         curStoryLineIndex += 1;
         if (isAuto)
         {
-            yield return new WaitForSeconds(delayNextDialougeSpeed);
+            yield return delayAutoDialogueSecond;
             ShowDialogue();
         }
+    }
+
+    public void InputNext()
+    {
+        if (isWaitingInput)
+            ShowDialogue() ;
+        else
+            SkipText();
     }
 
     public void SkipText()
@@ -135,13 +166,15 @@ public class DialogueUI : MonoBehaviour
 
         dialogueTexts[1].text = currentText;
         isTypeText = false;
+        isWaitingInput = true;
+        curStoryLineIndex += 1;
     }
     #endregion
 
     #region Maintain Conversation
     public void ContinueConversation(int _nextDialogueIndex)
     {
-        ClearDialogueTexts();
+        //ClearDialogueTexts();
         CloseAllChoiceSlots();
         curContentIndex = _nextDialogueIndex;
         isChoiceActive = false;
@@ -160,6 +193,7 @@ public class DialogueUI : MonoBehaviour
         CloseAllChoiceSlots();
         isChoiceActive = false;
         conversationUIParentObject.SetActive(false);
+        autoButton.gameObject.SetActive(false);
     }
 
     public void CloseAllChoiceSlots()
