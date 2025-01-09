@@ -95,9 +95,17 @@ public class PlayerCtrl : MonoBehaviour
 
         if (currentPlayerIndex == _index) return;
 
-        // 쿨타임과 죽은 상태일때는 바로 return; => UI 추가해야 함
-        if (_checkCoolTime && canChangePlayer == false) return;
-        if (_checkCoolTime && players[_index].IsAlive == false) return;
+        PlayerChangeUI changeUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI;
+        if (_checkCoolTime && canChangePlayer == false) 
+        {
+            changeUI.ShowWarnText(UIEnums.CHANGE.COOLDOWN);
+            return;
+        }
+        if (_checkCoolTime && players[_index].IsAlive == false)
+        {
+            changeUI.ShowWarnText(UIEnums.CHANGE.DEATH);
+            return;
+        }
         if(_checkCoolTime == false)
         {
             players[currentPlayerIndex].InitState();
@@ -105,7 +113,10 @@ public class PlayerCtrl : MonoBehaviour
         else
         {
               if (players[currentPlayerIndex].GetCanChangeState == false)
+            {
+                changeUI.ShowWarnText(UIEnums.CHANGE.CANNOTCHANGE);
                 return;
+            }
         }
 
         players[currentPlayerIndex].InitState();
@@ -117,9 +128,10 @@ public class PlayerCtrl : MonoBehaviour
         currentPlayerIndex = _index;
 
         canChangePlayer = false;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.ChangeData(players[currentPlayerIndex].PlayerStat);
         partyConditionControl.ChangePlayer(players[currentPlayerIndex].PlayerStat);
-        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.ControlButtonEffect(currentPlayerIndex);
-        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetCoolTime(changePlayerCoolTime, CoolDown);
+        changeUI.ControlButtonEffect(currentPlayerIndex);
+        changeUI.SetCoolTime(changePlayerCoolTime, CoolDown);
     }
 
     public void CoolDown() { canChangePlayer = true; }
@@ -151,6 +163,7 @@ public class PlayerCtrl : MonoBehaviour
                 _party[i].gameObject.SetActive(true);
                 SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(_party[i].GetPlayerMovementControl.GetBodyTransform);
                 partyConditionControl.SetPlayerStat(_party[i].GetPlayerStatControl.PlayerStat);
+                SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.ChangeData(_party[i].GetPlayerStatControl.PlayerStat);
             }
             else
                 _party[i].gameObject.SetActive(false); 

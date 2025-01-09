@@ -5,11 +5,14 @@ using UnityEngine.UI;
 public class InteractionSlot : MonoBehaviour
 {
     [SerializeField] Text descriptionText;
-    [SerializeField, Header("0 : F Key, 1 : Chat Icon, 2 : Direction Icon")] Image[] slotImages;
+    [SerializeField, Header("0 : F Key, 1 : Chat Icon, 2 : Direction Icon, 3:TextBox")] Image[] slotImages;
     Interactable interactable = null;
     public void SetImage()
     {
-        // Atlas
+        slotImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "FKey_Icon");
+        slotImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Interact_Icon");
+        slotImages[2].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Direction_Icon");
+        slotImages[3].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Dialogue_Bar");
     }
 
     public bool IsSameData(Interactable _interactable)

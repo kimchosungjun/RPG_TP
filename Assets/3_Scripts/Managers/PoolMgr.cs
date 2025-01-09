@@ -16,11 +16,17 @@ public class PoolMgr : MonoBehaviour
     [SerializeField] FloatDamageTextUI floatDamageOriginal;
     [SerializeField] List <FloatDamageTextUI> floatDamageTexts = new List<FloatDamageTextUI>();
 
-    [Header("Float Get Item")]
-    [SerializeField] ShowGetItemSlot[] getItemSlot;
+    ShowGetItemSlot[] showGetItemSlots = null;
     private void Awake()
     {
         SharedMgr.PoolMgr = this;
+    }
+
+    private void Start()
+    {
+        ShowGetItemUI showGetItemUI = SharedMgr.UIMgr.GameUICtrl.GetShowGetItemUI;
+        if(showGetItemUI==null) showGetItemUI = FindObjectOfType<ShowGetItemUI>();  
+        showGetItemSlots = showGetItemUI.GetSlots();
     }
 
     public Transform GetPool(OBJECTS _poolObject)
@@ -66,6 +72,7 @@ public class PoolMgr : MonoBehaviour
         return result.transform;
     }
 
+    #region UI Pool
 
     public FloatDamageTextUI GetFloatDamageText()
     {
@@ -87,14 +94,20 @@ public class PoolMgr : MonoBehaviour
 
     public ShowGetItemSlot GetItemSlot()
     {
+        if (SharedMgr.UIMgr.GameUICtrl.GetShowGetItemUI.IsActive() == false) return null; 
+
         for (int i = 0; i < 2; i++)
         {
-            if (getItemSlot[i].gameObject.activeSelf == false)
+            if (showGetItemSlots[i].gameObject.activeSelf == false)
             {
-                getItemSlot[i].transform.SetAsLastSibling();
-                return getItemSlot[i];
+                showGetItemSlots[i].transform.SetAsLastSibling();
+                return showGetItemSlots[i];
             }
         }
         return null;
     }
+
+
+
+    #endregion
 }

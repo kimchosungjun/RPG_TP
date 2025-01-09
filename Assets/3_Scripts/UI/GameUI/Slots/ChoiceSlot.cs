@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class ChoiceSlot : MonoBehaviour
 {
     [SerializeField] Text choiceText;
-    [SerializeField, Header("0 : F Key, 1 : Chat Icon, 2 : Direction Icon")] Image[] slotImages;
+    [SerializeField, Header("0 : F Key, 1 : Chat Icon, 2 : Direction Icon, 3:Choice Frame")] Image[] slotImages;
 
     int slotEventID = -1;
     public int SlotEventID { get { return slotEventID; }set { slotEventID = value; } }
@@ -55,5 +55,13 @@ public class ChoiceSlot : MonoBehaviour
     public void InActiveDirection()
     {
         slotImages[2].gameObject.SetActive(false);
+    }
+
+    public void SetImage()
+    {
+        slotImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "FKey_Icon");
+        slotImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Chat_Icon");
+        slotImages[2].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Direction_Icon");
+        slotImages[3].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Dialogue_Bar");
     }
 }

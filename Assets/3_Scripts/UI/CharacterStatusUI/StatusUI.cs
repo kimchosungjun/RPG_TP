@@ -10,10 +10,10 @@ public abstract class StatusUI : MonoBehaviour
 
     #region Link UI & Value
     [Header("Monster")]
-    [SerializeField] protected GameObject statusCanvasObject;
+    [SerializeField] protected GameObject playerStatusParentObject;
     [SerializeField] protected Text hpText;
     [SerializeField] protected Text levelText;
-    protected float effectTime = 5f;
+    protected float effectTime = 10f;
     #endregion
 
     ///******************************************/
@@ -28,7 +28,7 @@ public abstract class StatusUI : MonoBehaviour
     ///******************************************/
     ///**********  캔버스 활성화   ************/
     ///******************************************/
-    public void DecideActiveCanvas(bool _isActive) { statusCanvasObject.gameObject.SetActive(_isActive); }
+    public void DecideActiveCanvas(bool _isActive) { playerStatusParentObject.gameObject.SetActive(_isActive); }
     //public virtual void HPEffect()
     //{
     //    if (hpImage.fillAmount == effectImage.fillAmount) return;

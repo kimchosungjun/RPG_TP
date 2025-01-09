@@ -20,32 +20,18 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     float maxExp = -1f;
     #endregion
 
-    /****************************/
-    /******* Set Data**********/
-    /****************************/
+    /******************************************/
+    /***************** Set Data **************/
+    /******************************************/
 
     #region Set Data & Link UI 
     public override void Init()
     {
-        if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
+        if (playerStatusParentObject.activeSelf) playerStatusParentObject.SetActive(false);
         SetImages();
     }
 
-    public void Setup(PlayerStat _playerStat)
-    {
-        if (isActive == false)
-            return;
-        //set hp
-        stat = _playerStat;
-        float currentHP = _playerStat.GetSaveStat.currentHP;
-        float maxHp = _playerStat.MaxHP;
-        hpImages[1].fillAmount = currentHP/maxHp;
-        hpImages[2].fillAmount = hpImages[1].fillAmount;
-        hpText.text = _playerStat.GetSaveStat.currentHP + "/" + _playerStat.MaxHP;
-        levelText.text = "Lv."+_playerStat.GetSaveStat.currentLevel;
-    }
-
-    public void UpdateData(PlayerStat _playerStat)
+    public void ChangeData(PlayerStat _playerStat)
     {
         if (isActive == false)
             return;
@@ -72,20 +58,37 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
         // turn on
-        if (statusCanvasObject.activeSelf == false) statusCanvasObject.SetActive(true);
+        if (playerStatusParentObject.activeSelf == false) playerStatusParentObject.SetActive(true);
     }
     #endregion
 
-    /****************************/
-    /****** Update Data ******/
-    /****************************/
+    /******************************************/
+    /************ Update Data **************/
+    /******************************************/
 
     #region Update UI
+
+    public void UpdateData(UIEnums.STATUS _updateStatusType)
+    {
+        switch (_updateStatusType)
+        {
+            case STATUS.HP:
+                UpdateHP();
+                break;
+            case STATUS.EXP:
+                UpdateExp();
+                break;
+            case STATUS.LEVEL:
+                UpdateLevel();
+                break;
+        }
+    }
 
     bool updateHp = false;
     public void UpdateHP()
     {
         hpTarget = stat.GetSaveStat.currentHP;
+        hpText.text = hpTarget + "/" + stat.MaxHP;  
         if (updateHp == false)
         {
             updateHp = true;    
@@ -139,6 +142,10 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
             yield return new WaitForFixedUpdate();
         }
     }
+    public void UpdateLevel()
+    {
+        levelText.text = "Lv."+stat.GetSaveStat.currentLevel;
+    }
     #endregion
 
     /******************************************/
@@ -155,13 +162,13 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     public void Active()
     {
         isActive = true;
-        statusCanvasObject.SetActive(true);
+        playerStatusParentObject.SetActive(true);
     }
 
     public void InActive()
     {
         isActive = false;
-        statusCanvasObject.SetActive(false);
+        playerStatusParentObject.SetActive(false);
     }
 
     public void SetImages()

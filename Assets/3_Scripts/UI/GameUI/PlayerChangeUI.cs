@@ -4,23 +4,22 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerChangeUI : MonoBehaviour
+public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
 {
-    bool isActive = true;
+
     [SerializeField] PlayerChangeButton[] buttons;
     [SerializeField] GameObject uiFrameParent;
+    [SerializeField] ChangeWarnWindow warnWindow;
+
+    /******************************************/
+    /**************  Methods  ***************/
+    /******************************************/
 
     #region Set Button Data
     public void Init()
     {
-        int cnt = buttons.Length;   
-        for(int i=0; i<cnt; i++)
-        {
-            buttons[i].SetImage();
-            buttons[i].EmptyButton();
-        }
-
-        if(uiFrameParent.activeSelf==false)
+        SetImages();
+        if (uiFrameParent.activeSelf==false)
             uiFrameParent.SetActive(true);
     }
 
@@ -84,20 +83,14 @@ public class PlayerChangeUI : MonoBehaviour
         if (_announceCoolDown != null)
             _announceCoolDown.Invoke();
     }
-    #endregion
 
-    #region Control UI Active State
-    public void Active()
+    public void ShowWarnText(UIEnums.CHANGE _changeType) 
     {
-        isActive = true;
-        uiFrameParent.SetActive(true);
+        if (warnWindow.gameObject.activeSelf == false)
+            warnWindow.gameObject.SetActive(true);
+        warnWindow.ShowWarnText(_changeType); 
     }
 
-    public void InActive()
-    {
-        isActive = false;
-        uiFrameParent.SetActive(false);
-    }
     #endregion
 
     #region Window Ver 
@@ -112,5 +105,44 @@ public class PlayerChangeUI : MonoBehaviour
                 buttons[_index].ControlEffect(false);
         }
     }
+
+
     #endregion
+
+    /******************************************/
+    /**************  Interface  ***************/
+    /******************************************/
+
+    #region Interface
+
+    bool isActive = true;
+    public void Active()
+    {
+        isActive = true;
+        uiFrameParent.SetActive(true);
+    }
+
+    public void InActive()
+    {
+        isActive = false;
+        uiFrameParent.SetActive(false);
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
+    public void SetImages()
+    {
+        int cnt = buttons.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            buttons[i].SetImage();
+            buttons[i].EmptyButton();
+        }
+        warnWindow.SetImage();
+    }
+    #endregion
+
 }

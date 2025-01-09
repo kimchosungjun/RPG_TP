@@ -8,6 +8,7 @@ public class PlayerChangeButton : MonoBehaviour
     [SerializeField, Header("Button Image"), Tooltip("0:Circle, 1:Frame, 2:Icon, 3:Effect, 4 : Panel")] Image[] changeButtonImages;
     [SerializeField, Header("Lv Text")] Text levelText;
     [SerializeField] Button button;
+    [SerializeField] int index;
     public void SetImage()
     {
         changeButtonImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Circle_Frame");
@@ -37,4 +38,5 @@ public class PlayerChangeButton : MonoBehaviour
 
     public Image GetPanel() { return changeButtonImages[4]; }
     public void ControlEffect(bool _isActive) { changeButtonImages[3].gameObject.SetActive(_isActive); }
+    public void PressPlayerChangeButton() { SharedMgr.GameCtrlMgr.GetPlayerCtrl.PressChangePlayer(index); }
 }

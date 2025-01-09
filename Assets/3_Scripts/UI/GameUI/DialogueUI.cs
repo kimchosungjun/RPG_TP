@@ -1,11 +1,9 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Properties;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueUI : MonoBehaviour
+public class DialogueUI : MonoBehaviour, ICommonSetUI
 {
     /******************************************/
     /****************  Value  *****************/
@@ -17,6 +15,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField, Header("0:Name, 1:Dialogue")] Text[] dialogueTexts;
     [SerializeField] Image textDivisionImage;
     [SerializeField] ConversationAutoButton autoButton;
+    [SerializeField] GameObject dialogueFrame;
     #endregion
 
     #region Dialogue Data
@@ -26,8 +25,8 @@ public class DialogueUI : MonoBehaviour
     Dialogue dialogue = null;
     bool isChoiceActive = false;
     public bool GetIsChoiceActive { get { return isChoiceActive; } }
-    [SerializeField] int currentChoiceIndex = 0;
-    [SerializeField] int activeSlotCnt = 0;
+    int currentChoiceIndex = 0;
+    int activeSlotCnt = 0;
     #endregion
 
     #region Type
@@ -35,7 +34,7 @@ public class DialogueUI : MonoBehaviour
     bool isTypeText = false;
     string currentText = string.Empty;
     
-    [SerializeField] bool isAuto = false;
+    [SerializeField,Header("Auto Mode")] bool isAuto = false;
     
     float typeSpeed = 0.125f;
     WaitForSeconds typeSecond = new WaitForSeconds(0.125f);
@@ -46,9 +45,15 @@ public class DialogueUI : MonoBehaviour
     public void SetHighTypeSpeed() { typeSpeed = 0.05f; typeSecond = new WaitForSeconds(typeSpeed); }
     #endregion
 
+
     /******************************************/
     /***************  Method ****************/
     /******************************************/
+
+    public void Init()
+    {
+        SetImages();
+    }
 
     #region Show Dialogue
     public void StartConversation(Dialogue _dialogue, bool _isContinueConversation = false)
@@ -248,6 +253,41 @@ public class DialogueUI : MonoBehaviour
     public void SelectChoice()
     {
         choiceSlots[currentChoiceIndex].PressSlot();
+    }
+    #endregion
+
+    /******************************************/
+    /**************  Interface  ***************/
+    /******************************************/
+
+    #region Interface
+    bool isActive = true;
+    public bool IsActive()
+    {
+        return isActive;
+    }
+
+    public void Active()
+    {
+        isActive = true;
+        dialogueFrame.SetActive(true);
+    }
+
+    public void InActive()
+    {
+        isActive = false;
+        dialogueFrame.SetActive(false);
+    }
+
+    public void SetImages()
+    {
+        textDivisionImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Division_Top_Bar");
+        autoButton.SetImage();
+        int cnt = choiceSlots.Length;
+        for(int i=0; i<cnt; i++)
+        {
+            choiceSlots[i].SetImage();
+        }
     }
     #endregion
 }

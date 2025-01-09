@@ -139,6 +139,7 @@ MonoBehaviour:
   - {fileID: 1846041365987896811}
   levelText: {fileID: 7826232400583142979}
   button: {fileID: 3937631403434502503}
+  index: 0
 --- !u!1 &949608795671785329
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,10 +417,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerCtrl, Assembly-CSharp
-        m_MethodName: PressChangePlayer
-        m_Mode: 3
+      - m_Target: {fileID: 7389870152093017516}
+        m_TargetAssemblyTypeName: PlayerChangeButton, Assembly-CSharp
+        m_MethodName: PressPlayerChangeButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

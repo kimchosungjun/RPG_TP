@@ -7,19 +7,20 @@ using UnityEngine.UI;
 //#if UNITY_EDITOR
 //#endif
 
-public class InteractionUI : MonoBehaviour
+public class InteractionUI : MonoBehaviour, ICommonSetUI
 {
-    [SerializeField] int currentIndex = 0;
-    [SerializeField] int activeSlotCnt = 0;
+    int currentIndex = 0;
+    int activeSlotCnt = 0;
     [SerializeField] InteractionSlot[] slots;
+    [SerializeField] GameObject slotGroup;
     List<InteractionSlot> activeSlots = new List<InteractionSlot>();
-    
-    public bool IsActive()
+
+    public void Init()
     {
-        if (activeSlotCnt == 0) return false;
-        return true;
+        SetImages();
     }
 
+    #region Interact
     public void Interaction()
     {
         if (activeSlotCnt == 0) return;
@@ -28,6 +29,8 @@ public class InteractionUI : MonoBehaviour
 
     public void AddInteractable(Interactable _interactable)
     {
+        if (isActive == false) return;
+
         InteractionSlot slot = GetInActiveSlot();
         if (slot == null) return;
 #if UNITY_EDITOR
@@ -64,8 +67,16 @@ public class InteractionUI : MonoBehaviour
             }
         }
     }
+    #endregion
 
     #region Input Up & Down Key : Only Use Window Ver
+    public bool CanInput()
+    {
+        if (isActive == false) return false;
+        if (activeSlotCnt == 0) return false;
+        return true;
+    }
+
     public void InputUpKey()
     {
         if (currentIndex == 0)
@@ -99,6 +110,36 @@ public class InteractionUI : MonoBehaviour
         }
         if(activeSlotCnt >= 1)
             activeSlots[currentIndex].ActiveDirection();
+    }
+    #endregion
+
+    /******************************************/
+    /**************  Interface  ***************/
+    /******************************************/
+
+    #region Interface
+    bool isActive = true;
+    public bool IsActive() { return isActive; }
+
+    public void Active()
+    {
+        isActive = true;
+        slotGroup.SetActive(true);
+    }
+
+    public void InActive()
+    {
+        isActive = false;
+        slotGroup.SetActive(false);
+    }
+
+    public void SetImages()
+    {
+        int cnt = slots.Length;
+        for(int i=0; i<cnt; i++)
+        {
+            slots[i].SetImage();
+        }
     }
     #endregion
 }

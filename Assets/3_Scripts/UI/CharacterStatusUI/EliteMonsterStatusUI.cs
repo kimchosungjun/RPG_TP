@@ -25,7 +25,7 @@ public class EliteMonsterStatusUI : StatusUI
     #region Override Life Cycle
     public override void Init()
     {
-        if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
+        if (playerStatusParentObject.activeSelf) playerStatusParentObject.SetActive(false);
     }
 
     public void Setup(Transform _followTransform = null)

@@ -35,7 +35,7 @@ public class PlayerStatControl : ActorStatControl
         int allDamage = _attackData.GetAttackValue - playerStat.Defence;
         allDamage = (allDamage <= 0) ? 1 : allDamage;
         playerStat.GetSaveStat.currentHP -= allDamage;
-        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(playerStat);
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.HP);
         if (playerStat.GetSaveStat.currentHP <= 0) Death();
     }
     #endregion

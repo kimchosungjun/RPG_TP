@@ -104,7 +104,7 @@ public class BasePlayer : BaseActor
 
     public virtual void Setup()
     {
-        playerStatusUI.UpdateData(playerStat);
+        //playerStatusUI.UpdateData(playerStat);
         playerMovementControl.Setup();
     }
 

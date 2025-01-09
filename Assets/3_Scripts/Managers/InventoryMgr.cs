@@ -348,15 +348,14 @@ public class InventoryMgr
     {
         getItemQueue.Enqueue(_itemData);
         ShowGetItemSlot slot = SharedMgr.PoolMgr.GetItemSlot();
-        if (slot != null)
-            slot.ShowSlot(getItemQueue.Dequeue());
+        slot?.ShowSlot(getItemQueue.Dequeue());
     }
 
     public void ShowNextGetItemSlot()
     {
         if (getItemQueue.Count == 0)
             return;
-        SharedMgr.PoolMgr.GetItemSlot().ShowSlot(getItemQueue.Dequeue());
+        SharedMgr.PoolMgr.GetItemSlot()?.ShowSlot(getItemQueue.Dequeue());
     }
     #endregion
 

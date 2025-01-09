@@ -22,7 +22,7 @@ public class SubBossStatusUICtrl : EliteMonsterStatusUI
     #region Override Life Cycle
     public override void Init()
     {
-        if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
+        if (playerStatusParentObject.activeSelf) playerStatusParentObject.SetActive(false);
     }
 
     // To Do ~~~ 

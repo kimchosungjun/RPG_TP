@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 
 public class ShowGetItemSlot : MonoBehaviour
 {
+    [SerializeField] Image slotFrameImage;
     [SerializeField] Image iconImage;
     [SerializeField] Text getText;
     [SerializeField] Animator anim;
@@ -29,6 +31,7 @@ public class ShowGetItemSlot : MonoBehaviour
         yield return showTime;
         StartCoroutine(CInActive());    
     }
+
     public void InActive()
     {
         this.gameObject.SetActive(false);
@@ -41,5 +44,10 @@ public class ShowGetItemSlot : MonoBehaviour
         getText.gameObject.SetActive(false);
         anim.Play("GetSlotInActive");
         yield break;
+    }
+
+    internal void SetImages()
+    {
+        slotFrameImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Slot_Atlas","Get_Item");
     }
 }

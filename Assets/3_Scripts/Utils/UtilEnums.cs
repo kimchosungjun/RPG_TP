@@ -94,4 +94,11 @@ namespace UIEnums
         EXP,
         LEVEL
     }
+
+    public enum CHANGE
+    {
+        COOLDOWN,
+        DEATH,
+        CANNOTCHANGE,
+    }
 }
