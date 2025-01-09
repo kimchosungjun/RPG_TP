@@ -98,12 +98,10 @@ public class LoginInputView : MonoBehaviour
 
     public void ShowWarnText(string _text)
     {
-        indicateText.text = _text;  
-        if(isShowWarnText)
-        {
-            showTime = 0;
+        indicateText.text = _text;
+        showTime = 0;
+        if (isShowWarnText)
             return;
-        }
         isShowWarnText = true;
         StartCoroutine(CShowWarnText());
     }
@@ -113,6 +111,7 @@ public class LoginInputView : MonoBehaviour
         indicateText.gameObject.SetActive(true);
         while (true)
         {
+            showTime += Time.deltaTime;
             if(showTime >= 3f)
             {
                 indicateText.gameObject.SetActive(false);
