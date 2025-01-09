@@ -9,6 +9,7 @@ public class LoadingView : MonoBehaviour
     [SerializeField] Text percentText;
     [SerializeField] Slider percentSlider;
     [SerializeField, Range(0f, 0.1f)] float fillAllTimer = 0.1f;
+    [SerializeField, Tooltip("0:Frame,1:Fill")] Image[] gaugeImages;
     public void Init()
     {
         if (loadingView == null)
@@ -16,6 +17,8 @@ public class LoadingView : MonoBehaviour
             Transform[] childrenTfs = GetComponentsInChildren<Transform>();
             loadingView = childrenTfs[1].gameObject;
         }
+
+        SetImage();
 
         if (loadingView != null)
             loadingView.gameObject.SetActive(true);
@@ -41,6 +44,12 @@ public class LoadingView : MonoBehaviour
         float percent = (_percent*100);
         percentText.text = (int)percent + "%";
         percentSlider.value = percent;
+    }
+
+    public void SetImage()
+    {
+        gaugeImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Loading_Bar");
+        gaugeImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Loading_Line");
     }
 
     public void UpdateAllPercent() { StartCoroutine(CUpdateAllPercent());}

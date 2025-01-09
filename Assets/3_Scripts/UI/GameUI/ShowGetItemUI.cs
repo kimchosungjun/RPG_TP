@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShowGetItemUI : MonoBehaviour, ICommonSetUI
 {
-    bool isActive = true;
     [SerializeField] ShowGetItemSlot[] slots;
     [SerializeField] GameObject slotGroupParent;
 
@@ -32,20 +31,13 @@ public class ShowGetItemUI : MonoBehaviour, ICommonSetUI
         }
     }
 
-    public bool IsActive()
+    public void TurnOn()
     {
-        return isActive;
-    }
-
-    public void Active()
-    {
-        isActive = true;
         slotGroupParent.SetActive(true);
     }
 
-    public void InActive()
+    public void TurnOff()
     {
-        isActive = false;
         slotGroupParent.SetActive(false);
     }
     #endregion

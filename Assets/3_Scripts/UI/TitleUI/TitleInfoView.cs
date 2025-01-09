@@ -22,19 +22,19 @@ public class TitleInfoView :MonoBehaviour
         transparent_Color.a = 0f;
         infoImage.color = transparent_Color;
         infoText.color = transparent_Color;
-
-        if (infoImage.gameObject.activeSelf == false) 
-        {
-            infoImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Test", "battle");
-            infoImage.gameObject.SetActive(true);
-        }
-        if(infoText.gameObject.activeSelf==false) infoText.gameObject.SetActive(true);
     }
 
     public void FadeInfo() { StartCoroutine(CFadeInfo()); }
 
     IEnumerator CFadeInfo() 
     {
+        if (infoImage.gameObject.activeSelf == false)
+        {
+            infoImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Weapon_Icon");
+            infoImage.gameObject.SetActive(true);
+        }
+        if (infoText.gameObject.activeSelf == false) infoText.gameObject.SetActive(true);
+
         Color color = infoText.color;
         float time = 0f;
         // Fade In

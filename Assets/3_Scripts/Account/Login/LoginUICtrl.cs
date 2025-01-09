@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 public class LoginUICtrl : MonoBehaviour
 {
@@ -11,11 +7,13 @@ public class LoginUICtrl : MonoBehaviour
     [SerializeField] LoginSceneCtrl sceneCtrl;
 
     [Header("UI의 정보를 표기하는 View")]
-    [SerializeField] LoginInputView inputView;
     [SerializeField] LoginLobbyView lobbyView;
     [SerializeField] LoginGateView gateView;    
+    [SerializeField] LoginInputView inputView;
     [SerializeField] LoginFadeInView fadeInView;
 
+    public LoginInputView GetLoginInputView { get { return inputView; }  }
+    public LoginGateView GetLoginGateView { get { return gateView; } }
     private void Awake()
     {
         inputView.Init();
@@ -30,5 +28,5 @@ public class LoginUICtrl : MonoBehaviour
     public void DoLogin() { inputView.ActiveView(); }
     public void DoFadeIn() { fadeInView.FadeIn(); }
     public void DoLobby() { lobbyView.ActiveView(); }
-    public void ReturnLogin() { lobbyView.Init(); inputView.Init(); inputView.ActiveView(); }
+    public void ReturnLogin() { lobbyView.Init(); inputView.Init(); gateView.CloseDoor(); }
 }

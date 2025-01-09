@@ -20,8 +20,8 @@ public class LoadingFrameView : MonoBehaviour
 
     public void SetLoadingImage() 
     {
-        // To Do ~~ 
-        // 게임 속 플레이 이미지 삽입 예정
+        // To Do ~~
+        //loadingImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("","");
     }
 
     public void FadeIn() { StartCoroutine(CFadeIn()); }

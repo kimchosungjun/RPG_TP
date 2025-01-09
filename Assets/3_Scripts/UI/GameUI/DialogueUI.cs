@@ -267,13 +267,13 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         return isActive;
     }
 
-    public void Active()
+    public void TurnOn()
     {
         isActive = true;
         dialogueFrame.SetActive(true);
     }
 
-    public void InActive()
+    public void TurnOff()
     {
         isActive = false;
         dialogueFrame.SetActive(false);

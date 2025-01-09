@@ -14,6 +14,7 @@ public class TitleUIController : MonoBehaviour
 
     private void Start()
     {
+        if (titleGameNameView != null) titleGameNameView.Setup();
         if (titleInfoView != null) titleInfoView.FadeInfo();
     }
 

@@ -29,8 +29,6 @@ public class InteractionUI : MonoBehaviour, ICommonSetUI
 
     public void AddInteractable(Interactable _interactable)
     {
-        if (isActive == false) return;
-
         InteractionSlot slot = GetInActiveSlot();
         if (slot == null) return;
 #if UNITY_EDITOR
@@ -72,7 +70,6 @@ public class InteractionUI : MonoBehaviour, ICommonSetUI
     #region Input Up & Down Key : Only Use Window Ver
     public bool CanInput()
     {
-        if (isActive == false) return false;
         if (activeSlotCnt == 0) return false;
         return true;
     }
@@ -118,18 +115,14 @@ public class InteractionUI : MonoBehaviour, ICommonSetUI
     /******************************************/
 
     #region Interface
-    bool isActive = true;
-    public bool IsActive() { return isActive; }
 
-    public void Active()
+    public void TurnOn()
     {
-        isActive = true;
         slotGroup.SetActive(true);
     }
 
-    public void InActive()
+    public void TurnOff()
     {
-        isActive = false;
         slotGroup.SetActive(false);
     }
 

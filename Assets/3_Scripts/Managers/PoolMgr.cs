@@ -94,8 +94,6 @@ public class PoolMgr : MonoBehaviour
 
     public ShowGetItemSlot GetItemSlot()
     {
-        if (SharedMgr.UIMgr.GameUICtrl.GetShowGetItemUI.IsActive() == false) return null; 
-
         for (int i = 0; i < 2; i++)
         {
             if (showGetItemSlots[i].gameObject.activeSelf == false)

@@ -40,8 +40,8 @@ public class ShowGetItemSlot : MonoBehaviour
 
     IEnumerator CInActive()
     {
-        iconImage.gameObject.SetActive(false);
-        getText.gameObject.SetActive(false);
+        //iconImage.gameObject.SetActive(false);
+        //getText.gameObject.SetActive(false);
         anim.Play("GetSlotInActive");
         yield break;
     }

@@ -18,12 +18,11 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
     #region Set Button Data
     public void Init()
     {
+        TurnOff();
         SetImages();
-        if (uiFrameParent.activeSelf==false)
-            uiFrameParent.SetActive(true);
     }
 
-    public void SetButtonData()
+    public void SetButtonData(int _currentPlayerIndex)
     {
         List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
         int playerCnt = players.Count -1;
@@ -34,16 +33,23 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
             if (i > playerCnt)
                 buttons[i].gameObject.SetActive(false);
             else
+            {
                 buttons[i].ChangeButtonData(players[i].PlayerStat.GetSaveStat.currentLevel, players[i].gameObject.name);
+                if (_currentPlayerIndex == i)
+                    buttons[i].ControlEffect(true);
+                else
+                    buttons[i].ControlEffect(false);
+                if (buttons[i].gameObject.activeSelf == false)
+                    buttons[i].gameObject.SetActive(true);
+            }
         }
+        TurnOn();
     }
     #endregion
 
     #region CoolDown
     public void SetCoolTime(float _coolTime, UnityAction _announceCoolDown)
     {
-        if (isActive == false) return;
-
         StartCoroutine(CChangeCoolDown(_coolTime, _announceCoolDown));
     }
 
@@ -115,22 +121,14 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
 
     #region Interface
 
-    bool isActive = true;
-    public void Active()
+    public void TurnOn()
     {
-        isActive = true;
         uiFrameParent.SetActive(true);
     }
 
-    public void InActive()
+    public void TurnOff()
     {
-        isActive = false;
         uiFrameParent.SetActive(false);
-    }
-
-    public bool IsActive()
-    {
-        return isActive;
     }
 
     public void SetImages()

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface ICommonSetUI 
 {
-    public bool IsActive();
-    public void Active();
-    public void InActive();
+    public void TurnOn();
+    public void TurnOff();
     public void SetImages();
 }

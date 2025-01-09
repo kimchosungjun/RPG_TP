@@ -268,6 +268,7 @@ public class InventoryMgr
             return;
         }    
         weaponDatas.Add(_weaponData);
+        if (SharedMgr.UIMgr.GameUICtrl.CanAccessUI() == false) return;
         ShowGetSlot(_weaponData);
     }
 

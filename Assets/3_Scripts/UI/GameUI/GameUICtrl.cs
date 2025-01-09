@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 public class GameUICtrl : MonoBehaviour
 {
+    bool isConversationState = false;
+    public bool CanAccessUI()
+    {
+        return !isConversationState;
+    }
+
     [Header("Camera Space")]
     [SerializeField] DashGaugeUI dashGaugeUI;
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
@@ -65,33 +71,36 @@ public class GameUICtrl : MonoBehaviour
 
 #if UNITY_EDITOR
         // Interaction
-        if (interactionUI.CanInput())
+        if (interactionUI.CanInput() && isConversationState == false)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                    interactionUI.Interaction();
+                interactionUI.Interaction();
             }
-            if (Input.GetKeyDown(KeyCode.Keypad8))
+
+            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
+            if (scroll > 0f)
             {
-                    interactionUI.InputUpKey();
+                interactionUI.InputUpKey();
             }
-            if (Input.GetKeyDown(KeyCode.Keypad2))
+            if (scroll < 0f)
             {
-                    interactionUI.InputDownKey();
+                interactionUI.InputDownKey();
             }
         }
         // Dialouge
         if (dialogueUI.GetIsChoiceActive)
         {
+            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
             if (Input.GetKeyDown(KeyCode.F))
             {
                 dialogueUI.SelectChoice();
             }
-            if (Input.GetKeyDown(KeyCode.Keypad8))
+            if (scroll > 0f)
             {
                 dialogueUI.InputUpKey();
             }
-            if (Input.GetKeyDown(KeyCode.Keypad2))
+            if (scroll < 0f)
             {
                 dialogueUI.InputDownKey();
             }
@@ -106,11 +115,19 @@ public class GameUICtrl : MonoBehaviour
 
     public void StartConversation()
     {
-
+        isConversationState = true;
+        playerStatusUI.TurnOff();
+        playerChangeUI.TurnOff();
+        showGetItemUI.TurnOff();
+        interactionUI.TurnOff();
     }
 
     public void EndConversation()
     {
-
+        isConversationState = false;
+        playerStatusUI.TurnOn();
+        playerChangeUI.TurnOn();
+        showGetItemUI.TurnOn();
+        interactionUI.TurnOn();
     }
 }

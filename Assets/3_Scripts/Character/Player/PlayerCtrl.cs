@@ -149,7 +149,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             _party[i].Init();
         }
-        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
     }
 
     public void SetPartyData(List<BasePlayer> _party)

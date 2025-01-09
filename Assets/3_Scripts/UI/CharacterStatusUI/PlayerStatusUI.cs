@@ -27,14 +27,12 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     #region Set Data & Link UI 
     public override void Init()
     {
-        if (playerStatusParentObject.activeSelf) playerStatusParentObject.SetActive(false);
+        TurnOff();
         SetImages();
     }
 
     public void ChangeData(PlayerStat _playerStat)
     {
-        if (isActive == false)
-            return;
         // update bool init
         updateExp = false;
         updateHp = false;
@@ -57,8 +55,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
         // set text
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
-        // turn on
-        if (playerStatusParentObject.activeSelf == false) playerStatusParentObject.SetActive(true);
+        TurnOn();
     }
     #endregion
 
@@ -153,21 +150,13 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     /******************************************/
 
     #region Interface Method
-    bool isActive = true;
-    public bool IsActive()
+    public void TurnOn()
     {
-        return isActive;
-    }
-
-    public void Active()
-    {
-        isActive = true;
         playerStatusParentObject.SetActive(true);
     }
 
-    public void InActive()
+    public void TurnOff()
     {
-        isActive = false;
         playerStatusParentObject.SetActive(false);
     }
 
