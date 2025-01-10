@@ -13,9 +13,10 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
     [SerializeField] GameObject conversationUIParentObject;
     [SerializeField] ChoiceSlot[] choiceSlots;
     [SerializeField, Header("0:Name, 1:Dialogue")] Text[] dialogueTexts;
-    [SerializeField] Image textDivisionImage;
+    [SerializeField, Tooltip("0:Division, 1:Direction")] Image[] conversationUIImages;
     [SerializeField] ConversationAutoButton autoButton;
     [SerializeField] GameObject dialogueFrame;
+    
     #endregion
 
     #region Dialogue Data
@@ -106,6 +107,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         }
 
         string text  = SharedMgr.InteractionMgr.GetDialogueReader.ReadText(dialogue.dialogueContentSet[curContentIndex].storyLines[curStoryLineIndex], out haveEvent);
+        conversationUIImages[1].gameObject.SetActive(false);
         if (haveEvent)
         {
             curStoryLineIndex += 1;
@@ -125,7 +127,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
 
         isChoiceActive = true;
         int choiceCnt = _choiceLines.Count;
-
+        conversationUIImages[1].gameObject.SetActive(false);
         ActiveDirectionIndicator(choiceCnt);
         for(int i=0; i<choiceCnt; i++)
         {
@@ -152,6 +154,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         isTypeText = false;
         isWaitingInput = true;
         curStoryLineIndex += 1;
+        conversationUIImages[1].gameObject.SetActive(true);
         if (isAuto)
         {
             yield return delayAutoDialogueSecond;
@@ -281,7 +284,8 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
 
     public void SetImages()
     {
-        textDivisionImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Division_Top_Bar");
+        conversationUIImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Division_Top_Bar");
+        conversationUIImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Direction_Icon");
         autoButton.SetImage();
         int cnt = choiceSlots.Length;
         for(int i=0; i<cnt; i++)

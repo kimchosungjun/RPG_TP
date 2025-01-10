@@ -6,7 +6,6 @@ public class TestPlayerStatLoader : MonoBehaviour
 {
     TableMgr tableMgr;
     [SerializeField] GameObject playerObjeet;
-    [SerializeField] Transform gos;
     private void Start()
     {
         tableMgr = SharedMgr.TableMgr;
