@@ -17,8 +17,8 @@ public class InventoryListUI : MonoBehaviour
 
     public void SetImages()
     {
-        invenImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Inven_Bar");
-        invenImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Scroll_Bar");
+        invenImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas_2", "Inven_Bar");
+        invenImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Slot_Atlas", "Scroll_Bar");
         deleteBtnImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Black_Frame");
         deleteBtnImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Trash_Icon");
         int slotCnt = inventorySlots.Length;

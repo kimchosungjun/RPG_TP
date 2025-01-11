@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ItemEnums;
@@ -66,14 +64,19 @@ public class InventorySlot : MonoBehaviour
         switch (invenUI.GetCurrentType)
         {
             case ITEMTYPE.ITEM_ETC:
+                invenUI.CurrentItemData = etcData;
                 invenUI.ShowItemInfo(etcData);
                 break;
             case ITEMTYPE.ITEM_COMSUME:
+                invenUI.CurrentItemData = consumeData;
                 invenUI.ShowItemInfo(consumeData);
                 break;
             case ITEMTYPE.ITEM_WEAPON:
+                invenUI.CurrentItemData = weaponData;
                 invenUI.ShowItemInfo(weaponData);
                 break;
         }
+        invenUI.GetDeleteUI.InActive();
     }
+
 }

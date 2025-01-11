@@ -1,9 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConsumeUseUI : MonoBehaviour
 {
     ConsumeData consumeData = null;
     [SerializeField] GameObject consumeObject;
+    [SerializeField] Image[] btnImages;
+
+    public void Init()
+    {
+        SetImages();
+    }
+
+    public bool IsActive()
+    {
+        return consumeObject.activeSelf;
+    }
+
+    public void SetImages()
+    {
+        Sprite sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Red_Frame");
+        btnImages[0].sprite = sprite;
+        btnImages[1].sprite = sprite;
+    }
+
     public void Active(ConsumeData _data)
     {
         consumeData = _data;
@@ -19,6 +39,7 @@ public class ConsumeUseUI : MonoBehaviour
     public void Use()
     {
         consumeData.Use();
+        InActive();
     }
 
     public void NotUse()

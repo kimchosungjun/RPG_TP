@@ -14,8 +14,8 @@ public class InventorySideBarUI : MonoBehaviour
     {
         ResourceMgr res = SharedMgr.ResourceMgr;
         sideBarFrameImage.sprite = res.GetSpriteAtlas("Slot_Atlas", "SideSlot_Frame");
-        sideSlots[0].SetImage(res.GetSpriteAtlas("Icon_Atlas", "Etc_Icon"));
-        sideSlots[1].SetImage(res.GetSpriteAtlas("Icon_Atlas", "Portion_Icon"));
-        sideSlots[2].SetImage(res.GetSpriteAtlas("Icon_Atlas", "Weapon_Icon"));
+        sideSlots[0].SetImage(res.GetSpriteAtlas("Icon_Atlas_2", "Etc_Btn"));
+        sideSlots[1].SetImage(res.GetSpriteAtlas("Icon_Atlas_2", "Consume_Btn"));
+        sideSlots[2].SetImage(res.GetSpriteAtlas("Icon_Atlas_2", "Weapon_Btn"));
     }
 }

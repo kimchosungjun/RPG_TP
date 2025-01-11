@@ -1,25 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ItemEnums;
-using TMPro;
 
 public class InventoryInfoUI : MonoBehaviour
 {
     [Header("Infos")]
     [SerializeField] GameObject[] InfoObject;
+    [SerializeField] GameObject topIndicateObject;
     int currentIndex = 0;
+
+    Sprite[] typeIcons;
 
     public void TurnOffCurrentInfo()
     {
-        InfoObject[currentIndex].SetActive (false);    
+        if (InfoObject[currentIndex].activeSelf == false) return;
+
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.CurrentItemData = null;
+        InfoObject[currentIndex].SetActive (false);
+        topIndicateObject.SetActive(false);
+    }
+
+    public void Init()
+    {
+        SetImage();
+    }
+
+    public void SetImage()
+    {
+        ResourceMgr res = SharedMgr.ResourceMgr;
+        typeIcons = new Sprite[InfoObject.Length];
+        Sprite descSprite = res.GetSpriteAtlas("Bar_Atlas_2", "InvenDesc_Bar");
+        typeIcons[0] = res.GetSpriteAtlas("Icon_Atlas_3", "Type_Etc");
+        typeIcons[1] = res.GetSpriteAtlas("Icon_Atlas_3", "Type_Consume");
+        typeIcons[2] = res.GetSpriteAtlas("Icon_Atlas_3", "Type_Weapon");
+        
+        etcIcons[2].sprite = descSprite;
+        consumeIcons[2].sprite = descSprite;
+        weaponIcons[2].sprite = descSprite;
+
+        consumeIcons[3].sprite = res.GetSpriteAtlas("Button_Atlas","Black_Frame");
+        weaponIcons[3].sprite = res.GetSpriteAtlas("Icon_Atlas", "Attack_Icon");
     }
 
     #region Etc
     [Header("Etc")]
-    [SerializeField] Image etcIcon;
-    [SerializeField] Image etcTypeIcon;
+    [SerializeField, Tooltip("0:Icon ,1:TypeIcon, 2:Desc")] Image[] etcIcons;
     [SerializeField] Text etcName;
     [SerializeField] Text etcCntText;
     [SerializeField] Text etcDescriptionText;
@@ -27,20 +52,21 @@ public class InventoryInfoUI : MonoBehaviour
     public void ShowInfo(EtcData _itemData)
     {
         currentIndex = (int)ITEMTYPE.ITEM_ETC;
-        etcIcon.sprite = _itemData.itemIcon;
-        etcTypeIcon.sprite = _itemData.itemTypeIcon;
+        etcIcons[0].sprite = _itemData.itemIcon;
+        etcIcons[1].sprite = typeIcons[0];
         etcName.text = _itemData.itemName;
         etcCntText.text = "X"+_itemData.itemCnt;
         etcDescriptionText.text = _itemData.itemDescription;
         InfoObject[currentIndex].SetActive(true);
+        if (topIndicateObject.activeSelf == false)
+            topIndicateObject.SetActive(true);
     }
     #endregion
 
     #region Consume
 
     [Header("Consume")]
-    [SerializeField] Image consumeIcon;
-    [SerializeField] Image consumeTypeIcon;
+    [SerializeField, Tooltip("0:Icon ,1:TypeIcon, 2:Desc")] Image[] consumeIcons;
     [SerializeField] Text consumeName;
     [SerializeField] Text consumeCntText;
     [SerializeField] Text consumeDescriptionText;
@@ -50,7 +76,14 @@ public class InventoryInfoUI : MonoBehaviour
     {
         consumeData = _itemData;
         currentIndex = (int)ITEMTYPE.ITEM_COMSUME;
+        consumeIcons[0].sprite = _itemData.itemIcon;
+        consumeIcons[1].sprite = typeIcons[1];
+        consumeName.text = _itemData.itemName;
+        consumeCntText.text = "X" + _itemData.itemCnt;
+        consumeDescriptionText.text = _itemData.itemDescription;
         InfoObject[currentIndex].SetActive(true);
+        if(topIndicateObject.activeSelf==false)
+            topIndicateObject.SetActive(true);
     }
 
     public void PressUse()
@@ -63,8 +96,7 @@ public class InventoryInfoUI : MonoBehaviour
     #region Weapon
 
     [Header("Weapon")]
-    [SerializeField] Image weaponIcon;
-    [SerializeField] Image weaponTypeIcon;
+    [SerializeField, Tooltip("0:Icon ,1:TypeIcon, 2:Desc, 3:First_Att, 4:Second_Att")] Image[] weaponIcons;
     [SerializeField] Text weaponName;
     [SerializeField] Text weaponDescriptionText;
     [SerializeField] Slider weaponLevelSlide;
@@ -75,28 +107,34 @@ public class InventoryInfoUI : MonoBehaviour
     public void ShowInfo(WeaponData _itemData)
     {
         currentIndex = (int)ITEMTYPE.ITEM_WEAPON;
-        weaponIcon.sprite = _itemData.itemIcon;
-        weaponTypeIcon.sprite = _itemData.itemTypeIcon;
+        weaponIcons[0].sprite = _itemData.itemIcon;
+        weaponIcons[1].sprite = typeIcons[2];
+ 
         weaponName.text = _itemData.itemName;
         weaponDescriptionText.text = _itemData.itemDescription;
         weaponLevelText.text = "Lv."+_itemData.weaponCurrentLevel;
         if (_itemData.weaponMaxExp == 0)
             weaponLevelSlide.value = 1;
         else
-            weaponLevelSlide.value = _itemData.weaponCurrentExp / _itemData.weaponMaxExp;
+            weaponLevelSlide.value = (float)_itemData.weaponCurrentExp / _itemData.weaponMaxExp;
         weaponAttackText.text = _itemData.attackValue.ToString();
      
         switch (_itemData.WeaponEffect)
         {
             case WEAPONEFFECT.WEAPON_ATTACK:
                 weaponAdditionTexts[0].text = "공격력 % 증가";
+                weaponIcons[4].sprite = weaponIcons[3].sprite;
                 break;
             case WEAPONEFFECT.WEAPON_CRITICAL:
                 weaponAdditionTexts[0].text = "크리티컬 증가";
+                weaponIcons[4].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas","Critical_Icon");
                 break;
         }
         weaponAdditionTexts[1].text = (int)(_itemData.effectValue * 100) + "%";
         InfoObject[currentIndex].SetActive(true);
+        InfoObject[currentIndex].SetActive(true);
+        if (topIndicateObject.activeSelf == false)
+            topIndicateObject.SetActive(true);
     }
     #endregion
 

@@ -19,10 +19,10 @@ public class TestGetItem : MonoBehaviour
         {
             GetConsume();
         }
-        //if (GUI.Button(new Rect(500, 300, 50, 50), "무기 아이템 습득"))
-        //{
-
-        //}
+        if (GUI.Button(new Rect(500, 300, 50, 50), "무기 아이템 습득"))
+        {
+            GetWeapon();
+        }
     }
 
     public void GetEtc()
@@ -34,13 +34,15 @@ public class TestGetItem : MonoBehaviour
 
     public void GetConsume()
     {
-        WeaponData data = new WeaponData();
-        data.SetData(SharedMgr.TableMgr.GetItem.GetWeaponTableData(weaponID));
+        ConsumeData data = new ConsumeData();
+        data.SetData(SharedMgr.TableMgr.GetItem.GetConsumeTableData(100));
         SharedMgr.InventoryMgr.AddItem(data);
     }
 
     public void GetWeapon()
     {
-
+        WeaponData data = new WeaponData();
+        data.SetData(SharedMgr.TableMgr.GetItem.GetWeaponTableData(weaponID));
+        SharedMgr.InventoryMgr.AddItem(data);
     }
 }
