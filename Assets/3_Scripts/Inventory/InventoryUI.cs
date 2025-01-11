@@ -61,11 +61,13 @@ public class InventoryUI : MonoBehaviour
         if (inventoryObject.activeSelf == true)
         {
             InActiveAllUI();
+            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
         }
         else
         {
             inventoryObject.SetActive(true);
             ChangeShowItemType(currentShowType);
+            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.INVENTORY;
         }
     }
     #endregion
@@ -122,6 +124,7 @@ public class InventoryUI : MonoBehaviour
             consumeUseUI.InActive();
             return;
         }
+        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
         inventoryInfoUI.TurnOffCurrentInfo();
         inventoryObject.SetActive(false);
     }

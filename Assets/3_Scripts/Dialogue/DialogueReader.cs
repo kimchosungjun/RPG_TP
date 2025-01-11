@@ -87,8 +87,8 @@ public class DialogueReader
     {
         if (_texts.Length ==2)
         {
-            _slot.SlotEventID = GetEventID(_texts[0]);
-            Event(_texts[0], _slot.ChoiceAction);
+              _slot.SlotEventID = GetEventID(_texts[0]);
+            Event(_texts[0], _slot);
             return _texts[1];
         }
         else
@@ -99,7 +99,7 @@ public class DialogueReader
     }
 
     // Choice
-    public void Event(string _text, UnityAction<int> _action)
+    public void Event(string _text, ChoiceSlot _slot)
     {
         UnityAction<int> action = null;
         char eventType = _text[1];
@@ -112,7 +112,7 @@ public class DialogueReader
                 action += AcceptAward;
                 break;
         }
-        _action = action;
+        _slot.ChoiceAction = action;
     }
 
     public int GetEventID(string _text)
@@ -122,6 +122,7 @@ public class DialogueReader
 
     public void AcceptQuest(int _id)
     {
+        SharedMgr.QuestMgr.AddQuestData(_id);
         SharedMgr.InteractionMgr.CurrentInteractNPC.AddQuestData(_id);
     }
 

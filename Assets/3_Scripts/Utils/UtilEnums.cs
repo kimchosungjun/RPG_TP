@@ -101,4 +101,18 @@ namespace UIEnums
         DEATH,
         CANNOTCHANGE,
     }
+
+    public enum GAMEUI
+    {
+        PLAYER_STATUS,
+        PLAYER_CHANGE,
+        INVENTORY,
+        GETITEM,
+        INTERACT,
+        PARTY,
+        UPGRADE,
+        QUEST,
+        DIALOGUE,
+        NONE
+    }
 }

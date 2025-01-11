@@ -1,10 +1,12 @@
+using UIEnums;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class GameUICtrl : MonoBehaviour
 {
     bool isConversationState = false;
+    public GAMEUI CurrentOpenUI { get; set; } = GAMEUI.NONE;
+
     public bool CanAccessUI()
     {
         return !isConversationState;
@@ -17,9 +19,9 @@ public class GameUICtrl : MonoBehaviour
     [Header("Overlap")]
     [SerializeField] PlayerStatusUI playerStatusUI;
     [SerializeField] PlayerChangeUI playerChangeUI;
-    [SerializeField] InventoryUI inventoyUI;
     [SerializeField] ShowGetItemUI showGetItemUI;
     [SerializeField] InteractionUI interactionUI;
+    [SerializeField] InventoryUI inventoyUI;
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
 
@@ -61,55 +63,65 @@ public class GameUICtrl : MonoBehaviour
         showGetItemUI.Init();
         interactionUI.Init();
         dialogueUI.Init();
+        questUI.Init();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventoyUI.InputInventoryKey();
-        }
-
 #if UNITY_EDITOR
-        // Interaction
-        if (interactionUI.CanInput() && isConversationState == false)
+        if (isConversationState)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (dialogueUI.GetIsChoiceActive)
             {
-                interactionUI.Interaction();
+                float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
+                if (Input.GetKeyDown(KeyCode.F) && CanOpenUI(GAMEUI.QUEST))
+                {
+                    dialogueUI.SelectChoice();
+                }
+                if (scroll > 0f)
+                {
+                    dialogueUI.InputUpKey();
+                }
+                if (scroll < 0f)
+                {
+                    dialogueUI.InputDownKey();
+                }
             }
 
-            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-            if (scroll > 0f)
+            if (SharedMgr.InteractionMgr.GetIsConversation && Input.GetKeyDown(KeyCode.Space))
             {
-                interactionUI.InputUpKey();
-            }
-            if (scroll < 0f)
-            {
-                interactionUI.InputDownKey();
+                dialogueUI.InputNext();
             }
         }
-        // Dialouge
-        if (dialogueUI.GetIsChoiceActive)
+        else
         {
-            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.I) && CanOpenUI(GAMEUI.INVENTORY))
             {
-                dialogueUI.SelectChoice();
+                inventoyUI.InputInventoryKey();
             }
-            if (scroll > 0f)
+
+            if (Input.GetKeyDown(KeyCode.J) && CanOpenUI(GAMEUI.QUEST))
             {
-                dialogueUI.InputUpKey();
+                questUI.InputQuestKey();
             }
-            if (scroll < 0f)
+
+            if (interactionUI.CanInput() && CanOpenUI(GAMEUI.INTERACT))
             {
-                dialogueUI.InputDownKey();
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    interactionUI.Interaction();
+                }
+
+                float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
+                if (scroll > 0f)
+                {
+                    interactionUI.InputUpKey();
+                }
+                if (scroll < 0f)
+                {
+                    interactionUI.InputDownKey();
+                }
             }
-        }
-        
-        if(SharedMgr.InteractionMgr.GetIsConversation && Input.GetKeyDown(KeyCode.Space))
-        {
-            dialogueUI.InputNext();
         }
 #endif
     }
@@ -130,5 +142,16 @@ public class GameUICtrl : MonoBehaviour
         playerChangeUI.TurnOn();
         showGetItemUI.TurnOn();
         interactionUI.TurnOn();
+    }
+
+    public bool CanOpenUI(GAMEUI _uiType)
+    {
+        if (CurrentOpenUI == GAMEUI.NONE)
+            return true;
+
+        if (_uiType == CurrentOpenUI)
+            return true;
+
+        return false;
     }
 }

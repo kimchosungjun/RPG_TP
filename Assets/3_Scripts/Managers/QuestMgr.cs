@@ -6,6 +6,7 @@ public class QuestMgr
 {
     List <QuestSOData> questDatas;
     Dictionary <int,int> questIndexes; // First QuestID, Second List Index
+    public List<QuestSOData> GetQuestDatas { get { return questDatas; } }
 
     public void Init()
     {
@@ -26,7 +27,22 @@ public class QuestMgr
 
         questDatas.Add(_questData);
         questIndexes.Add(_questData.GetQuestID, questDatas.Count -1);
-        // To Do ~~ Quest UI
+        SharedMgr.UIMgr.GameUICtrl.GetQuestUI.UpdateQuestDatas();
+    }
+
+    public void AddQuestData(int _id)
+    {
+        string path = "QuestGroup/Quest_SO" + _id;
+        QuestSOData data = SharedMgr.ResourceMgr.LoadResource<QuestSOData>(path);
+
+        if (data == null) return;
+
+        if (questIndexes.ContainsKey(_id))
+            return;
+
+        questDatas.Add(data);
+        questIndexes.Add(data.GetQuestID, questDatas.Count - 1);
+        SharedMgr.UIMgr.GameUICtrl.GetQuestUI.UpdateQuestDatas();
     }
 
     public void DeleteQuestData(int _questID)
@@ -36,7 +52,7 @@ public class QuestMgr
 
         questDatas.RemoveAt(questIndexes[_questID]);
         questIndexes.Remove(_questID);
-        // To Do ~~ Quest UI
+        SharedMgr.UIMgr.GameUICtrl.GetQuestUI.UpdateQuestDatas();
     }
 
     public QuestSOData GetQuestData(int _id)

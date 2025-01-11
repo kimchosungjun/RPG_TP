@@ -80,7 +80,7 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         }
 
         // 공격 입력
-        if (/*Input.GetMouseButtonDown(0)*/ Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             characterControl.ChangeState(STATES.ATTACK);
             return;

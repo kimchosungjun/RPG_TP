@@ -180,6 +180,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         isTypeText = false;
         isWaitingInput = true;
         curStoryLineIndex += 1;
+        conversationUIImages[1].gameObject.SetActive(true);
     }
     #endregion
 

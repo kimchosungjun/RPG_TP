@@ -18,7 +18,7 @@ public class InteractionNPC : Interactable
 
     public void AddQuestData(int _id)
     {
-        saveData.currentQuestIndex = _id;
+        //saveData.currentQuestIndex = _id;
         currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
     }
 
