@@ -57,6 +57,7 @@ public class GameUICtrl : MonoBehaviour
         //interactionUI?.Init();
         playerStatusUI.Init();
         playerChangeUI.Init();
+        inventoyUI.Init();
         showGetItemUI.Init();
         interactionUI.Init();
         dialogueUI.Init();

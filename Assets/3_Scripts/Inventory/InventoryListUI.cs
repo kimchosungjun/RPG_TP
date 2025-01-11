@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,25 @@ public class InventoryListUI : MonoBehaviour
     [SerializeField] Text itemTypeText;
     [SerializeField] Text bagCntTex;
     [SerializeField] InventorySlot[] inventorySlots;
+    [SerializeField, Tooltip("0:Frame, 1:Icon")] Image[] deleteBtnImages;
+    [SerializeField, Tooltip("0:Top Indicate Image, 1:Side Bar Image")] Image[] invenImages;
+    public void Init()
+    {
+        SetImages();
+    }
+
+    public void SetImages()
+    {
+        invenImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Inven_Bar");
+        invenImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Scroll_Bar");
+        deleteBtnImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Black_Frame");
+        deleteBtnImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Trash_Icon");
+        int slotCnt = inventorySlots.Length;
+        for(int i=0; i<slotCnt; i++)
+        {
+            inventorySlots[i].SetSlotImage();
+        }
+    }
 
     public void ChangeItemType(ITEMTYPE _itemType)
     {

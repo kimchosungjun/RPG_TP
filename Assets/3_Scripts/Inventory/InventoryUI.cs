@@ -5,14 +5,21 @@ using ItemEnums;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] GameObject inventoryObject;
+    [SerializeField, Header("UI Parent : Use for On/Off")] GameObject inventoryObject;
+    [SerializeField] InventorySideBarUI sideUI;
     [SerializeField] InventoryListUI inventoryListUI;
     [SerializeField] InventoryInfoUI inventoryInfoUI;
     [SerializeField] ConsumeUseUI consumeUseUI;
-    [SerializeField] SideBarSlot[] sideSlots; // 아틀라스로 이미지 설정
+   
     ITEMTYPE currentShowType = ITEMTYPE.ITEM_ETC;
     public ITEMTYPE GetCurrentType { get { return currentShowType; } }
     int inventoryCurrentIndex = 0;
+
+    public void Init()
+    {
+        sideUI.Init();
+        inventoryListUI.Init();
+    }
 
     public void InputInventoryKey()
     {

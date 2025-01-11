@@ -1,16 +1,19 @@
 using ItemEnums;
-using System;
+using UnityEngine.UI;
 using UnityEngine;
-public interface ISlot
-{
-    public void PressSlot();
-}
 
 
-public class SideBarSlot : MonoBehaviour, ISlot
+public class SideBarSlot : MonoBehaviour
 {
     [SerializeField] ITEMTYPE slotType; 
-    public void PressSlot() 
+    [SerializeField] Image iconImage;
+
+    public void SetImage(Sprite _sprite)
+    {
+        iconImage.sprite = _sprite;
+    }
+
+    public void PressSideBar()
     {
         SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.ChangeShowItemType(slotType);
     }

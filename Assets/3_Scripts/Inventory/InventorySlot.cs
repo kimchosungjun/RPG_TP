@@ -6,24 +6,37 @@ using ItemEnums;
 
 public class InventorySlot : MonoBehaviour
 {
-    [SerializeField] Image itemImage;
+    [SerializeField, Tooltip("0:Frame, 1:TextFame, 2:Icon")] Image[] slotImages;
     [SerializeField] Text numberText;
     [SerializeField] Button slotButton;
     EtcData etcData = null;
     ConsumeData consumeData = null;
     WeaponData weaponData = null;
 
-    // Empty Slot
+    Color transparentColor = Color.white;
+    Color defaultColor = Color.white;
+
+    public void SetSlotImage()
+    {
+        defaultColor = slotImages[2].color;
+        transparentColor = defaultColor;
+        transparentColor.a = 0f;
+
+        slotImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas","InvenSlot_Frame");
+        slotImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Black_Frame");
+    }
+
     public void ChangeSlot()
     {
-        itemImage.sprite = null;
+        slotImages[2].color = transparentColor;
         numberText.text = string.Empty;
         slotButton.interactable = false;
     }
 
     public void ChangeSlot(EtcData _etcData)
     {
-        itemImage.sprite = _etcData.itemIcon;
+        slotImages[2].sprite = _etcData.itemIcon;
+        slotImages[2].color = defaultColor;
         numberText.text = _etcData.itemCnt+"개";
         etcData = _etcData;
         slotButton.interactable = true;
@@ -31,7 +44,8 @@ public class InventorySlot : MonoBehaviour
 
     public void ChangeSlot(ConsumeData _consumeData)
     {
-        itemImage.sprite = _consumeData.itemIcon;
+        slotImages[2].sprite = _consumeData.itemIcon;
+        slotImages[2].color = defaultColor;
         numberText.text = _consumeData.itemCnt + "개";
         consumeData = _consumeData;
         slotButton.interactable = true;
@@ -39,7 +53,8 @@ public class InventorySlot : MonoBehaviour
 
     public void ChangeSlot(WeaponData _weaponData)
     {
-        itemImage.sprite = _weaponData.itemIcon;
+        slotImages[2].sprite = _weaponData.itemIcon;
+        slotImages[2].color = defaultColor;
         numberText.text = "Lv."+_weaponData.weaponCurrentLevel;
         weaponData = _weaponData;
         slotButton.interactable = true;
