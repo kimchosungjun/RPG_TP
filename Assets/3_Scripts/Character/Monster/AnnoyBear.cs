@@ -47,7 +47,7 @@ public class AnnoyBear : MonoBehaviour
     {
         originalPosition = transform.position;
         SetBehaviourState();
-        ctrl.Setup(this.transform);
+        //ctrl.Setup(this.transform);
     }
 
     void SetBehaviourState()

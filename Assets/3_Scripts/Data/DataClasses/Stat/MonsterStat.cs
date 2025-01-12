@@ -44,4 +44,28 @@ public class MonsterStat : BaseStat
     }
 
     #endregion
+
+    #region Elite Groggy Stat
+
+    EliteGroggyStat groggyStat = null;
+    
+    public EliteGroggyStat GroggyStat 
+    {
+        get 
+        {
+            if(groggyStat == null)
+                groggyStat = new EliteGroggyStat(); 
+            return groggyStat; 
+        }
+    }
+
+    public class EliteGroggyStat
+    {
+        float currentGroggyValue = 0f;
+        float maxGroggyGauge = 1f;
+
+        public float CurrentGroggyValue { get { return  currentGroggyValue; } set { currentGroggyValue = value; } }
+        public void RefillGauge() { currentGroggyValue = maxGroggyGauge; }
+    }
+#endregion
 }

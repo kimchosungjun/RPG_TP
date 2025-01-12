@@ -17,6 +17,7 @@ public class GameUICtrl : MonoBehaviour
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
 
     [Header("Overlap")]
+    [SerializeField] BossStatusUI bossStatusUI;
     [SerializeField] PlayerStatusUI playerStatusUI;
     [SerializeField] PlayerChangeUI playerChangeUI;
     [SerializeField] ShowGetItemUI showGetItemUI;
@@ -25,6 +26,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
 
+    public BossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
     public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
     public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
@@ -44,7 +46,7 @@ public class GameUICtrl : MonoBehaviour
         SharedMgr.UIMgr.GameUICtrl = this;
         
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
-        
+        if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<BossStatusUI>();   
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 
         if(inventoyUI==null) inventoyUI = GetComponentInChildren<InventoryUI>();    
@@ -57,6 +59,7 @@ public class GameUICtrl : MonoBehaviour
     public void UIInit()
     {
         //interactionUI?.Init();
+        bossStatusUI.Init();    
         playerStatusUI.Init();
         playerChangeUI.Init();
         inventoyUI.Init();

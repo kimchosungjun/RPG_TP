@@ -10,9 +10,7 @@ public class CameraCtrl : MonoBehaviour
     CameraQuaterView quaterView = null;
     [SerializeField] CameraShakeView shakeView;
     [SerializeField] CameraTalkView talkView;
-    [SerializeField] MainCamera mainCam;
 
-    public MainCamera GetMainCam { get { return mainCam; } }
 
     private void Start()
     {

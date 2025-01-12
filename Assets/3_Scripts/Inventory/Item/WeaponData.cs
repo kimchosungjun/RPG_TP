@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ItemEnums;
 
+[System.Serializable]
 public class WeaponData : ItemData
 {
     public int uniqueID;
+    public int holdPlayerID = -1;
 
     // Exp & Level
     public int weaponCurrentExp;
@@ -26,13 +25,18 @@ public class WeaponData : ItemData
     public override void Use()
     {
         IsHoldWeapon = true;
-       
+    }
+
+    public void Use(int _playerID)
+    {
+        holdPlayerID = _playerID;
+        Use();
     }
 
     public void TakeOff()
     {
         IsHoldWeapon = false;
-
+        holdPlayerID=-1;
     }
 
     public void SetData(ItemTableClassGroup.WeaponTableData _tableData)

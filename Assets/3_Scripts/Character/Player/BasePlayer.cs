@@ -1,3 +1,4 @@
+using ItemEnums;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -11,12 +12,14 @@ public class BasePlayer : BaseActor
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
     [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; 
     [Header("플레이어 움직임 관리"), SerializeField] protected PlayerMovementControl playerMovementControl;
+    [SerializeField] WEAPONTYPE playerWeaponType;
     #endregion
 
     #region Property
     public PlayerStat PlayerStat { get { return playerStat; }  set { playerStat = value; } }
     public PlayerStatControl GetPlayerStatControl { get { return playerStatControl; } }
     public PlayerMovementControl GetPlayerMovementControl { get { return playerMovementControl; } }
+    public WEAPONTYPE GetWeaponType { get { return playerWeaponType; } } 
     public bool IsAlive { get { return isAlive; } set { isAlive = value; } }
     
     // Call After Death Animation 

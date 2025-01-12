@@ -6,19 +6,26 @@ public class MonsterStatControl : ActorStatControl
 {
     MonsterStat monsterStat = null;
     BaseMonster baseMonster = null;
-    
     public MonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
-    public void SetBaseMonster(BaseMonster _baseMonster) { this.baseMonster = _baseMonster; }
+    public BaseMonster BaseMonster { get { return baseMonster; } set { baseMonster = value; } } 
+    
     public override void Heal(float _heal, bool _isPercent = false)
     {
-        base.Heal(_heal);
+        float increaseHP = 0f;
+        if (monsterStat.CurrentHP <=0) return; // Death State
+        if (_isPercent)
+            increaseHP = monsterStat.MaxHP * _heal;
+        else
+            increaseHP = monsterStat.CurrentHP + _heal;
+
+        monsterStat.CurrentHP = increaseHP > monsterStat.MaxHP
+                ? monsterStat.MaxHP : (int)increaseHP;
     }
 
     public override void Recovery(float _percent = 10f, float _time = 0.2f)
     {
-        base.Recovery(_percent, _time); 
-        // 현재 체력과 최대체력 비교
-        // monsterStat.HP = 
+        float increaseHP = monsterStat.MaxHP * (_percent / 100);
+        Heal(_percent);
     }
 
     IEnumerator CRecovery(float _percent)
@@ -44,8 +51,6 @@ public class MonsterStatControl : ActorStatControl
         {
             monsterStat.CurrentHP = curHp;
         }
-        // 데미지를 스탯에 적용 후 UI에 표기
-        base.TakeDamage(_attackData);
     }
 
     /// <summary>

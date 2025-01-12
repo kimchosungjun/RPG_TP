@@ -55,7 +55,7 @@ public abstract class BaseMonster : BaseActor
         SetCharacterType(); 
         if (monsterStatControl == null) 
             monsterStatControl = GetComponent<MonsterStatControl>();
-        monsterStatControl?.SetBaseMonster(this);
+        monsterStatControl.BaseMonster = this;
     }
     protected virtual void Start() { CreateBTStates(); }
     protected virtual void FixedUpdate() { }

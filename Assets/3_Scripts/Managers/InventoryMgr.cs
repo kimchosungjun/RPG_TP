@@ -15,7 +15,7 @@ public class InventoryMgr
 
     Dictionary<int, List<EtcData>> etcGroup = new Dictionary<int, List<EtcData>>();
     Dictionary<int, List<ConsumeData>> consumeGroup = new Dictionary<int, List<ConsumeData>>();
-
+    
     int maxGold = 9999999;
     int inventoryMaxCnt = 25;
     List<EtcData> etcDatas = new List<EtcData>();
@@ -23,6 +23,7 @@ public class InventoryMgr
     List<WeaponData> weaponDatas = new List<WeaponData>();
 
     Dictionary<int,WeaponData> holdWeaponGroup = new Dictionary<int, WeaponData>();
+    Dictionary<WEAPONTYPE, List<WeaponData>> weaponSortGroup = new Dictionary<WEAPONTYPE, List<WeaponData>>();
     #endregion
 
     #region Hold Item : Property
@@ -30,6 +31,18 @@ public class InventoryMgr
     public List<EtcData> GetEtcInventory()  { return etcDatas; }
     public List<ConsumeData> GetConsumeInventory() { return consumeDatas; }
     public List<WeaponData> GetWeaponInventory() { return weaponDatas; }
+    public List<WeaponData> GetHoldWeaponInventory() 
+    {
+        List<int>keys = new List<int>(holdWeaponGroup.Keys);
+        int cnt = keys.Count;
+        if(cnt ==0) return null;
+        List<WeaponData> holdList = new List<WeaponData>();
+        for(int i=0; i < cnt; i++)
+        {
+            holdList.Add(holdWeaponGroup[keys[i]]);
+        }
+        return holdList; 
+    }
 
     Queue<ItemData> getItemQueue = new Queue<ItemData>();
 
@@ -266,8 +279,15 @@ public class InventoryMgr
             // To Do Link UI
             Debug.Log("Full Inventory");
             return;
-        }    
+        }
+        WEAPONTYPE type = _weaponData.WeaponType;
+
         weaponDatas.Add(_weaponData);
+        if (weaponSortGroup.ContainsKey(type) == false)
+            weaponSortGroup[type] = new List<WeaponData>();
+        List<WeaponData> list = weaponSortGroup[type];
+        list.Add(_weaponData);
+        weaponSortGroup.Add(type, list);
         if (SharedMgr.UIMgr.GameUICtrl.CanAccessUI() == false) return;
         ShowGetSlot(_weaponData);
     }
@@ -360,7 +380,29 @@ public class InventoryMgr
     }
     #endregion
 
+    #region Hold Weapon 
+    public void ChangeHoldWeapon(int _legacyID, WeaponData _newWeapon)
+    {
+        if (holdWeaponGroup.ContainsKey(_legacyID))
+        {
+            holdWeaponGroup[_legacyID].TakeOff();
+            holdWeaponGroup.Remove(_legacyID);
+        }
+        holdWeaponGroup.Add(_newWeapon.uniqueID, _newWeapon);
 
+        // To Do 랠리포인트 
+    }
+
+    public List<WeaponData> GetSortWeaponGroup(WEAPONTYPE _weaponType)
+    {
+        if (weaponSortGroup.ContainsKey(_weaponType)==false) return null;
+
+        int cnt = weaponSortGroup[_weaponType].Count;
+        if (cnt == 0) return null;
+        return weaponSortGroup[_weaponType];
+    }
+
+    #endregion
 
 
 

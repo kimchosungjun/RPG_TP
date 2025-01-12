@@ -15,15 +15,13 @@ GameObject:
   - component: {fileID: 9027356401048517839}
   - component: {fileID: 1978293355841749447}
   - component: {fileID: 4952192914324098030}
-  - component: {fileID: 9155908915233609220}
-  - component: {fileID: 617337657551226109}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1944749976399036177
 Transform:
   m_ObjectHideFlags: 0
@@ -157,7 +155,7 @@ MonoBehaviour:
   isMoveLock: 1
   shakeView: {fileID: 1978293355841749447}
   talkView: {fileID: 4952192914324098030}
-  mainCam: {fileID: 617337657551226109}
+  mainCam: {fileID: 0}
 --- !u!114 &1978293355841749447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,34 +181,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTalkViewTime: 1
---- !u!114 &9155908915233609220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247224148624072808}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a468b4ee34832e44a9dfd7e861c9688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SCShader: {fileID: 4800000, guid: 84957f115388de34b8d74b9439e5eb9c, type: 3}
-  CenterX: 0
-  CenterY: 0
-  Size: 5
-  Eyes: 2
---- !u!114 &617337657551226109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247224148624072808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c677da6553fce024d8e2dee48e7f3b84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsCameraAni: 0
-  ZoomDelta: 0

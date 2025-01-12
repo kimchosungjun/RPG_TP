@@ -1,6 +1,8 @@
 using ItemTableClassGroup;
 using ItemEnums;
+using System;
 
+[Serializable]
 public class ConsumeData : ItemData
 {
     public int effect;
