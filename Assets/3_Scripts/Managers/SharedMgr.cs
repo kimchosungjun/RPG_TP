@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class SharedMgr 
 {
+    public static MainCamera mainCam;
+
     #region Stick Super Mgr  
     public static MgrCreator SuperMgr = null;
     public static SceneMgr SceneMgr = null;

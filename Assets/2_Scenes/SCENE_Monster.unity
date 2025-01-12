@@ -6787,6 +6787,8 @@ GameObject:
   - component: {fileID: 330585549}
   - component: {fileID: 330585548}
   - component: {fileID: 330585550}
+  - component: {fileID: 330585551}
+  - component: {fileID: 330585552}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6952,6 +6954,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveTalkViewTime: 1
+--- !u!114 &330585551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a468b4ee34832e44a9dfd7e861c9688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SCShader: {fileID: 4800000, guid: 84957f115388de34b8d74b9439e5eb9c, type: 3}
+  CenterX: 0
+  CenterY: 0
+  Size: 5
+  Eyes: 2
+--- !u!114 &330585552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ab17e9cb25a46409e552d92d5d4d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsCameraAni: 0
+  ZoomDelta: 0
 --- !u!1 &338193111
 GameObject:
   m_ObjectHideFlags: 0

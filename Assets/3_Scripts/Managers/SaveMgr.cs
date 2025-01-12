@@ -13,7 +13,7 @@ public class SaveMgr
         reader= new SaveDataReader();
     }
 
-    public void LoadNPCSaveData(string _npcName, ref NPCSaveData _saveData)
+    public void LoadNPCSaveData(string _npcName, ref NPCSaveDataGroup _saveData)
     {
     }
 

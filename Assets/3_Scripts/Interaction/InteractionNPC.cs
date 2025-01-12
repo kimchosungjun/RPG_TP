@@ -7,7 +7,7 @@ public class InteractionNPC : Interactable
 {
     [SerializeField] int dialogueIndex;
     public int GetDialogueIndex { get { return dialogueIndex; } }
-    NPCSaveData saveData = null;
+    NPCSaveDataGroup saveData = null;
     QuestSOData currentQuestData = null;
 
     #region Manage Quest Data

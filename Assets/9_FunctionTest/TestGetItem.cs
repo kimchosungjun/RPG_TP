@@ -23,6 +23,11 @@ public class TestGetItem : MonoBehaviour
         {
             GetWeapon();
         }
+        if (GUI.Button(new Rect(100, 600, 50, 50), "카메라 효과"))
+        {
+            PressZoom();
+        }
+
     }
 
     public void GetEtc()
@@ -44,5 +49,14 @@ public class TestGetItem : MonoBehaviour
         WeaponData data = new WeaponData();
         data.SetData(SharedMgr.TableMgr.GetItem.GetWeaponTableData(weaponID));
         SharedMgr.InventoryMgr.AddItem(data);
+    }
+
+
+    public void PressZoom()
+    {
+        float ScaleTime = 0.2f;
+        float SlowTime = 3f;
+        float SlowTimeConvertSlow = ScaleTime * SlowTime;
+        SharedMgr.mainCam.ZoomEndStage(0, -1.5f, 2, SlowTime -1.5f, 1f, Vector3.zero);
     }
 }

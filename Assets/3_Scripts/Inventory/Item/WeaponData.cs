@@ -5,6 +5,8 @@ using ItemEnums;
 
 public class WeaponData : ItemData
 {
+    public int uniqueID;
+
     // Exp & Level
     public int weaponCurrentExp;
     public int weaponMaxExp;
@@ -46,5 +48,7 @@ public class WeaponData : ItemData
         attackValue = _tableData.attackValue;
         effectValue = _tableData.additionEffectValue;
         weaponEffect = _tableData.additionalEffect;
+
+        uniqueID = SharedMgr.TableMgr.GetItem.GetWeaponUniqueID();
     }
 }

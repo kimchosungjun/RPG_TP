@@ -8,12 +8,18 @@ namespace SaveDataGroup
     public class SaveDataClasses { }
     #endregion
 
-    public class QuestSaveData
+    public class PlayerSaveDataGroup
+    {
+        public List<int> cuurrentPlayerParty;
+        //public List<int> cuurrentPlayerParty2;
+    }
+
+    public class QuestSaveDataGroup
     {
 
     }
 
-    public class NPCSaveData
+    public class NPCSaveDataGroup
     {
         public int dialogueIndex;
         public int currentQuestIndex = -1;

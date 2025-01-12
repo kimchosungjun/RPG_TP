@@ -9,12 +9,15 @@ public class CameraCtrl : MonoBehaviour
 
     CameraQuaterView quaterView = null;
     [SerializeField] CameraShakeView shakeView;
-    [SerializeField ]CameraTalkView talkView;
+    [SerializeField] CameraTalkView talkView;
+    [SerializeField] MainCamera mainCam;
+
+    public MainCamera GetMainCam { get { return mainCam; } }
 
     private void Start()
     {
         quaterView = new CameraQuaterView(this.transform);
-        talkView.Setup() ;
+        talkView.Setup();
         shakeView.Setup();
     }
 
