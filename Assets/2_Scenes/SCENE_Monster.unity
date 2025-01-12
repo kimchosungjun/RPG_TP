@@ -44988,6 +44988,7 @@ MonoBehaviour:
   playerActionControl: {fileID: 5866666020441516154}
   playerStatControl: {fileID: 5866666020441516157}
   playerMovementControl: {fileID: 5866666020441516158}
+  playerWeaponType: 0
 --- !u!114 &5866666020441516157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45475,6 +45476,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 0.BossStatusUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5435040445608167097, guid: d2af5c6fd68419541b7210cd11e78b40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45889,6 +45895,7 @@ MonoBehaviour:
   playerActionControl: {fileID: 6621925900300702759}
   playerStatControl: {fileID: 6621925900300702761}
   playerMovementControl: {fileID: 6621925900300702762}
+  playerWeaponType: 0
 --- !u!114 &6621925900300702761
 MonoBehaviour:
   m_ObjectHideFlags: 0

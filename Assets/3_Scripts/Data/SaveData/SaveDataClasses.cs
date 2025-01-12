@@ -16,6 +16,12 @@ namespace SaveDataGroup
     {
         public PlayerSaveDataGroup PlayerSaveDataGroup;
         public InventorySaveDataGroup InventorySaveDataGroup;
+
+        public UserSaveData() 
+        {
+            PlayerSaveDataGroup = new PlayerSaveDataGroup();
+            InventorySaveDataGroup = new InventorySaveDataGroup();
+        }
     }
 
     #region Save Data Group
@@ -37,7 +43,7 @@ namespace SaveDataGroup
             cuurrentPlayerPartyIDSet = new List<int>();
             cuurrentPlayerPartyIDSet.Add(warriorID);
             playerSaveDataSet = new List<PlayerSaveStat>();
-            PlayerSaveStat saveStat = new PlayerSaveStat(warriorID,SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(warriorID).defaultHP); 
+            PlayerSaveStat saveStat = new PlayerSaveStat(warriorID, SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(warriorID).defaultHP); 
             playerSaveDataSet.Add(saveStat);    
             currentPlayerPosition = Vector3.zero;
         }
@@ -71,7 +77,6 @@ namespace SaveDataGroup
         {
             InventoryMgr inven = SharedMgr.InventoryMgr;
             gold = inven.GetGold;
-            
             consumeSet = SharedMgr.InventoryMgr.GetConsumeInventory();
         }
     }

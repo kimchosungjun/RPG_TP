@@ -3204,6 +3204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 946331241}
   - component: {fileID: 946331242}
+  - component: {fileID: 946331243}
   m_Layer: 0
   m_Name: DialougeCreator
   m_TagString: Untagged
@@ -3291,6 +3292,18 @@ MonoBehaviour:
         - $A0
         choiceLines: []
   dialogueName: YoungGirl
+--- !u!114 &946331243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946331240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a77156fad22d924aa0762b2fecfb261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &956414217
 GameObject:
   m_ObjectHideFlags: 0
