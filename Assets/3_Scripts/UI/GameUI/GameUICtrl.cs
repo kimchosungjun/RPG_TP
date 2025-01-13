@@ -22,6 +22,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] PlayerChangeUI playerChangeUI;
     [SerializeField] ShowGetItemUI showGetItemUI;
     [SerializeField] InteractionUI interactionUI;
+    [SerializeField] PlayerPartyUI playerPartyUI;
     [SerializeField] InventoryUI inventoyUI;
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
@@ -29,9 +30,10 @@ public class GameUICtrl : MonoBehaviour
     public BossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
     public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
-    public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
     public ShowGetItemUI GetShowGetItemUI { get { return showGetItemUI; } }
     public InteractionUI GetInteractionUI { get { return interactionUI; } }
+    public PlayerPartyUI GetPlayerPartyUI { get { return playerPartyUI; } } 
+    public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     // 나중에 Awake로 변경
@@ -49,24 +51,26 @@ public class GameUICtrl : MonoBehaviour
         if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<BossStatusUI>();   
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 
-        if(inventoyUI==null) inventoyUI = GetComponentInChildren<InventoryUI>();    
         if(showGetItemUI==null) showGetItemUI = GetComponentInChildren<ShowGetItemUI>();    
         if(interactionUI==null) interactionUI = GetComponentInChildren<InteractionUI>();
+        if(playerPartyUI==null) playerPartyUI = GetComponentInChildren<PlayerPartyUI>();    
+
+        if(inventoyUI==null) inventoyUI = GetComponentInChildren<InventoryUI>();    
         if(questUI==null) questUI = GetComponentInChildren<QuestUI>();  
         if(dialogueUI ==null) dialogueUI = GetComponentInChildren<DialogueUI>();    
     }
 
     public void UIInit()
     {
-        //interactionUI?.Init();
         bossStatusUI.Init();    
         playerStatusUI.Init();
         playerChangeUI.Init();
-        inventoyUI.Init();
         showGetItemUI.Init();
         interactionUI.Init();
-        dialogueUI.Init();
+        playerPartyUI.Init();
+        inventoyUI.Init();
         questUI.Init();
+        dialogueUI.Init();
     }
 
     private void Update()
@@ -106,6 +110,11 @@ public class GameUICtrl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.J) && CanOpenUI(GAMEUI.QUEST))
             {
                 questUI.InputQuestKey();
+            }
+
+            if (Input.GetKeyDown(KeyCode.P) && CanOpenUI(GAMEUI.PLAYER_PARTY))
+            {
+                playerPartyUI.InputPartyKey();
             }
 
             if (interactionUI.CanInput() && CanOpenUI(GAMEUI.INTERACT))

@@ -92,7 +92,8 @@ namespace UIEnums
     {
         HP,
         EXP,
-        LEVEL
+        LEVEL,
+        GROGGY
     }
 
     public enum CHANGE
@@ -102,6 +103,13 @@ namespace UIEnums
         CANNOTCHANGE,
     }
 
+    public enum PARTY
+    {
+        STATUS,
+        WEAPON,
+        SKILL
+    }
+
     public enum GAMEUI
     {
         PLAYER_STATUS,
@@ -109,7 +117,7 @@ namespace UIEnums
         INVENTORY,
         GETITEM,
         INTERACT,
-        PARTY,
+        PLAYER_PARTY,
         UPGRADE,
         QUEST,
         DIALOGUE,

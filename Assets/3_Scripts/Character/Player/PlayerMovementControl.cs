@@ -63,6 +63,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /***************** 대쉬  ******************/
     /******************************************/
     protected float playerDashForce;
+    protected WaitForSeconds dashTime = new WaitForSeconds(0.5f);
     #endregion
 
     #region Common Detect
@@ -320,8 +321,13 @@ public abstract class PlayerMovementControl : MonoBehaviour
         dashDirection = dashDirection.normalized;
         rigid.velocity = Vector3.zero;
         rigid.AddForce(dashDirection * playerDashForce, ForceMode.Impulse);
-        //if (isOnGround)
-        //    dashDirection = Vector3.ProjectOnPlane(dashDirection, groundHit.normal);
+        StartCoroutine(CDashCooling());
+    }
+
+    IEnumerator CDashCooling()
+    {
+        yield return dashTime;
+        DashCooling();
     }
 
     public void DashCooling()
@@ -369,7 +375,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
         playerMoveSpeed = _playerStat.Speed;
         playerMoveLimitSpeed = playerMoveSpeed;
         playerJumpForce = _playerStat.JumpSpeed;
-        playerDashForce = _playerStat.DashSpeed;
+        playerDashForce = _playerStat.DashSpeed * 1.5f;
     }
 
     public virtual void LinkMyComponent()
