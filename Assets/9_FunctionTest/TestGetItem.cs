@@ -23,10 +23,10 @@ public class TestGetItem : MonoBehaviour
         {
             GetWeapon();
         }
-        if (GUI.Button(new Rect(100, 600, 50, 50), "카메라 효과"))
-        {
-            PressZoom();
-        }
+        //if (GUI.Button(new Rect(100, 600, 50, 50), "카메라 효과"))
+        //{
+        //    PressZoom();
+        //}
 
     }
 

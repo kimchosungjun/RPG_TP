@@ -2,8 +2,6 @@ using UnityEngine;
 using System;
 using ItemEnums;
 using System.Collections.Generic;
-using UnityEngine.Rendering;
-
 public class InventoryMgr  
 {
     /**********************************************/
@@ -153,6 +151,7 @@ public class InventoryMgr
     public void AddGold(int _gold)
     {
         gold = (gold + _gold) > maxGold ? maxGold : gold + _gold;
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.GetGoldUI.UpdateGold();
     }
 
     public void AddItem(EtcData _etcData)
@@ -287,7 +286,7 @@ public class InventoryMgr
             weaponSortGroup[type] = new List<WeaponData>();
         List<WeaponData> list = weaponSortGroup[type];
         list.Add(_weaponData);
-        weaponSortGroup.Add(type, list);
+        weaponSortGroup[type] = list;
         if (SharedMgr.UIMgr.GameUICtrl.CanAccessUI() == false) return;
         ShowGetSlot(_weaponData);
     }
@@ -295,13 +294,18 @@ public class InventoryMgr
     #endregion
 
     #region Remove Item
-    public void RemoveGold(int _gold) { if (CanUseGold(_gold) == false) return; gold -= _gold; }
+    public void RemoveGold(int _gold) 
+    {
+        if (CanUseGold(_gold) == false) return;
+        gold -= _gold; 
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.GetGoldUI.UpdateGold();
+    }
 
     public void RemoveItem(EtcData _etcData)
     {
         if (etcGroup.ContainsKey(_etcData.itemID) == false)
             return;
-
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.CurrentItemData = null;
         int groupCnt = etcGroup[_etcData.itemID].Count;
         for (int i = 0; i < groupCnt; i++)
         {
@@ -318,6 +322,7 @@ public class InventoryMgr
             if (etcDatas[i] == _etcData)
             {
                 etcDatas.RemoveAt(i);
+                SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
                 break;
             }
         }
@@ -328,12 +333,13 @@ public class InventoryMgr
         if (consumeGroup.ContainsKey(_consumeData.itemID) == false)
             return;
 
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.CurrentItemData = null;
         int groupCnt = consumeGroup[_consumeData.itemID].Count;
         for (int i = 0; i < groupCnt; i++)
         {
             if (consumeGroup[_consumeData.itemID][i] == _consumeData)
             {
-                consumeGroup[_consumeData.itemID].RemoveAt(i);
+                consumeGroup[_consumeData.itemID].RemoveAt(i);   
                 break;
             }
         }
@@ -344,6 +350,7 @@ public class InventoryMgr
             if (consumeDatas[i] == _consumeData)
             {
                 consumeDatas.RemoveAt(i);
+                SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
                 break;
             }
         }
@@ -351,12 +358,14 @@ public class InventoryMgr
 
     public void RemoveItem(WeaponData _weaponData)
     {
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.CurrentItemData = null;
         int cnt= weaponDatas.Count;
         for(int i=0; i<cnt; i++)
         {
             if (weaponDatas[i] == _weaponData)
             {
                 weaponDatas.RemoveAt(i);
+                SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
                 break;
             }
         }
@@ -370,6 +379,7 @@ public class InventoryMgr
         getItemQueue.Enqueue(_itemData);
         ShowGetItemSlot slot = SharedMgr.PoolMgr.GetItemSlot();
         slot?.ShowSlot(getItemQueue.Dequeue());
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
     }
 
     public void ShowNextGetItemSlot()

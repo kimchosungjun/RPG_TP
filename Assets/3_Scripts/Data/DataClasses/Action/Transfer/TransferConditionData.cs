@@ -36,7 +36,7 @@ public class TransferConditionData
     public TransferConditionData() { }
     #endregion
 
-    #region Set Transfer Data
+    #region Set Transfer Data : Player
     public void SetData(PlayerStat _playerStat, int _buffStat, int _useStat, int _buffContinuity, 
         float _buffValue, float _buffTime, float _multiplier, int _applyType)
     {
@@ -65,7 +65,9 @@ public class TransferConditionData
         this.multiplier = _multiplier;
         this.conditionValue = Mathf.Round(_buffValue + statValue*_multiplier);
     }
+    #endregion
 
+    #region Set Transfer Data : Monster
     public void SetData(MonsterStat _monsterStat, int _buffStat, int _useStat, int _buffContinuity, float _buffValue, float _buffTime, float _multiplier)
     {
         this.conditionStat = (CONDITION_EFFECT_STATS)_buffStat;

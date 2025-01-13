@@ -86,9 +86,10 @@ public partial class ItemTable : BaseTable
         _reader.get(_row, ref _tableData.ID);
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
-        _reader.get(_row, ref _tableData.iconName);
-        _reader.get(_row, ref _tableData.typeIconName);
+        _reader.get(_row, ref _tableData.itemType);
         _reader.get(_row, ref _tableData.exp);
+        _reader.get(_row, ref _tableData.fileName);
+        _reader.get(_row, ref _tableData.atlasName);
         return true;
     }
 
@@ -98,11 +99,17 @@ public partial class ItemTable : BaseTable
         _reader.get(_row, ref _tableData.ID);
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
-        _reader.get(_row, ref _tableData.iconName);
-        _reader.get(_row, ref _tableData.typeIconName);
-        _reader.get(_row, ref _tableData.effect);
-        _reader.get(_row, ref _tableData.effectValue);
+        _reader.get(_row, ref _tableData.itemType);
+        _reader.get(_row, ref _tableData.multiplier);
         _reader.get(_row, ref _tableData.maintainTime);
+        _reader.get(_row, ref _tableData.attributeStat);
+        _reader.get(_row, ref _tableData.effectStat);
+        _reader.get(_row, ref _tableData.duration);
+        _reader.get(_row, ref _tableData.defaultValue);
+        _reader.get(_row, ref _tableData.applyStatType);
+        _reader.get(_row, ref _tableData.partyType);
+        _reader.get(_row, ref _tableData.fileName);
+        _reader.get(_row, ref _tableData.atlasName);
         return true;
     }
 
@@ -112,14 +119,15 @@ public partial class ItemTable : BaseTable
         _reader.get(_row, ref _tableData.ID);
         _reader.get(_row, ref _tableData.name);
         _reader.get(_row, ref _tableData.description);
-        _reader.get(_row, ref _tableData.iconName);
-        _reader.get(_row, ref _tableData.typeIconName);
+        _reader.get(_row, ref _tableData.itemType);
         _reader.get(_row, ref _tableData.attackValue);
         _reader.get(_row, ref _tableData.additionalEffect);
         _reader.get(_row, ref _tableData.additionEffectValue);
         _reader.get(_row, ref _tableData.increaseAttackValue);
         _reader.get(_row, ref _tableData.increaseAdditionEffectValue);
         _reader.get(_row, ref _tableData.price);
+        _reader.get(_row, ref _tableData.atlasName);
+        _reader.get(_row, ref _tableData.fileName);
         return true;
     }
 

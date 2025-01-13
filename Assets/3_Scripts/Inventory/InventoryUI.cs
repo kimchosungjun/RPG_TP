@@ -102,7 +102,11 @@ public class InventoryUI : MonoBehaviour
     #endregion
 
     #region Use UI
-    public void DecideUse(ConsumeData _data) { consumeUseUI.Active(_data); }
+    public void DecideUse(ConsumeData _data) 
+    {
+        if (_data == null) return;
+        consumeUseUI.Active(_data); 
+    }
     #endregion
 
     #region Add/Remove Item
@@ -136,6 +140,16 @@ public class InventoryUI : MonoBehaviour
         consumeUseUI.InActive();
         inventoryObject.SetActive(false);
     }
+    #endregion
+
+    #region Update Inventory
+
+    public void UpdateInventory()
+    {
+        inventoryListUI.ChangeItemType(currentShowType);
+        inventoryInfoUI.UpdateInfoData();
+    }
+
     #endregion
 }
 

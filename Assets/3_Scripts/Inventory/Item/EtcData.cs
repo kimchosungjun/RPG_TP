@@ -10,14 +10,19 @@ public class EtcData : ItemData
     int maxCnt = 999;
     public int GetMaxCnt { get { return maxCnt; } }
 
-    public override void Remove()
+    public override void Remove(int _cnt = 1)
     {
-        
+        itemCnt -= _cnt;
+        SharedMgr.InventoryMgr.AddGold(_cnt * etcExp);
+        if (itemCnt <=0)
+            SharedMgr.InventoryMgr.RemoveItem(this);
     }
 
-    public override void Use()
+    public override void Use(int _value = 1)
     {
-        
+        itemCnt -= _value;
+        if (itemCnt <= 0)
+            SharedMgr.InventoryMgr.RemoveItem(this);
     }
 
     public void SetData(EtcTableData _tableData, int _cnt = 1)
@@ -25,10 +30,11 @@ public class EtcData : ItemData
         itemID = _tableData.ID;
         itemName = _tableData.name;
         itemDescription = _tableData.description;
-        itemIcon = null;
-        itemTypeIcon = null;
         itemType = (int)ITEMTYPE.ITEM_ETC;
         itemCnt = _cnt;
         etcExp = _tableData.exp;
+        fileName = _tableData.fileName;
+        atlasName = _tableData.atlasName;   
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
     }
 }

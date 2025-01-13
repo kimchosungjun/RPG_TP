@@ -5,21 +5,36 @@ using System;
 [Serializable]
 public class ConsumeData : ItemData
 {
-    public int effect;
-    public float effectValue;
+    public float multiplier;
     public float maintainTime;
+    public int attributeStat;
+    public int effectStat;
+    public int duration;
+    public float defaultValue;
+    public int applyStatType;
+    public int partyType;
 
     int maxCnt = 999;
     public int GetMaxCnt { get { return maxCnt; } }
 
-    public override void Remove()
+    public override void Remove(int _cnt = 1)
     {
-        base.Remove();
+        itemCnt -= _cnt;
+        if (itemCnt <= 0)
+            SharedMgr.InventoryMgr.RemoveItem(this);
     }
 
-    public override void Use()
+    public override void Use(int _value = 1)
     {
-        base.Use(); 
+        itemCnt -= _value;
+        BasePlayer player = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer;
+        TransferConditionData data = new TransferConditionData();
+        data.SetData(player.PlayerStat, effectStat, attributeStat, duration, defaultValue, maintainTime, multiplier, applyStatType);
+        player.GetPlayerStatControl.AddCondition(data);
+        if (itemCnt <= 0)
+            SharedMgr.InventoryMgr.RemoveItem(this);
+        else
+            SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
     }
 
     public void SetData(ConsumeTableData _tableData, int _cnt = 1)
@@ -27,12 +42,18 @@ public class ConsumeData : ItemData
         itemID = _tableData.ID;
         itemName = _tableData.name;
         itemDescription = _tableData.description;
-        itemIcon = null;
-        itemTypeIcon = null;
         itemType = (int)ITEMTYPE.ITEM_ETC;
         itemCnt = _cnt;
-        effect = _tableData.effect;
-        effectValue = _tableData.effectValue;
+        multiplier = _tableData.multiplier;
         maintainTime = _tableData.maintainTime;
+        attributeStat = _tableData.attributeStat;
+        effectStat = _tableData.effectStat;
+        duration    = _tableData.duration;
+        defaultValue = _tableData.defaultValue;
+        applyStatType = _tableData.applyStatType;
+        partyType = _tableData.partyType;
+        atlasName = _tableData.atlasName;
+        fileName = _tableData.fileName;
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
     }
 }

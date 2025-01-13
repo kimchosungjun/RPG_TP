@@ -14,7 +14,7 @@ public class ShowGetItemSlot : MonoBehaviour
 
     public void ShowSlot(ItemData _itemData)
     {
-        iconImage.sprite = _itemData.itemIcon;
+        iconImage.sprite = _itemData.GetIcon;
         getText.text = _itemData.itemName + " X " + _itemData.itemCnt;
         this.gameObject.SetActive(true);
     }

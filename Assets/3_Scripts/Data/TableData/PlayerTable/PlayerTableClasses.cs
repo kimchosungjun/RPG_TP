@@ -82,7 +82,7 @@ namespace PlayerTableClassGroup
         public int[] effectStatTypes; // enum : 영향을 주는 스탯
         public int[] continuityTypes; // enum : 즉발 여부
         public float[] defaultValues;
-        public int[] applyType;
+        public int[] applyType; // Use Multiplier
         public int[] partyType;
         public int particle; // enum
         public void SetSize()

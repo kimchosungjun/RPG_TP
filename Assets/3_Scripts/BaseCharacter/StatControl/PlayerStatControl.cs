@@ -23,6 +23,7 @@ public class PlayerStatControl : ActorStatControl
 
         playerStat.GetSaveStat.currentHP = increaseHP > playerStat.MaxHP
                 ? playerStat.MaxHP : (int)increaseHP;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.HP);
     }
 
     public override void Recovery(float _percent = 10f, float _time = 0.2f)

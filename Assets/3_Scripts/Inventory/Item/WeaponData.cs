@@ -5,6 +5,7 @@ public class WeaponData : ItemData
 {
     public int uniqueID;
     public int holdPlayerID = -1;
+    public int weaponPrice;
 
     // Exp & Level
     public int weaponCurrentExp;
@@ -22,21 +23,24 @@ public class WeaponData : ItemData
     public WEAPONEFFECT WeaponEffect { get; private set; }
     public bool IsHoldWeapon { get; private set; } = false; // Check For Sell
 
-    public override void Use()
+    public override void Remove(int _cnt = 1)
     {
-        IsHoldWeapon = true;
+        SharedMgr.InventoryMgr.AddGold(weaponPrice);
+        SharedMgr.InventoryMgr.RemoveItem(this);
     }
 
-    public void Use(int _playerID)
+    public override void Use(int _value = 1)
     {
-        holdPlayerID = _playerID;
-        Use();
+        IsHoldWeapon = true;
+        holdPlayerID = _value;
+        // To Do ~~ 
     }
 
     public void TakeOff()
     {
         IsHoldWeapon = false;
         holdPlayerID=-1;
+        // To Do ~~
     }
 
     public void SetData(ItemTableClassGroup.WeaponTableData _tableData)
@@ -44,15 +48,16 @@ public class WeaponData : ItemData
         itemID = _tableData.ID;
         itemName = _tableData.name;
         itemDescription = _tableData.description;
-        itemIcon = null;
-        itemTypeIcon = null;
+        weaponPrice = _tableData.price;
         itemType = (int)ITEMTYPE.ITEM_ETC;
         itemCnt = 1;
         
         attackValue = _tableData.attackValue;
         effectValue = _tableData.additionEffectValue;
         weaponEffect = _tableData.additionalEffect;
-
+        atlasName = _tableData.atlasName;
+        fileName = _tableData.fileName;
         uniqueID = SharedMgr.TableMgr.GetItem.GetWeaponUniqueID();
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon"); 
     }
 }

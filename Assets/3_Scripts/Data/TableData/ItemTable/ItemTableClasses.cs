@@ -13,8 +13,9 @@ namespace ItemTableClassGroup
         public int ID;
         public string name;
         public string description;
-        public string iconName;
-        public string typeIconName;
+        public int itemType;
+        public string fileName;
+        public string atlasName;
     }
 
     [Serializable]
@@ -26,9 +27,14 @@ namespace ItemTableClassGroup
     [Serializable]
     public class ConsumeTableData : ItemTableData
     {
-        public int effect;
-        public float effectValue;
+        public float multiplier;
         public float maintainTime;
+        public int attributeStat;
+        public int effectStat;
+        public int duration;
+        public float defaultValue;
+        public int applyStatType;
+        public int partyType;
     }
 
     [Serializable]

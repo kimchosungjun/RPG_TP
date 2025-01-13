@@ -33,7 +33,7 @@ public class InventorySlot : MonoBehaviour
 
     public void ChangeSlot(EtcData _etcData)
     {
-        slotImages[2].sprite = _etcData.itemIcon;
+        slotImages[2].sprite = _etcData.GetIcon;
         slotImages[2].color = defaultColor;
         numberText.text = _etcData.itemCnt+"개";
         etcData = _etcData;
@@ -42,7 +42,7 @@ public class InventorySlot : MonoBehaviour
 
     public void ChangeSlot(ConsumeData _consumeData)
     {
-        slotImages[2].sprite = _consumeData.itemIcon;
+        slotImages[2].sprite = _consumeData.GetIcon;
         slotImages[2].color = defaultColor;
         numberText.text = _consumeData.itemCnt + "개";
         consumeData = _consumeData;
@@ -51,7 +51,7 @@ public class InventorySlot : MonoBehaviour
 
     public void ChangeSlot(WeaponData _weaponData)
     {
-        slotImages[2].sprite = _weaponData.itemIcon;
+        slotImages[2].sprite = _weaponData.GetIcon;
         slotImages[2].color = defaultColor;
         numberText.text = "Lv."+_weaponData.weaponCurrentLevel;
         weaponData = _weaponData;

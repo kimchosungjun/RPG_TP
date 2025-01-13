@@ -598,7 +598,7 @@ MonoBehaviour:
   cam: {fileID: 1575896778}
   render: {fileID: 8400000, guid: 8cd90189d97ecd5429443993853d1552, type: 2}
   img: {fileID: 0}
-  name: 
+  name: moonstone00
   objs:
   - {fileID: 100000, guid: 456aa20c486e5da4c91e989620329b6d, type: 3}
   - {fileID: 100000, guid: 6ba48bbfcad5b0d46b5a027c103e194c, type: 3}
