@@ -10,18 +10,18 @@ public class WeaponManageSlot : MonoBehaviour
     [SerializeField] Text levelText;
     [SerializeField] Button button;
     Color halfColor = Color.white;  
-    public void Init()
+    public void Init(Sprite _sprite)
     {
         halfColor.a = 0.5f;
         levelText.text = string.Empty;
         button.interactable = false;
         slotImages[1].color = halfColor;
-        SetImages();
+        SetImages(_sprite);
     }
     
-    public void SetImages()
+    public void SetImages(Sprite _sprite)
     {
-        slotImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "WeaponManage_Slot_Button");
+        slotImages[0].sprite = _sprite;
         if (slotImages[1].gameObject.activeSelf)
             slotImages[1].gameObject.SetActive(false);
     }

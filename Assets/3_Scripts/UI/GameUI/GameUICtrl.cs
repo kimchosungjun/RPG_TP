@@ -23,6 +23,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] ShowGetItemUI showGetItemUI;
     [SerializeField] InteractionUI interactionUI;
     [SerializeField] PlayerPartyUI playerPartyUI;
+    [SerializeField] UpgradeIndicatorUI upgradeIndicatorUI;
     [SerializeField] InventoryUI inventoyUI;
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
@@ -33,6 +34,7 @@ public class GameUICtrl : MonoBehaviour
     public ShowGetItemUI GetShowGetItemUI { get { return showGetItemUI; } }
     public InteractionUI GetInteractionUI { get { return interactionUI; } }
     public PlayerPartyUI GetPlayerPartyUI { get { return playerPartyUI; } } 
+    public UpgradeIndicatorUI GetUpgradeIndicatorUI { get { return upgradeIndicatorUI; } }
     public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
@@ -53,8 +55,8 @@ public class GameUICtrl : MonoBehaviour
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 
         if(showGetItemUI==null) showGetItemUI = GetComponentInChildren<ShowGetItemUI>();    
         if(interactionUI==null) interactionUI = GetComponentInChildren<InteractionUI>();
-        if(playerPartyUI==null) playerPartyUI = GetComponentInChildren<PlayerPartyUI>();    
-
+        if(playerPartyUI==null) playerPartyUI = GetComponentInChildren<PlayerPartyUI>();
+        if (upgradeIndicatorUI==null) upgradeIndicatorUI = GetComponentInChildren<UpgradeIndicatorUI>(); 
         if(inventoyUI==null) inventoyUI = GetComponentInChildren<InventoryUI>();    
         if(questUI==null) questUI = GetComponentInChildren<QuestUI>();  
         if(dialogueUI ==null) dialogueUI = GetComponentInChildren<DialogueUI>();    
@@ -68,6 +70,7 @@ public class GameUICtrl : MonoBehaviour
         showGetItemUI.Init();
         interactionUI.Init();
         playerPartyUI.Init();
+        upgradeIndicatorUI.Init();
         inventoyUI.Init();
         questUI.Init();
         dialogueUI.Init();
