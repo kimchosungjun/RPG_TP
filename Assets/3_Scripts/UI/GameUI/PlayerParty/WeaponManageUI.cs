@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponManageUI : MonoBehaviour
+public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
 {
     [SerializeField, Tooltip("0:Frame, 1:ScrollBar")] Image[] weaponManageImages;
     [SerializeField] WeaponManageSlot[] slots;
@@ -32,5 +32,15 @@ public class WeaponManageUI : MonoBehaviour
         }
 
         upgradeView.Init(); 
+    }
+
+    public void TurnOff()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void TurnOn()
+    {
+        //throw new System.NotImplementedException();
     }
 }

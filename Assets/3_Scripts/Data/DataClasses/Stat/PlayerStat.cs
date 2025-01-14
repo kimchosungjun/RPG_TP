@@ -15,6 +15,8 @@ public class PlayerStat : BaseStat
     [SerializeField] protected float dashSpeed;
     [SerializeField] protected float jumpSpeed;
     [SerializeField] protected PlayerSaveStat currentStat = null;
+    [SerializeField] protected string atlasName;
+    [SerializeField] protected string fileName;
     #endregion
 
     #region Public
@@ -24,6 +26,8 @@ public class PlayerStat : BaseStat
     public float DashSpeed { get { return dashSpeed; } set { dashSpeed = value; } }
     public float JumpSpeed { get { return jumpSpeed; } set { jumpSpeed = value; } }
     public PlayerSaveStat GetSaveStat{ get { return currentStat; } }
+    public string GetAtlasName { get { return atlasName; } }
+    public string GetFileName { get { return fileName; } }
     #endregion
 
     #region Load Stat
@@ -47,6 +51,9 @@ public class PlayerStat : BaseStat
         defenceValue = tableData.defaultDefence + level * tableData.increaseDefence;
         criticalValue = tableData.defaultCritical + level * tableData.increaseCritical;
         attackSpeed = tableData.defaultAttackSpeed+ level * tableData.increaseAttackSpeed;
+
+        atlasName = tableData.atlasName;
+        fileName = tableData.fileName;  
     }
     #endregion
 }

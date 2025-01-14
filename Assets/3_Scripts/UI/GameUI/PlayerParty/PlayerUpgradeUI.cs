@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUpgradeUI : MonoBehaviour
+public class PlayerUpgradeUI : MonoBehaviour, IPlayerPartyUI
 {
     [SerializeField, Tooltip("0:Normal, 1:Skill, 2:Ultimate, 3 : Upgrade Frame")] Image[] frames;
     [SerializeField, Tooltip("0:Normal, 1:Skill, 2:Ultimate, 3: LevelupBtn, 4:LevelupGold")] Image[] icons;
@@ -28,5 +28,15 @@ public class PlayerUpgradeUI : MonoBehaviour
         icons[2].sprite = res.GetSpriteAtlas("Icon_Atlas_4", "Ultimate_Icon");
         icons[3].sprite = res.GetSpriteAtlas("Bar_Atlas_2", "Red_Long_Bar");
         icons[4].sprite = res.GetSpriteAtlas("Icon_Atlas_2", "Gold_Icon");
+    }
+
+    public void TurnOff()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void TurnOn()
+    {
+        //throw new System.NotImplementedException();
     }
 }

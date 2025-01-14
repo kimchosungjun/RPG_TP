@@ -1,12 +1,16 @@
+using PlayerTableClassGroup;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerPartyStatusUI : MonoBehaviour
+public class PlayerPartyStatusUI : MonoBehaviour, IPlayerPartyUI
 {
+    [SerializeField] GameObject uiFrameObject;
     [SerializeField, Tooltip("0:HP, 1:Atk, 2:Def, 3:Cri, 4:PlayerIcon")] Image[] icons;
     [SerializeField, Tooltip("0:Hp, 1:Atk, 2:Def, 3:Cir, 4:Player")] Image[] iconFrames;
     [SerializeField] PlayerPartyStatusButton[] buttons;
-
+    [SerializeField, Tooltip("0:HP, 1:Atk, 2:Def, 3:Cri, 4:Lv, 5:Name, 6 :ClassText")] Text[] characterStatTexts;
+    [SerializeField] Slider expSlider;
     public void Init()
     {
         SetImages();
@@ -28,7 +32,7 @@ public class PlayerPartyStatusUI : MonoBehaviour
         iconFrames[4].sprite = res.GetSpriteAtlas("Bar_Atlas_3", "PartyPlayerStatus_Frame");
 
         int slotCnt = buttons.Length;
-        for (int i=0; i <slotCnt; i++)
+        for (int i = 0; i < slotCnt; i++)
         {
             buttons[i].Init();
         }
@@ -36,6 +40,80 @@ public class PlayerPartyStatusUI : MonoBehaviour
 
     public void PressCharacter(int _id)
     {
+        List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
+        int cnt =players.Count;
+        for(int i=0; i<cnt; i++)
+        {
+            if (players[i].PlayerStat.GetSaveStat.playerTypeID == _id)
+            {
+                UpdatePlayerStat(players[i].PlayerStat);
+                return;
+            }
+        }
+    }
 
+    public void TurnOn()
+    {
+        if (uiFrameObject.activeSelf == false)
+            uiFrameObject.SetActive(true);
+        SharedMgr.UIMgr.GameUICtrl.GetModelCam.TurnOn();
+        UpdateCharacterButton();
+        PlayerStat stat = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.PlayerStat;
+        UpdatePlayerStat(stat);
+    }
+
+    public void TurnOff()
+    {
+        SharedMgr.UIMgr.GameUICtrl.GetModelCam.TurnOff();
+        if (uiFrameObject.activeSelf)
+            uiFrameObject.SetActive(false);
+    }
+    
+    public void UpdatePlayerStat(PlayerStat _stat)
+    {
+        PlayerLevelTableData lvTable = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData();
+        int curLv = _stat.GetSaveStat.currentLevel;
+        characterStatTexts[0].text = _stat.MaxHP.ToString();
+        characterStatTexts[1].text = _stat.Attack.ToString();
+        characterStatTexts[2].text = _stat.Defence.ToString();
+        characterStatTexts[3].text = _stat.Critical * 100 + "%";
+        characterStatTexts[4].text = curLv + "/" + lvTable.maxLevel;
+        characterStatTexts[5].text = _stat.GetActorName;
+
+        #region Class
+        // Later Revise 
+        if (_stat.Equals("전사"))
+            characterStatTexts[6].text = "근거리";
+        else
+            characterStatTexts[6].text = "원거리";
+        #endregion
+
+        if (lvTable.GetNeedExp(curLv)==-1)
+        {
+            expSlider.maxValue = 1f;
+            expSlider.value = 1f;
+        }
+        else
+        {
+            expSlider.maxValue = lvTable.GetNeedExp(curLv);
+            expSlider.value = _stat.GetSaveStat.currentExp;
+        }
+        SharedMgr.UIMgr.GameUICtrl.GetModelCam.ChangeModel(_stat.GetSaveStat.playerTypeID);
+    }
+
+    public void UpdateCharacterButton()
+    {
+        PlayerStat stat = null;
+        ResourceMgr res = SharedMgr.ResourceMgr;
+        List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
+        int slotCnt = buttons.Length;
+        int playerCnt = players.Count;
+        for (int i = 0; i < playerCnt; i++)
+        {
+            if (i > slotCnt - 1) break;
+            stat = players[i].PlayerStat;
+            int id = stat.GetSaveStat.playerTypeID;
+            buttons[i].SetButton(id,res.GetSpriteAtlas(stat.GetAtlasName,stat.GetFileName));
+        }
     }
 }

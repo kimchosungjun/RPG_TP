@@ -12,6 +12,10 @@ public class GameUICtrl : MonoBehaviour
         return !isConversationState;
     }
 
+    [Header("Raw Render : Model UI")]
+    [SerializeField] UIModelCam modelCam;
+    public UIModelCam GetModelCam { get { return modelCam; } }
+
     [Header("Camera Space")]
     [SerializeField] DashGaugeUI dashGaugeUI;
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
@@ -48,8 +52,11 @@ public class GameUICtrl : MonoBehaviour
     public void UILink()
     {
         SharedMgr.UIMgr.GameUICtrl = this;
-        
+        // Model UI
+        if(modelCam==null) modelCam =FindObjectOfType<UIModelCam>();    
+        // Camer Space
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
+        // Overlay
         if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<BossStatusUI>();   
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 

@@ -143,6 +143,8 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.increaseDefence);
         _reader.get(_row, ref _tableData.increaseCritical);
         _reader.get(_row, ref _tableData.increaseAttackSpeed);
+        _reader.get(_row, ref _tableData.atlasName);
+        _reader.get(_row, ref _tableData.fileName);
         return true;
     }
 

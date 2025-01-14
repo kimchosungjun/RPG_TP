@@ -105,9 +105,10 @@ namespace UIEnums
 
     public enum PARTY
     {
-        STATUS,
-        WEAPON,
-        SKILL
+        STATUS =0,
+        WEAPON =1,
+        SKILL_UPGRADE =2,
+        MAX=3
     }
 
     public enum GAMEUI

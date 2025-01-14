@@ -9,7 +9,7 @@ public class WeaponUpgradeView : MonoBehaviour
     [SerializeField] Transform parentTransform;
     List<WeaponUpgradeMatSlot> slots = new List<WeaponUpgradeMatSlot>();
 
-    [SerializeField, Tooltip("0:BackFrame, 1:EnhanceBtn, 2:ClearBtn, 3:AtkFrame, 4:AddFrame, 5:UseSlotFrame")] Image[] images;
+    [SerializeField, Tooltip("0:BackFrame, 1:EnhanceBtn, 2:ClearBtn, 3:AtkFrame, 4:AddFrame, 5:UseSlotFrame, 6:ExpSliderFrame")] Image[] images;
     [SerializeField,Tooltip(" 0:AtkIcon, 1:AddIcon, 2:Direction, 3:AddDirection,4:UseSlotIcon") ] Image[] icons;
     [SerializeField, Tooltip("0:WeaponName, 1:curLv, 2:NextLv, 3:CurAtk, 4:NextAtk, 5:curAdd, 6:nextAdd")] Text[] texts;
 
@@ -52,7 +52,8 @@ public class WeaponUpgradeView : MonoBehaviour
         images[3].sprite = indicateFrame;
         images[4].sprite = indicateFrame;
         images[5].sprite = res.GetSpriteAtlas("Slot_Atlas", "Item_Icon_Frame");
-        
+        images[6].sprite = res.GetSpriteAtlas("Bar_Atlas", "Loading_Bar");
+
         Sprite weaponIcon = res.GetSpriteAtlas("Icon_Atlas", "Weapon_Icon");
         Sprite directionIcon = res.GetSpriteAtlas("Icon_Atlas", "Next_Icon");
         icons[0].sprite = weaponIcon;

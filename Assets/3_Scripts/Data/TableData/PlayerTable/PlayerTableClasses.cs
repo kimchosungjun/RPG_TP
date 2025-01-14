@@ -25,6 +25,8 @@ namespace PlayerTableClassGroup
         public int increaseDefence;
         public float increaseCritical;  
         public float increaseAttackSpeed;
+        public string atlasName;
+        public string fileName;
     }
 
     [Serializable]
@@ -44,6 +46,11 @@ namespace PlayerTableClassGroup
             skillLevelupGolds = new int[actionMaxLevel - 1];
             ultimateLevelupGolds = new int[actionMaxLevel - 1];
         }
+
+        public int GetNeedExp(int _level) { if (maxLevel <= _level) return -1; return needExps[_level - 1]; }
+        public int GetNormalAttackLevelupGolds(int _level) { if (actionMaxLevel <= _level) return -1; return normalAttackLevelupGolds[_level - 1]; }
+        public int GetSkillLevelupGolds(int _level) { if (actionMaxLevel <= _level) return -1; return skillLevelupGolds[_level - 1]; }
+        public int GetUltimateLevelupGolds(int _level) { if (actionMaxLevel <= _level) return -1; return ultimateLevelupGolds[_level - 1]; }
     }
 
     [Serializable]

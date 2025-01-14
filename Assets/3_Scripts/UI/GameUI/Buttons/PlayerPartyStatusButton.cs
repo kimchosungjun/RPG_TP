@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,12 +21,12 @@ public class PlayerPartyStatusButton : MonoBehaviour
         button.interactable = false;
     }
 
-    public void SetButton(int _id, string _name)
+    public void SetButton(int _id, Sprite _icon)
     {
+        if (characterID == _id) return;
         characterID = _id;
-        string fileName = _name + "_Icon";
         buttonImages[1].color = Color.white;
-        buttonImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", fileName);
+        buttonImages[1].sprite = _icon;
         if(buttonImages[1].gameObject.activeSelf==false)
             buttonImages[1].gameObject.SetActive(true);
         button.interactable = true;
