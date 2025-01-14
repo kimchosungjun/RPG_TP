@@ -15,20 +15,26 @@ public class DashGaugeUI : MonoBehaviour
 
     [SerializeField] Image dashGauge;
     [SerializeField] Color[] colors;
+
+    public void Init()
+    {
+        dashGauge.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Dash_Gauge_Icon");
+    }
+
     public void ActiveGauge()
     {
-        dashGauge.gameObject.SetActive(true);
+        if (dashGauge.gameObject.activeSelf == false)
+            dashGauge.gameObject.SetActive(true);
     }
 
     public void InActiveGauge()
     {
-        dashGauge.gameObject.SetActive(false);
+        if (dashGauge.gameObject.activeSelf)
+            dashGauge.gameObject.SetActive(false);
     }
 
     public void SetGaugeAmount(float _amount)
     {
-        if(dashGauge.gameObject.activeSelf==false)
-            dashGauge.gameObject.SetActive(true);
         dashGauge.fillAmount = _amount;
         CheckGaugeColor();
     }

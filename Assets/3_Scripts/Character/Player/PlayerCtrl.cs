@@ -175,6 +175,7 @@ public class PlayerCtrl : MonoBehaviour
     #region Player Dash Gauge
     float dashGauge = 1f;
     bool showDashGauge = false;
+    bool isInActiveUI = true;
     float lastDashTime = 0f;
     [SerializeField] float increaseDashGaugePerSecond = 0.05f;
     public bool CanDash()
@@ -194,7 +195,10 @@ public class PlayerCtrl : MonoBehaviour
             StartCoroutine(CRecoveryDashGauge());
         }
         else
+        {
+            isInActiveUI = false;
             SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI.UseDashGauge();
+        }
         
     }
 
@@ -202,7 +206,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         DashGaugeUI dashGaugeUI = SharedMgr.UIMgr.GameUICtrl.GetDashGaugeUI;
         if (dashGaugeUI == null) yield break;
-        bool isInActiveUI = false;
+        isInActiveUI = false;
+        dashGaugeUI.ActiveGauge();
         while (true)
         {
             dashGauge += increaseDashGaugePerSecond * Time.deltaTime;
@@ -214,7 +219,7 @@ public class PlayerCtrl : MonoBehaviour
                 break;
             }
 
-            if(isInActiveUI == false && Time.time - lastDashTime > 3f )
+            if(isInActiveUI == false && Time.time - lastDashTime > 10f )
             {
                 dashGaugeUI.InActiveGauge();
                 isInActiveUI = true;
@@ -227,6 +232,7 @@ public class PlayerCtrl : MonoBehaviour
         showDashGauge = false;
     }
 
+    // Debuff 
     public void DecreaseDashGauge(float _dashGaugePercent)
     {
         float decreaseValue = dashGauge - _dashGaugePercent > 0f ? _dashGaugePercent: dashGauge - _dashGaugePercent;

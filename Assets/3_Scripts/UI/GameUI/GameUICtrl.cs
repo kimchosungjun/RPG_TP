@@ -54,7 +54,7 @@ public class GameUICtrl : MonoBehaviour
         SharedMgr.UIMgr.GameUICtrl = this;
         // Model UI
         if(modelCam==null) modelCam =FindObjectOfType<UIModelCam>();    
-        // Camer Space
+        // Camera Space
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
         // Overlay
         if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<BossStatusUI>();   
@@ -71,6 +71,11 @@ public class GameUICtrl : MonoBehaviour
 
     public void UIInit()
     {
+        // Model 
+        modelCam.Init();
+        // Camera Space
+        dashGaugeUI.Init();
+        // Overlay
         bossStatusUI.Init();    
         playerStatusUI.Init();
         playerChangeUI.Init();

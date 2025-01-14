@@ -9,7 +9,7 @@ public class UIModelCam : MonoBehaviour
     [SerializeField] CamModel[] models;
     [SerializeField] GameObject parent;
 
-    private void Awake()
+    public void Init()
     {
         int cnt = models.Length;
         for(int i=0; i < cnt; i++)
