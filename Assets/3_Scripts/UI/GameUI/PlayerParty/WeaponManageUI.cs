@@ -1,18 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
 {
+    [SerializeField] GameObject[] weaponManageParents;
     [SerializeField, Tooltip("0:Frame, 1:ScrollBar")] Image[] weaponManageImages;
-    [SerializeField] WeaponManageSlot[] slots;
     [SerializeField] SelectWeaponLevelupButton levelupButton;
     [SerializeField] ReplaceWeaponButton replaceButton;
+    [SerializeField] WeaponManageView manageView;
     [SerializeField] WeaponUpgradeView upgradeView;
+
+    public WeaponManageView GetManageView { get { return manageView; } }    
+
     public void Init()
     {
         if (levelupButton == null) levelupButton = GetComponentInChildren<SelectWeaponLevelupButton>();
         if (replaceButton == null) replaceButton = GetComponentInChildren<ReplaceWeaponButton>();
-        if(upgradeView==null) upgradeView= GetComponentInChildren<WeaponUpgradeView>(); 
+        if (manageView==null) manageView = GetComponentInChildren<WeaponManageView>();  
+        if (upgradeView==null) upgradeView= GetComponentInChildren<WeaponUpgradeView>(); 
         SetImages();
     }
 
@@ -25,22 +31,22 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
         replaceButton.Init();
 
         Sprite buttonFrameSprite = res.GetSpriteAtlas("Button_Atlas", "WeaponManage_Slot_Button");
-        int cnt = slots.Length;
-        for (int i = 0; i < cnt; i++)
-        {
-            slots[i].Init(buttonFrameSprite);
-        }
 
+        manageView.Init(buttonFrameSprite);
         upgradeView.Init(); 
-    }
-
-    public void TurnOff()
-    {
-        //throw new System.NotImplementedException();
     }
 
     public void TurnOn()
     {
-        //throw new System.NotImplementedException();
+        manageView.SetDataToWeaponList();
+        weaponManageParents[0].SetActive(true);
+        if (weaponManageParents[1].activeSelf)
+            weaponManageParents[1].SetActive(false);
+    }
+
+    public void TurnOff()
+    {
+        weaponManageParents[0].SetActive(false);
+        weaponManageParents[1].SetActive(false);
     }
 }

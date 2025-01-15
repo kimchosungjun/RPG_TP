@@ -1,4 +1,5 @@
 using ItemEnums;
+using ItemTableClassGroup;
 
 [System.Serializable]
 public class WeaponData : ItemData
@@ -58,6 +59,40 @@ public class WeaponData : ItemData
         atlasName = _tableData.atlasName;
         fileName = _tableData.fileName;
         uniqueID = SharedMgr.TableMgr.GetItem.GetWeaponUniqueID();
-        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon"); 
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+        weaponMaxLevel = SharedMgr.TableMgr.GetItem.GetWeaponUpgradeTableData().maxLevel;
+    }
+
+    public int GetCurrentAttackValue()
+    {
+        float value = attackValue;
+        WeaponTableData tableData = SharedMgr.TableMgr.GetItem.GetWeaponTableData(itemID);
+        if (tableData == null) return -1;
+        value += tableData.increaseAttackValue * (weaponCurrentLevel - 1);
+        return (int)value;
+    }
+
+    public int GetCurrentAdditionValue()
+    {
+        float value = effectValue;
+        WeaponTableData tableData = SharedMgr.TableMgr.GetItem.GetWeaponTableData(itemID);
+        if (tableData == null) return -1;
+        value += tableData.increaseAdditionEffectValue * (weaponCurrentLevel - 1);
+        return (int)(value * 100f);
+    }
+
+    public string GetAdditionalEffectName()
+    {
+        string result = string.Empty;
+        switch (WeaponEffect)
+        {
+            case WEAPONEFFECT.WEAPON_ATTACK:
+                result = "공격력%";
+                break;
+            case WEAPONEFFECT.WEAPON_CRITICAL:
+                result = "크리티컬 증가";
+                break;
+        }
+        return result;
     }
 }

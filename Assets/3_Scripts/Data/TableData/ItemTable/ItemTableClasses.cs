@@ -40,7 +40,7 @@ namespace ItemTableClassGroup
     [Serializable]
     public class WeaponTableData : ItemTableData
     {
-        public float attackValue;
+        public int attackValue;
         public int additionalEffect;
         public float additionEffectValue;
         public float increaseAttackValue;

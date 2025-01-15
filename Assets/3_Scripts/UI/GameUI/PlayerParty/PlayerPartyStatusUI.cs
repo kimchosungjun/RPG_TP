@@ -77,7 +77,7 @@ public class PlayerPartyStatusUI : MonoBehaviour, IPlayerPartyUI
         characterStatTexts[1].text = _stat.Attack.ToString();
         characterStatTexts[2].text = _stat.Defence.ToString();
         characterStatTexts[3].text = _stat.Critical * 100 + "%";
-        characterStatTexts[4].text = curLv + "/" + lvTable.maxLevel;
+        characterStatTexts[4].text = "Lv. "+ curLv + "/" + lvTable.maxLevel;
         characterStatTexts[5].text = _stat.GetActorName;
 
         #region Class
