@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UIEnums;
+using Photon.Realtime;
 
 public interface IPlayerPartyUI
 {
@@ -15,18 +16,25 @@ public class PlayerPartyUI : MonoBehaviour
     bool isActive = false;
     IPlayerPartyUI[] partyUISet;
     PARTY currentShowType = PARTY.STATUS;
+    public PARTY GetCurrentUIType { get { return currentShowType; }  }
     
     [SerializeField] GameObject playerPartyUISetFrame;
     [SerializeField] PartySideBarUI partySideBarUI;
     [SerializeField] PlayerPartyStatusUI playerPartyStatusUI;
     [SerializeField] WeaponManageUI weaponManageUI;
     [SerializeField] PlayerUpgradeUI playerUpgradeUI;
+    [SerializeField] CharacterSlotSetUI characterSlotSetUI;
     [SerializeField] Image exitBtnImage;
 
     //public PartySideBarUI GetPartySideBarUI { get { return partySideBarUI; } }
     public PlayerPartyStatusUI GetPlayerPartyStatusUI { get { return playerPartyStatusUI; } }
     public WeaponManageUI GetWeaponManageUI { get {return weaponManageUI; } }   
     public PlayerUpgradeUI GetPlayerUpgradeUI { get {return playerUpgradeUI; } }
+    public CharacterSlotSetUI GetCharacterSlotSetUI { get { return characterSlotSetUI; } }
+
+    [Header("Character Button Effect")]
+    [SerializeField] RectTransform effectTransform;
+    public RectTransform GetEffectTransform { get { return effectTransform; } }
 
     #region Init UI 
     public void Init()
@@ -43,6 +51,7 @@ public class PlayerPartyUI : MonoBehaviour
         if(playerPartyStatusUI==null) playerPartyStatusUI = GetComponentInChildren<PlayerPartyStatusUI>();    
         if(weaponManageUI == null) weaponManageUI= GetComponentInChildren<WeaponManageUI>();    
         if (playerUpgradeUI==null)  playerUpgradeUI= GetComponentInChildren<PlayerUpgradeUI>(); 
+        if(characterSlotSetUI ==null) characterSlotSetUI = GetComponentInChildren<CharacterSlotSetUI>();
     }
 
     public void InitPartyUISet()
@@ -59,6 +68,7 @@ public class PlayerPartyUI : MonoBehaviour
         playerPartyStatusUI.Init();
         weaponManageUI.Init();
         playerUpgradeUI.Init();
+        characterSlotSetUI.Init();
         exitBtnImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Back_Icon");
     }
     #endregion
@@ -108,6 +118,19 @@ public class PlayerPartyUI : MonoBehaviour
     {
         currentShowType = _changeUI;
         ManageActiveUI();
+    }
+
+    public void InputUnderCharacterButton(int _characterID)
+    {
+        switch (currentShowType)
+        {
+            case PARTY.WEAPON:
+                weaponManageUI.ChangeCharacter(_characterID);
+                break;
+            case PARTY.SKILL_UPGRADE:
+                
+                break;
+        }
     }
 
 }

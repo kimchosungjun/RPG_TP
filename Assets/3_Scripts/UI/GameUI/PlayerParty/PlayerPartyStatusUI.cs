@@ -58,8 +58,9 @@ public class PlayerPartyStatusUI : MonoBehaviour, IPlayerPartyUI
             uiFrameObject.SetActive(true);
         SharedMgr.UIMgr.GameUICtrl.GetModelCam.TurnOn();
         UpdateCharacterButton();
-        PlayerStat stat = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.PlayerStat;
-        UpdatePlayerStat(stat);
+        buttons[0].PressButton();
+
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOff();    
     }
 
     public void TurnOff()
@@ -82,10 +83,18 @@ public class PlayerPartyStatusUI : MonoBehaviour, IPlayerPartyUI
 
         #region Class
         // Later Revise 
-        if (_stat.Equals("전사"))
-            characterStatTexts[6].text = "근거리";
-        else
-            characterStatTexts[6].text = "원거리";
+
+        switch (_stat.GetBattleType)
+        {
+            case PlayerEnums.BATTLE_TYPE.NEAR:
+                icons[4].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Attack_Icon");
+                characterStatTexts[6].text = "근거리 전투";
+                break;
+            case PlayerEnums.BATTLE_TYPE.FAR:
+                icons[4].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Far_Icon");
+                characterStatTexts[6].text = "원거리 전투";
+                break;
+        }
         #endregion
 
         if (lvTable.GetNeedExp(curLv)==-1)

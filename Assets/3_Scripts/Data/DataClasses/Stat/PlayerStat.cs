@@ -1,6 +1,8 @@
 using UnityEngine;
 using PlayerTableClassGroup;
 using MonsterEnums;
+using ItemEnums;
+using PlayerEnums;
 
 /// <summary>
 /// 파일로부터 불러와 사용하는 스탯 데이터 : 고정 데이터
@@ -17,6 +19,8 @@ public class PlayerStat : BaseStat
     [SerializeField] protected PlayerSaveStat currentStat = null;
     [SerializeField] protected string atlasName;
     [SerializeField] protected string fileName;
+    [SerializeField] protected WEAPONTYPE holdWeaponType;
+    [SerializeField] protected BATTLE_TYPE battleType;
     #endregion
 
     #region Public
@@ -28,6 +32,9 @@ public class PlayerStat : BaseStat
     public PlayerSaveStat GetSaveStat{ get { return currentStat; } }
     public string GetAtlasName { get { return atlasName; } }
     public string GetFileName { get { return fileName; } }
+
+    public WEAPONTYPE GetWeaponType { get { return holdWeaponType; } }
+    public BATTLE_TYPE GetBattleType { get { return battleType; } }
     #endregion
 
     #region Load Stat
@@ -53,7 +60,9 @@ public class PlayerStat : BaseStat
         attackSpeed = tableData.defaultAttackSpeed+ level * tableData.increaseAttackSpeed;
 
         atlasName = tableData.atlasName;
-        fileName = tableData.fileName;  
+        fileName = tableData.fileName;
+        holdWeaponType = tableData.GetWeaponType();
+        battleType = tableData.GetBattleType();
     }
     #endregion
 }

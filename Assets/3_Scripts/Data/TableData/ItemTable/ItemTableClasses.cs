@@ -46,6 +46,7 @@ namespace ItemTableClassGroup
         public float increaseAttackValue;
         public float increaseAdditionEffectValue;
         public int price;
+        public int weaponType;
     }
 
 
@@ -60,6 +61,18 @@ namespace ItemTableClassGroup
         {
             needExps = new int[maxLevel - 1];   
             needGolds = new int[maxLevel - 1];  
+        }
+
+        public int GetNeedExp(int _level)
+        {
+            if (_level == maxLevel) return -1;
+            return needExps[_level-1]; 
+        }
+
+        public int GetNeedGold(int _level)
+        {
+            if (_level == maxLevel) return -1;
+            return needGolds[_level - 1];
         }
     }
 }

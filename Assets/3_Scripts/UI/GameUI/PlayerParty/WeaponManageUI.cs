@@ -1,3 +1,4 @@
+using ItemEnums;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
     [SerializeField] WeaponManageView manageView;
     [SerializeField] WeaponUpgradeView upgradeView;
 
+    List<WeaponData> weapons = null;
     public WeaponManageView GetManageView { get { return manageView; } }    
 
     public void Init()
@@ -38,15 +40,26 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
 
     public void TurnOn()
     {
-        manageView.SetDataToWeaponList();
         weaponManageParents[0].SetActive(true);
         if (weaponManageParents[1].activeSelf)
             weaponManageParents[1].SetActive(false);
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOn();
     }
 
     public void TurnOff()
     {
         weaponManageParents[0].SetActive(false);
         weaponManageParents[1].SetActive(false);
+    }
+
+    public void ChangeCharacter(int _id)
+    {
+        if (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id) == null) return;
+        WEAPONTYPE type = SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id).GetWeaponType();
+
+        weapons = SharedMgr.InventoryMgr.GetSortWeaponGroup(type);
+        if (weapons == null) return;
+
+        manageView.SetDataToWeaponList(weapons);
     }
 }

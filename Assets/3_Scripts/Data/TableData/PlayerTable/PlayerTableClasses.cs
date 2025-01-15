@@ -1,3 +1,5 @@
+using ItemEnums;
+using PlayerEnums;
 using System;
 
 namespace PlayerTableClassGroup
@@ -27,6 +29,11 @@ namespace PlayerTableClassGroup
         public float increaseAttackSpeed;
         public string atlasName;
         public string fileName;
+        public int weaponType;
+        public int battleType;
+
+        public WEAPONTYPE GetWeaponType() { return (WEAPONTYPE)weaponType; }
+        public BATTLE_TYPE GetBattleType() { return (BATTLE_TYPE) battleType; }
     }
 
     [Serializable]
@@ -57,7 +64,7 @@ namespace PlayerTableClassGroup
     public class PlayerNormalAttackTableData
     {
         public int id;
-        public int level;
+        public int level =1;
         public int combo;
         public string name;
         public string description;
@@ -78,7 +85,7 @@ namespace PlayerTableClassGroup
     public class PlayerConditionSkillTableData
     {
         public int id;
-        public int level;
+        public int level =1;
         public int combo;
         public string name;
         public string description;
@@ -108,7 +115,7 @@ namespace PlayerTableClassGroup
     public class PlayerAttackSkillTableData
     {
         public int id;
-        public int level;
+        public int level = 1;
         public int combo;
         public string name;
         public string description;

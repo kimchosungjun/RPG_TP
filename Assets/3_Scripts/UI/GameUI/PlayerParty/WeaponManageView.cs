@@ -1,6 +1,5 @@
 using ItemTableClassGroup;
 using PlayerTableClassGroup;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,9 +25,9 @@ public class WeaponManageView : MonoBehaviour
             infoParents[1].SetActive(false);
     }
 
-    public void SetDataToWeaponList()
+    public void SetDataToWeaponList(List<WeaponData> _weapons)
     {
-        List<WeaponData> dataSet = SharedMgr.InventoryMgr.GetWeaponInventory();
+        List<WeaponData> dataSet = _weapons;
         int dataSetCnt = dataSet.Count;
         int slotCnt = slots.Length;
         for (int i = 0; i < dataSetCnt; i++)

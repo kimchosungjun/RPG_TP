@@ -29,13 +29,12 @@ public class PlayerUpgradeUI : MonoBehaviour, IPlayerPartyUI
         icons[3].sprite = res.GetSpriteAtlas("Bar_Atlas_2", "Red_Long_Bar");
         icons[4].sprite = res.GetSpriteAtlas("Icon_Atlas_2", "Gold_Icon");
     }
-
-    public void TurnOff()
+    public void TurnOn()
     {
-        //throw new System.NotImplementedException();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOn();
     }
 
-    public void TurnOn()
+    public void TurnOff()
     {
         //throw new System.NotImplementedException();
     }

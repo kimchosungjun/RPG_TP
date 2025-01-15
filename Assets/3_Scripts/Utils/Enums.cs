@@ -47,6 +47,12 @@ namespace PlayerEnums
         ULTIMATESKILL,
         LEVEL
     }
+
+    public enum BATTLE_TYPE
+    {
+        NEAR=0,
+        FAR=1
+    }
 }
 
 // 몬스터

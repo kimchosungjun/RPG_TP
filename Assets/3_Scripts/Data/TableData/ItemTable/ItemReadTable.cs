@@ -128,6 +128,7 @@ public partial class ItemTable : BaseTable
         _reader.get(_row, ref _tableData.price);
         _reader.get(_row, ref _tableData.atlasName);
         _reader.get(_row, ref _tableData.fileName);
+        _reader.get(_row, ref _tableData.weaponType);
         return true;
     }
 

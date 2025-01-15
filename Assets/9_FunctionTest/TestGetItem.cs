@@ -6,28 +6,25 @@ public class TestGetItem : MonoBehaviour
 {
     [SerializeField] int etcId;
     [SerializeField] int cnt;
-    [SerializeField] int weaponID;
+    //[SerializeField] int weaponID;
 
 
     private void OnGUI()
     {
-        if(GUI.Button (new Rect(300,300,50,50), "기타 아이템 습득"))
+        if(GUI.Button (new Rect(300,300,50,50), "스태프 아이템 습득"))
         {
-            GetEtc();
+            //GetEtc();
+            GetWeapon(0,1,204);
         }
-        if (GUI.Button(new Rect(400, 300, 50, 50), "소비 아이템 습득"))
+        if (GUI.Button(new Rect(400, 300, 50, 50), "활 아이템 습득"))
         {
-            GetConsume();
+            //GetConsume();
+            GetWeapon(0,1,203);
         }
-        if (GUI.Button(new Rect(500, 300, 50, 50), "무기 아이템 습득"))
+        if (GUI.Button(new Rect(500, 300, 50, 50), "너클 아이템 습득"))
         {
-            GetWeapon();
+            GetWeapon(0,1,201);
         }
-        //if (GUI.Button(new Rect(100, 600, 50, 50), "카메라 효과"))
-        //{
-        //    PressZoom();
-        //}
-
     }
 
     public void GetEtc()
@@ -44,7 +41,7 @@ public class TestGetItem : MonoBehaviour
         SharedMgr.InventoryMgr.AddItem(data);
     }
 
-    public void GetWeapon()
+    public void GetWeapon(int etc, int cnt, int weaponID)
     {
         WeaponData data = new WeaponData();
         data.SetData(SharedMgr.TableMgr.GetItem.GetWeaponTableData(weaponID));

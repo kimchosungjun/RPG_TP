@@ -7,6 +7,7 @@ public class PlayerPartyStatusButton : MonoBehaviour
     [SerializeField] Button button;
     int characterID = -1;
     Color halfColor = Color.white;
+
     public void Init()
     {
         SetImage();
@@ -36,5 +37,24 @@ public class PlayerPartyStatusButton : MonoBehaviour
     {
         if (characterID == -1) return;
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetPlayerPartyStatusUI.PressCharacter(characterID);
+        SetEffectRect();
+    }
+
+    public void PressUnderCharacterButton()
+    {
+        if (characterID == -1) return;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.InputUnderCharacterButton(characterID);
+        SetEffectRect();
+    }
+
+    public void SetEffectRect()
+    {
+        RectTransform rect = SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetEffectTransform;
+        if (rect == null) return;
+
+        rect.SetParent(this.transform);
+        rect.anchoredPosition = Vector2.zero;
+        if (rect.gameObject.activeSelf == false)
+            rect.gameObject.SetActive(true);
     }
 }
