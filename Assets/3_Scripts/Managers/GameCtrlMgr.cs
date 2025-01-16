@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GameCtrlMgr : MonoBehaviour
 {
+    #region Player
     [SerializeField] PlayerCtrl playerCtrl;
     public PlayerCtrl GetPlayerCtrl { get { return playerCtrl; } }
 
+    [SerializeField] PlayerStatCtrl playerStatCtrl;
+    public PlayerStatCtrl GetPlayerStatCtrl { get { return playerStatCtrl; } }
+    #endregion
+
+    #region Camera
     [SerializeField] CameraCtrl cameraCtrl;
     public CameraCtrl GetCameraCtrl { get {return cameraCtrl; } }
+    #endregion
 
     private void Awake()
     {
@@ -22,5 +29,7 @@ public class GameCtrlMgr : MonoBehaviour
             playerCtrl = FindObjectOfType<PlayerCtrl>();
         if (cameraCtrl == null)
             cameraCtrl = FindObjectOfType<CameraCtrl>();
+        if(playerStatCtrl==null)
+            playerStatCtrl = GetComponent<PlayerStatCtrl>();
     }
 }

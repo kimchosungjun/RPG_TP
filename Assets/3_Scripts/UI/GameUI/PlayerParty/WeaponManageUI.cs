@@ -13,8 +13,15 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
     [SerializeField] WeaponUpgradeView upgradeView;
 
     List<WeaponData> weapons = null;
-    public WeaponManageView GetManageView { get { return manageView; } }    
+    public WeaponManageView GetManageView { get { return manageView; } }
 
+    #region Select Data
+    int currentSelectCharacterID = -1;
+    public int GetCurrentSelectCharacterID { get { return currentSelectCharacterID; } }
+
+    [SerializeField] WeaponData currentSelectWeaponData = null;
+    public WeaponData CurrentSelectWeaponData { get { return currentSelectWeaponData; }  set { currentSelectWeaponData = value; } }
+    #endregion
     public void Init()
     {
         if (levelupButton == null) levelupButton = GetComponentInChildren<SelectWeaponLevelupButton>();
@@ -48,6 +55,7 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
 
     public void TurnOff()
     {
+        manageView.ClearWeaponInfos();
         weaponManageParents[0].SetActive(false);
         weaponManageParents[1].SetActive(false);
     }
@@ -56,10 +64,33 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
     {
         if (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id) == null) return;
         WEAPONTYPE type = SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id).GetWeaponType();
+        currentSelectCharacterID = _id;
 
         weapons = SharedMgr.InventoryMgr.GetSortWeaponGroup(type);
-        if (weapons == null) return;
-
         manageView.SetDataToWeaponList(weapons);
+        manageView.ClearWeaponInfos();
+        // To Do Reset Weapon Info
+    }
+
+    public void ChangeHoldWeapon()
+    {
+        PlayerStat stat = SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(currentSelectCharacterID);
+        if (stat == null) return;
+
+        WeaponData holdWeapon = SharedMgr.InventoryMgr.GetHoldWeaponData(stat.HoldWeaponUniqueID);
+        stat.HoldWeaponUniqueID = currentSelectWeaponData.uniqueID;
+        SharedMgr.InventoryMgr.ChangeHoldWeapon(holdWeapon, currentSelectWeaponData, currentSelectCharacterID);
+        manageView.PressWeaponSlot(currentSelectWeaponData);
+        // To Do Update Info UI
+    }
+
+    public void SelectLevelUpButton()
+    {
+        if (weaponManageParents[0].activeSelf)
+            weaponManageParents[0].SetActive(false);
+        if (weaponManageParents[1].activeSelf == false)
+            weaponManageParents[1].SetActive(true);
+        upgradeView.UpdateMatSlots();
+        upgradeView.SetWeaponData(currentSelectWeaponData);
     }
 }

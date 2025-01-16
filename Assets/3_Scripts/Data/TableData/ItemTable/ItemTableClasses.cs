@@ -43,7 +43,7 @@ namespace ItemTableClassGroup
         public int attackValue;
         public int additionalEffect;
         public float additionEffectValue;
-        public float increaseAttackValue;
+        public int increaseAttackValue;
         public float increaseAdditionEffectValue;
         public int price;
         public int weaponType;

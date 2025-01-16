@@ -391,15 +391,16 @@ public class InventoryMgr
     #endregion
 
     #region Hold Weapon 
-    public void ChangeHoldWeapon(int _legacyID, WeaponData _newWeapon)
+    public void ChangeHoldWeapon(WeaponData _legacyWeapon ,WeaponData _newWeapon, int _characterID)
     {
-        if (holdWeaponGroup.ContainsKey(_legacyID))
+        if (_legacyWeapon!=null && holdWeaponGroup.ContainsKey(_legacyWeapon.uniqueID))
         {
-            holdWeaponGroup[_legacyID].TakeOff();
-            holdWeaponGroup.Remove(_legacyID);
+            holdWeaponGroup[_legacyWeapon.uniqueID].TakeOff();
+            holdWeaponGroup.Remove(_legacyWeapon.uniqueID);
         }
+        _newWeapon.holdPlayerID = _characterID;
+        _newWeapon.Use(_characterID);
         holdWeaponGroup.Add(_newWeapon.uniqueID, _newWeapon);
-
         // To Do 랠리포인트 
     }
 
@@ -410,6 +411,13 @@ public class InventoryMgr
         int cnt = weaponSortGroup[_weaponType].Count;
         if (cnt == 0) return null;
         return weaponSortGroup[_weaponType];
+    }
+
+    public WeaponData GetHoldWeaponData(int _uniqueID)
+    {
+        if(holdWeaponGroup.ContainsKey(_uniqueID))
+            return holdWeaponGroup[_uniqueID];
+        return null;
     }
 
     #endregion

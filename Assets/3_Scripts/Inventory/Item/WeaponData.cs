@@ -1,8 +1,9 @@
 using ItemEnums;
 using ItemTableClassGroup;
 using System;
+using System.Diagnostics;
 
-[System.Serializable]
+[Serializable]
 public class WeaponData : ItemData
 {
     public int uniqueID;
@@ -12,13 +13,14 @@ public class WeaponData : ItemData
     // Exp & Level
     public int weaponCurrentExp;
     public int weaponMaxExp;
-    public int weaponCurrentLevel;
+    public int weaponCurrentLevel = 1;
     public int weaponMaxLevel;
     // Stat
-    public float attackValue;
+    public int attackValue;
     public float effectValue;
+    public float GetEffectValue() { return effectValue * 100; }
     //public int weaponEffect;
-  
+
     // Enum 값으로 변환 후 저장할 속성
     public WEAPONTYPE WeaponType { get; private set; }
     public WEAPONEFFECT WeaponEffect { get; private set; }
@@ -50,7 +52,7 @@ public class WeaponData : ItemData
         itemName = _tableData.name;
         itemDescription = _tableData.description;
         weaponPrice = _tableData.price;
-        itemType = (int)ITEMTYPE.ITEM_ETC;
+        itemType = (int)ITEMTYPE.ITEM_WEAPON;
         itemCnt = 1;
         
         attackValue = _tableData.attackValue;
@@ -66,18 +68,23 @@ public class WeaponData : ItemData
         //weaponEffect = _tableData.additionalEffect;
     }
 
-    public void ApplyEnhance(Tuple<int, int> _enhanceData)
+    public void ApplyEnhance(int _exp)
     {
-        weaponCurrentLevel += _enhanceData.Item1;
-        weaponCurrentExp = _enhanceData.Item2;
-
-        if (weaponCurrentLevel == weaponMaxLevel)
-            weaponMaxExp = -1;
-        else
-            weaponMaxExp = SharedMgr.TableMgr.GetItem.GetWeaponUpgradeTableData().GetNeedExp(weaponCurrentLevel);
+        Tuple<int, int, int, float, int> enhanceResult = PredictEnhance(_exp);
+        weaponCurrentLevel = enhanceResult.Item1;
+        weaponCurrentExp = enhanceResult.Item2;
+        attackValue = enhanceResult.Item3;  
+        effectValue = enhanceResult.Item4 / 100f;
+        weaponMaxExp = enhanceResult.Item5; 
     }
 
-    public Tuple<int, int> PredictEnhance(int _exp)
+
+    /// <summary>
+    /// Lv / Exp / Atk / Additional Value / Max Exp
+    /// </summary>
+    /// <param name="_exp"></param>
+    /// <returns></returns>
+    public Tuple<int, int, int, float, int> PredictEnhance(int _exp)
     {
         int getExp = _exp;
         int needExp = weaponMaxExp;
@@ -100,26 +107,19 @@ public class WeaponData : ItemData
                 break;
             }
         }
-        Tuple<int, int> result = new Tuple<int, int>(predictLevel, predictExp);
+
+        WeaponTableData tableData = SharedMgr.TableMgr.GetItem.GetWeaponTableData(itemID);
+        int predictAtkValue = attackValue;
+        float predictAdditionValue = effectValue;
+        if (tableData != null)
+        {
+            int diff = predictLevel - weaponCurrentLevel;
+            predictAtkValue += tableData.increaseAttackValue * diff;
+            predictAdditionValue += tableData.increaseAdditionEffectValue * diff;
+            predictAdditionValue *= 100;
+        }
+        Tuple<int, int, int, float, int> result = new Tuple<int, int, int, float, int>(predictLevel, predictExp, predictAtkValue, predictAdditionValue, needExp);
         return result;
-    }
-
-    public int GetCurrentAttackValue()
-    {
-        float value = attackValue;
-        WeaponTableData tableData = SharedMgr.TableMgr.GetItem.GetWeaponTableData(itemID);
-        if (tableData == null) return -1;
-        value += tableData.increaseAttackValue * (weaponCurrentLevel - 1);
-        return (int)value;
-    }
-
-    public int GetCurrentAdditionValue()
-    {
-        float value = effectValue;
-        WeaponTableData tableData = SharedMgr.TableMgr.GetItem.GetWeaponTableData(itemID);
-        if (tableData == null) return -1;
-        value += tableData.increaseAdditionEffectValue * (weaponCurrentLevel - 1);
-        return (int)(value * 100f);
     }
 
     public string GetAdditionalEffectName()

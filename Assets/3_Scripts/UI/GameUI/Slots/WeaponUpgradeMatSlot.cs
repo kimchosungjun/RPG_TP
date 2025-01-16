@@ -7,17 +7,24 @@ public class WeaponUpgradeMatSlot : MonoBehaviour
     [SerializeField] Button button;
     [SerializeField] Text cntText;
     EtcData data = null;
-
-    public void Init(EtcData _data)
+    WeaponUpgradeView view = null;
+    public void Init(EtcData _data, WeaponUpgradeView _view)
     {
         images[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "WeaponManage_Slot_Button");
-        SetData(data);
+        SetData(_data);
+        view = _view;
+    }
+
+    public void SetData() 
+    {
+        data = null;
+        this.gameObject.SetActive(false);
     }
 
     public void SetData(EtcData _data)
     {
-        data = _data; 
-        images[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas(_data.atlasName,_data.fileName+"_Icon");
+        data = _data;
+        images[1].sprite = _data.GetIcon;
         cntText.text = "X"+data.itemCnt;
 
         if (images[1].gameObject.activeSelf == false)
@@ -38,6 +45,7 @@ public class WeaponUpgradeMatSlot : MonoBehaviour
 
     public void PressMatSlot()
     {
-        Debug.Log("snf ");
+        if(view==null) { Debug.LogError("Error : Init"); return; }
+        view.PressMatEctButton(data);
     }
 }

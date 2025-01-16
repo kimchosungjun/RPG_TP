@@ -13,8 +13,8 @@ public class TestGetItem : MonoBehaviour
     {
         if(GUI.Button (new Rect(300,300,50,50), "스태프 아이템 습득"))
         {
-            //GetEtc();
-            GetWeapon(0,1,204);
+            GetEtc();
+            //GetWeapon(0,1,204);
         }
         if (GUI.Button(new Rect(400, 300, 50, 50), "활 아이템 습득"))
         {

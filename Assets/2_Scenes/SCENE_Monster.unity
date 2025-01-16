@@ -4040,7 +4040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &261552015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4090,7 +4090,17 @@ MonoBehaviour:
   - {fileID: 17900306}
   - {fileID: 971240105}
   - {fileID: 1677991281}
-  texts: []
+  texts:
+  - {fileID: 1647718239}
+  - {fileID: 25680156}
+  - {fileID: 1790943073}
+  - {fileID: 574290710}
+  - {fileID: 1527754489}
+  - {fileID: 82442458}
+  - {fileID: 338193113}
+  - {fileID: 1158165679}
+  - {fileID: 999045406}
+  expSlider: {fileID: 453282756}
 --- !u!1 &263491488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4538,8 +4548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d19c84e8f7ade41be880d76e556b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  etcId: 0
-  cnt: 2
+  etcId: 2
+  cnt: 10
 --- !u!1 &295859703
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,7 +6182,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1346756860}
   m_HandleRect: {fileID: 1346756859}
   m_Direction: 2
@@ -7103,7 +7113,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 463075033}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 261552016}
+        m_TargetAssemblyTypeName: WeaponUpgradeView, Assembly-CSharp
+        m_MethodName: PressUseMatSlotButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &463654865
 GameObject:
   m_ObjectHideFlags: 0
@@ -7260,7 +7282,8 @@ MonoBehaviour:
   - {fileID: 1436479214}
   - {fileID: 1329599203}
   - {fileID: 1251276928}
-  levelUpButton: {fileID: 1250908454}
+  replaceButton: {fileID: 1939510742}
+  levelUpButton: {fileID: 1250908457}
 --- !u!1 &472211365
 GameObject:
   m_ObjectHideFlags: 0
@@ -7692,6 +7715,23 @@ MonoBehaviour:
   replaceButton: {fileID: 1939510742}
   manageView: {fileID: 471054334}
   upgradeView: {fileID: 261552016}
+  currentSelectWeaponData:
+    itemID: 0
+    itemName: 
+    itemDescription: 
+    itemType: 0
+    itemCnt: 0
+    fileName: 
+    atlasName: 
+    uniqueID: 0
+    holdPlayerID: -1
+    weaponPrice: 0
+    weaponCurrentExp: 0
+    weaponMaxExp: 0
+    weaponCurrentLevel: 1
+    weaponMaxLevel: 0
+    attackValue: 0
+    effectValue: 0
 --- !u!1 &506863597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9696,7 +9736,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645766710}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10370,7 +10410,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 680245185}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 261552016}
+        m_TargetAssemblyTypeName: WeaponUpgradeView, Assembly-CSharp
+        m_MethodName: DecideEnhanceWeapon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &680245185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13760,6 +13812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 919375369}
   - component: {fileID: 919375368}
+  - component: {fileID: 919375370}
   m_Layer: 0
   m_Name: GameCtrlMgr
   m_TagString: Untagged
@@ -13780,7 +13833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCtrl: {fileID: 241610177}
-  cameraCtrl: {fileID: 0}
+  playerStatCtrl: {fileID: 919375370}
+  cameraCtrl: {fileID: 7110839287028166752}
 --- !u!4 &919375369
 Transform:
   m_ObjectHideFlags: 0
@@ -13796,6 +13850,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &919375370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919375367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9242b1b1f6163541a31ce9508fd813d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930424035
 GameObject:
   m_ObjectHideFlags: 0
@@ -17474,7 +17540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -17494,7 +17560,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 0
 --- !u!222 &1158165680
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19474,6 +19540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonImage: {fileID: 1250908455}
+  button: {fileID: 1250908454}
 --- !u!1 &1251276926
 GameObject:
   m_ObjectHideFlags: 0
@@ -21140,7 +21207,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1381069320}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 261552016}
+        m_TargetAssemblyTypeName: WeaponUpgradeView, Assembly-CSharp
+        m_MethodName: ClearUseMatSlot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1381069320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27517,9 +27596,9 @@ RectTransform:
   - {fileID: 228750944}
   - {fileID: 525882952}
   - {fileID: 1436479213}
-  - {fileID: 1250908453}
   - {fileID: 1329599202}
   - {fileID: 1251276927}
+  - {fileID: 1250908453}
   m_Father: {fileID: 2008757363}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30809,6 +30888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonImage: {fileID: 1939510740}
+  button: {fileID: 1939510739}
 --- !u!1 &1940116025
 GameObject:
   m_ObjectHideFlags: 0
@@ -56265,6 +56345,7 @@ MonoBehaviour:
     fileName: 
     holdWeaponType: 0
     battleType: 0
+    HoldWeaponUniqueID: -1
   playerActionControl: {fileID: 5866666020441516154}
   playerStatControl: {fileID: 5866666020441516157}
   playerMovementControl: {fileID: 5866666020441516158}
@@ -59082,6 +59163,7 @@ MonoBehaviour:
     fileName: 
     holdWeaponType: 0
     battleType: 0
+    HoldWeaponUniqueID: -1
   playerActionControl: {fileID: 6621925900300702759}
   playerStatControl: {fileID: 6621925900300702761}
   playerMovementControl: {fileID: 6621925900300702762}
@@ -63765,6 +63847,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7110839287028166748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7110839287028166752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9027356401048517839, guid: 4853107dc8f236e48aab5e9b29c90f73,
+    type: 3}
+  m_PrefabInstance: {fileID: 7110839287028166748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce632281109d8b4a838f5ad792b4023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7113277550642009517
 GameObject:
   m_ObjectHideFlags: 0

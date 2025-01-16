@@ -1,6 +1,5 @@
 using UnityEngine;
 using PlayerTableClassGroup;
-using MonsterEnums;
 using ItemEnums;
 using PlayerEnums;
 
@@ -21,9 +20,11 @@ public class PlayerStat : BaseStat
     [SerializeField] protected string fileName;
     [SerializeField] protected WEAPONTYPE holdWeaponType;
     [SerializeField] protected BATTLE_TYPE battleType;
+
     #endregion
 
     #region Public
+    public int HoldWeaponUniqueID = -1;
     public int Attack { get { return attackValue; } set { attackValue = value; } }
     public float Critical { get { return criticalValue; } set { criticalValue = value; } }
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
@@ -63,6 +64,7 @@ public class PlayerStat : BaseStat
         fileName = tableData.fileName;
         holdWeaponType = tableData.GetWeaponType();
         battleType = tableData.GetBattleType();
+        SharedMgr.GameCtrlMgr.GetPlayerStatCtrl?.AddPlayerStat(this);
     }
     #endregion
 }
