@@ -25,12 +25,14 @@ public class PlayerPartyUI : MonoBehaviour
     [SerializeField] PlayerUpgradeUI playerUpgradeUI;
     [SerializeField] CharacterSlotSetUI characterSlotSetUI;
     [SerializeField] Image exitBtnImage;
+    [SerializeField] InventoryGoldUI goldUI;
 
     //public PartySideBarUI GetPartySideBarUI { get { return partySideBarUI; } }
     public PlayerPartyStatusUI GetPlayerPartyStatusUI { get { return playerPartyStatusUI; } }
     public WeaponManageUI GetWeaponManageUI { get {return weaponManageUI; } }   
     public PlayerUpgradeUI GetPlayerUpgradeUI { get {return playerUpgradeUI; } }
     public CharacterSlotSetUI GetCharacterSlotSetUI { get { return characterSlotSetUI; } }
+    public InventoryGoldUI GetInventoryGoldUI { get {   return goldUI; } }  
 
     [Header("Character Button Effect")]
     [SerializeField] RectTransform effectTransform;
@@ -52,6 +54,7 @@ public class PlayerPartyUI : MonoBehaviour
         if(weaponManageUI == null) weaponManageUI= GetComponentInChildren<WeaponManageUI>();    
         if (playerUpgradeUI==null)  playerUpgradeUI= GetComponentInChildren<PlayerUpgradeUI>(); 
         if(characterSlotSetUI ==null) characterSlotSetUI = GetComponentInChildren<CharacterSlotSetUI>();
+        if (goldUI == null) goldUI = GetComponentInChildren<InventoryGoldUI>();
     }
 
     public void InitPartyUISet()
@@ -70,6 +73,7 @@ public class PlayerPartyUI : MonoBehaviour
         playerUpgradeUI.Init();
         characterSlotSetUI.Init();
         exitBtnImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Back_Icon");
+        goldUI.Init();
     }
     #endregion
 
@@ -128,8 +132,22 @@ public class PlayerPartyUI : MonoBehaviour
                 weaponManageUI.ChangeCharacter(_characterID);
                 break;
             case PARTY.SKILL_UPGRADE:
-                
+                playerUpgradeUI.ChangeCharacter(_characterID);
                 break;
+        }
+    }
+
+    public void ManageGoldUI(bool _isActive)
+    {
+        if (goldUI.gameObject.activeSelf == _isActive) return;
+        if (_isActive)
+        {
+            goldUI.UpdateGold();
+            goldUI.gameObject.SetActive(true);
+        }
+        else
+        {
+            goldUI.gameObject.SetActive(false);
         }
     }
 

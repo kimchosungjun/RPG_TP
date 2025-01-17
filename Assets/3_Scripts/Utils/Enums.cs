@@ -53,6 +53,13 @@ namespace PlayerEnums
         NEAR=0,
         FAR=1
     }
+
+    public enum ACTION_TYPE
+    {
+        NORMAL=0,
+        SKILL=1,
+        ULTIMATE=2
+    }
 }
 
 // 몬스터
@@ -168,8 +175,7 @@ namespace EffectEnums
     }
 }
 
-// To Do ~~~~~
-// 아이템
+// Item
 namespace ItemEnums
 {
     public enum ITEMTYPE

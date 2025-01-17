@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -9,23 +10,31 @@ public class PlayerBaseActionSOData : ScriptableObject
     [SerializeField] protected string actionName;
     [SerializeField] protected string actionDescription;
     [SerializeField] protected int actionParticleID;
+    [SerializeField] protected int currentLevel;
+    [SerializeField] protected int maxLevel;
     #endregion
 
     #region Public Property & Method
 
     public string GetActionName { get { return actionName; } }
     public string GetActionDescription { get { return actionDescription; } }
- 
+    public int GetParticleID() { return actionParticleID; }
+    public int GetCurrentLevel { get { return currentLevel; } }
+    public int GetMaxLevel { get { return maxLevel; } }
 
-    // To Do ~~~~~~~ 
-    // 나중에 수정할 것
+    public virtual void LevelUp() { }
+    public bool CanLevelUp() { if (currentLevel >= maxLevel) return false; return true; }
+
     /// <summary>
-    /// 추후에 Enum값으로 변환해서 반환 or int 값을 enum값으로 파싱
+    /// Name, Lv, Description
     /// </summary>
     /// <returns></returns>
-    public int GetParticleID() { return actionParticleID; }
-    
+    public virtual Tuple<string,int,string> GetNextLevelData() { return null;  }
+    public virtual int GetNextLevelUpGold()  { return 0; }
+
+    public void SetLevelData(int _curLv, int _maxLv) { currentLevel = _curLv; maxLevel = _maxLv; }
     #endregion
+
 }
 
 

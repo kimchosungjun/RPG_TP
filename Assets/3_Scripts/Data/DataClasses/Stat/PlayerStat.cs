@@ -2,6 +2,7 @@ using UnityEngine;
 using PlayerTableClassGroup;
 using ItemEnums;
 using PlayerEnums;
+using System.Linq;
 
 /// <summary>
 /// 파일로부터 불러와 사용하는 스탯 데이터 : 고정 데이터
@@ -20,7 +21,7 @@ public class PlayerStat : BaseStat
     [SerializeField] protected string fileName;
     [SerializeField] protected WEAPONTYPE holdWeaponType;
     [SerializeField] protected BATTLE_TYPE battleType;
-
+    [SerializeField] protected PlayerBaseActionSOData[] soDatas = new PlayerBaseActionSOData[3];
     #endregion
 
     #region Public
@@ -36,6 +37,13 @@ public class PlayerStat : BaseStat
 
     public WEAPONTYPE GetWeaponType { get { return holdWeaponType; } }
     public BATTLE_TYPE GetBattleType { get { return battleType; } }
+    public PlayerBaseActionSOData GetActionSoData(ACTION_TYPE _actionType) 
+    {
+        int index = (int)_actionType;
+        int cnt = soDatas.Length;
+        if (cnt <= index) return null;
+        return soDatas[(int)_actionType]; 
+    }
     #endregion
 
     #region Load Stat
@@ -65,6 +73,12 @@ public class PlayerStat : BaseStat
         holdWeaponType = tableData.GetWeaponType();
         battleType = tableData.GetBattleType();
         SharedMgr.GameCtrlMgr.GetPlayerStatCtrl?.AddPlayerStat(this);
+    }
+
+    public void SetActionSoDatas(PlayerBaseActionSOData[] _actionDatas)
+    {
+        if (_actionDatas == null || _actionDatas.Length == 0) return;
+        soDatas = _actionDatas;
     }
     #endregion
 }
@@ -104,6 +118,24 @@ public class PlayerSaveStat
         currentNormalAttackLevel= 1;    
         currentSkillLevel = 1;
         currentUltimateSkillLevel = 1;
+    }
+
+    public int GetLevelData(ACTION_TYPE _actionType)
+    {
+        int level = -1;
+        switch (_actionType)
+        {
+            case ACTION_TYPE.NORMAL:
+                level = currentNormalAttackLevel;
+                break;
+            case ACTION_TYPE.SKILL:
+                level = currentSkillLevel;
+                break;
+            case ACTION_TYPE.ULTIMATE:
+                level = currentUltimateSkillLevel;
+                break; 
+        }
+        return level;   
     }
 }
 

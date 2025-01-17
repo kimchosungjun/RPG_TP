@@ -21,9 +21,19 @@ public class WarriorActionControl : PlayerActionControl
         PlayerTable playerTable = SharedMgr.TableMgr.GetPlayer;
 
         // 행동의 데이터를 불러오고 그 데이터 지정된 SO에 설정한다.
-        normalAttackSOData.SetSOData(playerTable.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, stat.GetSaveStat.currentNormalAttackLevel));
-        buffActionSOData.SetSOData(playerTable.GetPlayerBuffSkillTableData((int)PlayerEnums.CONDITION_SKILLS.WARRIOR_ROAR, stat.GetSaveStat.currentSkillLevel));
-        ultimateAttackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, stat.GetSaveStat.currentUltimateSkillLevel));
+        normalAttackSOData.SetLevelData(stat.GetSaveStat.currentNormalAttackLevel, 3);
+        buffActionSOData.SetLevelData(stat.GetSaveStat.currentSkillLevel, 3);
+        ultimateAttackSkillSOData.SetLevelData(stat.GetSaveStat.currentUltimateSkillLevel, 3);
+
+        normalAttackSOData.SetSOData(playerTable.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.WARRIOR, stat.GetSaveStat.currentNormalAttackLevel), PlayerEnums.TYPEIDS.WARRIOR);
+        buffActionSOData.SetSOData(playerTable.GetPlayerBuffSkillTableData((int)PlayerEnums.CONDITION_SKILLS.WARRIOR_ROAR, stat.GetSaveStat.currentSkillLevel), PlayerEnums.CONDITION_SKILLS.WARRIOR_ROAR);
+        ultimateAttackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, stat.GetSaveStat.currentUltimateSkillLevel), PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE);
+
+        PlayerBaseActionSOData[] actionSoDatas = new PlayerBaseActionSOData[3];
+        actionSoDatas[0] = normalAttackSOData;
+        actionSoDatas[1] = buffActionSOData;
+        actionSoDatas[2] = ultimateAttackSkillSOData;
+        _statCtrl.PlayerStat.SetActionSoDatas(actionSoDatas);
     }
     #endregion
 

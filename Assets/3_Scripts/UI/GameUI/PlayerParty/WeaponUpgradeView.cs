@@ -213,6 +213,7 @@ public class WeaponUpgradeView : MonoBehaviour
 
     public void DecideEnhanceWeapon()
     {
+        if (matData == null) return;
         data.ApplyEnhance(matCnt * matData.etcExp);
         matData.Use(matCnt);
         ClearUseMatSlot();

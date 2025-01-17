@@ -51,6 +51,8 @@ public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
         if (weaponManageParents[1].activeSelf)
             weaponManageParents[1].SetActive(false);
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOn();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.ManageGoldUI(true);
+
     }
 
     public void TurnOff()

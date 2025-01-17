@@ -60,7 +60,8 @@ public class PlayerPartyStatusUI : MonoBehaviour, IPlayerPartyUI
         UpdateCharacterButton();
         buttons[0].PressButton();
 
-        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOff();    
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOff();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.ManageGoldUI(false);
     }
 
     public void TurnOff()

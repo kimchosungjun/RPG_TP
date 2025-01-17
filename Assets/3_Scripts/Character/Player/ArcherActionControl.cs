@@ -23,9 +23,19 @@ public class ArcherActionControl : PlayerActionControl
         PlayerTable playerTable = SharedMgr.TableMgr.GetPlayer;
 
         // 행동의 데이터를 불러오고 그 데이터 지정된 SO에 설정한다.
-        normalAttackSOData.SetSOData(playerTable.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.ARCHER, stat.GetSaveStat.currentNormalAttackLevel));
-        attackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.ARCHER_FULL_BLOWN_SHOOT, stat.GetSaveStat.currentSkillLevel));
-        ultimateAttackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE, stat.GetSaveStat.currentUltimateSkillLevel));
+        normalAttackSOData.SetLevelData(stat.GetSaveStat.currentNormalAttackLevel, 3);
+        attackSkillSOData.SetLevelData(stat.GetSaveStat.currentSkillLevel, 3);
+        ultimateAttackSkillSOData.SetLevelData(stat.GetSaveStat.currentUltimateSkillLevel, 3);
+
+        normalAttackSOData.SetSOData(playerTable.GetPlayerNormalAttackData((int)PlayerEnums.TYPEIDS.ARCHER, stat.GetSaveStat.currentNormalAttackLevel), PlayerEnums.TYPEIDS.ARCHER);
+        attackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.ARCHER_FULL_BLOWN_SHOOT, stat.GetSaveStat.currentSkillLevel), PlayerEnums.ATTACK_SKILLS.ARCHER_FULL_BLOWN_SHOOT);
+        ultimateAttackSkillSOData.SetSOData(playerTable.GetPlayerAttackSkillTableData(PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE, stat.GetSaveStat.currentUltimateSkillLevel), PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE);
+
+        PlayerBaseActionSOData[] actionSoDatas = new PlayerBaseActionSOData[3];
+        actionSoDatas[0] = normalAttackSOData;
+        actionSoDatas[1] = attackSkillSOData;
+        actionSoDatas[2] = ultimateAttackSkillSOData;
+        _statCtrl.PlayerStat.SetActionSoDatas(actionSoDatas);
     }
     #endregion
 

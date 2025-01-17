@@ -222,6 +222,7 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.applyType, _tableData.combo);
         _reader.get(_row, ref _tableData.partyType, _tableData.combo);
         _reader.get(_row, ref _tableData.particle);
+        _reader.get(_row, ref _tableData.isUltimate);
         return true;
     }
 
@@ -248,6 +249,7 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.effectType, _tableData.combo);
         _reader.get(_row, ref _tableData.particle);
         _reader.get(_row, ref _tableData.defaultValues, _tableData.combo);
+        _reader.get(_row, ref _tableData.isUltimate);
         return true;
     }
     #endregion

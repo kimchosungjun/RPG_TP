@@ -99,6 +99,7 @@ namespace PlayerTableClassGroup
         public int[] applyType; // Use Multiplier
         public int[] partyType;
         public int particle; // enum
+        public bool isUltimate;
         public void SetSize()
         {
             multipliers = new float[combo];
@@ -125,6 +126,7 @@ namespace PlayerTableClassGroup
         public int[] effectType; // enum : ATTACK_EFFECT_TYPES
         public int particle; // enum
         public int[] defaultValues;
+        public bool isUltimate;
 
         public void SetSize()
         {
