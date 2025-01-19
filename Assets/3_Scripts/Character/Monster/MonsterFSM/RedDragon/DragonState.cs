@@ -49,17 +49,71 @@ namespace DragondStateClasses
 
         public override void FixedExecute()
         {
-            redDragon.ChasePlayer();
-            //if (redDragon.IsInAttackRange())
-            //{
-
-            //}
-            //else
-            //{
-            //}
+            if (redDragon.IsInAttackRange())
+            {
+                redDragon.DoAttack();
+                redDragon.ChangeState(RedDragon.DRAGON_STATE.TAKEOFF);
+            }
+            else
+                redDragon.ChasePlayer();
         }
     }
 
+    #endregion
+
+    #region Attack
+    public class DragonAttackState : DragonState
+    {
+        float defaultSpeed = 0;
+        public DragonAttackState(RedDragon _redDragon) : base(_redDragon) { }
+
+        public override void Enter()
+        {
+            defaultSpeed = redDragon.GetNav.speed;
+            redDragon.GetNav.speed = 0;
+            int randomAttack = Randoms.GetRandomCnt(0, 3);
+            redDragon.ChargeAttackEnergy(0.5f);
+            redDragon.SetAttackAnimation(RedDragon.DRAGON_ANIM.ATTACK, randomAttack);
+        }
+
+        public override void Exit()
+        {
+            redDragon.GetNav.speed = defaultSpeed;
+        }
+    }
+    #endregion
+
+    #region 
+    public class DragonTakeOffState : DragonState
+    {
+        public DragonTakeOffState(RedDragon _redDragon) : base(_redDragon) { }
+
+        public override void Enter()
+        {
+            redDragon.SetAnimation(RedDragon.DRAGON_ANIM.TAKEOFF);
+        }
+    }
+
+    public class DragonGlideState : DragonState
+    {
+        public DragonGlideState(RedDragon _redDragon) : base(_redDragon) { }
+
+        public override void Enter()
+        {
+            redDragon.SetAnimation(RedDragon.DRAGON_ANIM.GLIDE);
+            redDragon.GlideAttack();
+        }
+    }
+
+    public class DragonLandState : DragonState
+    {
+        public DragonLandState(RedDragon _redDragon) : base(_redDragon) { }
+
+        public override void Enter()
+        {
+            redDragon.SetAnimation(RedDragon.DRAGON_ANIM.LAND);
+        }
+    }
     #endregion
 }
 
