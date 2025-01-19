@@ -21,12 +21,13 @@ public class StandardMonster : BaseMonster
 
     protected override void Start()
     {
+        MonsterTable table = SharedMgr.TableMgr.GetMonster;
+        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
+        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
+        monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
+        monsterStatControl.MonsterStat = monsterStat;
+        monsterStatControl.SetStatusUI(statusUI);
         base.Start();
-    }
-
-    protected override void FixedUpdate()
-    {
-       // statusUI.FixedExecute();
     }
     #endregion
 
@@ -37,8 +38,6 @@ public class StandardMonster : BaseMonster
         monsterStatControl.TakeDamage(_attackData);  
        // statusUI.AnnounceChangeStat(UIEnums.STATUS.HP); 
     }
-    public override void Recovery(float _percent = 10f, float _time = 0.2f) { monsterStatControl.Recovery(10f); }
-    public override NODESTATES IdleMovement() { return NODESTATES.SUCCESS; }
     protected override void CreateBTStates() { }
     #endregion
 }

@@ -50,18 +50,18 @@ public class Flybee : PatrolMonster
     protected override NODESTATES DoPatrol()
     {
         anim.SetInteger("MState", (int)STATES.MOVE);
-        if (Vector3.Distance(transform.position, targetWay) < 0.2f)
-        {
-            currentWayPoint += 1;
-            if (currentWayPoint >= maxWayPoint)
-                currentWayPoint = 0;
-            targetWay = pathWays[currentWayPoint];
-        }
-        // 회전 : 나중에 수정
-        transform.rotation = Quaternion.LookRotation(targetWay - transform.position);
+        //if (Vector3.Distance(transform.position, targetWay) < 0.2f)
+        //{
+        //    currentWayPoint += 1;
+        //    if (currentWayPoint >= maxWayPoint)
+        //        currentWayPoint = 0;
+        //    targetWay = pathWays[currentWayPoint];
+        //}
+        //// 회전 : 나중에 수정
+        //transform.rotation = Quaternion.LookRotation(targetWay - transform.position);
 
-        Vector3 moveDirection = (targetWay - transform.position).normalized;
-        transform.position += moveDirection * Time.deltaTime * moveSpeed;
+        //Vector3 moveDirection = (targetWay - transform.position).normalized;
+        //transform.position += moveDirection * Time.deltaTime * moveSpeed;
 
         return NODESTATES.SUCCESS;
     }

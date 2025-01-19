@@ -1,28 +1,45 @@
 using MonsterEnums;
+using System.Collections;
 using UnityEngine;
 
 public class EliteMonster : BaseMonster
 {
-    [SerializeField] protected StatusUI statusUICtrl = null;
+    [SerializeField] protected EliteMonsterStatusUI statusUI = null;
+    protected EliteGauge eliteGauge = new EliteGauge();
+    protected override void CreateBTStates() {  }
 
-    #region Override
-    public override void Death()
+    public class EliteGauge
     {
-        throw new System.NotImplementedException();
-    }
-    public override NODESTATES IdleMovement()
-    {
-        throw new System.NotImplementedException();
-    }
+        float groggyGauge = 100f;
+        bool countGroggy = true;
 
-    public override void Recovery(float _percent = 10f, float _time = 0.2f)
-    {
-        throw new System.NotImplementedException();
-    }
+        public float GetGroggyGauge { get { return groggyGauge; } }
+        public void FixedGroggyDecrease()
+        {
+            if (countGroggy == false) return;
+            groggyGauge -= Time.fixedDeltaTime;
+            CheckGroggy();
+        }
 
-    protected override void CreateBTStates()
-    {
-        throw new System.NotImplementedException();
+        public void CheckGroggy()
+        {
+            if(groggyGauge <= 0f)
+            {
+                // To Do Announce
+                countGroggy = false;
+            }
+        }
+
+        public void DoNormalAttack()
+        {
+            groggyGauge -= 10f;
+            CheckGroggy();
+        }
+
+        public void DoSkill()
+        {
+            groggyGauge -= 15;
+            CheckGroggy();
+        }
     }
-    #endregion
 }

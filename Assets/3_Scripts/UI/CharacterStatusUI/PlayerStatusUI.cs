@@ -12,7 +12,9 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     #region Variable
     [SerializeField, Header("HP Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] hpImages;
     [SerializeField, Header("Exp Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] expImages;
+    [SerializeField] PlayerJoystickUI joystickUI;
 
+    public PlayerJoystickUI GetJoystickUI { get { return joystickUI; } }    
 
     float hpTarget = -1;
     float expTarget = -1;
@@ -29,6 +31,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     {
         TurnOff();
         SetImages();
+        joystickUI.Init();
     }
 
     public void ChangeData(PlayerStat _playerStat)

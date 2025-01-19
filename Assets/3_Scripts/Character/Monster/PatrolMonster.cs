@@ -1,7 +1,7 @@
 using MonsterEnums;
 using UnityEngine;
 
-public class PatrolMonster : NonCombatMonster
+public class PatrolMonster : StandardMonster
 {  
     [SerializeField] protected Vector3[] pathWays;
     [SerializeField] protected float moveSpeed;

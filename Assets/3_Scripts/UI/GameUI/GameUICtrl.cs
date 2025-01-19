@@ -21,7 +21,7 @@ public class GameUICtrl : MonoBehaviour
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
 
     [Header("Overlap")]
-    [SerializeField] BossStatusUI bossStatusUI;
+    [SerializeField] SubBossStatusUI bossStatusUI;
     [SerializeField] PlayerStatusUI playerStatusUI;
     [SerializeField] PlayerChangeUI playerChangeUI;
     [SerializeField] ShowGetItemUI showGetItemUI;
@@ -32,7 +32,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
 
-    public BossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
+    public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
     public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
     public ShowGetItemUI GetShowGetItemUI { get { return showGetItemUI; } }
@@ -57,7 +57,7 @@ public class GameUICtrl : MonoBehaviour
         // Camera Space
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
         // Overlay
-        if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<BossStatusUI>();   
+        if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<SubBossStatusUI>();   
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 
         if(showGetItemUI==null) showGetItemUI = GetComponentInChildren<ShowGetItemUI>();    

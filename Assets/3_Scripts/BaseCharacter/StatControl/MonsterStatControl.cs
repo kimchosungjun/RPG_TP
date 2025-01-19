@@ -9,6 +9,12 @@ public class MonsterStatControl : ActorStatControl
     public MonsterStat MonsterStat { get { return monsterStat; } set { monsterStat = value; } }
     public BaseMonster BaseMonster { get { return baseMonster; } set { baseMonster = value; } } 
     
+    public bool CheckFullHp()
+    {
+        if (monsterStat.CurrentHP == monsterStat.MaxHP) return true;
+        return false;
+    }
+
     public override void Heal(float _heal, bool _isPercent = false)
     {
         float increaseHP = 0f;
@@ -20,17 +26,6 @@ public class MonsterStatControl : ActorStatControl
 
         monsterStat.CurrentHP = increaseHP > monsterStat.MaxHP
                 ? monsterStat.MaxHP : (int)increaseHP;
-    }
-
-    public override void Recovery(float _percent = 10f, float _time = 0.2f)
-    {
-        float increaseHP = monsterStat.MaxHP * (_percent / 100);
-        Heal(_percent);
-    }
-
-    IEnumerator CRecovery(float _percent)
-    {
-        yield return null;  
     }
 
     public override void TakeDamage(TransferAttackData _attackData)

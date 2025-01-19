@@ -14,6 +14,11 @@ public class CombatMonster : StandardMonster
         
     [Header("거리")]
     [SerializeField] protected float detectRange;
+
+    protected override void CreateBTStates()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
 
     /******************************************/
@@ -25,9 +30,9 @@ public class CombatMonster : StandardMonster
     protected override void Start()
     {
         MonsterTable table = SharedMgr.TableMgr.GetMonster;
-        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(monsterType);
-        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(monsterType);
-        monsterStat.SetMonsterStat(statTableData ,monsterLevel);
+        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
+        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
+        monsterStat.SetMonsterStat(statTableData ,initMonsterData.monsterLevel);
         monsterStatControl.MonsterStat = monsterStat;
         monsterStatControl.SetStatusUI(statusUI);
         //statusUI.Setup(this.transform, monsterStat);

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using MonsterEnums;
 
-public class Rayfish : CowardMonster
+public class Rayfish : PatrolMonster
 {
+    bool isIdleMove = false;
+    bool isMoving = false;
+    bool isHitState = false;
     protected List<PathNode> pathNodeGroup = new List<PathNode>();
     public PathNode GetFarPath()
     {
         PathNode bestNode = null;
         float bestDistance = float.MaxValue;
-        float maxDistanceSqr = maxDistance * maxDistance;
+        float maxDistanceSqr = 0f; /*maxDistance * maxDistance;*/
         foreach (var node in pathNodeGroup)
         {
             float distanceToAI = (node.NodePosition - transform.position).sqrMagnitude;
@@ -31,11 +34,6 @@ public class Rayfish : CowardMonster
         SetPathNodes(Vector3.zero);
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        selectorNode.Evaluate();
-    }
 
     public void SetPathNodes(Vector3 _centerPosition, int _nodeCnt = 10, float _pathRadius = 10f)
     {
@@ -149,7 +147,7 @@ public class Rayfish : CowardMonster
     public NODESTATES DoIsDetectPlayer()
     {
 
-        float distance = Vector3.Distance(player.position, transform.position);
+        float distance = Vector3.Distance(transform.position, transform.position);
         if (2f > distance)
         {
             return NODESTATES.SUCCESS;
