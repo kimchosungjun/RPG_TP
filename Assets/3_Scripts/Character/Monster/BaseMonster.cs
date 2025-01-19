@@ -15,6 +15,8 @@ public abstract class BaseMonster : BaseActor
     [Header("컴포넌트"), SerializeField] protected Animator anim = null;
     [SerializeField] protected MonsterStatControl monsterStatControl;
     protected MonsterStat monsterStat;
+    public Animator GetAnim { get { return anim; } }    
+    public MonsterStat GetMonsterStat { get { return monsterStat; } }
     #endregion
 
     #region Value : Notice
@@ -68,11 +70,11 @@ public abstract class BaseMonster : BaseActor
     protected virtual void Start() 
     { 
         CreateBTStates();
-        MonsterTable table = SharedMgr.TableMgr.GetMonster;
-        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
-        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
-        monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
-        monsterStatControl.MonsterStat = monsterStat;
+        //MonsterTable table = SharedMgr.TableMgr.GetMonster;
+        //MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
+        //MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
+        //monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
+        //monsterStatControl.MonsterStat = monsterStat;
     }
     
     /// <summary>

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DragondStateClasses;
 using UnityEngine;
 using MonsterEnums;
 using UnityEngine.AI;
@@ -10,11 +11,25 @@ public class RedDragon : EliteMonster
     [SerializeField] NavMeshAgent nav;
     [SerializeField] float attackRange = 5f;
     bool isPassiveRotate = false;
+    DRAGON_PHASE currentPhase = DRAGON_PHASE.FIRST;
 
-    int currentState = 0;
+    bool isScream = false;
 
     #region ENUM
-    enum DRAGON_ANIM
+    public enum DRAGON_STATE
+    {
+        IDLE=0,
+        MOVE,
+        FIRST,
+        SECOND,
+        THIRD,
+        SPECIAL,
+        HIT,
+        GROGGY,
+        DEATH
+    }
+
+    public enum DRAGON_ANIM
     {
         IDLE=0,
         MOVE=1,
@@ -35,61 +50,79 @@ public class RedDragon : EliteMonster
     }
     #endregion
 
-    DRAGON_PHASE currentPhase = DRAGON_PHASE.FIRST;
-    bool isConstraint = false; // Hit, Groggy
-    Selector rootSelector;
+    #region Set Animation & State
 
-    Sequence firstRoot;
+    [SerializeField] int currentStateIndex = 0;
+    DragonState [] currentStates;
+    MonsterStateMachine stateMachine;
+    
     protected override void CreateBTStates()
     {
-        // Common
-        ActionNode checkInAttackRange = new ActionNode(IsInAttackRange);
-        ActionNode chasePlayer = new ActionNode(ChasePlayer);
+        stateMachine = new MonsterStateMachine();
+        currentStates = new DragonState[9];
+        currentStates[(int)DRAGON_STATE.IDLE] = new DragonIdleState(this);
+        currentStates[(int)DRAGON_STATE.MOVE] = new DragonMoveState(this);
+        currentStates[(int)DRAGON_STATE.FIRST] = new DragonState(this);
+        currentStates[(int)DRAGON_STATE.SECOND] = new DragonState(this);
+        currentStates[(int)DRAGON_STATE.THIRD] = new DragonState(this);
+        currentStates[(int)DRAGON_STATE.SPECIAL] = new DragonState(this);
+        currentStates[(int)DRAGON_STATE.HIT] = new DragonState(this);
+        currentStates[(int)DRAGON_STATE.GROGGY] = new DragonState(this);
+        currentStates[(int)DRAGON_STATE.DEATH] = new DragonState(this);
 
-        // First : Check Constraint Control
-        ActionNode constraintNode =new ActionNode(BeingConstraint);
-
-        // Second : FirstPhase
-        ActionNode checkFirstPhase = new ActionNode(CheckFirstPhase); 
-
-        List<Node> firstPhaseNodes = new List<Node>();
-        firstPhaseNodes.Add(checkFirstPhase);
-
-        ActionNode checkCanDoFirstAttack = new ActionNode(CanDoFirstAttack);
-
-        List<Node> firstPhaseCoolDownNodes = new List<Node>();
-        firstPhaseCoolDownNodes.Add(checkCanDoFirstAttack);
-
-        List<Node> firstPhaseAttackConditionNodes = new List<Node>();
-        firstPhaseAttackConditionNodes.Add(checkInAttackRange);
-        firstPhaseAttackConditionNodes.Add(chasePlayer);
-        Selector firstPhaseAttackCondition = new Selector(firstPhaseAttackConditionNodes);
-        firstPhaseCoolDownNodes.Add(firstPhaseAttackCondition);
-        
-        ActionNode doBasicAttack = new ActionNode(DoBasicAttack);   
-        firstPhaseCoolDownNodes.Add(doBasicAttack);
-        Sequence firstCoolDown = new Sequence(firstPhaseCoolDownNodes);
-        
-        firstPhaseNodes.Add(firstCoolDown);
-
-        List<Node> firstPhaseCoolTimeNodes = new List<Node>();
-        firstPhaseCoolTimeNodes.Add(chasePlayer);    
-        Sequence fistCoolTime = new Sequence(firstPhaseCoolTimeNodes);
-        
-        firstPhaseNodes.Add(fistCoolTime);
-
-        Sequence firstPhase = new Sequence(firstPhaseNodes);
-        firstRoot = firstPhase;
-
-        //List<Node> behaviourNodes = new List<Node>();
-        //behaviourNodes.Add(constraintNode);
-
-        //Sequence redDragon = new Sequence(behaviourNodes);
-        //rootSelector = new Selector();
+        stateMachine.InitStateMachine(currentStates[0]);
     }
 
+    public void ChangeState(DRAGON_STATE _newState)
+    {
+        currentStateIndex = (int)_newState;
+        stateMachine.ChangeState(currentStates[(int)_newState]);
+    }
+
+    public void SetAnimation(DRAGON_ANIM _state)
+    {
+        anim.SetInteger("State", (int)_state);
+    }
+
+    public void SetAttackAnimation(DRAGON_ANIM _state, int _attackIndex)
+    {
+        anim.SetInteger("State", (int)_state);
+        anim.SetInteger("AttackState", _attackIndex);
+    }
+
+    public void ClearState()
+    {
+        anim.SetInteger("State", 0);
+        anim.SetInteger("AttackState", 0);
+    }
+    #endregion
+
+    #region Idle Behaviour
+    
+    public void CheckPlayerInArea()
+    {
+        if (isInMonsterArea && isScream == false)
+        {
+            isScream = true;
+            SetAnimation(DRAGON_ANIM.SCREAM);
+        }
+    }
+
+    public void AfterScream()
+    {
+        if (isInMonsterArea)
+        {
+            SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI.TurnOn();
+            ChangeState(DRAGON_STATE.MOVE);
+        }
+        else
+            isScream = false;
+    }
+
+    #endregion
+
     #region Check Enemy In Range
-    public NODESTATES IsInAttackRange()
+    public bool IsInAttackRange()
     {
         float detectionAngle = 60f; 
         int enemyLayer = 1 << (int)UtilEnums.LAYERS.PLAYER;
@@ -97,15 +130,15 @@ public class RedDragon : EliteMonster
         if(Vector3.Distance(enemy, transform.position) <= attackRange)
         {
             Collider[] hits = Physics.OverlapSphere(transform.position, attackRange, enemyLayer);
-            if (hits.Length == 0) return NODESTATES.FAIL;
+            if (hits.Length == 0) return false;
             Vector3 directionToTarget = (hits[0].transform.position - transform.position).normalized;
             float angle = Vector3.Angle(transform.forward, directionToTarget);
 
             if (angle <= detectionAngle)
-                return NODESTATES.SUCCESS;
-            return NODESTATES.FAIL;
+                return true;
+            return false;
         }
-        return NODESTATES.FAIL;
+        return false;
     }
 
     #endregion
@@ -127,45 +160,42 @@ public class RedDragon : EliteMonster
     Vector3 destPosition;
 
     // Orbit Movement
-    float orbitDistance = 3f;
+    float currentAngle = 0;
+    float orbitDistance = 20f;
     float orbitSpeed = 5f;
     float rotateSpeed = 10f;
-    public NODESTATES ChasePlayer()
-    {
-        if(currentState != 1)
-        {
-            currentState = 1;
-            anim.SetInteger("State", currentState);
-        }
 
+    public void ChasePlayer()
+    {
         destPosition = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position;
         if (Vector3.Distance(transform.position, destPosition) <= attackRange)
         {
-            if (isPassiveRotate)
+            if (isPassiveRotate == false)
             {
-                isPassiveRotate = false;
-                nav.angularSpeed = 1080f;
+                nav.speed = 0.2f;
+                isPassiveRotate = true;
+                nav.updateRotation = false;
             }
             OrbitMove(destPosition);
             OrbitLookAt(destPosition);
         }
         else
         {
-            if(isPassiveRotate == false)
+            if (isPassiveRotate)
             {
-                isPassiveRotate = true;
-                nav.angularSpeed = 0f;
+                nav.speed = 3f;
+                nav.updateRotation = true;
+                isPassiveRotate = false;
             }
             nav.SetDestination(destPosition);
         }
-        return NODESTATES.SUCCESS; 
     }
 
     public void OrbitMove(Vector3 _center)
     {
-        float angle = Time.time * orbitSpeed; // 현재 시간에 따른 각도 계산
-        float xOffset = Mathf.Cos(angle) * orbitDistance;
-        float zOffset = Mathf.Sin(angle) * orbitDistance;
+        currentAngle+= Time.fixedDeltaTime;
+        float xOffset = Mathf.Cos(currentAngle) * orbitDistance;
+        float zOffset = Mathf.Sin(currentAngle) * orbitDistance;
         _center += new Vector3(xOffset, 0, zOffset);
         nav.SetDestination(_center);    
     }
@@ -190,13 +220,7 @@ public class RedDragon : EliteMonster
     #region First
 
     TransferAttackData attackData = new TransferAttackData();
-    public NODESTATES BeingConstraint()
-    {
-        if (isConstraint)
-            return NODESTATES.SUCCESS;
-        else
-            return NODESTATES.FAIL;
-    }
+   
     #endregion
 
     #region Second
@@ -227,14 +251,14 @@ public class RedDragon : EliteMonster
 
     protected override void Start()
     {
+        base.Start(); 
         statusUI = SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI;
-        base.Start();
-        attackControl.SetData(monsterStat);
+        //attackControl.SetData(monsterStat);
     }
 
     protected override void FixedUpdate()
     {
-        if (firstRoot != null) firstRoot.Evaluate();
+        currentStates[currentStateIndex].FixedExecute();
     }
     #endregion
 }
