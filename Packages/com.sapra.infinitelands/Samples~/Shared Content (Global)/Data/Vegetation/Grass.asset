@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de817b995c1b4874fb986bd4938ec142, type: 3}
+  m_Name: Grass
+  m_EditorClassIdentifier: 
+  _skipRendering: 0
+  DistanceBetweenItems: 0.05
+  MinimumScale: 0.25
+  MaximumScale: 0.75
+  VerticalPosition: 0
+  AlignToGround: 2
+  DensityAffectsHeight: 1
+  PositionRandomness: 1
+  TextureRandomnessDistance: 1.82
+  CastShadows: 0
+  GenerateColliders: 0
+  ColliderObject: {fileID: 0}
+  CrossFadeDithering: 0
+  LodGroups: {fileID: 0}
+  LOD:
+  - mesh: {fileID: 986804797544830715, guid: 851f4ed09f238b34a978cc57108bad32, type: 3}
+    materials:
+    - {fileID: 2100000, guid: 74995995b85f32f4bb13f9b11036ee21, type: 2}
+  - mesh: {fileID: -4420680295349439438, guid: 851f4ed09f238b34a978cc57108bad32, type: 3}
+    materials:
+    - {fileID: 2100000, guid: 74995995b85f32f4bb13f9b11036ee21, type: 2}
+  HighLodDistance: 10
+  ShadowsLODOffset: 0
+  ViewDistance: 100
+  ShadowDistance: 100
+  CollisionDistance: 30
+  HalfInstancesAtDistance: 1
+  HalfInstancesDistance: 30
+  DrawDistances: 0
+  DrawBoundigBoxes: 0

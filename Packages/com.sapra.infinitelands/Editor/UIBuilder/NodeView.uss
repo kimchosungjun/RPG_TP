@@ -1,0 +1,126 @@
+.node #collapsible-area {
+    background-color: #222222
+}
+
+NodeView.expanded{
+    width: 214px;
+}
+.node VisualElement #title {
+    background-color: #3F3F3F
+}
+
+.Input VisualElement #title {
+    background-color: #2D5E50
+}
+
+.Operation VisualElement #title {
+    background-color: #2D385E
+}
+
+.Filter VisualElement #title {
+    background-color: #B1935E;
+}
+
+.Filter VisualElement #title-label {
+    color: #191919;
+}
+
+.Features VisualElement #title{
+    background-color: #452d4c;
+}
+
+.DEPRECATED VisualElement #title {
+    background-color: #ff0206;
+}
+.DEPRECATED VisualElement #title-label {
+    color: #191919;
+}
+
+.Mask VisualElement #title {
+    background-color: #7f336d
+}
+
+.Output VisualElement #title {
+    background-color: #59662E
+}
+
+.Biome VisualElement #title {
+    background-color: #5B3E2E
+}
+
+
+#title-label{
+    margin: 6px;
+}
+
+Vector2Field{
+    flex-direction: column;
+}
+Vector2Field .unity-composite-field__field-spacer{
+    flex-grow: 0;
+}
+
+Slider{
+    flex-direction: column;
+}
+
+SliderInt{
+    flex-direction: column;
+}
+
+MinMaxSlider Label{
+    min-width: 0;
+    margin-right: 5px;
+}
+
+
+Vector3Field{
+    flex-direction: column;
+}
+
+Toggle.image-foldout.False VisualElement.unity-toggle__checkmark{
+    background-image: resource("D_animationvisibilitytoggleoff");
+}
+Toggle.image-foldout.True VisualElement.unity-toggle__checkmark{
+    background-image: resource("d_animationvisibilitytoggleon");
+}
+
+.Preview.False{
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+.Preview.True{
+    visibility: visible;
+    height: 200px;
+    width: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    margin: 5px 0 4px 0;
+    align-self: center;
+}
+
+#extension{
+    max-width: 206px;
+}
+
+Button.documentation{
+    background-image: resource("d__Help");
+}
+
+.more_buttons_layout{
+    flex-direction: row;
+}
+
+.more_button{
+    margin: 3px;
+    padding: 0px;
+    background-color: #3C3C3C;
+    border-radius: 3px;
+    border-width: 1px;
+    width: 16px;
+    height: 16px;
+    border-color: #484848;
+}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4b453bc413cf6e641844a569f2620be1
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276010
+  packageName: 'Infinite Lands: Node-Based World Creator'
+  packageVersion: 0.7.4
+  assetPath: Packages/com.sapra.infinitelands/Samples~/World Generation (URP)/Scenes/SingleGeneration
+    (URP).unity
+  uploadId: 716111

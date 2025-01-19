@@ -1,0 +1,1406 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9035359701123379969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a3e3dfa38e22540b64ea4b53429990, type: 3}
+  m_Name: NormalMaskNode
+  m_EditorClassIdentifier: 
+  guid: e769b785c453b9747939d9b4344653f7
+  expanded: 1
+  position: {x: 1904.1305, y: -476.86957}
+  connections:
+  - provider: {fileID: 1405600890851931183}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Range: {x: 0.563718, y: 1}
+  BlendFactor: 0.103
+  Input: {fileID: 1405600890851931183}
+--- !u!114 &-8523909471547799308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a3e3dfa38e22540b64ea4b53429990, type: 3}
+  m_Name: NormalMaskNode(Clone)
+  m_EditorClassIdentifier: 
+  guid: 4448fb96130ecf94aad6ea12df723b43
+  expanded: 1
+  position: {x: -65.99999, y: -272.99997}
+  connections:
+  - provider: {fileID: -5884076236460965062}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Range: {x: 0.5740954, y: 1}
+  BlendFactor: 0.132
+  Input: {fileID: -5884076236460965062}
+--- !u!114 &-8205314539471226994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f28cc63fb8a4654d812cf1d433315ca, type: 3}
+  m_Name: LocalOutputNode
+  m_EditorClassIdentifier: 
+  guid: fac47bfc1ac2bce4ea2b8c4fb21e72d3
+  expanded: 1
+  position: {x: 1924, y: 125.01782}
+  connections:
+  - provider: {fileID: 804241360277660414}
+    providerPortName: HeightData
+    inputPortName: inputMap
+  OutputName: Grass
+  inputMap: {fileID: 804241360277660414}
+--- !u!114 &-7780808601854646382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d5bda8cc3b1a64482f597aaa79e0cb, type: 3}
+  m_Name: NewRangeNode
+  m_EditorClassIdentifier: 
+  guid: 7b62ae5759ffb86408246093f0ca5b29
+  expanded: 1
+  position: {x: 1905.9999, y: -32.982178}
+  connections:
+  - provider: {fileID: 804241360277660414}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  MinimumValue: 0
+  MaximumValue: 0.4
+  Input: {fileID: 804241360277660414}
+--- !u!114 &-7741139241938689926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd44f56b285bf49aba7dcb9ed766fe, type: 3}
+  m_Name: CombineNode
+  m_EditorClassIdentifier: 
+  guid: 82ee46f98ad251d4aa4c5d2f5bac4eb2
+  expanded: 1
+  position: {x: -994, y: 549}
+  connections:
+  - provider: {fileID: -6108163335214695633}
+    providerPortName: localInput
+    inputPortName: HeightMaps
+  - provider: {fileID: -1508152725237794693}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  generateTexture: 0
+  operation: 1
+  HeightMaps:
+  - {fileID: -6108163335214695633}
+  - {fileID: -1508152725237794693}
+  BlendFactor: 10
+--- !u!114 &-6365914311511484402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef6ee8c4c67ff94694a7a3a95575eb9, type: 3}
+  m_Name: VegetationOutputNode
+  m_EditorClassIdentifier: 
+  guid: 90d50fdd35976c04daef58135e7bbf47
+  expanded: 1
+  position: {x: -411, y: 560.85}
+  connections:
+  - provider: {fileID: -1301043237263771191}
+    providerPortName: HeightData
+    inputPortName: DensityMap
+  VegetationItem: {fileID: 11400000, guid: c68fa09103fe70649977759caa1a48a8, type: 2}
+  DensityMap: {fileID: -1301043237263771191}
+  showPreview: 1
+--- !u!114 &-6108163335214695633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1f927955e4dc748b511d78cd65354c, type: 3}
+  m_Name: LocalInputNode
+  m_EditorClassIdentifier: 
+  guid: aaaae69d4def32a4a96f99b44892a8db
+  expanded: 1
+  position: {x: -1158, y: 655}
+  connections: []
+  generateTexture: 0
+  output: {fileID: -8205314539471226994}
+--- !u!114 &-5921468806209318017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f28cc63fb8a4654d812cf1d433315ca, type: 3}
+  m_Name: LocalOutputNode
+  m_EditorClassIdentifier: 
+  guid: 3303fd43e7d281c4d91291bfe5aff086
+  expanded: 1
+  position: {x: 1463.1305, y: -543.86957}
+  connections:
+  - provider: {fileID: -146463629343622063}
+    providerPortName: HeightData
+    inputPortName: inputMap
+  OutputName: Slope
+  inputMap: {fileID: -146463629343622063}
+--- !u!114 &-5884076236460965062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e413cf60441f9347b63d663ed526e0a, type: 3}
+  m_Name: GetSlopeNode(Clone)
+  m_EditorClassIdentifier: 
+  guid: e08e81a010e829748a07ebf5b49ceab2
+  expanded: 1
+  position: {x: -312, y: -272.99994}
+  connections:
+  - provider: {fileID: 7505344947644104476}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Input: {fileID: 7505344947644104476}
+  FeatureMode: 0
+--- !u!114 &-5311281267024769147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f28cc63fb8a4654d812cf1d433315ca, type: 3}
+  m_Name: LocalOutputNode
+  m_EditorClassIdentifier: 
+  guid: 6aa73e3a102ebe842bf59e4502824c6a
+  expanded: 1
+  position: {x: 891.4415, y: -679}
+  connections:
+  - provider: {fileID: 6520452813562964879}
+    providerPortName: HeightData
+    inputPortName: inputMap
+  OutputName: Height
+  inputMap: {fileID: 6520452813562964879}
+--- !u!114 &-4606610436010084618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f83aa784a3990b40a3519533b2e8d5b, type: 3}
+  m_Name: BlurNode
+  m_EditorClassIdentifier: 
+  guid: 25fbf5288cdba6a4abdb6f96e0f4ebdb
+  expanded: 1
+  position: {x: -740, y: -144.00003}
+  connections:
+  - provider: {fileID: -534048783320126449}
+    providerPortName: HeightData
+    inputPortName: HeightMap
+  generateTexture: 0
+  HeightMap: {fileID: -534048783320126449}
+  Mask: {fileID: 0}
+  BlurSize: 37.76
+--- !u!114 &-4417235420108905959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1f927955e4dc748b511d78cd65354c, type: 3}
+  m_Name: LocalInputNode
+  m_EditorClassIdentifier: 
+  guid: 1c222641afd2f8540be83ca3890cc077
+  expanded: 1
+  position: {x: 1107, y: -32.982178}
+  connections: []
+  generateTexture: 0
+  output: {fileID: 6758001335070327954}
+--- !u!114 &-4317821023727778090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 8c1f54a5d6311b74cbcd40d16e58e349
+  expanded: 1
+  position: {x: 1440.1305, y: -381.86957}
+  connections: []
+  generateTexture: 0
+  NoiseType: 1
+  MinMaxHeight: {x: 0, y: 0.3}
+  TileSize: 670.43
+  Octaves: 3
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
+--- !u!114 &-1899624081475502289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 37583cf8d01cbce45a4013212c0d5ccd
+  expanded: 1
+  position: {x: 148.00002, y: -602}
+  connections: []
+  generateTexture: 0
+  NoiseType: 1
+  MinMaxHeight: {x: -50, y: 50}
+  TileSize: 60.1
+  Octaves: 5
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
+--- !u!114 &-1508152725237794693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a125ae673fa34f4390cfafb035d4194, type: 3}
+  m_Name: CurveNode
+  m_EditorClassIdentifier: 
+  guid: 5a26d1bf03e20b04bba3a4d60d625185
+  expanded: 1
+  position: {x: -1455, y: 549}
+  connections:
+  - provider: {fileID: -547431849763077089}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Function:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5966102
+      value: 0.12072781
+      inSlope: 0.690144
+      outSlope: 0.690144
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.69972533
+      value: 0.7744653
+      inSlope: 2.1797085
+      outSlope: 2.1797085
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Input: {fileID: -547431849763077089}
+--- !u!114 &-1332753704426089335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef6ee8c4c67ff94694a7a3a95575eb9, type: 3}
+  m_Name: VegetationOutputNode
+  m_EditorClassIdentifier: 
+  guid: 37ffa55fbccad6e40bde41d2c7dce0a3
+  expanded: 1
+  position: {x: -197, y: 971}
+  connections:
+  - provider: {fileID: -120156330699840729}
+    providerPortName: HeightData
+    inputPortName: DensityMap
+  VegetationItem: {fileID: 11400000, guid: e0f6b1623d9fffe4aa4e39601da2efc5, type: 2}
+  DensityMap: {fileID: -120156330699840729}
+  showPreview: 1
+--- !u!114 &-1332200338200023086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 904d7b16b3cad79458bd8b2bd171b155
+  expanded: 1
+  position: {x: -1211.8887, y: 104}
+  connections: []
+  generateTexture: 0
+  NoiseType: 1
+  MinMaxHeight: {x: -5000, y: 5000}
+  TileSize: 10000
+  Octaves: 5
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
+--- !u!114 &-1301043237263771191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd44f56b285bf49aba7dcb9ed766fe, type: 3}
+  m_Name: CombineNode
+  m_EditorClassIdentifier: 
+  guid: d5b6b0bbf7e6c774e973828ea0067b26
+  expanded: 1
+  position: {x: -677, y: 601}
+  connections:
+  - provider: {fileID: -7741139241938689926}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  - provider: {fileID: 38370485752227080}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  generateTexture: 1
+  operation: 4
+  HeightMaps:
+  - {fileID: -7741139241938689926}
+  - {fileID: 38370485752227080}
+  BlendFactor: 10
+--- !u!114 &-1164238619665799461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db2f20ceb0ff8341a0e0ac5603c6748, type: 3}
+  m_Name: TextureOutputNode
+  m_EditorClassIdentifier: 
+  guid: d99442177903fc94da74022878a945c4
+  expanded: 1
+  position: {x: 2142, y: -33.98221}
+  connections:
+  - provider: {fileID: -7780808601854646382}
+    providerPortName: HeightData
+    inputPortName: DensityMap
+  TextureItem: {fileID: 11400000, guid: 9dcffdeb93aaa07489e6eabbdf5840f3, type: 2}
+  DensityMap: {fileID: -7780808601854646382}
+  showPreview: 1
+--- !u!114 &-1057717917807815973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 6a0f2684c5fbbef4ca9610b88f179c29
+  expanded: 1
+  position: {x: -1692, y: -865.9999}
+  connections: []
+  generateTexture: 0
+  NoiseType: 1
+  MinMaxHeight: {x: 0, y: 120}
+  TileSize: 300
+  Octaves: 2
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
+--- !u!114 &-864186061572283820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b3006cbc2b74c40936cab13a2abfa1, type: 3}
+  m_Name: ConstantNode
+  m_EditorClassIdentifier: 
+  guid: 0529814f501a8f44198f34b687cfe944
+  expanded: 1
+  position: {x: 1904, y: -795}
+  connections: []
+  generateTexture: 0
+  Value: 0.2
+--- !u!114 &-547431849763077089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 343254a6a6c6b3b499829a024a8de9bd
+  expanded: 1
+  position: {x: -1682, y: 549}
+  connections: []
+  generateTexture: 0
+  NoiseType: 1
+  MinMaxHeight: {x: 0, y: 1}
+  TileSize: 289.2
+  Octaves: 2
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
+--- !u!114 &-534048783320126449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed3a5fac60e424499895fd13b53c78c, type: 3}
+  m_Name: WarpNode
+  m_EditorClassIdentifier: 
+  guid: 79b363219729afb4b847c00153e8812e
+  expanded: 1
+  position: {x: -970.9999, y: -144.00002}
+  connections:
+  - provider: {fileID: -1332200338200023086}
+    providerPortName: HeightData
+    inputPortName: Warp
+  - provider: {fileID: 4218912461021068334}
+    providerPortName: HeightData
+    inputPortName: HeightMap
+  generateTexture: 0
+  HeightMap: {fileID: 4218912461021068334}
+  Warp: {fileID: -1332200338200023086}
+  Mask: {fileID: 0}
+--- !u!114 &-146463629343622063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e413cf60441f9347b63d663ed526e0a, type: 3}
+  m_Name: GetSlopeNode
+  m_EditorClassIdentifier: 
+  guid: 3a345db331cef0f4cb6e49278a841be9
+  expanded: 1
+  position: {x: 1226.1305, y: -494.86957}
+  connections:
+  - provider: {fileID: 3871771455365125341}
+    providerPortName: localInput
+    inputPortName: Input
+  generateTexture: 0
+  Input: {fileID: 3871771455365125341}
+  FeatureMode: 0
+--- !u!114 &-120156330699840729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: f93b6892e23d49a41957ef7f8e701c35
+  expanded: 1
+  position: {x: -632.9999, y: 970.99994}
+  connections: []
+  generateTexture: 1
+  NoiseType: 1
+  MinMaxHeight: {x: 0, y: 1}
+  TileSize: 78.5
+  Octaves: 2
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aeb814720255334f9da8722f01f530c, type: 3}
+  m_Name: SnowyMountains
+  m_EditorClassIdentifier: 
+  AutoUpdate: 1
+  position: {x: 622, y: 449}
+  scale: {x: 0.7561437, y: 0.7561437}
+  output: {fileID: 3870522293018060332}
+  nodes:
+  - {fileID: 3870522293018060332}
+  - {fileID: 270085735728238139}
+  - {fileID: 197119758386922552}
+  - {fileID: 3649065362056683398}
+  - {fileID: 7505344947644104476}
+  - {fileID: -5311281267024769147}
+  - {fileID: 3871771455365125341}
+  - {fileID: 6281223499465774961}
+  - {fileID: -146463629343622063}
+  - {fileID: -9035359701123379969}
+  - {fileID: 4292095545898890545}
+  - {fileID: -864186061572283820}
+  - {fileID: 5946682224173312982}
+  - {fileID: 6758001335070327954}
+  - {fileID: -4417235420108905959}
+  - {fileID: 4069350427757876424}
+  - {fileID: 804241360277660414}
+  - {fileID: -1164238619665799461}
+  - {fileID: -7780808601854646382}
+  - {fileID: 1405600890851931183}
+  - {fileID: -5884076236460965062}
+  - {fileID: -8523909471547799308}
+  - {fileID: 6520452813562964879}
+  - {fileID: -6365914311511484402}
+  - {fileID: -1508152725237794693}
+  - {fileID: -5921468806209318017}
+  - {fileID: 3947038869108631664}
+  - {fileID: 38370485752227080}
+  - {fileID: -7741139241938689926}
+  - {fileID: -8205314539471226994}
+  - {fileID: -6108163335214695633}
+  - {fileID: -1301043237263771191}
+  - {fileID: 4249430025304570549}
+  - {fileID: 754352078584290609}
+  - {fileID: 8560261076828240847}
+  - {fileID: 6182728472447913065}
+  - {fileID: 4218912461021068334}
+  - {fileID: -534048783320126449}
+  - {fileID: -1332200338200023086}
+  - {fileID: -4606610436010084618}
+  - {fileID: -1057717917807815973}
+  - {fileID: 8561841416491144551}
+  - {fileID: -1899624081475502289}
+  - {fileID: -4317821023727778090}
+  - {fileID: -547431849763077089}
+  - {fileID: 2775739452343393743}
+  - {fileID: 5519700580826897636}
+  - {fileID: -1332753704426089335}
+  - {fileID: -120156330699840729}
+  groups:
+  - guid: 02d09eaa59e685640a7d75c6268d259c
+    Name: Height
+    position: {x: -1523, y: -837}
+    elementGuids:
+    - 3af3543383ea9f24690ba24d90fb1a78
+    - 48d2b68a0fe3dc94289cd717228075fd
+    - f9f9699c50306b3419b6c5f931b6e5db
+    - e20c5d5e784f7fb458706042f7a860e6
+    - 64bbc92c3c53a01449e66d80f3f881ee
+    - 6aa73e3a102ebe842bf59e4502824c6a
+    - 24836cc7995d1d64c832d3ee50c474b4
+    - e08e81a010e829748a07ebf5b49ceab2
+    - 4448fb96130ecf94aad6ea12df723b43
+    - 924fb8ebd07dc7842a22c72a2a065e91
+    - ea4959a06619b8946948e3f34167e174
+    - 1274a9ed01376ee479c38956956602fe
+    - c0c8b8af336ea9148a3f56ff1a49d0dc
+    - 1de5c9c29419b4642a436c39dbe60a5f
+    - 769f07e9afe4136499955d1705a0cfbb
+    - 79b363219729afb4b847c00153e8812e
+    - 904d7b16b3cad79458bd8b2bd171b155
+    - 25fbf5288cdba6a4abdb6f96e0f4ebdb
+    - 3f94f552b5538e64e8e5c2eaa76c4a31
+    - 6a0f2684c5fbbef4ca9610b88f179c29
+    - 37583cf8d01cbce45a4013212c0d5ccd
+    - cc257aad4d0fd484791c66152d1bb58b
+  - guid: a2b21e2b7f6cd24459ab928b9b97d160
+    Name: Textures
+    position: {x: 1043.7827, y: -694.86957}
+    elementGuids:
+    - 845e831b70523d44bad178974f9b57bb
+    - 3a345db331cef0f4cb6e49278a841be9
+    - e769b785c453b9747939d9b4344653f7
+    - ebe762b5b52a17a4b86316ffc02e0a60
+    - 3911ea3341d29eb4285f986a6ac4257f
+    - 3303fd43e7d281c4d91291bfe5aff086
+    - 3f53b8bd786dd0f4b87e29011e14f36d
+    - 1c222641afd2f8540be83ca3890cc077
+    - 3199b8a3d9d77d2438ccdae457bf43f7
+    - 7dfdacb7967f07c45b78578e94953d31
+    - d99442177903fc94da74022878a945c4
+    - 7b62ae5759ffb86408246093f0ca5b29
+    - fac47bfc1ac2bce4ea2b8c4fb21e72d3
+    - 8c1f54a5d6311b74cbcd40d16e58e349
+    - cf73b3a7894a3044992fce6cf6905476
+    - 0529814f501a8f44198f34b687cfe944
+  - guid: 9819581c1ac86d24584947b944576b58
+    Name: Vegetation
+    position: {x: -1707, y: 480}
+    elementGuids:
+    - 90d50fdd35976c04daef58135e7bbf47
+    - 5a26d1bf03e20b04bba3a4d60d625185
+    - da4c2ebe995d4074b82d8b4c4a59d2d3
+    - 26200c8163173664b8e00683f6313e54
+    - 82ee46f98ad251d4aa4c5d2f5bac4eb2
+    - aaaae69d4def32a4a96f99b44892a8db
+    - d5b6b0bbf7e6c774e973828ea0067b26
+    - 343254a6a6c6b3b499829a024a8de9bd
+    - f32b3144e7c3e9347bb227c9dfccb11f
+    - 37ffa55fbccad6e40bde41d2c7dce0a3
+    - f93b6892e23d49a41957ef7f8e701c35
+  stickyNotes: []
+--- !u!114 &38370485752227080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a3e3dfa38e22540b64ea4b53429990, type: 3}
+  m_Name: NormalMaskNode
+  m_EditorClassIdentifier: 
+  guid: 26200c8163173664b8e00683f6313e54
+  expanded: 1
+  position: {x: -1013, y: 796}
+  connections:
+  - provider: {fileID: 3947038869108631664}
+    providerPortName: localInput
+    inputPortName: Input
+  generateTexture: 0
+  Range: {x: 0, y: 0.33333325}
+  BlendFactor: 0.1
+  Input: {fileID: 3947038869108631664}
+--- !u!114 &197119758386922552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a125ae673fa34f4390cfafb035d4194, type: 3}
+  m_Name: CurveNode(Clone)
+  m_EditorClassIdentifier: 
+  guid: f9f9699c50306b3419b6c5f931b6e5db
+  expanded: 1
+  position: {x: -1348, y: -608}
+  connections:
+  - provider: {fileID: 8561841416491144551}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Function:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.43524525
+      value: 0.27313924
+      inSlope: 1.4028373
+      outSlope: 1.4028373
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.65563184
+      value: 0.7388332
+      inSlope: 1.7454921
+      outSlope: 1.7454921
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.81017876
+      value: 0.9027713
+      inSlope: 1.0925113
+      outSlope: 1.0925113
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Input: {fileID: 8561841416491144551}
+--- !u!114 &270085735728238139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a125ae673fa34f4390cfafb035d4194, type: 3}
+  m_Name: CurveNode
+  m_EditorClassIdentifier: 
+  guid: 48d2b68a0fe3dc94289cd717228075fd
+  expanded: 1
+  position: {x: -1348, y: -748}
+  connections:
+  - provider: {fileID: -1057717917807815973}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Function:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.43524525
+      value: 0.27313924
+      inSlope: 1.4028373
+      outSlope: 1.4028373
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.81017876
+      value: 0.9027713
+      inSlope: 1.0925113
+      outSlope: 1.0925113
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Input: {fileID: -1057717917807815973}
+--- !u!114 &754352078584290609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43d274c44f05b44394ca824f7d3ad66, type: 3}
+  m_Name: VoronoiNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 1274a9ed01376ee479c38956956602fe
+  expanded: 1
+  position: {x: -1691.9998, y: -216.99988}
+  connections: []
+  generateTexture: 0
+  NoiseType: 2
+  MinMaxHeight: {x: 0, y: 10000}
+  TileSize: 40000
+  Octaves: 1
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  SmoothVoronoi: 0.29
+  RidgeMode: 0
+  FixedSeed: 1
+  SeedOffset: 2
+--- !u!114 &804241360277660414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a3e3dfa38e22540b64ea4b53429990, type: 3}
+  m_Name: NormalMaskNode
+  m_EditorClassIdentifier: 
+  guid: 7dfdacb7967f07c45b78578e94953d31
+  expanded: 1
+  position: {x: 1685, y: -32.982178}
+  connections:
+  - provider: {fileID: 4069350427757876424}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Range: {x: 0, y: 0.2503748}
+  BlendFactor: 0.175
+  Input: {fileID: 4069350427757876424}
+--- !u!114 &1405600890851931183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd44f56b285bf49aba7dcb9ed766fe, type: 3}
+  m_Name: CombineNode
+  m_EditorClassIdentifier: 
+  guid: 3911ea3341d29eb4285f986a6ac4257f
+  expanded: 1
+  position: {x: 1671.1305, y: -476.86957}
+  connections:
+  - provider: {fileID: -146463629343622063}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  - provider: {fileID: -4317821023727778090}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  generateTexture: 0
+  operation: 0
+  HeightMaps:
+  - {fileID: -146463629343622063}
+  - {fileID: -4317821023727778090}
+  BlendFactor: 10
+--- !u!114 &2775739452343393743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dac7164f0b1e554ab3c2276f0518395, type: 3}
+  m_Name: AppplyMask
+  m_EditorClassIdentifier: 
+  guid: cc257aad4d0fd484791c66152d1bb58b
+  expanded: 1
+  position: {x: 445.00003, y: -389.99994}
+  connections:
+  - provider: {fileID: 4249430025304570549}
+    providerPortName: HeightData
+    inputPortName: Mask
+  - provider: {fileID: -1899624081475502289}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  ValueAtZero: 2
+  Input: {fileID: -1899624081475502289}
+  Mask: {fileID: 4249430025304570549}
+--- !u!114 &3649065362056683398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd44f56b285bf49aba7dcb9ed766fe, type: 3}
+  m_Name: CombineNode
+  m_EditorClassIdentifier: 
+  guid: e20c5d5e784f7fb458706042f7a860e6
+  expanded: 1
+  position: {x: -1050.0195, y: -599}
+  connections:
+  - provider: {fileID: 270085735728238139}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  - provider: {fileID: 197119758386922552}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  generateTexture: 0
+  operation: 1
+  HeightMaps:
+  - {fileID: 270085735728238139}
+  - {fileID: 197119758386922552}
+  BlendFactor: 10
+--- !u!114 &3870522293018060332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906554316c986004795fcc727b70c356, type: 3}
+  m_Name: HeightOutputNode
+  m_EditorClassIdentifier: 
+  guid: 3af3543383ea9f24690ba24d90fb1a78
+  expanded: 1
+  position: {x: 891.4415, y: -756}
+  connections:
+  - provider: {fileID: 6520452813562964879}
+    providerPortName: HeightData
+    inputPortName: HeightMap
+  HeightMap: {fileID: 6520452813562964879}
+--- !u!114 &3871771455365125341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1f927955e4dc748b511d78cd65354c, type: 3}
+  m_Name: LocalInputNode
+  m_EditorClassIdentifier: 
+  guid: 845e831b70523d44bad178974f9b57bb
+  expanded: 1
+  position: {x: 1069.1305, y: -494.86957}
+  connections: []
+  generateTexture: 0
+  output: {fileID: -5311281267024769147}
+--- !u!114 &3947038869108631664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1f927955e4dc748b511d78cd65354c, type: 3}
+  m_Name: LocalInputNode
+  m_EditorClassIdentifier: 
+  guid: da4c2ebe995d4074b82d8b4c4a59d2d3
+  expanded: 1
+  position: {x: -1171, y: 852}
+  connections: []
+  generateTexture: 0
+  output: {fileID: -5921468806209318017}
+--- !u!114 &4069350427757876424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad040cd5011a91b48b511ce60b4bbaff, type: 3}
+  m_Name: FoldNode
+  m_EditorClassIdentifier: 
+  guid: 3199b8a3d9d77d2438ccdae457bf43f7
+  expanded: 1
+  position: {x: 1455, y: -32.982178}
+  connections:
+  - provider: {fileID: 5946682224173312982}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  FoldingLine: 1
+  RelativeTo: 0
+  Input: {fileID: 5946682224173312982}
+--- !u!114 &4218912461021068334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dac7164f0b1e554ab3c2276f0518395, type: 3}
+  m_Name: MultiplyNode
+  m_EditorClassIdentifier: 
+  guid: 769f07e9afe4136499955d1705a0cfbb
+  expanded: 1
+  position: {x: -1229.9999, y: -154.99997}
+  connections:
+  - provider: {fileID: 6182728472447913065}
+    providerPortName: HeightData
+    inputPortName: Mask
+  - provider: {fileID: 754352078584290609}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  ValueAtZero: 0
+  Input: {fileID: 754352078584290609}
+  Mask: {fileID: 6182728472447913065}
+--- !u!114 &4249430025304570549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f83aa784a3990b40a3519533b2e8d5b, type: 3}
+  m_Name: BlurNode
+  m_EditorClassIdentifier: 
+  guid: ea4959a06619b8946948e3f34167e174
+  expanded: 1
+  position: {x: 148, y: -272.99994}
+  connections:
+  - provider: {fileID: -8523909471547799308}
+    providerPortName: HeightData
+    inputPortName: HeightMap
+  generateTexture: 0
+  HeightMap: {fileID: -8523909471547799308}
+  Mask: {fileID: 0}
+  BlurSize: 30
+--- !u!114 &4292095545898890545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db2f20ceb0ff8341a0e0ac5603c6748, type: 3}
+  m_Name: TextureOutputNode
+  m_EditorClassIdentifier: 
+  guid: ebe762b5b52a17a4b86316ffc02e0a60
+  expanded: 1
+  position: {x: 2142.1304, y: -466.86957}
+  connections:
+  - provider: {fileID: -9035359701123379969}
+    providerPortName: HeightData
+    inputPortName: DensityMap
+  TextureItem: {fileID: 11400000, guid: 2dfe4b962f795404dba816ca7a1f3390, type: 2}
+  DensityMap: {fileID: -9035359701123379969}
+  showPreview: 1
+--- !u!114 &5519700580826897636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef6ee8c4c67ff94694a7a3a95575eb9, type: 3}
+  m_Name: VegetationOutputNode
+  m_EditorClassIdentifier: 
+  guid: f32b3144e7c3e9347bb227c9dfccb11f
+  expanded: 1
+  position: {x: -411, y: 971}
+  connections:
+  - provider: {fileID: -120156330699840729}
+    providerPortName: HeightData
+    inputPortName: DensityMap
+  VegetationItem: {fileID: 11400000, guid: 61245817508108e41922a5424b9b0fbd, type: 2}
+  DensityMap: {fileID: -120156330699840729}
+  showPreview: 1
+--- !u!114 &5946682224173312982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d84e78c49c29974f95a77205bbf7d07, type: 3}
+  m_Name: GetCavityNode
+  m_EditorClassIdentifier: 
+  guid: 3f53b8bd786dd0f4b87e29011e14f36d
+  expanded: 1
+  position: {x: 1227, y: -32.982178}
+  connections:
+  - provider: {fileID: -4417235420108905959}
+    providerPortName: localInput
+    inputPortName: Input
+  generateTexture: 0
+  CavitySize: 45.1
+  Input: {fileID: -4417235420108905959}
+  FeatureMode: 0
+--- !u!114 &6182728472447913065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a3e3dfa38e22540b64ea4b53429990, type: 3}
+  m_Name: NormalMaskNode
+  m_EditorClassIdentifier: 
+  guid: 1de5c9c29419b4642a436c39dbe60a5f
+  expanded: 1
+  position: {x: -1455, y: 104.000046}
+  connections:
+  - provider: {fileID: 8560261076828240847}
+    providerPortName: HeightData
+    inputPortName: Input
+  generateTexture: 0
+  Range: {x: 0.797902, y: 1}
+  BlendFactor: 0
+  Input: {fileID: 8560261076828240847}
+--- !u!114 &6281223499465774961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db2f20ceb0ff8341a0e0ac5603c6748, type: 3}
+  m_Name: TextureOutputNode
+  m_EditorClassIdentifier: 
+  guid: cf73b3a7894a3044992fce6cf6905476
+  expanded: 1
+  position: {x: 2142, y: -796}
+  connections:
+  - provider: {fileID: -864186061572283820}
+    providerPortName: HeightData
+    inputPortName: DensityMap
+  TextureItem: {fileID: 11400000, guid: c679d9669d25b6447bd4748efe6b10e8, type: 2}
+  DensityMap: {fileID: -864186061572283820}
+  showPreview: 1
+--- !u!114 &6520452813562964879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd44f56b285bf49aba7dcb9ed766fe, type: 3}
+  m_Name: CombineNode(Clone)
+  m_EditorClassIdentifier: 
+  guid: 924fb8ebd07dc7842a22c72a2a065e91
+  expanded: 1
+  position: {x: 659.00006, y: -756}
+  connections:
+  - provider: {fileID: 7505344947644104476}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  - provider: {fileID: 2775739452343393743}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  generateTexture: 1
+  operation: 0
+  HeightMaps:
+  - {fileID: 7505344947644104476}
+  - {fileID: 2775739452343393743}
+  BlendFactor: 10
+--- !u!114 &6758001335070327954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f28cc63fb8a4654d812cf1d433315ca, type: 3}
+  m_Name: LocalOutputNode
+  m_EditorClassIdentifier: 
+  guid: 24836cc7995d1d64c832d3ee50c474b4
+  expanded: 1
+  position: {x: -798.9998, y: -646.5}
+  connections:
+  - provider: {fileID: 3649065362056683398}
+    providerPortName: HeightData
+    inputPortName: inputMap
+  OutputName: BaseGround
+  inputMap: {fileID: 3649065362056683398}
+--- !u!114 &7505344947644104476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd44f56b285bf49aba7dcb9ed766fe, type: 3}
+  m_Name: CombineNode
+  m_EditorClassIdentifier: 
+  guid: 64bbc92c3c53a01449e66d80f3f881ee
+  expanded: 1
+  position: {x: -526, y: -509.78458}
+  connections:
+  - provider: {fileID: 3649065362056683398}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  - provider: {fileID: -4606610436010084618}
+    providerPortName: HeightData
+    inputPortName: HeightMaps
+  generateTexture: 0
+  operation: 0
+  HeightMaps:
+  - {fileID: 3649065362056683398}
+  - {fileID: -4606610436010084618}
+  BlendFactor: 10
+--- !u!114 &8560261076828240847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43d274c44f05b44394ca824f7d3ad66, type: 3}
+  m_Name: VoronoiNoiseNode
+  m_EditorClassIdentifier: 
+  guid: c0c8b8af336ea9148a3f56ff1a49d0dc
+  expanded: 1
+  position: {x: -1691.9998, y: 124.000015}
+  connections: []
+  generateTexture: 0
+  NoiseType: 3
+  MinMaxHeight: {x: 0, y: 1}
+  TileSize: 40000
+  Octaves: 1
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  SmoothVoronoi: 0.001
+  RidgeMode: 0
+  FixedSeed: 1
+  SeedOffset: 2
+--- !u!114 &8561841416491144551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b938e39cb4f554aa6312d209656fd2, type: 3}
+  m_Name: SimplexNoiseNode
+  m_EditorClassIdentifier: 
+  guid: 3f94f552b5538e64e8e5c2eaa76c4a31
+  expanded: 1
+  position: {x: -1692.0002, y: -539}
+  connections: []
+  generateTexture: 0
+  NoiseType: 0
+  MinMaxHeight: {x: 0, y: 100}
+  TileSize: 300
+  Octaves: 3
+  Rotation: {x: 0, y: 0, z: 0}
+  Lacunarity: 2
+  Persistence: 0.5
+  RidgeMode: 0
