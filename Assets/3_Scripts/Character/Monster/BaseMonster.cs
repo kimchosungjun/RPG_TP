@@ -70,11 +70,12 @@ public abstract class BaseMonster : BaseActor
     protected virtual void Start() 
     { 
         CreateBTStates();
-        //MonsterTable table = SharedMgr.TableMgr.GetMonster;
-        //MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
-        //MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
-        //monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
-        //monsterStatControl.MonsterStat = monsterStat;
+        MonsterTable table = SharedMgr.TableMgr.GetMonster;
+        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
+        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
+        monsterStat = new MonsterStat();
+        monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
+        monsterStatControl.MonsterStat = monsterStat;
     }
     
     /// <summary>

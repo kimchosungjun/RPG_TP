@@ -7,15 +7,30 @@ public class ParticleAction : MonoBehaviour
     [SerializeField] Transform particleParent;
     [SerializeField] ParticleSystem[] particles;
     [SerializeField] float maintainTime;
+
+    public HitBox GetHitBox { get; set; } = null;
     public void DoParticle(float _maintainTime)
     {
-        particleParent.gameObject.SetActive(true);
+        if(particleParent.gameObject.activeSelf == false)
+            particleParent.gameObject.SetActive(true);
         int cnt = particles.Length;
         for (int i = 0; i < cnt; i++)
         {
             particles[i].Play();
         }
         StartCoroutine(CParticleMaintainTime(_maintainTime));
+    }
+
+    public void DoParticle()
+    {
+        if (particleParent.gameObject.activeSelf == false)
+            particleParent.gameObject.SetActive(true);
+        int cnt = particles.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            particles[i].Play();
+        }
+        StartCoroutine(CParticleMaintainTime(maintainTime));
     }
 
     IEnumerator CParticleMaintainTime(float _maintainTime) 
@@ -40,7 +55,7 @@ public class ParticleAction : MonoBehaviour
         for (int i = 0; i < cnt; i++)
         {
             particles[i].Stop();
-        }
+        }    
         particleParent.gameObject.SetActive(false);
     }
 

@@ -77,6 +77,7 @@ public class PlayerCtrl : MonoBehaviour
             {
                 SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[i].GetPlayerMovementControl.GetBodyTransform);
                 ChangePlayer(i, false);
+                return;
             }
         }
 

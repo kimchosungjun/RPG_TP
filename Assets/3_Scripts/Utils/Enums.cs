@@ -89,8 +89,8 @@ namespace MonsterEnums
         SLIME=2,
         VIRUS=3,
         ANNOYBEAR=4,
-        BULLTANK=5,
-        DRAGON=6
+        DRAGON=5,
+        //BULLTANK=,
     }
 
     public enum ATTACK_ACTIONS
@@ -101,7 +101,12 @@ namespace MonsterEnums
         BEAR_SMASH01=3,
         BEAR_SMASH02=4,
         BEAR_SMASH03=5,
-        BEAR_STAMP=6
+        BEAR_STAMP=6,
+        DRAGON_BASIC=7,
+        DRAGOND_CLAW_1=8,
+        DRAGOND_CLAW_2=9,
+        DRAGON_FLAME=10,
+        DRAGOND_ORBIT_FLAME=11,
     }
 
     public enum CONDITION_ACTIONS
