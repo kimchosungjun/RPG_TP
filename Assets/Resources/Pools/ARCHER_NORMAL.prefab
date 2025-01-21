@@ -68,7 +68,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a53c2c9f8125c2843a857fce4e08418d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer: 0
+  enemyLayer: 7
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   visibleTime: 10
   speed: 10
   isPenetrate: 0

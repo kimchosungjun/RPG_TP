@@ -31,11 +31,6 @@ public class MonsterStat : BaseStat
     public virtual void SetMonsterStat(MonsterTableClassGroup.MonsterStatTableData _combatMonsterStat, int _level)
     {
         level = _level;
-        if (_combatMonsterStat == null)
-        {
-            Debug.Log("없다");
-            return;
-        }
         int levelDiff = _level - _combatMonsterStat.startLevel;
         maxHp = _combatMonsterStat.maxHP + _combatMonsterStat.hpIncrease * levelDiff;
         currentHP = maxHp;
@@ -50,8 +45,9 @@ public class MonsterStat : BaseStat
 
     public int GetCurrentHPPercent()
     {
-        float result = currentHP / maxHp;
-        return (int)(result * 100f);
+        float result = currentHP *100f / maxHp;
+        int res = (int)(result);
+        return res;
     }
 
     #endregion

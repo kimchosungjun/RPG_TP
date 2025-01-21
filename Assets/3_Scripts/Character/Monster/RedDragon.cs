@@ -223,6 +223,12 @@ public class RedDragon : EliteMonster
 
     #region Take Damage
 
+    // Relate Hit Condition
+    float effectMaintainTime = 0f;
+    public float GetEffectMaintainTime { get { return effectMaintainTime; } }
+    EffectEnums.HIT_EFFECTS currentEffect = EffectEnums.HIT_EFFECTS.NONE;
+    public EffectEnums.HIT_EFFECTS GetCurrentHitEffect { get { return currentEffect; } }
+
     public override bool CanTakeDamageState() { return isInvincible ? false : true; }
 
     public override void ApplyStatTakeDamage(TransferAttackData _attackData)
@@ -233,8 +239,10 @@ public class RedDragon : EliteMonster
 
     public override void ApplyMovementTakeDamage(TransferAttackData _attackData) 
     {
-        if(isInvincible == false && _attackData.GetHitEffect != EffectEnums.HIT_EFFECTS.NONE)
+        currentEffect = _attackData.GetHitEffect;
+        if (currentEffect != EffectEnums.HIT_EFFECTS.NONE)
         {
+            effectMaintainTime = _attackData.EffectMaintainTime;
             ChangeState(DRAGON_STATE.HIT);
         }
     }
@@ -265,7 +273,6 @@ public class RedDragon : EliteMonster
         base.Start(); 
         statusUI = SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI;
         attackControl.SetData(monsterStat);
-        //attackControl.SetData(monsterStat);
     }
 
     protected override void FixedUpdate()

@@ -129,34 +129,20 @@ namespace DragondStateClasses
     {
         public DragonHitState(RedDragon _redDragon) : base(_redDragon) { }
 
-        EffectEnums.HIT_EFFECTS effect;
         bool checkMaintainTime = false;
         float maintainTime = 0f;
         float time = 0f;
 
-        public void SetEffect(TransferAttackData _attackData)
-        {
-            effect = _attackData.GetHitEffect;
-            if(_attackData.GetHitEffect == EffectEnums.HIT_EFFECTS.STUN)
-            {
-                checkMaintainTime = true;
-                maintainTime = _attackData.EffectMaintainTime;
-            }
-        }
-
-        public void SetEffect(EffectEnums.HIT_EFFECTS _effect, float _time)
-        {
-            effect = _effect;
-            maintainTime = _time;
-            if (_effect == EffectEnums.HIT_EFFECTS.STUN)
-                checkMaintainTime = true;
-        }
-
         public override void Enter()
         {
             time = 0f;
-            if(effect == EffectEnums.HIT_EFFECTS.STUN)
+            redDragon.GetNav.ResetPath();
+            if(redDragon.GetCurrentHitEffect == EffectEnums.HIT_EFFECTS.STUN)
+            {
+                checkMaintainTime = true;
+                maintainTime = redDragon.GetEffectMaintainTime;
                 redDragon.SetAnimation(RedDragon.DRAGON_ANIM.GROGGY);
+            }
             else
                 redDragon.SetAnimation(RedDragon.DRAGON_ANIM.HIT);
         }
@@ -169,7 +155,7 @@ namespace DragondStateClasses
                 if (time >= maintainTime)
                 {
                     redDragon.ChangeState(RedDragon.DRAGON_STATE.MOVE);
-                    return;
+                    checkMaintainTime = false;
                 }
             }
         }
