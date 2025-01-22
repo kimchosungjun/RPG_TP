@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 4244268427382144}
   - component: {fileID: 33678800601683448}
   - component: {fileID: 23744000064268988}
-  - component: {fileID: 955394162340613868}
+  - component: {fileID: 6862379247803740174}
   m_Layer: 0
   m_Name: Graveyard_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4244268427382144
 Transform:
@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,6 +53,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -82,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &955394162340613868
+--- !u!65 &6862379247803740174
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,8 +92,16 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573284199375500}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.892706, y: 0.7337574, z: 0.10977744}
-  m_Center: {x: 0.05296433, y: 0.36688048, z: 0.00000012293458}
+  serializedVersion: 3
+  m_Size: {x: 11.678118, y: 2.2012722, z: 0.32933235}
+  m_Center: {x: 0.15889311, y: 1.1006414, z: 0.00000036507845}
