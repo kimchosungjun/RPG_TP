@@ -3441,7 +3441,7 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
+  m_DetailObjectDistance: 50
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
@@ -7601,8 +7601,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377033852}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.39636087, y: 0.18084164, z: -0.0747419, w: 0.8969995}
+  m_LocalPosition: {x: 116.68469, y: 55.493774, z: 90.707245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10042,10 +10042,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_LargeWall_b (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 1030981415, guid: abc00000000007704129481400173865, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
-      objectReference: {fileID: 0}
     - target: {fileID: 1030981416, guid: abc00000000007704129481400173865, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -10089,10 +10085,6 @@ PrefabInstance:
     - target: {fileID: 1030981416, guid: abc00000000007704129481400173865, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1030981418, guid: abc00000000007704129481400173865, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

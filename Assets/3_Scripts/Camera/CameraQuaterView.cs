@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraQuaterView
+public class CameraQuaterView : MonoBehaviour
 {
     // 벽, 땅 
     int wallNGroundLayer = 1 << (int)UtilEnums.LAYERS.WALL | 1 << (int)UtilEnums.LAYERS.GROUND;
@@ -17,14 +15,9 @@ public class CameraQuaterView
     float mMouseYValue = 0f; // 마우스 Y값, 카메라를 X축을 회전축으로 상하 회전
     Vector3 offset = Vector3.zero;   // 캐릭터로부터 얼마나 떨어져 있는지에 대한 변위(위치)
 
-    #region Creator & Change Information
-    public CameraQuaterView(Transform _camTransform) 
-    {
-        camTransform = _camTransform;
-        deltaDistance = 5f;
-    }
+    #region Setup & Change Information
 
-    public CameraQuaterView(Transform _camTransform, float _deltaDistance)
+    public void Setup(Transform _camTransform, float _deltaDistance = 7.5f)
     {
         camTransform = _camTransform;
         deltaDistance = _deltaDistance;
@@ -44,7 +37,7 @@ public class CameraQuaterView
         camTransform.rotation = Quaternion.Euler(mMouseYValue, mMouseXValue, 0f);      // 설정된 회전값을 적용해둠
     }
 
-    public void SetDeltaDistance(float _distance) { deltaDistance = _distance; }
+    public void SetDeltaDistance(float _distance) { deltaDistance = _distance; offset = new Vector3(0f, 0f, -1f * deltaDistance); }
     #endregion
 
     #region Interface Camera View  

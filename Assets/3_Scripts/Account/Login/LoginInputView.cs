@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -79,20 +80,22 @@ public class LoginInputView : MonoBehaviour
         // 회원가입
         string _id = idInput.text;
         string _password = pwInput.text;
-        
-        if (SharedMgr.SceneMgr.IsExistID(_id)  || _id == string.Empty)
+
+        if (_id.Length == 0 || _password.Length == 0)
         {
-            if (_password.Length == 0 || _id.Length == 0)
-            {
-                ShowWarnText("ID와 비밀번호은 빈칸일 수 없습니다.");
-                return;
-            }
+            ShowWarnText("ID와 비밀번호은 빈칸일 수 없습니다.");
+            return;
+        }
+        else if (SharedMgr.SceneMgr.IsExistID(_id))
+        {
             ShowWarnText("이미 존재하는 계정입니다!");
+            return;
         }
         else
         {
             SharedMgr.SceneMgr.SetPlayerAccount(_id, _password);
             ShowWarnText( "회원가입에 성공했습니다.");
+            return;
         }
     }
 

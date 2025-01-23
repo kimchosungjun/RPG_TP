@@ -7,14 +7,14 @@ public class CameraCtrl : MonoBehaviour
     int activeCamIndex = 0;
     [SerializeField] bool isMoveLock = true;
 
-    CameraQuaterView quaterView = null;
+    [SerializeField] CameraQuaterView quaterView;
     [SerializeField] CameraShakeView shakeView;
     [SerializeField] CameraTalkView talkView;
 
 
     private void Start()
     {
-        quaterView = new CameraQuaterView(this.transform);
+        quaterView.Setup(this.transform);
         talkView.Setup();
         shakeView.Setup();
     }

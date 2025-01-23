@@ -514,7 +514,7 @@ PrefabInstance:
     - target: {fileID: 8655505908091735681, guid: 2123512c0ff8de04e940ab9f56dfc533,
         type: 3}
       propertyPath: m_Name
-      value: SuperMgr
+      value: MgrCreator
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
