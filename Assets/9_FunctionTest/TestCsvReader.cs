@@ -9,7 +9,7 @@ public class TestCsvReader : MonoBehaviour
     private void Awake()
     {
         tableMgr = new TableMgr();
-        tableMgr.LinkPlayerTable();
+        tableMgr.ParsePlayerTable();
     }
 
     public void OnGUI()

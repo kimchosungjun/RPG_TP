@@ -63,9 +63,8 @@ public class LoginInputView : MonoBehaviour
             idInput.interactable = false;
             pwInput.interactable = false;
             SharedMgr.UIMgr.LoginUICtrl.DoLobby();
-            SharedMgr.UIMgr.LoginUICtrl.DoOpenGate();
+            SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.LoadSaveData();
             viewParent.SetActive(false);
-            
         }
         else
         {

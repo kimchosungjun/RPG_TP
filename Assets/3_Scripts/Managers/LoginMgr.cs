@@ -9,9 +9,9 @@ using UnityEngine;
 public partial class SceneMgr: MonoBehaviour
 {
     #region ID, Password
-    public void SetPlayerAccount(string _ID, string _Password)
+    public void SetPlayerAccount(string _Key, string _Value)
     {
-        PlayerPrefs.SetString(_ID, _Password);
+        PlayerPrefs.SetString(_Key, _Value);
         PlayerPrefs.Save();
     }
 
@@ -34,6 +34,8 @@ public partial class SceneMgr: MonoBehaviour
     {
         return IsExistID("ID");
     }
+
+    public string GetPlayerID() { return PlayerPrefs.GetString("ID"); }
     #endregion
 
 

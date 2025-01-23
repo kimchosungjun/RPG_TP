@@ -7,26 +7,40 @@ using UnityEditor;
 
 public class TableMgr 
 {
-    #region Private Table
-    private AccountSaveData accountSaveData;
+    /*****************************/
+    /******** Table Data *******/
+    /*****************************/
+
+    #region Table Data
+    
+    // Private 
     private PlayerTable player = new PlayerTable();
     private MonsterTable monster = new MonsterTable();
     private ItemTable item = new ItemTable();
-    #endregion
-
-    #region Property
+    
+    // Property
     public PlayerTable GetPlayer { get { return player; } }
     public MonsterTable GetMonster { get {  return monster; } }
     public ItemTable GetItem { get { return item; } }
-    public AccountSaveData AccountSaveData { get { return accountSaveData; } set { accountSaveData = value; } }
+
     #endregion
 
-    public void Init() 
+    #region Load Data Table
+    public void Init()
     {
         SharedMgr.TableMgr = this;
-        LinkPlayerTable();
+        ParsePlayerTable();
         ParseMonsterData();
         ParseItemData();
+    }
+
+    public void ParsePlayerTable()
+    {
+        GetPlayer.InitPlayerTableCsv("PlayerTable", 1, 0);
+        GetPlayer.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
+        GetPlayer.InitPlayerNormalAttackTableCsv("PlayerNormalAttackTable", 1, 0);
+        GetPlayer.InitPlayerConditionSkillTableCsv("PlayerConditionSkillTable", 1, 0);
+        GetPlayer.InitPlayerAttackSkillTableCsv("PlayerAttackSkillTable", 1, 0);
     }
 
     private void ParseMonsterData()
@@ -46,40 +60,24 @@ public class TableMgr
         item.InitWeaponUpgradeTableCsv("WeaponUpgradeTable", 1, 0);
     }
 
-    #region Test Function
+    #endregion
 
-    public void LoadTableData(TABLE_FOLDER_TYPES _tableType)
-    {
-        switch (_tableType)
-        {
-            case TABLE_FOLDER_TYPES.PLAYER:
-                LoadPlayerData();
-                break;
-            case TABLE_FOLDER_TYPES.MONSTER:
-                break;
-        }
-    }
 
-    /// <summary>
-    /// Row : 행, Col : 열
-    /// </summary>
-    public void LinkPlayerTable()
-    {
-#if UNITY_EDITOR
-        GetPlayer.InitPlayerTableCsv("PlayerTable", 1, 0);
-        GetPlayer.InitPlayerLevelTableCsv("PlayerLevelTable", 1, 0);
-        GetPlayer.InitPlayerNormalAttackTableCsv("PlayerNormalAttackTable", 1, 0);
-        GetPlayer.InitPlayerConditionSkillTableCsv("PlayerConditionSkillTable", 1, 0);
-        GetPlayer.InitPlayerAttackSkillTableCsv("PlayerAttackSkillTable", 1,0);
-#else
-#endif
-    }
+    /*****************************/
+    /******** Save Data ********/
+    /*****************************/
 
-    public void LoadPlayerData(/*PlayerEnums.TYPEID _typeID*/)
-    {
-        GetPlayer.InitPlayerTableCsv("PlayerTableCsv", 1, 0);
-    }
+    #region Save Data
 
+    // Private 
+    private AccountSaveData accountSaveData;
+
+    // Property
+    public AccountSaveData AccountSaveData { get { return accountSaveData; } set { accountSaveData = value; } }
+
+    #endregion
+
+    #region Save & Load Data
     public void Save()
     {
         //character.SaveBinary<PlayerTable>("PlayerTableCsv");
@@ -87,5 +85,6 @@ public class TableMgr
         //AssetDatabase.Refresh();
 #endif
     }
+
     #endregion
 }

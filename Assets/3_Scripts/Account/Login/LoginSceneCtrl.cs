@@ -18,15 +18,14 @@ public class LoginSceneCtrl : MonoBehaviour
         loginUICtrl.DoFadeIn();
         if(SharedMgr.SceneMgr.IsMaintainLogin())
         {
-            SharedMgr.UIMgr.LoginUICtrl.DoOpenGate();
+            LoadSaveData();
             loginUICtrl.DoLobby();
         }
         else
         {
             loginUICtrl.DoLogin();
         }
-        // To Do ~~~~~ Load Save Data 
     }
 
-    
+    public void LoadSaveData() { SharedMgr.SaveMgr.LoadUserData(SharedMgr.UIMgr.LoginUICtrl.DoOpenGate); }
 }

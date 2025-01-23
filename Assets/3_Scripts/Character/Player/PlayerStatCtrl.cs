@@ -19,4 +19,22 @@ public class PlayerStatCtrl : MonoBehaviour
             return;
         playerStatGroup.Add(_stat.GetSaveStat.playerTypeID, _stat);
     }
+
+    /// <summary>
+    /// Return All Save Stat : Use for Update Save Stat
+    /// </summary>
+    /// <returns></returns>
+    public List<PlayerSaveStat> GetAllSaveStat()
+    {
+        int keyCnt = playerStatGroup.Keys.Count;
+        List<int> keys = new List<int>(playerStatGroup.Keys);
+        List<PlayerSaveStat> result = new List<PlayerSaveStat>();
+
+        for(int i=0; i<keyCnt; i++)
+        {
+            result.Add(playerStatGroup[keys[i]].GetSaveStat);
+        }
+
+        return result;
+    }
 }

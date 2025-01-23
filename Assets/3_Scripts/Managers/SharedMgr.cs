@@ -20,9 +20,6 @@ public static class SharedMgr
     public static SaveMgr SaveMgr = null;
     #endregion
 
-    // 아직 안씀
-    public static HoldItemMgr HoldItemMgr = null;
-
     //public static TableMgr InitTableMgr()
     //{
     // tablemgr==null이면 table을 만들어서 연결할때 return 한다.

@@ -51,6 +51,7 @@ public class LoginLobbyView : MonoBehaviour
     public void PressLogOut()
     {
         logOutView.SetActive(true);
+        SharedMgr.SaveMgr.ClearUserData();
     }
 
     public void DecideGameExit()

@@ -6,6 +6,8 @@ public class LoginUICtrl : MonoBehaviour
     [Header("씬의 Flow를 관리하는 씬 컨트롤러")]
     [SerializeField] LoginSceneCtrl sceneCtrl;
 
+    public LoginSceneCtrl GetSceneCtrl { get { return sceneCtrl; } } 
+
     [Header("UI의 정보를 표기하는 View")]
     [SerializeField] LoginLobbyView lobbyView;
     [SerializeField] LoginGateView gateView;    

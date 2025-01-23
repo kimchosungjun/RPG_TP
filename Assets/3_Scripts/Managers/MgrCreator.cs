@@ -5,17 +5,16 @@ public class MgrCreator : MonoBehaviour
     #region Reference Link
     [SerializeField] SceneMgr sceneMgr;
     [SerializeField] SoundMgr soundMgr;
+    [SerializeField] SaveMgr saveMgr;
     #endregion
     
     #region Use Heap Memory
-    HoldItemMgr holdItemMgr = new HoldItemMgr();
     UIMgr uiMgr = new UIMgr();
     ResourceMgr resourceMgr = new ResourceMgr();
     TableMgr tableMgr = new TableMgr();
     InventoryMgr inventoryMgr = new InventoryMgr();
     InteractionMgr dialogueMgr = new InteractionMgr();
     QuestMgr questMgr = new QuestMgr(); 
-    SaveMgr saveMgr = new SaveMgr();
     #endregion
 
     private void Awake()
@@ -38,8 +37,6 @@ public class MgrCreator : MonoBehaviour
             dialogueMgr.Init();
             questMgr.Init();
             saveMgr.Init();
-            // 아이템 정보 : 아직 안씀 
-            holdItemMgr.Init();
         }
     }
 }
