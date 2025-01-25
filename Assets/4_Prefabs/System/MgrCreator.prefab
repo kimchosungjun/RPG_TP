@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 3988643297882749764}
   - component: {fileID: 6105756085784400855}
   - component: {fileID: 6479941925014515507}
+  - component: {fileID: 8472621538886880199}
   m_Layer: 0
   m_Name: MgrCreator
   m_TagString: Untagged
@@ -290,7 +291,7 @@ Transform:
   - {fileID: 7407071274341102226}
   - {fileID: 7367420561857841706}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3988643297882749764
 MonoBehaviour:
@@ -306,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneMgr: {fileID: 6105756085784400855}
   soundMgr: {fileID: 6479941925014515507}
+  saveMgr: {fileID: 8472621538886880199}
 --- !u!114 &6105756085784400855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,5 +330,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dd51f735fa0ea245b68a69c71f11bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8472621538886880199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655505908091735681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe48cfb2b5dd63449d10de2eb2854e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

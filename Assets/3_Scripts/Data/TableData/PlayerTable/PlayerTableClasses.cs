@@ -31,6 +31,7 @@ namespace PlayerTableClassGroup
         public string fileName;
         public int weaponType;
         public int battleType;
+        public string prefabName;
 
         public WEAPONTYPE GetWeaponType() { return (WEAPONTYPE)weaponType; }
         public BATTLE_TYPE GetBattleType() { return (BATTLE_TYPE) battleType; }

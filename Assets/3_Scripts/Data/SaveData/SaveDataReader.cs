@@ -7,13 +7,15 @@ public class SaveDataReader
     public string GetPath(string _directoryName)
     {
         string dataName = "UserData.json";
-        string path = Path.Combine(_directoryName, dataName);
+        string path = _directoryName+"/"+dataName;
         return path;
     }
 
     public UserSaveData GetUserData(string _directoryName)
     {
-        return JsonUtility.FromJson<UserSaveData>(GetPath(_directoryName));
+        string json = File.ReadAllText(GetPath(_directoryName));
+        UserSaveData saveData = JsonUtility.FromJson<UserSaveData>(json);
+        return saveData; 
     }
 
     public UserSaveData GetUserData()

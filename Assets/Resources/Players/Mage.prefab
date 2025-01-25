@@ -885,9 +885,19 @@ MonoBehaviour:
       currentNormalAttackLevel: 1
       currentSkillLevel: 1
       currentUltimateSkillLevel: 1
+    atlasName: 
+    fileName: 
+    holdWeaponType: 0
+    battleType: 0
+    soDatas:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    HoldWeaponUniqueID: -1
   playerActionControl: {fileID: 820060188921091454}
   playerStatControl: {fileID: 1866161969179706786}
   playerMovementControl: {fileID: 4141476038577328447}
+  playerWeaponType: 0
 --- !u!114 &1866161969179706786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,24 +911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentConditions: []
-  playerStat:
-    actorName: 
-    maxHp: 0
-    speed: 0
-    defenceValue: 0
-    attackValue: 0
-    criticalValue: 0
-    attackSpeed: 0
-    dashSpeed: 0
-    jumpSpeed: 0
-    currentStat:
-      playerTypeID: 0
-      currentHP: 100
-      currentLevel: 1
-      currentExp: 0
-      currentNormalAttackLevel: 1
-      currentSkillLevel: 1
-      currentUltimateSkillLevel: 1
 --- !u!114 &4141476038577328447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7102,19 +7094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData:
-    hitEffectType: 0
-    attackValue: 0
-    effectMaintainTime: 0
-  conditionData:
-    conditionStat: 0
-    conditionContinuity: 0
-    applyType: 0
-    conditionValue: 0
-    multiplier: 0
-    maxConditionTime: 0
-    effectConditionTime: 0
-    isEndConditionTime: 0
   triggerAttack: {fileID: 1922244314378619103}
 --- !u!1 &5966259572864121629
 GameObject:
@@ -8630,19 +8609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData:
-    hitEffectType: 0
-    attackValue: 0
-    effectMaintainTime: 0
-  conditionData:
-    conditionStat: 0
-    conditionContinuity: 0
-    applyType: 0
-    conditionValue: 0
-    multiplier: 0
-    maxConditionTime: 0
-    effectConditionTime: 0
-    isEndConditionTime: 0
   triggerAttack: {fileID: 3556234051753448207}
 --- !u!1 &7075600046708886596
 GameObject:
@@ -9978,6 +9944,7 @@ Transform:
   - {fileID: 6994754918130835528}
   - {fileID: 8450875329626405542}
   - {fileID: 6812338977844559207}
+  - {fileID: 730548364286423125}
   - {fileID: 1108631005480193361}
   m_Father: {fileID: 5052382861349630390}
   m_RootOrder: -1
@@ -10059,19 +10026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375c0a20eb55267478a8368cad0f1b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackData:
-    hitEffectType: 0
-    attackValue: 0
-    effectMaintainTime: 0
-  conditionData:
-    conditionStat: 0
-    conditionContinuity: 0
-    applyType: 0
-    conditionValue: 0
-    multiplier: 0
-    maxConditionTime: 0
-    effectConditionTime: 0
-    isEndConditionTime: 0
   triggerAttack: {fileID: 974054567204412204}
 --- !u!1 &8461195817638133967
 GameObject:
@@ -10773,6 +10727,85 @@ Transform:
   m_Father: {fileID: 7822585303102727736}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &984551779871332286
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5396744252404922145}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1661751
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0683296
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.078322485
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.30602092
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.80090797
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.40153962
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.3219684
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 38.925
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 6.614
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e43dc984353edfe4d84fbafb362fe6f7,
+        type: 3}
+      propertyPath: m_Name
+      value: Staff_2HL_Magician
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e43dc984353edfe4d84fbafb362fe6f7, type: 3}
+--- !u!4 &730548364286423125 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e43dc984353edfe4d84fbafb362fe6f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 984551779871332286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1839621040293664046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10889,6 +10922,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLayer: 7
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   isMultiAttack: 1
 --- !u!4 &4373996614831677322 stripped
 Transform:
@@ -11012,6 +11058,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLayer: 7
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   isMultiAttack: 1
 --- !u!4 &5410747678269313056 stripped
 Transform:
@@ -11135,6 +11194,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLayer: 7
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   isMultiAttack: 1
 --- !u!4 &3502895338768813482 stripped
 Transform:

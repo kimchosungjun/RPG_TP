@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    [SerializeField] EffectEnums.HIT_EFFECTS effect;
     /**********************************************/
     /************ 캐릭터 변경 변수 *************/
     /**********************************************/
@@ -24,12 +23,13 @@ public class PlayerCtrl : MonoBehaviour
     #endregion
 
     #region Life Cycle
-    private void Awake() 
+
+    private void Awake()
     {
-        InitPartyData(players);
+        InitPartyData();
     }
 
-    private void Start() 
+    private void Start()
     {
         SetPartyData(players);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[currentPlayerIndex].GetPlayerMovementControl.GetBodyTransform);
@@ -143,12 +143,29 @@ public class PlayerCtrl : MonoBehaviour
     /**********************************************/
 
     #region Set Player Data
-    public void InitPartyData(List<BasePlayer> _party)
+    public void InitPartyData()
     {
-        int cnt = _party.Count;
+        List<int> playerIDSet = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.CurrentPlayerPartyIDSet;
+        int idSetCnt = playerIDSet.Count;
+        List<BasePlayer> basePlayers = new List<BasePlayer>();
+        Vector3 savePosition = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.CurrentPlayerPosition;
+        Quaternion saveRotation = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.GetPlayerRotation();
+        for (int i=0; i<idSetCnt; i++)
+        {
+            GameObject playerObject = Instantiate(SharedMgr.ResourceMgr.GetBasePlayer
+                (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(playerIDSet[i]).prefabName).gameObject);
+            BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();
+            basePlayer.SetID = playerIDSet[i];
+            basePlayers.Add(basePlayer);    
+            playerObject.transform.SetParent(this.transform, false);
+            playerObject.transform.position = savePosition;
+            playerObject.transform.rotation = saveRotation; 
+        }
+        players = basePlayers;
+        int cnt = players.Count;
         for(int i = 0; i < cnt; i++)
         {
-            _party[i].Init();
+            players[i].Init();
         }
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
     }
@@ -259,48 +276,47 @@ public class PlayerCtrl : MonoBehaviour
     public void EndConversation() { players[currentPlayerIndex].GetPlayerMovementControl.EndConversation(); }
 
     #endregion
-
-    /**********************************************/
-    /*************** 파티 변경 ******************/
-    /************ 현재 버전 사용 X *************/
-    /**********************************************/
-
-    #region Change Party : Not Use
-
-    public bool CanChangeParty(List<BasePlayer> _newParty)
-    {
-        int newPartyCnt = _newParty.Count;
-        for (int i = 0; i < newPartyCnt; i++)
-        {
-            if (_newParty[i].IsAlive)
-                return true;
-        }
-        return false;
-    }
-
-    public void ChangeParty(List<BasePlayer> _newParty)
-    {
-        players = _newParty;
-        int newPartyCnt = _newParty.Count;
-        for (int i = 0; i < newPartyCnt; i++)
-        {
-            if (_newParty[i].IsAlive)
-            {
-                currentPlayerIndex = i;
-                InitPartyData(_newParty);
-                SetPartyData(_newParty);
-                players = _newParty;
-                int legacyPartyCnt = players.Count;
-                for (int k = 0; k < legacyPartyCnt; k++)
-                {
-                    players[k].gameObject.SetActive(false);
-                }
-                return;
-            }
-        }
-    }
-
-    #endregion
 }
 
 
+/**********************************************/
+/*************** 파티 변경 ******************/
+/************ 현재 버전 사용 X *************/
+/**********************************************/
+
+#region Change Party : Not Use
+
+//public bool CanChangeParty(List<BasePlayer> _newParty)
+//{
+//    int newPartyCnt = _newParty.Count;
+//    for (int i = 0; i < newPartyCnt; i++)
+//    {
+//        if (_newParty[i].IsAlive)
+//            return true;
+//    }
+//    return false;
+//}
+
+//public void ChangeParty(List<BasePlayer> _newParty)
+//{
+//    players = _newParty;
+//    int newPartyCnt = _newParty.Count;
+//    for (int i = 0; i < newPartyCnt; i++)
+//    {
+//        if (_newParty[i].IsAlive)
+//        {
+//            currentPlayerIndex = i;
+//            InitPartyData(_newParty);
+//            SetPartyData(_newParty);
+//            players = _newParty;
+//            int legacyPartyCnt = players.Count;
+//            for (int k = 0; k < legacyPartyCnt; k++)
+//            {
+//                players[k].gameObject.SetActive(false);
+//            }
+//            return;
+//        }
+//    }
+//}
+
+#endregion

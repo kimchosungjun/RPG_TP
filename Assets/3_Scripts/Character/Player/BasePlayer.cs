@@ -1,12 +1,12 @@
 using ItemEnums;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 public class BasePlayer : BaseActor
 {
     #region Value
+    protected int id;
     protected bool isAlive = true;
-    [SerializeField] int id;
+    //[SerializeField] int id;
     [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUI; 
     [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; 
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
@@ -21,7 +21,7 @@ public class BasePlayer : BaseActor
     public PlayerMovementControl GetPlayerMovementControl { get { return playerMovementControl; } }
     public WEAPONTYPE GetWeaponType { get { return playerWeaponType; } } 
     public bool IsAlive { get { return isAlive; } set { isAlive = value; } }
-    
+    public int SetID { set { id = value; } }
     // Call After Death Animation 
     public void AnnounceDeath()
     {
@@ -74,17 +74,10 @@ public class BasePlayer : BaseActor
     /****************************************/
 
     #region Life Cycle : Virtual
+
     public virtual void Init()
     {
-        PlayerSaveStat saveStat;
-        // 스탯 연결
-        if (id == 0)
-            saveStat = new PlayerSaveStat();
-        else if(id==1)
-            saveStat = new PlayerSaveStat(1,100);
-        else
-            saveStat = new PlayerSaveStat(2,100);
-
+        PlayerSaveStat saveStat = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.PlayerSaveDataSet[id];
         playerStat = new PlayerStat();
         playerStat.LoadPlayerStat(saveStat);
 
@@ -96,18 +89,15 @@ public class BasePlayer : BaseActor
         playerStatControl.PlayerStat = playerStat;
         playerStatControl.Player = this;
         isAlive = !playerStatControl.CheckDeathState();
-        
+
         playerActionControl.SetPlayerData(playerStatControl, playerMovementControl);
-        playerStatusUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
-        
-        // 스크립트 연결
-       
+
         playerMovementControl.Init(playerStat);
     }
 
     public virtual void Setup()
     {
-        //playerStatusUI.UpdateData(playerStat);
+        playerStatusUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
         playerMovementControl.Setup();
     }
 

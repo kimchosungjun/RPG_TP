@@ -25,4 +25,11 @@ public partial class ResourceMgr
     //    //character= LoadResource<Character>(characterPath + _characterName) as Character;
     //    return character;
     //}
+
+    public BasePlayer GetBasePlayer(string _playerPrefabName)
+    {
+        string path = "Players/";
+        path += _playerPrefabName;
+        return Resources.Load<BasePlayer>(path);
+    }
 }

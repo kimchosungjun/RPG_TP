@@ -58,7 +58,7 @@ namespace SaveDataGroup
             cuurrentPlayerPartyIDSet = new List<int>();
             cuurrentPlayerPartyIDSet.Add(warriorID);
             playerSaveDataSet = new List<PlayerSaveStat>();
-            PlayerSaveStat saveStat = new PlayerSaveStat(warriorID, SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(warriorID).defaultHP); 
+            PlayerSaveStat saveStat = new PlayerSaveStat(0, 150); 
             playerSaveDataSet.Add(saveStat);    
             currentPlayerPosition = new Vector3(12f, 0f, 290f);
             currentPlayerRotation = new Vector3(0, 180f, 0);

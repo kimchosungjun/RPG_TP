@@ -147,6 +147,7 @@ public partial class PlayerTable: BaseTable
         _reader.get(_row, ref _tableData.fileName);
         _reader.get(_row, ref _tableData.weaponType);
         _reader.get(_row, ref _tableData.battleType);
+        _reader.get(_row, ref _tableData.prefabName);
         return true;
     }
 

@@ -1,6 +1,5 @@
 using SaveDataGroup;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +9,9 @@ public class SaveMgr : MonoBehaviour
     string directoryPath = string.Empty;
 
     SaveDataReader reader = new SaveDataReader();
-    UserSaveData saveData;
+    [SerializeField] UserSaveData saveData;
+
+    public UserSaveData GetUserSaveData { get { return saveData; } }    
 
     public void Init()
     {
@@ -27,13 +28,11 @@ public class SaveMgr : MonoBehaviour
     {
         string persistentPath = Application.persistentDataPath;
         string directoryName = SharedMgr.SceneMgr.GetPlayerID();
-        directoryPath =  Path.Combine(persistentPath, directoryName);
+        directoryPath =  persistentPath+"/" + directoryName;
         if (!Directory.Exists(directoryPath))
-        {
-            Directory.CreateDirectory(directoryPath);
             return false;
-        }
-        return true;
+        else
+            return true;
     }
 
     public string GetDirectoryPath() 
@@ -42,7 +41,7 @@ public class SaveMgr : MonoBehaviour
         {
             string persistentPath = Application.persistentDataPath;
             string directoryName = SharedMgr.SceneMgr.GetPlayerID();
-            directoryPath = Path.Combine(persistentPath, directoryName);
+            directoryPath = persistentPath +"/"+ directoryName;
             return directoryPath;
         }
         return directoryPath;   
@@ -60,19 +59,29 @@ public class SaveMgr : MonoBehaviour
         if (IsExistDirectory())
         {
             // exist Save Data
-            saveData = reader.GetUserData(GetDirectoryPath()); 
+            saveData = reader.GetUserData(GetDirectoryPath());
         }
         else
         {
             // not exist Save Data
-            saveData  = reader.GetUserData();
+            StartCoroutine(CCreateNewData());
         }
 
         if (_action != null) _action();
     }
 
+    IEnumerator CCreateNewData()
+    {
+        Directory.CreateDirectory(directoryPath);
+        yield return null;
+        saveData = reader.GetUserData();
+        reader.SaveData(GetDirectoryPath(), saveData);
+    }
+
+    #endregion
     public void ClearUserData() { saveData = null; }
 
+    #region Save Data
     public void SaveUserData()  { StartCoroutine(CSaveUserData()); }
 
     IEnumerator CSaveUserData()

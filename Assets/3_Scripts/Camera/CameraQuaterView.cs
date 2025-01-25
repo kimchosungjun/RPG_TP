@@ -7,7 +7,7 @@ public class CameraQuaterView : MonoBehaviour
 
     // 처음에 초기화해줘야 하는 값들
     Transform camTransform = null; // 카메라의 Transform
-    Transform lookatTransform = null; // 바라볼 목표의 Transfrom
+    [SerializeField] Transform lookatTransform = null; // 바라볼 목표의 Transfrom
     float deltaDistance = 5f; // 캐릭터로부터 카메라가 떨어진 거리
 
     // 마우스는 2D 좌표계의 개념

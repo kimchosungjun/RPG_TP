@@ -511,6 +511,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8472621538886880199, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: saveData.PlayerSaveDataGroup.currentPlayerPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472621538886880199, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: saveData.PlayerSaveDataGroup.currentPlayerPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472621538886880199, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: saveData.PlayerSaveDataGroup.currentPlayerPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472621538886880199, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: saveData.PlayerSaveDataGroup.currentPlayerRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472621538886880199, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: saveData.PlayerSaveDataGroup.playerSaveDataSet.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472621538886880199, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: saveData.PlayerSaveDataGroup.cuurrentPlayerPartyIDSet.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8655505908091735681, guid: 2123512c0ff8de04e940ab9f56dfc533,
         type: 3}
       propertyPath: m_Name

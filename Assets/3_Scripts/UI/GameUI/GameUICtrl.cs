@@ -43,7 +43,7 @@ public class GameUICtrl : MonoBehaviour
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     // 나중에 Awake로 변경
-    private void Start()
+    private void Awake()
     {
         UILink();
         UIInit();
