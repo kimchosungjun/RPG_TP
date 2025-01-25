@@ -27,14 +27,14 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
         List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
         int playerCnt = players.Count -1;
         int buttonCnt = buttons.Length;
-
+        PlayerTable playerTable = SharedMgr.TableMgr.GetPlayer;
         for(int i=0; i<buttonCnt; i++)
         {
             if (i > playerCnt)
                 buttons[i].gameObject.SetActive(false);
             else
             {
-                buttons[i].ChangeButtonData(players[i].PlayerStat.GetSaveStat.currentLevel, players[i].gameObject.name);
+                buttons[i].ChangeButtonData(players[i].PlayerStat.GetSaveStat.currentLevel, playerTable.GetPlayerTableData(players[i].PlayerID).prefabName);
                 if (_currentPlayerIndex == i)
                     buttons[i].ControlEffect(true);
                 else

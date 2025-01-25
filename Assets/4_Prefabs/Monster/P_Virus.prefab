@@ -10,14 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 9060782215717829019}
   - component: {fileID: 1477926776206634081}
-  - component: {fileID: 301405614838744649}
   m_Layer: 0
   m_Name: Virus_FarAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9060782215717829019
 Transform:
   m_ObjectHideFlags: 0
@@ -66,28 +65,7 @@ MonoBehaviour:
     conditionType: 0
     defaultValueIncrease: 0
     startLevel: 0
-  spredAttack: {fileID: 301405614838744649}
-  coolTime: 0
---- !u!114 &301405614838744649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259449044351756696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e27481553e8f354cb38e4bd811f68ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwPositions:
-  - {fileID: 4763357504683467984}
-  - {fileID: 1022949592326612430}
-  - {fileID: 8253878195438685622}
-  projectiles:
-  - {fileID: 2380698882962520890}
-  - {fileID: 2361383190159068942}
-  - {fileID: 6959085706455382589}
+  spredAttack: {fileID: 0}
 --- !u!1 &405978151416529343
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +140,6 @@ GameObject:
   - component: {fileID: 6418254108391790104}
   - component: {fileID: 5455195596083713310}
   - component: {fileID: 3189247269613513336}
-  - component: {fileID: 6959085706455382589}
   m_Layer: 0
   m_Name: Throw
   m_TagString: Untagged
@@ -258,22 +235,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &6959085706455382589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3646241190031590477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b834ff68635a9e04f990106ca686b8fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer: 8
-  visibleTime: 10
-  speed: 5
-  isPenetrate: 0
 --- !u!1 &4530003306004163328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,12 +1793,11 @@ Transform:
   m_Children:
   - {fileID: 4530003306004526968}
   - {fileID: 4530003306004526948}
-  - {fileID: 4988548759609031072}
   - {fileID: 6931772627360313773}
   - {fileID: 9060782215717829019}
   - {fileID: 2300183799017922984}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4530003305994672282
 Animator:
@@ -1872,6 +1832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentConditions: []
 --- !u!114 &5418262378649258458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,27 +1847,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 4530003305994672282}
   monsterStatControl: {fileID: 2381960137077435773}
-  monsterType: 3
-  monsterLevel: 12
+  initMonsterData:
+    monsterType: 3
+    monsterLevel: 3
   statusUI: {fileID: 8076422825904239986}
-  monsterStat:
-    actorName: 
-    maxHp: 0
-    speed: 0
-    defenceValue: 0
-    ID: 0
-    level: 0
-    currentHP: 0
-    boostSpeed: 0
-    attackValue: 0
-    criticalValue: 0
   detectRange: 15
   nearCombatRange: 5
   farCombatRange: 10
   nav: {fileID: 5295230655071613870}
-  detecter: {fileID: 1064942359646457851}
+  detecter: {fileID: 0}
   maintainIdleTime: 0
+  isDoIdle: 0
   spread: {fileID: 1477926776206634081}
+  rush: {fileID: 0}
 --- !u!195 &5295230655071613870
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2106,7 +2059,6 @@ GameObject:
   - component: {fileID: 759255735008711913}
   - component: {fileID: 5725556928859083994}
   - component: {fileID: 4934861716380207855}
-  - component: {fileID: 2380698882962520890}
   m_Layer: 0
   m_Name: Throw
   m_TagString: Untagged
@@ -2202,22 +2154,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &2380698882962520890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6622728616069533873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b834ff68635a9e04f990106ca686b8fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer: 8
-  visibleTime: 10
-  speed: 5
-  isPenetrate: 0
 --- !u!1 &7046925762359609409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,7 +2166,6 @@ GameObject:
   - component: {fileID: 2469011884855679347}
   - component: {fileID: 3925381788418621743}
   - component: {fileID: 6705690777404276008}
-  - component: {fileID: 2361383190159068942}
   m_Layer: 0
   m_Name: Throw
   m_TagString: Untagged
@@ -2326,22 +2261,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &2361383190159068942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7046925762359609409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b834ff68635a9e04f990106ca686b8fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer: 8
-  visibleTime: 10
-  speed: 5
-  isPenetrate: 0
 --- !u!1 &7209745905199675269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,72 +2295,6 @@ Transform:
   m_Father: {fileID: 9060782215717829019}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8105620932530125510
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4988548759609031072}
-  - component: {fileID: 1064942359646457851}
-  - component: {fileID: 2180819177169748525}
-  m_Layer: 0
-  m_Name: Detect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4988548759609031072
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105620932530125510}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4530003306004526970}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1064942359646457851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105620932530125510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ecdd4e2278d8645af33ef3f1da331b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &2180819177169748525
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105620932530125510}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8, y: 2, z: 8}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8782969323940049982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,6 +2339,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745bf4a4fafc99a46bff8cf37cfc82c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackActionData:
+    attribute: 0
+    multiplier: 0
+    effect: 0
+    maintainTime: 0
+    coolTime: 0
+    defaultValue: 0
+    defaultValueIncrease: 0
+    startLevel: 0
+  conditionActionData:
+    attribute: 0
+    multiplier: 0
+    effect: 0
+    maintainTime: 0
+    coolTime: 0
+    defaultValue: 0
+    conditionType: 0
+    defaultValueIncrease: 0
+    startLevel: 0
+  nearAttack: {fileID: 0}
+  coolTime: 0
+  isCoolDown: 1
 --- !u!1001 &7959627963729571134
 PrefabInstance:
   m_ObjectHideFlags: 0

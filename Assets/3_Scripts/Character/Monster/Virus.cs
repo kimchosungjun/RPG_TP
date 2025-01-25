@@ -5,11 +5,12 @@ using EffectEnums;
 using UnityEngine;
 using UnityEngine.AI;
 
-public partial class Virus : CombatMonster
+public class Virus : StandardMonster
 {
     [SerializeField] float nearCombatRange;
     [SerializeField] float farCombatRange;
     [Header("컴포넌트"),SerializeField] NavMeshAgent nav;
+    [SerializeField] float detectRange;
     [SerializeField] BaseDetecter detecter;
     [Header("유휴상태 유지시간"),SerializeField] float maintainIdleTime = 5f; 
     [SerializeField] bool isDoIdle = false;
@@ -37,10 +38,18 @@ public partial class Virus : CombatMonster
     protected override void Start()
     {
         base.Start();
-        detecter.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
+        MonsterTable table = SharedMgr.TableMgr.GetMonster;
+        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
+        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
+        monsterStat = new MonsterStat();
+        monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
+        monsterStatControl.MonsterStat = monsterStat;
+        monsterStatControl.SetStatusUI(statusUI);
+        //detecter.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
         nav.speed = monsterStat.Speed;
         spread.SetData(monsterStat);
-        rush.SetData(monsterStat);  
+        //rush.SetData(monsterStat);
+        statusUI.Setup(this.transform, monsterStat);
     }
 
     protected override void CreateBTStates()
@@ -116,7 +125,7 @@ public partial class Virus : CombatMonster
     {
         if (isDeathState) return;
         //virusRoot.Evaluate();
-       // statusUI.FixedExecute();
+        statusUI.FixedExecute();
     }
     #endregion
 

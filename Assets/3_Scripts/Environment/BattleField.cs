@@ -12,27 +12,27 @@ public class BattleField : MonoBehaviour
 
     private void Start()
     {
-        HashSet<int> spawnIndexes = new HashSet<int>();
-        int randomNum = 0;
-        int pathCnt = pathNodes.Length;
-        int monsterCnt = spawnMonsters.Length;
-        for (int i = 0; i < monsterCnt; i++)
-        {
-            while (true)
-            {
-                randomNum = Random.Range(0, pathCnt);
-                if (spawnIndexes.Contains(randomNum))
-                    continue;
-                else
-                {
-                    spawnMonsters[i].Spawn(pathNodes[randomNum].NodePosition);
-                    spawnMonsters[i].MonsterArea = this;
-                    spawnMonsters[i].SetPathNodes(pathNodes);
-                    spawnIndexes.Add(randomNum);
-                    break;
-                }
-            }
-        }
+        //HashSet<int> spawnIndexes = new HashSet<int>();
+        //int randomNum = 0;
+        //int pathCnt = pathNodes.Length;
+        //int monsterCnt = spawnMonsters.Length;
+        //for (int i = 0; i < monsterCnt; i++)
+        //{
+        //    while (true)
+        //    {
+        //        randomNum = Random.Range(0, pathCnt);
+        //        if (spawnIndexes.Contains(randomNum))
+        //            continue;
+        //        else
+        //        {
+        //            spawnMonsters[i].Spawn(pathNodes[randomNum].NodePosition);
+        //            spawnMonsters[i].MonsterArea = this;
+        //            spawnMonsters[i].SetPathNodes(pathNodes);
+        //            spawnIndexes.Add(randomNum);
+        //            break;
+        //        }
+        //    }
+        //}
     }
 
     int playerLayer = (int) LAYERS.PLAYER;

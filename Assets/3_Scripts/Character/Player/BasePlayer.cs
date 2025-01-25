@@ -21,7 +21,7 @@ public class BasePlayer : BaseActor
     public PlayerMovementControl GetPlayerMovementControl { get { return playerMovementControl; } }
     public WEAPONTYPE GetWeaponType { get { return playerWeaponType; } } 
     public bool IsAlive { get { return isAlive; } set { isAlive = value; } }
-    public int SetID { set { id = value; } }
+    public int PlayerID { get { return id; } set { id = value; } }
     // Call After Death Animation 
     public void AnnounceDeath()
     {

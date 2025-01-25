@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UIEnums;
 
 public class StandardMonsterStatusUI : StatusUI
@@ -10,6 +11,9 @@ public class StandardMonsterStatusUI : StatusUI
     #region Variable
     [SerializeField, Tooltip("HP바의 위치 : 머리에서 좀 더 떨어지도록 설정")] float heightDelta = 0.2f;
     [SerializeField] protected Transform followTransform = null;
+    [SerializeField] Image[] hpImages;
+    [SerializeField] Image[] effectImages;
+    [SerializeField] float effectSpeed = 3f;
     protected Transform camTransform = null;
     protected MonsterStat monsterStat = null;
     #endregion
@@ -21,28 +25,34 @@ public class StandardMonsterStatusUI : StatusUI
     #region Override Life Cycle
     public override void Init()
     {
-        //if (statusCanvasObject.activeSelf) statusCanvasObject.SetActive(false);
+        if (playerStatusParentObject.activeSelf) playerStatusParentObject.SetActive(false);
     }
 
-    //public void Setup(Transform _followTransform, MonsterStat _monsterStat)
-    //{
-    //    // Link
-    //    monsterStat = _monsterStat;
-    //    followTransform = _followTransform;
-    //    statusCanvasObject.GetComponent<Canvas>().worldCamera = Camera.main;
-    //    camTransform = Camera.main.transform;
-        
-    //    // Set
-    //    hpImage.fillAmount = 1f;
-    //    effectImage.fillAmount = 1f;
-    //    levelText.text = "Lv." + monsterStat.Level;
-    //}
+    public void Setup(Transform _followTransform, MonsterStat _monsterStat)
+    {
+        // Link
+        monsterStat = _monsterStat;
+        followTransform = _followTransform;
+        playerStatusParentObject.GetComponent<Canvas>().worldCamera = Camera.main;
+        camTransform = Camera.main.transform;
 
-    //public override void FixedExecute()
-    //{
-    //    UpdatePostion();
-    //    HPEffect();
-    //}
+        Sprite hpLineSprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Loading_Line");
+        hpImages[0].sprite = hpLineSprite;
+        hpImages[1].sprite = hpLineSprite;
+        effectImages[0].sprite = hpLineSprite;
+        effectImages[1].sprite = hpLineSprite;
+
+        // Set
+        hpImages[0].fillAmount = 1f;
+        effectImages[0].fillAmount = 1f;
+        levelText.text = "Lv." + monsterStat.Level;
+    }
+
+    public virtual void FixedExecute()
+    {
+        UpdatePostion();
+        HPEffect();
+    }
 
     #endregion
 
@@ -58,9 +68,15 @@ public class StandardMonsterStatusUI : StatusUI
         transform.rotation = camTransform.rotation;
     }
 
-    //public override void AnnounceChangeStat(STATUS _statusType = STATUS.HP)
-    //{
-    //    hpImage.fillAmount = (monsterStat.CurrentHP / monsterStat.MaxHP);
-    //}
+    public void HPEffect()
+    {
+        if (effectImages[0].fillAmount > hpImages[0].fillAmount)
+            effectImages[0].fillAmount -= Time.fixedDeltaTime * effectSpeed;
+    }
+
+    public void UpdateHP()
+    {
+        hpImages[0].fillAmount =  monsterStat.CurrentHP / monsterStat.MaxHP;
+    }
     #endregion
 }
