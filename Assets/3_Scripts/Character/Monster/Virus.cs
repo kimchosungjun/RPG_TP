@@ -38,18 +38,10 @@ public class Virus : StandardMonster
     protected override void Start()
     {
         base.Start();
-        MonsterTable table = SharedMgr.TableMgr.GetMonster;
-        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
-        MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
-        monsterStat = new MonsterStat();
-        monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
-        monsterStatControl.MonsterStat = monsterStat;
-        monsterStatControl.SetStatusUI(statusUI);
         //detecter.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
         nav.speed = monsterStat.Speed;
         spread.SetData(monsterStat);
         //rush.SetData(monsterStat);
-        statusUI.Setup(this.transform, monsterStat);
     }
 
     protected override void CreateBTStates()

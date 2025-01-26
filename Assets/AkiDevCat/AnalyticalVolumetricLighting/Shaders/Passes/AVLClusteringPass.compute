@@ -1,0 +1,330 @@
+﻿// ===== Includes =====
+
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "../Includes/AVLStructs.hlsl"
+
+// ===== Kernels =====
+
+#pragma kernel DepthAlignmentMain
+#pragma kernel ClusterFrustumMain
+#pragma kernel CullLightsMain
+#pragma kernel CullMasksMain
+
+#pragma multi_compile _ DEPTH_CULLING_ON
+
+// ===== Variables =====
+
+float                                         _RenderingQuality;
+
+// x = Cluster size X
+// y = Cluster size Y
+// z = 1.0 / Cluster size X
+// w = 1.0 / Cluster size Y
+float4                                        _ClusterSize;
+float4                                        _NearFrustumPlane;
+float4                                        _FarFrustumPlane;
+float4                                        _RenderingResolution;
+
+// = Matrices =
+
+float4x4                                      _InvProjectionMatrix;
+// float4x4                                      _ViewMatrix;
+
+// = Textures =
+
+Texture2D<float>                              _CameraDepthTexture;
+RWTexture2D<uint>                             _LightClusterDepthTexture;
+
+// = Buffer Variables =
+
+StructuredBuffer    <AVL_LightData>           _GlobalLightBuffer;
+uint                                          _GlobalLightBufferSize;
+StructuredBuffer    <AVL_MaskData>            _GlobalMaskBuffer;
+uint                                          _GlobalMaskBufferSize;
+uint                                          _GlobalMaskBufferMaxSize;
+RWStructuredBuffer  <AVL_LightClusterData>    _LightClusterBuffer;
+RWStructuredBuffer  <uint>                    _LightIndexBuffer;
+RWStructuredBuffer  <uint>                    _MaskIndexBuffer;
+RWStructuredBuffer  <int>                     _MaskInverseIndexBuffer;
+
+// = Group-shared Variables =
+
+groupshared uint                              _GSActiveLightCount = 0;
+groupshared uint                              _GSActiveLightArray[MAX_LIGHT_PER_CLUSTER];
+
+groupshared uint                              _GSActiveMaskCount = 0;
+groupshared uint                              _GSActiveMaskArray[MAX_MASKS_PER_CLUSTER];
+
+// ===== Common Functions =====
+
+// Returns > 0 if inside, <= 0 if outside
+float FrustumCullSphere(float4 frustumPlanes[6], float3 sphereCenter, float sphereRadius)
+{
+    const float4 sPos = float4(sphereCenter, 1.0);
+    const float d01 = min(dot(frustumPlanes[0], sPos), dot(frustumPlanes[1], sPos));
+    const float d23 = min(dot(frustumPlanes[2], sPos), dot(frustumPlanes[3], sPos));
+    const float d45 = min(dot(frustumPlanes[4], sPos), dot(frustumPlanes[5], sPos));
+
+    return min(min(d01, d23), d45) + sphereRadius;
+}
+
+// ===== Kernel Functions =====
+
+[numthreads(4, 4, 1)]
+void DepthAlignmentMain(uint3 dThreadId : SV_DispatchThreadID, uint3 gThreadId : SV_GroupThreadID, uint3 groupId : SV_GroupID)
+{
+    if (dThreadId.x >= (uint)_ClusterSize.x || dThreadId.y >= (uint)_ClusterSize.y)
+        return;
+    
+    const uint2 clusterIdXY = dThreadId.xy;
+
+    const float2 uvClusterMin = clusterIdXY / _ClusterSize.xy + float2(1.0, 1.0) * FLT_EPS;
+    const float2 uvClusterMax = (clusterIdXY + uint2(1, 1)) / _ClusterSize.xy - float2(1.0, 1.0) * FLT_EPS;
+
+    const uint2 pMin = uvClusterMin * (_RenderingResolution).xy;
+    const uint2 pMax = uvClusterMax * (_RenderingResolution).xy;
+
+    float2 uv = uvClusterMin;
+
+    float maxDepth = 0.0;
+    
+    for (uint y = pMin.y; y <= pMax.y; y++)
+    {
+        for (uint x = pMin.x; x <= pMax.x; x++)
+        {
+            float rawDepth = _CameraDepthTexture[uint2(x, y) / _RenderingQuality]; // ToDo might cause artifacts. Better use downsampled depth texture
+            #if UNITY_REVERSED_Z
+            rawDepth = 1.0 - rawDepth;
+            #endif
+            float4 vsPosition = mul(_InvProjectionMatrix, float4(uv * 2.0 - 1.0, rawDepth * 2.0 - 1.0, 1.0));
+            vsPosition.xyz /= vsPosition.w;
+            vsPosition.z *= -1.0;
+            maxDepth = max(maxDepth, vsPosition.z);
+            uv += float2(0, _RenderingResolution.z);
+        }
+        uv += float2(0, _RenderingResolution.w);
+    }
+
+    _LightClusterDepthTexture[clusterIdXY] = (uint)ceil(min(maxDepth, _ProjectionParams.z));
+}
+
+[numthreads(4, 4, 1)] // ToDo find the optimal values
+void ClusterFrustumMain (uint3 id : SV_DispatchThreadID)
+{
+    // ToDo would be great to make a visualization for this step in case some rework is needed
+    
+    if (id.x >= (uint)_ClusterSize.x || id.y >= (uint)_ClusterSize.y)
+        return;
+
+    const uint threadId = id.x + id.y * _ClusterSize.x;
+
+    float2 clusterCornerUVs     [4];
+    float4 clusterCorners       [6];
+    float4 clusterFrustumPlanes [4];
+
+    // Construct UVs
+    clusterCornerUVs[0] = (id.xy + float2(1, 1)) * _ClusterSize.zw;
+    clusterCornerUVs[1] = (id.xy + float2(1, 0)) * _ClusterSize.zw;
+    clusterCornerUVs[2] = (id.xy + float2(0, 0)) * _ClusterSize.zw;
+    clusterCornerUVs[3] = (id.xy + float2(0, 1)) * _ClusterSize.zw;
+
+    // Construct NDC positions
+    // 4th and 5th positions are the far plane max, min corners
+    clusterCorners[0] = float4(clusterCornerUVs[0] * 2.0 - 1.0, -1, 1);
+    clusterCorners[1] = float4(clusterCornerUVs[1] * 2.0 - 1.0, -1, 1);
+    clusterCorners[2] = float4(clusterCornerUVs[2] * 2.0 - 1.0, -1, 1);
+    clusterCorners[3] = float4(clusterCornerUVs[3] * 2.0 - 1.0, -1, 1);
+    clusterCorners[4] = float4(clusterCornerUVs[0] * 2.0 - 1.0, 1, 1);
+    clusterCorners[5] = float4(clusterCornerUVs[2] * 2.0 - 1.0, 1, 1);
+
+    // Transform from NDC to View Space
+    for (int i = 0; i < 6; i++)
+    {
+        clusterCorners[i] = mul(_InvProjectionMatrix, clusterCorners[i]);
+        clusterCorners[i] /= clusterCorners[i].w;
+        clusterCorners[i].z *= -1.0f;
+    }
+    
+    // Reconstruct normals from two triangle edges
+
+    // X+ Plane
+    clusterFrustumPlanes[1].xyz = normalize(cross(clusterCorners[4].xyz - clusterCorners[0].xyz,
+                                                  clusterCorners[1].xyz - clusterCorners[0].xyz));
+
+    // Y+ Plane
+    clusterFrustumPlanes[0].xyz = normalize(cross(clusterCorners[3].xyz - clusterCorners[0].xyz,
+                                                  clusterCorners[4].xyz - clusterCorners[0].xyz));
+
+    // X- Plane
+    clusterFrustumPlanes[3].xyz = normalize(cross(clusterCorners[2].xyz - clusterCorners[3].xyz,
+                                                  clusterCorners[5].xyz - clusterCorners[2].xyz));
+
+    // Y- Plane
+    clusterFrustumPlanes[2].xyz = normalize(cross(clusterCorners[1].xyz - clusterCorners[2].xyz,
+                                                  clusterCorners[5].xyz - clusterCorners[2].xyz));
+
+    // Reconstruct plane D value
+    clusterFrustumPlanes[0].w = dot(clusterFrustumPlanes[0].xyz, clusterCorners[0].xyz);
+    clusterFrustumPlanes[1].w = dot(clusterFrustumPlanes[1].xyz, clusterCorners[0].xyz);
+    clusterFrustumPlanes[2].w = dot(clusterFrustumPlanes[2].xyz, clusterCorners[2].xyz);
+    clusterFrustumPlanes[3].w = dot(clusterFrustumPlanes[3].xyz, clusterCorners[2].xyz);
+    
+    // Create data structure
+    AVL_LightClusterData result;
+
+    #if DEPTH_CULLING_ON
+    result.FarPlaneDepth = (float)_LightClusterDepthTexture[id.xy];
+    #else
+    result.FarPlaneDepth = _FarFrustumPlane.w;
+    #endif
+    result.BufferOffset = 0;
+    result.LightCount = 0;
+    result.MaskBufferOffset = 0;
+    result.MaskCount = 0;
+    result.FrustumPlanes4 = float4x4(clusterFrustumPlanes[0], clusterFrustumPlanes[1],
+                                     clusterFrustumPlanes[2], clusterFrustumPlanes[3]);
+
+    // Write to buffer
+    _LightClusterBuffer[threadId] = result;
+}
+
+[numthreads(1, 1, LIGHT_THREAD_COUNT_PER_GROUP)]
+void CullLightsMain (uint3 dThreadId : SV_DispatchThreadID, uint3 gThreadId : SV_GroupThreadID, uint3 groupId : SV_GroupID)
+{
+    // ToDo would be great to make a visualization for this step in case some rework is needed
+    
+    const uint clusterId = groupId.x + groupId.y * _ClusterSize.x;
+    const uint lightCountPerThread = (uint)ceil((float)_GlobalLightBufferSize / (float)LIGHT_THREAD_COUNT_PER_GROUP);
+    
+    AVL_LightClusterData lightCluster = _LightClusterBuffer[clusterId];
+    
+    float4 frustumPlanes[6];
+    frustumPlanes[0] = lightCluster.FrustumPlanes4[0];
+    frustumPlanes[1] = lightCluster.FrustumPlanes4[1];
+    frustumPlanes[2] = lightCluster.FrustumPlanes4[2];
+    frustumPlanes[3] = lightCluster.FrustumPlanes4[3];
+    frustumPlanes[4] = _NearFrustumPlane;
+    frustumPlanes[5] = _FarFrustumPlane;
+    frustumPlanes[5].w = lightCluster.FarPlaneDepth;
+
+    uint threadActiveLights[MAX_LIGHT_PER_CLUSTER];
+    uint threadActiveLightCount = 0;
+    uint threadActiveLightGlobalOffset = 0;
+
+    uint i;
+
+    for (i = 0; i < lightCountPerThread; i++)
+    {
+        const uint lightGlobalIndex = (gThreadId.z) * lightCountPerThread + i;
+
+        if (lightGlobalIndex >= _GlobalLightBufferSize)
+            break;
+        
+        const AVL_LightData light = _GlobalLightBuffer[lightGlobalIndex];
+
+        // ToDo move calculation outside
+        float3 origin = mul(_ViewMatrix, float4(light.BoundingOrigin, 1.0)).xyz;
+        origin.xy = -origin.xy; // ToDo investigate
+        
+        if (FrustumCullSphere(frustumPlanes, origin, light.BoundingRadius) > 0.0)
+        {
+            threadActiveLights[threadActiveLightCount++] = lightGlobalIndex;
+        }
+    }
+
+    InterlockedAdd(_GSActiveLightCount, threadActiveLightCount, threadActiveLightGlobalOffset);
+    for (i = 0; i < threadActiveLightCount; i++)
+    {
+        _GSActiveLightArray[threadActiveLightGlobalOffset + i] = threadActiveLights[i];
+    }
+
+    DeviceMemoryBarrierWithGroupSync(); // ToDo is group sync needed?
+    
+    [branch]
+    if (gThreadId.x == 0 && gThreadId.y == 0 && gThreadId.z == 0)
+    {
+        const uint accessOffset = clusterId * MAX_LIGHT_PER_CLUSTER;
+        
+        for (uint j = 0; j < _GSActiveLightCount; j++)
+        {
+            _LightIndexBuffer[accessOffset + j] = _GSActiveLightArray[j];
+        }
+    
+        lightCluster.BufferOffset = accessOffset;
+        lightCluster.LightCount = _GSActiveLightCount;
+    
+        _LightClusterBuffer[clusterId] = lightCluster;
+    }
+}
+
+[numthreads(1, 1, LIGHT_THREAD_COUNT_PER_GROUP)]
+void CullMasksMain (uint3 dThreadId : SV_DispatchThreadID, uint3 gThreadId : SV_GroupThreadID, uint3 groupId : SV_GroupID)
+{
+    const uint clusterId = groupId.x + groupId.y * _ClusterSize.x;
+    const uint maskCountPerThread = (uint)ceil((float)_GlobalMaskBufferSize / (float)LIGHT_THREAD_COUNT_PER_GROUP);
+    
+    AVL_LightClusterData lightCluster = _LightClusterBuffer[clusterId];
+    float4 frustumPlanes[6];
+    frustumPlanes[0] = lightCluster.FrustumPlanes4[0];
+    frustumPlanes[1] = lightCluster.FrustumPlanes4[1];
+    frustumPlanes[2] = lightCluster.FrustumPlanes4[2];
+    frustumPlanes[3] = lightCluster.FrustumPlanes4[3];
+    frustumPlanes[4] = _NearFrustumPlane;
+    frustumPlanes[5] = _FarFrustumPlane;
+    frustumPlanes[5].w = lightCluster.FarPlaneDepth;
+
+    uint threadActiveMasks[MAX_MASKS_PER_CLUSTER];
+    uint threadActiveMaskCount = 0;
+    uint threadActiveMaskGlobalOffset = 0;
+
+    uint i;
+
+    for (i = 0; i < maskCountPerThread; i++)
+    {
+        const uint maskGlobalIndex = (gThreadId.z) * maskCountPerThread + i;
+        const uint inverseBufferIndex = clusterId * _GlobalMaskBufferMaxSize + maskGlobalIndex;
+
+        if (maskGlobalIndex >= _GlobalMaskBufferSize)
+            break;
+
+        _MaskInverseIndexBuffer[inverseBufferIndex] = -1;
+        
+        const AVL_MaskData mask = _GlobalMaskBuffer[maskGlobalIndex];
+
+        float3 origin = mul(_ViewMatrix, float4(mask.Origin, 1.0)).xyz;
+        origin.xy = -origin.xy;
+
+        // ToDo move calculation outside
+        if (FrustumCullSphere(frustumPlanes, origin, mask.BoundingRadius) > 0.0)
+        {
+            threadActiveMasks[threadActiveMaskCount++] = maskGlobalIndex;
+        }
+    }
+
+    InterlockedAdd(_GSActiveMaskCount, threadActiveMaskCount, threadActiveMaskGlobalOffset);
+    for (i = 0; i < threadActiveMaskCount; i++)
+    {
+        _GSActiveMaskArray[threadActiveMaskGlobalOffset + i] = threadActiveMasks[i];
+    }
+
+    DeviceMemoryBarrierWithGroupSync();
+
+    UNITY_BRANCH
+    if (gThreadId.x == 0 && gThreadId.y == 0 && gThreadId.z == 0)
+    {
+        const uint accessOffset = clusterId * MAX_MASKS_PER_CLUSTER;
+        const uint inverseAccessOffset = clusterId * _GlobalMaskBufferMaxSize;
+        
+        for (uint j = 0; j < _GSActiveMaskCount; j++)
+        {
+            const uint gMaskIndex = _GSActiveMaskArray[j];
+            _MaskIndexBuffer[accessOffset + j] = gMaskIndex;
+            _MaskInverseIndexBuffer[inverseAccessOffset + gMaskIndex] = j;
+        }
+    
+        lightCluster.MaskBufferOffset = accessOffset;
+        lightCluster.MaskCount = _GSActiveMaskCount;
+    
+        _LightClusterBuffer[clusterId] = lightCluster;
+    }
+}
