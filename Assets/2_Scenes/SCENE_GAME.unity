@@ -932,6 +932,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
       propertyPath: m_RootOrder
@@ -2107,6 +2112,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -2448,6 +2458,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
@@ -5549,6 +5564,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave1 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
       propertyPath: m_RootOrder
@@ -6838,6 +6858,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
@@ -9738,6 +9763,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903863415414040596, guid: 861d87ac333a0e04e99afa0787681441,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6531746490558050990, guid: 861d87ac333a0e04e99afa0787681441,
         type: 3}
@@ -12883,6 +12913,7 @@ Transform:
   - {fileID: 1794867924}
   - {fileID: 171967408}
   - {fileID: 1643352800}
+  - {fileID: 1901023688}
   m_Father: {fileID: 1314843049}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19234,6 +19265,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave1 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
       propertyPath: m_RootOrder
@@ -20680,6 +20716,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
       propertyPath: m_RootOrder
@@ -21443,6 +21484,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
@@ -22559,6 +22605,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Church
       objectReference: {fileID: 0}
+    - target: {fileID: 1206442627522542, guid: b7296d5515d23844b88668359d702859, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4063983631187228, guid: b7296d5515d23844b88668359d702859, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -22817,6 +22867,7 @@ Transform:
   - {fileID: 2065586863}
   - {fileID: 1222791822}
   - {fileID: 306573318}
+  - {fileID: 1979482329}
   m_Father: {fileID: 1314843049}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29063,6 +29114,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave3 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -29823,6 +29879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
@@ -32371,6 +32432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave
       objectReference: {fileID: 0}
+    - target: {fileID: 5903863415414040596, guid: 861d87ac333a0e04e99afa0787681441,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6531746490558050990, guid: 861d87ac333a0e04e99afa0787681441,
         type: 3}
       propertyPath: m_RootOrder
@@ -33178,6 +33244,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
@@ -34194,6 +34265,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903863415414040596, guid: 861d87ac333a0e04e99afa0787681441,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6531746490558050990, guid: 861d87ac333a0e04e99afa0787681441,
         type: 3}
@@ -37592,6 +37668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
       propertyPath: m_RootOrder
@@ -38341,6 +38422,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grave (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903863415414040596, guid: 861d87ac333a0e04e99afa0787681441,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6531746490558050990, guid: 861d87ac333a0e04e99afa0787681441,
         type: 3}
       propertyPath: m_RootOrder
@@ -38976,6 +39062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave1 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
@@ -40406,6 +40497,37 @@ Transform:
   m_Children:
   - {fileID: 1585642303}
   m_Father: {fileID: 537789692}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1901023687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1901023688}
+  m_Layer: 0
+  m_Name: Lights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1901023688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901023687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 614339424}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1905547219
@@ -42429,6 +42551,37 @@ Transform:
   m_Father: {fileID: 132021723}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 19.065447, y: 52.952866, z: 138.5542}
+--- !u!1 &1979482328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979482329}
+  m_Layer: 0
+  m_Name: Lights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1979482329
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979482328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1181112337}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982047644
 GameObject:
   m_ObjectHideFlags: 0
@@ -43200,6 +43353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3477203725378770397, guid: 9f9bac2bf3030b0439706f487659e3b7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4254303996877836135, guid: 9f9bac2bf3030b0439706f487659e3b7,
         type: 3}
@@ -45081,6 +45239,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grave1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555352413405436104, guid: 3410fe058b03f6544a51196feb5df00c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2899684668293481074, guid: 3410fe058b03f6544a51196feb5df00c,
         type: 3}
