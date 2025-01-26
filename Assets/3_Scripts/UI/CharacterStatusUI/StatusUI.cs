@@ -11,32 +11,12 @@ public abstract class StatusUI : MonoBehaviour
     #region Link UI & Value
     [Header("Monster")]
     [SerializeField] protected GameObject playerStatusParentObject;
-    [SerializeField] protected Text hpText;
     [SerializeField] protected Text levelText;
     protected float effectTime = 10f;
     #endregion
 
-    ///******************************************/
-    ///********  몬스터에 의해 호출   ********/
-    ///******************************************/
-
-    //#region Life Cycle
+    // Call : Awake
     public abstract void Init();
-    //public abstract void FixedExecute();
-    //#endregion
-
-    ///******************************************/
-    ///**********  캔버스 활성화   ************/
-    ///******************************************/
-    public void DecideActiveCanvas(bool _isActive) { playerStatusParentObject.gameObject.SetActive(_isActive); }
-    //public virtual void HPEffect()
-    //{
-    //    if (hpImage.fillAmount == effectImage.fillAmount) return;
-
-    //    if (hpImage.fillAmount < effectImage.fillAmount) effectImage.fillAmount -= Time.deltaTime / effectTime;
-    //    else if (hpImage.fillAmount > effectImage.fillAmount) effectImage.fillAmount = hpImage.fillAmount;
-    //}
-    //public abstract void AnnounceChangeStat(STATUS _statusType = STATUS.HP);
 }
 
 

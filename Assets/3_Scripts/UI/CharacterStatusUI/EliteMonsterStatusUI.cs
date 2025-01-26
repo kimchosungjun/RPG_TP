@@ -8,7 +8,7 @@ public class EliteMonsterStatusUI : StatusUI
     /******************************************/
     /*****************  변수  *****************/
     /******************************************/
-
+    [SerializeField] protected Text hpText;
     [SerializeField, Tooltip("0:Lv, 1:Name, 2:HP")] Text[] statusTexts;
     [SerializeField, Tooltip("0:HP Effect, 1:HP Fill, 2:HP Frame , 3:Groggy Effect, 4:Groggy Fill, 5:Groggy Frame")] Image[] statusImages;
     [SerializeField] GameObject statusParent;

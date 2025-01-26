@@ -16,6 +16,8 @@ public class StandardMonsterStatusUI : StatusUI
     [SerializeField] float effectSpeed = 3f;
     protected Transform camTransform = null;
     protected MonsterStat monsterStat = null;
+    
+    bool isActive = false;
     #endregion
 
     /******************************************/
@@ -25,7 +27,9 @@ public class StandardMonsterStatusUI : StatusUI
     #region Override Life Cycle
     public override void Init()
     {
-        if (playerStatusParentObject.activeSelf) playerStatusParentObject.SetActive(false);
+        DecideActiveState(false);
+        hpImages[0].fillAmount = 1; 
+        effectImages[0].fillAmount= 1;
     }
 
     public void Setup(Transform _followTransform, MonsterStat _monsterStat)
@@ -50,12 +54,24 @@ public class StandardMonsterStatusUI : StatusUI
 
     public virtual void FixedExecute()
     {
-        UpdatePostion();
-        HPEffect();
+        if (isActive)
+        {
+            UpdatePostion();
+            HPEffect();
+        }
     }
 
     #endregion
 
+
+    public void DecideActiveState(bool _isActive)
+    {
+        playerStatusParentObject.SetActive(_isActive);
+        isActive = _isActive;
+
+        if (isActive)
+            UpdateHP();
+    }
 
     /******************************************/
     /***** HP UI 위치,회전값 최신화 ******/

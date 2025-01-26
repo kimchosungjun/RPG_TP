@@ -13,7 +13,7 @@ public class Virus : StandardMonster
 
     [Header("Component"),SerializeField] NavMeshAgent nav;
     [SerializeField] float detectRange;
-    [SerializeField] MonsterSight sight;
+    [SerializeField] MonsterFinder finder;
 
     [Header("Maintain Idle"),SerializeField] float maintainIdleTime = 5f; 
     [SerializeField] bool isDoIdle = false;
@@ -42,10 +42,10 @@ public class Virus : StandardMonster
     protected override void Start()
     {
         base.Start();
-        //detecter.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
+        //sight.Setup(detectRange, (int)UtilEnums.LAYERS.PLAYER);
         nav.speed = monsterStat.Speed;
         spread.SetData(monsterStat);
-        //rush.SetData(monsterStat);
+        rush.SetData(monsterStat);
     }
 
     protected override void CreateBTStates()
@@ -119,7 +119,7 @@ public class Virus : StandardMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        virusRoot.Evaluate();
+        //virusRoot.Evaluate();
         statusUI.FixedExecute();
     }
     #endregion
@@ -130,7 +130,7 @@ public class Virus : StandardMonster
     NODESTATES DoMoveToTarget()
     {
         anim.SetInteger("MState", (int)STATES.MOVE);
-        nav.SetDestination(sight.GetTransform.position); 
+        nav.SetDestination(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position); 
         return NODESTATES.FAIL; 
     }
 
@@ -145,7 +145,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoDetectPlayer()
     {
-        if (sight.IsDetect())
+        if (finder.IsDetect())
             return NODESTATES.SUCCESS;
         return NODESTATES.FAIL;
     }
@@ -160,7 +160,7 @@ public class Virus : StandardMonster
         StartCoroutine(CDoIdle());
         anim.SetInteger("Idle", 1);
         anim.SetInteger("MState", (int)STATES.IDLE);
-        sight.ChangeRange(detectRange * 0.75f);
+        finder.ChangeRange(detectRange * 0.75f);
         return NODESTATES.FAIL;
     }
 
@@ -172,7 +172,7 @@ public class Virus : StandardMonster
         StartCoroutine(CDoIdle());
         anim.SetInteger("Idle", 0);
         anim.SetInteger("MState", (int)STATES.IDLE);
-        sight.ChangeRange(detectRange);
+        finder.ChangeRange(detectRange);
         return NODESTATES.FAIL;
     }
     
@@ -186,7 +186,7 @@ public class Virus : StandardMonster
     #endregion
 
     #region Second BT : Check Distance & Move
-    NODESTATES DoCheckFarAttackRange() { return (farCombatRange < sight.GetDistance()) ? NODESTATES.FAIL : NODESTATES.SUCCESS; }
+    NODESTATES DoCheckFarAttackRange() { return (farCombatRange < finder.GetDistance()) ? NODESTATES.FAIL : NODESTATES.SUCCESS; }
     #endregion
 
     #region Third BT : Far Attack
@@ -204,7 +204,7 @@ public class Virus : StandardMonster
     }
     NODESTATES DoCheckNearAttackRange()
     {
-        if(nearCombatRange < sight.GetDistance())
+        if(nearCombatRange < finder.GetDistance())
         {
             DoMoveToTarget();
             return NODESTATES.FAIL; 
@@ -220,7 +220,7 @@ public class Virus : StandardMonster
     {
         if (rush.GetCoolDown)
         {
-            transform.LookAt(sight.GetTransform);
+            transform.LookAt(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
             isDoAnimation = true;
             anim.SetInteger("Attack",0);
             anim.SetInteger("MState", (int)STATES.ATTACK);

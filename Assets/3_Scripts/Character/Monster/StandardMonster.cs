@@ -22,4 +22,19 @@ public class StandardMonster : BaseMonster
     #endregion
 
     protected override void CreateBTStates() { }
+
+    #region Area
+    public override void AnnounceInMonsterArea()
+    {
+        base.AnnounceInMonsterArea();
+        statusUI.DecideActiveState(true);
+    }
+
+    public override void AnnounceOutMonsterArea()
+    {
+        base.AnnounceOutMonsterArea();
+        // to do recovery
+        statusUI.DecideActiveState(false);
+    }
+    #endregion
 }

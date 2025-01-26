@@ -18,10 +18,10 @@ TagManager:
   - Interactor
   - UnInteractor
   - UIModel
-  - 
-  - 
-  - 
-  - 
+  - PlayerAttack
+  - MonsterAttack
+  - PlayerFinder
+  - MonsterFinder
   - 
   - 
   - 

@@ -10,6 +10,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     /******************************************/
 
     #region Variable
+    [SerializeField] Text hpText;
     [SerializeField, Header("HP Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] hpImages;
     [SerializeField, Header("Exp Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] expImages;
     [SerializeField] PlayerJoystickUI joystickUI;

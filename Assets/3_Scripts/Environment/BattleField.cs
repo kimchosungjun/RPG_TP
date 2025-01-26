@@ -4,12 +4,6 @@ using UnityEngine;
 using UtilEnums;
 public class BattleField : MonoBehaviour
 {
-    class FiledMonster
-    {
-        public float spawnTime;
-        
-    }
-
     // int playerLayer = 1 <<8; : Physics에서는 이 방식 사용
     // Physics는 비트 플래그로 작동하지만 Gameobject의 레이어는 단일 레이어값으로 작동한다.
     [SerializeField] BaseMonster[] spawnMonsters;
@@ -18,27 +12,13 @@ public class BattleField : MonoBehaviour
 
     private void Start()
     {
-        //HashSet<int> spawnIndexes = new HashSet<int>();
-        //int randomNum = 0;
-        //int pathCnt = pathNodes.Length;
-        //int monsterCnt = spawnMonsters.Length;
-        //for (int i = 0; i < monsterCnt; i++)
-        //{
-        //    while (true)
-        //    {
-        //        randomNum = Random.Range(0, pathCnt);
-        //        if (spawnIndexes.Contains(randomNum))
-        //            continue;
-        //        else
-        //        {
-        //            spawnMonsters[i].Spawn(pathNodes[randomNum].NodePosition);
-        //            spawnMonsters[i].MonsterArea = this;
-        //            spawnMonsters[i].SetPathNodes(pathNodes);
-        //            spawnIndexes.Add(randomNum);
-        //            break;
-        //        }
-        //    }
-        //}
+        int monsterCnt = spawnMonsters.Length;
+        for (int i = 0; i < monsterCnt; i++)
+        {
+            spawnMonsters[i].gameObject.SetActive(true);
+            spawnMonsters[i].MonsterArea = this;
+            //spawnMonsters[i].SetPathNodes(pathNodes);
+        }
     }
 
     int playerLayer = (int) LAYERS.PLAYER;
