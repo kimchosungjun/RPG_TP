@@ -7,17 +7,21 @@ using UnityEngine.AI;
 
 public class Virus : StandardMonster
 {
+    [Header("Range")]
     [SerializeField] float nearCombatRange;
     [SerializeField] float farCombatRange;
-    [Header("컴포넌트"),SerializeField] NavMeshAgent nav;
+
+    [Header("Component"),SerializeField] NavMeshAgent nav;
     [SerializeField] float detectRange;
-    [SerializeField] BaseDetecter detecter;
-    [Header("유휴상태 유지시간"),SerializeField] float maintainIdleTime = 5f; 
+    [SerializeField] MonsterSight sight;
+
+    [Header("Maintain Idle"),SerializeField] float maintainIdleTime = 5f; 
     [SerializeField] bool isDoIdle = false;
     bool isDeathState = false; 
     bool isDoHitEffect = false; // 그로기.. 등 조작 불능 상태인 경우 넉백같은 효과가 작동하지 않도록 방지하는 변수
     bool isDoAnimation = false; // 피격, 공격.. 등 특정 행동 애니메이션 도중에는 작동하지 않도록 방지하는 변수
 
+    [Header("Virus Attack")]
     [SerializeField] VirusSpread spread;
     [SerializeField] VirusRush rush;
     Sequence virusRoot = null;
@@ -88,7 +92,7 @@ public class Virus : StandardMonster
         #region Forth BT States : Check Near Attack CoolTime 
         List<Node> checkNearCoolTimeGroup = new List<Node>();
         ActionNode doCheckNearAttackCoolTime = new ActionNode(DoCheckCanNearAttack);
-        // ActionNode doMoveRoundPlayer = new ActionNode(DoCheckCanNearAttack);
+        ActionNode doMoveRoundPlayer = new ActionNode(DoCheckCanNearAttack);
         checkNearCoolTimeGroup.Add(doCheckNearAttackCoolTime);
         checkNearCoolTimeGroup.Add(doMoveToPlayer);
         #endregion
@@ -106,7 +110,6 @@ public class Virus : StandardMonster
         virusBTGroup.Add(doCheckFarAttackCoolTimeSequence);
         virusBTGroup.Add(doNearAttackCoolTimeSequence);
 
-
         // Root
         virusRoot = new Sequence(virusBTGroup);
     }
@@ -116,7 +119,7 @@ public class Virus : StandardMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        //virusRoot.Evaluate();
+        virusRoot.Evaluate();
         statusUI.FixedExecute();
     }
     #endregion
@@ -127,7 +130,7 @@ public class Virus : StandardMonster
     NODESTATES DoMoveToTarget()
     {
         anim.SetInteger("MState", (int)STATES.MOVE);
-        nav.SetDestination(detecter.GetTransform.position); 
+        nav.SetDestination(sight.GetTransform.position); 
         return NODESTATES.FAIL; 
     }
 
@@ -142,7 +145,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoDetectPlayer()
     {
-        if (detecter.IsDetect())
+        if (sight.IsDetect())
             return NODESTATES.SUCCESS;
         return NODESTATES.FAIL;
     }
@@ -157,7 +160,7 @@ public class Virus : StandardMonster
         StartCoroutine(CDoIdle());
         anim.SetInteger("Idle", 1);
         anim.SetInteger("MState", (int)STATES.IDLE);
-        detecter.ChangeRange(detectRange * 0.75f);
+        sight.ChangeRange(detectRange * 0.75f);
         return NODESTATES.FAIL;
     }
 
@@ -169,7 +172,7 @@ public class Virus : StandardMonster
         StartCoroutine(CDoIdle());
         anim.SetInteger("Idle", 0);
         anim.SetInteger("MState", (int)STATES.IDLE);
-        detecter.ChangeRange(detectRange);
+        sight.ChangeRange(detectRange);
         return NODESTATES.FAIL;
     }
     
@@ -183,7 +186,7 @@ public class Virus : StandardMonster
     #endregion
 
     #region Second BT : Check Distance & Move
-    NODESTATES DoCheckFarAttackRange() { return (farCombatRange < detecter.GetDistance()) ? NODESTATES.FAIL : NODESTATES.SUCCESS; }
+    NODESTATES DoCheckFarAttackRange() { return (farCombatRange < sight.GetDistance()) ? NODESTATES.FAIL : NODESTATES.SUCCESS; }
     #endregion
 
     #region Third BT : Far Attack
@@ -201,7 +204,7 @@ public class Virus : StandardMonster
     }
     NODESTATES DoCheckNearAttackRange()
     {
-        if(nearCombatRange < detecter.GetDistance())
+        if(nearCombatRange < sight.GetDistance())
         {
             DoMoveToTarget();
             return NODESTATES.FAIL; 
@@ -217,7 +220,7 @@ public class Virus : StandardMonster
     {
         if (rush.GetCoolDown)
         {
-            transform.LookAt(detecter.GetTransform);
+            transform.LookAt(sight.GetTransform);
             isDoAnimation = true;
             anim.SetInteger("Attack",0);
             anim.SetInteger("MState", (int)STATES.ATTACK);

@@ -48,6 +48,7 @@ namespace PoolEnums
         MAGICIAN_METEOR =9,
         EXPLOSION=10,
         GUIDED_FIRE=11,
+        VIRUS_SPREAD=12,
     }
 }
 
@@ -83,6 +84,14 @@ namespace UtilEnums
         ITEM = 3,
         NPC = 4,
         CAMERA=5,
+    }
+
+    public enum ZONE_TPYES
+    {
+        CAVE=0,
+        TOWN_SOUTH=1,
+        TOWN_EAST=2,
+        TOWN_WEST=3
     }
 }
 

@@ -17,6 +17,11 @@ public class GameCtrlMgr : MonoBehaviour
     public CameraCtrl GetCameraCtrl { get {return cameraCtrl; } }
     #endregion
 
+    #region Zone
+    [SerializeField ]ZoneCtrl zoneCtrl;
+    public ZoneCtrl GetZoneCtrl { get { return zoneCtrl; } }
+    #endregion
+
     private void Awake()
     {
         SharedMgr.GameCtrlMgr = this;
@@ -31,5 +36,7 @@ public class GameCtrlMgr : MonoBehaviour
             cameraCtrl = FindObjectOfType<CameraCtrl>();
         if(playerStatCtrl==null)
             playerStatCtrl = GetComponent<PlayerStatCtrl>();
+        if(zoneCtrl == null)
+            zoneCtrl = FindObjectOfType<ZoneCtrl>();    
     }
 }

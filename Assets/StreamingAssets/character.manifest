@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 2067827700
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 38b75f7859b1d464e8026f48f378f063
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 93febf3aee915b140b1e37286967438b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 137
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Blink/Art/Paladin J Nordstrom@Idle.fbx
+Dependencies: []

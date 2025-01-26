@@ -4,10 +4,10 @@ using MonsterEnums;
 
 public class VirusSpread : MonoBehaviour
 {
+    [SerializeField] ProjectileAttackAction[] spredAttacks;
     MonsterStat stat = null;
-    [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
-    [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
-    [SerializeField] ProjectileAttackAction spredAttack = null;
+    MonsterAttackActionData attackActionData = new MonsterAttackActionData();
+    MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
     protected bool isCoolDown = true;
 
     public bool GetCoolDown { get { return isCoolDown; } }
@@ -15,8 +15,6 @@ public class VirusSpread : MonoBehaviour
     // 생성시 한번만 호출 : 몬스터의 레벨을 바꿀 생각 없기 때문이다.
     public void SetData(MonsterStat _stat)
     {
-        if (spredAttack == null) spredAttack = GetComponentInChildren<ProjectileAttackAction>();
-
         // 스탯과 행동 데이터 불러오기
         this.stat= _stat;
         MonsterTable monsterTable = SharedMgr.TableMgr.GetMonster;
@@ -33,7 +31,14 @@ public class VirusSpread : MonoBehaviour
         TransferConditionData conditionData = new TransferConditionData();
         conditionData.SetData(stat, conditionActionData.GetEffect, conditionActionData.GetAttribute,
             conditionActionData.GetConditionType, conditionActionData.GetDefaultValue, conditionActionData.GetMaintainTime, conditionActionData.GetMultiplier);
-        spredAttack.SetTransferData(attackData, conditionData);
+
+        int projectileCnt = spredAttacks.Length;
+        for (int i=0; i< projectileCnt; i++)
+        {
+            HitTriggerProjectile projectile = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.VIRUS_SPREAD).GetComponent<HitTriggerProjectile>();
+            spredAttacks[i].SetTransferData(attackData, conditionData, projectile);
+        }
+       
     }
     IEnumerator CStartCoolDown(float _coolTime)
     {

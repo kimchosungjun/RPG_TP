@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3283784118854933984}
   - component: {fileID: 4953854144172256688}
   - component: {fileID: 8414625713530151003}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SM_Arch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1030973955}
   - component: {fileID: 1030973956}
   - component: {fileID: 1030973957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SM_Arch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
