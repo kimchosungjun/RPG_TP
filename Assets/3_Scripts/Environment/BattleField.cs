@@ -4,25 +4,78 @@ using UnityEngine;
 using UtilEnums;
 public class BattleField : MonoBehaviour
 {
-    // int playerLayer = 1 <<8; : Physics에서는 이 방식 사용
-    // Physics는 비트 플래그로 작동하지만 Gameobject의 레이어는 단일 레이어값으로 작동한다.
     [SerializeField] BaseMonster[] spawnMonsters;
-    [SerializeField] PathNode[] pathNodes;
-    [SerializeField] float respawnTime;
+    [SerializeField] Transform[] monsterSpawnTransforms;
+  
+    List<RespawnChecker> respawnMonsters = new List<RespawnChecker>();
+    int playerLayer = (int) LAYERS.PLAYER;
+    bool isWaitRespawn = false;
 
-    private void Start()
+    class RespawnChecker
+    {
+        float respawnTime;
+        float currentTime;
+        public BaseMonster monster = null;
+
+        public void SetRespawnInfo(BaseMonster _baseMonster)
+        {
+            currentTime = 0;
+            respawnTime = SharedMgr.TableMgr.GetMonster.GetMonsterInfoTableData(_baseMonster.GetMonsterStat.GetID).respawnTime;
+            monster = _baseMonster;
+        }
+        
+        public bool CanRespawn()
+        {
+            currentTime += Time.fixedDeltaTime;
+            if (currentTime >= respawnTime)
+                return true;
+            return false;
+        }
+    }
+
+    #region Life Cycle
+    protected virtual void Start()
+    {
+        SetupMonsters();
+    }
+
+    public virtual void SetupMonsters()
     {
         int monsterCnt = spawnMonsters.Length;
         for (int i = 0; i < monsterCnt; i++)
         {
-            spawnMonsters[i].gameObject.SetActive(true);
+            spawnMonsters[i].BattleFieldSpawnIndex = i;
             spawnMonsters[i].MonsterArea = this;
-            //spawnMonsters[i].SetPathNodes(pathNodes);
+            SpawnMonster(spawnMonsters[i]);
         }
     }
 
-    int playerLayer = (int) LAYERS.PLAYER;
-    private void OnTriggerEnter(Collider other)
+    protected virtual void FixedUpdate()
+    {
+        CheckRespawnTime();
+    }
+
+    public virtual void CheckRespawnTime()
+    {
+        if (isWaitRespawn == false) return;
+
+        int cnt = respawnMonsters.Count;
+        for(int i = cnt-1; i>=0; i--)
+        {
+            if (respawnMonsters[i].CanRespawn()) 
+            {
+                RespawnMonster(respawnMonsters[i].monster);
+                respawnMonsters.RemoveAt(i);
+            }
+        }
+
+        cnt = respawnMonsters.Count;
+        if (cnt == 0) isWaitRespawn = false;
+    }
+    #endregion
+
+    #region Trigger 
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == playerLayer)
         {
@@ -34,7 +87,7 @@ public class BattleField : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == playerLayer)
         {
@@ -45,30 +98,37 @@ public class BattleField : MonoBehaviour
             }
         }
     }
+    #endregion
 
-    public void DeathMonster(GameObject _baseMonsterObject)
+    #region Spawn
+
+    public virtual void SpawnMonster(BaseMonster _monster)
     {
-        if(_baseMonsterObject.activeSelf==true) _baseMonsterObject.SetActive(false) ;
-        StartCoroutine(CRespawn(_baseMonsterObject));
+        if (_monster.gameObject.activeSelf==false)
+            _monster.gameObject.SetActive(true);
+
+        int index = _monster.BattleFieldSpawnIndex;
+        _monster.transform.position = monsterSpawnTransforms[index].position;
+        _monster.transform.rotation= monsterSpawnTransforms[index].rotation;
     }
 
-    IEnumerator CRespawn(GameObject _baseMonsterObject)
+    public virtual void RespawnMonster(BaseMonster _monster)
     {
-        BaseMonster baseMonster = _baseMonsterObject.GetComponent<BaseMonster>();   
-        yield return new WaitForSeconds(respawnTime);
+        SpawnMonster(_monster);
+        _monster.GetMonsterStatControl.ResetStat();
+    }
 
-        bool isSpawn = false;
-        int pathCnt = pathNodes.Length;
-        for (int i = 0; i < pathCnt; i++)
+    public virtual void DeathMonster(GameObject _baseMonsterObject)
+    {
+        if (_baseMonsterObject.activeSelf == true)
         {
-            if (pathNodes[i].CheckObstacle() == false)
-                continue;
-            baseMonster.Spawn(pathNodes[i].NodePosition);
-            isSpawn = true;
-            break;
+            _baseMonsterObject.SetActive(false);
+            RespawnChecker checker = new RespawnChecker();
+            checker.SetRespawnInfo(_baseMonsterObject.GetComponent<BaseMonster>());
+            respawnMonsters.Add(checker);
+            isWaitRespawn = true;
         }
-        if (isSpawn)
-            yield break;
-        baseMonster.Spawn(pathNodes[0].NodePosition);
     }
+
+    #endregion
 }

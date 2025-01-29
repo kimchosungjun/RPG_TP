@@ -18,6 +18,7 @@ public static class SharedMgr
     public static InteractionMgr InteractionMgr = null;
     public static QuestMgr QuestMgr = null;
     public static SaveMgr SaveMgr = null;
+    public static CursorMgr CursorMgr = null;
     #endregion
 
     //public static TableMgr InitTableMgr()

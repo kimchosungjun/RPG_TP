@@ -38,5 +38,7 @@ public class LoginFadeInView : MonoBehaviour
         color.a = 0f;
         fadeInImage.color = color;
         fadeInImage.gameObject.SetActive(false);
+        SharedMgr.CursorMgr.SetCursor();
+        SharedMgr.CursorMgr.SetCursorVisibleState(true);
     }
 }

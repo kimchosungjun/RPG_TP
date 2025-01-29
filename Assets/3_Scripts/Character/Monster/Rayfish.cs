@@ -8,25 +8,7 @@ public class Rayfish : PatrolMonster
     bool isIdleMove = false;
     bool isMoving = false;
     bool isHitState = false;
-    protected List<PathNode> pathNodeGroup = new List<PathNode>();
-    public PathNode GetFarPath()
-    {
-        PathNode bestNode = null;
-        float bestDistance = float.MaxValue;
-        float maxDistanceSqr = 0f; /*maxDistance * maxDistance;*/
-        foreach (var node in pathNodeGroup)
-        {
-            float distanceToAI = (node.NodePosition - transform.position).sqrMagnitude;
-            if (distanceToAI > maxDistanceSqr) continue;
-            float distanceToPlayer = (node.NodePosition - transform.position).sqrMagnitude;
-            if (distanceToPlayer > bestDistance)
-            {
-                bestNode = node;
-                bestDistance = distanceToPlayer;
-            }
-        }
-        return bestNode;
-    }
+   
 
     protected override void Awake()
     {
@@ -43,7 +25,7 @@ public class Rayfish : PatrolMonster
             float x = _centerPosition.x + Mathf.Cos(angle) * _pathRadius;
             float z = _centerPosition.z + Mathf.Sin(angle) * _pathRadius;
             Vector3 nodePosition = new Vector3(x, 0, z); 
-            pathNodeGroup.Add(new PathNode(nodePosition)); 
+            //pathNodeGroup.Add(new PathNode(nodePosition)); 
         }
     }
 
@@ -114,31 +96,31 @@ public class Rayfish : PatrolMonster
 
     IEnumerator CDoRunAway()
     {
-        PathNode targetNode = GetFarPath();
+        //PathNode targetNode = GetFarPath();
         // 노드가 없다면 실행 불가
-        if (targetNode == null) yield break;
+        //if (targetNode == null) yield break;
 
-        Vector3 targetPosition = targetNode.NodePosition;
-        float distance = Vector3.Distance(transform.position, targetPosition);
+        //Vector3 targetPosition = targetNode.NodePosition;
+        //float distance = Vector3.Distance(transform.position, targetPosition);
 
-        // 현재 위치와 별 차이 없으면 그대로
-        if (distance < 0.5f) yield break;
-
-        isMoving = true;
-        Vector3 currentPosition = transform.position;
-        Quaternion currentRotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.LookRotation((targetPosition - transform.position).normalized);
-        float movementPercent = 0f;
-        while (distance > 0.5f)
-        {
-            movementPercent += Time.deltaTime * moveSpeed;
-            transform.position = Vector3.Slerp(currentPosition, targetPosition, movementPercent);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, movementPercent);
-            distance = Vector3.Distance(transform.position, targetPosition);
-            yield return null;
-        }
-        transform.rotation = targetRotation;
-        isMoving = false;
+        //// 현재 위치와 별 차이 없으면 그대로
+        //if (distance < 0.5f)
+            yield break;
+        //isMoving = true;
+        //Vector3 currentPosition = transform.position;
+        //Quaternion currentRotation = transform.rotation;
+        //Quaternion targetRotation = Quaternion.LookRotation((targetPosition - transform.position).normalized);
+        //float movementPercent = 0f;
+        //while (distance > 0.5f)
+        //{
+        //    movementPercent += Time.deltaTime * moveSpeed;
+        //    transform.position = Vector3.Slerp(currentPosition, targetPosition, movementPercent);
+        //    transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, movementPercent);
+        //    distance = Vector3.Distance(transform.position, targetPosition);
+        //    yield return null;
+        //}
+        //transform.rotation = targetRotation;
+        //isMoving = false;
     }
     #endregion
 
@@ -162,26 +144,26 @@ public class Rayfish : PatrolMonster
 
     public NODESTATES DoIdleBehaviour()
     {
-        int randomNodeIndex = 0;
-        int randomNum = 0;
-        randomNum = Random.Range(0, 2);
-        randomNodeIndex = Random.Range(0, pathNodeGroup.Count);
-        switch (randomNum)
-        {
-            // 유휴상태
-            case 0:
-                if (isIdleMove == false) anim.SetBool("IsMove", false);
-                break;
-            // 움직임 상태
-            case 1:
-                if (isIdleMove == false)
-                {
-                    isIdleMove = true;
-                    anim.SetBool("IsMove", true);
-                    DoMove(pathNodeGroup[randomNodeIndex].NodePosition);
-                }
-                break;
-        }
+        //int randomNodeIndex = 0;
+        //int randomNum = 0;
+        //randomNum = Random.Range(0, 2);
+        //randomNodeIndex = Random.Range(0, pathNodeGroup.Count);
+        //switch (randomNum)
+        //{
+        //    // 유휴상태
+        //    case 0:
+        //        if (isIdleMove == false) anim.SetBool("IsMove", false);
+        //        break;
+        //    // 움직임 상태
+        //    case 1:
+        //        if (isIdleMove == false)
+        //        {
+        //            isIdleMove = true;
+        //            anim.SetBool("IsMove", true);
+        //            DoMove(pathNodeGroup[randomNodeIndex].NodePosition);
+        //        }
+        //        break;
+        //}
         return NODESTATES.SUCCESS;
     }
 

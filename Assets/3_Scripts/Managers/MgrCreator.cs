@@ -15,6 +15,7 @@ public class MgrCreator : MonoBehaviour
     InventoryMgr inventoryMgr = new InventoryMgr();
     InteractionMgr dialogueMgr = new InteractionMgr();
     QuestMgr questMgr = new QuestMgr(); 
+    CursorMgr cursorMgr = new CursorMgr();
     #endregion
 
     private void Awake()
@@ -37,6 +38,7 @@ public class MgrCreator : MonoBehaviour
             dialogueMgr.Init();
             questMgr.Init();
             saveMgr.Init();
+            cursorMgr.Init();
         }
     }
 }

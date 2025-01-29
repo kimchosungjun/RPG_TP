@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterTableClassGroup;
+using UnityEngine.Assertions.Must;
 
 public partial class MonsterTable : BaseTable
 {
@@ -81,6 +82,7 @@ public partial class MonsterTable : BaseTable
         _reader.get(_row, ref _tableData.description);
         _reader.get(_row, ref _tableData.feature);
         _reader.get(_row, ref _tableData.type);
+        _reader.get(_row, ref _tableData.respawnTime);
         return true;
     }
     

@@ -21,9 +21,10 @@ public abstract class BaseMonster : BaseActor
 
     #region Value : Notice
     protected int playerLayer = 1 << 8;
-    protected PathNode[] pathNodes;
     protected bool isInMonsterArea = false;
     public BattleField MonsterArea { protected get; set; }
+    public int BattleFieldSpawnIndex { get; set; } = -1;
+    public MonsterStatControl GetMonsterStatControl { get { return monsterStatControl; } }
     #endregion
 
     #region Value : Monster Information
@@ -91,7 +92,6 @@ public abstract class BaseMonster : BaseActor
     #region Virtual Method : Announce Area & Spawn 
     public virtual void AnnounceInMonsterArea() { isInMonsterArea = true; } 
     public virtual void AnnounceOutMonsterArea() { isInMonsterArea = false; }
-    public virtual void SetPathNodes(PathNode[] _pathNodes) { pathNodes = _pathNodes; } 
     public virtual void Spawn(Vector3 _spawnPosition) { this.transform.position = _spawnPosition; this.gameObject.SetActive(true); }
     public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); } // 애니메이션 설정하기
     public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject); this.gameObject.SetActive(false); } // 스탯 원래대로 만들기 추가 

@@ -17,6 +17,7 @@ namespace MonsterTableClassGroup
         public string description;
         public string feature;
         public string type;
+        public float respawnTime;
     }
     #endregion
 

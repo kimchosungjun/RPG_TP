@@ -53,7 +53,7 @@ public class MonsterStatControl : ActorStatControl
     /// </summary>
     public void ResetStat()
     {
-
+        monsterStat.ResetMonsterStat();
     }
 
     #region Apply Condition Data

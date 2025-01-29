@@ -28,18 +28,18 @@ public class MonsterStat : BaseStat
     /// 스탯을 초기화할때 호출 (처음 생성시, 혹은 스탯 리셋시)
     /// </summary>
     /// <param name="_nonCombatMonsterStat"></param>
-    public virtual void SetMonsterStat(MonsterTableClassGroup.MonsterStatTableData _combatMonsterStat, int _level)
+    public virtual void SetMonsterStat(MonsterTableClassGroup.MonsterStatTableData _tableData, int _level)
     {
         level = _level;
-        int levelDiff = _level - _combatMonsterStat.startLevel;
-        maxHp = _combatMonsterStat.maxHP + _combatMonsterStat.hpIncrease * levelDiff;
+        int levelDiff = _level - _tableData.startLevel;
+        maxHp = _tableData.maxHP + _tableData.hpIncrease * levelDiff;
         currentHP = maxHp;
-        speed = _combatMonsterStat.speed;
-        defenceValue = _combatMonsterStat.defence + _combatMonsterStat.defenceIncrease * levelDiff;
-        ID = _combatMonsterStat.ID;
-        boostSpeed = _combatMonsterStat.boostSpeed;
-        attackValue = _combatMonsterStat.attack + _combatMonsterStat.attackIncrease * levelDiff;
-        criticalValue = _combatMonsterStat.critical + _combatMonsterStat.criticalIncrease * levelDiff;
+        speed = _tableData.speed;
+        defenceValue = _tableData.defence + _tableData.defenceIncrease * levelDiff;
+        ID = _tableData.ID;
+        boostSpeed = _tableData.boostSpeed;
+        attackValue = _tableData.attack + _tableData.attackIncrease * levelDiff;
+        criticalValue = _tableData.critical + _tableData.criticalIncrease * levelDiff;
         actorName = SharedMgr.TableMgr.GetMonster.GetMonsterInfoTableData(ID).name;
     }
 
@@ -48,6 +48,21 @@ public class MonsterStat : BaseStat
         float result = currentHP *100f / maxHp;
         int res = (int)(result);
         return res;
+    }
+
+    public void ResetMonsterStat()
+    {
+        MonsterTableClassGroup.MonsterStatTableData tableData = SharedMgr.TableMgr.GetMonster.GetMonsterStatTableData(ID);
+        int levelDiff = level - tableData.startLevel;
+        maxHp = tableData.maxHP + tableData.hpIncrease * levelDiff;
+        currentHP = maxHp;
+        speed = tableData.speed;
+        defenceValue = tableData.defence + tableData.defenceIncrease * levelDiff;
+        ID = tableData.ID;
+        boostSpeed = tableData.boostSpeed;
+        attackValue = tableData.attack + tableData.attackIncrease * levelDiff;
+        criticalValue = tableData.critical + tableData.criticalIncrease * levelDiff;
+        actorName = SharedMgr.TableMgr.GetMonster.GetMonsterInfoTableData(ID).name;
     }
 
     #endregion

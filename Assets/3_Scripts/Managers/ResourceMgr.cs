@@ -12,6 +12,12 @@ public partial class ResourceMgr
         SharedMgr.ResourceMgr = this;
     }
 
+    /// <summary>
+    /// Path : Resources/
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="_path"></param>
+    /// <returns></returns>
     public T LoadResource<T>(string _path) where T : Object
     {
         T loadT = Resources.Load<T>(_path);
