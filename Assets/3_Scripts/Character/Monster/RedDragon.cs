@@ -11,7 +11,6 @@ public class RedDragon : EliteMonster
 
     [Header("RedDragon Component")]
     [SerializeField] RedDragonAttackControl attackControl;
-    [SerializeField] NavMeshAgent nav;
     [SerializeField, Range(0,10f)] float attackRange = 4f;
     [SerializeField] CapsuleCollider coll;
     public NavMeshAgent GetNav { get { return nav; } }
@@ -74,7 +73,7 @@ public class RedDragon : EliteMonster
     DragonState currentState = null;
     DragonState [] allStates;
     MonsterStateMachine stateMachine;
-    protected override void CreateBTStates()
+    protected override void CreateStates()
     {
         stateMachine = new MonsterStateMachine();
         allStates = new DragonState[8];
@@ -169,7 +168,7 @@ public class RedDragon : EliteMonster
     
     public void CheckPlayerInArea()
     {
-        if (isInMonsterArea && isScream == false)
+        if (IsInMonsterArea && isScream == false)
         {
             isScream = true;
             SetAnimation(DRAGON_ANIM.SCREAM);
@@ -202,7 +201,7 @@ public class RedDragon : EliteMonster
     // Meet Player : Once
     public void AfterScream()
     {
-        if (isInMonsterArea)
+        if (IsInMonsterArea)
         {
             SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI.TurnOn();
             ChangeState(DRAGON_STATE.MOVE);

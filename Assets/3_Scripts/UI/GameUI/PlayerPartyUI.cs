@@ -105,6 +105,7 @@ public class PlayerPartyUI : MonoBehaviour
         if (isActive)
         {
             Setup();
+            SharedMgr.CursorMgr.SetCursorVisibleState(true);
             if (playerPartyUISetFrame.activeSelf == false)
                 playerPartyUISetFrame.SetActive(true);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = GAMEUI.PLAYER_PARTY;
@@ -113,6 +114,7 @@ public class PlayerPartyUI : MonoBehaviour
         {
             if (playerPartyUISetFrame.activeSelf)
                 playerPartyUISetFrame.SetActive(false);
+            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = GAMEUI.NONE;
         }
     }

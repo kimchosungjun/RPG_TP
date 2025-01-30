@@ -37,7 +37,6 @@ public class MonsterFinder : Finder
 
     protected override void OnTriggerEnter(Collider other)
     {
-
         if(other.gameObject.layer == findLayer)
             isDetect = true;
     }

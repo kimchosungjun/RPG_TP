@@ -6,7 +6,7 @@ public class EliteMonster : BaseMonster
 {
     [SerializeField] protected EliteMonsterStatusUI statusUI = null;
     protected EliteGauge eliteGauge = new EliteGauge();
-    protected override void CreateBTStates() {  }
+    protected override void CreateStates() {  }
 
     public class EliteGauge
     {

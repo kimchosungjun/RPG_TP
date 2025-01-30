@@ -44,8 +44,7 @@ public class BattleField : MonoBehaviour
         int monsterCnt = spawnMonsters.Length;
         for (int i = 0; i < monsterCnt; i++)
         {
-            spawnMonsters[i].BattleFieldSpawnIndex = i;
-            spawnMonsters[i].MonsterArea = this;
+            spawnMonsters[i].SetBattleFieldData(this, i, monsterSpawnTransforms[i].position, this.transform.position);
             SpawnMonster(spawnMonsters[i]);
         }
     }

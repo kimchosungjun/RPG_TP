@@ -47,6 +47,7 @@ public class GameUICtrl : MonoBehaviour
     {
         UILink();
         UIInit();
+        SharedMgr.CursorMgr.SetCursorVisibleState(false);
     }
 
     public void UILink()
@@ -90,7 +91,16 @@ public class GameUICtrl : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
+        // Cursor
+        if(CurrentOpenUI == GAMEUI.NONE)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftAlt))
+                SharedMgr.CursorMgr.SetCursorVisibleState(true);
+            else if (Input.GetKeyUp(KeyCode.LeftAlt))
+                SharedMgr.CursorMgr.SetCursorVisibleState(false);
+        }
+
         if (isConversationState)
         {
             if (dialogueUI.GetIsChoiceActive)

@@ -11,7 +11,6 @@ public class Virus : StandardMonster
     [SerializeField] float nearCombatRange;
     [SerializeField] float farCombatRange;
 
-    [Header("Component"),SerializeField] NavMeshAgent nav;
     [SerializeField] float detectRange;
     [SerializeField] MonsterFinder finder;
 
@@ -48,7 +47,7 @@ public class Virus : StandardMonster
         rush.SetData(monsterStat);
     }
 
-    protected override void CreateBTStates()
+    protected override void CreateStates()
     {
         #region First BT States : Detect & Do Idle
         // Level 2 

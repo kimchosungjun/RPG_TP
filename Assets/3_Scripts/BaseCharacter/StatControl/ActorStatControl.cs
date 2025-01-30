@@ -11,7 +11,7 @@ public abstract class ActorStatControl : MonoBehaviour
     #region Value : Buff & StatusUI
     protected int buffCnt = 0;
     protected Dictionary<CONDITION_EFFECT_STATS, int> overlapBuffGroup = new Dictionary<CONDITION_EFFECT_STATS, int>();
-    [SerializeField] protected List<TransferConditionData> currentConditions = new List<TransferConditionData>();
+    protected List<TransferConditionData> currentConditions = new List<TransferConditionData>();
     protected StatusUI statusUI = null;
     public void SetStatusUI(StatusUI _statusUI) { this.statusUI = _statusUI; }
     #endregion

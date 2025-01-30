@@ -15,7 +15,7 @@ public class CombatMonster : StandardMonster
     [Header("거리")]
     [SerializeField] protected float detectRange;
 
-    protected override void CreateBTStates()
+    protected override void CreateStates()
     {
         throw new System.NotImplementedException();
     }

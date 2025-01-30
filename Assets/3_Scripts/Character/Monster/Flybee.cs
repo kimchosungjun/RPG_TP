@@ -19,7 +19,7 @@ public class Flybee : PatrolMonster
         if (statusUI == null) statusUI = GetComponentInChildren<StandardMonsterStatusUI>();
     }
 
-    protected override void CreateBTStates()
+    protected override void CreateStates()
     {
         // Level1 
         ActionNode checkCurrentStateAction = new ActionNode(DoCheckHitState);

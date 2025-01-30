@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class StandardMonster : BaseMonster
 {
-    [Header("스탯 UI"),SerializeField] protected StandardMonsterStatusUI statusUI = null;
-    
-    // Set Status UI
+    [Header("Status UI : Must Link"),SerializeField] protected StandardMonsterStatusUI statusUI = null;
 
     #region Override Life Cycle
     protected override void Awake()
     {
         base.Awake();
+        if(statusUI==null)
+            statusUI = GetComponentInChildren<StandardMonsterStatusUI>();   
         statusUI.Init();
     }
 
@@ -21,9 +21,7 @@ public class StandardMonster : BaseMonster
     }
     #endregion
 
-    protected override void CreateBTStates() { }
-
-    #region Area
+    #region Battle Field
     public override void AnnounceInMonsterArea()
     {
         base.AnnounceInMonsterArea();
@@ -33,8 +31,10 @@ public class StandardMonster : BaseMonster
     public override void AnnounceOutMonsterArea()
     {
         base.AnnounceOutMonsterArea();
-        // to do recovery
         statusUI.DecideActiveState(false);
+        ReturnToSpawnPosition();
     }
     #endregion
+
+    protected override void CreateStates() { }
 }

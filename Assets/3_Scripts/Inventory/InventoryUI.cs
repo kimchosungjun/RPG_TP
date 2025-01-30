@@ -61,12 +61,14 @@ public class InventoryUI : MonoBehaviour
         if (inventoryObject.activeSelf == true)
         {
             InActiveAllUI();
+            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
         }
         else
         {
             inventoryObject.SetActive(true);
             ChangeShowItemType(currentShowType);
+            SharedMgr.CursorMgr.SetCursorVisibleState(true);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.INVENTORY;
         }
     }

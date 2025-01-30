@@ -74,11 +74,13 @@ public class QuestUI : MonoBehaviour
         if (isActive)
         {
             UpdateQuestDatas();
+            SharedMgr.CursorMgr.SetCursorVisibleState(true);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.QUEST;
         }
         else
         {
             infoUI.InActive();
+            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
         }
         questFrameParent.SetActive(isActive);

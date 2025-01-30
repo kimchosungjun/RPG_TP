@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSight : MonoBehaviour
+public class PlayerFinder : MonoBehaviour
 {
     protected virtual void OnTriggerEnter(Collider other)
     {

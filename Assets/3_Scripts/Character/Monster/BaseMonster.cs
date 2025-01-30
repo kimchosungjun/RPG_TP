@@ -2,38 +2,58 @@ using UnityEngine;
 using MonsterEnums;
 using System;
 using System.Collections;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(MonsterStatControl))]
 public abstract class BaseMonster : BaseActor
 {
     /******************************************/
-    /************ 연결 컴포넌트  ************/
-    /********** 시야 감지 & 영역  ***********/
+    /**********      Component     ***********/
+    /**********  NavMesh Agent  ***********/
     /******************************************/
 
-    #region Value : Animator, StatControl
-    [Header("컴포넌트"), SerializeField] protected Animator anim = null;
+    #region Value : Animator, StatControl, Navmesh 
+    [Header("Component"), SerializeField] protected Animator anim = null;
     [SerializeField] protected MonsterStatControl monsterStatControl;
+    [SerializeField] protected NavMeshAgent nav;
+    [SerializeField] protected MonsterFinder monsterFinder; 
+    protected float toOriginalStopDistance = 0.5f;
+    protected float toPlayerStopDistance = 1f;
     protected MonsterStat monsterStat;
     public Animator GetAnim { get { return anim; } }    
     public MonsterStat GetMonsterStat { get { return monsterStat; } }
     #endregion
 
-    #region Value : Notice
+    #region Value : Notice (Area)
+
+    // Enemy Layer : Player
     protected int playerLayer = 1 << 8;
-    protected bool isInMonsterArea = false;
-    public BattleField MonsterArea { protected get; set; }
-    public int BattleFieldSpawnIndex { get; set; } = -1;
-    public MonsterStatControl GetMonsterStatControl { get { return monsterStatControl; } }
+
+    // Area : Battle Field
+    public bool IsInMonsterArea { get; protected set; } = false; 
+    public BattleField MonsterArea { get; protected set; }
+    public int BattleFieldSpawnIndex { get; protected set; } = -1;
+    public Vector3 SpawnPosition { get; protected set; }
+    public Vector3 FieldCenterPosition { get; set; }
+
+    public void SetBattleFieldData(BattleField _field, int _fieldIndex, Vector3 _spawnPos, Vector3 _fieldPos) 
+    {
+        MonsterArea = _field;
+        BattleFieldSpawnIndex = _fieldIndex;    
+        SpawnPosition= _spawnPos;
+        FieldCenterPosition = _fieldPos;
+    }
+
     #endregion
 
     #region Value : Monster Information
     [SerializeField] protected InitMonsterData initMonsterData;
+    public MonsterStatControl GetMonsterStatControl { get { return monsterStatControl; } }
     #endregion
 
     /******************************************/
-    /************* 레이어 설정  *************/
-    /************* 피격 메서드  *************/
+    /**************  Set Layer  **************/
+    /*************  Hit Method  **************/
     /******************************************/
 
     #region Override : Set Layer & Take Damage
@@ -50,10 +70,11 @@ public abstract class BaseMonster : BaseActor
     #endregion
 
     /******************************************/
-    /************ 라이프 사이클  ************/
+    /*************  Life Cycle  ***************/
     /******************************************/
 
     #region Virtual : Life Cycle
+
     /// <summary>
     /// Set Character Type, Link Monster Stat
     /// </summary>
@@ -62,6 +83,9 @@ public abstract class BaseMonster : BaseActor
         SetCharacterType();
         if (monsterStatControl == null)
             monsterStatControl = GetComponent<MonsterStatControl>();
+        if (nav == null)
+            nav = GetComponent<NavMeshAgent>();
+        nav.stoppingDistance = toPlayerStopDistance;
         monsterStatControl.BaseMonster = this;
     }
 
@@ -70,7 +94,7 @@ public abstract class BaseMonster : BaseActor
     /// </summary>
     protected virtual void Start() 
     { 
-        CreateBTStates();
+        CreateStates();
         MonsterTable table = SharedMgr.TableMgr.GetMonster;
         MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
         MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
@@ -78,24 +102,61 @@ public abstract class BaseMonster : BaseActor
         monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
         monsterStatControl.MonsterStat = monsterStat;
     }
-    
-    /// <summary>
-    /// Empty
-    /// </summary>
+
     protected virtual void FixedUpdate() { }
     #endregion
 
     /******************************************/
-    /************* 가상 메서드  *************/
+    /*********** Virtual Method *************/
     /******************************************/
 
-    #region Virtual Method : Announce Area & Spawn 
-    public virtual void AnnounceInMonsterArea() { isInMonsterArea = true; } 
-    public virtual void AnnounceOutMonsterArea() { isInMonsterArea = false; }
-    public virtual void Spawn(Vector3 _spawnPosition) { this.transform.position = _spawnPosition; this.gameObject.SetActive(true); }
+    #region Announce Area & Spawn 
+    public virtual void AnnounceInMonsterArea() { IsInMonsterArea = true; } 
+    public virtual void AnnounceOutMonsterArea() { IsInMonsterArea = false; ReturnToSpawnPosition(); }
     public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); } // 애니메이션 설정하기
     public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject); this.gameObject.SetActive(false); } // 스탯 원래대로 만들기 추가 
+    #endregion
 
+    #region Return To Spawn Position
+    public virtual void ReturnToSpawnPosition()
+    {
+        GoOffAggro();
+        Recovery();
+    }
+
+    public virtual void EscapeReturnToSpawnPosition()
+    {
+        isGoOffAggro = false;
+        isRecovery = false;
+        nav.stoppingDistance = toPlayerStopDistance;
+    }
+    #endregion
+
+    #region Go Off Aggro
+    protected bool isGoOffAggro = false;
+    public void GoOffAggro()
+    {
+        if (isGoOffAggro) return;
+        StartCoroutine(CGoOffAggro());
+    }
+
+    IEnumerator CGoOffAggro()
+    {
+        isGoOffAggro = true;
+        nav.SetDestination(SpawnPosition);
+        nav.stoppingDistance = 0;
+        while (true)
+        {
+            if (isGoOffAggro == false) yield break;
+            if (nav.remainingDistance < toOriginalStopDistance) break;
+            yield return new WaitForFixedUpdate();
+        }
+        nav.stoppingDistance = toPlayerStopDistance;
+        isGoOffAggro = false;
+    }
+    #endregion
+    
+    #region Recovery
     protected bool isRecovery = false;
     public virtual void Recovery(float _percent = 10f, float _time = 0.2f)
     {
@@ -105,6 +166,7 @@ public abstract class BaseMonster : BaseActor
     protected virtual IEnumerator CRecovery(float _percent, float _time)
     {
         float time = 0f;
+        isRecovery = true;
         while (true)
         {
             if (isRecovery == false) yield break;
@@ -120,22 +182,17 @@ public abstract class BaseMonster : BaseActor
     }
     #endregion
 
-    #region Abstract Method 
     /// <summary>
-    /// 몬스터에 맞는 BT 구조 생성하기
+    /// Must Override
     /// </summary>
-    protected abstract void CreateBTStates();
-
-    /// <summary>
-    /// 공격받은지 오래되거나 본래의 자리로 돌아갈 때 호출 : 자동 치유
-    /// </summary>
-  
-    #endregion
+    protected abstract void CreateStates();
 }
 
+#region Monster Lv, Type Class Data
 [Serializable]
 public class InitMonsterData
 {
     public TYPEIDS monsterType;
     public int monsterLevel;
 }
+#endregion
