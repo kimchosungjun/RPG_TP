@@ -14,6 +14,7 @@ public class LoginUICtrl : MonoBehaviour
     [SerializeField] LoginInputView inputView;
     [SerializeField] LoginFadeInView fadeInView;
 
+    public LoginLobbyView GetLoginLobbyView { get { return lobbyView; } }
     public LoginInputView GetLoginInputView { get { return inputView; }  }
     public LoginGateView GetLoginGateView { get { return gateView; } }
     private void Awake()

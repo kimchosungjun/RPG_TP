@@ -66,10 +66,8 @@ public class Virus : StandardMonster
         #region Second BT States : Check Far Combat Range
         // Level1
         ActionNode checkFarRange = new ActionNode(DoCheckFarAttackRange);
-        //ActionNode doMoveToPlayer = new ActionNode(DoMoveToTarget);
         List<Node> checkFarAttackRangeGroup = new List<Node>();
         checkFarAttackRangeGroup.Add(checkFarRange);
-        //checkFarAttackRangeGroup.Add(doMoveToPlayer);
         #endregion
 
         # region Third BT States : Check Far Attack Cool Time & Check Near Attack Range
@@ -233,8 +231,7 @@ public class Virus : StandardMonster
     {
         if (finder.DetectInSihgt(farCombatRange) == false)
         {
-            if(isBattle)
-                DoMoveToTarget();
+            DoMoveToTarget();
             return NODESTATES.FAIL;
         }
         return NODESTATES.SUCCESS;
@@ -363,7 +360,7 @@ public class Virus : StandardMonster
         // Base에서 Death 애니메이션과 Layer설정 변경함
         base.Death();
         isDeathState = true;
-        statusUI.gameObject.SetActive(false);
+        statusUI.DecideActiveState(false);
     }
 
     /// <summary>

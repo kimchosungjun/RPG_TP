@@ -48,7 +48,7 @@ public class SaveMgr : MonoBehaviour
     }
     #endregion
 
-    #region Data (Load & Clear)
+    #region Load Data (+ Check Join Lobby)
 
     /// <summary>
     /// Action : Open Door UI 
@@ -59,29 +59,54 @@ public class SaveMgr : MonoBehaviour
         if (IsExistDirectory())
         {
             // exist Save Data
-            saveData = reader.GetUserData(GetDirectoryPath());
+            StartCoroutine(CLoadExistData(_action));
         }
         else
         {
             // not exist Save Data
-            StartCoroutine(CCreateNewData());
+            StartCoroutine(CCreateNewData(_action));
         }
+    }
 
+    IEnumerator CLoadExistData(UnityAction _action)
+    {
+        // Load Save Data
+        saveData = reader.GetUserData(GetDirectoryPath());
+        yield return null;   
+        // Check Join Lobby 
+        while (true)
+        {
+            if (SharedMgr.PhotonMgr.CheckConnectLobby() == false)
+                yield return null;
+            else
+                break;
+        }
         if (_action != null) _action();
     }
 
-    IEnumerator CCreateNewData()
+    IEnumerator CCreateNewData(UnityAction _action)
     {
+        // Create Directory
         Directory.CreateDirectory(directoryPath);
         yield return null;
+        // Load & Create Save File
         saveData = reader.GetUserData();
         reader.SaveData(GetDirectoryPath(), saveData);
+        yield return null;
+        // Check Join Lobby 
+        while (true)
+        {
+            if (SharedMgr.PhotonMgr.CheckConnectLobby() == false)
+                yield return null;
+            else
+                break;
+        }
+        if (_action != null) _action();
     }
 
     #endregion
-    public void ClearUserData() { saveData = null; }
-
-    #region Save Data
+ 
+    #region Save & Clear 
     public void SaveUserData()  { StartCoroutine(CSaveUserData()); }
 
     IEnumerator CSaveUserData()
@@ -90,6 +115,8 @@ public class SaveMgr : MonoBehaviour
         yield return null;
         reader.SaveData(GetDirectoryPath(), saveData);
     }
+
+    public void ClearUserData() { saveData = null; }
     #endregion
 }
 

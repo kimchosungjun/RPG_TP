@@ -6,16 +6,25 @@ using UnityEngine.SceneManagement;
 
 public partial class SceneMgr : MonoBehaviour
 {
+    bool isPhotonScene = false;
     SCENES nextLoadScene = SCENES.LOADING;
     SCENES currentScene = SCENES.TITLE;
     AsyncOperation asyncOperation = null;
     public void Init() { SharedMgr.SceneMgr = this; }
 
-    public void LoadScene(SCENES _changeScene, bool _isLoading = false)
+    public bool IsLoginScene()
+    {
+        if (currentScene == SCENES.LOGIN)
+            return true;
+        return false;
+    }
+
+    public void LoadScene(SCENES _changeScene, bool _isLoading = false, bool _isPhotonScene = false)
     {
         if (currentScene == _changeScene)
             return;
 
+        isPhotonScene = _isPhotonScene;
         currentScene = _changeScene;
 
         int _loadSceneIndex = Enums.GetIntValue(currentScene);
@@ -32,6 +41,7 @@ public partial class SceneMgr : MonoBehaviour
             SceneManager.LoadScene((int) SCENES.LOADING);
         }
     }
+
 
     /// <summary>
     /// 로딩씬에 의해 호출

@@ -1773,6 +1773,7 @@ MonoBehaviour:
     monsterType: 3
     monsterLevel: 3
   statusUI: {fileID: 8076422825904239986}
+  isBattle: 0
   nearCombatRange: 2
   farCombatRange: 10
   finder: {fileID: 7516926096759921729}
@@ -2266,8 +2267,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
+      propertyPath: sightAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,
+        type: 3}
       propertyPath: sightRange
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8668999176913685889, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}

@@ -6,6 +6,7 @@ public class MgrCreator : MonoBehaviour
     [SerializeField] SceneMgr sceneMgr;
     [SerializeField] SoundMgr soundMgr;
     [SerializeField] SaveMgr saveMgr;
+    [SerializeField] PhotonMgr photonMgr;
     #endregion
     
     #region Use Heap Memory
@@ -39,6 +40,12 @@ public class MgrCreator : MonoBehaviour
             questMgr.Init();
             saveMgr.Init();
             cursorMgr.Init();
+            photonMgr.Init();
         }
+    }
+
+    private void Start()
+    {
+        photonMgr.Setup();
     }
 }
