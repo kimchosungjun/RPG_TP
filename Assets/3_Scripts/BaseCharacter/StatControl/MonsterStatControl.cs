@@ -20,7 +20,7 @@ public class MonsterStatControl : ActorStatControl
         float increaseHP = 0f;
         if (monsterStat.CurrentHP <=0) return; // Death State
         if (_isPercent)
-            increaseHP = monsterStat.MaxHP * _heal;
+            increaseHP = monsterStat.CurrentHP + monsterStat.MaxHP * _heal;
         else
             increaseHP = monsterStat.CurrentHP + _heal;
 
@@ -46,6 +46,7 @@ public class MonsterStatControl : ActorStatControl
         {
             monsterStat.CurrentHP = curHp;
         }
+        baseMonster.AnnounceStatusUI();
     }
 
     /// <summary>

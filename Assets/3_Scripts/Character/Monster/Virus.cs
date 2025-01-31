@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using EffectEnums;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEditor;
-using UnityEngine.UIElements;
 
 public class Virus : StandardMonster
 {
@@ -14,9 +11,8 @@ public class Virus : StandardMonster
     [SerializeField] float farCombatRange;
     [SerializeField] MonsterFinder finder;
 
-    float maintainIdleTime = 5f; 
+    float maintainIdleTime = 5f;
     bool isDoIdle = false;
-    bool isDeathState = false; 
     bool isDoHitEffect = false; // 그로기.. 등 조작 불능 상태인 경우 넉백같은 효과가 작동하지 않도록 방지하는 변수
     bool isDoAnimation = false; // 피격, 공격.. 등 특정 행동 애니메이션 도중에는 작동하지 않도록 방지하는 변수
     bool isDoMoveNearPlayer = false;
@@ -33,6 +29,7 @@ public class Virus : StandardMonster
     {
         base.Awake();
         if (anim == null) anim = GetComponent<Animator>();
+        if (finder == null) finder = GetComponentInChildren<MonsterFinder>();
     }
     #endregion
 
@@ -43,6 +40,7 @@ public class Virus : StandardMonster
         nav.speed = monsterStat.Speed;
         spread.SetData(monsterStat);
         rush.SetData(monsterStat);
+        finder?.ChangeDetectLayer(UtilEnums.LAYERS.PLAYER);
     }
 
     protected override void CreateStates()
@@ -68,17 +66,17 @@ public class Virus : StandardMonster
         #region Second BT States : Check Far Combat Range
         // Level1
         ActionNode checkFarRange = new ActionNode(DoCheckFarAttackRange);
-        ActionNode doMoveToPlayer = new ActionNode(DoMoveToTarget);
+        //ActionNode doMoveToPlayer = new ActionNode(DoMoveToTarget);
         List<Node> checkFarAttackRangeGroup = new List<Node>();
         checkFarAttackRangeGroup.Add(checkFarRange);
-        checkFarAttackRangeGroup.Add(doMoveToPlayer);
+        //checkFarAttackRangeGroup.Add(doMoveToPlayer);
         #endregion
 
         # region Third BT States : Check Far Attack Cool Time & Check Near Attack Range
         List<Node> checkFarAttackCoolTimeGroup = new List<Node>();
         ActionNode checkFarAttackCoolTime = new ActionNode(DoCheckCanFarAttack);
         ActionNode checkNearAttackRange = new ActionNode(DoCheckNearAttackRange);
-        
+
         checkFarAttackCoolTimeGroup.Add(checkFarAttackCoolTime);
         checkFarAttackCoolTimeGroup.Add(checkNearAttackRange);
         #endregion
@@ -97,7 +95,7 @@ public class Virus : StandardMonster
         Selector doCheckFarAttackRangeSelector = new Selector(checkFarAttackRangeGroup); // 두번째 행동 갈래의 집합
         Sequence doCheckFarAttackCoolTimeSequence = new Sequence(checkFarAttackCoolTimeGroup); // 세번째 행동 갈래의 집합
         Sequence doNearAttackCoolTimeSequence = new Sequence(checkNearCoolTimeGroup); // 네번째 행동 갈래의 집합 : 마지막
-        
+
         List<Node> virusBTGroup = new List<Node>();
         virusBTGroup.Add(checkDoAnimation);
         virusBTGroup.Add(checkGoOutOfBounds);
@@ -125,17 +123,43 @@ public class Virus : StandardMonster
     // Comon Method 
     NODESTATES DoMoveToTarget()
     {
+        bool continueMove = false;
+        if (isDoMoveNearPlayer)
+        {
+            if (spread.GetCoolDown || rush.GetCoolDown)
+                continueMove = true;
+
+            if (continueMove == false)
+            {
+                DoMoveBack();
+                return NODESTATES.FAIL;
+            }
+
+            nav.speed = monsterStat.Speed;
+            nav.updateRotation = true;
+            isDoMoveNearPlayer = false;
+        }
+
         if (finder.GetDistance() < 2f)
         {
             ChangeAnimation(STATES.IDLE);
+            Vector3 direction = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position - this.transform.position;
+            direction.y = 0;
+            direction = direction.normalized;
+            Quaternion.LookRotation(direction);
+
+            if (nav.updateRotation)
+                nav.updateRotation = false;
             nav.SetDestination(this.transform.position);
         }
         else
         {
+            if (nav.updateRotation == false)
+                nav.updateRotation = true;
             ChangeAnimation(STATES.MOVE);
             nav.SetDestination(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
         }
-        return NODESTATES.FAIL; 
+        return NODESTATES.FAIL;
     }
 
     #region Behaviours : Method
@@ -143,23 +167,20 @@ public class Virus : StandardMonster
     #region First BT : Idle
     NODESTATES DoAnimation()
     {
-        if (isDoAnimation) return NODESTATES.FAIL;
+        if (isDeathState) return NODESTATES.FAIL;
 
-        if (isDoMoveNearPlayer)
-        {
-            nav.speed = monsterStat.Speed;
-            nav.updatePosition = true;
-            isDoMoveNearPlayer = false;
-        }
+        if (isDoAnimation) return NODESTATES.FAIL;
 
         return NODESTATES.SUCCESS;
     }
 
     NODESTATES DoCheckGoOutOfBounds()
     {
-        if(Vector3.Distance(transform.position, FieldCenterPosition) > MonsterArea.GetRadius - 0.5f)
+        if (IsInMonsterArea == false || (Vector3.Distance(transform.position, FieldCenterPosition) > MonsterArea.GetRadius - 0.5f) )
         {
             ReturnToSpawnPosition();
+            if (isBattle)
+                isBattle = false;
             return NODESTATES.FAIL;
         }
         EscapeReturnToSpawnPosition();
@@ -168,7 +189,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoDetectPlayer()
     {
-        if (finder.IsDetect())
+        if (finder.IsDetect() || isBattle)
             return NODESTATES.SUCCESS;
         return NODESTATES.FAIL;
     }
@@ -177,7 +198,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoOnGuard()
     {
-        if(isDoIdle)
+        if (isDoIdle || isDeathState)
             return NODESTATES.FAIL;
 
         StartCoroutine(CDoIdle());
@@ -196,7 +217,7 @@ public class Virus : StandardMonster
         ChangeAnimation(STATES.IDLE);
         return NODESTATES.FAIL;
     }
-    
+
     IEnumerator CDoIdle()
     {
         isDoIdle = true;
@@ -207,7 +228,18 @@ public class Virus : StandardMonster
     #endregion
 
     #region Second BT : Check Distance & Move
-    NODESTATES DoCheckFarAttackRange()  { return (farCombatRange < finder.GetDistance()) ? NODESTATES.FAIL : NODESTATES.SUCCESS; }
+
+    NODESTATES DoCheckFarAttackRange()
+    {
+        if (finder.DetectInSihgt(farCombatRange) == false)
+        {
+            if(isBattle)
+                DoMoveToTarget();
+            return NODESTATES.FAIL;
+        }
+        return NODESTATES.SUCCESS;
+    }
+
     #endregion
 
     #region Third BT : Far Attack
@@ -224,7 +256,7 @@ public class Virus : StandardMonster
     }
     NODESTATES DoCheckNearAttackRange()
     {
-        if (nearCombatRange < finder.GetDistance())
+        if (finder.DetectInSihgt(nearCombatRange) == false)
         {
             DoMoveToTarget();
             return NODESTATES.FAIL;
@@ -232,8 +264,10 @@ public class Virus : StandardMonster
         return NODESTATES.SUCCESS;
     }
     public void DoSpread() { spread.Spread(); }
-    public void StopSpread() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
-    
+    public void StopSpread()
+    {
+        anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+
     #endregion
 
     #region Forth BT : Near Attack & Round Player
@@ -243,7 +277,7 @@ public class Virus : StandardMonster
         {
             transform.LookAt(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
             isDoAnimation = true;
-            anim.SetInteger("Attack",0);
+            anim.SetInteger("Attack", 0);
             anim.SetInteger("MState", (int)STATES.ATTACK);
             return NODESTATES.FAIL;
         }
@@ -254,23 +288,28 @@ public class Virus : StandardMonster
     {
         if (isDoMoveNearPlayer == false)
         {
-            nav.speed = 0.5f;
-            nav.updateRotation= false;
+            nav.speed = 0.25f;
+            nav.updateRotation = false;
             isDoMoveNearPlayer = true;
+            nav.stoppingDistance = 0f;
         }
 
+        DoMoveBack();
+        return NODESTATES.SUCCESS;
+    }
+
+    public void DoMoveBack()
+    {
         Vector3 direction = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position - transform.position;
         direction.y = 0;
-        direction = direction.normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime);
-        
-        if(Vector3.Distance((transform.position - direction), FieldCenterPosition) < MonsterArea.GetRadius - 0.6f )
+        direction = direction.normalized * 1.5f;
+
+        if (Vector3.Distance((transform.position - direction), FieldCenterPosition) < MonsterArea.GetRadius - 0.6f)
             nav.SetDestination(transform.position - direction);
         else
             nav.ResetPath();
-
-        return NODESTATES.SUCCESS;
     }
 
     public void DoRush() { rush.StartRush(); }
@@ -284,6 +323,8 @@ public class Virus : StandardMonster
     {
         if (isDeathState) return;
         rush.StopRush();
+
+        if (isDoHitEffect == false) nav.ResetPath();
         switch (_attackData.GetHitEffect)
         {
             case HIT_EFFECTS.STUN:
@@ -293,6 +334,7 @@ public class Virus : StandardMonster
             default:
                 if (isDoHitEffect)
                     return;
+                isDoHitEffect = true;
                 anim.SetInteger("MState", (int)STATES.HIT);
                 break;
         }
@@ -303,7 +345,9 @@ public class Virus : StandardMonster
         isDoAnimation = true;
         isDoHitEffect = true;
         yield return new WaitForSeconds(_effectTime);
+        ChangeAnimation(STATES.IDLE);
         isDoHitEffect = false;
+        isDoAnimation = false;
     }
 
     public void EscapeHitState()
@@ -311,7 +355,7 @@ public class Virus : StandardMonster
         if (isDeathState) return;
         isDoAnimation = false;
         isDoHitEffect = false;
-        anim.SetInteger("MState", (int)STATES.IDLE);
+        ChangeAnimation(STATES.IDLE);
     }
 
     public override void Death()
@@ -325,7 +369,7 @@ public class Virus : StandardMonster
     /// <summary>
     /// 공격, 피격 .. 등 애니메이션 끝날 때 호출
     /// </summary>
-    public void EscapeDoAnimation()  { isDoAnimation = false; }
+    public void EscapeDoAnimation() { isDoAnimation = false; }
 
     public void ChangeAnimation(STATES _animState)
     {
@@ -335,5 +379,23 @@ public class Virus : StandardMonster
             return;
         anim.SetInteger("MState", changeAnimState);
     }
+
     #endregion
+
+    public override void Revival()
+    {
+        base.Revival();
+        nav.speed = monsterStat.Speed;
+        isBattle = false;
+        isDoIdle = false;
+        isDoHitEffect = false;
+        isDoAnimation = false;
+        isDoMoveNearPlayer = false;
+    }
+
+    public override void ApplyStatTakeDamage(TransferAttackData _attackData)
+    {
+        base.ApplyStatTakeDamage(_attackData);
+        EscapeReturnToSpawnPosition();
+    }
 }

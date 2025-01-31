@@ -5,6 +5,7 @@ using PlayerEnums;
 
 public class MageMovementControl : PlayerMovementControl
 {
+    [SerializeField] MageActionControl mageActionControl;
     bool canPlayerCtrl = true;
     public bool CanPlayerCtrl { get { return canPlayerCtrl; } }
 
@@ -57,4 +58,9 @@ public class MageMovementControl : PlayerMovementControl
         stateMachine.FixedExecute();
     }
     #endregion
+
+    public override void DoEscapeAttackState()
+    {
+        mageActionControl?.EscapeAttackState();
+    }
 }

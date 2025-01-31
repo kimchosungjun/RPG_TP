@@ -3269,7 +3269,7 @@ Transform:
   - {fileID: 1837770752144634194}
   - {fileID: 5545221018146716849}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6406824297650797864
 Animator:
@@ -3445,7 +3445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!1 &3269482740535663461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4036,6 +4035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 1937848089603593266}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &3956964017497624783
 GameObject:
   m_ObjectHideFlags: 0
@@ -10288,6 +10288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4196104190183110863, guid: 4137bf4f78f5141428cdbe09b6394f96,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196104190183110863, guid: 4137bf4f78f5141428cdbe09b6394f96,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -10356,6 +10361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NormalAttack_First
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670122044626269067, guid: 079f853abc24c314aaa0555fd61479de,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3670122044626269067, guid: 079f853abc24c314aaa0555fd61479de,
         type: 3}
@@ -10540,6 +10550,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4196104190183110863, guid: 4137bf4f78f5141428cdbe09b6394f96,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196104190183110863, guid: 4137bf4f78f5141428cdbe09b6394f96,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -10663,6 +10678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NormalAttack_Second
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171179391747637083, guid: 318f3815b47bccb4d9f7d4041346da4e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4171179391747637083, guid: 318f3815b47bccb4d9f7d4041346da4e,
         type: 3}

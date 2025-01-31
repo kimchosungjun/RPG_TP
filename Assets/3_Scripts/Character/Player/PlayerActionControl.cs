@@ -12,4 +12,6 @@ public abstract class PlayerActionControl : MonoBehaviour
     /// 공격, 버프에 사용할 플레이어 스탯 데이터가 필요
     /// </summary>
     public abstract void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl);
+
+    public abstract void EscapeAttackState();
 }

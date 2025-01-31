@@ -112,6 +112,11 @@ public class WarriorMovementControl : PlayerMovementControl
     {
         canPlayerCtrl = _isMoveLock;
     }
+
+    public override void DoEscapeAttackState()
+    {
+        warriorActionControl.EscapeAttackState();
+    }
 }
 
 

@@ -73,4 +73,9 @@ public class EliteMonsterStatusUI : StatusUI
         statusImages[5].sprite = resource.GetSpriteAtlas("Bar_Atlas", "Loading_Bar");
     }
     #endregion
+
+    public override void UpdateStatusData()
+    {
+
+    }
 }

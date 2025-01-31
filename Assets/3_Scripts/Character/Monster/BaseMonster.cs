@@ -19,9 +19,10 @@ public abstract class BaseMonster : BaseActor
     [SerializeField] protected MonsterFinder monsterFinder; 
     protected float toOriginalStopDistance = 0.5f;
     protected float toPlayerStopDistance = 1f;
-    protected MonsterStat monsterStat;
+    [SerializeField] protected MonsterStat monsterStat;
     public Animator GetAnim { get { return anim; } }    
     public MonsterStat GetMonsterStat { get { return monsterStat; } }
+    protected bool isDeathState = false;
     #endregion
 
     #region Value : Notice (Area)
@@ -44,6 +45,14 @@ public abstract class BaseMonster : BaseActor
         FieldCenterPosition = _fieldPos;
     }
 
+    public void RespawnBattleFieldData(bool _isInArea)
+    {
+        IsInMonsterArea = _isInArea;
+        if(_isInArea)
+            AnnounceInMonsterArea();
+        Revival();
+    }
+
     #endregion
 
     #region Value : Monster Information
@@ -57,6 +66,11 @@ public abstract class BaseMonster : BaseActor
     /******************************************/
 
     #region Override : Set Layer & Take Damage
+    public override void SetDefaultLayerType()
+    {
+        this.gameObject.layer = (int)UtilEnums.LAYERS.MONSTER;
+    }
+
     public override void SetCharacterType()
     {
         intLayer = (int)UtilEnums.LAYERS.MONSTER;
@@ -114,12 +128,14 @@ public abstract class BaseMonster : BaseActor
     public virtual void AnnounceInMonsterArea() { IsInMonsterArea = true; } 
     public virtual void AnnounceOutMonsterArea() { IsInMonsterArea = false; ReturnToSpawnPosition(); }
     public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); } // 애니메이션 설정하기
-    public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject); this.gameObject.SetActive(false); } // 스탯 원래대로 만들기 추가 
+    public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject);  } // 스탯 원래대로 만들기 추가 
     #endregion
 
     #region Return To Spawn Position
     public virtual void ReturnToSpawnPosition()
     {
+        if (this.gameObject.activeSelf == false) return;
+
         GoOffAggro();
         Recovery();
     }
@@ -188,6 +204,17 @@ public abstract class BaseMonster : BaseActor
     /// Must Override
     /// </summary>
     protected abstract void CreateStates();
+
+    #region Must Override Methods
+
+    public abstract void AnnounceStatusUI();
+    public virtual void Revival() 
+    {
+        isDeathState = false;
+        SetDefaultLayerType();
+    }
+
+    #endregion
 }
 
 #region Monster Lv, Type Class Data

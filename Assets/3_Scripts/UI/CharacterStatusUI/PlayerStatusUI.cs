@@ -69,12 +69,12 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
 
     #region Update UI
 
-    public void UpdateData(UIEnums.STATUS _updateStatusType)
+    public void UpdateData(STATUS _updateStatusType)
     {
         switch (_updateStatusType)
         {
             case STATUS.HP:
-                UpdateHP();
+                UpdateStatusData();
                 break;
             case STATUS.EXP:
                 UpdateExp();
@@ -86,13 +86,13 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     }
 
     bool updateHp = false;
-    public void UpdateHP()
+    public override void UpdateStatusData()
     {
         hpTarget = stat.GetSaveStat.currentHP;
-        hpText.text = hpTarget + "/" + stat.MaxHP;  
+        hpText.text = hpTarget + "/" + stat.MaxHP;
         if (updateHp == false)
         {
-            updateHp = true;    
+            updateHp = true;
             StartCoroutine(CUpdateHP());
         }
     }
@@ -175,5 +175,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
         expImages[1].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
         expImages[2].sprite = resource.GetSpriteAtlas("Bar_Atlas", "XP_Line");
     }
+
+
     #endregion
 }

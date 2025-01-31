@@ -50,6 +50,11 @@ public class BasePlayer : BaseActor
     /***************************************/
 
     #region Override  
+    public override void SetDefaultLayerType()
+    {
+        this.gameObject.layer = (int)UtilEnums.LAYERS.PLAYER;
+    }
+
     public override void SetCharacterType()
     {
         intLayer = (int)UtilEnums.LAYERS.MONSTER;

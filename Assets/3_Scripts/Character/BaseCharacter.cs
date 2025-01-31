@@ -27,5 +27,6 @@ public abstract class BaseCharacter : MonoBehaviour
     /// </summary>
     public abstract void SetCharacterType();
     public virtual void SetNoneInteractionType() { this.gameObject.layer = noneInteractionLayer; }
+    public abstract void SetDefaultLayerType();
     #endregion 
 }

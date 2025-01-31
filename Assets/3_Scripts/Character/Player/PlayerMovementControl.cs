@@ -489,5 +489,6 @@ public abstract class PlayerMovementControl : MonoBehaviour
     public void SkillCooling() { ChangeState(STATES.MOVEMENT); SetActionCooling(); }
     public void UltimateSkillCooling() { ChangeState(STATES.MOVEMENT); SetActionCooling(); }
     public virtual void Death() { ChangeState(STATES.DEATH); }
+    public virtual void DoEscapeAttackState() { }
     #endregion
 }

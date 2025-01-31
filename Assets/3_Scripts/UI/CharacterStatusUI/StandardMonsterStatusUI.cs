@@ -13,7 +13,7 @@ public class StandardMonsterStatusUI : StatusUI
     [SerializeField] protected Transform followTransform = null;
     [SerializeField] Image[] hpImages;
     [SerializeField] Image[] effectImages;
-    [SerializeField] float effectSpeed = 3f;
+    protected float effectSpeed = 0.2f;
     protected Transform camTransform = null;
     protected MonsterStat monsterStat = null;
     
@@ -70,7 +70,7 @@ public class StandardMonsterStatusUI : StatusUI
         isActive = _isActive;
 
         if (isActive)
-            UpdateHP();
+            UpdateStatusData();
     }
 
     /******************************************/
@@ -90,9 +90,10 @@ public class StandardMonsterStatusUI : StatusUI
             effectImages[0].fillAmount -= Time.fixedDeltaTime * effectSpeed;
     }
 
-    public void UpdateHP()
+    public override void UpdateStatusData()
     {
-        hpImages[0].fillAmount =  monsterStat.CurrentHP / monsterStat.MaxHP;
+        hpImages[0].fillAmount =(float)monsterStat.CurrentHP / monsterStat.MaxHP;
     }
+
     #endregion
 }

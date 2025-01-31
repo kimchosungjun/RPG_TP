@@ -61,5 +61,6 @@ public class ArcherMovementControl : PlayerMovementControl
     }
     #endregion
 
+    public override void DoEscapeAttackState() {  }
     #endregion
 }

@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class EliteMonster : BaseMonster
 {
+
     [SerializeField] protected EliteMonsterStatusUI statusUI = null;
     protected EliteGauge eliteGauge = new EliteGauge();
+
+    public override void AnnounceStatusUI()
+    {
+        statusUI.UpdateStatusData();
+    }
+
     protected override void CreateStates() {  }
 
     public class EliteGauge

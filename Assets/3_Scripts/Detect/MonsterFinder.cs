@@ -31,11 +31,34 @@ public class MonsterFinder : Finder
                 isInSight = false;
         }
     }
+
+    public bool DetectInSihgt(float _range)
+    {
+        {
+            if (GetDistance() > _range)
+                return false;
+
+            Collider[] colls = Physics.OverlapSphere(transform.position, _range, findLayerMask);
+            int cnt = colls.Length;
+            if (cnt == 0)
+                return false;
+            else
+            {
+                Vector3 direction = colls[0].transform.position - transform.position;
+                direction.y = 0;
+                float angle = Vector3.Angle(transform.forward, direction);
+
+                if (Mathf.Abs(angle) <= sightAngle)
+                    return true;
+                else
+                    return false;
+            }
+        }
+    }
     #endregion
 
     #region Detect
 
     public bool IsDetect() { return (GetDistance() < sightRange) ? true : false; }
     #endregion
-
 }

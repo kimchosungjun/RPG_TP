@@ -111,9 +111,13 @@ public class PlayerGroundMoveState : PlayerOnGroundState
 
     public void CheckTransitionFallState()
     {
+        float yVelocity = rigid.velocity.y;
         if(characterControl.IsOnGround == false)
         {
-            if (rigid.velocity.y < -0.1f)
+            if (Mathf.Abs(yVelocity) < 0.2f)
+                return;
+
+            if (rigid.velocity.y < -0.2f)
                 characterControl.ChangeState(STATES.FALL);
             else
                 characterControl.ChangeState(STATES.JUMP);

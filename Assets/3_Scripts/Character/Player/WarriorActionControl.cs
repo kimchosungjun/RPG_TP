@@ -89,6 +89,15 @@ public class WarriorActionControl : PlayerActionControl
     #endregion
 
     #region Common Animation Exit
+    public override void EscapeAttackState()
+    {
+        int cnt = normalAttacks.Length;
+        for(int i=0; i<cnt; i++)
+        {
+            normalAttacks[i].StopAttack();
+        }
+    }
+
     public void AnimAttackCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.AttackCooling(); }
     public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.SkillCooling(); }
     public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.UltimateSkillCooling(); }

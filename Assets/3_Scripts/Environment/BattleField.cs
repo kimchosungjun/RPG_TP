@@ -89,7 +89,7 @@ public class BattleField : MonoBehaviour
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == playerLayer)
+       if (other.gameObject.layer == playerLayer)
         {
             int monsterCnt = spawnMonsters.Length;
             for (int i = 0; i < monsterCnt; i++)
@@ -110,12 +110,18 @@ public class BattleField : MonoBehaviour
 
         if (_monster.gameObject.activeSelf == false)
             _monster.gameObject.SetActive(true);
+
+        Collider[] colls = Physics.OverlapSphere(transform.position, radius, 1 << (int)LAYERS.PLAYER);
+        if (colls.Length == 0)
+            _monster.RespawnBattleFieldData(false);
+        else
+            _monster.RespawnBattleFieldData(true);
     }
 
     public virtual void RespawnMonster(BaseMonster _monster)
     {
-        SpawnMonster(_monster);
         _monster.GetMonsterStatControl.ResetStat();
+        SpawnMonster(_monster);
     }
 
     public virtual void DeathMonster(GameObject _baseMonsterObject)

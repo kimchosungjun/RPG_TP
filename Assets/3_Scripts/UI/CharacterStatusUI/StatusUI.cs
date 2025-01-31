@@ -17,6 +17,8 @@ public abstract class StatusUI : MonoBehaviour
 
     // Call : Awake
     public abstract void Init();
+
+    public abstract void UpdateStatusData();
 }
 
 

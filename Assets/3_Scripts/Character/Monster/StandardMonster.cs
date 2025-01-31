@@ -5,6 +5,8 @@ public class StandardMonster : BaseMonster
 {
     [Header("Status UI : Must Link"),SerializeField] protected StandardMonsterStatusUI statusUI = null;
 
+    [SerializeField] protected bool isBattle = false;
+
     #region Override Life Cycle
     protected override void Awake()
     {
@@ -22,6 +24,20 @@ public class StandardMonster : BaseMonster
     #endregion
 
     #region Battle Field
+    public override bool CanTakeDamageState()
+    {
+        if (IsInMonsterArea == false) return false;
+        return true;
+    }
+
+    public override void ApplyStatTakeDamage(TransferAttackData _attackData) 
+    {
+        base.ApplyStatTakeDamage(_attackData);
+        if (isBattle == false)
+            isBattle = true;
+
+    }
+
     public override void AnnounceInMonsterArea()
     {
         base.AnnounceInMonsterArea();
@@ -37,4 +53,9 @@ public class StandardMonster : BaseMonster
     #endregion
 
     protected override void CreateStates() { }
+
+    public override void AnnounceStatusUI()
+    {
+        statusUI.UpdateStatusData();
+    }
 }
