@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3747466993840392999}
   - component: {fileID: 7527576567449981817}
   - component: {fileID: 93971740488623583}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ARCHER_NORMAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

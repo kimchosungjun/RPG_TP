@@ -4,14 +4,15 @@ using UnityEngine;
 using UtilEnums;
 public class BattleField : MonoBehaviour
 {
-    [SerializeField] BaseMonster[] spawnMonsters;
-    [SerializeField] Transform[] monsterSpawnTransforms;
-  
-    List<RespawnChecker> respawnMonsters = new List<RespawnChecker>();
-    int playerLayer = (int) LAYERS.PLAYER;
-    bool isWaitRespawn = false;
+    [SerializeField] protected BaseMonster[] spawnMonsters;
+    [SerializeField] protected Transform[] monsterSpawnTransforms;
+    [SerializeField] protected float radius;
+    protected List<RespawnChecker> respawnMonsters = new List<RespawnChecker>();
+    protected int playerLayer = (int) LAYERS.PLAYER;
+    protected bool isWaitRespawn = false;
+    public float GetRadius { get { return radius; } protected set { radius = value; } }
 
-    class RespawnChecker
+    protected class RespawnChecker
     {
         float respawnTime;
         float currentTime;
@@ -103,12 +104,12 @@ public class BattleField : MonoBehaviour
 
     public virtual void SpawnMonster(BaseMonster _monster)
     {
-        if (_monster.gameObject.activeSelf==false)
-            _monster.gameObject.SetActive(true);
-
         int index = _monster.BattleFieldSpawnIndex;
         _monster.transform.position = monsterSpawnTransforms[index].position;
         _monster.transform.rotation= monsterSpawnTransforms[index].rotation;
+
+        if (_monster.gameObject.activeSelf == false)
+            _monster.gameObject.SetActive(true);
     }
 
     public virtual void RespawnMonster(BaseMonster _monster)

@@ -34099,7 +34099,7 @@ GameObject:
   - component: {fileID: 3104886526567336994}
   - component: {fileID: 1906829166599420483}
   - component: {fileID: 6595010433796172024}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EXPLOSION
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39040,6 +39040,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLayer: 7
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   overlapRange: 5
 --- !u!114 &6595010433796172024
 MonoBehaviour:

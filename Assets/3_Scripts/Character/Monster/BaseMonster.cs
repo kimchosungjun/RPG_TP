@@ -126,6 +126,8 @@ public abstract class BaseMonster : BaseActor
 
     public virtual void EscapeReturnToSpawnPosition()
     {
+        if (isGoOffAggro == false || isRecovery == false) return;
+
         isGoOffAggro = false;
         isRecovery = false;
         nav.stoppingDistance = toPlayerStopDistance;

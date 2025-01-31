@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2486570264549061818}
   - component: {fileID: 8097680935825516650}
   - component: {fileID: -6712319981089397516}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MAGICIAN_METEOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}

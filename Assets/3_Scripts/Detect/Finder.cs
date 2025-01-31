@@ -29,6 +29,7 @@ public abstract class Finder : MonoBehaviour
     }
 
     public void ChangeRange(float _range) { sightRange = _range; }   
+    public void DecreaseRange(float _percent) { sightRange *= _percent; }
 
     public virtual void SetDetect(float _sightRange, float _sightAngle, UtilEnums.LAYERS _layer)
     {
@@ -38,7 +39,4 @@ public abstract class Finder : MonoBehaviour
     }
 
     public abstract void DetectInSight();
-
-    protected abstract void OnTriggerEnter(Collider other);
-    protected abstract void OnTriggerExit(Collider other);
 }

@@ -14,6 +14,8 @@ public class MonsterFinder : Finder
     public bool IsInSight() { return isInSight; }
     public override void DetectInSight()
     {
+        if(GetDistance()>sightRange) { isInSight = false; return; }
+
         Collider[] colls = Physics.OverlapSphere(transform.position, sightRange, findLayerMask);
         int cnt = colls.Length;
         if (cnt == 0) isInSight = false;
@@ -32,20 +34,8 @@ public class MonsterFinder : Finder
     #endregion
 
     #region Detect
- 
-    public bool IsDetect() { return isDetect; }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == findLayer)
-            isDetect = true;
-    }
-
-    protected override void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == findLayer)
-            isDetect = false;
-    }
+    public bool IsDetect() { return (GetDistance() < sightRange) ? true : false; }
     #endregion
 
 }

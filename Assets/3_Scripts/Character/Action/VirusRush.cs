@@ -7,7 +7,6 @@ public class VirusRush : MonoBehaviour
     [SerializeField] MonsterAttackActionData attackActionData = new MonsterAttackActionData();
     [SerializeField] MonsterConditionActionData conditionActionData = new MonsterConditionActionData();
     [SerializeField] TriggerAttackAction nearAttack = null;
-    public float coolTime = 0; 
     [SerializeField] protected bool isCoolDown = true;
     public bool GetCoolDown { get { return isCoolDown; } }
 
@@ -25,7 +24,7 @@ public class VirusRush : MonoBehaviour
 
     public void StartRush()
     {
-        StartCoroutine(CStartCoolDown(2f));
+        StartCoroutine(CStartCoolDown(attackActionData.GetCoolTime));
         // 전달할 데이터 가공 후, 전달
         TransferAttackData attackData = new TransferAttackData();
         attackData = new TransferAttackData();
@@ -49,4 +48,5 @@ public class VirusRush : MonoBehaviour
     {
         isCoolDown = true;
     }
+
 }

@@ -38,8 +38,8 @@ public class VirusSpread : MonoBehaviour
             HitTriggerProjectile projectile = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.VIRUS_SPREAD).GetComponent<HitTriggerProjectile>();
             spredAttacks[i].SetTransferData(attackData, conditionData, projectile);
         }
-       
     }
+
     IEnumerator CStartCoolDown(float _coolTime)
     {
         isCoolDown = false;

@@ -29430,7 +29430,7 @@ GameObject:
   - component: {fileID: 7535726044466033455}
   - component: {fileID: 3082158887518206904}
   - component: {fileID: 5940798454274527100}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WARRIOR_SLASH
   m_TagString: Untagged
   m_Icon: {fileID: 0}

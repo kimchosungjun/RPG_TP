@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 6749429408952070690}
   - component: {fileID: 3873396138322769783}
   - component: {fileID: 4719264443289540815}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Field_Virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,6 +319,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  radius: 0
 --- !u!136 &4719264443289540815
 CapsuleCollider:
   m_ObjectHideFlags: 0

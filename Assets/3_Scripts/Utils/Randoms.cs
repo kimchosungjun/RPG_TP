@@ -15,4 +15,19 @@ public class Randoms
         float randFloat = Random.value;
         return (randFloat <= _criticalPercent) ? 1.5f : 1f;
     }
+
+    public static float GetCritical(float _criticalPercent, ref bool _isCritical)
+    {
+        float randFloat = Random.value;
+        if(randFloat <= _criticalPercent)
+        {
+            _isCritical = true;
+            return 1.5f;
+        }
+        else
+        {
+            _isCritical = false;
+            return 1f;
+        }
+    }
 }
