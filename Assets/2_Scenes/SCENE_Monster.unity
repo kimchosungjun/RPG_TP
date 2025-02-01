@@ -640,6 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 111610475}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &118980831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 225540798}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &227448085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,7 +1716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32fe9e862f7734428afbba1e3fc51eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effect: 1
   isLockPlayerControl: 0
   players:
   - {fileID: 5866666020441516156}
@@ -1735,7 +1736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6fcb2a85271684b97e34f63e726d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
   playerCtrl: {fileID: 241610177}
 --- !u!1 &244185379
 GameObject:
@@ -1814,6 +1814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 253279783}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &260337524
 GameObject:
   m_ObjectHideFlags: 0
@@ -2452,6 +2453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 328993478}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &330072953
 GameObject:
   m_ObjectHideFlags: 0
@@ -5025,6 +5027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 699382647}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &707050238
 GameObject:
   m_ObjectHideFlags: 0
@@ -5766,19 +5769,8 @@ MonoBehaviour:
   - {fileID: 1001206454}
   - {fileID: 1196106868}
   - {fileID: 1777762030}
-  pathNodes:
-  - nodePosition: {x: 1, y: 0, z: 0}
-  - nodePosition: {x: 1, y: 0, z: 1}
-  - nodePosition: {x: 2, y: 0, z: 0}
-  - nodePosition: {x: 2, y: 0, z: 1}
-  - nodePosition: {x: 2, y: 0, z: 2}
-  - nodePosition: {x: -1, y: 0, z: 0}
-  - nodePosition: {x: -1, y: 0, z: 1}
-  - nodePosition: {x: -1, y: 0, z: 2}
-  - nodePosition: {x: -2, y: 0, z: 0}
-  - nodePosition: {x: -2, y: 0, z: 1}
-  - nodePosition: {x: -2, y: 0, z: 2}
-  respawnTime: 0
+  monsterSpawnTransforms: []
+  radius: 0
 --- !u!135 &783838981
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6663,6 +6655,7 @@ MonoBehaviour:
   playerCtrl: {fileID: 241610177}
   playerStatCtrl: {fileID: 919375370}
   cameraCtrl: {fileID: 7110839287028166752}
+  zoneCtrl: {fileID: 0}
 --- !u!4 &919375369
 Transform:
   m_ObjectHideFlags: 0
@@ -7279,10 +7272,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   monsterStatControl: {fileID: 0}
+  nav: {fileID: 0}
+  monsterFinder: {fileID: 0}
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    ID: 0
+    level: 0
+    currentHP: 0
+    boostSpeed: 0
+    attackValue: 0
+    criticalValue: 0
   initMonsterData:
     monsterType: 0
     monsterLevel: 0
   statusUI: {fileID: 0}
+  isBattle: 0
   pathWays: []
   moveSpeed: 3
 --- !u!114 &1001206455
@@ -7297,7 +7304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!1 &1002235388
 GameObject:
   m_ObjectHideFlags: 0
@@ -8908,10 +8914,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   monsterStatControl: {fileID: 0}
+  nav: {fileID: 0}
+  monsterFinder: {fileID: 0}
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    ID: 0
+    level: 0
+    currentHP: 0
+    boostSpeed: 0
+    attackValue: 0
+    criticalValue: 0
   initMonsterData:
     monsterType: 0
     monsterLevel: 0
   statusUI: {fileID: 0}
+  isBattle: 0
   pathWays: []
   moveSpeed: 3
 --- !u!114 &1196106869
@@ -8926,7 +8946,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!1001 &1196556363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9587,6 +9606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 1275362583}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &1275400750
 GameObject:
   m_ObjectHideFlags: 0
@@ -10349,6 +10369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 0}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &1407317235
 GameObject:
   m_ObjectHideFlags: 0
@@ -11666,19 +11687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMonsters:
   - {fileID: 6888474215405526472}
-  pathNodes:
-  - nodePosition: {x: 1, y: 0, z: 0}
-  - nodePosition: {x: 1, y: 0, z: 1}
-  - nodePosition: {x: 2, y: 0, z: 0}
-  - nodePosition: {x: 2, y: 0, z: 1}
-  - nodePosition: {x: 2, y: 0, z: 2}
-  - nodePosition: {x: -1, y: 0, z: 0}
-  - nodePosition: {x: -1, y: 0, z: 1}
-  - nodePosition: {x: -1, y: 0, z: 2}
-  - nodePosition: {x: -2, y: 0, z: 0}
-  - nodePosition: {x: -2, y: 0, z: 1}
-  - nodePosition: {x: -2, y: 0, z: 2}
-  respawnTime: 0
+  monsterSpawnTransforms: []
+  radius: 0
 --- !u!135 &1538007429
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13930,10 +13940,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   monsterStatControl: {fileID: 0}
+  nav: {fileID: 0}
+  monsterFinder: {fileID: 0}
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    ID: 0
+    level: 0
+    currentHP: 0
+    boostSpeed: 0
+    attackValue: 0
+    criticalValue: 0
   initMonsterData:
     monsterType: 0
     monsterLevel: 0
   statusUI: {fileID: 0}
+  isBattle: 0
   pathWays: []
   moveSpeed: 3
 --- !u!114 &1777762031
@@ -13948,7 +13972,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!1 &1789089030
 GameObject:
   m_ObjectHideFlags: 0
@@ -14292,6 +14315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 0}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!1 &1813499419
 GameObject:
   m_ObjectHideFlags: 0
@@ -14528,6 +14552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPosition: {fileID: 0}
   projectile: {fileID: 0}
+  haveParentDirection: 0
 --- !u!224 &1849884747 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 711853162364885071, guid: d2af5c6fd68419541b7210cd11e78b40,
@@ -38369,7 +38394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ed4e9b6b96ea047a44e4cc1ff7f1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   playerStatusUI: {fileID: 0}
   playerStat:
     actorName: 
@@ -38414,7 +38438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!114 &5866666020441516158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40402,6 +40425,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 359246288649063251, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6781938334281227997, guid: 2123512c0ff8de04e940ab9f56dfc533,
         type: 3}
       propertyPath: m_RootOrder
@@ -41143,7 +41171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ed4e9b6b96ea047a44e4cc1ff7f1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
   playerStatusUI: {fileID: 0}
   playerStat:
     actorName: 
@@ -41188,7 +41215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!114 &6621925900300702762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44222,12 +44248,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6888474215397950065}
   monsterStatControl: {fileID: 6888474215405526474}
+  nav: {fileID: 6888474215405526478}
+  monsterFinder: {fileID: 0}
+  monsterStat:
+    actorName: 
+    maxHp: 0
+    speed: 0
+    defenceValue: 0
+    ID: 0
+    level: 0
+    currentHP: 0
+    boostSpeed: 0
+    attackValue: 0
+    criticalValue: 0
   initMonsterData:
     monsterType: 5
     monsterLevel: 20
   statusUI: {fileID: 0}
   attackControl: {fileID: 6888474215405526477}
-  nav: {fileID: 6888474215405526478}
   attackRange: 5
   coll: {fileID: 6888474215405526476}
   glidePostions:
@@ -44260,7 +44298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8e983869b2b8f45bc356b1cb161dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: []
 --- !u!136 &6888474215405526476
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -45983,6 +46020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16615f33a26ca964e952695177753dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookatTransform: {fileID: 0}
 --- !u!1 &7113277550642009517
 GameObject:
   m_ObjectHideFlags: 0
