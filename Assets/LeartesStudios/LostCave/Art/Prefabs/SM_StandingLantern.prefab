@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1030985900}
-  - component: {fileID: 2986159340629823330}
   - component: {fileID: 8010084188805898386}
-  - component: {fileID: 8203130136442047977}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: SM_StandingLantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,27 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2986159340629823330
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030985899}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.43697256, y: 3.7282906, z: 0.45927665}
-  m_Center: {x: 0.003442496, y: 1.8393705, z: -0.0040879697}
 --- !u!65 &8010084188805898386
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,29 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4579315, y: 1.1791077, z: 0.45927665}
-  m_Center: {x: -0.02150774, y: 0.56477916, z: -0.0040879697}
---- !u!65 &8203130136442047977
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1030985899}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.21714504, y: 1.1791077, z: 2.4806066}
-  m_Center: {x: -0.023025148, y: 0.56477916, z: -0.07543039}
+  m_Size: {x: 2.4, y: 4, z: 2.4}
+  m_Center: {x: -0.02150774, y: 2, z: -0.0040879697}
 --- !u!1 &1030985902
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +65,7 @@ GameObject:
   - component: {fileID: 1030985903}
   - component: {fileID: 1030985904}
   - component: {fileID: 1030985905}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: SM_StandingLantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}

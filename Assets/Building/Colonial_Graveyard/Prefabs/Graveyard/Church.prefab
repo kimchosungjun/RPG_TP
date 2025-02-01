@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4063983631187228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Church
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 33027951761252786}
   - component: {fileID: 23516887361018510}
   - component: {fileID: 6940899196513860735}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Graveyard Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 4848767518336968}
   - component: {fileID: 33037081435179774}
   - component: {fileID: 23589656400886592}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Graveyard From
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3901335236708201029}
   - component: {fileID: 5429899152901898735}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PathColl
   m_TagString: Untagged
   m_Icon: {fileID: 0}

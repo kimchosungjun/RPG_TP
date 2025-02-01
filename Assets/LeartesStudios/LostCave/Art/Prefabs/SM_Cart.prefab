@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030974191}
   - component: {fileID: 3388160732219897291}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: SM_Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 1030974194}
   - component: {fileID: 1030974195}
   - component: {fileID: 1030974196}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: SM_Cart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

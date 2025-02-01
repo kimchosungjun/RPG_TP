@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 3283780387301533269}
   - component: {fileID: 1890824959971797488}
   - component: {fileID: 4456725254594583866}
-  - component: {fileID: -3616928857686581356}
-  m_Layer: 3
+  - component: {fileID: 3011801049916645782}
+  m_Layer: 17
   m_Name: Grave8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3283780387301533269
 Transform:
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-3616928857686581356
+--- !u!65 &3011801049916645782
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,5 +104,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3213864, y: 0.5323424, z: 0.13492115}
-  m_Center: {x: -0.00009353459, y: 0.26571062, z: -0.027953945}
+  m_Size: {x: 1.6069319, y: 2.6617117, z: 0.6746057}
+  m_Center: {x: -0.00046768785, y: 1.3285532, z: -0.13976973}

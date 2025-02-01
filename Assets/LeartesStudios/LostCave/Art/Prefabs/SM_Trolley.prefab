@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030978439}
   - component: {fileID: 593064093365508845}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: SM_Trolley
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 1030978442}
   - component: {fileID: 1030978443}
   - component: {fileID: 1030978444}
-  m_Layer: 3
+  m_Layer: 17
   m_Name: SM_Trolley_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4234160514820878}
   - component: {fileID: 33551723709158152}
   - component: {fileID: 23123590984810442}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sidewalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4685886571930254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graveyard_ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 4280883367103298}
   - component: {fileID: 33719911311118016}
   - component: {fileID: 23448555270877816}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graveyard Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
