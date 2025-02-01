@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33678800601683448}
   - component: {fileID: 23744000064268988}
   - component: {fileID: 6862379247803740174}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Graveyard_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

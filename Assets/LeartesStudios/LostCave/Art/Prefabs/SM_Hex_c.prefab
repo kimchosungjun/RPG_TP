@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030977843}
   - component: {fileID: 2770085796524129050}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SM_Hex_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 1030977846}
   - component: {fileID: 1030977847}
   - component: {fileID: 1030977848}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SM_Hex_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1890824959971797488}
   - component: {fileID: 4456725254594583866}
   - component: {fileID: -3616928857686581356}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grave8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +30,7 @@ Transform:
     w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -91,8 +93,16 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2799414267125759215}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.3213864, y: 0.5323424, z: 0.13492115}
   m_Center: {x: -0.00009353459, y: 0.26571062, z: -0.027953945}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8093741190888379636}
   - component: {fileID: 6320320434563293246}
   - component: {fileID: -2656185584745493448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grave9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +30,7 @@ Transform:
     w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -91,8 +93,16 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5527805166191247851}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.32310516, y: 0.17655766, z: 0.588905}
   m_Center: {x: -0.00000014901161, y: 0.08647385, z: 0.00085811317}
