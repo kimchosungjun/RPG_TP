@@ -63,6 +63,13 @@ namespace UtilEnums
         GAME = 3,
     }
 
+    public enum SOUNDS
+    {
+        MASTER=0,
+        BGM=1,
+        SFX=2
+    }
+
     public enum LAYERS
     {
         DEFAULT = 0,

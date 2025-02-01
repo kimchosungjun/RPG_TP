@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3740101263893024803}
   - component: {fileID: 359246288649063251}
   m_Layer: 0
-  m_Name: Photon_View
+  m_Name: PV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,8 @@ AudioSource:
   m_GameObject: {fileID: 3116686500691800136}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8352904831895986205, guid: 9d66bf9d73d63124f983d1c25a734144,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -193,7 +194,7 @@ GameObject:
   - component: {fileID: 7367420561857841706}
   - component: {fileID: 1890610889013014561}
   m_Layer: 0
-  m_Name: Effect
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +224,8 @@ AudioSource:
   m_GameObject: {fileID: 5474514284902361019}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8767373398623166862, guid: 9d66bf9d73d63124f983d1c25a734144,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -389,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd51f735fa0ea245b68a69c71f11bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 9d66bf9d73d63124f983d1c25a734144, type: 2}
 --- !u!114 &8472621538886880199
 MonoBehaviour:
   m_ObjectHideFlags: 0
