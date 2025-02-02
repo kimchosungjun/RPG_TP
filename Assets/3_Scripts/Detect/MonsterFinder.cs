@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class MonsterFinder : Finder
 {
+    protected override void Awake()
+    {
+        setFindLayer = UtilEnums.LAYERS.PLAYER;
+        base.Awake();
+    }
+
     // Common
     public float GetDistance()
     {
@@ -23,7 +29,7 @@ public class MonsterFinder : Finder
         {
             Vector3 direction = colls[0].transform.position - transform.position;
             direction.y = 0;
-            float angle = Vector3.Angle(transform.forward, direction);
+            float angle = Vector3.Angle(transform.forward, direction) * 0.5f;
 
             if (Mathf.Abs(angle) <= sightAngle)
                 isInSight = true;

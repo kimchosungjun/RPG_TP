@@ -17,7 +17,7 @@ public class QuestSOData : ScriptableObject
     [Header("Quest Awards")]
     [SerializeField] List<ItemAward> itemAwards;
     [SerializeField] List<ExpAward> expAwards;
-
+    [SerializeField] List<CharacterAward> characterAwards;
     QuestConditionSaveData saveData;
     public QuestConditionSaveData GetSaveData { get { if (saveData == null) return null; return saveData; } }
     #endregion
@@ -67,6 +67,9 @@ public class QuestSOData : ScriptableObject
         {
             itemAwards[i].GetAward();
         }
+
+       if(characterAwards.Count !=0)
+            characterAwards[0].GetAward();
     }
     #endregion
 }

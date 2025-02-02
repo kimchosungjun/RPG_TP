@@ -6,6 +6,7 @@ public interface IQuestAwards
     public void GetAward();
 }
 
+#region Exp
 
 [Serializable]
 public class ExpAward : IQuestAwards
@@ -18,6 +19,9 @@ public class ExpAward : IQuestAwards
             GetComponent<PartyConditionControl>()?.GetExp(awardAmount);
     }
 }
+#endregion
+
+#region Item
 
 [Serializable]
 public class ItemAward : IQuestAwards
@@ -82,4 +86,18 @@ public class ItemAward : IQuestAwards
         return canGetAward;
     }
 }
+#endregion
 
+#region Character
+
+[Serializable]
+public class CharacterAward : IQuestAwards
+{
+    [SerializeField] PlayerEnums.TYPEIDS playerID;
+    public void GetAward()
+    {
+
+    }
+}
+
+#endregion

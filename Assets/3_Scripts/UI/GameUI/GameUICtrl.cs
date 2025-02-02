@@ -31,6 +31,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] InventoryUI inventoyUI;
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
+    [SerializeField] SoundControlUI soundControlUI;
 
     public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
@@ -42,6 +43,8 @@ public class GameUICtrl : MonoBehaviour
     public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
+    public SoundControlUI SoundControlUI { get { return soundControlUI; } }
+
     // 나중에 Awake로 변경
     private void Awake()
     {
@@ -87,6 +90,7 @@ public class GameUICtrl : MonoBehaviour
         inventoyUI.Init();
         questUI.Init();
         dialogueUI.Init();
+        soundControlUI.Init();
     }
 
     private void Update()

@@ -15,7 +15,7 @@ public class SoundMgr : MonoBehaviour
     {
         if(bgmSource==null)bgmSource=transform.Find("BGM").GetComponent<AudioSource>();
         bgmSource.loop = true;
-        if(sfxSource == null) sfxSource = transform.Find("Effect").GetComponent<AudioSource>();
+        if(sfxSource == null) sfxSource = transform.Find("SFX").GetComponent<AudioSource>();
         SharedMgr.SoundMgr = this;
     }
 

@@ -80,6 +80,9 @@ public class DialogueReader
             case 'E':
                 EndConversation();
                 break;
+            case 'X':
+                InActiveNPC();
+                break;
         }
     }
 
@@ -134,6 +137,11 @@ public class DialogueReader
     public void EndConversation()
     {
         SharedMgr.InteractionMgr.CurrentInteractNPC.BlockConversation();
+    }
+
+    public void InActiveNPC()
+    {
+
     }
     #endregion
 }

@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Quest_SO0
   m_EditorClassIdentifier: 
   questID: 0
-  questName: "\uACE0\uC591\uC774 \uAD6C\uCD9C"
-  questDescription: "\uB192\uC740 \uACF3\uC5D0\uC11C \uB0B4\uB824\uC624\uC9C0 \uBABB\uD558\uB294
-    \uACE0\uC591\uC774\uB97C \uAD6C\uCD9C\uD574\uC57C \uD569\uB2C8\uB2E4.\n\uACE0\uC591\uC774\uB97C
-    \uC544\uC774\uC5D0\uAC8C \uBB34\uC0AC\uD788 \uB370\uB824\uB2E4 \uC8FC\uC138\uC694."
+  questName: "\uC790\uACA9 \uC99D\uBA85"
+  questDescription: "\uD30C\uD2F0\uB97C \uAD6C\uD558\uB294 \uC5D8\uD504\uB97C \uB9CC\uB0AC\uC2B5\uB2C8\uB2E4.\n\uB3D9\uAD74
+    \uC18D \uBC14\uC774\uB7EC\uC2A4 \uBAAC\uC2A4\uD130\uB97C 3\uB9C8\uB9AC \uD1F4\uCE58\uD558\uC5EC
+    \uC790\uACA9\uC744 \uC99D\uBA85\uD569\uC2DC\uB2E4."
   questConditions:
-  - type: 0
-    targetName: "\uACE0\uC591\uC774"
+  - type: 1
+    targetName: "\uBC14\uC774\uB7EC\uC2A4"
     targetID: 999
-    targetCnt: 1
+    targetCnt: 3
     currentCnt: 0
   itemAwards:
   - itemType: 3
@@ -32,3 +32,5 @@ MonoBehaviour:
     itemAmount: 5
   expAwards:
   - awardAmount: 300
+  characterAwards:
+  - playerID: 1

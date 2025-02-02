@@ -37,6 +37,9 @@ public class BattleField : MonoBehaviour
     #region Life Cycle
     protected virtual void Start()
     {
+        CapsuleCollider coll = GetComponent<CapsuleCollider>();
+        if (coll!=null)
+            radius = coll.radius;
         SetupMonsters();
     }
 

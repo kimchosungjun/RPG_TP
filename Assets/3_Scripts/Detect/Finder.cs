@@ -6,12 +6,26 @@ public abstract class Finder : MonoBehaviour
 {
     [SerializeField] protected float sightRange;
     [SerializeField] protected float sightAngle;
-    
+
+    protected UtilEnums.LAYERS setFindLayer;
     protected int findLayer;
     protected LayerMask findLayerMask;
 
     protected bool isInSight = false;
     protected bool isDetect = false;
+
+    protected virtual void Awake()
+    {
+        if(setFindLayer == UtilEnums.LAYERS.DEFAULT)
+        {
+            findLayer = 0;
+            findLayerMask =0;
+            return;
+        }
+        int layer = (int)setFindLayer;
+        findLayer = layer;
+        findLayerMask = 1<<layer;
+    }
 
     public void ChangeDetectLayer(UtilEnums.LAYERS _layer)
     {

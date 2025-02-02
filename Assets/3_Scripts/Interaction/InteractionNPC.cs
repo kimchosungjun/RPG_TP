@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InteractionNPC : Interactable
 {
+    [SerializeField] Animator anim;
     [SerializeField] int dialogueIndex;
     public int GetDialogueIndex { get { return dialogueIndex; } }
     NPCSaveDataGroup saveData = null;
@@ -24,6 +25,13 @@ public class InteractionNPC : Interactable
 
     #endregion
 
+
+    enum NPCState
+    {
+        Idle=0,
+        Talk=1
+    }
+
     public void Start()
     {
         LoadNpcData();
@@ -38,14 +46,49 @@ public class InteractionNPC : Interactable
     public override void Interact()
     {
         SharedMgr.InteractionMgr.StartConversation(this);
-        SharedMgr.InteractionMgr.RemoveInteractable(this);
-        //Destroy(this.gameObject);
-        this.gameObject.SetActive(false);
+        StartCoroutine(CLookPlayer());
+    }
+
+    IEnumerator CLookPlayer()
+    {
+        Vector3 playerPosition = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position;
+        Vector3 direction = playerPosition - transform.position;
+        direction.y = 0;
+        direction = direction.normalized;
+        Quaternion endRot = Quaternion.LookRotation(direction);
+        float angle = Vector3.Angle(transform.forward, direction) * 0.5f;
+
+        if (angle <= 30f)
+        {
+            transform.rotation = endRot;
+            anim.SetInteger("State", (int)NPCState.Talk);
+            yield break; 
+        }
+
+        Quaternion startRot = transform.rotation;
+        float time = 0f;
+
+        anim.SetBool("IsTurn", true);
+        anim.SetInteger("State", (int)NPCState.Talk);
+        while (time < 2f) 
+        {
+            time += Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(startRot, endRot, time);
+            yield return null;
+        }
+       
+    }
+
+    public void AnnounceEndConversation()
+    {
+        anim.SetBool("IsTurn", false);
+        anim.SetInteger("State", (int)NPCState.Idle);
     }
 
     public void BlockConversation()
     {
         ChangeToDisable();
+        SharedMgr.InteractionMgr.RemoveInteractable(this);
     }
 
 }

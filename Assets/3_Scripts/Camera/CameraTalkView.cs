@@ -34,7 +34,6 @@ public class CameraTalkView : MonoBehaviour
     IEnumerator CMoveToTalk(Transform _newTarget)
     {
         Transform playerTrasnfrom = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform;
-
         Vector3 halfPoint = (_newTarget.position + playerTrasnfrom.position) / 2;
         Vector3 lookPosition = halfPoint;
         Vector3 offSetCalDirection = _newTarget.position - lookPosition;
@@ -49,7 +48,7 @@ public class CameraTalkView : MonoBehaviour
         float dot = Vector3.Dot(camDirection, offSetDirection);
         if (dot > 0f)
             offset.x *= -1; 
-        lookPosition = offSetDirection * offset.x + Vector3.up * offset.y;
+        lookPosition += offSetDirection * offset.x + Vector3.up * offset.y;
 
         Vector3 lookDirection =   halfPoint + Vector3.up - lookPosition;
         //lookDirection = lookDirection.normalized;

@@ -154,12 +154,13 @@ public class PlayerCtrl : MonoBehaviour
         {
             GameObject playerObject = Instantiate(SharedMgr.ResourceMgr.GetBasePlayer
                 (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(playerIDSet[i]).prefabName).gameObject);
-            BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();
-            basePlayer.PlayerID = playerIDSet[i];
-            basePlayers.Add(basePlayer);    
             playerObject.transform.SetParent(this.transform, false);
             playerObject.transform.position = savePosition;
             playerObject.transform.rotation = saveRotation; 
+            if(playerObject.activeSelf==false) playerObject.SetActive(true);    
+            BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();
+            basePlayer.PlayerID = playerIDSet[i];
+            basePlayers.Add(basePlayer);    
         }
         players = basePlayers;
         int cnt = players.Count;

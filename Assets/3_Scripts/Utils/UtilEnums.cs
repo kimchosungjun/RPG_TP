@@ -139,6 +139,7 @@ namespace UIEnums
         UPGRADE,
         QUEST,
         DIALOGUE,
+        SOUND,
         NONE
     }
 }

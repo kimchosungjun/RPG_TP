@@ -5,19 +5,26 @@ using UtilEnums;
 
 public class LoginLobbyView : MonoBehaviour
 {
+    [Header("Objects")]
     [SerializeField] GameObject lobbyViewParent;
     [SerializeField] GameObject decideExitView;
     [SerializeField] GameObject logOutView;
 
+    [Header("UI Images")]
     [SerializeField, Tooltip("0:Start, 1:Exit, 2:Logout")] Image[] buttonImages;
     [SerializeField, Tooltip("0:Button, 1:Button")] Image[] exitImages;
     [SerializeField, Tooltip("0:Button, 1:Button")] Image[] logoutImages;
     [SerializeField, Tooltip("0:Line, 1:Frame, 2:WarnFrame, 3:WarnButton")] Image[] serverIndicatorImages;
     [SerializeField, Tooltip("0:State, 1:Cnt")] Text[] serverTexts;
     [SerializeField] GameObject overFlowServerIndicator;
+
     string[] serverStateTexts = new string[5];
     [SerializeField] Color[] serverStateColors;
     bool onceSetImage = false;
+
+    [SerializeField, Header("Connect Text")] PeriodAnimation connectText;
+    public PeriodAnimation GetPeriodAnimation { get { return connectText; } }
+    
     public void Init()
     {
         if (lobbyViewParent.activeSelf) lobbyViewParent.gameObject.SetActive(false);
@@ -31,6 +38,8 @@ public class LoginLobbyView : MonoBehaviour
         serverStateTexts[2] = "보통";
         serverStateTexts[3] = "혼잡";
         serverStateTexts[4] = "포화";
+
+        connectText.Init();
     }
 
     public void ActiveView() 
@@ -69,14 +78,18 @@ public class LoginLobbyView : MonoBehaviour
     #region Btn Function
     public void PressGameStart()
     {
+        connectText.StartPeriodAnimation();
         bool isExist = true;
         if(SharedMgr.PhotonMgr.IsFullRoom(ref isExist) == false)
         {
             SharedMgr.PhotonMgr.JoinLobbyRoom(isExist);
-            SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.GAME, true, true);
+            SharedMgr.SceneMgr.LoadScene(SCENES.GAME, true, true);
         }
         else
+        {
             OverFlowServer();   
+            connectText.EndPeriodAnimation();
+        }
     }
 
     public void PressGameExit()

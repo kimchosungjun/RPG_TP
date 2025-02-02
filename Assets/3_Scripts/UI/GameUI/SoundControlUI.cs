@@ -84,4 +84,21 @@ public class SoundControlUI : MonoBehaviour
         sound.ControlSound(UtilEnums.SOUNDS.BGM, soundSliders[1].value);
         sound.ControlSound(UtilEnums.SOUNDS.SFX, soundSliders[2].value);
     }
+
+    public void InputInventoryKey()
+    {
+        if (soundUIParent.activeSelf == true)
+        {
+            TurnOff();
+            SharedMgr.CursorMgr.SetCursorVisibleState(false);
+            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
+        }
+        else
+        {
+            soundUIParent.SetActive(true);
+            TurnOn();   
+            SharedMgr.CursorMgr.SetCursorVisibleState(true);
+            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SOUND;
+        }
+    }
 }

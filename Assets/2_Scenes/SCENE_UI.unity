@@ -3243,55 +3243,49 @@ MonoBehaviour:
     dialogueSet:
     - questID: 0
       dialogueID: 0
-      speakerName: "\uC5B4\uB9B0 \uC18C\uB140"
+      speakerName: "\uBAA8\uD5D8\uAC00 \uC5D8\uD504"
       dialogueContentSet:
       - dialogueIndex: 0
         storyLines:
-        - "\uC6B0\uC5D0\uC5D0\uC5D0\uC5E5...."
-        - "\uACE0\uC591\uC774...\uACE0\uC591\uC774.."
-        - "\uC800\uAE30\uC694.. \uB3C4\uC640\uC8FC\uC138\uC694.."
+        - "\uD760... \uB2E4\uB978 \uB9C8\uC744\uB85C \uAC00\uC57C\uD558\uB098.."
+        - "\uC5EC\uAE30\uC5D4 \uAD1C\uCC2E\uC740 \uBAA8\uD5D8\uAC00\uAC00 \uC5C6\uB294\uAC70
+          \uAC19\uC740\uB370.."
         choiceLines:
         - continueDialouge: 1
           nextDialogueID: 1
           choiceTexts:
-          - "\uBB34\uC2A8 \uC77C\uC774\uB2C8?"
+          - "\uD639\uC2DC \uD30C\uD2F0\uB97C \uAD6C\uD558\uC2E0\uB2E4\uBA74 \uC800\uB791
+            \uAC19\uC774 \uB2E4\uB2C8\uC2E4\uB798\uC694?"
         - continueDialouge: 0
           nextDialogueID: 0
           choiceTexts:
-          - "(\uBABB\uBCF8 \uCC99 \uD55C\uB2E4.)"
+          - "(\uBB34\uC2DC\uD55C\uB2E4.)"
       - dialogueIndex: 1
         storyLines:
-        - "\uC81C \uACE0\uC591\uC774\uAC00 \uC9C0\uBD95\uC5D0\uC11C \uBABB\uB0B4\uB824\uC624\uACE0
-          \uC788\uC5B4\uC694.."
-        - "\uACE0\uC591\uC774\uB97C \uAD6C\uD574\uC8FC\uC138\uC694..!"
+        - "\uB108\uAC00 \uC2E4\uB825\uB9CC \uBCF4\uC5EC\uC900\uB2E4\uBA74 \uB3D9\uC758\uD558\uC9C0."
+        - "\uC694\uC998 \uAD11\uC0B0\uC5D0 \uBC14\uC774\uB7EC\uC2A4 \uBAAC\uC2A4\uD130\uAC00
+          \uC0AC\uB78C\uB4E4\uC744 \uAD34\uB86D\uD78C\uB2E4\uB294\uB370.."
+        - "3\uB9C8\uB9AC\uB97C \uD63C\uC790 \uD1A0\uBC8C\uD574\uC628\uB2E4\uBA74
+          \uB108\uC758 \uC81C\uC548 \uBC1B\uC544\uB4E4\uC77C\uAC8C."
         choiceLines:
-        - continueDialouge: 1
+        - continueDialouge: 0
           nextDialogueID: 2
           choiceTexts:
           - $Q0
-          - "\uC751 \uB0B4\uAC00 \uB3C4\uC640\uC904\uAC8C \uAE30\uB2E4\uB9AC\uB834."
-        - continueDialouge: 0
-          nextDialogueID: 0
-          choiceTexts:
-          - "\uB0B4\uAC00 \uC9C0\uAE08 \uBC14\uBE60\uC11C.. \uB2E4\uB978 \uC0AC\uB78C\uC5D0\uAC8C
-            \uBD80\uD0C1\uD558\uB834."
+          - "\uC88B\uC2B5\uB2C8\uB2E4. \uC7A0\uC2DC \uC5EC\uAE30\uC11C \uAE30\uB2E4\uB9AC\uC2DC\uC8E0."
       - dialogueIndex: 2
         storyLines:
-        - "\uAC10\uC0AC\uD569\uB2C8\uB2E4!! "
-        - "\uACE0\uC591\uC774\uB294 \uC624\uB978\uCABD \uC9C0\uBD95\uC73C\uB85C \uC62C\uB77C\uAC14\uC5B4\uC694!"
+        - "\uC544\uC9C1\uB3C4 \uD1F4\uCE58\uD558\uC9C0 \uBABB\uD588\uB098? "
+        - "\uAD11\uC0B0 \uC624\uB978\uCABD \uD1B5\uB85C\uB85C \uAC00\uBD10\uB77C."
         choiceLines: []
       - dialogueIndex: 3
         storyLines:
-        - "\uACE0\uC591\uC774\uB294 \uC624\uB978\uCABD \uC9C0\uBD95 \uC704\uC5D0
-          \uC788\uC744\uAC70\uC608\uC694..!"
-        choiceLines: []
-      - dialogueIndex: 4
-        storyLines:
-        - "\uB0B4 \uACE0\uC591\uC774...!\""
-        - "\uB3C4\uC640\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
+        - "\uC124\uB9C8 \uD63C\uC790 \uD1F4\uCE58\uD560\uC904\uC774\uC57C.. \uD569\uACA9\uC774\uB2E4."
+        - "\uC55E\uC73C\uB85C \uC798 \uBD80\uD0C1\uD574 \uD30C\uD2B8\uB108."
         - $A0
+        - $X
         choiceLines: []
-  dialogueName: YoungGirl
+  dialogueName: Archer_NPC
 --- !u!114 &946331243
 MonoBehaviour:
   m_ObjectHideFlags: 0
