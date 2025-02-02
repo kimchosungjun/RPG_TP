@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 8064945849388038000}
   - component: {fileID: 2043519225447483522}
   m_Layer: 17
-  m_Name: Guard
+  m_Name: PatrolGuard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

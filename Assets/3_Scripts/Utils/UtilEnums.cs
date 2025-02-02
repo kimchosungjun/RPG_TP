@@ -100,6 +100,12 @@ namespace UtilEnums
         TOWN_EAST=2,
         TOWN_WEST=3
     }
+
+    public enum PATH_TYPES
+    {
+        LEFT_TOWN=0,
+        RIGHT_TOWN=1
+    }
 }
 
 // UI
