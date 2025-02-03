@@ -4,12 +4,12 @@ using System.Collections;
 using EffectEnums;
 using UnityEngine;
 
-public class Virus : StandardMonster
+
+public class ChestMonster : StandardMonster
 {
     [Header("Range")]
     [SerializeField] float nearCombatRange;
     [SerializeField] float farCombatRange;
-    [SerializeField] MonsterFinder finder;
 
     float maintainIdleTime = 5f;
     bool isDoIdle = false;
@@ -29,7 +29,7 @@ public class Virus : StandardMonster
     {
         base.Awake();
         if (anim == null) anim = GetComponent<Animator>();
-        if (finder == null) finder = GetComponentInChildren<MonsterFinder>();
+        if (monsterFinder == null) monsterFinder = GetComponentInChildren<MonsterFinder>();
     }
     #endregion
 
@@ -40,7 +40,7 @@ public class Virus : StandardMonster
         nav.speed = monsterStat.Speed;
         spread.SetData(monsterStat);
         rush.SetData(monsterStat);
-        finder?.ChangeDetectLayer(UtilEnums.LAYERS.PLAYER);
+        monsterFinder?.ChangeDetectLayer(UtilEnums.LAYERS.PLAYER);
     }
 
     protected override void CreateStates()
@@ -138,7 +138,7 @@ public class Virus : StandardMonster
             isDoMoveNearPlayer = false;
         }
 
-        if (finder.GetDistance() < 2f)
+        if (monsterFinder.GetDistance() < 2f)
         {
             ChangeAnimation(STATES.IDLE);
             Vector3 direction = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position - this.transform.position;
@@ -174,7 +174,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoCheckGoOutOfBounds()
     {
-        if (IsInMonsterArea == false || (Vector3.Distance(transform.position, FieldCenterPosition) > MonsterArea.GetRadius - 0.5f) )
+        if (IsInMonsterArea == false || (Vector3.Distance(transform.position, FieldCenterPosition) > MonsterArea.GetRadius - 0.5f))
         {
             ReturnToSpawnPosition();
             if (isBattle)
@@ -187,7 +187,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoDetectPlayer()
     {
-        if (finder.IsDetect() || isBattle)
+        if (monsterFinder.IsDetect() || isBattle)
             return NODESTATES.SUCCESS;
         return NODESTATES.FAIL;
     }
@@ -229,7 +229,7 @@ public class Virus : StandardMonster
 
     NODESTATES DoCheckFarAttackRange()
     {
-        if (finder.DetectInSihgt(farCombatRange) == false)
+        if (monsterFinder.DetectInSihgt(farCombatRange) == false)
         {
             DoMoveToTarget();
             return NODESTATES.FAIL;
@@ -253,7 +253,7 @@ public class Virus : StandardMonster
     }
     NODESTATES DoCheckNearAttackRange()
     {
-        if (finder.DetectInSihgt(nearCombatRange) == false)
+        if (monsterFinder.DetectInSihgt(nearCombatRange) == false)
         {
             DoMoveToTarget();
             return NODESTATES.FAIL;
@@ -263,7 +263,8 @@ public class Virus : StandardMonster
     public void DoSpread() { spread.Spread(); }
     public void StopSpread()
     {
-        anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+        anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false;
+    }
 
     #endregion
 

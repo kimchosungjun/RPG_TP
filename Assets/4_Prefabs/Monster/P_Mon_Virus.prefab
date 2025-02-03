@@ -1682,7 +1682,7 @@ GameObject:
   - component: {fileID: 4186091309769744043}
   - component: {fileID: 8732332655187265397}
   m_Layer: 7
-  m_Name: P_Virus
+  m_Name: P_Mon_Virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1770,13 +1770,12 @@ MonoBehaviour:
     attackValue: 0
     criticalValue: 0
   initMonsterData:
-    monsterType: 3
+    monsterType: 1
     monsterLevel: 3
   statusUI: {fileID: 8076422825904239986}
   isBattle: 0
   nearCombatRange: 2
   farCombatRange: 10
-  finder: {fileID: 7516926096759921729}
   spread: {fileID: 1477926776206634081}
   rush: {fileID: 5508482153903166494}
 --- !u!195 &5295230655071613870

@@ -84,35 +84,34 @@ namespace MonsterEnums
 
     public enum TYPEIDS
     {
-        RAYFISH=0,
-        FLYBEE=1,
+        CHEST=0,
+        VIRUS=1,
         SLIME=2,
-        VIRUS=3,
-        ANNOYBEAR=4,
-        DRAGON=5,
-        //BULLTANK=,
+        HORNSLIME=3,
+        DRAGON=4,
     }
 
     public enum ATTACK_ACTIONS
     {
-        SLIME_RUSH=0,
-        VIRUS_RUSH=1,
-        VIRUS_SPREAD=2,
-        BEAR_SMASH01=3,
-        BEAR_SMASH02=4,
-        BEAR_SMASH03=5,
-        BEAR_STAMP=6,
+        CHEST_BITE = 0,
+        CHEST_RUSH = 1,
+        VIRUS_RUSH = 2,
+        VIRUS_SPREAD = 3,
+        SLIME_BITE = 3,
+        SLIME_RUSH = 4,
+        HORN_BITE = 5,
+        HORN_RUSH=6,
         DRAGON_BASIC=7,
-        DRAGOND_CLAW_1=8,
-        DRAGOND_CLAW_2=9,
-        DRAGON_FLAME=10,
-        DRAGOND_ORBIT_FLAME=11,
+        DRAGOND_CLAW_1 = 8,
+        DRAGOND_CLAW_2 = 9,
+        DRAGON_FLAME = 10,
+        DRAGOND_ORBIT_FLAME = 11,
     }
 
     public enum CONDITION_ACTIONS
     {
-        VIRUS_SLOW=0,
-        VIRUS_HEAL=1,
+        VIRUS_SLOW = 0,
+        VIRUS_HEAL = 1,
     }
 }
 

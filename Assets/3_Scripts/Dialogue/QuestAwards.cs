@@ -1,9 +1,35 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public interface IQuestAwards 
 {
     public void GetAward();
+}
+
+[Serializable]
+public class AwardGroup : IQuestAwards
+{
+    [SerializeField] List<ExpAward> expAwards;
+    [SerializeField] List<ItemAward> itemAwards;
+    [SerializeField] List<CharacterAward> characterAwards;
+    
+    public void GetAward()
+    {
+        int expCnt = expAwards.Count;
+        int itemCnt = itemAwards.Count; 
+        int characterCnt = characterAwards.Count;   
+
+        // Call Sequence : 1. Exp, 2 : Charater
+        if(expCnt!=0)
+            expAwards[0].GetAward();    
+        if(characterCnt !=0)
+            characterAwards[0].GetAward();
+        for(int i=0; i<itemCnt; i++)
+        {
+            itemAwards[i].GetAward();
+        }
+    }
 }
 
 #region Exp

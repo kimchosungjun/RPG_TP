@@ -56,6 +56,7 @@ public abstract class BaseMonster : BaseActor
     #endregion
 
     #region Value : Monster Information
+    [Header("Must Init"), Tooltip("Set Monster Type & Lv")]
     [SerializeField] protected InitMonsterData initMonsterData;
     public MonsterStatControl GetMonsterStatControl { get { return monsterStatControl; } }
     #endregion
