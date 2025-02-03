@@ -1,7 +1,7 @@
 using UnityEngine;
 using MonsterEnums;
 
-public class VirusRush : MonsterAttackAction
+public class ChestBite : MonsterAttackAction
 {
     [SerializeField] TriggerAttackAction nearAttack = null;
 
@@ -10,8 +10,7 @@ public class VirusRush : MonsterAttackAction
         base.SetData(_stat);
         if (nearAttack == null) nearAttack = GetComponentInChildren<TriggerAttackAction>();
         MonsterTable monsterTable = SharedMgr.TableMgr.GetMonster;
-        attackActionData.SetConditionData(monsterTable.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_RUSH), stat.Level);
-        conditionActionData.SetConditionData(monsterTable.GetMonsterConditionTableData(CONDITION_ACTIONS.VIRUS_SLOW), stat.Level);
+        attackActionData.SetConditionData(monsterTable.GetMonsterAttackTableData(ATTACK_ACTIONS.CHEST_BITE), stat.Level);
     }
 
     public override void DoAttack()

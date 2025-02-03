@@ -259,10 +259,8 @@ public class VirusMonster : StandardMonster
         }
         return NODESTATES.SUCCESS;
     }
-    public void DoSpread() { spread.Spread(); }
-    public void StopSpread()
-    {
-        anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+    public void DoSpread() { spread.DoAttack(); }
+    public void StopSpread() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
 
     #endregion
 
@@ -308,8 +306,8 @@ public class VirusMonster : StandardMonster
             nav.ResetPath();
     }
 
-    public void DoRush() { rush.StartRush(); }
-    public void StopRush() { rush.StopRush(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+    public void DoRush() { rush.StopAttack(); }
+    public void StopRush() { rush.StopAttack(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
     #endregion
 
     #endregion
@@ -318,7 +316,7 @@ public class VirusMonster : StandardMonster
     public override void ApplyMovementTakeDamage(TransferAttackData _attackData)
     {
         if (isDeathState) return;
-        rush.StopRush();
+        rush.StopAttack();
 
         if (isDoHitEffect == false) nav.ResetPath();
         switch (_attackData.GetHitEffect)

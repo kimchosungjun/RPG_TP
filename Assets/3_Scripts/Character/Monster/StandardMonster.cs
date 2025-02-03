@@ -4,8 +4,7 @@ using UnityEngine;
 public class StandardMonster : BaseMonster
 {
     [Header("Status UI : Must Link"),SerializeField] protected StandardMonsterStatusUI statusUI = null;
-
-    [SerializeField] protected bool isBattle = false;
+    protected bool isBattle = false;
 
     #region Override Life Cycle
     protected override void Awake()

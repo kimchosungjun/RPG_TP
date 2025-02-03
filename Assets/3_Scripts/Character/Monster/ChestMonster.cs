@@ -17,10 +17,10 @@ public class ChestMonster : StandardMonster
     bool isDoAnimation = false; // 피격, 공격.. 등 특정 행동 애니메이션 도중에는 작동하지 않도록 방지하는 변수
     bool isDoMoveNearPlayer = false;
 
-    [Header("Virus Attack")]
-    [SerializeField] VirusSpread spread;
-    [SerializeField] VirusRush rush;
-    Sequence virusBTRoot = null;
+    [Header("Chest Attack")]
+    [SerializeField] ChestBite bite;
+    [SerializeField] ChestRush rush;
+    Sequence chestBTRoot = null;
 
     #region Life Cycle
 
@@ -38,13 +38,16 @@ public class ChestMonster : StandardMonster
     {
         base.Start();
         nav.speed = monsterStat.Speed;
-        spread.SetData(monsterStat);
         rush.SetData(monsterStat);
+        bite.SetData(monsterStat);
         monsterFinder?.ChangeDetectLayer(UtilEnums.LAYERS.PLAYER);
     }
 
     protected override void CreateStates()
     {
+        // Near : Bite
+        // Far : Rush
+
         #region First BT States : Detect & Do Idle
         // Level 2 
         List<Node> doIdleStatesGroup = new List<Node>();
@@ -103,7 +106,7 @@ public class ChestMonster : StandardMonster
         virusBTGroup.Add(doNearAttackCoolTimeSequence);
 
         // Root
-        virusBTRoot = new Sequence(virusBTGroup);
+        chestBTRoot = new Sequence(virusBTGroup);
     }
     #endregion
 
@@ -111,7 +114,7 @@ public class ChestMonster : StandardMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        virusBTRoot.Evaluate();
+        chestBTRoot.Evaluate();
         statusUI.FixedExecute();
     }
     #endregion
@@ -124,7 +127,7 @@ public class ChestMonster : StandardMonster
         bool continueMove = false;
         if (isDoMoveNearPlayer)
         {
-            if (spread.GetCoolDown || rush.GetCoolDown)
+            if (rush.GetCoolDown || bite.GetCoolDown)
                 continueMove = true;
 
             if (continueMove == false)
@@ -242,7 +245,7 @@ public class ChestMonster : StandardMonster
     #region Third BT : Far Attack
     NODESTATES DoCheckCanFarAttack()
     {
-        if (spread.GetCoolDown)
+        if (rush.GetCoolDown)
         {
             isDoAnimation = true;
             anim.SetInteger("Attack", 1);
@@ -260,18 +263,15 @@ public class ChestMonster : StandardMonster
         }
         return NODESTATES.SUCCESS;
     }
-    public void DoSpread() { spread.Spread(); }
-    public void StopSpread()
-    {
-        anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false;
-    }
+    public void DoRush() { rush.DoAttack(); }
+    public void StopRush() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
 
     #endregion
 
     #region Forth BT : Near Attack & Round Player
     NODESTATES DoCheckCanNearAttack()
     {
-        if (rush.GetCoolDown)
+        if (bite.GetCoolDown)
         {
             transform.LookAt(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
             isDoAnimation = true;
@@ -310,8 +310,8 @@ public class ChestMonster : StandardMonster
             nav.ResetPath();
     }
 
-    public void DoRush() { rush.StartRush(); }
-    public void StopRush() { rush.StopRush(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+    public void DoBite() { bite.StopAttack(); }
+    public void StopBite() { bite.StopAttack(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
     #endregion
 
     #endregion
@@ -320,7 +320,7 @@ public class ChestMonster : StandardMonster
     public override void ApplyMovementTakeDamage(TransferAttackData _attackData)
     {
         if (isDeathState) return;
-        rush.StopRush();
+        bite.StopAttack();
 
         if (isDoHitEffect == false) nav.ResetPath();
         switch (_attackData.GetHitEffect)
