@@ -23,4 +23,6 @@ public abstract class MonsterAttackAction : MonoBehaviour
     }
 
     protected void OnDisable() { isCoolDown = true; }
+
+    public virtual void SetAttackParticle() { }
 }

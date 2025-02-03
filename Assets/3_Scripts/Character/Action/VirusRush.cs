@@ -24,7 +24,17 @@ public class VirusRush : MonsterAttackAction
         conditionData.SetData(stat, conditionActionData.GetEffect, conditionActionData.GetAttribute,
             conditionActionData.GetConditionType, conditionActionData.GetDefaultValue, conditionActionData.GetMaintainTime, conditionActionData.GetMultiplier);
         nearAttack.SetTransferData(attackData, conditionData);
+        SetAttackParticle();
+        nearAttack.DoAttack();
     }
 
     public override void StopAttack() { nearAttack.StopAttack(); }
+
+    public override void SetAttackParticle()
+    {
+        Vector3 position = transform.position + transform.forward + Vector3.up;
+        Transform particleTF = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MON_BITE);
+        particleTF.position = position;
+        particleTF.gameObject.SetActive(true);
+    }
 }

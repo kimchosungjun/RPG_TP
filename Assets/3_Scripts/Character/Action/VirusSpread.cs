@@ -8,7 +8,7 @@ public class VirusSpread : MonsterAttackAction
 
     public override void SetData(MonsterStat _stat)
     {
-        base.SetData(stat); 
+        base.SetData(_stat); 
         MonsterTable monsterTable = SharedMgr.TableMgr.GetMonster;
         attackActionData.SetConditionData(monsterTable.GetMonsterAttackTableData(ATTACK_ACTIONS.VIRUS_SPREAD), stat.Level);
         conditionActionData.SetConditionData(monsterTable.GetMonsterConditionTableData(CONDITION_ACTIONS.VIRUS_SLOW), stat.Level);

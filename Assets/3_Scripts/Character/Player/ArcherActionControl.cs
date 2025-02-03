@@ -51,8 +51,7 @@ public class ArcherActionControl : PlayerActionControl
             (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitTriggerProjectile>());
 
         // Particle
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
-            SetParticlePosition(popTransform.position, popTransform.rotation, 1f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.GRASS_POP, popTransform.position, popTransform.rotation);
     }
 
     public void DoSkillAttack(int _combo)
@@ -65,8 +64,7 @@ public class ArcherActionControl : PlayerActionControl
             (attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_NORMAL).GetComponent<HitTriggerProjectile>());
 
         // Particle
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
-            SetParticlePosition(popTransform.position, popTransform.rotation, 1f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.GRASS_POP, popTransform.position, popTransform.rotation);
     }
 
     public void DoUltimateAttack()
@@ -75,11 +73,10 @@ public class ArcherActionControl : PlayerActionControl
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        ultimateAttack.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_ULTIMATE).GetComponent<HitTriggerProjectile>());
+        ultimateAttack.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_SLASH).GetComponent<HitTriggerProjectile>());
 
         // Particle
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ARCHER_POP).GetComponent<ParticleAction>().
-            SetParticlePosition(popTransform.position, popTransform.rotation, 1f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.GRASS_POP, popTransform.position, popTransform.rotation);
     }
 
     public void DoAnnounceDeathState()

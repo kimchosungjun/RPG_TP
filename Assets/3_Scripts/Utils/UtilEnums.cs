@@ -36,19 +36,31 @@ namespace PoolEnums
 {
     public enum  OBJECTS
     {
-        WARRIOR_NORMAL=0,
-        ATTACK_BUFF=1,
-        WARRIOR_SLASH = 2,
-        ARCHER_NORMAL=3,
-        ARCHER_ATTACK_SKILL=4,
-        ARCHER_POP=5,
-        ARCHER_ULTIMATE = 6,
-        MAGICIAN_NORMAL =7,
-        MAGIC_CIRCLE_SPELL = 8,
-        MAGICIAN_METEOR =9,
-        EXPLOSION=10,
-        GUIDED_FIRE=11,
-        VIRUS_SPREAD=12,
+        // PLAYER
+        WARRIOR_CAST = 0,
+        WARRIOR_SLASH,
+        ARCHER_NORMAL,
+        ARCHER_SLASH,
+        MAGE_CAST,
+        MAGE_METEOR,
+        MAGE_CIRCLE_SPELL,
+        PITCHBLACK_POP,
+        GRASS_POP,
+        FIRE_POP,
+        ATTACK_BUFF,
+        HEAL_BUFF,
+        
+        // MONSTER
+        MON_BITE,
+        MON_RUSH,
+        VIRUS_SPREAD,
+        GUIDED_FIRE,
+        
+        // COMMON
+        EXPLOSION,
+        STUN,
+        HEAL,
+        NONE
     }
 }
 

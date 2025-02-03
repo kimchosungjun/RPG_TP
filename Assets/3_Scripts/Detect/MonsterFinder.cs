@@ -8,12 +8,21 @@ public class MonsterFinder : Finder
         base.Awake();
     }
 
-    // Common
+    #region Common Method : Distance, Direction
     public float GetDistance()
     {
         return Vector3.Distance(transform.position, 
             SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
     }
+
+    public Vector3 GetDirection()
+    {
+        Vector3 direction = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position - transform.position;
+        direction.y = 0;
+        direction = direction.normalized;
+        return direction;
+    }
+    #endregion
 
     #region Sight
 

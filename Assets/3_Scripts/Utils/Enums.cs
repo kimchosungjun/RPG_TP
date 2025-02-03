@@ -106,12 +106,14 @@ namespace MonsterEnums
         DRAGOND_CLAW_2 = 10,
         DRAGON_FLAME = 11,
         DRAGOND_ORBIT_FLAME = 12,
+        NONE
     }
 
     public enum CONDITION_ACTIONS
     {
         VIRUS_SLOW = 0,
         VIRUS_HEAL = 1,
+        NONE
     }
 }
 

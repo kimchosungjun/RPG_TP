@@ -41,7 +41,8 @@ public class ParticleAction : MonoBehaviour
 
     public void DoParticleLoop()
     {
-        particleParent.gameObject.SetActive(true);
+        if(particleParent.gameObject.activeSelf==false)
+            particleParent.gameObject.SetActive(true);
         int cnt = particles.Length;
         for (int i = 0; i < cnt; i++)
         {

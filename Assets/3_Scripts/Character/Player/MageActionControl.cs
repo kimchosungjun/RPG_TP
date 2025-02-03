@@ -60,7 +60,7 @@ public class MageActionControl : PlayerActionControl
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo) * stat.Attack * Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
         normalAttacks[_combo].SetTransferData(attackData, null);
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGICIAN_NORMAL).GetComponent<ParticleAction>().
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGE_CAST).GetComponent<ParticleAction>().
             SetParticlePosition(normalAttackParticleTransforms[_combo].transform.position, normalAttackParticleTransforms[_combo].transform.rotation, 1.5f);
     }
 
@@ -109,7 +109,7 @@ buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffA
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGICIAN_METEOR).GetComponent<CreateExplosion>
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGE_METEOR).GetComponent<CreateExplosion>
             ().SetTransferData(attackData, null, meteorTransform.position, meteorTransform.rotation, Vector3.down, 
             ultimateExplosionTransofrm.position, ultimateExplosionTransofrm.rotation, 2f, PoolEnums.OBJECTS.EXPLOSION);
     }
@@ -121,7 +121,7 @@ buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffA
 
     public void MeteorSpell()
     {
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGIC_CIRCLE_SPELL).GetComponent<ParticleAction>().
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MAGE_CIRCLE_SPELL).GetComponent<ParticleAction>().
           SetParticlePosition(ultimateMeteorSpellTransform.transform.position, ultimateMeteorSpellTransform.transform.rotation, 1.5f);
     }
     #endregion

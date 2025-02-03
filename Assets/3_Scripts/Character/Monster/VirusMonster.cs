@@ -18,7 +18,7 @@ public class VirusMonster : StandardMonster
 
     [Header("Virus Attack")]
     [SerializeField] VirusSpread spread;
-    [SerializeField] VirusRush rush;
+    [SerializeField] MonsterTriggerAttackAction rush;
     Sequence virusBTRoot = null;
 
     #region Life Cycle
@@ -244,6 +244,7 @@ public class VirusMonster : StandardMonster
         if (spread.GetCoolDown)
         {
             isDoAnimation = true;
+            transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             anim.SetInteger("Attack", 1);
             anim.SetInteger("MState", (int)STATES.ATTACK);
             return NODESTATES.FAIL;
@@ -269,7 +270,7 @@ public class VirusMonster : StandardMonster
     {
         if (rush.GetCoolDown)
         {
-            transform.LookAt(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
+            transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             isDoAnimation = true;
             anim.SetInteger("Attack", 0);
             anim.SetInteger("MState", (int)STATES.ATTACK);
@@ -306,7 +307,7 @@ public class VirusMonster : StandardMonster
             nav.ResetPath();
     }
 
-    public void DoRush() { rush.StopAttack(); }
+    public void DoRush() { rush.DoAttack(); }
     public void StopRush() { rush.StopAttack(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
     #endregion
 
@@ -339,6 +340,8 @@ public class VirusMonster : StandardMonster
         isDoAnimation = true;
         isDoHitEffect = true;
         yield return new WaitForSeconds(_effectTime);
+        if (isDeathState)
+            yield break;
         ChangeAnimation(STATES.IDLE);
         isDoHitEffect = false;
         isDoAnimation = false;

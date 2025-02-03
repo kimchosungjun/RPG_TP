@@ -44,8 +44,7 @@ public class WarriorActionControl : PlayerActionControl
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo)*stat.Attack*Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
         normalAttacks[_combo].SetTransferData(attackData, null);
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_NORMAL).GetComponent<ParticleAction>().
-            SetParticlePosition(normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation, 1.5f);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_CAST, normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation);
     }
 
     public void StopNormalAttack(int _combo) 
@@ -102,6 +101,5 @@ public class WarriorActionControl : PlayerActionControl
     public void AnimSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.SkillCooling(); }
     public void AnimUltimateSkillCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.UltimateSkillCooling(); }
     public void AnimFallDownCooling() { movementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
-    //public void AnimDashCooling() { anim.SetInteger("States", (int)PlayerEnums.STATES.MOVEMENT); movementControl.DashCooling(); }
     #endregion
 }

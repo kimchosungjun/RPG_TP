@@ -4998,13 +4998,13 @@ GameObject:
   - component: {fileID: 1142371896071607783}
   - component: {fileID: 7869435565422693471}
   - component: {fileID: 6746614451233925934}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GUIDED_FIRE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1142371896071607783
 Transform:
   m_ObjectHideFlags: 0
@@ -5056,6 +5056,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyLayer: 8
+  attackData:
+    hitEffectType: 0
+    attackValue: 0
+    effectMaintainTime: 0
+  conditionData:
+    conditionStat: 0
+    conditionContinuity: 0
+    applyType: 0
+    conditionValue: 0
+    multiplier: 0
+    maxConditionTime: 0
+    effectConditionTime: 0
+    isEndConditionTime: 0
   overlapRange: 3
   particleAction: {fileID: 7869435565422693471}
 --- !u!1 &4719213425200694963

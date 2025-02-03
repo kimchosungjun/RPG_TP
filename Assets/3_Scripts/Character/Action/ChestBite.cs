@@ -23,6 +23,7 @@ public class ChestBite : MonsterAttackAction
         conditionData.SetData(stat, conditionActionData.GetEffect, conditionActionData.GetAttribute,
             conditionActionData.GetConditionType, conditionActionData.GetDefaultValue, conditionActionData.GetMaintainTime, conditionActionData.GetMultiplier);
         nearAttack.SetTransferData(attackData, conditionData);
+        nearAttack.DoAttack();
     }
 
     public override void StopAttack() { nearAttack.StopAttack(); }
