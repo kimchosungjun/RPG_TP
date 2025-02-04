@@ -461,6 +461,16 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1890610889013014561, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482851218598158197, guid: 2123512c0ff8de04e940ab9f56dfc533,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6781938334281227997, guid: 2123512c0ff8de04e940ab9f56dfc533,
         type: 3}
       propertyPath: m_RootOrder

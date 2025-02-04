@@ -82,6 +82,16 @@ namespace UtilEnums
         SFX=2
     }
 
+    public enum BGMCLIPS
+    {
+
+    }
+
+    public enum SFXCLIPS
+    {
+
+    }
+
     public enum LAYERS
     {
         DEFAULT = 0,
