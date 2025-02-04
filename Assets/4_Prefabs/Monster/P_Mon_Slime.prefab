@@ -395,7 +395,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -464,6 +464,7 @@ MonoBehaviour:
   initMonsterData:
     monsterType: 2
     monsterLevel: 8
+    monsterDropID: 0
   statusUI: {fileID: 4809575611063248073}
   nearCombatRange: 2
   farCombatRange: 4

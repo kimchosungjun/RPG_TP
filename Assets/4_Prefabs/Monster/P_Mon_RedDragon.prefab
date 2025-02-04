@@ -946,7 +946,7 @@ Transform:
   - {fileID: 1161012658089502613}
   - {fileID: 7431155645305437373}
   - {fileID: 7887672086262979247}
-  - {fileID: 5816968565243690005}
+  - {fileID: 9154378372728062581}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   anim: {fileID: 4954448813450426686}
   monsterStatControl: {fileID: 8632270972948011611}
   nav: {fileID: 4622697291569473080}
-  monsterFinder: {fileID: 2923090609491668657}
+  monsterFinder: {fileID: 513414600881393873}
   monsterStat:
     actorName: 
     maxHp: 0
@@ -1024,6 +1024,7 @@ MonoBehaviour:
   initMonsterData:
     monsterType: 5
     monsterLevel: 20
+    monsterDropID: 0
   statusUI: {fileID: 0}
   attackControl: {fileID: 1187298642741050657}
   attackRange: 5
@@ -1119,7 +1120,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -3730,7 +3731,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b71972bd20803e40878aa45336bc343, type: 3}
---- !u!114 &2923090609491668657 stripped
+--- !u!114 &513414600881393873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,
     type: 3}
@@ -3742,7 +3743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ecdd4e2278d8645af33ef3f1da331b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5816968565243690005 stripped
+--- !u!4 &9154378372728062581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 589363454752980668, guid: 7b71972bd20803e40878aa45336bc343,
     type: 3}

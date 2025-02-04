@@ -169,7 +169,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -226,11 +226,12 @@ MonoBehaviour:
   initMonsterData:
     monsterType: 0
     monsterLevel: 2
+    monsterDropID: 0
   statusUI: {fileID: 8605150476394795920}
   nearCombatRange: 2
   farCombatRange: 5
-  bite: {fileID: 0}
-  rush: {fileID: 0}
+  bite: {fileID: 7502360780661044192}
+  rush: {fileID: 7709223847081897869}
 --- !u!114 &3715980348561429941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,6 +1085,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b60f4226fc091404599374611c7bde54, type: 3}
+--- !u!114 &7709223847081897869 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4807228378600016753, guid: b60f4226fc091404599374611c7bde54,
+    type: 3}
+  m_PrefabInstance: {fileID: 2903166461942490364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4589851fa8050694f9c0c2b964bdf8de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7976177535142652961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5114696879565179101, guid: b60f4226fc091404599374611c7bde54,
@@ -1173,6 +1186,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b60f4226fc091404599374611c7bde54, type: 3}
+--- !u!114 &7502360780661044192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4807228378600016753, guid: b60f4226fc091404599374611c7bde54,
+    type: 3}
+  m_PrefabInstance: {fileID: 3074562015012731025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4589851fa8050694f9c0c2b964bdf8de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7804743009575514188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5114696879565179101, guid: b60f4226fc091404599374611c7bde54,

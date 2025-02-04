@@ -37335,6 +37335,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedDragon_DragonNest
       objectReference: {fileID: 0}
+    - target: {fileID: 8857270063257455437, guid: c63f0d8e23e77bc4e91d78e8a5ac41be,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

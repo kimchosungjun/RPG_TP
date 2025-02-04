@@ -18,8 +18,8 @@ public class ChestMonster : StandardMonster
     bool isDoMoveNearPlayer = false;
 
     [Header("Chest Attack")]
-    [SerializeField] ChestBite bite;
-    [SerializeField] ChestRush rush;
+    [SerializeField] MonsterTriggerAttackAction bite;
+    [SerializeField] MonsterTriggerAttackAction rush;
     Sequence chestBTRoot = null;
 
     #region Life Cycle

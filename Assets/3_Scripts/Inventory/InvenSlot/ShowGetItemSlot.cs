@@ -11,11 +11,24 @@ public class ShowGetItemSlot : MonoBehaviour
     [SerializeField] Text getText;
     [SerializeField] Animator anim;
     WaitForSeconds showTime = new WaitForSeconds(2f);
+    Sprite moneyIcon = null;
 
     public void ShowSlot(ItemData _itemData)
     {
+        if (_itemData.IsMoney())
+        {
+            ShowSlot(_itemData.itemCnt);
+            return;
+        }
         iconImage.sprite = _itemData.GetIcon;
         getText.text = _itemData.itemName + " X " + _itemData.itemCnt;
+        this.gameObject.SetActive(true);
+    }
+
+    public void ShowSlot(int _GetMoney)
+    {
+        iconImage.sprite = moneyIcon;
+        getText.text = $"골드 X {_GetMoney}";
         this.gameObject.SetActive(true);
     }
 
@@ -40,14 +53,13 @@ public class ShowGetItemSlot : MonoBehaviour
 
     IEnumerator CInActive()
     {
-        //iconImage.gameObject.SetActive(false);
-        //getText.gameObject.SetActive(false);
         anim.Play("GetSlotInActive");
         yield break;
     }
 
     internal void SetImages()
     {
+        moneyIcon = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas_2", "Gold_Icon");
         slotFrameImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Slot_Atlas","Get_Item");
     }
 }

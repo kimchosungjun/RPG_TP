@@ -1772,6 +1772,7 @@ MonoBehaviour:
   initMonsterData:
     monsterType: 1
     monsterLevel: 3
+    monsterDropID: 3
   statusUI: {fileID: 8076422825904239986}
   nearCombatRange: 2
   farCombatRange: 10

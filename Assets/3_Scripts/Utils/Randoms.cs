@@ -30,4 +30,9 @@ public class Randoms
             return 1f;
         }
     }
+    
+    public static bool IsInProbability(float _percent)
+    {
+        return Random.value < _percent;
+    }
 }

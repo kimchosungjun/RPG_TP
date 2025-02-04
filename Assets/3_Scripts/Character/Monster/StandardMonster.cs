@@ -53,8 +53,5 @@ public class StandardMonster : BaseMonster
 
     protected override void CreateStates() { }
 
-    public override void AnnounceStatusUI()
-    {
-        statusUI.UpdateStatusData();
-    }
+    public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
 }

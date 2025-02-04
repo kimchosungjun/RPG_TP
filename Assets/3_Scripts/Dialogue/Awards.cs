@@ -2,13 +2,13 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public interface IQuestAwards 
+public interface IAwards 
 {
     public void GetAward();
 }
 
 [Serializable]
-public class AwardGroup : IQuestAwards
+public class AwardGroup : IAwards
 {
     [SerializeField] List<ExpAward> expAwards;
     [SerializeField] List<ItemAward> itemAwards;
@@ -35,7 +35,7 @@ public class AwardGroup : IQuestAwards
 #region Exp
 
 [Serializable]
-public class ExpAward : IQuestAwards
+public class ExpAward : IAwards
 {
     public int awardAmount;
 
@@ -50,7 +50,7 @@ public class ExpAward : IQuestAwards
 #region Item
 
 [Serializable]
-public class ItemAward : IQuestAwards
+public class ItemAward : IAwards
 {
     public ItemEnums.ITEMTYPE itemType;
     public ItemEnums.ITEMID itemID;
@@ -117,7 +117,7 @@ public class ItemAward : IQuestAwards
 #region Character
 
 [Serializable]
-public class CharacterAward : IQuestAwards
+public class CharacterAward : IAwards
 {
     [SerializeField] PlayerEnums.TYPEIDS playerID;
     public void GetAward()

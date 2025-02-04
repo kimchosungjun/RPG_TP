@@ -3,6 +3,7 @@ using MonsterEnums;
 using System;
 using System.Collections;
 using UnityEngine.AI;
+using MonsterTableClassGroup;
 
 [RequireComponent(typeof(MonsterStatControl))]
 public abstract class BaseMonster : BaseActor
@@ -128,8 +129,8 @@ public abstract class BaseMonster : BaseActor
     #region Announce Area & Spawn 
     public virtual void AnnounceInMonsterArea() { IsInMonsterArea = true; } 
     public virtual void AnnounceOutMonsterArea() { IsInMonsterArea = false; ReturnToSpawnPosition(); }
-    public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); } // 애니메이션 설정하기
-    public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject);  } // 스탯 원래대로 만들기 추가 
+    public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); GetDropItem(); } 
+    public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject);  } 
     #endregion
 
     #region Return To Spawn Position
@@ -201,28 +202,80 @@ public abstract class BaseMonster : BaseActor
     }
     #endregion
 
-    /// <summary>
-    /// Must Override
-    /// </summary>
-    protected abstract void CreateStates();
-
     #region Must Override Methods
-
+    protected abstract void CreateStates();
     public abstract void AnnounceStatusUI();
     public virtual void Revival() 
     {
         isDeathState = false;
         SetDefaultLayerType();
     }
+    #endregion
+
+    #region Drop
+
+    public virtual void GetDropItem()
+    {
+        MonsterDropTableData dropData = SharedMgr.TableMgr.GetMonster.GetMonsterDropTableData(initMonsterData.monsterDropID);
+        if (dropData == null)
+            return;
+
+        int dropGold = dropData.dropGold;
+        InventoryMgr inven = SharedMgr.InventoryMgr; 
+        
+        // Gold
+        if(dropGold > 0)
+        {
+            ItemData goldData = new ItemData(ItemEnums.ITEMTYPE.ITEM_GOLD, dropGold);
+            inven.AddGold(dropGold);
+            inven.ShowGetSlot(goldData);
+        }
+
+        // Exp
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.GetPlayerStatControl.GetExp(dropData.dropExp);
+
+        // Item
+        EtcData etcData = new EtcData();
+        int dropItemTypeCnt = dropData.itemIDs.Length;
+
+        int quantity = 0;
+        bool isChoiceQuantity = false;
+        int quantityProbabilityCnt = dropData.quantityProbabilities.Length;
+        for (int k = 1; k < quantityProbabilityCnt; k++)
+        {
+            if (Randoms.IsInProbability(dropData.quantityProbabilities[k]))
+            {
+                isChoiceQuantity = true;
+                quantity = dropData.minQuantity + k;
+                break;
+            }
+        }
+        if (isChoiceQuantity == false)
+            quantity = dropData.minQuantity;
+
+        for (int i=1; i<dropItemTypeCnt; i++)
+        {
+            if(Randoms.IsInProbability(dropData.itemDropProbabilities[i]) == true)
+            {
+                etcData.SetData(SharedMgr.TableMgr.GetItem.GetEtcTableData(dropData.itemIDs[i]), quantity);
+                inven.AddItem(etcData);
+                return;
+            }
+        }
+
+        etcData.SetData(SharedMgr.TableMgr.GetItem.GetEtcTableData(dropData.itemIDs[0]), quantity);
+        inven.AddItem(etcData);
+    }
 
     #endregion
 }
 
-#region Monster Lv, Type Class Data
+#region Monster Lv, Type, DropID Class Data
 [Serializable]
 public class InitMonsterData
 {
     public TYPEIDS monsterType;
     public int monsterLevel;
+    public int monsterDropID;
 }
 #endregion
