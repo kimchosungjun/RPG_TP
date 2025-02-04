@@ -61,7 +61,7 @@ Shader "CS_Mosaic/Mosaic"
 					(floor(i.texcoord * _TilingX) / _TilingX,
 						floor(i.texcoord * _TilingY) / _TilingY));
 
-					UNITY_APPLY_FOG(i.fogCoord, col);
+					UNITY_APPLY_FOG(i.fogCoord, c);
 
 					return c * _Brightness;
 				}
