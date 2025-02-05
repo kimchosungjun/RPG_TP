@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public partial class SoundMgr : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
-    AudioSource bgmSource;
+    [SerializeField] AudioSource[] bgmSources;
     AudioSource sfxSource;
 
     float masterVolume = 0f;
@@ -13,8 +14,8 @@ public partial class SoundMgr : MonoBehaviour
 
     public void Init()
     {
-        if(bgmSource==null)bgmSource=transform.Find("BGM").GetComponent<AudioSource>();
-        bgmSource.loop = true;
+        bgmSources[0].loop = true;
+        bgmSources[1].loop = true;
         if(sfxSource == null) sfxSource = transform.Find("SFX").GetComponent<AudioSource>();
         SharedMgr.SoundMgr = this;
     }
@@ -33,14 +34,33 @@ public partial class SoundMgr : MonoBehaviour
 
     public void PlayBGM(string _bgm)
     {
+        if (bgmSources[0].clip !=null)
+        {
+            bgmSources[0].Stop();
+            bgmSources[0].clip = null;
+        }    
+
+        _bgm = "BGM/" + _bgm;
         Object obj = Resources.Load(_bgm);
         if (obj == null)    // obj = null 이 성립되기 때문에 실수로 지우면 사운드 플레이 버그가 발생하지만 찾기가 어렵다.
             return;
         AudioClip clip = obj as AudioClip;
         if (null == clip)
             return;
-        bgmSource.clip = clip;
-        bgmSource.Play();
+        bgmSources[0].clip = clip;
+        bgmSources[0].Play();
+    }
+
+    public void PlayBGM(UtilEnums.BGMCLIPS _bgmClip)
+    {
+        
+    }
+
+    IEnumerator CFadeBGM()
+    {
+        float time = 0f;
+
+        yield return new WaitForFixedUpdate();
     }
 
     public void PlayerEffect(string _effect)

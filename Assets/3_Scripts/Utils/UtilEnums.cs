@@ -84,6 +84,7 @@ namespace UtilEnums
 
     public enum BGMCLIPS
     {
+        LOGINBGM,
 
     }
 
