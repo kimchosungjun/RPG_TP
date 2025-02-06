@@ -62,11 +62,11 @@ public class LoadingView : MonoBehaviour
         float fillValue = 0;
         while (time < fillAllTimer)
         {
-            time += Time.deltaTime;
+            time += Time.fixedDeltaTime;
             fillValue = Mathf.Lerp(startPoint, endPoint, time / fillAllTimer);
             percentSlider.value = fillValue;
             percentText.text= (int)fillValue + "%";
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         percentSlider.value = 100;
         percentText.text = "100%";

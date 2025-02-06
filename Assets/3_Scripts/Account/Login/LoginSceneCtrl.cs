@@ -10,6 +10,7 @@ public class LoginSceneCtrl : MonoBehaviour
     {
         if (loginUICtrl == null)
             loginUICtrl = FindObjectOfType<LoginUICtrl>();
+        SharedMgr.SoundMgr.PlayBGM(UtilEnums.BGMCLIPS.LOGIN_BGM, false);
     }
 
 

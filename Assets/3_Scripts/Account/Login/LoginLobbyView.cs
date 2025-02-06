@@ -55,6 +55,7 @@ public class LoginLobbyView : MonoBehaviour
         serverTexts[1].text = playerCnt + "/4";
         serverTexts[0].color = serverStateColors[playerCnt];
         serverTexts[1].color = serverStateColors[playerCnt];
+        serverIndicatorImages[0].fillAmount = (float)playerCnt / 4;
     }
 
     public void SetImage()

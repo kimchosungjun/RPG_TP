@@ -84,8 +84,11 @@ namespace UtilEnums
 
     public enum BGMCLIPS
     {
-        LOGINBGM,
-
+        LOGIN_BGM,
+        CAVE_BGM,
+        TOWN_BGM,
+        DRAGONNEST_BGM,
+        NONE
     }
 
     public enum SFXCLIPS
