@@ -90,6 +90,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     {
         hpTarget = stat.GetSaveStat.currentHP;
         hpText.text = hpTarget + "/" + stat.MaxHP;
+        hpImages[1].fillAmount = (float)hpTarget/stat.MaxHP;
         if (updateHp == false)
         {
             updateHp = true;

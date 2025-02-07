@@ -20,6 +20,8 @@ public class PlayerCtrl : MonoBehaviour
     public int GetCurrentPlayerIndex { get { return currentPlayerIndex; } }
     public BasePlayer GetPlayer { get { return players[currentPlayerIndex]; } }
     public List<BasePlayer> GetPlayers { get { return players; } }
+
+    //[SerializeField] FootStepPlayer footStepPlayer;
     #endregion
 
     #region Life Cycle
@@ -80,10 +82,8 @@ public class PlayerCtrl : MonoBehaviour
                 return;
             }
         }
-
-        // To Do ~~~~~
-        // 죽음 UI를 보여줘야 한다.
-        Debug.Log("모든 플레이어가 사망..");
+        SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.ActiveGameOver();
+        SetPlayerControl(true);
     }
 
     public void PressChangePlayer(int _index) { ChangePlayer(_index); }
@@ -113,7 +113,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else
         {
-              if (players[currentPlayerIndex].GetCanChangeState == false)
+            if (players[currentPlayerIndex].GetCanChangeState == false)
             {
                 changeUI.ShowWarnText(UIEnums.CHANGE.CANNOTCHANGE);
                 return;
@@ -268,8 +268,35 @@ public class PlayerCtrl : MonoBehaviour
 
     #endregion
 
+    #region Heal All Player
+
+    public void HealAllPlayer()
+    {
+        int cnt = players.Count;
+        for(int i=0; i<cnt; i++)
+        {
+            players[i].GetPlayerStatControl.InHealField();
+        }
+    }
+
+    public void MoveToNearTown()
+    {
+        int cnt = players.Count;
+        for (int i = 0; i < cnt; i++)
+        {
+            players[i].GetPlayerStatControl.InHealField();
+        }
+        players[currentPlayerIndex].transform.position = new Vector3(212, 0.1f, 153);
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetMoveRockCamera(false);
+        StartCoroutine(CReleaseDeathState());
+    }
+
+    IEnumerator CReleaseDeathState() { yield return new WaitForSeconds(1f); SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.FadeIn(ReleaseMoveLock); }
+
+    #endregion
+
     /**********************************************/
-    /*************** 대화 설정 ******************/
+    /*************** 상태 설정 ******************/
     /**********************************************/
 
     #region Conversation Control
@@ -277,6 +304,24 @@ public class PlayerCtrl : MonoBehaviour
     public void EndConversation() { players[currentPlayerIndex].GetPlayerMovementControl.EndConversation(); }
 
     #endregion
+
+    #region Character Move Control
+
+    public void SetPlayerControl(bool _isLockPlayerControl)
+    {
+        isLockPlayerControl = _isLockPlayerControl;
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetMoveRockCamera(_isLockPlayerControl);
+    }
+
+    public void ReleaseMoveLock() { SetPlayerControl(false); }
+
+    #endregion
+
+
+    /**********************************************/
+    /*************** 소리 설정 ******************/
+    /**********************************************/
+    //public void FootStep() { footStepPlayer.SoundFootStep(); }
 }
 
 

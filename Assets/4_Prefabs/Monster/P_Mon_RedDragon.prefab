@@ -1025,7 +1025,7 @@ MonoBehaviour:
   initMonsterData:
     monsterType: 5
     monsterLevel: 20
-    monsterDropID: 0
+    monsterDropID: 11
   statusUI: {fileID: 0}
   attackControl: {fileID: 1187298642741050657}
   attackRange: 5

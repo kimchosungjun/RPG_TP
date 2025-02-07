@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class EliteMonster : BaseMonster
 {
+    #region Status Value (UI & Gauge)
 
     [SerializeField] protected EliteMonsterStatusUI statusUI = null;
     protected EliteGauge eliteGauge = new EliteGauge();
-
-    public override void AnnounceStatusUI()
-    {
-        statusUI.UpdateStatusData();
-    }
-
-    protected override void CreateStates() {  }
-
     public class EliteGauge
     {
         float groggyGauge = 100f;
@@ -30,7 +23,7 @@ public class EliteMonster : BaseMonster
 
         public void CheckGroggy()
         {
-            if(groggyGauge <= 0f)
+            if (groggyGauge <= 0f)
             {
                 // To Do Announce
                 countGroggy = false;
@@ -49,4 +42,35 @@ public class EliteMonster : BaseMonster
             CheckGroggy();
         }
     }
+
+    #endregion
+
+    // Common 
+    public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
+    
+    protected override void CreateStates() { }
+
+    #region Go Off Aggro
+    public override void GoOffAggro()
+    {
+        if (isGoOffAggro) return;
+        StartCoroutine(CGoOffAggro());
+    }
+
+    IEnumerator CGoOffAggro()
+    {
+        isGoOffAggro = true;
+        nav.SetDestination(SpawnPosition);
+        nav.stoppingDistance = 0;
+        while (true)
+        {
+            if (isGoOffAggro == false) yield break;
+            if (nav.remainingDistance < toOriginalStopDistance) break;
+            yield return new WaitForFixedUpdate();
+        }
+        nav.stoppingDistance = toPlayerStopDistance;
+        isGoOffAggro = false;
+        //ChangeAnimation(STATES.IDLE);
+    }
+    #endregion
 }

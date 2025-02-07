@@ -37,6 +37,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] DashGaugeUI dashGaugeUI;
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
 
+
     [Header("Overlap")]
     [SerializeField] SubBossStatusUI bossStatusUI;
     [SerializeField] PlayerStatusUI playerStatusUI;
@@ -49,6 +50,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
     [SerializeField] SoundControlUI soundControlUI;
+    [SerializeField] IndicatorUI IndicatorUI;
 
     public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
@@ -61,6 +63,7 @@ public class GameUICtrl : MonoBehaviour
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     public SoundControlUI SoundControlUI { get { return soundControlUI; } }
+    public IndicatorUI GetIndicatorUI { get { return IndicatorUI; } }
 
     // 나중에 Awake로 변경
     private void Awake()
@@ -108,6 +111,7 @@ public class GameUICtrl : MonoBehaviour
         questUI.Init();
         dialogueUI.Init();
         soundControlUI.Init();
+        IndicatorUI.Init();
     }
 
     private void Update()

@@ -6,8 +6,7 @@ public class BasePlayer : BaseActor
     #region Value
     protected int id;
     protected bool isAlive = true;
-    //[SerializeField] int id;
-    [Header("플레이어 상태 UI"), SerializeField]protected PlayerStatusUI playerStatusUI; 
+    protected PlayerStatusUI playerStatusUI; 
     [Header("플레이어 스탯"), SerializeField]protected PlayerStat playerStat; 
     [Header("플레이어 행동 관리"), SerializeField] protected PlayerActionControl playerActionControl;
     [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; 
@@ -31,7 +30,7 @@ public class BasePlayer : BaseActor
 
     // Call Immediately : Show Animation
     public void DoDeathState() { playerMovementControl.Death(); isAlive = false; }
-    public void DoRevival() { InitState(); isAlive = true; }
+    public void DoRevival() { InitState(); isAlive = true; SetDefaultLayerType(); }
     public void InitState() { playerMovementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
     public bool GetCanChangeState { get { return playerMovementControl.CanChangePlayer; } }
     public void SetTransform(Vector3 _position, Quaternion _rotation, Vector3 _velocity)
@@ -72,6 +71,10 @@ public class BasePlayer : BaseActor
     }
     public override void ApplyCondition(TransferConditionData _conditionData) { playerStatControl.AddCondition(_conditionData);  }
 
+    #endregion
+
+    #region Foot Step
+    //public void FootStep() { SharedMgr.GameCtrlMgr.GetPlayerCtrl.FootStep(); }
     #endregion
 
     /****************************************/

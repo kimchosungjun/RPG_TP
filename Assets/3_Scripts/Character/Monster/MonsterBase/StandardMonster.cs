@@ -64,6 +64,31 @@ public class StandardMonster : BaseMonster
     // Relate State
     public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
 
+    #region Go Off Aggro
+
+    public override void GoOffAggro()
+    {
+        if (isGoOffAggro) return;
+        StartCoroutine(CGoOffAggro());
+    }
+
+    IEnumerator CGoOffAggro()
+    {
+        isGoOffAggro = true;
+        nav.SetDestination(SpawnPosition);
+        nav.stoppingDistance = 0;
+        while (true)
+        {
+            if (isGoOffAggro == false) yield break;
+            if (nav.remainingDistance < toOriginalStopDistance) break;
+            yield return new WaitForFixedUpdate();
+        }
+        nav.stoppingDistance = toPlayerStopDistance;
+        isGoOffAggro = false;
+        ChangeAnimation(STATES.IDLE);
+    }
+    #endregion
+
     #region Apply Damage (Stat & State)
     public override void ApplyStatTakeDamage(TransferAttackData _attackData)
     {

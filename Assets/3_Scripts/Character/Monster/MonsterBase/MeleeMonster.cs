@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class MeleeMonster : StandardMonster
 {
-    [Header("Attacks")]
+    [Header("Ranged Attack")]
     [SerializeField] MonsterTriggerAttackAction bite;
     [SerializeField] MonsterTriggerAttackAction rush;
-    Sequence chestBTRoot = null;
+    Sequence rangedBTRoot = null;
     List<ITriggerAttack> triggerAttacks = new List<ITriggerAttack>();
 
-    #region Start : Set Data & Create BT States
+    #region Start
     protected override void Start()
     {
         base.Start();
@@ -23,9 +23,6 @@ public class MeleeMonster : StandardMonster
 
     protected override void CreateStates()
     {
-        // Near : Bite
-        // Far : Rush
-
         #region First BT States : Detect & Do Idle
         // Level 2 
         List<Node> doIdleStatesGroup = new List<Node>();
@@ -83,7 +80,7 @@ public class MeleeMonster : StandardMonster
         virusBTGroup.Add(doNearAttackCoolTimeSequence);
 
         // Root
-        chestBTRoot = new Sequence(virusBTGroup);
+        rangedBTRoot = new Sequence(virusBTGroup);
         #endregion
     }
     #endregion
@@ -92,7 +89,7 @@ public class MeleeMonster : StandardMonster
     protected override void FixedUpdate()
     {
         if (isDeathState) return;
-        chestBTRoot.Evaluate();
+        rangedBTRoot.Evaluate();
         statusUI.FixedExecute();
     }
     #endregion
@@ -180,6 +177,7 @@ public class MeleeMonster : StandardMonster
         if (rush.GetCoolDown)
         {
             isDoAnimation = true;
+            transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             anim.SetInteger("Attack", 1);
             anim.SetInteger("MState", (int)STATES.ATTACK);
             return NODESTATES.FAIL;
@@ -205,7 +203,7 @@ public class MeleeMonster : StandardMonster
     {
         if (bite.GetCoolDown)
         {
-            transform.LookAt(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
+            transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             isDoAnimation = true;
             anim.SetInteger("Attack", 0);
             anim.SetInteger("MState", (int)STATES.ATTACK);
@@ -242,7 +240,7 @@ public class MeleeMonster : StandardMonster
             nav.ResetPath();
     }
 
-    public void DoBite() { bite.StopAttack(); }
+    public void DoBite() { bite.DoAttack(); }
     public void StopBite() { bite.StopAttack(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
     #endregion
 
@@ -293,22 +291,15 @@ public class MeleeMonster : StandardMonster
     public override void EscapeHitState()
     {
         base.EscapeHitState();
-        InActiveTriggerAttacks();
-    }
-    
-    private void InActiveTriggerAttacks()
-    {
-        int triggerAttackCnt = triggerAttacks.Count;
-        for(int i=0; i<triggerAttackCnt; i++)
-        {
-            triggerAttacks[i].InActiveTrigger();
-        }
+        triggerAttacks[0].InActiveTrigger();
+        triggerAttacks[1].InActiveTrigger();
     }
 
     public override void Death()
     {
         base.Death();
         nav.ResetPath();
-        InActiveTriggerAttacks();
+        triggerAttacks[0].InActiveTrigger();
+        triggerAttacks[1].InActiveTrigger();   
     }
 }

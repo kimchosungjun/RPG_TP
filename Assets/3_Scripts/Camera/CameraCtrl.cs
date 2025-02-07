@@ -64,5 +64,10 @@ public class CameraCtrl : MonoBehaviour
     {
         talkView.EndTalk(ResetMoveLockView);
     }
+
+    public void SetMoveRockCamera(bool _isLock)
+    {
+        isMoveLock = _isLock;
+    }
     #endregion
 }

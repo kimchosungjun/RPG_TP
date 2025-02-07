@@ -41,6 +41,13 @@ public class PlayerStatControl : ActorStatControl
         SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.HP);
         if (playerStat.GetSaveStat.currentHP <= 0) Death();
     }
+
+    public void InHealField()
+    {
+        if(playerStat.GetSaveStat.currentHP <= 0) player.DoRevival();
+        PlayerStat.GetSaveStat.currentHP = playerStat.MaxHP;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.HP);
+    }
     #endregion
 
     #region Death

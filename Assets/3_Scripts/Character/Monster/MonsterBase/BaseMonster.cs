@@ -155,26 +155,7 @@ public abstract class BaseMonster : BaseActor
 
     #region Go Off Aggro
     protected bool isGoOffAggro = false;
-    public void GoOffAggro()
-    {
-        if (isGoOffAggro) return;
-        StartCoroutine(CGoOffAggro());
-    }
-
-    IEnumerator CGoOffAggro()
-    {
-        isGoOffAggro = true;
-        nav.SetDestination(SpawnPosition);
-        nav.stoppingDistance = 0;
-        while (true)
-        {
-            if (isGoOffAggro == false) yield break;
-            if (nav.remainingDistance < toOriginalStopDistance) break;
-            yield return new WaitForFixedUpdate();
-        }
-        nav.stoppingDistance = toPlayerStopDistance;
-        isGoOffAggro = false;
-    }
+    public abstract void GoOffAggro();
     #endregion
     
     #region Recovery

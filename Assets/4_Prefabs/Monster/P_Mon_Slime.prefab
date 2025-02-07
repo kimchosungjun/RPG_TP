@@ -464,8 +464,8 @@ MonoBehaviour:
   sfxPlayer: {fileID: 715085908143587896}
   initMonsterData:
     monsterType: 2
-    monsterLevel: 8
-    monsterDropID: 0
+    monsterLevel: 6
+    monsterDropID: 3
   statusUI: {fileID: 4809575611063248073}
   nearCombatRange: 2
   farCombatRange: 4

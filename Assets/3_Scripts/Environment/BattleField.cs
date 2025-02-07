@@ -131,11 +131,11 @@ public class BattleField : MonoBehaviour
     {
         if (_baseMonsterObject.activeSelf == true)
         {
-            _baseMonsterObject.SetActive(false);
             RespawnChecker checker = new RespawnChecker();
             checker.SetRespawnInfo(_baseMonsterObject.GetComponent<BaseMonster>());
             respawnMonsters.Add(checker);
             isWaitRespawn = true;
+            _baseMonsterObject.SetActive(false);
         }
     }
 
