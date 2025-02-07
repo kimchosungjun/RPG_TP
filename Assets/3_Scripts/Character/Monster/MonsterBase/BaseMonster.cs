@@ -13,7 +13,7 @@ public abstract class BaseMonster : BaseActor
     /**********  NavMesh Agent  ***********/
     /******************************************/
 
-    #region Value : Animator, StatControl, Navmesh 
+    #region Value : Animator, StatControl, Navmesh, Audio
     [Header("Component"), SerializeField] protected Animator anim = null;
     [SerializeField] protected MonsterStatControl monsterStatControl;
     [SerializeField] protected NavMeshAgent nav;
@@ -23,6 +23,7 @@ public abstract class BaseMonster : BaseActor
     [SerializeField] protected MonsterStat monsterStat;
     public Animator GetAnim { get { return anim; } }    
     public MonsterStat GetMonsterStat { get { return monsterStat; } }
+    [SerializeField] SFXPlayer sfxPlayer; 
     protected bool isDeathState = false;
     #endregion
 

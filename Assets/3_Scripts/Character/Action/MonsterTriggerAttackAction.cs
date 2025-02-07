@@ -2,7 +2,7 @@ using UnityEngine;
 using MonsterEnums;
 using PoolEnums;
 
-public class MonsterTriggerAttackAction : MonsterAttackAction
+public class MonsterTriggerAttackAction : MonsterAttackAction, ITriggerAttack
 {
     [SerializeField] TriggerAttackAction nearAttack = null;
     [SerializeField] ATTACK_ACTIONS attackAction = ATTACK_ACTIONS.NONE;
@@ -45,4 +45,6 @@ public class MonsterTriggerAttackAction : MonsterAttackAction
         particleTF.position = position;
         particleTF.gameObject.SetActive(true);
     }
+
+    public void InActiveTrigger() { nearAttack.StopAttack(); }
 }

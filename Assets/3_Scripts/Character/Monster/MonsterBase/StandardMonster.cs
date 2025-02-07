@@ -103,7 +103,7 @@ public class StandardMonster : BaseMonster
         isDoAnimation = false;
     }
 
-    public void EscapeHitState()
+    public virtual void EscapeHitState()
     {
         if (isDeathState) return;
         isDoAnimation = false;

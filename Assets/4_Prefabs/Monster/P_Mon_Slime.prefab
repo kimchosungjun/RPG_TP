@@ -30,7 +30,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8019454852034469156}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 87.5031, y: -14.062477, z: 255.93753}
 --- !u!1 &458424879492469848
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ Transform:
   - {fileID: 5104534303133763282}
   m_Father: {fileID: 3406225094427531926}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.988676e-15, y: 2.4907571e-15, z: -24.273623}
 --- !u!1 &822643894582855351
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5416029267172646887}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.5763323, y: -90, z: 0}
 --- !u!1 &871635689569201924
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ Transform:
   - {fileID: 8513152528952808401}
   m_Father: {fileID: 6272408359116470582}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.1998818e-15, y: -180, z: 61.47827}
 --- !u!1 &4057265748381356174
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8019454852034469156}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 66.59254, y: 90, z: 0}
 --- !u!1 &5439861961984808950
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ Transform:
   - {fileID: 5416029267172646887}
   m_Father: {fileID: 1527949966216410032}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -67.60852}
 --- !u!1 &5605120359558981484
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +461,7 @@ MonoBehaviour:
     boostSpeed: 0
     attackValue: 0
     criticalValue: 0
+  sfxPlayer: {fileID: 715085908143587896}
   initMonsterData:
     monsterType: 2
     monsterLevel: 8
@@ -502,7 +503,7 @@ Transform:
   - {fileID: 8019454852034469156}
   m_Father: {fileID: 5416029267172646887}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -3.8373498e-15, y: 1.969816e-14, z: -14.912462}
 --- !u!1 &6980365750889957401
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +534,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8019454852034469156}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 79.0394, y: 90, z: 0}
 --- !u!1 &8418938212528698327
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +565,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5416029267172646887}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.5763323, y: -90, z: 0}
 --- !u!1 &8954863814792545137
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +596,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6272408359116470582}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 47.610226, y: -90, z: 0}
 --- !u!1001 &3779681574573173793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -783,13 +784,25 @@ PrefabInstance:
     - target: {fileID: 8668999176913685889, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
       propertyPath: m_Name
-      value: MonsterFinder
+      value: MonsterFunctions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b71972bd20803e40878aa45336bc343, type: 3}
+--- !u!114 &715085908143587896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5230270957420300672, guid: 7b71972bd20803e40878aa45336bc343,
+    type: 3}
+  m_PrefabInstance: {fileID: 4718041098551626680}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13dfca2945e6984585c2c514274f83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3566550645845108640 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,

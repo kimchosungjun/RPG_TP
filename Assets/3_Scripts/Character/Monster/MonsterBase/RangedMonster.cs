@@ -10,6 +10,7 @@ public class RangedMonster : StandardMonster
     [SerializeField] VirusSpread spread;
     [SerializeField] MonsterTriggerAttackAction rush;
     Sequence rangedBTRoot = null;
+    List<ITriggerAttack> triggerAttacks = new List<ITriggerAttack>();
 
     #region Start
     protected override void Start()
@@ -17,6 +18,7 @@ public class RangedMonster : StandardMonster
         base.Start();
         spread.SetData(monsterStat);
         rush.SetData(monsterStat);
+        triggerAttacks.Add(rush);
     }
 
     protected override void CreateStates()
@@ -32,10 +34,8 @@ public class RangedMonster : StandardMonster
         // Level 1
         List<Node> doDetectNearPlayer = new List<Node>();
         ActionNode detectNearPlayer = new ActionNode(DoDetectPlayer);
-        ActionNode checkDoIdleState = new ActionNode(DoIdleState);
         RandomSelector randomDoIdle = new RandomSelector(doIdleStatesGroup);
         doDetectNearPlayer.Add(detectNearPlayer);
-        doDetectNearPlayer.Add(checkDoIdleState);
         doDetectNearPlayer.Add(randomDoIdle);
         #endregion
 
@@ -125,8 +125,6 @@ public class RangedMonster : StandardMonster
             return NODESTATES.SUCCESS;
         return NODESTATES.FAIL;
     }
-
-    NODESTATES DoIdleState() { return NODESTATES.FAIL; }
 
     NODESTATES DoOnGuard()
     {
@@ -288,5 +286,17 @@ public class RangedMonster : StandardMonster
             nav.SetDestination(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
         }
         return NODESTATES.FAIL;
+    }
+
+    public override void EscapeHitState()
+    {
+        base.EscapeHitState();
+        triggerAttacks[0].InActiveTrigger();
+    }
+
+    public override void Death()
+    {
+        base.Death();
+        triggerAttacks[0].InActiveTrigger();
     }
 }

@@ -1,7 +1,6 @@
 using MonsterEnums;
 using System.Collections.Generic;
 using System.Collections;
-using EffectEnums;
 using UnityEngine;
 
 public class MeleeMonster : StandardMonster
@@ -10,6 +9,7 @@ public class MeleeMonster : StandardMonster
     [SerializeField] MonsterTriggerAttackAction bite;
     [SerializeField] MonsterTriggerAttackAction rush;
     Sequence chestBTRoot = null;
+    List<ITriggerAttack> triggerAttacks = new List<ITriggerAttack>();
 
     #region Start : Set Data & Create BT States
     protected override void Start()
@@ -17,6 +17,8 @@ public class MeleeMonster : StandardMonster
         base.Start();
         rush.SetData(monsterStat);
         bite.SetData(monsterStat);
+        triggerAttacks.Add(rush);
+        triggerAttacks.Add(bite);
     }
 
     protected override void CreateStates()
@@ -35,10 +37,8 @@ public class MeleeMonster : StandardMonster
         // Level 1
         List<Node> doDetectNearPlayer = new List<Node>();
         ActionNode detectNearPlayer = new ActionNode(DoDetectPlayer);
-        ActionNode checkDoIdleState = new ActionNode(DoIdleState);
         RandomSelector randomDoIdle = new RandomSelector(doIdleStatesGroup);
         doDetectNearPlayer.Add(detectNearPlayer);
-        doDetectNearPlayer.Add(checkDoIdleState);
         doDetectNearPlayer.Add(randomDoIdle);
         #endregion
 
@@ -128,8 +128,6 @@ public class MeleeMonster : StandardMonster
             return NODESTATES.SUCCESS;
         return NODESTATES.FAIL;
     }
-
-    NODESTATES DoIdleState() { return NODESTATES.FAIL; }
 
     NODESTATES DoOnGuard()
     {
@@ -290,5 +288,26 @@ public class MeleeMonster : StandardMonster
             nav.SetDestination(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position);
         }
         return NODESTATES.FAIL;
+    }
+
+    public override void EscapeHitState()
+    {
+        base.EscapeHitState();
+        InActiveTriggerAttacks();
+    }
+    
+    private void InActiveTriggerAttacks()
+    {
+        int triggerAttackCnt = triggerAttacks.Count;
+        for(int i=0; i<triggerAttackCnt; i++)
+        {
+            triggerAttacks[i].InActiveTrigger();
+        }
+    }
+
+    public override void Death()
+    {
+        base.Death();
+        InActiveTriggerAttacks();
     }
 }

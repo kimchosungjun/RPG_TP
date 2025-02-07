@@ -205,7 +205,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 507513978321700772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b198c504815f243b415a4ecca3c0b1, type: 3}
+  m_Script: {fileID: 11500000, guid: ae620f53e28be8943803f946d693906b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 206365286072177033}
@@ -223,13 +223,14 @@ MonoBehaviour:
     boostSpeed: 0
     attackValue: 0
     criticalValue: 0
+  sfxPlayer: {fileID: 2452073687183777125}
   initMonsterData:
     monsterType: 0
-    monsterLevel: 2
+    monsterLevel: 0
     monsterDropID: 0
   statusUI: {fileID: 8605150476394795920}
   nearCombatRange: 2
-  farCombatRange: 5
+  farCombatRange: 4
   bite: {fileID: 7502360780661044192}
   rush: {fileID: 7709223847081897869}
 --- !u!114 &3715980348561429941
@@ -1381,7 +1382,7 @@ PrefabInstance:
     - target: {fileID: 8668999176913685889, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
       propertyPath: m_Name
-      value: MonsterFinder
+      value: MonsterFunctions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1398,6 +1399,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7ecdd4e2278d8645af33ef3f1da331b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2452073687183777125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5230270957420300672, guid: 7b71972bd20803e40878aa45336bc343,
+    type: 3}
+  m_PrefabInstance: {fileID: 7679239619472233701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13dfca2945e6984585c2c514274f83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7115675659604224601 stripped

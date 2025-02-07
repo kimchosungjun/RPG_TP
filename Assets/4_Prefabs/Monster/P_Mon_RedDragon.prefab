@@ -948,7 +948,7 @@ Transform:
   - {fileID: 7887672086262979247}
   - {fileID: 9154378372728062581}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!95 &4954448813450426686
 Animator:
@@ -1021,6 +1021,7 @@ MonoBehaviour:
     boostSpeed: 0
     attackValue: 0
     criticalValue: 0
+  sfxPlayer: {fileID: 0}
   initMonsterData:
     monsterType: 5
     monsterLevel: 20
@@ -3721,10 +3722,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,
+        type: 3}
+      propertyPath: sightAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,
+        type: 3}
+      propertyPath: sightRange
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8668999176913685889, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
       propertyPath: m_Name
-      value: MonsterFinder
+      value: MonsterFunctions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
