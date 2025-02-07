@@ -11,6 +11,7 @@ public class LoginInputView : MonoBehaviour
     [SerializeField] InputField pwInput;
     [SerializeField] Text indicateText;
     [SerializeField] GameObject viewParent;
+    [SerializeField] Image exitBtnImage;
 
     float showTime = 0f;
     bool isShowWarnText = false;
@@ -37,6 +38,7 @@ public class LoginInputView : MonoBehaviour
         images[1].sprite = barSprite;
         images[2].sprite = btnSprite;
         images[3].sprite = btnSprite;
+        exitBtnImage.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Back_Icon");
     }
 
     public void ActiveView() { viewParent.SetActive(true); }
@@ -46,7 +48,7 @@ public class LoginInputView : MonoBehaviour
         string _id = idInput.text;
         string _password = pwInput.text;
         string _value = SharedMgr.SceneMgr.GetPlayerAccount(_id);
-        SharedMgr.SoundMgr.PressButtonSFX();
+
         if (SharedMgr.SceneMgr.IsExistID(_id) == false)
         {
             idInput.text = "";
@@ -65,6 +67,7 @@ public class LoginInputView : MonoBehaviour
             SharedMgr.UIMgr.LoginUICtrl.DoLobby();
             SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.LoadSaveData();
             viewParent.SetActive(false);
+            SharedMgr.SoundMgr.PressButtonSFX();
         }
         else
         {
@@ -79,7 +82,6 @@ public class LoginInputView : MonoBehaviour
         // 회원가입
         string _id = idInput.text;
         string _password = pwInput.text;
-        SharedMgr.SoundMgr.PressButtonSFX();
         if (_id.Length == 0 || _password.Length == 0)
         {
             ShowWarnText("ID와 비밀번호은 빈칸일 수 없습니다.");
@@ -92,6 +94,7 @@ public class LoginInputView : MonoBehaviour
         }
         else
         {
+            SharedMgr.SoundMgr.PressButtonSFX();
             SharedMgr.SceneMgr.SetPlayerAccount(_id, _password);
             ShowWarnText( "회원가입에 성공했습니다.");
             return;
@@ -100,6 +103,7 @@ public class LoginInputView : MonoBehaviour
 
     public void ShowWarnText(string _text)
     {
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.FAIL_SFX);
         indicateText.text = _text;
         showTime = 0;
         if (isShowWarnText)
@@ -122,5 +126,11 @@ public class LoginInputView : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    public void PressExitBtn()
+    {
+        //SharedMgr.SoundMgr.PressButtonSFX();
+        SharedMgr.UIMgr.LoginUICtrl.GetLoginLobbyView.PressGameExit();
     }
 }

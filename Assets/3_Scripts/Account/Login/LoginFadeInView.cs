@@ -7,6 +7,7 @@ public class LoginFadeInView : MonoBehaviour
 {
     [SerializeField] float fadeInTimer;
     [SerializeField] Image fadeInImage;
+    [SerializeField] GameObject blockObject;
 
     public void Init()
     {
@@ -40,5 +41,10 @@ public class LoginFadeInView : MonoBehaviour
         fadeInImage.gameObject.SetActive(false);
         SharedMgr.CursorMgr.SetCursor();
         SharedMgr.CursorMgr.SetCursorVisibleState(true);
+    }
+
+    public void SetBlock(bool _isActive)
+    {
+        blockObject.SetActive(_isActive);
     }
 }

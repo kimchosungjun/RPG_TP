@@ -17,6 +17,8 @@ public class LoginLobbyView : MonoBehaviour
     [SerializeField, Tooltip("0:Line, 1:Frame, 2:WarnFrame, 3:WarnButton")] Image[] serverIndicatorImages;
     [SerializeField, Tooltip("0:State, 1:Cnt")] Text[] serverTexts;
     [SerializeField] GameObject overFlowServerIndicator;
+    [SerializeField] Button gameStartBtn;
+    [SerializeField] Text gameStartText;
 
     string[] serverStateTexts = new string[5];
     [SerializeField] Color[] serverStateColors;
@@ -79,6 +81,9 @@ public class LoginLobbyView : MonoBehaviour
     #region Btn Function
     public void PressGameStart()
     {
+        gameStartBtn.interactable = false;
+        gameStartText.color = gameStartBtn.colors.disabledColor;
+        SharedMgr.UIMgr.LoginUICtrl.GetLoginFadeInView.SetBlock(true);
         connectText.StartPeriodAnimation(DecideEnterGame);
         SharedMgr.SoundMgr.PressButtonSFX();
     }
@@ -95,6 +100,9 @@ public class LoginLobbyView : MonoBehaviour
         {
             OverFlowServer();
             connectText.EndPeriodAnimation();
+            gameStartBtn.interactable = true;
+            gameStartText.color = gameStartBtn.colors.normalColor;
+            SharedMgr.UIMgr.LoginUICtrl.GetLoginFadeInView.SetBlock(false);
         }
     }
 
@@ -102,6 +110,7 @@ public class LoginLobbyView : MonoBehaviour
     {
         SharedMgr.SoundMgr.PressButtonSFX();
         decideExitView.SetActive(true);
+        SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.SetActiveEditWindow = true;
     }
 
     public void PressLogOut()
@@ -115,9 +124,12 @@ public class LoginLobbyView : MonoBehaviour
     {
 #if UNITY_EDITOR
         SharedMgr.SoundMgr.PressButtonSFX();
+        SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.SetActiveEditWindow = false;
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-    Application.Quit();
+        SharedMgr.SoundMgr.PressButtonSFX();
+        SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.SetActiveEditWindow = false;
+        Application.Quit();
 #endif
     }
 
@@ -125,6 +137,7 @@ public class LoginLobbyView : MonoBehaviour
     {
         SharedMgr.SoundMgr.PressButtonSFX();
         decideExitView.SetActive(false);
+        SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.SetActiveEditWindow = false;
     }
 
     public void DecideLogOut()

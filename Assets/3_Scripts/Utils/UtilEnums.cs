@@ -100,6 +100,7 @@ namespace UtilEnums
         DRAGON_GROWL_SFX,
         DRAGON_GUIDED_SFX,
         EXPLOSION_SFX,
+        FAIL_SFX,
         GOLD_SFX,
         HEAL_SFX,
         HIT_SFX,

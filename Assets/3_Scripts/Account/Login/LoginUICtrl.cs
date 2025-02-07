@@ -17,6 +17,8 @@ public class LoginUICtrl : MonoBehaviour
     public LoginLobbyView GetLoginLobbyView { get { return lobbyView; } }
     public LoginInputView GetLoginInputView { get { return inputView; }  }
     public LoginGateView GetLoginGateView { get { return gateView; } }
+    public LoginFadeInView GetLoginFadeInView { get {return fadeInView; } }
+
     private void Awake()
     {
         inputView.Init();

@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class PeriodAnimation : MonoBehaviour
 {
     int currentComma = 0;
-    [SerializeField] int commaCnt = 3;
+    [SerializeField] int commaCnt = 4;
     [SerializeField] Text text;
     string originalText = string.Empty;
-    
+    WaitForSeconds periodAnimTime = new WaitForSeconds(0.2f);
+
     public void Init()
     {
         if(text==null)text = GetComponent<Text>();
@@ -43,7 +44,7 @@ public class PeriodAnimation : MonoBehaviour
                 connectText += '.';
             }
             text.text = connectText;
-            yield return null;
+            yield return periodAnimTime;
         }
     }
     
