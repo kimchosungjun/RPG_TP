@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PeriodAnimation : MonoBehaviour
@@ -16,9 +17,10 @@ public class PeriodAnimation : MonoBehaviour
         if (this.gameObject.activeSelf) this.gameObject.SetActive(false);
     }
 
-    public void StartPeriodAnimation()
+    public void StartPeriodAnimation(UnityAction _action)
     {
         this.gameObject.SetActive(true);
+        if (_action != null) StartCoroutine(CEnterAction(_action));
         StartCoroutine(CPeriodAnimation());
     }
 
@@ -43,5 +45,11 @@ public class PeriodAnimation : MonoBehaviour
             text.text = connectText;
             yield return null;
         }
-    }   
+    }
+    
+    IEnumerator CEnterAction(UnityAction _action)
+    {
+        yield return new WaitForSeconds(2f);
+        _action();
+    }
 }

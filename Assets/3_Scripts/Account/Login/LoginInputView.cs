@@ -46,7 +46,7 @@ public class LoginInputView : MonoBehaviour
         string _id = idInput.text;
         string _password = pwInput.text;
         string _value = SharedMgr.SceneMgr.GetPlayerAccount(_id);
-
+        SharedMgr.SoundMgr.PressButtonSFX();
         if (SharedMgr.SceneMgr.IsExistID(_id) == false)
         {
             idInput.text = "";
@@ -79,7 +79,7 @@ public class LoginInputView : MonoBehaviour
         // 회원가입
         string _id = idInput.text;
         string _password = pwInput.text;
-
+        SharedMgr.SoundMgr.PressButtonSFX();
         if (_id.Length == 0 || _password.Length == 0)
         {
             ShowWarnText("ID와 비밀번호은 빈칸일 수 없습니다.");

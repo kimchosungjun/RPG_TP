@@ -5,12 +5,29 @@ using UnityEngine;
 public class GameUICtrl : MonoBehaviour
 {
     bool isConversationState = false;
-    public GAMEUI CurrentOpenUI { get; set; } = GAMEUI.NONE;
-
-    public bool CanAccessUI()
+    private GAMEUI gameUI = GAMEUI.NONE;
+    public GAMEUI CurrentOpenUI 
     {
-        return !isConversationState;
+        get
+        {
+            return gameUI;
+        }
+        set
+        {
+            gameUI = value;
+            PlayUISFX(value == GAMEUI.NONE ? true : false);
+        }
+    } 
+
+    public void PlayUISFX(bool _isNone) 
+    {
+        if (_isNone)
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_CLOSE_SFX);
+        else
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_OPEN_SFX);
     }
+
+    public bool CanAccessUI() { return !isConversationState; }
 
     [Header("Raw Render : Model UI")]
     [SerializeField] UIModelCam modelCam;

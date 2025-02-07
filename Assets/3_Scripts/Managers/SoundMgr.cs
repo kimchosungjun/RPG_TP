@@ -114,7 +114,7 @@ public partial class SoundMgr : MonoBehaviour
         currentFade = null;
     }
 
-    public void PlayerEffect(SFXCLIPS _sfxClip)
+    public void PlaySFX(SFXCLIPS _sfxClip)
     {
         if (sfxClipGroup.ContainsKey(_sfxClip) == false)
         {
@@ -130,6 +130,8 @@ public partial class SoundMgr : MonoBehaviour
 
         sfxSource.PlayOneShot(sfxClipGroup[_sfxClip]);
     }
+
+    public void PressButtonSFX() { PlaySFX(SFXCLIPS.BUTTON_SFX); }
     #endregion
 
     #region Control Sound

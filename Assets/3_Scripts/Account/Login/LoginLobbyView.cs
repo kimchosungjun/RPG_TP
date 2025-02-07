@@ -79,27 +79,34 @@ public class LoginLobbyView : MonoBehaviour
     #region Btn Function
     public void PressGameStart()
     {
-        connectText.StartPeriodAnimation();
+        connectText.StartPeriodAnimation(DecideEnterGame);
+        SharedMgr.SoundMgr.PressButtonSFX();
+    }
+
+    public void DecideEnterGame()
+    {
         bool isExist = true;
-        if(SharedMgr.PhotonMgr.IsFullRoom(ref isExist) == false)
+        if (SharedMgr.PhotonMgr.IsFullRoom(ref isExist) == false)
         {
             SharedMgr.PhotonMgr.JoinLobbyRoom(isExist);
             SharedMgr.SceneMgr.LoadScene(SCENES.GAME, true, true);
         }
         else
         {
-            OverFlowServer();   
+            OverFlowServer();
             connectText.EndPeriodAnimation();
         }
     }
 
     public void PressGameExit()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         decideExitView.SetActive(true);
     }
 
     public void PressLogOut()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         logOutView.SetActive(true);
         SharedMgr.SaveMgr.ClearUserData();
     }
@@ -107,6 +114,7 @@ public class LoginLobbyView : MonoBehaviour
     public void DecideGameExit()
     {
 #if UNITY_EDITOR
+        SharedMgr.SoundMgr.PressButtonSFX();
         UnityEditor.EditorApplication.isPlaying = false;
 #else
     Application.Quit();
@@ -115,11 +123,13 @@ public class LoginLobbyView : MonoBehaviour
 
     public void CancelGameExit()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         decideExitView.SetActive(false);
     }
 
     public void DecideLogOut()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.SceneMgr.SetPlayerAccount("ID", string.Empty);
         SharedMgr.SceneMgr.SetPlayerAccount("PW", string.Empty);
         GetComponentInParent<LoginUICtrl>()?.ReturnLogin();
@@ -127,6 +137,7 @@ public class LoginLobbyView : MonoBehaviour
 
     public void CancelLogOut()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         logOutView.SetActive(false);
     }
 
@@ -136,6 +147,10 @@ public class LoginLobbyView : MonoBehaviour
             overFlowServerIndicator.SetActive(true); 
     }
 
-    public void Confirm() { overFlowServerIndicator.SetActive(false); }
+    public void Confirm()
+    {
+        SharedMgr.SoundMgr.PressButtonSFX();
+        overFlowServerIndicator.SetActive(false);
+    }
     #endregion
 }

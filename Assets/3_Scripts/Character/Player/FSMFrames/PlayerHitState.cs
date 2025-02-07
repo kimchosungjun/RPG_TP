@@ -8,7 +8,6 @@ public class PlayerHitState : PlayerState
 
     public override void Enter()
     {
-        characterControl.DoEscapeAttackState();
         characterControl.GetRigid.useGravity = true;
         characterControl.CanChangePlayer = false;
         enterTime = Time.time;

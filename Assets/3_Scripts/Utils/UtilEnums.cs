@@ -93,7 +93,24 @@ namespace UtilEnums
 
     public enum SFXCLIPS
     {
-
+        ARCHER_ATK_SFX = 0,
+        BUFF_SFX,
+        BUTTON_SFX,
+        DRAGON_FIRE_SFX,
+        DRAGON_GROWL_SFX,
+        DRAGON_GUIDED_SFX,
+        EXPLOSION_SFX,
+        GOLD_SFX,
+        HEAL_SFX,
+        HIT_SFX,
+        INVEN_OPEN_SFX,
+        INVEN_CLOSE_SFX ,
+        MAGE_FIRE_SFX,
+        MON_ATK_SFX,
+        MON_SLASH_SFX,
+        PLAYER_ATK_SFX,
+        PLAYERALL_DEATH_SFX,
+        VIRUS_SPREAD_SFX
     }
 
     public enum LAYERS

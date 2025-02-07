@@ -115,8 +115,8 @@ public class StandardMonster : BaseMonster
     #region Relate Alive State
     public override void Death()
     {
-        base.Death(); // Base : Death Anim & Set Layer
         isDeathState = true;
+        base.Death(); // Base : Death Anim & Set Layer
         statusUI.DecideActiveState(false);
     }
 

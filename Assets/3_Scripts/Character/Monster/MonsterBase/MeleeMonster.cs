@@ -308,6 +308,7 @@ public class MeleeMonster : StandardMonster
     public override void Death()
     {
         base.Death();
+        nav.ResetPath();
         InActiveTriggerAttacks();
     }
 }

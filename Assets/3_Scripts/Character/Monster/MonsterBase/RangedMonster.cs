@@ -1,7 +1,6 @@
 using MonsterEnums;
 using System.Collections.Generic;
 using System.Collections;
-using EffectEnums;
 using UnityEngine;
 
 public class RangedMonster : StandardMonster
@@ -297,6 +296,7 @@ public class RangedMonster : StandardMonster
     public override void Death()
     {
         base.Death();
+        nav.ResetPath();
         triggerAttacks[0].InActiveTrigger();
     }
 }

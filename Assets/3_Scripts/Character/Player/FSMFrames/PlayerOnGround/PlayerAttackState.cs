@@ -43,6 +43,7 @@ public class PlayerAttackState : PlayerActionState
     {
         base.Exit();
         attackCombo.SetComboTime();  
+        characterControl.DoEscapeAttackState();
     }
 
 
