@@ -43,7 +43,7 @@ public partial class InteractionMgr
     {
         if (isConversation) 
             return;
-        Dialogue data = GetDialouge(_npc.GetDialogueIndex);
+        Dialogue data = GetDialouge(_npc.DialogueIndex);
         if (data == null)
             return;
         isConversation = true;
@@ -52,9 +52,6 @@ public partial class InteractionMgr
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetTalkCamerView(currentInteractNpc.transform);
         SharedMgr.GameCtrlMgr.GetPlayerCtrl.StartConversation(currentInteractNpc.transform.position);
         SharedMgr.UIMgr.GameUICtrl.StartConversation();
-        
-        // To Do ~~~
-        // InActive UI
     }
 
     public void ContinueConversation(int _nextDialogueIndex)
@@ -71,11 +68,6 @@ public partial class InteractionMgr
         SharedMgr.GameCtrlMgr.GetCameraCtrl.ReSetTalkCameraView();
         SharedMgr.GameCtrlMgr.GetPlayerCtrl.EndConversation();
         SharedMgr.UIMgr.GameUICtrl.EndConversation();
-
-        // To Do ~~~
-        // Reverse
-        //=========
-        // InActive UI
     }
 
     #endregion

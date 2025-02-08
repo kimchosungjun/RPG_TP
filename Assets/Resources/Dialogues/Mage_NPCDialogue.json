@@ -1,0 +1,69 @@
+{
+  "dialogueSet": [
+    {
+      "questID": 1,
+      "dialogueID": 1,
+      "speakerName": "모험가 마법사",
+      "dialogueContentSet": [
+        {
+          "dialogueIndex": 0,
+          "storyLines": [ "...... ", ".. 혹시 저한테 볼일이 있으신가요?" ],
+          "choiceLines": [
+            {
+              "continueDialouge": false,
+              "nextDialogueID": 0,
+              "choiceTexts": [ "아닙니다." ]
+            },
+            {
+              "continueDialouge": true,
+              "nextDialogueID": 1,
+              "choiceTexts": [ "저와 파티를 맺지 않으실래요?" ]
+            }
+          ]
+        },
+        {
+          "dialogueIndex": 1,
+          "storyLines": [ "저도 파티를 구하고 있기는 했는데 갑작스럽네요." ],
+          "choiceLines": [
+            {
+              "continueDialouge": false,
+              "nextDialogueID": 0,
+              "choiceTexts": [ "부담스러우시다면.. 알겠습니다.." ]
+            },
+            {
+              "continueDialouge": true,
+              "nextDialogueID": 2,
+              "choiceTexts": [ "부담스러우시겠지만 안될까요..?" ]
+            }
+          ]
+        },
+        {
+          "dialogueIndex": 2,
+          "storyLines": [ "제 고향의 골칫거리만 해결해주신다면 파티에 참여할게요.", "마을 남동쪽의 뿔 슬라임들이 골칫거리라고 하네요.", "5마리 정도만 퇴치해주실 수 있나요?" ],
+          "choiceLines": [
+            {
+              "continueDialouge": false,
+              "nextDialogueID": 0,
+              "choiceTexts": [ "죄송합니다. 없던일로 하죠." ]
+            },
+            {
+              "continueDialouge": false,
+              "nextDialogueID": 0,
+              "choiceTexts": [ "$Q1", "알겠습니다. 이따가 봽죠." ]
+            }
+          ]
+        },
+        {
+          "dialogueIndex": 3,
+          "storyLines": [ "뿔 슬라임은 마을 남동쪽에서 주로 출몰한다고 하네요." ],
+          "choiceLines": []
+        },
+        {
+          "dialogueIndex": 4,
+          "storyLines": [ "정말로 퇴치해오셨네요.. 좋습니다.", "이제 고향을 떠나도 마음이 놓일거 같네요.", "잘 부탁드립니다!", "$A1", "$X" ],
+          "choiceLines": []
+        }
+      ]
+    }
+  ]
+}

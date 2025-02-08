@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using SaveDataGroup;
 
-public class SaveDataReader
+public class UserSaveDataReader
 {
     public string GetPath(string _directoryName)
     {
@@ -11,20 +11,20 @@ public class SaveDataReader
         return path;
     }
 
-    public UserSaveData GetUserData(string _directoryName)
+    public UserSaveDataGroup GetUserData(string _directoryName)
     {
         string json = File.ReadAllText(GetPath(_directoryName));
-        UserSaveData saveData = JsonUtility.FromJson<UserSaveData>(json);
+        UserSaveDataGroup saveData = JsonUtility.FromJson<UserSaveDataGroup>(json);
         return saveData; 
     }
 
-    public UserSaveData GetUserData()
+    public UserSaveDataGroup GetUserData()
     {
-        UserSaveData data = new UserSaveData();
+        UserSaveDataGroup data = new UserSaveDataGroup();
         return data;
     }
 
-    public void SaveData(string _directoryName ,UserSaveData _saveData)
+    public void SaveData(string _directoryName ,UserSaveDataGroup _saveData)
     {
         string saveTexts = JsonUtility.ToJson(_saveData);
         File.WriteAllText(GetPath(_directoryName), saveTexts);

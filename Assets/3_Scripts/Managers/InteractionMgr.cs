@@ -25,4 +25,6 @@ public partial class InteractionMgr
         interactableSet.Remove(_interactable);  
         SharedMgr.UIMgr.GameUICtrl.GetInteractionUI.RemoveInteractable(_interactable);
     }
+
+
 }

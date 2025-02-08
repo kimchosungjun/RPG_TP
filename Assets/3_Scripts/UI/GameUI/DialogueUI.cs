@@ -28,6 +28,8 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
     public bool GetIsChoiceActive { get { return isChoiceActive; } }
     int currentChoiceIndex = 0;
     int activeSlotCnt = 0;
+    Coroutine typeCor = null;
+    Coroutine autoCor = null;
     #endregion
 
     #region Type
@@ -99,6 +101,12 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
     
     public void ShowDialogue()
     {
+        if (autoCor != null)
+        {
+            StopCoroutine(autoCor);
+            autoCor = null;
+        }
+
         isWaitingInput = false;
         if (curStoryLineIndex >= dialogue.dialogueContentSet[curContentIndex].storyLines.Count)
         {
@@ -114,7 +122,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
             ShowDialogue();
         }
         else
-            StartCoroutine(CTypeDialogueText(text));
+            typeCor = StartCoroutine(CTypeDialogueText(text));
     }
 
     public void ShowChoiceDialogue(List<Choice> _choiceLines)
@@ -139,6 +147,8 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
     #region Type Dialogue
     IEnumerator CTypeDialogueText(string _text)
     {
+        if (isTypeText)
+            yield break;
         currentText = _text;
         isTypeText = true;
         int _textCnt = _text.Length;
@@ -160,6 +170,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
             yield return delayAutoDialogueSecond;
             ShowDialogue();
         }
+        typeCor = null;
     }
 
     public void InputNext()
@@ -172,8 +183,13 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
 
     public void SkipText()
     {
-        if (isTypeText)
-            StopAllCoroutines();
+        if (isTypeText && typeCor != null)
+        {
+            StopCoroutine(typeCor);
+            typeCor = null;
+            if (isAuto)
+                autoCor = StartCoroutine(CAuto());
+        }
         else
             return;
         dialogueTexts[1].text = currentText;
@@ -181,6 +197,13 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         isWaitingInput = true;
         curStoryLineIndex += 1;
         conversationUIImages[1].gameObject.SetActive(true);
+    }
+
+    IEnumerator CAuto()
+    {
+        yield return delayAutoDialogueSecond;
+        ShowDialogue();
+        autoCor = null;
     }
     #endregion
 

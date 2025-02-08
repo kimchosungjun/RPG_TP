@@ -14,12 +14,12 @@ namespace SaveDataGroup
     public interface ICommonSaveData { public void UpdateData(); }
 
     [Serializable]
-    public class UserSaveData
+    public class UserSaveDataGroup
     {
         public PlayerSaveDataGroup PlayerSaveDataGroup;
         public InventorySaveDataGroup InventorySaveDataGroup;
 
-        public UserSaveData() 
+        public UserSaveDataGroup() 
         {
             PlayerSaveDataGroup = new PlayerSaveDataGroup();
             InventorySaveDataGroup = new InventorySaveDataGroup();
@@ -111,16 +111,70 @@ namespace SaveDataGroup
         }
     }
 
-    public class QuestSaveDataGroup
-    {
+   
 
+  
+
+    [Serializable]
+    public class QuestConditionSaveData
+    {
+        [SerializeField] int questID;
+        [SerializeField] List<QuestConditionData> conditions = new List<QuestConditionData>();
+
+        public QuestConditionSaveData() { }
+        public QuestConditionSaveData(int _questID, List<QuestConditionData> _datas)
+        {
+            questID = _questID;
+            conditions = _datas;
+        }
+    }
+    #endregion
+
+    #region Interaction Data
+    [Serializable]
+    public class InteractionDataGroup
+    {
+        public QuestSaveDataGroup saveClearQuest;
+        public List<NPCSaveData> npcDataSet;
+    
+        public NPCSaveData GetNpcSaveData(int _id)
+        {
+            int cnt = npcDataSet.Count;
+            if (cnt == 0)
+                return null;
+
+            for(int i=0; i<cnt; i++)
+            {
+                if (npcDataSet[i].npcID == _id)
+                    return npcDataSet[i];
+            }
+
+            return null;
+        }
     }
 
-    public class NPCSaveDataGroup
+    [Serializable]
+    public class QuestSaveDataGroup
     {
-        public int dialogueIndex;
-        public int currentQuestIndex = -1;
-        public List<int> clearDialogues;
+        public List<int> clearQuestDatas;
+
+        public void AddClearQuest(int _clearQuestID)
+        {
+            int cnt = clearQuestDatas.Count;
+            for (int i = 0; i < cnt; i++)
+            {
+                if (clearQuestDatas[i] == _clearQuestID)
+                    return;
+            }
+            clearQuestDatas.Add(_clearQuestID);
+        }
+    }
+
+    [Serializable]
+    public class NPCSaveData
+    {
+        public int npcID;
+        public int saveDialogueIndex;
     }
     #endregion
 }

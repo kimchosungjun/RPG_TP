@@ -1,50 +1,79 @@
+using QuestEnums;
 using SaveDataGroup;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionNPC : Interactable
 {
+    #region Variable
     [SerializeField] Animator anim;
-    [SerializeField] int dialogueIndex;
-    public int GetDialogueIndex { get { return dialogueIndex; } }
-    NPCSaveDataGroup saveData = null;
-    QuestSOData currentQuestData = null;
-
-    #region Manage Quest Data
-    public void LoadNpcData()
+    [SerializeField] int initDialogueIndex;
+    [SerializeField] NPCID npcID;
+    public int DialogueIndex 
     {
-        //SharedMgr.SaveMgr.LoadNPCSaveData(this.gameObject.name, ref saveData);
+        get 
+        {
+            return initDialogueIndex; 
+        } 
+        set
+        {
+            initDialogueIndex = value;
+            if (value < 0)
+                BlockConversation();
+        } 
     }
 
-    public void AddQuestData(int _id)
-    {
-        //saveData.currentQuestIndex = _id;
-        currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
-    }
-
+    string npcName = string.Empty;
+    NPCSaveData saveData = null;
+    [SerializeField] QuestSOData currentQuestData = null;
     #endregion
 
-
+    #region NPC Enum (Local)
     enum NPCState
     {
-        Idle=0,
-        Talk=1
+        Idle = 0,
+        Talk = 1
     }
+    #endregion
 
-    public void Start()
+    #region Load NPC Data (Life Cycle)
+    public void Awake()
     {
         LoadNpcData();
         SharedMgr.InteractionMgr.LoadDialogue(this.gameObject.name);
      }
 
+    private void Start()
+    {
+        npcName = SharedMgr.InteractionMgr.GetDialouge(initDialogueIndex).speakerName;
+    }
+    #endregion
+
+    #region Manage Quest Data
+    public void LoadNpcData()
+    {
+        NPCSaveData saveData = SharedMgr.SaveMgr.GetInteractionData.GetNpcSaveData((int)npcID);
+        if(saveData != null)
+            initDialogueIndex = saveData.saveDialogueIndex;
+    }
+
+    public void AddQuestData(int _id)
+    {
+        currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
+    }
+
+    #endregion
+
+    #region Interact
     public override string Detect()
     {
-        return "테스트용 NPC 입니다.";
+        return $"{npcName}와 대화한다.";
     }
 
     public override void Interact()
     {
+        if(currentQuestData != null)
+            currentQuestData.IsAchieveQuestCondition(ref initDialogueIndex);
         SharedMgr.InteractionMgr.StartConversation(this);
         StartCoroutine(CLookPlayer());
     }
@@ -90,5 +119,5 @@ public class InteractionNPC : Interactable
         ChangeToDisable();
         SharedMgr.InteractionMgr.RemoveInteractable(this);
     }
-
+    #endregion
 }

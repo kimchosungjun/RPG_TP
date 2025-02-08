@@ -8,10 +8,14 @@ public class SaveMgr : MonoBehaviour
 {
     string directoryPath = string.Empty;
 
-    SaveDataReader reader = new SaveDataReader();
-    [SerializeField] UserSaveData saveData;
+    UserSaveDataReader userDataReader = new UserSaveDataReader();
+    InteractioSaveDataReader interactionDataReader = new InteractioSaveDataReader();
 
-    public UserSaveData GetUserSaveData { get { return saveData; } }    
+    [SerializeField] UserSaveDataGroup userSaveData;
+    [SerializeField] InteractionDataGroup interactionData;
+    
+    public UserSaveDataGroup GetUserSaveData { get { return userSaveData; } }    
+    public InteractionDataGroup GetInteractionData { get { return interactionData; } }  
 
     public void Init()
     {
@@ -71,7 +75,9 @@ public class SaveMgr : MonoBehaviour
     IEnumerator CLoadExistData(UnityAction _action)
     {
         // Load Save Data
-        saveData = reader.GetUserData(GetDirectoryPath());
+        string directoryPath  = GetDirectoryPath();
+        userSaveData = userDataReader.GetUserData(directoryPath);
+        interactionData = interactionDataReader.GetUserData(directoryPath);
         yield return null;   
         // Check Join Lobby 
         while (true)
@@ -90,8 +96,10 @@ public class SaveMgr : MonoBehaviour
         Directory.CreateDirectory(directoryPath);
         yield return null;
         // Load & Create Save File
-        saveData = reader.GetUserData();
-        reader.SaveData(GetDirectoryPath(), saveData);
+        userSaveData = userDataReader.GetUserData();
+        interactionData = interactionDataReader.GetInteractionData();
+        userDataReader.SaveData(GetDirectoryPath(), userSaveData);
+        interactionDataReader.SaveData(GetDirectoryPath(), interactionData);
         yield return null;
         // Check Join Lobby 
         while (true)
@@ -111,12 +119,12 @@ public class SaveMgr : MonoBehaviour
 
     IEnumerator CSaveUserData()
     {
-        saveData.UpdateAllData();
+        userSaveData.UpdateAllData();
         yield return null;
-        reader.SaveData(GetDirectoryPath(), saveData);
+        userDataReader.SaveData(GetDirectoryPath(), userSaveData);
     }
 
-    public void ClearUserData() { saveData = null; }
+    public void ClearUserData() { userSaveData = null; }
     #endregion
 }
 

@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class IndicatorUI : MonoBehaviour
+public class IndicatorUI : MonoBehaviour, ICommonSetUI
 {
+    [SerializeField] GameObject allIndicatorParent;
     public void Init()
     {
         SetImages();
@@ -26,13 +27,23 @@ public class IndicatorUI : MonoBehaviour
     [SerializeField] Animator healIndicatorAnim;
     bool isActiveHealIndicator = false;
     float timer = 0f;
+    Coroutine healCor = null;
 
     public void ActiveHealIndicator()
     {
         if (isActiveHealIndicator == false)
-            StartCoroutine(CHealIndicate());
+            healCor = StartCoroutine(CHealIndicate());
         else
+        {
+            if (healIndicatorImage.gameObject.activeSelf == false)
+            {
+                if(healCor!=null)
+                    StopCoroutine(healCor); 
+                StartCoroutine(CHealIndicate());
+                return;
+            }
             timer = 0f;
+        }
     }
 
 
@@ -50,6 +61,7 @@ public class IndicatorUI : MonoBehaviour
         }
         isActiveHealIndicator = false;
         healIndicatorAnim.SetInteger("State", 2);
+        healCor = null;
     }
     #endregion
 
@@ -130,5 +142,24 @@ public class IndicatorUI : MonoBehaviour
     }
 
     public void InActviveFade() { fadeImage.gameObject.SetActive(false); }
+
+
+    #endregion
+
+    #region Interface : Turn On & Off
+    public void TurnOn()
+    {
+        allIndicatorParent.SetActive(true);
+    }
+
+    public void TurnOff()
+    {
+        allIndicatorParent.SetActive(false);
+        if (healIndicatorImage.gameObject.activeSelf)
+        {
+            healIndicatorImage.gameObject.SetActive(false);
+            healCor = null;
+        }
+    }
     #endregion
 }

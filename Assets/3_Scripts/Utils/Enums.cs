@@ -250,4 +250,10 @@ namespace QuestEnums
         KILL,
         HELP,
     }
+
+    public enum NPCID
+    {
+        ARCHER=0,
+        MAGE=1
+    }
 }

@@ -10,6 +10,8 @@ public class CameraTalkView : MonoBehaviour
 
     Vector3 legacyPostion;
     Quaternion legacyRotate;
+    Coroutine talkViewCor = null;
+    Coroutine resetCor = null;
 
     public void Setup()
     {
@@ -19,16 +21,25 @@ public class CameraTalkView : MonoBehaviour
 
     public void Talk(Transform _newTarget) 
     {
-        SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetIsLockPlayerContro = true;
         legacyPostion = camTransform.position;
-        legacyRotate = camTransform.rotation;   
-        StartCoroutine(CMoveToTalk(_newTarget));
+        legacyRotate = camTransform.rotation;
+        StopCoroutines();
+        talkViewCor = StartCoroutine(CMoveToTalk(_newTarget));
     }
 
     public void EndTalk(UnityAction _endTalkAction)
     {
-        StopAllCoroutines();
-        StartCoroutine(CRestCamera(_endTalkAction));
+        StopCoroutines();
+        resetCor = StartCoroutine(CRestCamera(_endTalkAction));
+    }
+
+    public void StopCoroutines()
+    {
+        if (talkViewCor != null)
+            StopCoroutine(talkViewCor);
+
+        if (resetCor != null)
+            StopCoroutine(resetCor);
     }
 
     IEnumerator CMoveToTalk(Transform _newTarget)
@@ -67,6 +78,7 @@ public class CameraTalkView : MonoBehaviour
         }
         camTransform.position = lookPosition;
         camTransform.rotation = endRotation;
+        talkViewCor = null;
     }
 
     IEnumerator CRestCamera(UnityAction _endTalkAction)
@@ -84,8 +96,8 @@ public class CameraTalkView : MonoBehaviour
             camTransform.rotation = Quaternion.Slerp(startRotate, legacyRotate, time / 1f);
             yield return new WaitForFixedUpdate();
         }
-
-        SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetIsLockPlayerContro = false;
+        
+        resetCor = null;
         if (_endTalkAction == null)
             yield break;
         _endTalkAction.Invoke();

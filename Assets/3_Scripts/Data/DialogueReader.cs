@@ -125,7 +125,7 @@ public class DialogueReader
 
     public void AcceptQuest(int _id)
     {
-        SharedMgr.QuestMgr.AddQuestData(_id);
+        SharedMgr.QuestMgr.AcceptQuestData(_id);
         SharedMgr.InteractionMgr.CurrentInteractNPC.AddQuestData(_id);
     }
 

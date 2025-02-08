@@ -61,7 +61,7 @@ public class GameUICtrl : MonoBehaviour
 
 
     [Header("Overlap")]
-    [SerializeField] IndicatorUI IndicatorUI;
+    [SerializeField] IndicatorUI indicatorUI;
     [SerializeField] SubBossStatusUI bossStatusUI;
     [SerializeField] PlayerStatusUI playerStatusUI;
     [SerializeField] PlayerChangeUI playerChangeUI;
@@ -75,7 +75,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] SettingUI settingUI;
     [SerializeField] GameExitUI gameExitUI;
 
-    public IndicatorUI GetIndicatorUI { get { return IndicatorUI; } }
+    public IndicatorUI GetIndicatorUI { get { return indicatorUI; } }
     public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
     public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
@@ -105,7 +105,7 @@ public class GameUICtrl : MonoBehaviour
         // Camera Space
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
         // Overlay
-        if(IndicatorUI==null) IndicatorUI= GetComponentInChildren<IndicatorUI>();   
+        if(indicatorUI==null) indicatorUI= GetComponentInChildren<IndicatorUI>();   
         if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<SubBossStatusUI>();   
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 
@@ -136,7 +136,7 @@ public class GameUICtrl : MonoBehaviour
         // Camera Space
         dashGaugeUI.Init();
         // Overlay
-        IndicatorUI.Init();
+        indicatorUI.Init();
         bossStatusUI.Init();    
         playerStatusUI.Init();
         playerChangeUI.Init();
@@ -155,7 +155,7 @@ public class GameUICtrl : MonoBehaviour
     {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
         // Cursor
-        if(CurrentOpenUI == GAMEUI.NONE)
+        if(CurrentOpenUI == GAMEUI.NONE && isConversationState == false)
         {
             if (Input.GetKeyDown(KeyCode.LeftAlt))
             {
@@ -248,19 +248,27 @@ public class GameUICtrl : MonoBehaviour
     public void StartConversation()
     {
         isConversationState = true;
+
+        indicatorUI.TurnOff();  
         playerStatusUI.TurnOff();
         playerChangeUI.TurnOff();
         showGetItemUI.TurnOff();
         interactionUI.TurnOff();
+
+        SharedMgr.CursorMgr.SetCursorVisibleState(true);
     }
 
     public void EndConversation()
     {
         isConversationState = false;
+        
+        indicatorUI.TurnOn();
         playerStatusUI.TurnOn();
         playerChangeUI.TurnOn();
         showGetItemUI.TurnOn();
         interactionUI.TurnOn();
+
+        SharedMgr.CursorMgr.SetCursorVisibleState(false);
     }
 
     public bool CanOpenUI(GAMEUI _uiType)
@@ -280,5 +288,12 @@ public class GameUICtrl : MonoBehaviour
             SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_CLOSE_SFX);
         else
             SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_OPEN_SFX);
+    }
+
+    public bool CanControlPlayer()
+    {
+        if (isConversationState || CurrentOpenUI != GAMEUI.NONE)
+            return false;
+        return true;
     }
 }
