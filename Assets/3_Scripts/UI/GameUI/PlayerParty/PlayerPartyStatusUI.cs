@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerPartyStatusUI : MonoBehaviour, IPlayerPartyUI
+public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
 {
     [SerializeField] GameObject uiFrameObject;
     [SerializeField, Tooltip("0:HP, 1:Atk, 2:Def, 3:Cri, 4:PlayerIcon")] Image[] icons;

@@ -7,7 +7,7 @@ QualitySettings:
   m_CurrentQuality: 2
   m_QualitySettings:
   - serializedVersion: 3
-    name: Performant
+    name: Low
     pixelLightCount: 0
     shadows: 0
     shadowResolution: 0
@@ -56,7 +56,7 @@ QualitySettings:
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
   - serializedVersion: 3
-    name: Balanced
+    name: Mid
     pixelLightCount: 1
     shadows: 1
     shadowResolution: 0
@@ -77,7 +77,7 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
-    vSyncCount: 1
+    vSyncCount: 0
     lodBias: 1
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -105,7 +105,7 @@ QualitySettings:
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
   - serializedVersion: 3
-    name: High Fidelity
+    name: High
     pixelLightCount: 2
     shadows: 2
     shadowResolution: 1
@@ -163,11 +163,11 @@ QualitySettings:
     Nintendo Switch: 2
     PS4: 2
     PS5: 2
-    Server: 0
+    Server: 1
     Stadia: 2
     Standalone: 2
     WebGL: 1
-    Windows Store Apps: 2
+    Windows Store Apps: 1
     XboxOne: 2
     iPhone: 1
     tvOS: 1

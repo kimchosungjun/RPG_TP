@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUpgradeUI : MonoBehaviour, IPlayerPartyUI
+public class PlayerUpgradeUI : MonoBehaviour, ITurnOnOffUI
 {
     [SerializeField, Tooltip("0:Normal, 1:Skill, 2:Ultimate, 3 : Upgrade Frame")] Image[] frames;
     [SerializeField, Tooltip("0:Normal, 1:Skill, 2:Ultimate, 3: LevelupBtn, 4:LevelupGold")] Image[] icons;

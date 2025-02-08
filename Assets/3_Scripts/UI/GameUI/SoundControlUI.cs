@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class SoundControlUI : MonoBehaviour
+public class SoundControlUI : MonoBehaviour, ITurnOnOffUI
 {
+    #region Variable
     [SerializeField] GameObject soundUIParent;
 
-    [SerializeField, Tooltip("0:MasterFrame, 1:MasterBtn, 2:BGMFrame, 3:BgmBtn, 4:SFXFrame, 5:SFXBtn, 6:Exit")] 
+    [SerializeField, Tooltip("0:MasterFrame, 1:MasterBtn, 2:BGMFrame, 3:BgmBtn, 4:SFXFrame, 5:SFXBtn")] 
     Image[] soundUIImages;
 
     [SerializeField, Tooltip("0:MasterPercent, 1:BgmPercent, 2:SFXPercent")]
     Text[] soundPercentText;
 
     [SerializeField, Tooltip("0:Master,1:Bgm,2:SFX")] Slider[] soundSliders;
+    #endregion
 
     #region Local Enum
 
@@ -38,6 +38,7 @@ public class SoundControlUI : MonoBehaviour
 
     #endregion
 
+    #region Set UI
     public void Init()
     {
         SetImages();
@@ -55,16 +56,18 @@ public class SoundControlUI : MonoBehaviour
         soundUIImages[3].sprite = btnSpr;
         soundUIImages[4].sprite = frameSpr;
         soundUIImages[5].sprite = btnSpr;
-        soundUIImages[6].sprite = res.GetSpriteAtlas("Icon_Atlas", "Back_Icon");
     }
 
     public void SetSoundValue()
     {
+        // To Do Load Data
         soundSliders[0].maxValue= 1;
         soundSliders[1].maxValue = 1;
         soundSliders[2].maxValue = 1;
     }
+    #endregion
 
+    #region Turn On & Off
     public void TurnOn()
     {
         SoundMgr sound = SharedMgr.SoundMgr;
@@ -85,20 +88,31 @@ public class SoundControlUI : MonoBehaviour
         sound.ControlSound(UtilEnums.SOUNDS.SFX, soundSliders[2].value);
     }
 
-    public void InputInventoryKey()
+    public void ApplySetting()
     {
-        if (soundUIParent.activeSelf == true)
-        {
-            TurnOff();
-            SharedMgr.CursorMgr.SetCursorVisibleState(false);
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
-        }
-        else
-        {
-            soundUIParent.SetActive(true);
-            TurnOn();   
-            SharedMgr.CursorMgr.SetCursorVisibleState(true);
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SOUND;
-        }
+        SoundMgr sound = SharedMgr.SoundMgr;
+        sound.ControlSound(UtilEnums.SOUNDS.MASTER, soundSliders[0].value);
+        sound.ControlSound(UtilEnums.SOUNDS.BGM, soundSliders[1].value);
+        sound.ControlSound(UtilEnums.SOUNDS.SFX, soundSliders[2].value);
     }
+    #endregion
+
+    #region Value Change
+
+    public void ChangeMasterValue(float _value)
+    {
+        soundSliders[0].value = _value;
+    }
+
+
+    public void ChangeBGMValue(float _value)
+    {
+        soundSliders[1].value = _value;
+    }
+
+    public void ChangeSFXValue(float _value)
+    {
+        soundSliders[2].value = _value;
+    }
+    #endregion
 }

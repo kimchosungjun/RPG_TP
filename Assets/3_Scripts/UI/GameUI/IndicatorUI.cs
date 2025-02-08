@@ -74,6 +74,7 @@ public class IndicatorUI : MonoBehaviour
     }
     #endregion
 
+    #region Fade
     [Header("Fade")]
     [SerializeField] float fadeTimer = 2f;
     [SerializeField] Image fadeImage;
@@ -129,4 +130,5 @@ public class IndicatorUI : MonoBehaviour
     }
 
     public void InActviveFade() { fadeImage.gameObject.SetActive(false); }
+    #endregion
 }

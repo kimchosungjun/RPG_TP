@@ -189,7 +189,8 @@ namespace UIEnums
         UPGRADE,
         QUEST,
         DIALOGUE,
-        SOUND,
+        SETTING,
+        EXIT,
         NONE
     }
 }

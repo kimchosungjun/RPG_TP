@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ItemEnums;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : MonoBehaviour, IInputKeyUI
 {
     #region UI
     [SerializeField, Header("UI Parent : Use for On/Off")] GameObject inventoryObject;
@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     #region Input : I (Only Window)
-    public void InputInventoryKey()
+    public void InputKey()
     {
         if (inventoryObject.activeSelf == true)
         {
@@ -151,6 +151,7 @@ public class InventoryUI : MonoBehaviour
         inventoryListUI.ChangeItemType(currentShowType);
         inventoryInfoUI.UpdateInfoData();
     }
+
 
     #endregion
 }

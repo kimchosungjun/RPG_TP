@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UIEnums;
-using Photon.Realtime;
 
-public interface IPlayerPartyUI
-{
-    public void TurnOn();
-    public void TurnOff();
-}
 
-public class PlayerPartyUI : MonoBehaviour
+public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
 {
     bool isActive = false;
-    IPlayerPartyUI[] partyUISet;
+    ITurnOnOffUI[] partyUISet;
     PARTY currentShowType = PARTY.STATUS;
     public PARTY GetCurrentUIType { get { return currentShowType; }  }
     
@@ -59,7 +53,7 @@ public class PlayerPartyUI : MonoBehaviour
 
     public void InitPartyUISet()
     {
-        partyUISet = new IPlayerPartyUI[(int)PARTY.MAX];
+        partyUISet = new ITurnOnOffUI[(int)PARTY.MAX];
         partyUISet[0] = playerPartyStatusUI;
         partyUISet[1] = weaponManageUI;
         partyUISet[2] = playerUpgradeUI;
@@ -99,7 +93,7 @@ public class PlayerPartyUI : MonoBehaviour
     #endregion
 
     // Game UI Ctrl
-    public void InputPartyKey()
+    public void InputKey()
     {
         isActive = !isActive;
         if (isActive)

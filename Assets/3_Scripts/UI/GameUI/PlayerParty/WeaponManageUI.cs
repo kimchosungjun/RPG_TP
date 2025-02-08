@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponManageUI : MonoBehaviour, IPlayerPartyUI
+public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
 {
     [SerializeField] GameObject[] weaponManageParents;
     [SerializeField, Tooltip("0:Frame, 1:ScrollBar")] Image[] weaponManageImages;

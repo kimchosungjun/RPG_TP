@@ -136,35 +136,35 @@ public partial class SoundMgr : MonoBehaviour
 
     #region Control Sound
 
-    public void ControlSound(UtilEnums.SOUNDS _soundType, float _value)
+    public void ControlSound(SOUNDS _soundType, float _value)
     {
         float setValue = Mathf.Log10(_value) * 20;
         switch (_soundType)
         {
-            case UtilEnums.SOUNDS.MASTER:
+            case SOUNDS.MASTER:
                 masterVolume = _value;
                 audioMixer.SetFloat("Master", setValue);
                 break;
-            case UtilEnums.SOUNDS.BGM:
+            case SOUNDS.BGM:
                 bgmVolume = _value;
-                audioMixer.SetFloat("Bgm", setValue);
+                audioMixer.SetFloat("BGM", setValue);
                 break;
-            case UtilEnums.SOUNDS.SFX:
+            case SOUNDS.SFX:
                 sfxVolume = _value; 
-                audioMixer.SetFloat("Sfx", setValue);
+                audioMixer.SetFloat("SFX", setValue);
                 break;
         }
     }
 
-    public float GetSoundVolume(UtilEnums.SOUNDS _soundType)
+    public float GetSoundVolume(SOUNDS _soundType)
     {
         switch (_soundType)
         {
-            case UtilEnums.SOUNDS.MASTER:
+            case SOUNDS.MASTER:
                 return masterVolume;
-            case UtilEnums.SOUNDS.BGM:
+            case SOUNDS.BGM:
                 return bgmVolume;
-            case UtilEnums.SOUNDS.SFX:
+            case SOUNDS.SFX:
                 return sfxVolume;
         }
         return masterVolume;

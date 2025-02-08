@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UIEnums;
 using UnityEngine;
 
 
 public class GameUICtrl : MonoBehaviour
 {
+    #region Variable
     bool isConversationState = false;
     private GAMEUI gameUI = GAMEUI.NONE;
     public GAMEUI CurrentOpenUI 
@@ -15,19 +17,39 @@ public class GameUICtrl : MonoBehaviour
         set
         {
             gameUI = value;
-            PlayUISFX(value == GAMEUI.NONE ? true : false);
+            SetCurrentUI(value);
         }
     } 
 
-    public void PlayUISFX(bool _isNone) 
+    List<IInputKeyUI> inputKeyUISet = new List<IInputKeyUI>();  
+
+    public void SetCurrentUI(GAMEUI _curUI)
     {
-        if (_isNone)
-            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_CLOSE_SFX);
+        if(_curUI == GAMEUI.NONE)
+        {
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
+            PlayUISFX(true);
+        }
         else
-            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_OPEN_SFX);
+        {
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
+            PlayUISFX(false);
+        }
+    }
+    #endregion
+
+    #region InputKeyUI Enum (Local Enum)
+
+    public enum InputKeyUITypes
+    {
+        Quest=0,
+        Inven,
+        Party,
+        Setting,
+        Exit
     }
 
-    public bool CanAccessUI() { return !isConversationState; }
+    #endregion
 
     [Header("Raw Render : Model UI")]
     [SerializeField] UIModelCam modelCam;
@@ -39,6 +61,7 @@ public class GameUICtrl : MonoBehaviour
 
 
     [Header("Overlap")]
+    [SerializeField] IndicatorUI IndicatorUI;
     [SerializeField] SubBossStatusUI bossStatusUI;
     [SerializeField] PlayerStatusUI playerStatusUI;
     [SerializeField] PlayerChangeUI playerChangeUI;
@@ -49,9 +72,10 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] InventoryUI inventoyUI;
     [SerializeField] QuestUI questUI;
     [SerializeField] DialogueUI dialogueUI;
-    [SerializeField] SoundControlUI soundControlUI;
-    [SerializeField] IndicatorUI IndicatorUI;
+    [SerializeField] SettingUI settingUI;
+    [SerializeField] GameExitUI gameExitUI;
 
+    public IndicatorUI GetIndicatorUI { get { return IndicatorUI; } }
     public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
     public PlayerChangeUI GetPlayerChangeUI { get {return playerChangeUI; } }
@@ -62,8 +86,8 @@ public class GameUICtrl : MonoBehaviour
     public InventoryUI GetInventoyUI { get { return inventoyUI; } }    
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
-    public SoundControlUI SoundControlUI { get { return soundControlUI; } }
-    public IndicatorUI GetIndicatorUI { get { return IndicatorUI; } }
+    public SettingUI GetSettingUI { get { return settingUI; } } 
+    public GameExitUI GameExitUI { get {  return gameExitUI; } }
 
     // 나중에 Awake로 변경
     private void Awake()
@@ -81,6 +105,7 @@ public class GameUICtrl : MonoBehaviour
         // Camera Space
         if(dashGaugeUI==null) dashGaugeUI = GetComponentInChildren<DashGaugeUI>();  
         // Overlay
+        if(IndicatorUI==null) IndicatorUI= GetComponentInChildren<IndicatorUI>();   
         if(bossStatusUI==null) bossStatusUI = GetComponentInChildren<SubBossStatusUI>();   
         if(playerStatusUI == null) playerStatusUI = GetComponentInChildren<PlayerStatusUI>();
         if(playerChangeUI==null) playerChangeUI = GetComponentInChildren<PlayerChangeUI>(); 
@@ -91,6 +116,17 @@ public class GameUICtrl : MonoBehaviour
         if(inventoyUI==null) inventoyUI = GetComponentInChildren<InventoryUI>();    
         if(questUI==null) questUI = GetComponentInChildren<QuestUI>();  
         if(dialogueUI ==null) dialogueUI = GetComponentInChildren<DialogueUI>();    
+        if(settingUI==null) settingUI = GetComponentInChildren<SettingUI>();
+        if(gameExitUI ==null) gameExitUI = GetComponentInChildren<GameExitUI>(); 
+
+        if(inputKeyUISet.Count!=0)
+            inputKeyUISet.Clear();
+
+        inputKeyUISet.Add(questUI);
+        inputKeyUISet.Add(inventoyUI);
+        inputKeyUISet.Add(playerPartyUI);
+        inputKeyUISet.Add(settingUI);
+        inputKeyUISet.Add(gameExitUI);
     }
 
     public void UIInit()
@@ -100,6 +136,7 @@ public class GameUICtrl : MonoBehaviour
         // Camera Space
         dashGaugeUI.Init();
         // Overlay
+        IndicatorUI.Init();
         bossStatusUI.Init();    
         playerStatusUI.Init();
         playerChangeUI.Init();
@@ -110,8 +147,8 @@ public class GameUICtrl : MonoBehaviour
         inventoyUI.Init();
         questUI.Init();
         dialogueUI.Init();
-        soundControlUI.Init();
-        IndicatorUI.Init();
+        settingUI.Init();
+        gameExitUI.Init();
     }
 
     private void Update()
@@ -121,9 +158,15 @@ public class GameUICtrl : MonoBehaviour
         if(CurrentOpenUI == GAMEUI.NONE)
         {
             if (Input.GetKeyDown(KeyCode.LeftAlt))
+            {
+                SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true); 
                 SharedMgr.CursorMgr.SetCursorVisibleState(true);
+            }
             else if (Input.GetKeyUp(KeyCode.LeftAlt))
+            {
+                SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);   
                 SharedMgr.CursorMgr.SetCursorVisibleState(false);
+            }
         }
 
         if (isConversationState)
@@ -152,19 +195,26 @@ public class GameUICtrl : MonoBehaviour
         }
         else
         {
+            // Input Key
             if (Input.GetKeyDown(KeyCode.I) && CanOpenUI(GAMEUI.INVENTORY))
             {
-                inventoyUI.InputInventoryKey();
+                inputKeyUISet[(int)InputKeyUITypes.Inven].InputKey();
             }
-
             if (Input.GetKeyDown(KeyCode.J) && CanOpenUI(GAMEUI.QUEST))
             {
-                questUI.InputQuestKey();
+                inputKeyUISet[(int)InputKeyUITypes.Quest].InputKey();
             }
-
             if (Input.GetKeyDown(KeyCode.P) && CanOpenUI(GAMEUI.PLAYER_PARTY))
             {
-                playerPartyUI.InputPartyKey();
+                inputKeyUISet[(int)InputKeyUITypes.Party].InputKey();
+            }
+            if (Input.GetKeyDown(KeyCode.O) && CanOpenUI(GAMEUI.SETTING))
+            {
+                inputKeyUISet[(int)InputKeyUITypes.Setting].InputKey();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape) && CanOpenUI(GAMEUI.EXIT))
+            {
+                inputKeyUISet[(int)InputKeyUITypes.Exit].InputKey();
             }
 
             if (interactionUI.CanInput() && CanOpenUI(GAMEUI.INTERACT))
@@ -187,6 +237,13 @@ public class GameUICtrl : MonoBehaviour
         }
 #endif
     }
+
+    public void InputUIIcon(InputKeyUITypes _type)
+    {
+        inputKeyUISet[(int)_type].InputKey();
+    }
+
+    public bool CanAccessUI() { return !isConversationState; }
 
     public void StartConversation()
     {
@@ -215,5 +272,13 @@ public class GameUICtrl : MonoBehaviour
             return true;
 
         return false;
+    }
+
+    public void PlayUISFX(bool _isNone)
+    {
+        if (_isNone)
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_CLOSE_SFX);
+        else
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_OPEN_SFX);
     }
 }

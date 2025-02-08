@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestUI : MonoBehaviour
+public class QuestUI : MonoBehaviour, IInputKeyUI
 {
     [SerializeField, Tooltip("0:QuestIcon, 1: QuestExit")] Image[] questImages;
     [SerializeField] QuestSlot[] questSlots;
@@ -68,7 +68,7 @@ public class QuestUI : MonoBehaviour
         UpdateQuestDatas();
     }
 
-    public void InputQuestKey()
+    public void InputKey()
     {
         isActive = !isActive;
         if (isActive)
@@ -92,5 +92,7 @@ public class QuestUI : MonoBehaviour
         infoUI.InActive();
         questFrameParent.SetActive(false);
     }
+
+
     #endregion
 }
