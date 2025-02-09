@@ -114,10 +114,10 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         float yVelocity = rigid.velocity.y;
         if(characterControl.IsOnGround == false)
         {
-            if (Mathf.Abs(yVelocity) < 0.2f)
+            if (Mathf.Abs(yVelocity) < 0.1f)
                 return;
 
-            if (rigid.velocity.y < -0.2f)
+            if (rigid.velocity.y < -0.1f)
                 characterControl.ChangeState(STATES.FALL);
             else
                 characterControl.ChangeState(STATES.JUMP);

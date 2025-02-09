@@ -20,7 +20,7 @@ public class PlayerCtrl : MonoBehaviour
     public BasePlayer GetPlayer { get { return players[currentPlayerIndex]; } }
     public List<BasePlayer> GetPlayers { get { return players; } }
 
-    //[SerializeField] FootStepPlayer footStepPlayer;
+    public bool CanInteractUI() { return GetPlayer.CanInteractUI(); }
     #endregion
 
     #region Life Cycle

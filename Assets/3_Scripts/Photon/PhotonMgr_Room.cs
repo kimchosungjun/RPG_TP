@@ -117,6 +117,7 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
+        // 방 들어감 : 들어간 유저만 호출
     }
 
     [PunRPC]

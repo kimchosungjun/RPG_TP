@@ -6,3 +6,4 @@
 6. 퀘스트를 수락하지 않았는데 퀘스트 창에 들어가 있는 점 해결하기
 
 
+https://assetstore.unity.com/packages/2d/gui/sci-fi-gui-skin-15606

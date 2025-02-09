@@ -134,8 +134,8 @@ namespace SaveDataGroup
     [Serializable]
     public class InteractionDataGroup
     {
-        public QuestSaveDataGroup saveClearQuest;
-        public List<NPCSaveData> npcDataSet;
+        public QuestSaveDataGroup saveClearQuest = new QuestSaveDataGroup();
+        public List<NPCSaveData> npcDataSet = new List<NPCSaveData>();
     
         public NPCSaveData GetNpcSaveData(int _id)
         {

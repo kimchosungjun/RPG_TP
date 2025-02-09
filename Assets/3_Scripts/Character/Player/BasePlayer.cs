@@ -41,6 +41,13 @@ public class BasePlayer : BaseActor
         transform.position = _position;
         transform.rotation = _rotation;
     }
+
+
+    public bool CanInteractUI()
+    {
+        if (isAlive == false) return false;
+        return playerMovementControl.CanInteractUI();
+    }
     #endregion
 
     /***************************************/

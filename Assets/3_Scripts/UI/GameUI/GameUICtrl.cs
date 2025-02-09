@@ -155,14 +155,14 @@ public class GameUICtrl : MonoBehaviour
     {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
         // Cursor
-        if(CurrentOpenUI == GAMEUI.NONE && isConversationState == false)
+        if(CanOpenUI(gameUI) && isConversationState == false)
         {
-            if (Input.GetKeyDown(KeyCode.LeftAlt))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true); 
                 SharedMgr.CursorMgr.SetCursorVisibleState(true);
             }
-            else if (Input.GetKeyUp(KeyCode.LeftAlt))
+            else if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);   
                 SharedMgr.CursorMgr.SetCursorVisibleState(false);
@@ -174,7 +174,7 @@ public class GameUICtrl : MonoBehaviour
             if (dialogueUI.GetIsChoiceActive)
             {
                 float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-                if (Input.GetKeyDown(KeyCode.F) && CanOpenUI(GAMEUI.QUEST))
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     dialogueUI.SelectChoice();
                 }
@@ -274,7 +274,7 @@ public class GameUICtrl : MonoBehaviour
     public bool CanOpenUI(GAMEUI _uiType)
     {
         if (CurrentOpenUI == GAMEUI.NONE)
-            return true;
+            return SharedMgr.GameCtrlMgr.GetPlayerCtrl.CanInteractUI();
 
         if (_uiType == CurrentOpenUI)
             return true;

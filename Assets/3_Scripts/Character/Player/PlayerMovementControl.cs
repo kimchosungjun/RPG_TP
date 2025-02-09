@@ -137,6 +137,17 @@ public abstract class PlayerMovementControl : MonoBehaviour
 
     protected bool isOnAirState = false;
     public bool IsOnAirState { get { return isOnAirState; }  set { isOnAirState = value; } }
+
+    public bool CanInteractUI()
+    {
+        if(currentPlayerState == STATES.MOVEMENT)
+        {
+            StopMoving();
+            return true;
+        }
+        return false;
+    }
+    public virtual void StopMoving() { ChangeState(STATES.MOVEMENT); anim.SetFloat("PlaneVelocity", 0f); }
     #endregion
 
     #region Change Player

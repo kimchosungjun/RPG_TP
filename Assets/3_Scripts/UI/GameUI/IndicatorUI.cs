@@ -18,6 +18,11 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
         healIndicatorImage.sprite = res.GetSpriteAtlas("Bar_Atlas", "Gold_Bar");
         gameOverImages[0].sprite = res.GetSpriteAtlas("Window_Atlas", "Popup_Frame");
         gameOverImages[1].sprite = res.GetSpriteAtlas("Button_Atlas", "Red_Frame");
+
+        minimapImages[0].sprite = res.GetSpriteAtlas("Minimap_Atlas", "MiniBack");
+        minimapImages[1].sprite = res.GetSpriteAtlas("Minimap_Atlas", "MiniFrame");
+        minimapImages[2].sprite = res.GetSpriteAtlas("Minimap_Atlas", "PlusBtn");
+        minimapImages[3].sprite = res.GetSpriteAtlas("Minimap_Atlas", "MinutBtn");
     }
 
     #region Heal Indicator
@@ -161,5 +166,13 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
             healCor = null;
         }
     }
+    #endregion
+
+    #region Minimap
+    [Header("Minimap")]
+    [SerializeField, Tooltip("0 :Background, 1:Frame, 2:+Btn, 3:-Btn")] Image[] minimapImages;
+    
+    public void PressZoomIn() { SharedMgr.GameCtrlMgr.GetCameraCtrl.Zoom(); }
+    public void PressZoomOut() { SharedMgr.GameCtrlMgr.GetCameraCtrl.Zoom(false); }
     #endregion
 }

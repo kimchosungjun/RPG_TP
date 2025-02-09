@@ -10,13 +10,14 @@ public class CameraCtrl : MonoBehaviour
     [SerializeField] CameraQuaterView quaterView;
     [SerializeField] CameraShakeView shakeView;
     [SerializeField] CameraTalkView talkView;
-
+    [SerializeField] MinimapCameraView minimapView;
 
     private void Start()
     {
         quaterView.Setup(this.transform);
         talkView.Setup();
         shakeView.Setup();
+        minimapView.Setup();
     }
 
     private void Update()
@@ -27,6 +28,7 @@ public class CameraCtrl : MonoBehaviour
 
     private void LateUpdate()
     {
+        minimapView.LateExecute();
         if (isMoveLock) return;
         quaterView.LateExecute();
     }
@@ -42,14 +44,7 @@ public class CameraCtrl : MonoBehaviour
     {
         isMoveLock = false;
         quaterView.ChangeTarget(_target);
-    }
-    #endregion
-
-    #region Set Shake View
-    public void SetShakeCameraView(int _id = 0)
-    {
-        isMoveLock = true;
-        shakeView.Shake(_id);
+        minimapView.ChangeTarget(_target);
     }
     #endregion
 
@@ -68,6 +63,29 @@ public class CameraCtrl : MonoBehaviour
     public void SetMoveRockCamera(bool _isLock)
     {
         isMoveLock = _isLock;
+    }
+    #endregion
+
+    #region Set MinimapView
+    public void SetMinimapTarget(Transform _target)
+    {
+        minimapView?.ChangeTarget(_target); 
+    }
+
+    public void Zoom(bool _isZoomIn = true)
+    {
+        if(_isZoomIn)
+            minimapView?.ZoomIn();
+        else
+            minimapView?.ZoomOut();
+    }
+    #endregion
+
+    #region Set Shake View
+    public void SetShakeCameraView(int _id = 0)
+    {
+        isMoveLock = true;
+        shakeView.Shake(_id);
     }
     #endregion
 }
