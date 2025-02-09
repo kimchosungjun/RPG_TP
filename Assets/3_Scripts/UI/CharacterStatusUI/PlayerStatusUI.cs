@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UIEnums;
 using System.Collections;
+using UnityEngine.Rendering;
 
 public class PlayerStatusUI : StatusUI, ICommonSetUI
 {
@@ -13,6 +14,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     [SerializeField] Text hpText;
     [SerializeField, Header("HP Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] hpImages;
     [SerializeField, Header("Exp Bar"), Tooltip("0:Frame, 1:Fill, 2:Effect")] Image[] expImages;
+    [SerializeField] Text expText;
     [SerializeField] PlayerJoystickUI joystickUI;
 
     public PlayerJoystickUI GetJoystickUI { get { return joystickUI; } }    
@@ -50,15 +52,21 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
         // set exp
         maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[_playerStat.GetSaveStat.currentLevel - 1];
         if (maxExp < 0f)
+        {
+            expText.text = string.Empty;
             expImages[1].fillAmount = 1f;
+        }
         else
         {
+            expText.text = stat.GetSaveStat.currentExp + "/" + maxExp;
             expImages[1].fillAmount = _playerStat.GetSaveStat.currentExp / maxExp;
             expImages[2].fillAmount = expImages[1].fillAmount;
         }
         // set text
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
+        
+
         TurnOn();
     }
     #endregion
@@ -116,7 +124,18 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     bool updateExp = false;
     public void UpdateExp()
     {
+        UpdateLevel();
         expTarget = stat.GetSaveStat.currentExp;
+        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[stat.GetSaveStat.currentLevel - 1];
+        if (maxExp < 0)
+        {
+            expText.text = string.Empty;
+            expImages[1].fillAmount = 1;
+            expImages[2].fillAmount = 1;
+            return;
+        }
+        expImages[2].fillAmount = (float)stat.GetSaveStat.currentExp / maxExp;
+        expText.text = stat.GetSaveStat.currentExp + "/" + maxExp;
         if (updateExp == false)
         {
             updateExp = true;
@@ -125,14 +144,6 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     }
     IEnumerator CUpdateExp()
     {
-        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[stat.GetSaveStat.currentLevel - 1];
-        
-        if(maxExp < 0)
-        {
-            expImages[1].fillAmount = 1;
-            expImages[2].fillAmount = 1;
-            yield break;
-        }
         while (true)
         {
             if (expImages[2].fillAmount <= expImages[1].fillAmount)
@@ -140,7 +151,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
                 updateExp = false;
                 break;
             }
-            expImages[2].fillAmount -= Time.fixedDeltaTime / effectTime;
+            expImages[1].fillAmount += Time.fixedDeltaTime / effectTime;
             yield return new WaitForFixedUpdate();
         }
     }

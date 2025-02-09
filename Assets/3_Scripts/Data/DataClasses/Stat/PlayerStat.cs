@@ -80,6 +80,19 @@ public class PlayerStat : BaseStat
         if (_actionDatas == null || _actionDatas.Length == 0) return;
         soDatas = _actionDatas;
     }
+
+    public void UpdateCurrentStat()
+    {
+        TableMgr tableMgr = SharedMgr.TableMgr;
+        PlayerTableData tableData = new PlayerTableData();
+        tableData = tableMgr.GetPlayer.GetPlayerTableData(currentStat.playerTypeID);
+
+        maxHp = tableData.defaultHP + currentStat.currentLevel * tableData.increaseHP;
+        attackValue = tableData.defaultAttack + currentStat.currentLevel * tableData.increaseAttack;
+        defenceValue = tableData.defaultDefence + currentStat.currentLevel * tableData.increaseDefence;
+        criticalValue = tableData.defaultCritical + currentStat.currentLevel * tableData.increaseCritical;
+        attackSpeed = tableData.defaultAttackSpeed + currentStat.currentLevel * tableData.increaseAttackSpeed;
+    }
     #endregion
 }
 
@@ -97,6 +110,12 @@ public class PlayerSaveStat
     [SerializeField] public int currentNormalAttackLevel;
     [SerializeField] public int currentSkillLevel;
     [SerializeField] public int currentUltimateSkillLevel;
+    
+    public void LevelUp()
+    {
+        currentLevel += 1;
+        SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(playerTypeID)?.UpdateCurrentStat();
+    }
 
     public PlayerSaveStat()
     {

@@ -94188,16 +94188,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1719677476}
     m_Modifications:
-    - target: {fileID: 101122064505123468, guid: 0ddcaa9a48434db41b5a2b0c618746a2,
-        type: 3}
-      propertyPath: m_Name
-      value: 1_1.BossStatusUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1405260673726427515, guid: 0ddcaa9a48434db41b5a2b0c618746a2,
-        type: 3}
-      propertyPath: m_Name
-      value: 1_2.PlayerStatusUI
-      objectReference: {fileID: 0}
     - target: {fileID: 3162830912449601231, guid: 0ddcaa9a48434db41b5a2b0c618746a2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -94307,21 +94297,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 1.StatusUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4001058964250888642, guid: 0ddcaa9a48434db41b5a2b0c618746a2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5177450876694430231, guid: 0ddcaa9a48434db41b5a2b0c618746a2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7997937302423712157, guid: 0ddcaa9a48434db41b5a2b0c618746a2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

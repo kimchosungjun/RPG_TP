@@ -68,6 +68,7 @@ public class PlayerStatControl : ActorStatControl
         int maxLevel = levelTableData.maxLevel;
         int currentMaxExp = levelTableData.needExps[currentLevel - 1];
         int exp = _exp;
+        
         if (currentLevel == maxLevel)
             return;
 
@@ -76,21 +77,41 @@ public class PlayerStatControl : ActorStatControl
             if (exp + saveStat.currentExp < currentMaxExp)
             {
                 saveStat.currentExp += exp;
+                SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.EXP);
                 return;
+            }
+            else if(exp + saveStat.currentExp == currentMaxExp)
+            {
+                saveStat.currentExp = 0;
+                saveStat.LevelUp();
+                currentLevel += 1;
+                exp = 0;
+                if (currentLevel == maxLevel)
+                {
+                    SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.EXP);
+                    return;
+                }
+                currentMaxExp = levelTableData.needExps[currentLevel - 1];
+                SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.EXP);
             }
             else
             {
-                saveStat.currentExp = 0;
-                saveStat.currentLevel += 1;
+                saveStat.LevelUp();
                 exp = currentMaxExp - saveStat.currentExp;
+                saveStat.currentExp = 0;
                 currentLevel += 1;
 
-                if (currentLevel == maxLevel || exp == 0)
+                if (currentLevel == maxLevel)
+                {
+                    SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.UpdateData(UIEnums.STATUS.EXP);
                     return;
+                }
 
                 currentMaxExp = levelTableData.needExps[currentLevel - 1];
             }
         }
+
+      
     }
 
     #endregion

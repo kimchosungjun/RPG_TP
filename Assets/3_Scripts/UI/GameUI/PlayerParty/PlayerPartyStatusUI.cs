@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
 {
+    [SerializeField] PlayerStat stat;
     [SerializeField] GameObject uiFrameObject;
     [SerializeField, Tooltip("0:HP, 1:Atk, 2:Def, 3:Cri, 4:PlayerIcon")] Image[] icons;
     [SerializeField, Tooltip("0:Hp, 1:Atk, 2:Def, 3:Cir, 4:Player")] Image[] iconFrames;
@@ -41,11 +42,12 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
     public void PressCharacter(int _id)
     {
         List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
-        int cnt =players.Count;
-        for(int i=0; i<cnt; i++)
+        int cnt = players.Count;
+        for(int i=0; i< cnt; i++)
         {
             if (players[i].PlayerStat.GetSaveStat.playerTypeID == _id)
             {
+                stat = players[i].PlayerStat;
                 UpdatePlayerStat(players[i].PlayerStat);
                 return;
             }
