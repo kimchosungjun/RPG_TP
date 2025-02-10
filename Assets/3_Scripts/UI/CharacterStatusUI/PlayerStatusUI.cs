@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UIEnums;
 using System.Collections;
-using UnityEngine.Rendering;
 
 public class PlayerStatusUI : StatusUI, ICommonSetUI
 {
@@ -17,8 +16,9 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     [SerializeField] Text expText;
     [SerializeField] PlayerJoystickUI joystickUI;
 
-    public PlayerJoystickUI GetJoystickUI { get { return joystickUI; } }    
+    public PlayerJoystickUI GetJoystickUI { get { return joystickUI; } }
 
+    int curLv = -1;
     float hpTarget = -1;
     float expTarget = -1;
     PlayerStat stat = null;
@@ -40,6 +40,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     public void ChangeData(PlayerStat _playerStat)
     {
         // update bool init
+        curLv = _playerStat.GetSaveStat.currentLevel;
         updateExp = false;
         updateHp = false;
         //set hp
@@ -123,10 +124,12 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
 
     bool updateExp = false;
     public void UpdateExp()
-    {
-        UpdateLevel();
+    { 
         expTarget = stat.GetSaveStat.currentExp;
-        maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[stat.GetSaveStat.currentLevel - 1];
+        if (stat.GetSaveStat.currentLevel < SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().maxLevel)
+            maxExp = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData().needExps[stat.GetSaveStat.currentLevel - 1];
+        else
+            maxExp = -1;
         if (maxExp < 0)
         {
             expText.text = string.Empty;
@@ -136,6 +139,11 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
         }
         expImages[2].fillAmount = (float)stat.GetSaveStat.currentExp / maxExp;
         expText.text = stat.GetSaveStat.currentExp + "/" + maxExp;
+        if(curLv != stat.GetSaveStat.currentLevel)
+        {
+            UpdateData(STATUS.HP);
+            UpdateData(STATUS.LEVEL);
+        }
         if (updateExp == false)
         {
             updateExp = true;
@@ -149,6 +157,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
             if (expImages[2].fillAmount <= expImages[1].fillAmount)
             {
                 updateExp = false;
+                expImages[1].fillAmount = expImages[2].fillAmount;
                 break;
             }
             expImages[1].fillAmount += Time.fixedDeltaTime / effectTime;
@@ -158,6 +167,7 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     public void UpdateLevel()
     {
         levelText.text = "Lv."+stat.GetSaveStat.currentLevel;
+        curLv = stat.GetSaveStat.currentLevel;
     }
     #endregion
 

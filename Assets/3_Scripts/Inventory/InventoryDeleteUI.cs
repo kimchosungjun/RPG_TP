@@ -90,8 +90,9 @@ public class InventoryDeleteUI : MonoBehaviour
         if (data == null)
             return;
 
-        Debug.Log("제거!");
+        data.Remove((int)deleteSlider.value);
         InActive();
+        SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
     }
     #endregion
 

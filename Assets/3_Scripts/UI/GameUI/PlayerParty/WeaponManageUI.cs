@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
+public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
 {
     [SerializeField] GameObject[] weaponManageParents;
     [SerializeField, Tooltip("0:Frame, 1:ScrollBar")] Image[] weaponManageImages;
@@ -15,6 +15,8 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
     List<WeaponData> weapons = null;
     public WeaponManageView GetManageView { get { return manageView; } }
 
+    int changeCharacterID = -1;
+
     #region Select Data
     int currentSelectCharacterID = -1;
     public int GetCurrentSelectCharacterID { get { return currentSelectCharacterID; } }
@@ -22,6 +24,7 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
     [SerializeField] WeaponData currentSelectWeaponData = null;
     public WeaponData CurrentSelectWeaponData { get { return currentSelectWeaponData; }  set { currentSelectWeaponData = value; } }
     #endregion
+
     public void Init()
     {
         if (levelupButton == null) levelupButton = GetComponentInChildren<SelectWeaponLevelupButton>();
@@ -52,7 +55,6 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
             weaponManageParents[1].SetActive(false);
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetCharacterSlotSetUI.TurnOn();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.ManageGoldUI(true);
-
     }
 
     public void TurnOff()
@@ -64,6 +66,7 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
 
     public void ChangeCharacter(int _id)
     {
+        changeCharacterID = _id;
         if (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id) == null) return;
         WEAPONTYPE type = SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id).GetWeaponType();
         currentSelectCharacterID = _id;
@@ -94,5 +97,11 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI
             weaponManageParents[1].SetActive(true);
         upgradeView.UpdateMatSlots();
         upgradeView.SetWeaponData(currentSelectWeaponData);
+    }
+
+    public void UpdateData()
+    {
+        if (changeCharacterID == -1) return;
+        ChangeCharacter(changeCharacterID);
     }
 }

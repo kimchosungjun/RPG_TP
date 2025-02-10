@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
+public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
 {
     [SerializeField] PlayerStat stat;
     [SerializeField] GameObject uiFrameObject;
@@ -12,6 +12,9 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
     [SerializeField] PlayerPartyStatusButton[] buttons;
     [SerializeField, Tooltip("0:HP, 1:Atk, 2:Def, 3:Cri, 4:Lv, 5:Name, 6 :ClassText")] Text[] characterStatTexts;
     [SerializeField] Slider expSlider;
+
+    int currentID = -1;
+
     public void Init()
     {
         SetImages();
@@ -43,6 +46,7 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
     {
         List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
         int cnt = players.Count;
+        currentID = _id;
         for(int i=0; i< cnt; i++)
         {
             if (players[i].PlayerStat.GetSaveStat.playerTypeID == _id)
@@ -73,6 +77,15 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
             uiFrameObject.SetActive(false);
     }
     
+    public void UpdatePlayerStat(int _id)
+    {
+        if (_id == -1) return;
+
+        PlayerStat searchStat =  SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(_id);
+        if (searchStat == null) return;
+        UpdatePlayerStat( searchStat);
+    }
+
     public void UpdatePlayerStat(PlayerStat _stat)
     {
         PlayerLevelTableData lvTable = SharedMgr.TableMgr.GetPlayer.GetPlayerLevelTableData();
@@ -127,5 +140,11 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI
             int id = stat.GetSaveStat.playerTypeID;
             buttons[i].SetButton(id,res.GetSpriteAtlas(stat.GetAtlasName,stat.GetFileName));
         }
+    }
+
+    public void UpdateData()
+    {
+        if( currentID !=-1)
+            UpdatePlayerStat(currentID);
     }
 }

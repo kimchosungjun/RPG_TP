@@ -12,3 +12,8 @@ public interface ITurnOnOffUI
     public void TurnOn();
     public void TurnOff();
 }
+
+public interface IUpdateUI
+{
+    public void UpdateData();
+}

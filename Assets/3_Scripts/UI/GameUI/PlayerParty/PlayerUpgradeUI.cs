@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUpgradeUI : MonoBehaviour, ITurnOnOffUI
+public class PlayerUpgradeUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
 {
     [SerializeField, Tooltip("0:Normal, 1:Skill, 2:Ultimate, 3 : Upgrade Frame")] Image[] frames;
     [SerializeField, Tooltip("0:Normal, 1:Skill, 2:Ultimate, 3: LevelupBtn, 4:LevelupGold")] Image[] icons;
@@ -122,14 +122,16 @@ public class PlayerUpgradeUI : MonoBehaviour, ITurnOnOffUI
     {
         SharedMgr.InventoryMgr.RemoveGold(useGold);
         SharedMgr.UIMgr.GameUICtrl.GetUpgradeIndicatorUI.TurnOn(actionSoData);
-        //if (SharedMgr.InventoryMgr.CanUseGold(useGold))
-        //{
-        //    SharedMgr.InventoryMgr.RemoveGold(useGold);
-        //    SharedMgr.UIMgr.GameUICtrl.GetUpgradeIndicatorUI.TurnOn(actionSoData);
-        //}
-        //else
-        //{
-        //    Debug.Log("Don't have enough money!!!");
-        //}
+        if (SharedMgr.InventoryMgr.CanUseGold(useGold))
+        {
+            SharedMgr.InventoryMgr.RemoveGold(useGold);
+            SharedMgr.UIMgr.GameUICtrl.GetUpgradeIndicatorUI.TurnOn(actionSoData);
+        }
+        else
+        {
+            Debug.Log("Don't have enough money!!!");
+        }
     }
+
+    public void UpdateData() { }
 }

@@ -62,6 +62,11 @@ namespace PoolEnums
         HEAL,
         NONE
     }
+
+    public enum ONLYONE
+    {
+        LEVEL_UP = 0,
+    }
 }
 
 // 레이어, 씬, 테이블 ID

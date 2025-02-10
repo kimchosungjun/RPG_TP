@@ -87,11 +87,14 @@ public class PlayerStat : BaseStat
         PlayerTableData tableData = new PlayerTableData();
         tableData = tableMgr.GetPlayer.GetPlayerTableData(currentStat.playerTypeID);
 
-        maxHp = tableData.defaultHP + currentStat.currentLevel * tableData.increaseHP;
-        attackValue = tableData.defaultAttack + currentStat.currentLevel * tableData.increaseAttack;
-        defenceValue = tableData.defaultDefence + currentStat.currentLevel * tableData.increaseDefence;
-        criticalValue = tableData.defaultCritical + currentStat.currentLevel * tableData.increaseCritical;
-        attackSpeed = tableData.defaultAttackSpeed + currentStat.currentLevel * tableData.increaseAttackSpeed;
+        int level = currentStat.currentLevel - 1;
+        maxHp = tableData.defaultHP + tableData.increaseHP * level;
+        if(currentStat.currentHP > 0)
+            currentStat.currentHP = maxHp;
+        attackValue = tableData.defaultAttack + tableData.increaseAttack * level;
+        defenceValue = tableData.defaultDefence + tableData.increaseDefence * level;
+        criticalValue = tableData.defaultCritical + tableData.increaseCritical * level;
+        attackSpeed = tableData.defaultAttackSpeed + tableData.increaseAttackSpeed * level;
     }
     #endregion
 }

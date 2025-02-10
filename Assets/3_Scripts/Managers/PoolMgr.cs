@@ -23,12 +23,18 @@ public class PoolMgr : MonoBehaviour
     ShowGetItemSlot[] showGetItemSlots = null;
     #endregion
 
+    #region Only One Particle
+    [SerializeField] PoolParticle poolParticle;
+    public PoolParticle GetPoolParticle { get { return poolParticle; } }    
+    #endregion
+
     /********* Methods **********/
 
     #region Life Cycle
     private void Awake()
     {
         SharedMgr.PoolMgr = this;
+        if(poolParticle==null) poolParticle = GetComponentInChildren<PoolParticle>();
     }
 
     private void Start()

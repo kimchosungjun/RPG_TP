@@ -1123,8 +1123,8 @@ MonoBehaviour:
   minimapImages:
   - {fileID: 1800329916516555050}
   - {fileID: 6834839610529098344}
-  - {fileID: 7959415240603738048}
   - {fileID: 5605154739480777901}
+  - {fileID: 7959415240603738048}
 --- !u!1 &7104640291156128972
 GameObject:
   m_ObjectHideFlags: 0

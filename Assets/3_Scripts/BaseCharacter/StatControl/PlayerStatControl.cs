@@ -68,7 +68,8 @@ public class PlayerStatControl : ActorStatControl
         int maxLevel = levelTableData.maxLevel;
         int currentMaxExp = levelTableData.needExps[currentLevel - 1];
         int exp = _exp;
-        
+        bool isLevelUp = false;
+
         if (currentLevel == maxLevel)
             return;
 
@@ -83,6 +84,12 @@ public class PlayerStatControl : ActorStatControl
             else if(exp + saveStat.currentExp == currentMaxExp)
             {
                 saveStat.currentExp = 0;
+                if (isLevelUp == false)
+                {
+                    isLevelUp = true;
+                    SharedMgr.PoolMgr.GetPoolParticle.UseParticle(PoolEnums.ONLYONE.LEVEL_UP, 3f, true);
+                    SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.BUFF_SFX);                                       
+                }
                 saveStat.LevelUp();
                 currentLevel += 1;
                 exp = 0;
@@ -96,6 +103,12 @@ public class PlayerStatControl : ActorStatControl
             }
             else
             {
+                if (isLevelUp == false)
+                {
+                    isLevelUp = true;
+                    SharedMgr.PoolMgr.GetPoolParticle.UseParticle(PoolEnums.ONLYONE.LEVEL_UP, 3f, true);
+                    SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.BUFF_SFX);
+                }
                 saveStat.LevelUp();
                 exp = currentMaxExp - saveStat.currentExp;
                 saveStat.currentExp = 0;

@@ -28,6 +28,8 @@ public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
     public CharacterSlotSetUI GetCharacterSlotSetUI { get { return characterSlotSetUI; } }
     public InventoryGoldUI GetInventoryGoldUI { get {   return goldUI; } }  
 
+    List<IUpdateUI> updateUIList = new List<IUpdateUI>();
+
     [Header("Character Button Effect")]
     [SerializeField] RectTransform effectTransform;
     public RectTransform GetEffectTransform { get { return effectTransform; } }
@@ -74,6 +76,10 @@ public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
     #region Setup (Manage UI Active State)
     public void Setup()
     {
+        updateUIList.Add(playerPartyStatusUI);
+        updateUIList.Add(weaponManageUI);
+        updateUIList.Add(playerUpgradeUI);
+
         ManageActiveUI();
     }
 
@@ -103,6 +109,9 @@ public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
             if (playerPartyUISetFrame.activeSelf == false)
                 playerPartyUISetFrame.SetActive(true);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = GAMEUI.PLAYER_PARTY;
+
+            if(currentShowType != PARTY.MAX)
+                updateUIList[(int)currentShowType].UpdateData();
         }
         else
         {

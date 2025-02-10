@@ -9,17 +9,26 @@ public class ParticleAction : MonoBehaviour
     [SerializeField] float maintainTime;
 
     public HitBox GetHitBox { get; set; } = null;
-    public void DoParticle(float _maintainTime)
+    public void DoParticle(float _maintainTime, bool _followPlayer = false)
     {
-        if(particleParent.gameObject.activeSelf == false)
+        if (particleParent.gameObject.activeSelf == false)
             particleParent.gameObject.SetActive(true);
         int cnt = particles.Length;
         for (int i = 0; i < cnt; i++)
         {
             particles[i].Play();
         }
-        StartCoroutine(CParticleMaintainTime(_maintainTime));
+        if (_followPlayer)
+        {
+            StartCoroutine(CFollowPlayer(_maintainTime));
+        }
+        else
+        {
+            StartCoroutine(CParticleMaintainTime(_maintainTime));
+        }
     }
+
+    
 
     public void DoParticle()
     {
@@ -37,6 +46,18 @@ public class ParticleAction : MonoBehaviour
     {
         yield return new WaitForSeconds(_maintainTime);
         StopParticle();
+    }
+
+    IEnumerator CFollowPlayer(float _mainTainTime)
+    {
+        float time = 0;
+        while (time < _mainTainTime)
+        {
+            particleParent.transform.position = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform.position + Vector3.up *0.2f;
+            time += Time.deltaTime;
+            yield return null;
+        }
+        StopParticle(); 
     }
 
     public void DoParticleLoop()

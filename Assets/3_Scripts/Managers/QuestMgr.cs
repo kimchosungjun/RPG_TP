@@ -8,7 +8,7 @@ public class QuestMgr
     List <QuestSOData> questDatas;
     List <QuestSOData> acceptQuestData;
     Dictionary <int,int> questIndexes; // First QuestID, Second List Index
-    public List<QuestSOData> GetQuestDatas { get { return questDatas; } }
+    public List<QuestSOData> GetQuestDatas { get { return acceptQuestData; } }
 
     #region Load & Set
     public void Init()
