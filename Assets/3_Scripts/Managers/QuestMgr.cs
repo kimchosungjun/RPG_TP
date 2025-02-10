@@ -5,18 +5,14 @@ using UnityEngine;
 public class QuestMgr 
 {
     Dictionary <int, QuestConditionDataGroup> killConditions = new Dictionary<int, QuestConditionDataGroup>();
-    List <QuestSOData> questDatas;
-    List <QuestSOData> acceptQuestData;
-    Dictionary <int,int> questIndexes; // First QuestID, Second List Index
+    Dictionary <int ,QuestSOData> questDataGroup= new Dictionary<int, QuestSOData>();
+    List <QuestSOData> acceptQuestData = new List<QuestSOData>();
     public List<QuestSOData> GetQuestDatas { get { return acceptQuestData; } }
 
     #region Load & Set
     public void Init()
     {
         SharedMgr.QuestMgr = this;
-        questDatas = new List<QuestSOData>();
-        acceptQuestData = new List<QuestSOData>();
-        questIndexes = new Dictionary<int, int>();
         LoadQuestData();
     }
 
@@ -33,45 +29,42 @@ public class QuestMgr
         string path = "QuestGroup/Quest_SO" + _id;
         QuestSOData data = SharedMgr.ResourceMgr.LoadResource<QuestSOData>(path);
         if (data == null) return;
-        questDatas.Add(data);
+        questDataGroup.Add(data.GetQuestID, data);
     }
     #endregion
 
     #region Manage Quest
     public void DeleteQuestData(int _questID)
     {
-        if (questIndexes.ContainsKey(_questID) == false)
-            return;
-
-        acceptQuestData.RemoveAt(questIndexes[_questID]);
-        questIndexes.Remove(_questID);
+        int cnt = acceptQuestData.Count;
+        for(int i=0; i<cnt; i++)
+        {
+            if(acceptQuestData[i].GetQuestID == _questID)
+            {
+                acceptQuestData.RemoveAt(i);
+                break;
+            }
+        }
         SharedMgr.UIMgr.GameUICtrl.GetQuestUI.UpdateQuestDatas();
     }
 
     public QuestSOData GetQuestData(int _id)
     {
-        if (questIndexes.ContainsKey(_id))
-            return questDatas[questIndexes[_id]];
+         if(questDataGroup.ContainsKey(_id))
+            return questDataGroup[_id];
         return null;
     }
 
     public void AcceptQuestData(int _questID)
     {
-        if (questDatas.Count - 1 > _questID)
+        if (!questDataGroup.ContainsKey(_questID))
             return;
 
-        if (acceptQuestData.Contains(questDatas[_questID]))
+        if (acceptQuestData.Contains(questDataGroup[_questID]))
             return;
 
-        if (questIndexes.ContainsKey(_questID))
-            return;
-
-        if (questIndexes.ContainsKey(_questID))
-            return;
-
-        acceptQuestData.Add(questDatas[_questID]);
-        questIndexes.Add(_questID, acceptQuestData.Count - 1);
-        questDatas[_questID].GetKillConditionData();
+        acceptQuestData.Add(questDataGroup[_questID]);
+        questDataGroup[_questID].GetKillConditionData();
         SharedMgr.UIMgr.GameUICtrl.GetQuestUI.UpdateQuestDatas();
     }
     #endregion

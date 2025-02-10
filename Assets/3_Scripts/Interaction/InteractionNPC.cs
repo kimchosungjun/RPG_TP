@@ -86,7 +86,6 @@ public class InteractionNPC : Interactable
         direction = direction.normalized;
         Quaternion endRot = Quaternion.LookRotation(direction);
         float angle = Vector3.Angle(transform.forward, direction) * 0.5f;
-
         if (angle <= 30f)
         {
             transform.rotation = endRot;

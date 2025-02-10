@@ -20,7 +20,7 @@ MonoBehaviour:
   notMeetQuestDialogueIndex: 2
   meetQuestDialogueIndex: 3
   afterGetAwardDialogueIndex: -1
-  questConditions:
+  questConditionSet:
   - type: 1
     targetName: "\uBC14\uC774\uB7EC\uC2A4"
     targetID: 1

@@ -7,9 +7,9 @@ public class InventorySlot : MonoBehaviour
     [SerializeField, Tooltip("0:Frame, 1:TextFame, 2:Icon")] Image[] slotImages;
     [SerializeField] Text numberText;
     [SerializeField] Button slotButton;
-    [SerializeField] EtcData etcData = null;
-    [SerializeField] ConsumeData consumeData = null;
-    [SerializeField] WeaponData weaponData = null;
+    EtcData etcData = null;
+    ConsumeData consumeData = null;
+    WeaponData weaponData = null;
 
     Color transparentColor = Color.white;
     Color defaultColor = Color.white;

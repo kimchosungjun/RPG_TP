@@ -63,6 +63,6 @@ public class QuestConditionData
                 break;
         }
 
-        return string.Empty;
+        return description;
     }
 }

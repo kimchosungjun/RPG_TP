@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class QuestInfoUI : MonoBehaviour
 {
     [SerializeField] QuestAwardSlot[] awardSlots;
-    [SerializeField, Tooltip("0:Name, 1:Description, 2:Condition")] Text[] questTexts;
+    [SerializeField, Tooltip("0:Name, 1:Description")] Text[] questTexts;
+    [SerializeField] Text[] questConditionTexts;
     [SerializeField] GameObject infoParent;
     [SerializeField] Image nameFrameImage;
 
@@ -18,7 +20,29 @@ public class QuestInfoUI : MonoBehaviour
         infoParent.SetActive(true);
         questTexts[0].text = _data.GetQuestName;
         questTexts[1].text = _data.GetQuestDescription;
-        questTexts[2].text = string.Empty;
+
+        List<QuestConditionData> conditions = _data.GetQuestConditionSet;
+        int cnt = conditions.Count;
+        Debug.Log(cnt);
+        for(int i=0; i<cnt; i++)
+        {
+            bool isMeet = false;
+            questConditionTexts[i].text = conditions[i].GetQuestDescription(ref isMeet);
+            Debug.Log(conditions[i].GetQuestDescription(ref isMeet));
+            if(isMeet)
+                questConditionTexts[i].color = Color.green;
+            else
+                questConditionTexts[i].color = Color.yellow;
+
+            if (questConditionTexts[i].gameObject.activeSelf == false)
+                questConditionTexts[i].gameObject.SetActive(true);
+        }
+
+        for(int i=cnt; i<3; i++)
+        {
+            if (questConditionTexts[i].gameObject.activeSelf)
+                questConditionTexts[i].gameObject.SetActive(false);
+        }   
     }
 
     public void InActive()

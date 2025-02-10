@@ -1,13 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SaveDataGroup;
+using Unity.VisualScripting;
 
 [CreateAssetMenu(fileName ="Quest", menuName ="QuestSOData")]
 public class QuestSOData : ScriptableObject
 {
     #region Value
     [Header("Quest Datas")]
+    bool isClearQuest = false;
     [SerializeField] int questID;
     [SerializeField] string questName;
     [TextArea(5,10), SerializeField] string questDescription;
@@ -17,7 +18,8 @@ public class QuestSOData : ScriptableObject
     [SerializeField] int afterGetAwardDialogueIndex;
 
     [Header("Quest Conditions")]
-    [SerializeField] List<QuestConditionData> questConditions;
+    [SerializeField] List<QuestConditionData> questConditionSet;
+    public List<QuestConditionData> GetQuestConditionSet { get { return questConditionSet; } }
     
     [Header("Quest Awards")]
     [SerializeField] List<ItemAward> itemAwards;
@@ -30,12 +32,12 @@ public class QuestSOData : ScriptableObject
     public List<QuestConditionData> GetKillConditionData()
     {
         List<QuestConditionData> datas =  new List<QuestConditionData>();
-        int cnt = questConditions.Count;
+        int cnt = questConditionSet.Count;
         for(int i=0; i<cnt; i++)
         {
-            if(questConditions[i].type ==  QuestEnums.TYPES.KILL)
+            if(questConditionSet[i].type ==  QuestEnums.TYPES.KILL)
             {
-                datas.Add(questConditions[i]);
+                datas.Add(questConditionSet[i]);
             }
         }
         return datas;
@@ -51,32 +53,22 @@ public class QuestSOData : ScriptableObject
     #region Achieve Quest
     public void AcceptQuest()
     {
-        saveData = new QuestConditionSaveData(questID, questConditions);
+        saveData = new QuestConditionSaveData(questID, questConditionSet);
     }
 
     public bool IsAchieveQuestCondition(ref int _dialogueIndex)
     {
-        int conditionCnt = questConditions.Count;
+        int conditionCnt = questConditionSet.Count;
         for (int i = 0; i < conditionCnt; i++)
         {
-            if (questConditions[i].IsAchieveQuestCondition() == false)
+            if (questConditionSet[i].IsAchieveQuestCondition() == false)
             {
                 _dialogueIndex = notMeetQuestDialogueIndex;
                 return false;
             }
         }
         _dialogueIndex = meetQuestDialogueIndex;
-        return true;
-    }
-
-    public bool CanAchieveQuestAwards()
-    {
-        //int itemAwardCnt = itemAwards.Count;
-        //for(int i=0; i < itemAwardCnt; i++)
-        //{
-        //    if (itemAwards[i].CanGetAward() == false)
-        //        return false;
-        //}
+        UpdateLogData();
         return true;
     }
 
@@ -97,4 +89,48 @@ public class QuestSOData : ScriptableObject
             characterAwards[0].GetAward();
     }
     #endregion
+
+    #region Quest Log Data
+    QuestLogData logData = null;
+
+    public void LoadQuestLog()
+    {
+        logData = new QuestLogData(isClearQuest, questID, questConditionSet);
+    }
+
+    public void LoadQuestLog(QuestLogData _logData)
+    {
+        logData = _logData;
+        isClearQuest = _logData.isClearQuest;
+        questConditionSet = _logData.conditions;
+    }
+
+    public void UpdateLogData()
+    {
+        logData.isClearQuest = isClearQuest;
+        logData.isClearQuest = isClearQuest;
+        logData.conditions = questConditionSet;
+    }
+
+    public void UpdateLogData(ref QuestLogData _logData)
+    {
+        UpdateLogData();
+        _logData = logData;
+    }
+    #endregion
+}
+
+public class QuestLogData
+{
+    public bool isClearQuest;
+    public int questID;
+    public List<QuestConditionData> conditions;
+
+    public QuestLogData() { }
+    public QuestLogData(bool _isClearQuest, int _questID, List<QuestConditionData> _conditions)
+    {
+        isClearQuest= _isClearQuest;    
+        questID= _questID;  
+        conditions= _conditions;
+    }
 }
