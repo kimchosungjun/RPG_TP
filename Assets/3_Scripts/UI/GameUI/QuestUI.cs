@@ -52,6 +52,7 @@ public class QuestUI : MonoBehaviour, IInputKeyUI
         int cnt = soDatas.Count;
         if (cnt == 0 || cnt <= _index) 
             return;
+        SharedMgr.SoundMgr.PressButtonSFX();
         infoUI.Active(soDatas[_index]);
     }
 
@@ -74,13 +75,11 @@ public class QuestUI : MonoBehaviour, IInputKeyUI
         if (isActive)
         {
             UpdateQuestDatas();
-            SharedMgr.CursorMgr.SetCursorVisibleState(true);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.QUEST;
         }
         else
         {
             infoUI.InActive();
-            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
         }
         questFrameParent.SetActive(isActive);
@@ -88,11 +87,8 @@ public class QuestUI : MonoBehaviour, IInputKeyUI
 
     public void ExitQuestUI()
     {
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
-        infoUI.InActive();
-        questFrameParent.SetActive(false);
+        SharedMgr.SoundMgr.PressButtonSFX();
+        InputKey();
     }
-
-
     #endregion
 }

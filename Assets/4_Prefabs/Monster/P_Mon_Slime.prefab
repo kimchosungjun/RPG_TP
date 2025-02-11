@@ -990,6 +990,11 @@ PrefabInstance:
       propertyPath: heightDelta
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2189717757727938636, guid: 80eafa1b32c46734fbb27476693f164d,
+        type: 3}
+      propertyPath: followTransform
+      value: 
+      objectReference: {fileID: 1527949966216410032}
     - target: {fileID: 4323910794320429977, guid: 80eafa1b32c46734fbb27476693f164d,
         type: 3}
       propertyPath: m_Name

@@ -23,7 +23,7 @@ public abstract class BaseMonster : BaseActor
     [SerializeField] protected MonsterStat monsterStat;
     public Animator GetAnim { get { return anim; } }    
     public MonsterStat GetMonsterStat { get { return monsterStat; } }
-    [SerializeField] SFXPlayer sfxPlayer; 
+    [SerializeField] protected SFXPlayer sfxPlayer; 
     protected bool isDeathState = false;
     #endregion
 
@@ -130,8 +130,8 @@ public abstract class BaseMonster : BaseActor
     #region Announce Area & Spawn 
     public virtual void AnnounceInMonsterArea() { IsInMonsterArea = true; } 
     public virtual void AnnounceOutMonsterArea() { IsInMonsterArea = false; ReturnToSpawnPosition(); }
-    public virtual void Death() { anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); GetDropItem(); } 
-    public virtual void AfterDeath() { MonsterArea.DeathMonster(this.gameObject);  } 
+    public virtual void Death() { StopAllCoroutines(); anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); GetDropItem(); } 
+    public virtual void AfterDeath()  { MonsterArea.DeathMonster(this.gameObject);} 
     #endregion
 
     #region Return To Spawn Position
@@ -199,12 +199,14 @@ public abstract class BaseMonster : BaseActor
     public virtual void GetDropItem()
     {
         MonsterDropTableData dropData = SharedMgr.TableMgr.GetMonster.GetMonsterDropTableData(initMonsterData.monsterDropID);
+        SharedMgr.QuestMgr.KillMonster((int)initMonsterData.monsterType);
         if (dropData == null)
             return;
 
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.GOLD_SFX);
         int dropGold = dropData.dropGold;
-        InventoryMgr inven = SharedMgr.InventoryMgr; 
-        
+        InventoryMgr inven = SharedMgr.InventoryMgr;
+
         // Gold
         if(dropGold > 0)
         {
@@ -219,33 +221,15 @@ public abstract class BaseMonster : BaseActor
         // Item
         EtcData etcData = new EtcData();
         int dropItemTypeCnt = dropData.itemIDs.Length;
-
+        // Set Quantity
         int quantity = 0;
-        bool isChoiceQuantity = false;
-        int quantityProbabilityCnt = dropData.quantityProbabilities.Length;
-        for (int k = 1; k < quantityProbabilityCnt; k++)
-        {
-            if (Randoms.IsInProbability(dropData.quantityProbabilities[k]))
-            {
-                isChoiceQuantity = true;
-                quantity = dropData.minQuantity + k;
-                break;
-            }
-        }
-        if (isChoiceQuantity == false)
-            quantity = dropData.minQuantity;
-
-        for (int i=1; i<dropItemTypeCnt; i++)
-        {
-            if(Randoms.IsInProbability(dropData.itemDropProbabilities[i]) == true)
-            {
-                etcData.SetData(SharedMgr.TableMgr.GetItem.GetEtcTableData(dropData.itemIDs[i]), quantity);
-                inven.AddItem(etcData);
-                return;
-            }
-        }
-
-        etcData.SetData(SharedMgr.TableMgr.GetItem.GetEtcTableData(dropData.itemIDs[0]), quantity);
+        Randoms.GetQuantity(dropData.minQuantity, dropData.maxQuantity, dropData.quantityProbabilities, ref quantity);
+        // Set Type
+        int itemIndex = 0;
+        Randoms.IsInProbability(dropData.itemDropProbabilities, ref itemIndex);
+        etcData.SetData(SharedMgr.TableMgr.GetItem.
+            GetEtcTableData(dropData.itemIDs[itemIndex]), quantity);
+        // Add Inven
         inven.AddItem(etcData);
     }
 

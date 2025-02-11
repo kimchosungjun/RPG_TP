@@ -35,4 +35,10 @@ public partial class ResourceMgr
         // switch에서 골라서 사용
         return null; 
     }
+
+    public T[] LoadAllResource<T>(string _path) where T: Object
+    {
+        T[] loadDatas = Resources.LoadAll<T>(_path);
+        return loadDatas;   
+    }
 }

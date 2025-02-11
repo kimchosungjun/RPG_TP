@@ -2,15 +2,14 @@ using System;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Collections.Generic;
+
 public class DialogueReader
 {
     #region Load
-    public DialogueDataSet LoadDialogueData(string _name)
+    public DialogueDataSet ConvertToJsonData(string _textAsset)
     {
-        string path = "Dialogues/" + _name + "Dialogue";
-        string texts = SharedMgr.ResourceMgr.LoadResource<TextAsset>(path).text;
         DialogueDataSet data = new DialogueDataSet();
-        data = JsonUtility.FromJson<DialogueDataSet>(texts);
+        data = JsonUtility.FromJson<DialogueDataSet>(_textAsset);
         return (data == null) ? null : data;
     }
 
@@ -123,15 +122,16 @@ public class DialogueReader
         return Convert.ToInt32(_text.Substring(2, _text.Length - 2)); 
     }
 
-    public void AcceptQuest(int _id)
+    public void AcceptQuest(int _questID)
     {
-        SharedMgr.QuestMgr.AcceptQuestData(_id);
-        SharedMgr.InteractionMgr.CurrentInteractNPC.AddQuestData(_id);
+        SharedMgr.QuestMgr.AcceptQuestData(_questID);
+        SharedMgr.InteractionMgr.CurrentInteractNPC.AddQuestData(_questID);
     }
 
-    public void AcceptAward(int _id)
+    public void AcceptAward(int _questID)
     {
-
+        SharedMgr.InteractionMgr.CurrentInteractNPC?.ClearQuestData();
+        SharedMgr.QuestMgr.GetQuestData(_questID).GetAwards();
     }
 
     public void EndConversation()
@@ -141,7 +141,7 @@ public class DialogueReader
 
     public void InActiveNPC()
     {
-
+        SharedMgr.InteractionMgr.CurrentInteractNPC.gameObject.SetActive(false);
     }
     #endregion
 }

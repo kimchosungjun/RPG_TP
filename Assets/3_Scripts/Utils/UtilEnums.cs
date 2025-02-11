@@ -55,6 +55,7 @@ namespace PoolEnums
         MON_RUSH,
         VIRUS_SPREAD,
         GUIDED_FIRE,
+        MON_DAMAGED,
         
         // COMMON
         EXPLOSION,

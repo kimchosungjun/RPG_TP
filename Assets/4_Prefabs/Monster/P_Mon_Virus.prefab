@@ -1769,6 +1769,7 @@ MonoBehaviour:
     boostSpeed: 0
     attackValue: 0
     criticalValue: 0
+  sfxPlayer: {fileID: 5819754934622353881}
   initMonsterData:
     monsterType: 1
     monsterLevel: 3
@@ -2084,7 +2085,7 @@ PrefabInstance:
     - target: {fileID: 8668999176913685889, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
       propertyPath: m_Name
-      value: MonsterFinder
+      value: MonsterFunctions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2097,6 +2098,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1753672662790025305}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5819754934622353881 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5230270957420300672, guid: 7b71972bd20803e40878aa45336bc343,
+    type: 3}
+  m_PrefabInstance: {fileID: 1753672662790025305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13dfca2945e6984585c2c514274f83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7516926096759921729 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8072481930409716760, guid: 7b71972bd20803e40878aa45336bc343,

@@ -26,33 +26,30 @@ public class GameExitUI : MonoBehaviour, IInputKeyUI
         if (isActive)
         {
             isActive = false;
-            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
             gameExitWindow.SetActive(false);
             return;
         }
         gameExitWindow.SetActive(true);
         isActive = true;
-        SharedMgr.CursorMgr.SetCursorVisibleState(true);
         SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.EXIT;
     }
 
     public void PressConfirmBtn()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SaveAccountData();
-        // To Do Back To LobbyScene
     }
 
     public void PressCancelBtn()
     {
-        isActive = false;
-        SharedMgr.CursorMgr.SetCursorVisibleState(false);
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
-        gameExitWindow.SetActive(false);
+        SharedMgr.SoundMgr.PressButtonSFX();
+        InputKey();
     }
 
     public void SaveAccountData()
     {
         // To Do Save Data
+        // To Do Back To LobbyScene
     }
 }

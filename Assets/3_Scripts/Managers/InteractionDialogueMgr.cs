@@ -17,15 +17,20 @@ public partial class InteractionMgr
     #endregion
 
     #region Load & Get Dialouge Data
-    public void LoadDialogue(string _name)
+    public void LoadDialogues(string _path)
     {
-        DialogueDataSet data = reader.LoadDialogueData(_name);
-        int dialogueCnt = data.dialogueSet.Count;
-        for (int i = 0; i < dialogueCnt; i++)
+        TextAsset[] textAssets = SharedMgr.ResourceMgr.LoadAllResource<TextAsset>(_path);
+        int textCnt = textAssets.Length;    
+        for(int i=0; i<textCnt; i++)
         {
-            if (dialogueGroup.ContainsKey(data.dialogueSet[i].dialogueID))
-                continue;
-            dialogueGroup.Add(data.dialogueSet[i].dialogueID, data.dialogueSet[i]);
+            DialogueDataSet data = reader.ConvertToJsonData(textAssets[i].text);
+            int dialogueCnt = data.dialogueSet.Count;
+            for (int k = 0; k < dialogueCnt; k++)
+            {
+                if (dialogueGroup.ContainsKey(data.dialogueSet[k].dialogueID))
+                    continue;
+                dialogueGroup.Add(data.dialogueSet[k].dialogueID, data.dialogueSet[k]);
+            }
         }
     }
 
@@ -41,14 +46,29 @@ public partial class InteractionMgr
 
     public void StartConversation(InteractionNPC _npc)
     {
-        if (isConversation) 
+        if (isConversation)
             return;
-        Dialogue data = GetDialouge(_npc.DialogueIndex);
+        Dialogue data = GetDialouge(_npc.DialogueID);
         if (data == null)
             return;
         isConversation = true;
         currentInteractNpc = _npc;
         SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.StartConversation(data);
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.SetTalkCamerView(currentInteractNpc.transform);
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.StartConversation(currentInteractNpc.transform.position);
+        SharedMgr.UIMgr.GameUICtrl.StartConversation();
+    }
+
+    public void StartConversation(InteractionNPC _npc, int _dialougeIndex)
+    {
+        if (isConversation) 
+            return;
+        Dialogue data = GetDialouge(_npc.DialogueID);
+        if (data == null)
+            return;
+        isConversation = true;
+        currentInteractNpc = _npc;
+        SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.StartConversation(data, _dialougeIndex);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetTalkCamerView(currentInteractNpc.transform);
         SharedMgr.GameCtrlMgr.GetPlayerCtrl.StartConversation(currentInteractNpc.transform.position);
         SharedMgr.UIMgr.GameUICtrl.StartConversation();
@@ -62,12 +82,16 @@ public partial class InteractionMgr
 
     public void EndConversation()
     {
-        isConversation = false;
-        SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.EndConversation();
-        currentInteractNpc = null;
-        SharedMgr.GameCtrlMgr.GetCameraCtrl.ReSetTalkCameraView();
-        SharedMgr.GameCtrlMgr.GetPlayerCtrl.EndConversation();
         SharedMgr.UIMgr.GameUICtrl.EndConversation();
+        SharedMgr.UIMgr.GameUICtrl.GetDialogueUI.EndConversation();
+        SharedMgr.GameCtrlMgr.GetCameraCtrl.ReSetTalkCameraView();
+    }
+
+    public void ReleaseMoveLock()
+    {
+        isConversation = false;
+        currentInteractNpc = null;
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.EndConversation();
     }
 
     #endregion

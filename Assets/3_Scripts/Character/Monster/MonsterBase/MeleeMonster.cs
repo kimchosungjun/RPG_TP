@@ -193,7 +193,7 @@ public class MeleeMonster : StandardMonster
         }
         return NODESTATES.SUCCESS;
     }
-    public void DoRush() { rush.DoAttack(); }
+    public void DoRush() { rush.DoAttack(); sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.MON_SLASH_SFX); }
     public void StopRush() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
 
     #endregion
@@ -240,7 +240,7 @@ public class MeleeMonster : StandardMonster
             nav.ResetPath();
     }
 
-    public void DoBite() { bite.DoAttack(); }
+    public void DoBite() { bite.DoAttack(); sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.MON_ATK_SFX); }
     public void StopBite() { bite.StopAttack(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
     #endregion
 
@@ -290,16 +290,16 @@ public class MeleeMonster : StandardMonster
 
     public override void EscapeHitState()
     {
-        base.EscapeHitState();
         triggerAttacks[0].InActiveTrigger();
         triggerAttacks[1].InActiveTrigger();
+        base.EscapeHitState();
     }
 
     public override void Death()
     {
-        base.Death();
-        nav.ResetPath();
         triggerAttacks[0].InActiveTrigger();
-        triggerAttacks[1].InActiveTrigger();   
+        triggerAttacks[1].InActiveTrigger();
+        nav.ResetPath();
+        base.Death();
     }
 }

@@ -18,5 +18,9 @@ public class SFXPlayer : MonoBehaviour
         source.loop = false;
     }
 
-    public void PlayOneSFX(SFXCLIPS _sfxClip) { source.PlayOneShot(SharedMgr.SoundMgr.GetClip(_sfxClip)); }
+    public void PlayOneSFX(SFXCLIPS _sfxClip) 
+    {
+        AudioClip clip = SharedMgr.SoundMgr.GetClip(_sfxClip);
+        source.PlayOneShot(clip); 
+    }
 }

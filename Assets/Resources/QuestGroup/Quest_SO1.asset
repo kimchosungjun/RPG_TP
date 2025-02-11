@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d077e093e23304aa1fea2bef12f266, type: 3}
   m_Name: Quest_SO1
   m_EditorClassIdentifier: 
+  isClearQuest: 0
   questID: 1
   questName: "\uC77C\uC77C \uB9C8\uC744 \uC9C0\uD0B4\uC774"
   questDescription: "\uBFD4 \uC2AC\uB77C\uC784 \uBB34\uB9AC\uAC00 \uB9C8\uC744 \uC0AC\uB78C\uB4E4\uC744
@@ -29,11 +30,12 @@ MonoBehaviour:
   itemAwards:
   - itemType: 3
     itemID: -1
-    itemAmount: 200
-  - itemType: 0
-    itemID: 100
-    itemAmount: 5
+    itemAmount: 350
+  - itemType: 2
+    itemID: 204
+    itemAmount: 1
   expAwards:
-  - awardAmount: 300
+  - awardAmount: 1000
   characterAwards:
   - playerID: 2
+    awardDescription: "\uB9C8\uBC95\uC0AC \uD569\uB958"

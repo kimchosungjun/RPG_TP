@@ -31,8 +31,45 @@ public class Randoms
         }
     }
     
-    public static bool IsInProbability(float _percent)
+    public static void IsInProbability(float[] _probabilities, ref int _index)
     {
-        return Random.value < _percent;
+        float randValue = Random.value;
+        float probability = 0.0f;
+        int cnt = _probabilities.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            probability += _probabilities[i];
+            if (probability < randValue)
+            {
+               _index = i;
+                return;
+            }
+        }
+        _index = 0;
+    }
+
+    public static void GetQuantity(int _startQuantity, int _endQuantity, float[] _probabilities, ref int _quantity)
+    {
+        if(_startQuantity == _endQuantity) { _quantity = _startQuantity; return; }
+
+        int cnt= _endQuantity - _startQuantity + 1;
+        int[] quantitySet = new int[cnt];
+        for (int i = 0; i < cnt; i++)
+        {
+            quantitySet[i] = _startQuantity + i;
+        }
+
+        float probability = 0.0f;
+        float randValue = Random.value;
+        for(int i=0; i<cnt; i++)
+        {
+            probability += _probabilities[i];
+            if (probability < randValue)
+            {
+                _quantity = quantitySet[i];
+                return;
+            }
+        }
+        _quantity = 1;
     }
 }

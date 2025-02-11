@@ -10,6 +10,11 @@ public partial class InteractionMgr
         SharedMgr.InteractionMgr = this;
         interactableSet = new HashSet<Interactable>();  
     }
+    
+    public void Setup()
+    {
+        LoadDialogues("Dialogues");
+    }
 
 
     public void AddInteractable(Interactable _interactable)
@@ -25,6 +30,4 @@ public partial class InteractionMgr
         interactableSet.Remove(_interactable);  
         SharedMgr.UIMgr.GameUICtrl.GetInteractionUI.RemoveInteractable(_interactable);
     }
-
-
 }

@@ -25498,6 +25498,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Mon_Slime (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5605120359558981484, guid: e7eb67fd9a909cc4c8c3795256d4a87c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -81319,6 +81324,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Mon_Slime (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5605120359558981484, guid: e7eb67fd9a909cc4c8c3795256d4a87c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82795,6 +82805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Mon_Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 5605120359558981484, guid: e7eb67fd9a909cc4c8c3795256d4a87c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83616,11 +83631,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1719677476}
     m_Modifications:
-    - target: {fileID: 4531840295816255628, guid: 4fb5a310aac10474dbfddb7ed9f41f8e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5612235226000109987, guid: 4fb5a310aac10474dbfddb7ed9f41f8e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -83730,21 +83740,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 7.InventoryUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7056084469365497373, guid: 4fb5a310aac10474dbfddb7ed9f41f8e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272238892199356944, guid: 4fb5a310aac10474dbfddb7ed9f41f8e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7334420802729331997, guid: 4fb5a310aac10474dbfddb7ed9f41f8e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -92763,6 +92758,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Etc.UI
       objectReference: {fileID: 0}
+    - target: {fileID: 5486436117932251737, guid: b853b70e607a93c43bde37344083f5e8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8614214360859446661}
+    - target: {fileID: 5486436117932251737, guid: b853b70e607a93c43bde37344083f5e8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PressConfirmGameOver
+      objectReference: {fileID: 0}
     - target: {fileID: 6739678227703621085, guid: b853b70e607a93c43bde37344083f5e8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -93269,6 +93274,11 @@ PrefabInstance:
     - target: {fileID: 5462500718769372831, guid: 678e4e2996b032a43864869fb05230ee,
         type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462500718769372831, guid: 678e4e2996b032a43864869fb05230ee,
+        type: 3}
+      propertyPath: initDialogueID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5462500718769372831, guid: 678e4e2996b032a43864869fb05230ee,

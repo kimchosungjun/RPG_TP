@@ -71,6 +71,18 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         SetConversation();
     }
 
+    public void StartConversation(Dialogue _dialogue, int _dialogueIndex,bool _isContinueConversation = false)
+    {
+        if (_dialogue == null) return;
+        ActiveUI();
+        dialogue = _dialogue;
+        if (autoButton.gameObject.activeSelf == false)
+            autoButton.gameObject.SetActive(true);
+        autoButton.OnOffEffect(isAuto);
+        dialogueTexts[0].text = dialogue.speakerName;
+        SetConversation(_dialogueIndex);
+    }
+
     public void ReverseAutoButton()
     {
         isAuto = !isAuto;

@@ -23,12 +23,10 @@ public class QuestInfoUI : MonoBehaviour
 
         List<QuestConditionData> conditions = _data.GetQuestConditionSet;
         int cnt = conditions.Count;
-        Debug.Log(cnt);
         for(int i=0; i<cnt; i++)
         {
             bool isMeet = false;
             questConditionTexts[i].text = conditions[i].GetQuestDescription(ref isMeet);
-            Debug.Log(conditions[i].GetQuestDescription(ref isMeet));
             if(isMeet)
                 questConditionTexts[i].color = Color.green;
             else
@@ -38,11 +36,48 @@ public class QuestInfoUI : MonoBehaviour
                 questConditionTexts[i].gameObject.SetActive(true);
         }
 
-        for(int i=cnt; i<3; i++)
+        for (int i=cnt; i<3; i++)
         {
             if (questConditionTexts[i].gameObject.activeSelf)
                 questConditionTexts[i].gameObject.SetActive(false);
-        }   
+        }
+
+        int slotCnt = awardSlots.Length;
+        int awardCnt = 0;
+        int curSlotIndex = 0;
+
+        awardCnt = _data.GetItemAwards.Count;
+
+        if (awardCnt != 0)
+        {
+            for (int i = 0; i < awardCnt; i++)
+            {
+                if (slotCnt <= curSlotIndex)
+                    return;
+                awardSlots[i].UpdateData(_data.GetItemAwards[i].GetAwardSprite(), _data.GetItemAwards[i].itemAmount);
+                curSlotIndex++;
+            }
+        }
+
+        awardCnt = _data.GetExpAwards.Count;
+        if (awardCnt != 0 && slotCnt > curSlotIndex)
+        {
+            awardSlots[curSlotIndex].UpdateData(_data.GetExpAwards[0].GetAwardSprite(), _data.GetExpAwards[0].awardAmount);
+            curSlotIndex++;
+        }
+
+        awardCnt = _data.GetCharacterAwards.Count;
+        if (awardCnt != 0 && slotCnt > curSlotIndex)
+        {
+            awardSlots[curSlotIndex].UpdateData(_data.GetCharacterAwards[0].GetAwardSprite(), _data.GetCharacterAwards[0].GetAwardDescription);
+            curSlotIndex++;
+        }
+
+        for (int i = curSlotIndex; i < slotCnt; i++)
+        {
+            awardSlots[i].UpdateData();
+        }
+
     }
 
     public void InActive()

@@ -28,11 +28,13 @@ public class GameUICtrl : MonoBehaviour
         if(_curUI == GAMEUI.NONE)
         {
             SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
+            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             PlayUISFX(true);
         }
         else
         {
             SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
+            SharedMgr.CursorMgr.SetCursorVisibleState(true);
             PlayUISFX(false);
         }
     }
@@ -164,6 +166,8 @@ public class GameUICtrl : MonoBehaviour
             }
             else if (Input.GetKeyUp(KeyCode.LeftControl))
             {
+                if (IsOpenUI() == false)
+                    return;
                 SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);   
                 SharedMgr.CursorMgr.SetCursorVisibleState(false);
             }
@@ -279,6 +283,13 @@ public class GameUICtrl : MonoBehaviour
         if (_uiType == CurrentOpenUI)
             return true;
 
+        return false;
+    }
+
+    public bool IsOpenUI()
+    {
+        if (CurrentOpenUI == GAMEUI.NONE)
+            return true;
         return false;
     }
 

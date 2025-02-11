@@ -73,13 +73,11 @@ public class SettingUI : MonoBehaviour, IInputKeyUI
             settingWindow.SetActive(false);
             isActive = false;
             ApplySetting();
-            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
             return;
         }
         isActive = true;
         settingWindow.SetActive(true);
-        SharedMgr.CursorMgr.SetCursorVisibleState(true);
         SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SETTING;
     }
 

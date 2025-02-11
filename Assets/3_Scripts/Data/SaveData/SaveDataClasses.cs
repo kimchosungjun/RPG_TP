@@ -151,6 +151,13 @@ namespace SaveDataGroup
 
             return null;
         }
+
+        public void AddNPCSaveData(NPCSaveData _saveData)
+        {
+            if (npcDataSet.Contains(_saveData))
+                return;
+            npcDataSet.Add(_saveData);  
+        }
     }
 
     [Serializable]
@@ -174,7 +181,16 @@ namespace SaveDataGroup
     public class NPCSaveData
     {
         public int npcID;
+        public int npcAcceptQuestID;
+        public int saveDialogueID;
         public int saveDialogueIndex;
+
+        public NPCSaveData()
+        {
+            npcAcceptQuestID = -1;
+            saveDialogueID = -1;
+            saveDialogueIndex = -1;
+        }
     }
     #endregion
 }

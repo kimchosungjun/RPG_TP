@@ -98,6 +98,7 @@ public class CameraTalkView : MonoBehaviour
         }
         
         resetCor = null;
+        SharedMgr.InteractionMgr.ReleaseMoveLock();
         if (_endTalkAction == null)
             yield break;
         _endTalkAction.Invoke();

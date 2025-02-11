@@ -27,7 +27,7 @@ public partial class SoundMgr : MonoBehaviour
     #region Load Clip 
     private AudioClip LoadClip(BGMCLIPS _bgmClip) 
     {
-        string path = "BGM/" + Enums.GetEnumString<BGMCLIPS>(_bgmClip);
+        string path = "Sounds/BGM/" + Enums.GetEnumString<BGMCLIPS>(_bgmClip);
         AudioClip clip = SharedMgr.ResourceMgr.LoadResource<AudioClip>(path);
         bgmClipGroup.Add(_bgmClip, clip);
         return clip;
@@ -35,7 +35,7 @@ public partial class SoundMgr : MonoBehaviour
 
     private AudioClip LoadClip(SFXCLIPS _sfxClip)
     {
-        string path = "BGM/" + Enums.GetEnumString<SFXCLIPS>(_sfxClip);
+        string path = "Sounds/SFX/" + Enums.GetEnumString<SFXCLIPS>(_sfxClip);
         AudioClip clip = SharedMgr.ResourceMgr.LoadResource<AudioClip>(path);
         sfxClipGroup.Add(_sfxClip, clip);
         return clip;

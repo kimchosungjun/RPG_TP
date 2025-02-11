@@ -61,14 +61,12 @@ public class InventoryUI : MonoBehaviour, IInputKeyUI
         if (inventoryObject.activeSelf == true)
         {
             InActiveAllUI();
-            SharedMgr.CursorMgr.SetCursorVisibleState(false);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
         }
         else
         {
             inventoryObject.SetActive(true);
             ChangeShowItemType(currentShowType);
-            SharedMgr.CursorMgr.SetCursorVisibleState(true);
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.INVENTORY;
         }
     }
@@ -119,6 +117,7 @@ public class InventoryUI : MonoBehaviour, IInputKeyUI
     #region Decide Active UI State
     public void PressExitButton()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         if (deleteUI.IsActive())
         {
             deleteUI.InActive();

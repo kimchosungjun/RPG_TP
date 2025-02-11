@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class QuestMgr 
 {
@@ -30,6 +28,17 @@ public class QuestMgr
         QuestSOData data = SharedMgr.ResourceMgr.LoadResource<QuestSOData>(path);
         if (data == null) return;
         questDataGroup.Add(data.GetQuestID, data);
+    }
+
+    public void LoadAcceptQuestData()
+    {
+        // Call when Log in 
+    }
+
+    public void Clear()
+    {
+        if(acceptQuestData.Count != 0)
+            acceptQuestData.Clear();
     }
     #endregion
 
@@ -64,7 +73,7 @@ public class QuestMgr
             return;
 
         acceptQuestData.Add(questDataGroup[_questID]);
-        questDataGroup[_questID].GetKillConditionData();
+        AddKillCondition(questDataGroup[_questID].GetKillConditionData());
         SharedMgr.UIMgr.GameUICtrl.GetQuestUI.UpdateQuestDatas();
     }
     #endregion
@@ -76,19 +85,6 @@ public class QuestMgr
             killConditions[_targetID].KillMonster();
     }
 
-    public void AddKillCondition(QuestConditionData _conditionData)
-    {
-        int targetID = _conditionData.targetID;
-        if (killConditions[targetID] == null )
-        {
-            QuestConditionDataGroup dataGroup = new QuestConditionDataGroup();  
-            dataGroup.AddCondition(_conditionData);
-            killConditions.Add(targetID, dataGroup);
-            return;
-        }
-        killConditions[targetID].AddCondition(_conditionData);
-    }
-
     public void AddKillCondition(List<QuestConditionData> _conditions)
     {
         if (_conditions == null)
@@ -97,12 +93,14 @@ public class QuestMgr
         for(int i=0; i< cnt; i++)
         {
             int targetID = _conditions[i].targetID;
-            if (killConditions[targetID] == null)
+            if (_conditions[i].IsAchieveQuestCondition())
+                continue;
+
+            if (killConditions.ContainsKey(targetID) == false)
             {
                 QuestConditionDataGroup dataGroup = new QuestConditionDataGroup();
                 dataGroup.AddCondition(_conditions[i]);
                 killConditions.Add(targetID, dataGroup);
-                return;
             }
             killConditions[targetID].AddCondition(_conditions[i]);
         }

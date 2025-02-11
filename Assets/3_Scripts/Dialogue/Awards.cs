@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public interface IAwards 
 {
     public void GetAward();
+    public Sprite GetAwardSprite();
 }
 
 [Serializable]
@@ -30,6 +31,8 @@ public class AwardGroup : IAwards
             itemAwards[i].GetAward();
         }
     }
+
+    public Sprite GetAwardSprite() { return null;}
 }
 
 #region Exp
@@ -44,6 +47,12 @@ public class ExpAward : IAwards
         SharedMgr.GameCtrlMgr.GetPlayerCtrl.
             GetComponent<PartyConditionControl>()?.GetExp(awardAmount);
     }
+
+    public Sprite GetAwardSprite() 
+    {
+        Sprite result = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas_4", "EXP_Icon");
+        return result;
+    }
 }
 #endregion
 
@@ -55,6 +64,7 @@ public class ItemAward : IAwards
     public ItemEnums.ITEMTYPE itemType;
     public ItemEnums.ITEMID itemID;
     public int itemAmount;
+    Sprite iconSprite = null;
 
     public void GetAward()
     {
@@ -88,28 +98,40 @@ public class ItemAward : IAwards
         ItemTable table = SharedMgr.TableMgr.GetItem;
         InventoryMgr inven = SharedMgr.InventoryMgr;
         bool canGetAward = false;
+        
         switch (itemType)
         {
             case ItemEnums.ITEMTYPE.ITEM_ETC:
                 EtcData etc = new EtcData();
                 etc.SetData(table.GetEtcTableData((int)itemID), itemAmount);
                 canGetAward = inven.CanAddItem(etc);
+                iconSprite = etc.GetIcon;
                 break;
             case ItemEnums.ITEMTYPE.ITEM_COMSUME:
                 ConsumeData consume = new ConsumeData();
                 consume.SetData(table.GetConsumeTableData((int)itemID), itemAmount);
                 canGetAward = inven.CanAddItem(consume);
+                iconSprite = consume.GetIcon;
                 break;
             case ItemEnums.ITEMTYPE.ITEM_WEAPON:
                 WeaponData weapon = new WeaponData();
                 weapon.SetData(table.GetWeaponTableData((int)itemID));
                 canGetAward = inven.CanAddItem(weapon);
+                iconSprite = weapon.GetIcon;
                 break;
             case ItemEnums.ITEMTYPE.ITEM_GOLD:
                 canGetAward = true;
+                iconSprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas_2", "Gold_Icon");
                 break;
         }
         return canGetAward;
+    }
+
+    public Sprite GetAwardSprite() 
+    {
+        if(iconSprite == null)
+            CanGetAward();
+        return iconSprite; 
     }
 }
 #endregion
@@ -120,9 +142,18 @@ public class ItemAward : IAwards
 public class CharacterAward : IAwards
 {
     [SerializeField] PlayerEnums.TYPEIDS playerID;
+    [SerializeField] string awardDescription;
+    public string GetAwardDescription { get { return awardDescription; } }
     public void GetAward()
     {
 
+    }
+
+    public Sprite GetAwardSprite()
+    {
+        UnityEngine.Object obj = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas_5", "Character_Icon");
+        if (obj == null) return null;
+        return obj as Sprite;
     }
 }
 

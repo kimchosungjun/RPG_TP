@@ -192,7 +192,7 @@ public class RangedMonster : StandardMonster
         }
         return NODESTATES.SUCCESS;
     }
-    public void DoSpread() { spread.DoAttack(); }
+    public void DoSpread() { spread.DoAttack(); sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.VIRUS_SPREAD_SFX); }
     public void StopSpread() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
 
     #endregion

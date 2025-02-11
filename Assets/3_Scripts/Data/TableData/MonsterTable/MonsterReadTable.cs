@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using MonsterTableClassGroup;
-using UnityEngine.Assertions.Must;
 
 public partial class MonsterTable : BaseTable
 {
@@ -26,10 +22,14 @@ public partial class MonsterTable : BaseTable
     public void InitMonsterDropTableCsv(string _name, int _startRow, int _startCol)
     {
         CSVReader reader = GetCSVReader(_name, UtilEnums.TABLE_FOLDER_TYPES.MONSTER);
-        MonsterDropTableData data = new MonsterDropTableData();
-        if (ReadMonsterDrop(reader, data, _startRow, _startCol) == false)
-            return;
-        monsterDropGroup.Add(data.dropID, data);
+      
+        for (int row = _startRow; row < reader.row; row++)
+        {
+            MonsterDropTableData data = new MonsterDropTableData();
+            if (ReadMonsterDrop(reader, data, row, _startCol) == false)
+                break ;
+            monsterDropGroup.Add(data.dropID, data);
+        }
     }
 
     public void InitMonsterStatTableCsv(string _name, int _startRow, int _startCol)

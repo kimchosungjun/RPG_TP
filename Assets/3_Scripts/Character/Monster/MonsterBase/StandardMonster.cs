@@ -90,6 +90,8 @@ public class StandardMonster : BaseMonster
     #endregion
 
     #region Apply Damage (Stat & State)
+    Transform stunParticle = null;
+
     public override void ApplyStatTakeDamage(TransferAttackData _attackData)
     {
         base.ApplyStatTakeDamage(_attackData);
@@ -103,9 +105,13 @@ public class StandardMonster : BaseMonster
         if (isDeathState) return;
     
         if (isDoHitEffect == false) nav.ResetPath();
+        sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.HIT_SFX);
         switch (_attackData.GetHitEffect)
         {
             case HIT_EFFECTS.STUN:
+                stunParticle = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.STUN);
+                stunParticle.transform.position = this.transform.position;
+                stunParticle.gameObject.SetActive(true);
                 StartCoroutine(CHitEffect(_attackData.EffectMaintainTime));
                 anim.SetInteger("MState", (int)STATES.GROGGY);
                 break;
@@ -123,6 +129,11 @@ public class StandardMonster : BaseMonster
         isDoAnimation = true;
         isDoHitEffect = true;
         yield return new WaitForSeconds(_effectTime);
+        if(stunParticle != null)
+        {
+            stunParticle.gameObject.SetActive(false);
+            stunParticle = null;
+        }
         ChangeAnimation(STATES.IDLE);
         isDoHitEffect = false;
         isDoAnimation = false;
@@ -141,8 +152,13 @@ public class StandardMonster : BaseMonster
     public override void Death()
     {
         isDeathState = true;
-        base.Death(); // Base : Death Anim & Set Layer
+        if (stunParticle != null)
+        {
+            stunParticle.gameObject.SetActive(false);
+            stunParticle = null;
+        }
         statusUI.DecideActiveState(false);
+        base.Death(); // Base : Death Anim & Set Layer
     }
 
     public override void Revival()

@@ -48,5 +48,6 @@ public class MgrCreator : MonoBehaviour
     {
         photonMgr.Setup();
         soundMgr.Setup();
+        dialogueMgr.Setup();
     }
 }

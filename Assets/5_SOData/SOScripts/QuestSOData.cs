@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SaveDataGroup;
-using Unity.VisualScripting;
 
 [CreateAssetMenu(fileName ="Quest", menuName ="QuestSOData")]
 public class QuestSOData : ScriptableObject
 {
     #region Value
     [Header("Quest Datas")]
-    bool isClearQuest = false;
+    [SerializeField] bool isClearQuest = false;
     [SerializeField] int questID;
     [SerializeField] string questName;
     [TextArea(5,10), SerializeField] string questDescription;
@@ -25,6 +24,10 @@ public class QuestSOData : ScriptableObject
     [SerializeField] List<ItemAward> itemAwards;
     [SerializeField] List<ExpAward> expAwards;
     [SerializeField] List<CharacterAward> characterAwards;
+
+    public List<ItemAward> GetItemAwards { get { return itemAwards; } }
+    public List<ExpAward > GetExpAwards { get {return expAwards; } }    
+    public List<CharacterAward > GetCharacterAwards { get { return characterAwards; } } 
     
     QuestConditionSaveData saveData;
     public QuestConditionSaveData GetSaveData { get { if (saveData == null) return null; return saveData; } }
@@ -74,7 +77,7 @@ public class QuestSOData : ScriptableObject
 
     public void GetAwards()
     {
-        SharedMgr.InteractionMgr.CurrentInteractNPC.DialogueIndex = afterGetAwardDialogueIndex;
+        SharedMgr.InteractionMgr.CurrentInteractNPC.DialogueID = afterGetAwardDialogueIndex;
         
         if (expAwards.Count != 0)
             expAwards[0].GetAward();
@@ -87,6 +90,8 @@ public class QuestSOData : ScriptableObject
 
        if(characterAwards.Count !=0)
             characterAwards[0].GetAward();
+
+        SharedMgr.QuestMgr.DeleteQuestData(this.questID);
     }
     #endregion
 
@@ -107,6 +112,8 @@ public class QuestSOData : ScriptableObject
 
     public void UpdateLogData()
     {
+        if (logData == null)
+            logData = new QuestLogData();
         logData.isClearQuest = isClearQuest;
         logData.isClearQuest = isClearQuest;
         logData.conditions = questConditionSet;
