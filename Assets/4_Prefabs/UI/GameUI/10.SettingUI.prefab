@@ -995,6 +995,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e1260c1148f6143b28bae5ace5e9c5d1, type: 2}
   - {fileID: 11400000, guid: 7b7fd9122c28c4d15b667c7040e3b3fd, type: 2}
   optionImage: {fileID: 7468849295906167761}
+  dropDown: {fileID: 4779003289047552244}
 --- !u!1 &2518351548537201582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,7 +3244,7 @@ MonoBehaviour:
   m_CaptionImage: {fileID: 0}
   m_ItemText: {fileID: 2047543338413235035}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 2
   m_Options:
     m_Options:
     - m_Text: "\uB0AE\uC74C"
@@ -3254,19 +3255,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5809433050809264554}
-        m_TargetAssemblyTypeName: GraphicControlUI, Assembly-CSharp
-        m_MethodName: SetRenderPipeline
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_AlphaFadeSpeed: 0.15
 --- !u!1 &7899394641625739238
 GameObject:

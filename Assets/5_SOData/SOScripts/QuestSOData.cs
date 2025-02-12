@@ -7,7 +7,7 @@ public class QuestSOData : ScriptableObject
 {
     #region Value
     [Header("Quest Datas")]
-    [SerializeField] bool isClearQuest = false;
+    bool isClearQuest = false;
     [SerializeField] int questID;
     [SerializeField] string questName;
     [TextArea(5,10), SerializeField] string questDescription;
@@ -28,10 +28,7 @@ public class QuestSOData : ScriptableObject
     public List<ItemAward> GetItemAwards { get { return itemAwards; } }
     public List<ExpAward > GetExpAwards { get {return expAwards; } }    
     public List<CharacterAward > GetCharacterAwards { get { return characterAwards; } } 
-    
-    QuestConditionSaveData saveData;
-    public QuestConditionSaveData GetSaveData { get { if (saveData == null) return null; return saveData; } }
-    
+     
     public List<QuestConditionData> GetKillConditionData()
     {
         List<QuestConditionData> datas =  new List<QuestConditionData>();
@@ -54,11 +51,6 @@ public class QuestSOData : ScriptableObject
     #endregion
 
     #region Achieve Quest
-    public void AcceptQuest()
-    {
-        saveData = new QuestConditionSaveData(questID, questConditionSet);
-    }
-
     public bool IsAchieveQuestCondition(ref int _dialogueIndex)
     {
         int conditionCnt = questConditionSet.Count;
@@ -77,7 +69,7 @@ public class QuestSOData : ScriptableObject
 
     public void GetAwards()
     {
-        SharedMgr.InteractionMgr.CurrentInteractNPC.DialogueID = afterGetAwardDialogueIndex;
+        SharedMgr.InteractionMgr.CurrentInteractNPC.SetDialogueIndex = afterGetAwardDialogueIndex;
         
         if (expAwards.Count != 0)
             expAwards[0].GetAward();
@@ -127,17 +119,3 @@ public class QuestSOData : ScriptableObject
     #endregion
 }
 
-public class QuestLogData
-{
-    public bool isClearQuest;
-    public int questID;
-    public List<QuestConditionData> conditions;
-
-    public QuestLogData() { }
-    public QuestLogData(bool _isClearQuest, int _questID, List<QuestConditionData> _conditions)
-    {
-        isClearQuest= _isClearQuest;    
-        questID= _questID;  
-        conditions= _conditions;
-    }
-}

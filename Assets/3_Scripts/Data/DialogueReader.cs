@@ -136,7 +136,7 @@ public class DialogueReader
 
     public void EndConversation()
     {
-        SharedMgr.InteractionMgr.CurrentInteractNPC.BlockConversation();
+        SharedMgr.InteractionMgr.CurrentInteractNPC.SetDialogueIndex = -1;
     }
 
     public void InActiveNPC()

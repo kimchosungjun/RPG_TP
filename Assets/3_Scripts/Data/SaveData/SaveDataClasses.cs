@@ -1,16 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 깃 안에 깃을 만들어서 예외처리
-
 namespace SaveDataGroup
 {
-    #region Origin
-    public class SaveDataClasses { }
-    #endregion
-
     public interface ICommonSaveData { public void UpdateData(); }
 
     [Serializable]
@@ -18,17 +11,13 @@ namespace SaveDataGroup
     {
         public PlayerSaveDataGroup PlayerSaveDataGroup;
         public InventorySaveDataGroup InventorySaveDataGroup;
-
-        public UserSaveDataGroup() 
-        {
-            PlayerSaveDataGroup = new PlayerSaveDataGroup();
-            InventorySaveDataGroup = new InventorySaveDataGroup();
-        }
+        public InteractionSaveDataGroup InteractionSaveDataGroup;
 
         public void UpdateAllData()
         {
             PlayerSaveDataGroup.UpdateData();
             InventorySaveDataGroup.UpdateData();
+            InteractionSaveDataGroup.UpdateData();
         }
     }
 
@@ -78,22 +67,16 @@ namespace SaveDataGroup
     public class InventorySaveDataGroup : ICommonSaveData
     {
         [SerializeField] int gold;
-        [SerializeField] List<EtcData> etcSet;
-        [SerializeField] List<ConsumeData> consumeSet;
-        [SerializeField] List<WeaponData> weaponSet;
+        [SerializeField] List<EtcData> etcSet = new List<EtcData>();
+        [SerializeField] List<ConsumeData> consumeSet = new List<ConsumeData>();
+        [SerializeField] List<WeaponData> weaponSet = new List<WeaponData>();
        
         public int Gold { get { return gold; } set { gold = value; } }  
         public List<EtcData> EtcSet {  get { return etcSet; } set { etcSet = value; } } 
         public List<ConsumeData> ConsumeSet { get { return consumeSet; } set {  consumeSet = value; } } 
         public List<WeaponData> WeaponSet { get {   return weaponSet; } set { weaponSet = value; } }    
         
-        public InventorySaveDataGroup()
-        {
-            gold = 0;
-            etcSet = new List<EtcData>();
-            consumeSet = new List<ConsumeData>();   
-            weaponSet = new List<WeaponData>();     
-         }
+        public InventorySaveDataGroup() { gold = 0; }
 
         public void LinkData()
         {
@@ -111,31 +94,16 @@ namespace SaveDataGroup
         }
     }
 
-   
 
-  
-
-    [Serializable]
-    public class QuestConditionSaveData
-    {
-        [SerializeField] int questID;
-        [SerializeField] List<QuestConditionData> conditions = new List<QuestConditionData>();
-
-        public QuestConditionSaveData() { }
-        public QuestConditionSaveData(int _questID, List<QuestConditionData> _datas)
-        {
-            questID = _questID;
-            conditions = _datas;
-        }
-    }
     #endregion
 
-    #region Interaction Data
+    // Interaction Save Data
+    #region Interaction Data Group
     [Serializable]
-    public class InteractionDataGroup
+    public class InteractionSaveDataGroup : ICommonSaveData
     {
-        public QuestSaveDataGroup saveClearQuest = new QuestSaveDataGroup();
         public List<NPCSaveData> npcDataSet = new List<NPCSaveData>();
+        public List<QuestLogData> questLogData = new List<QuestLogData> ();
     
         public NPCSaveData GetNpcSaveData(int _id)
         {
@@ -158,24 +126,38 @@ namespace SaveDataGroup
                 return;
             npcDataSet.Add(_saveData);  
         }
-    }
 
-    [Serializable]
-    public class QuestSaveDataGroup
-    {
-        public List<int> clearQuestDatas;
-
-        public void AddClearQuest(int _clearQuestID)
+        public QuestLogData GetQuestLogData(int _id)
         {
-            int cnt = clearQuestDatas.Count;
+            int cnt = questLogData.Count;
+            if (cnt == 0)
+                return null;
+
             for (int i = 0; i < cnt; i++)
             {
-                if (clearQuestDatas[i] == _clearQuestID)
-                    return;
+                if (questLogData[i].questID == _id)
+                    return questLogData[i];
             }
-            clearQuestDatas.Add(_clearQuestID);
+
+            return null;
+        }
+
+        public void AddQuestLogData(QuestLogData _questData)
+        {
+            if (questLogData.Contains(_questData))
+                return;
+            questLogData.Add(_questData);   
+        }
+
+        public void UpdateData()
+        {
+            throw new NotImplementedException();
         }
     }
+    #endregion
+
+    // Member
+    #region Interaction Data Member
 
     [Serializable]
     public class NPCSaveData
@@ -192,7 +174,22 @@ namespace SaveDataGroup
             saveDialogueIndex = -1;
         }
     }
+
+    [Serializable]
+    public class QuestLogData
+    {
+        public bool isClearQuest;
+        public int questID;
+        public List<QuestConditionData> conditions;
+
+        public QuestLogData() { }
+        public QuestLogData(bool _isClearQuest, int _questID, List<QuestConditionData> _conditions)
+        {
+            isClearQuest = _isClearQuest;
+            questID = _questID;
+            conditions = _conditions;
+        }
+    }
     #endregion
 }
-
 

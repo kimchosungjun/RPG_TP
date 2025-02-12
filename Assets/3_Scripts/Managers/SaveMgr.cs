@@ -2,32 +2,42 @@ using SaveDataGroup;
 using System.Collections;
 using System.IO;
 using UnityEngine;
+using UtilEnums;
 using UnityEngine.Events;
 
-public class SaveMgr : MonoBehaviour
+public partial class SaveMgr : MonoBehaviour
 {
-    string directoryPath = string.Empty;
+    #region Variable
+    // Read
+    string directoryPath;
+    SaveJsonDataReader reader;
 
-    UserSaveDataReader userDataReader = new UserSaveDataReader();
-    InteractioSaveDataReader interactionDataReader = new InteractioSaveDataReader();
-
-    [SerializeField] UserSaveDataGroup userSaveData;
-    [SerializeField] InteractionDataGroup interactionData;
-    
+    // Save Data Group
+    UserSaveDataGroup userSaveData;
     public UserSaveDataGroup GetUserSaveData { get { return userSaveData; } }    
-    public InteractionDataGroup GetInteractionData { get { return interactionData; } }  
 
+    // Save Data 
+    public PlayerSaveDataGroup GetPlayerSaveData { get { return userSaveData.PlayerSaveDataGroup; } }   
+    public InventorySaveDataGroup GetInventorySaveData { get {return userSaveData.InventorySaveDataGroup;} }
+    public InteractionSaveDataGroup GetInteractionData { get {  return userSaveData.InteractionSaveDataGroup; } }
+    #endregion
+
+    #region Manage Data
     public void Init()
     {
         SharedMgr.SaveMgr = this;
+        directoryPath = string.Empty; 
+        userSaveData = new UserSaveDataGroup();
+        reader = new SaveJsonDataReader();
+        LoadOptionFile();
     }
+
+    public void SaveUserData() { }
+    public void ClearUserData() { userSaveData = null; }
+    #endregion
 
     #region Directory
 
-    /// <summary>
-    /// Check Directory Exits : (False => Create Directory)
-    /// </summary>
-    /// <returns></returns>
     public bool IsExistDirectory()
     {
         string persistentPath = Application.persistentDataPath;
@@ -50,9 +60,12 @@ public class SaveMgr : MonoBehaviour
         }
         return directoryPath;   
     }
+
+    public void CreateDirectory(string _directoryPath) { Directory.CreateDirectory(_directoryPath); }
+
     #endregion
 
-    #region Load Data (+ Check Join Lobby)
+    #region Load Data 
 
     /// <summary>
     /// Action : Open Door UI 
@@ -60,25 +73,21 @@ public class SaveMgr : MonoBehaviour
     /// <param name="_action"></param>
     public void LoadUserData(UnityAction _action = null) 
     {
+        StopAllCoroutines();
         if (IsExistDirectory())
-        {
-            // exist Save Data
             StartCoroutine(CLoadExistData(_action));
-        }
         else
-        {
-            // not exist Save Data
             StartCoroutine(CCreateNewData(_action));
-        }
-    }
+     }
 
     IEnumerator CLoadExistData(UnityAction _action)
     {
         // Load Save Data
-        string directoryPath  = GetDirectoryPath();
-        userSaveData = userDataReader.GetUserData(directoryPath);
-        interactionData = interactionDataReader.GetUserData(directoryPath);
-        yield return null;   
+        userSaveData.PlayerSaveDataGroup = reader.LoadJsonFile<PlayerSaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.PLAYER);
+        userSaveData.InteractionSaveDataGroup = reader.LoadJsonFile<InteractionSaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.INTERACT);
+        userSaveData.InventorySaveDataGroup = reader.LoadJsonFile<InventorySaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.INVEN);
+        yield return null;
+        
         // Check Join Lobby 
         while (true)
         {
@@ -93,13 +102,18 @@ public class SaveMgr : MonoBehaviour
     IEnumerator CCreateNewData(UnityAction _action)
     {
         // Create Directory
-        Directory.CreateDirectory(directoryPath);
+        CreateDirectory(directoryPath);
         yield return null;
         // Load & Create Save File
-        userSaveData = userDataReader.GetUserData();
-        interactionData = interactionDataReader.GetInteractionData();
-        userDataReader.SaveData(GetDirectoryPath(), userSaveData);
-        interactionDataReader.SaveData(GetDirectoryPath(), interactionData);
+        PlayerSaveDataGroup playerSaveDataGroup = new PlayerSaveDataGroup();
+        InteractionSaveDataGroup interactionSaveDataGroup = new InteractionSaveDataGroup();
+        InventorySaveDataGroup inventorySaveDataGroup = new InventorySaveDataGroup();   
+        userSaveData.PlayerSaveDataGroup = playerSaveDataGroup;
+        userSaveData.InteractionSaveDataGroup = interactionSaveDataGroup;
+        userSaveData.InventorySaveDataGroup = inventorySaveDataGroup;
+        reader.SaveJsonData<PlayerSaveDataGroup>(playerSaveDataGroup, directoryPath, SAVE_JSON_PATHS.PLAYER);
+        reader.SaveJsonData<InteractionSaveDataGroup>(interactionSaveDataGroup, directoryPath, SAVE_JSON_PATHS.INTERACT);
+        reader.SaveJsonData<InventorySaveDataGroup>(inventorySaveDataGroup, directoryPath, SAVE_JSON_PATHS.INVEN);
         yield return null;
         // Check Join Lobby 
         while (true)
@@ -112,19 +126,6 @@ public class SaveMgr : MonoBehaviour
         if (_action != null) _action();
     }
 
-    #endregion
- 
-    #region Save & Clear 
-    public void SaveUserData()  { StartCoroutine(CSaveUserData()); }
-
-    IEnumerator CSaveUserData()
-    {
-        userSaveData.UpdateAllData();
-        yield return null;
-        userDataReader.SaveData(GetDirectoryPath(), userSaveData);
-    }
-
-    public void ClearUserData() { userSaveData = null; }
     #endregion
 }
 

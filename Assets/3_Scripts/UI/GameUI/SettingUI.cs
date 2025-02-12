@@ -72,7 +72,6 @@ public class SettingUI : MonoBehaviour, IInputKeyUI
         {
             settingWindow.SetActive(false);
             isActive = false;
-            ApplySetting();
             SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
             return;
         }
@@ -81,13 +80,6 @@ public class SettingUI : MonoBehaviour, IInputKeyUI
         SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SETTING;
     }
 
-    public void ApplySetting()
-    {
-        graphicControlUI.ApplySetting();
-        soundControlUI.ApplySetting(); 
-        // To Do 
-
-    }
     #endregion
 
     #region Press Btn

@@ -143,6 +143,15 @@ namespace UtilEnums
         CAMERA=5,
     }
 
+    public enum SAVE_JSON_PATHS
+    {
+        PLAYER=0,
+        INTERACT=1,
+        INVEN=2,
+    }
+
+    
+    // Zone
     public enum ZONE_TPYES
     {
         CAVE=0,

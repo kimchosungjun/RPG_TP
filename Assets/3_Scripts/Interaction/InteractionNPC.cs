@@ -6,42 +6,44 @@ using UnityEngine;
 public class InteractionNPC : Interactable
 {
     #region Variable
+    [SerializeField] bool isDisappearNPC = false;
+
+    bool canInteractable = true;
+    string npcName = string.Empty;
+
     [SerializeField] Animator anim;
-    [SerializeField] int initDialogueID;
-    [SerializeField] int dialogueIndex = 0;
     [SerializeField] NPCID npcID;
-    
+    QuestSOData currentQuestData = null;
+
+    // Property
+    NPCSaveData saveData = null;
     public int DialogueID 
     {
         get 
         {
-            return initDialogueID; 
+            if (saveData != null)
+                return saveData.saveDialogueID;
+            return -1;
         } 
         set
         {
-            initDialogueID = value;
             if(saveData!=null)
                 saveData.saveDialogueID = value;
-            if (value < 0)
-                BlockConversation();
         } 
     }
+
     public int SetDialogueIndex 
     {
         set 
         {
-            dialogueIndex = value;
             if (saveData != null)
-                saveData.saveDialogueIndex = dialogueIndex;
+                saveData.saveDialogueIndex = value;
+            if (value < 0)
+                BlockConversation();
         }
     }
 
-    string npcName = string.Empty;
-    NPCSaveData saveData = null;
-    [SerializeField] QuestSOData currentQuestData = null;
-    #endregion
-
-    #region NPC Enum (Local)
+    // NPC Local Enum
     enum NPCState
     {
         Idle = 0,
@@ -49,39 +51,63 @@ public class InteractionNPC : Interactable
     }
     #endregion
 
-    #region Load NPC Data (Life Cycle)
+    #region Life Cycle
     public void Awake()
     {
-        LoadNpcData();
+        LoadNPCData();
      }
 
-    private void Start()
+    public void LoadNPCData()
     {
-        npcName = SharedMgr.InteractionMgr.GetDialouge(initDialogueID).speakerName;
-    }
-    #endregion
-
-    #region Manage Quest Data
-    public void LoadNpcData()
-    {
-        NPCSaveData saveData = SharedMgr.SaveMgr.GetInteractionData.GetNpcSaveData((int)npcID);
-        if(saveData != null)
-            initDialogueID = saveData.saveDialogueIndex;
-        if(saveData == null)
+        saveData = SharedMgr.SaveMgr.GetInteractionData.GetNpcSaveData((int)npcID);
+        if (saveData == null)
         {
             saveData = new NPCSaveData();
             saveData.npcID = (int)npcID;
-            SharedMgr.SaveMgr.GetInteractionData.AddNPCSaveData(saveData);  
-        }
+            DialogueID = (int)npcID;
+            SetDialogueIndex = 0;
+            SharedMgr.SaveMgr.GetInteractionData.AddNPCSaveData(saveData);
+        }   
     }
 
-    public void AddQuestData(int _id)
+    private void Start()
     {
-        currentQuestData = SharedMgr.QuestMgr.GetQuestData(_id);
+        SetNPCData();
+    }
+
+    public void SetNPCData()
+    {
+        if (saveData == null)
+        {
+            Debug.Log("세이브 데이터 존재 X");
+            return;
+        }
+        
+        npcName = SharedMgr.InteractionMgr.GetDialouge((int)npcID).speakerName;
+        if (saveData.saveDialogueID < 0 || saveData.saveDialogueIndex < 0)
+        {
+            BlockConversation();
+            if (isDisappearNPC)
+                this.gameObject.SetActive(false);
+        }
+        if (saveData.npcAcceptQuestID >= 0)
+            currentQuestData = SharedMgr.QuestMgr.GetQuestData(saveData.npcAcceptQuestID);
+    }
+
+    #endregion
+
+    #region Quest Data
+
+    public void AddQuestData(int _questID)
+    {
+        if (currentQuestData != null)
+            Debug.LogError("Exist Accept Quest!!!!!!");
+
+        currentQuestData = SharedMgr.QuestMgr.GetQuestData(_questID);
         if(currentQuestData!=null)
         {
             if (saveData != null)
-                saveData.npcAcceptQuestID = _id;
+                saveData.npcAcceptQuestID = _questID;
         }
     }
 
@@ -102,10 +128,13 @@ public class InteractionNPC : Interactable
 
     public override void Interact()
     {
+        if (!canInteractable)
+            return;
+
         if(currentQuestData != null)
         {
-            currentQuestData.IsAchieveQuestCondition(ref dialogueIndex);
-            SharedMgr.InteractionMgr.StartConversation(this, dialogueIndex);
+            currentQuestData.IsAchieveQuestCondition(ref saveData.saveDialogueIndex);
+            SharedMgr.InteractionMgr.StartConversation(this, saveData.saveDialogueIndex);
         }
         else
         {
@@ -150,6 +179,7 @@ public class InteractionNPC : Interactable
 
     public void BlockConversation()
     {
+        canInteractable = false;
         ChangeToDisable();
         SharedMgr.InteractionMgr.RemoveInteractable(this);
     }

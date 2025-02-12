@@ -1,4 +1,3 @@
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 using UtilEnums;
@@ -145,7 +144,8 @@ public class LoginLobbyView : MonoBehaviour
         SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.SceneMgr.SetPlayerAccount("ID", string.Empty);
         SharedMgr.SceneMgr.SetPlayerAccount("PW", string.Empty);
-        GetComponentInParent<LoginUICtrl>()?.ReturnLogin();
+        SharedMgr.SaveMgr.ClearUserData();
+        GetComponentInParent<LoginUICtrl>()?.ReturnLogin();        
     }
 
     public void CancelLogOut()

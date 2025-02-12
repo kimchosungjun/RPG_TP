@@ -32,9 +32,12 @@ public partial class SoundMgr : MonoBehaviour
 
     public void LoadSoundInfomation()
     {
-        masterVolume = 0f;
-        bgmVolume = 0f;
-        sfxVolume = 0;
+        masterVolume = SharedMgr.SaveMgr.Option.masterVolume;
+        bgmVolume = SharedMgr.SaveMgr.Option.bgmVolume;
+        sfxVolume = SharedMgr.SaveMgr.Option.sfxVolume;
+        ControlSound(SOUNDS.MASTER, masterVolume);
+        ControlSound(SOUNDS.BGM, bgmVolume);
+        ControlSound(SOUNDS.SFX, sfxVolume);
     }
 
     public void SetSourceSetting()

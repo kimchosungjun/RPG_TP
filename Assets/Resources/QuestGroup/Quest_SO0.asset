@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d077e093e23304aa1fea2bef12f266, type: 3}
   m_Name: Quest_SO0
   m_EditorClassIdentifier: 
-  isClearQuest: 0
   questID: 0
   questName: "\uC790\uACA9 \uC99D\uBA85"
   questDescription: "\uD30C\uD2F0\uB97C \uAD6C\uD558\uB294 \uC5D8\uD504\uB97C \uB9CC\uB0AC\uC2B5\uB2C8\uB2E4.\n\uB3D9\uAD74
@@ -26,7 +25,7 @@ MonoBehaviour:
     targetName: "\uBC14\uC774\uB7EC\uC2A4"
     targetID: 1
     targetCnt: 3
-    currentCnt: 3
+    currentCnt: 0
   itemAwards:
   - itemType: 3
     itemID: -1
