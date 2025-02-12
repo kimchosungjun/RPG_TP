@@ -77,12 +77,6 @@ public class InteractionNPC : Interactable
 
     public void SetNPCData()
     {
-        if (saveData == null)
-        {
-            Debug.Log("세이브 데이터 존재 X");
-            return;
-        }
-        
         npcName = SharedMgr.InteractionMgr.GetDialouge((int)npcID).speakerName;
         if (saveData.saveDialogueID < 0 || saveData.saveDialogueIndex < 0)
         {
@@ -91,7 +85,10 @@ public class InteractionNPC : Interactable
                 this.gameObject.SetActive(false);
         }
         if (saveData.npcAcceptQuestID >= 0)
+        {
             currentQuestData = SharedMgr.QuestMgr.GetQuestData(saveData.npcAcceptQuestID);
+            currentQuestData.LoadQuestLog(SharedMgr.SaveMgr.GetInteractionData.GetQuestLogData(currentQuestData.GetQuestID));
+        }
     }
 
     #endregion
@@ -104,6 +101,7 @@ public class InteractionNPC : Interactable
             Debug.LogError("Exist Accept Quest!!!!!!");
 
         currentQuestData = SharedMgr.QuestMgr.GetQuestData(_questID);
+        currentQuestData.CreateQuestLogData();
         if(currentQuestData!=null)
         {
             if (saveData != null)

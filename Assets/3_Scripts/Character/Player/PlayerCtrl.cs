@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
@@ -188,6 +189,32 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Join Party 
+    public void JoinParty(int _characterID)
+    {
+        int partyCnt = players.Count;
+        if (partyCnt > 3)
+            return;
+
+        for(int i=0; i<partyCnt; i++)
+        {
+            if (players[i].PlayerID == _characterID)
+                return;
+        }
+        GameObject playerObject = Instantiate(SharedMgr.ResourceMgr.GetBasePlayer
+               (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_characterID).prefabName).gameObject);
+        playerObject.transform.SetParent(this.transform, false);
+        playerObject.transform.position = GetPlayer.transform.position;
+        playerObject.transform.rotation = GetPlayer.transform.rotation;
+        BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>(); 
+        basePlayer.PlayerID = _characterID;
+        players.Add(basePlayer);
+        basePlayer.Init();
+        basePlayer.Setup();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
+    }
     #endregion
 
     #region Player Dash Gauge

@@ -9,7 +9,7 @@ public class CsvSaver : MonoBehaviour
     private void Awake()
     {
         tableMgr = new TableMgr();
-        saveData = new PlayerSaveStat();
+        //saveData = new PlayerSaveStat();
     }
     [System.Serializable]
     public class InClass

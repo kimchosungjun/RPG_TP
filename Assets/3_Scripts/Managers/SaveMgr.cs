@@ -13,7 +13,7 @@ public partial class SaveMgr : MonoBehaviour
     SaveJsonDataReader reader;
 
     // Save Data Group
-    UserSaveDataGroup userSaveData;
+    UserSaveDataGroup userSaveData = null;
     public UserSaveDataGroup GetUserSaveData { get { return userSaveData; } }    
 
     // Save Data 
@@ -27,7 +27,6 @@ public partial class SaveMgr : MonoBehaviour
     {
         SharedMgr.SaveMgr = this;
         directoryPath = string.Empty; 
-        userSaveData = new UserSaveDataGroup();
         reader = new SaveJsonDataReader();
         LoadOptionFile();
     }
@@ -83,6 +82,8 @@ public partial class SaveMgr : MonoBehaviour
     IEnumerator CLoadExistData(UnityAction _action)
     {
         // Load Save Data
+        userSaveData = new UserSaveDataGroup();
+        yield return null;
         userSaveData.PlayerSaveDataGroup = reader.LoadJsonFile<PlayerSaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.PLAYER);
         userSaveData.InteractionSaveDataGroup = reader.LoadJsonFile<InteractionSaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.INTERACT);
         userSaveData.InventorySaveDataGroup = reader.LoadJsonFile<InventorySaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.INVEN);
@@ -103,14 +104,16 @@ public partial class SaveMgr : MonoBehaviour
     {
         // Create Directory
         CreateDirectory(directoryPath);
+        userSaveData = new UserSaveDataGroup();
         yield return null;
         // Load & Create Save File
-        PlayerSaveDataGroup playerSaveDataGroup = new PlayerSaveDataGroup();
+        PlayerSaveDataGroup playerSaveDataGroup = new PlayerSaveDataGroup(true);
         InteractionSaveDataGroup interactionSaveDataGroup = new InteractionSaveDataGroup();
         InventorySaveDataGroup inventorySaveDataGroup = new InventorySaveDataGroup();   
         userSaveData.PlayerSaveDataGroup = playerSaveDataGroup;
         userSaveData.InteractionSaveDataGroup = interactionSaveDataGroup;
         userSaveData.InventorySaveDataGroup = inventorySaveDataGroup;
+        yield return null;  
         reader.SaveJsonData<PlayerSaveDataGroup>(playerSaveDataGroup, directoryPath, SAVE_JSON_PATHS.PLAYER);
         reader.SaveJsonData<InteractionSaveDataGroup>(interactionSaveDataGroup, directoryPath, SAVE_JSON_PATHS.INTERACT);
         reader.SaveJsonData<InventorySaveDataGroup>(inventorySaveDataGroup, directoryPath, SAVE_JSON_PATHS.INVEN);
@@ -126,6 +129,38 @@ public partial class SaveMgr : MonoBehaviour
         if (_action != null) _action();
     }
 
+    #endregion
+
+    #region Save Data
+    Coroutine saveCoroutine = null;
+
+    public void SavePlayerData()
+    {
+        if (userSaveData == null || saveCoroutine !=null)
+            return;
+         saveCoroutine = StartCoroutine(CSaveAllData());
+    }
+
+    public void SavePlayerData(UnityAction _action)
+    {
+        if (userSaveData == null || saveCoroutine != null)
+            return;
+        saveCoroutine = StartCoroutine(CSaveAllData(_action));
+    }
+
+
+    IEnumerator CSaveAllData(UnityAction _action = null)
+    {
+        userSaveData.UpdateAllData();
+        yield return null;
+        reader.SaveJsonData<PlayerSaveDataGroup>(userSaveData.PlayerSaveDataGroup, directoryPath, SAVE_JSON_PATHS.PLAYER);
+        reader.SaveJsonData<InteractionSaveDataGroup>(userSaveData.InteractionSaveDataGroup, directoryPath, SAVE_JSON_PATHS.INTERACT);
+        reader.SaveJsonData<InventorySaveDataGroup>(userSaveData.InventorySaveDataGroup, directoryPath, SAVE_JSON_PATHS.INVEN);
+        yield return new WaitForSeconds(1f);
+        saveCoroutine = null;
+        if(_action!=null)
+            _action();
+    }
     #endregion
 }
 

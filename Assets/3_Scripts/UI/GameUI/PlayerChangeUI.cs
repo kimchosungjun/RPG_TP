@@ -128,6 +128,7 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
 
     public void TurnOff()
     {
+        warnWindow.gameObject.SetActive(false);
         uiFrameParent.SetActive(false);
     }
 

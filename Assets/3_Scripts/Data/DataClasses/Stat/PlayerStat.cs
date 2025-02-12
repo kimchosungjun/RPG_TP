@@ -120,44 +120,16 @@ public class PlayerSaveStat
         SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(playerTypeID)?.UpdateCurrentStat();
     }
 
-    public PlayerSaveStat()
-    {
-        currentHP = 100;
-        currentLevel = 1;
-        currentExp = 0;
-        currentNormalAttackLevel = 1;
-        currentSkillLevel = 1;
-        currentUltimateSkillLevel = 1;
-        playerTypeID = 0;
-    }
-
-    public PlayerSaveStat(int _id, int _curHP)
+    public PlayerSaveStat(int _id)
     {
         playerTypeID = _id;
-        currentHP = _curHP; 
+        Debug.Log(_id);
+        currentHP = SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id).defaultHP;     
         currentLevel = 1;   
         currentExp = 0;       
         currentNormalAttackLevel= 1;    
         currentSkillLevel = 1;
         currentUltimateSkillLevel = 1;
-    }
-
-    public int GetLevelData(ACTION_TYPE _actionType)
-    {
-        int level = -1;
-        switch (_actionType)
-        {
-            case ACTION_TYPE.NORMAL:
-                level = currentNormalAttackLevel;
-                break;
-            case ACTION_TYPE.SKILL:
-                level = currentSkillLevel;
-                break;
-            case ACTION_TYPE.ULTIMATE:
-                level = currentUltimateSkillLevel;
-                break; 
-        }
-        return level;   
     }
 }
 

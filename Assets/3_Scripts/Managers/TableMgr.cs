@@ -61,30 +61,4 @@ public class TableMgr
     }
 
     #endregion
-
-
-    /*****************************/
-    /******** Save Data ********/
-    /*****************************/
-
-    #region Save Data
-
-    // Private 
-    private AccountSaveData accountSaveData;
-
-    // Property
-    public AccountSaveData AccountSaveData { get { return accountSaveData; } set { accountSaveData = value; } }
-
-    #endregion
-
-    #region Save & Load Data
-    public void Save()
-    {
-        //character.SaveBinary<PlayerTable>("PlayerTableCsv");
-#if UNITY_EDITOR
-        //AssetDatabase.Refresh();
-#endif
-    }
-
-    #endregion
 }

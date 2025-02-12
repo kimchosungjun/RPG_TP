@@ -146,7 +146,7 @@ public class CharacterAward : IAwards
     public string GetAwardDescription { get { return awardDescription; } }
     public void GetAward()
     {
-
+        SharedMgr.SaveMgr.GetPlayerSaveData.AddPlayableCharacterID((int)playerID);
     }
 
     public Sprite GetAwardSprite()

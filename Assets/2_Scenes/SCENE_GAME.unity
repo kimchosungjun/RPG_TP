@@ -69726,7 +69726,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!1 &1721092197
 GameObject:
@@ -93998,7 +93998,7 @@ PrefabInstance:
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 155.5
+      value: 148.75
       objectReference: {fileID: 0}
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
@@ -94008,22 +94008,22 @@ PrefabInstance:
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 115
+      value: 121.25
       objectReference: {fileID: 0}
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.8660254
+      value: 0.25881672
       objectReference: {fileID: 0}
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: 0.9659265
       objectReference: {fileID: 0}
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
@@ -94038,7 +94038,7 @@ PrefabInstance:
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 300
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3059434574549087428, guid: 9c15a410e626ebf4b9f1bc3f97d956e9,
         type: 3}

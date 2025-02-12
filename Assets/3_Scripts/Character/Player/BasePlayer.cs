@@ -92,7 +92,7 @@ public class BasePlayer : BaseActor
 
     public virtual void Init()
     {
-        PlayerSaveStat saveStat = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.PlayerSaveDataSet[id];
+        PlayerSaveStat saveStat = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.GetPlayerSaveStat(id);
         playerStat = new PlayerStat();
         playerStat.LoadPlayerStat(saveStat);
 

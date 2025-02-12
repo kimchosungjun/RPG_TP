@@ -21,33 +21,63 @@ namespace SaveDataGroup
         }
     }
 
-    #region Save Data Group
+    // Player Save Data
+    #region Player Data Group
 
     [Serializable]
-    public class PlayerSaveDataGroup: ICommonSaveData
+    public class PlayerSaveDataGroup : ICommonSaveData
     {
         #region Values
         // Private Value
-        [SerializeField] List<int> cuurrentPlayerPartyIDSet;
-        [SerializeField] List<PlayerSaveStat> playerSaveDataSet;
+        [SerializeField] List<int> cuurrentPlayerPartyIDSet = new List<int>();
+        [SerializeField] List<PlayerSaveStat> playerSaveDataSet = new List<PlayerSaveStat>();
         [SerializeField] Vector3 currentPlayerPosition;
-        [SerializeField] Vector3 currentPlayerRotation; 
+        [SerializeField] Vector3 currentPlayerRotation;
 
         // Get Value
-        public List<int> CurrentPlayerPartyIDSet { get { return cuurrentPlayerPartyIDSet; } set { cuurrentPlayerPartyIDSet = value; } }   
-        public List<PlayerSaveStat> PlayerSaveDataSet { get { return playerSaveDataSet; } set { playerSaveDataSet = value; } }
-        public Vector3 CurrentPlayerPosition { get { return currentPlayerPosition; } set { currentPlayerPosition = value; } }   
+        public List<int> CurrentPlayerPartyIDSet { get { return cuurrentPlayerPartyIDSet; } }
+        public List<PlayerSaveStat> PlayerSaveDataSet { get { return playerSaveDataSet; } }
+        public Vector3 CurrentPlayerPosition { get { return currentPlayerPosition; } set { currentPlayerPosition = value; } }
         public Quaternion GetPlayerRotation() { return Quaternion.Euler(currentPlayerRotation); }
+
+        public PlayerSaveStat GetPlayerSaveStat(int _id)
+        {
+            int cnt = playerSaveDataSet.Count;
+            if (cnt == 0) return null;
+            for (int i = 0; i < cnt; i++)
+            {
+                if (playerSaveDataSet[i].playerTypeID == _id)
+                    return playerSaveDataSet[i];
+            }
+            return null;
+        }
         #endregion
 
-        #region Creator
-        public PlayerSaveDataGroup()
+        public void AddPlayableCharacterID(int _characterID)
         {
+            if (cuurrentPlayerPartyIDSet.Contains(_characterID))
+                return;
+            cuurrentPlayerPartyIDSet.Add(_characterID);
+            PlayerSaveStat saveStat = new PlayerSaveStat(_characterID);
+
+            if (playerSaveDataSet.Contains(saveStat))
+                return;
+            playerSaveDataSet.Add(saveStat);
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.JoinParty(_characterID);
+        }
+
+        #region Creator
+        public PlayerSaveDataGroup() { }
+
+        public PlayerSaveDataGroup(bool _isFirstCreate)
+        {
+            if (_isFirstCreate == false)
+                return;
             int warriorID = (int)(PlayerEnums.TYPEIDS.WARRIOR);
             cuurrentPlayerPartyIDSet = new List<int>();
             cuurrentPlayerPartyIDSet.Add(warriorID);
             playerSaveDataSet = new List<PlayerSaveStat>();
-            PlayerSaveStat saveStat = new PlayerSaveStat(0, 150); 
+            PlayerSaveStat saveStat = new PlayerSaveStat(0); 
             playerSaveDataSet.Add(saveStat);    
             currentPlayerPosition = new Vector3(12f, 0f, 290f);
             currentPlayerRotation = new Vector3(0, 180f, 0);
@@ -57,12 +87,14 @@ namespace SaveDataGroup
         public void UpdateData()
         {
             Transform playerTransform = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.transform;
-            playerSaveDataSet = SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetAllSaveStat();
             currentPlayerPosition = playerTransform.position;
             currentPlayerRotation = playerTransform.rotation.eulerAngles;
         }
     }
+    #endregion
 
+    // Inventory Save Data
+    #region Inventory Save Data Group
     [Serializable]
     public class InventorySaveDataGroup : ICommonSaveData
     {
@@ -102,9 +134,10 @@ namespace SaveDataGroup
     [Serializable]
     public class InteractionSaveDataGroup : ICommonSaveData
     {
-        public List<NPCSaveData> npcDataSet = new List<NPCSaveData>();
-        public List<QuestLogData> questLogData = new List<QuestLogData> ();
-    
+        [SerializeField] List<NPCSaveData> npcDataSet = new List<NPCSaveData>();
+        [SerializeField] List<QuestLogData> questLogDataSet = new List<QuestLogData> ();
+
+        #region Manage NPC Data
         public NPCSaveData GetNpcSaveData(int _id)
         {
             int cnt = npcDataSet.Count;
@@ -126,33 +159,52 @@ namespace SaveDataGroup
                 return;
             npcDataSet.Add(_saveData);  
         }
+        #endregion
 
+        #region Manage Quest Log Data
         public QuestLogData GetQuestLogData(int _id)
         {
-            int cnt = questLogData.Count;
+            int cnt = questLogDataSet.Count;
             if (cnt == 0)
                 return null;
 
             for (int i = 0; i < cnt; i++)
             {
-                if (questLogData[i].questID == _id)
-                    return questLogData[i];
+                if (questLogDataSet[i].questID == _id)
+                    return questLogDataSet[i];
             }
-
             return null;
         }
 
         public void AddQuestLogData(QuestLogData _questData)
         {
-            if (questLogData.Contains(_questData))
+            if (questLogDataSet.Contains(_questData))
                 return;
-            questLogData.Add(_questData);   
+            questLogDataSet.Add(_questData);   
+        }
+
+        public void DeleteQuestLogData(QuestLogData _questData)
+        {
+            int cnt = questLogDataSet.Count;
+            for(int i=0; i<cnt; i++)
+            {
+                if (questLogDataSet[i] == _questData)
+                {
+                    questLogDataSet.RemoveAt(i);
+                    return;
+                }
+            }
         }
 
         public void UpdateData()
         {
-            throw new NotImplementedException();
+            int cnt = questLogDataSet.Count;
+            for (int i = 0; i < cnt; i++)
+            {
+                SharedMgr.QuestMgr.GetQuestData(questLogDataSet[i].questID)?.UpdateLogData();
+            }
         }
+        #endregion
     }
     #endregion
 
@@ -178,14 +230,12 @@ namespace SaveDataGroup
     [Serializable]
     public class QuestLogData
     {
-        public bool isClearQuest;
         public int questID;
         public List<QuestConditionData> conditions;
 
         public QuestLogData() { }
-        public QuestLogData(bool _isClearQuest, int _questID, List<QuestConditionData> _conditions)
+        public QuestLogData(int _questID, List<QuestConditionData> _conditions)
         {
-            isClearQuest = _isClearQuest;
             questID = _questID;
             conditions = _conditions;
         }

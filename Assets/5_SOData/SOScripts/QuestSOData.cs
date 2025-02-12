@@ -7,7 +7,6 @@ public class QuestSOData : ScriptableObject
 {
     #region Value
     [Header("Quest Datas")]
-    bool isClearQuest = false;
     [SerializeField] int questID;
     [SerializeField] string questName;
     [TextArea(5,10), SerializeField] string questDescription;
@@ -63,12 +62,13 @@ public class QuestSOData : ScriptableObject
             }
         }
         _dialogueIndex = meetQuestDialogueIndex;
-        UpdateLogData();
+
         return true;
     }
 
     public void GetAwards()
     {
+        UpdateQuestClear();
         SharedMgr.InteractionMgr.CurrentInteractNPC.SetDialogueIndex = afterGetAwardDialogueIndex;
         
         if (expAwards.Count != 0)
@@ -90,31 +90,28 @@ public class QuestSOData : ScriptableObject
     #region Quest Log Data
     QuestLogData logData = null;
 
-    public void LoadQuestLog()
+    public void CreateQuestLogData()
     {
-        logData = new QuestLogData(isClearQuest, questID, questConditionSet);
+        logData = new QuestLogData(questID, questConditionSet);
+        SharedMgr.SaveMgr.GetInteractionData.AddQuestLogData(logData);
     }
 
     public void LoadQuestLog(QuestLogData _logData)
     {
         logData = _logData;
-        isClearQuest = _logData.isClearQuest;
         questConditionSet = _logData.conditions;
     }
 
     public void UpdateLogData()
     {
         if (logData == null)
-            logData = new QuestLogData();
-        logData.isClearQuest = isClearQuest;
-        logData.isClearQuest = isClearQuest;
+            logData = new QuestLogData(questID, questConditionSet);
         logData.conditions = questConditionSet;
     }
 
-    public void UpdateLogData(ref QuestLogData _logData)
+    public void UpdateQuestClear()
     {
-        UpdateLogData();
-        _logData = logData;
+        logData.conditions = questConditionSet; 
     }
     #endregion
 }
