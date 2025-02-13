@@ -2,22 +2,39 @@ using MonsterEnums;
 using System.Collections;
 using UnityEngine;
 
-public class EliteMonster : BaseMonster
+public abstract class EliteMonster : BaseMonster
 {
     #region Status Value (UI & Gauge)
 
     [SerializeField] protected EliteMonsterStatusUI statusUI = null;
-    protected EliteGauge eliteGauge = new EliteGauge();
+    protected EliteGauge eliteGauge = null;
+    public EliteGauge GetEliteGauge { get { return eliteGauge; } }  
     public class EliteGauge
     {
-        float groggyGauge = 100f;
-        bool countGroggy = true;
+        EliteMonster elite = null;
+        float groggyCheckTime = 0;
+        float groggyTime;
+        float groggyGauge;
+        bool countGroggy;
 
+        public EliteGauge(EliteMonster _monster) { elite = _monster; groggyGauge = 100f; countGroggy = true;  groggyTime = 3f; groggyCheckTime = 0; }
+        public EliteGauge(EliteMonster _monster, float _time) { elite = _monster; groggyGauge = 100f; countGroggy = true;  groggyTime = _time; groggyCheckTime = 0; }
+        public float GetGroggyTime { get { return groggyTime; } }
         public float GetGroggyGauge { get { return groggyGauge; } }
         public void FixedGroggyDecrease()
         {
-            if (countGroggy == false) return;
-            groggyGauge -= Time.fixedDeltaTime;
+            if (countGroggy == false)
+            {
+                groggyCheckTime += Time.fixedDeltaTime;
+                if(groggyCheckTime>groggyTime)
+                {
+                    groggyCheckTime = 0f;
+                    countGroggy = true;
+                    groggyGauge = 100f;
+                }    
+                return;
+            }
+            groggyGauge -= Time.fixedDeltaTime* 20;
             CheckGroggy();
         }
 
@@ -25,25 +42,29 @@ public class EliteMonster : BaseMonster
         {
             if (groggyGauge <= 0f)
             {
-                // To Do Announce
+                elite?.AnnounceGroggyState(groggyTime);
+                groggyGauge = 0f;
                 countGroggy = false;
             }
         }
-
-        public void DoNormalAttack()
+        
+        public void Hit(float _hitGauge = 1f)
         {
-            groggyGauge -= 10f;
+            if (countGroggy == false) return;
+            groggyGauge -= _hitGauge;
             CheckGroggy();
         }
 
-        public void DoSkill()
+        public void Reset()
         {
-            groggyGauge -= 15;
-            CheckGroggy();
+            groggyCheckTime = 0;
+            countGroggy = true;
+            groggyGauge = 100f;
         }
     }
 
     #endregion
+    public abstract void AnnounceGroggyState(float _groggyTime);
 
     // Common 
     public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
@@ -59,7 +80,19 @@ public class EliteMonster : BaseMonster
 
     public virtual void BossKillDrop() { }
 
-    #region  Escape Battle Field
+    #region Battle Field
+    public override void AnnounceInMonsterArea()
+    {
+        base.AnnounceInMonsterArea();
+        statusUI.ChangeData(monsterStat, eliteGauge);
+    }
+
+    public override void AnnounceOutMonsterArea()
+    {
+        base.AnnounceOutMonsterArea();
+        statusUI.ChangeData();
+    }
+
     public override void EscapeReturnToSpawnPosition() { }
     public void EscapeCalmState() 
     {

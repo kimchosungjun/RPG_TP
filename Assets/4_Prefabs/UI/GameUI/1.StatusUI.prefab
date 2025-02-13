@@ -259,12 +259,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf538bcff6bdbe54992ec5fd59d5bc27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatusParentObject: {fileID: 0}
-  levelText: {fileID: 0}
-  hpText: {fileID: 0}
+  statusParentObject: {fileID: 7997937302423712157}
+  levelText: {fileID: 6289064134780054785}
+  hpText: {fileID: 2181864606303076775}
   statusTexts:
   - {fileID: 6289064134780054785}
   - {fileID: 2181864606303076775}
+  - {fileID: 2097293785798146926}
   statusImages:
   - {fileID: 5891219790760654592}
   - {fileID: 1288356040870624982}
@@ -272,7 +273,6 @@ MonoBehaviour:
   - {fileID: 7383395529226757199}
   - {fileID: 2185172438627321093}
   - {fileID: 4749659660076423499}
-  statusParent: {fileID: 7997937302423712157}
 --- !u!1 &242174054829955514
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7954a5bc21fd70c43bb37594772e2352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatusParentObject: {fileID: 5177450876694430231}
+  statusParentObject: {fileID: 5177450876694430231}
   levelText: {fileID: 2898318848481604352}
   hpText: {fileID: 7225681541518648277}
   hpImages:

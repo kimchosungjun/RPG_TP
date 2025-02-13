@@ -157,7 +157,10 @@ namespace UtilEnums
         CAVE=0,
         TOWN_SOUTH=1,
         TOWN_EAST=2,
-        TOWN_WEST=3
+        TOWN_WEST=3,
+        DRAONG_NEST=4,
+        TOWN=5,
+        NONE
     }
 
     public enum PATH_TYPES

@@ -37,7 +37,7 @@ public class StandardMonsterStatusUI : StatusUI
         // Link
         monsterStat = _monsterStat;
         followTransform = _followTransform;
-        playerStatusParentObject.GetComponent<Canvas>().worldCamera = Camera.main;
+        statusParentObject.GetComponent<Canvas>().worldCamera = Camera.main;
         camTransform = Camera.main.transform;
 
         Sprite hpLineSprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Loading_Line");
@@ -66,7 +66,7 @@ public class StandardMonsterStatusUI : StatusUI
 
     public void DecideActiveState(bool _isActive)
     {
-        playerStatusParentObject.SetActive(_isActive);
+        statusParentObject.SetActive(_isActive);
         isActive = _isActive;
 
         if (isActive)

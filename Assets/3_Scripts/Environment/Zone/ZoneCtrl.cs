@@ -8,12 +8,14 @@ public class ZoneCtrl : MonoBehaviour
 {
     [SerializeField] BattleField[] battleFields;
 
-    [SerializeField] ZONE_TPYES cuurentZone;
+    [SerializeField] ZONE_TPYES cuurentZone = ZONE_TPYES.NONE;
     [SerializeField] PathNodeControl pathNodeControl;
 
     public void ChangeZone(ZONE_TPYES _currentZone)
     {
-        if (_currentZone == cuurentZone) return;   
+        if (_currentZone == cuurentZone) return;
+        cuurentZone = _currentZone;
+        SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.IndicateZone(_currentZone);
     }    
 
     public PathNode GetPathNode(PATH_TYPES _pathType) { return pathNodeControl.GetPathNode(_pathType); }

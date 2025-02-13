@@ -68,6 +68,7 @@ public class StandardMonster : BaseMonster
     public override void AnnounceAllPlayerDeath()
     {
         base.AnnounceAllPlayerDeath();
+        AnnounceOutMonsterArea();
         if(isDeathState==false)
             ReturnToSpawnPosition();
     }
@@ -85,6 +86,8 @@ public class StandardMonster : BaseMonster
         isGoOffAggro = true;
         nav.SetDestination(SpawnPosition);
         nav.stoppingDistance = 0;
+        nav.angularSpeed = 1080;
+        nav.updateRotation = true;
         while (true)
         {
             if (isGoOffAggro == false) yield break;

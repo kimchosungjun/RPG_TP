@@ -85,7 +85,7 @@ public class RedDragon : EliteMonster
         allStates[(int)DRAGON_STATE.LAND] = new DragonLandState(this);
         allStates[(int)DRAGON_STATE.HIT] = new DragonHitState(this);
         allStates[(int)DRAGON_STATE.DEATH] = new DragonDeathState(this);
-        allStates[(int)DRAGON_STATE.CALM] = new DragonState(this); 
+        allStates[(int)DRAGON_STATE.CALM] = new DragonCalmState(this); 
         currentState = allStates[(int)DRAGON_STATE.IDLE];
         stateMachine.InitStateMachine(allStates[0]);
     }
@@ -251,8 +251,33 @@ public class RedDragon : EliteMonster
     #region Take Damage
 
     // Relate Hit Condition
+    bool isChangeEffectTime = false;
     float effectMaintainTime = 0f;
-    public float GetEffectMaintainTime { get { return effectMaintainTime; } }
+    
+    public float EffectMaintainTime 
+    {
+        get
+        { 
+            return effectMaintainTime; 
+        }
+        set
+        {
+            effectMaintainTime = value;
+            isChangeEffectTime = !isChangeEffectTime; 
+        }
+    }
+    public bool IsChangeEffectTime 
+    {
+        get 
+        {
+            return isChangeEffectTime;
+        }
+        set
+        {
+            isChangeEffectTime = value;
+        }
+    }
+
     EffectEnums.HIT_EFFECTS currentEffect = EffectEnums.HIT_EFFECTS.NONE;
     public EffectEnums.HIT_EFFECTS GetCurrentHitEffect { get { return currentEffect; } }
 
@@ -269,7 +294,7 @@ public class RedDragon : EliteMonster
         currentEffect = _attackData.GetHitEffect;
         if (currentEffect != EffectEnums.HIT_EFFECTS.NONE)
         {
-            effectMaintainTime = _attackData.EffectMaintainTime;
+            EffectMaintainTime = _attackData.EffectMaintainTime;
             ChangeState(DRAGON_STATE.HIT);
         }
     }
@@ -284,6 +309,15 @@ public class RedDragon : EliteMonster
         }
     }
 
+    public override void AnnounceGroggyState(float _groggyTime)
+    {
+        if (isDeathState) return;
+        EffectMaintainTime = _groggyTime;
+        currentEffect = EffectEnums.HIT_EFFECTS.STUN; 
+        if(curState != DRAGON_STATE.HIT)
+            ChangeState(DRAGON_STATE.HIT);
+    }
+
     #endregion
 
     #region Calm State
@@ -291,6 +325,7 @@ public class RedDragon : EliteMonster
     public override void AnnounceOutMonsterArea()
     {
         base.AnnounceOutMonsterArea();
+        IsInMonsterArea = false;
         if (isDeathState==false)
             ChangeState(DRAGON_STATE.CALM);
     }
@@ -322,6 +357,7 @@ public class RedDragon : EliteMonster
     public void ResetState()
     {
         SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI.TurnOff();
+        IsInMonsterArea = false;
         isScream = false;
         isFlying = false;
         isInvincible = false;
@@ -336,6 +372,7 @@ public class RedDragon : EliteMonster
         if (nav == null) nav = GetComponent<NavMeshAgent>();
         if(coll==null) coll = GetComponent<CapsuleCollider>();
         maxGlidePointIndex = glidePostions.Length;
+        eliteGauge = new EliteGauge(this, 3f);
     }
 
     protected override void Start()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UtilEnums;
 
 public class IndicatorUI : MonoBehaviour, ICommonSetUI
 {
@@ -165,6 +166,11 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
             healIndicatorImage.gameObject.SetActive(false);
             healCor = null;
         }
+
+        if (zoneAnim.gameObject.activeSelf)
+        {
+            zoneAnim.gameObject.SetActive(false);
+        }
     }
     #endregion
 
@@ -174,5 +180,85 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
     
     public void PressZoomIn() { SharedMgr.GameCtrlMgr.GetCameraCtrl.Zoom(); }
     public void PressZoomOut() { SharedMgr.GameCtrlMgr.GetCameraCtrl.Zoom(false); }
+    #endregion
+
+    #region Zone Indicator
+    enum ZoneAnim
+    {
+        Open=0,
+        Idle=1,
+        Close=2
+    }
+
+   
+    public void IndicateZone(ZONE_TPYES _zoneType)
+    {
+        string zoneText = string.Empty;
+        switch (_zoneType)
+        {
+            case ZONE_TPYES.CAVE:
+                zoneText = "잿더미 광산";
+                break;
+            case ZONE_TPYES.TOWN_SOUTH:
+                zoneText = "잿빛 마을 남쪽";
+                break;
+            case ZONE_TPYES.TOWN_EAST:
+                zoneText = "잿빛 마을 동쪽";
+                break;
+            case ZONE_TPYES.TOWN_WEST:
+                zoneText = "잿빛 마을 서쪽";
+                break;
+            case ZONE_TPYES.DRAONG_NEST:
+                zoneText = "레드 드래곤의 둥지";
+                break;
+            case ZONE_TPYES.TOWN:
+                zoneText = "잿빛 마을";
+                break;
+        }
+        zoneIndicateText.text = zoneText;
+        ActiveZoneIndicator();
+    }
+
+    [Header("Zone Indicator")]
+    [SerializeField] Animator zoneAnim;
+    [SerializeField] Text zoneIndicateText;
+
+    bool isActiveZoneIndicator = false;
+    float zoneTimer = 0f;
+    Coroutine zoneCor = null;
+
+    public void ActiveZoneIndicator()
+    {
+        if (isActiveZoneIndicator == false)
+            zoneCor = StartCoroutine(CZoneIndicate());
+        else
+        {
+            if (zoneAnim.gameObject.activeSelf == false)
+            {
+                if (zoneCor != null)
+                    StopCoroutine(zoneCor);
+                StartCoroutine(CZoneIndicate());
+                return;
+            }
+            zoneTimer = 0f;
+        }
+    }
+
+
+    IEnumerator CZoneIndicate()
+    {
+        timer = 0f;
+        isActiveZoneIndicator = true;
+        zoneAnim.gameObject.SetActive(true);
+        zoneAnim.SetInteger("State", 1);
+        while (timer < 3f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        isActiveZoneIndicator = false;
+        zoneAnim.SetInteger("State", 2);
+        zoneCor = null;
+    }
     #endregion
 }

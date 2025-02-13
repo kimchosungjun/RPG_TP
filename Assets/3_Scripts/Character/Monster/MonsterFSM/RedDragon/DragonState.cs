@@ -143,11 +143,16 @@ namespace DragondStateClasses
         {
             time = 0f;
             redDragon.GetNav.ResetPath();
+            redDragon.GetEliteGauge.Hit();
             redDragon.GetSFXPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.HIT_SFX);
             if(redDragon.GetCurrentHitEffect == EffectEnums.HIT_EFFECTS.STUN)
             {
                 checkMaintainTime = true;
-                maintainTime = redDragon.GetEffectMaintainTime;
+                if (redDragon.IsChangeEffectTime)
+                {
+                    maintainTime = redDragon.EffectMaintainTime;
+                    redDragon.IsChangeEffectTime = false;
+                }
                 redDragon.SetAnimation(RedDragon.DRAGON_ANIM.GROGGY);
             }
             else
@@ -156,6 +161,13 @@ namespace DragondStateClasses
 
         public override void FixedExecute()
         {
+            if (redDragon.IsChangeEffectTime)
+            {
+                redDragon.IsChangeEffectTime = false;
+                time = 0;
+                maintainTime = redDragon.EffectMaintainTime;
+            }
+
             if (checkMaintainTime)
             {
                 time += Time.fixedDeltaTime;
@@ -189,6 +201,7 @@ namespace DragondStateClasses
         
         public override void Enter()
         {
+            redDragon.GetEliteGauge.Reset();
             redDragon.Recovery();
             redDragon.GoOffAggro();
             redDragon.ResetState();
@@ -202,7 +215,7 @@ namespace DragondStateClasses
                 return;
             }
 
-            if (redDragon.CheckCalmState())
+            if (redDragon.CheckCalmState() && redDragon.GetIsAllPlayerDeathState == false)
             {
                 redDragon.ChangeState(RedDragon.DRAGON_STATE.IDLE);
                 return;

@@ -315,11 +315,15 @@ public class PlayerCtrl : MonoBehaviour
         }
         players[currentPlayerIndex].transform.position = new Vector3(212, 0.1f, 153);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetMoveRockCamera(false);
-        SharedMgr.GameCtrlMgr.GetZoneCtrl.AnnouncePlayerState(false);
         StartCoroutine(CReleaseDeathState());
     }
 
-    IEnumerator CReleaseDeathState() { yield return new WaitForSeconds(1f); SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.FadeIn(ReleaseMoveLock); }
+    IEnumerator CReleaseDeathState()
+    { 
+        yield return new WaitForSeconds(1f); 
+        SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.FadeIn(ReleaseMoveLock);
+        SharedMgr.GameCtrlMgr.GetZoneCtrl.AnnouncePlayerState(false);
+    }
 
     #endregion
 

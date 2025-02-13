@@ -330,8 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d22e085e7b9794b887cfce74a804a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatusParentObject: {fileID: 9119940530335833499}
-  hpText: {fileID: 0}
+  statusParentObject: {fileID: 9119940530335833499}
   levelText: {fileID: 3633098944620233986}
   heightDelta: 0.2
   followTransform: {fileID: 0}
@@ -341,7 +340,6 @@ MonoBehaviour:
   effectImages:
   - {fileID: 3505413558212541397}
   - {fileID: 8266393494926513143}
-  effectSpeed: 3
 --- !u!1 &4938534677707785235
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public abstract class StatusUI : MonoBehaviour
 
     #region Link UI & Value
     [Header("Monster")]
-    [SerializeField] protected GameObject playerStatusParentObject;
+    [SerializeField] protected GameObject statusParentObject;
     [SerializeField] protected Text levelText;
     protected float effectTime = 10f;
     #endregion

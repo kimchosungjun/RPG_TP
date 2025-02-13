@@ -178,12 +178,12 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     #region Interface Method
     public void TurnOn()
     {
-        playerStatusParentObject.SetActive(true);
+        statusParentObject.SetActive(true);
     }
 
     public void TurnOff()
     {
-        playerStatusParentObject.SetActive(false);
+        statusParentObject.SetActive(false);
     }
 
     public void SetImages()
