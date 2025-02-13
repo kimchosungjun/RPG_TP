@@ -53,6 +53,24 @@ public class BattleField : MonoBehaviour
         }
     }
 
+    public void AnnounceAllPlayerDeath()
+    {
+        int cnt = spawnMonsters.Length;
+        for(int i=0; i<cnt; i++)
+        {
+            spawnMonsters[i].AnnounceAllPlayerDeath();
+        }
+    }
+
+    public void AnnounceAllPlayerRevival()
+    {
+        int cnt = spawnMonsters.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            spawnMonsters[i].AnnounceAllPlayerRevival();
+        }
+    }
+
     protected virtual void FixedUpdate()
     {
         CheckRespawnTime();

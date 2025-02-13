@@ -4,7 +4,6 @@ using UnityEngine;
 public class TriggerAttackAction : AttackAction
 {
     [SerializeField] protected HitTrigger triggerAttack = null;
-
     public override void DoAttack()
     {
         if (triggerAttack != null)

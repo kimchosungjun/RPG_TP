@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using DragondStateClasses;
 using UnityEngine;
-using MonsterEnums;
 using UnityEngine.AI;
 
 public class RedDragon : EliteMonster
@@ -10,10 +8,11 @@ public class RedDragon : EliteMonster
     #region Variable
 
     [Header("RedDragon Component")]
-    [SerializeField] RedDragonAttackControl attackControl;
     [SerializeField, Range(0,10f)] float attackRange = 4f;
     [SerializeField] CapsuleCollider coll;
+    [SerializeField] RedDragonAttackControl attackControl;
     public NavMeshAgent GetNav { get { return nav; } }
+    public RedDragonAttackControl GetAttackControl { get { return attackControl; } }
 
     // Relate State & Anim
     bool isScream = false;
@@ -30,9 +29,8 @@ public class RedDragon : EliteMonster
     [Header("Glide Point : Later Erase")]
     [SerializeField] Vector3[] glidePostions;
 
+    public SFXPlayer GetSFXPlayer { get { return sfxPlayer; } } 
     #endregion
-
-    [SerializeField] DRAGON_STATE curState;
 
     #region ENUM
     public enum DRAGON_STATE
@@ -44,7 +42,8 @@ public class RedDragon : EliteMonster
         GLIDE,
         LAND,
         HIT,
-        DEATH
+        DEATH,
+        CALM
     }
 
     public enum DRAGON_ANIM
@@ -71,12 +70,13 @@ public class RedDragon : EliteMonster
 
     #region Set State
     DragonState currentState = null;
-    DragonState [] allStates;
+    DragonState [] allStates = null;
     MonsterStateMachine stateMachine;
+    [SerializeField] DRAGON_STATE curState;
     protected override void CreateStates()
     {
         stateMachine = new MonsterStateMachine();
-        allStates = new DragonState[8];
+        allStates = new DragonState[9];
         allStates[(int)DRAGON_STATE.IDLE] = new DragonIdleState(this);
         allStates[(int)DRAGON_STATE.MOVE] = new DragonMoveState(this);
         allStates[(int)DRAGON_STATE.BATTLE] = new DragonAttackState(this);
@@ -85,7 +85,7 @@ public class RedDragon : EliteMonster
         allStates[(int)DRAGON_STATE.LAND] = new DragonLandState(this);
         allStates[(int)DRAGON_STATE.HIT] = new DragonHitState(this);
         allStates[(int)DRAGON_STATE.DEATH] = new DragonDeathState(this);
-
+        allStates[(int)DRAGON_STATE.CALM] = new DragonState(this); 
         currentState = allStates[(int)DRAGON_STATE.IDLE];
         stateMachine.InitStateMachine(allStates[0]);
     }
@@ -95,6 +95,26 @@ public class RedDragon : EliteMonster
         curState = _newState;
         currentState = allStates[(int)_newState];
         stateMachine.ChangeState(allStates[(int)_newState]);
+    }
+
+    public override void Death()
+    {
+        base.Death();
+        ChangeState(DRAGON_STATE.DEATH);
+    }
+
+    public override void Revival()
+    {
+        isDeathState = false;
+        isRecovery = false;
+        isGoOffAggro = false;
+        isScream = false;
+        isFlying = false;
+        isInvincible = false;
+
+        base.Revival();
+        if(allStates != null)
+            ChangeState(DRAGON_STATE.IDLE);
     }
 
     #endregion
@@ -131,6 +151,7 @@ public class RedDragon : EliteMonster
     public void GlideAttack() { StartCoroutine(CGliding()); }
     IEnumerator CGliding()
     {
+        Vector3 glideDestination = SpawnPosition;
         if (glidePoint >= maxGlidePointIndex)
         {
             attackControl.DoOrbitFlameAttack();
@@ -143,10 +164,11 @@ public class RedDragon : EliteMonster
             }
             glidePoint = 0;
         }
-        nav.SetDestination(glidePostions[glidePoint]);
+        glideDestination += glidePostions[glidePoint];
+        nav.SetDestination(glideDestination);
         while (true)
         {
-            if(Vector3.Distance(transform.position, glidePostions[glidePoint]) < 1f)
+            if(Vector3.Distance(transform.position, glideDestination) < 1f)
             {
                 glidePoint += 1;
                 break;
@@ -171,6 +193,8 @@ public class RedDragon : EliteMonster
         if (IsInMonsterArea && isScream == false)
         {
             isScream = true;
+            isInvincible = true;
+            sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.DRAGON_GROWL_SFX);
             SetAnimation(DRAGON_ANIM.SCREAM);
         }
     }
@@ -201,13 +225,17 @@ public class RedDragon : EliteMonster
     // Meet Player : Once
     public void AfterScream()
     {
+        isInvincible = false;
         if (IsInMonsterArea)
         {
             SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI.TurnOn();
             ChangeState(DRAGON_STATE.MOVE);
         }
         else
+        {
             isScream = false;
+            SetAnimation(DRAGON_ANIM.IDLE);
+        }
     }
 
     // Chase Player
@@ -254,6 +282,49 @@ public class RedDragon : EliteMonster
             isFlying = true;
             ChangeState(DRAGON_STATE.TAKEOFF);
         }
+    }
+
+    #endregion
+
+    #region Calm State
+    public bool GetIsAllPlayerDeathState { get { return allPlayerDeath; } }
+    public override void AnnounceOutMonsterArea()
+    {
+        base.AnnounceOutMonsterArea();
+        if (isDeathState==false)
+            ChangeState(DRAGON_STATE.CALM);
+    }
+    public override void EscapeReturnToSpawnPosition() { ChangeState(DRAGON_STATE.CALM); }
+    public override void AnnounceAllPlayerDeath()
+    {
+        base.AnnounceAllPlayerDeath();
+        if(isDeathState==false)
+            ChangeState(DRAGON_STATE.CALM);
+    }
+
+    protected override IEnumerator CGoOffAggro()
+    {
+        isGoOffAggro = true;
+        nav.SetDestination(SpawnPosition);
+        nav.stoppingDistance = 0;
+        SetAnimation(DRAGON_ANIM.MOVE);
+        while (true)
+        {
+            if (isGoOffAggro == false) yield break;
+            if (nav.remainingDistance < toOriginalStopDistance) break;
+            yield return new WaitForFixedUpdate();
+        }
+        nav.stoppingDistance = toPlayerStopDistance;
+        SetAnimation(DRAGON_ANIM.IDLE);
+        isGoOffAggro = false;
+    }
+
+    public void ResetState()
+    {
+        SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI.TurnOff();
+        isScream = false;
+        isFlying = false;
+        isInvincible = false;
     }
 
     #endregion

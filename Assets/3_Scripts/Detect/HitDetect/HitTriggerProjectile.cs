@@ -37,6 +37,17 @@ public class HitTriggerProjectile : HitBox
         if(other.gameObject.layer == (int)enemyLayer)
         {
             other.GetComponent<BaseActor>()?.TakeDamage(attackData);
+            if (enemyLayer == UtilEnums.LAYERS.MONSTER)
+            {
+                Transform hitParticle = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MON_DAMAGED);
+                RaycastHit hit;
+                Vector3 direction = (other.transform.position - transform.position).normalized;
+                if (Physics.Raycast(transform.position, direction, out hit))
+                {
+                    hitParticle.transform.position = hit.point;
+                    hitParticle.gameObject.SetActive(true);
+                }
+            }
             if (isPenetrate == false) InActive();
         }
 

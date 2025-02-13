@@ -5,6 +5,7 @@ using EffectEnums;
 
 public class StandardMonster : BaseMonster
 {
+    #region Variable
     // Component & Float Values
     [Header("Status UI : Must Link"),SerializeField] protected StandardMonsterStatusUI statusUI = null;
     [Header("Range"),SerializeField] protected float nearCombatRange;
@@ -17,6 +18,7 @@ public class StandardMonster : BaseMonster
     protected bool isDoHitEffect = false;
     protected bool isDoAnimation = false;
     protected bool isDoMoveNearPlayer = false;
+    #endregion
 
     #region Override Life Cycle
     protected override void Awake()
@@ -63,6 +65,12 @@ public class StandardMonster : BaseMonster
 
     // Relate State
     public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
+    public override void AnnounceAllPlayerDeath()
+    {
+        base.AnnounceAllPlayerDeath();
+        if(isDeathState==false)
+            ReturnToSpawnPosition();
+    }
 
     #region Go Off Aggro
 

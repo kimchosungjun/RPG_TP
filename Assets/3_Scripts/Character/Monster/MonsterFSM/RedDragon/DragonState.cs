@@ -19,7 +19,6 @@ namespace DragondStateClasses
     }
     #endregion
 
-
     #region Idle
     public class DragonIdleState : DragonState
     {
@@ -72,6 +71,11 @@ namespace DragondStateClasses
             redDragon.ChargeAttackEnergy(0.5f);
             redDragon.SetAttackAnimation(RedDragon.DRAGON_ANIM.ATTACK, randomAttack);
         }
+
+        public override void Exit()
+        {
+            redDragon.GetAttackControl.EscapeAttackState();
+        }
     }
     #endregion
 
@@ -82,6 +86,7 @@ namespace DragondStateClasses
 
         public override void Enter()
         {
+            redDragon.SetCollideState(false);
             redDragon.SetAnimation(RedDragon.DRAGON_ANIM.TAKEOFF);
         }
     }
@@ -119,6 +124,7 @@ namespace DragondStateClasses
 
         public override void Exit()
         {
+            redDragon.SetCollideState(true);
             redDragon.IsInvincible = false;
         }
     }
@@ -137,6 +143,7 @@ namespace DragondStateClasses
         {
             time = 0f;
             redDragon.GetNav.ResetPath();
+            redDragon.GetSFXPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.HIT_SFX);
             if(redDragon.GetCurrentHitEffect == EffectEnums.HIT_EFFECTS.STUN)
             {
                 checkMaintainTime = true;
@@ -170,17 +177,44 @@ namespace DragondStateClasses
 
         public override void Enter()
         {
-            // Get Item & Exp
-            // Change Layer
-            
+            SharedMgr.UIMgr.GameUICtrl.GetBossStatusUI.TurnOff();
+            redDragon.SetAnimation(RedDragon.DRAGON_ANIM.DEATH);
+        }
+    }
+
+    #region Return To Original Position
+    public class DragonCalmState : DragonState
+    {
+        public DragonCalmState(RedDragon _redDragon) : base(_redDragon) { }
+        
+        public override void Enter()
+        {
+            redDragon.Recovery();
+            redDragon.GoOffAggro();
+            redDragon.ResetState();
+        }
+
+        public override void FixedExecute()
+        {
+            if (redDragon.IsInMonsterArea && redDragon.GetIsAllPlayerDeathState == false)
+            {
+                redDragon.ChangeState(RedDragon.DRAGON_STATE.MOVE);
+                return;
+            }
+
+            if (redDragon.CheckCalmState())
+            {
+                redDragon.ChangeState(RedDragon.DRAGON_STATE.IDLE);
+                return;
+            }
         }
 
         public override void Exit()
         {
-            // Active GameObject
-            // Reset Stat
+            redDragon.EscapeCalmState();
         }
     }
+    #endregion
 
     #endregion
 }

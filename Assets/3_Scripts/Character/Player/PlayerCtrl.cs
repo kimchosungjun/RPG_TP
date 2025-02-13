@@ -82,6 +82,7 @@ public class PlayerCtrl : MonoBehaviour
                 return;
             }
         }
+        SharedMgr.GameCtrlMgr.GetZoneCtrl.AnnouncePlayerState(true);
         SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.ActiveGameOver();
         SetPlayerControl(true);
     }
@@ -314,6 +315,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         players[currentPlayerIndex].transform.position = new Vector3(212, 0.1f, 153);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetMoveRockCamera(false);
+        SharedMgr.GameCtrlMgr.GetZoneCtrl.AnnouncePlayerState(false);
         StartCoroutine(CReleaseDeathState());
     }
 

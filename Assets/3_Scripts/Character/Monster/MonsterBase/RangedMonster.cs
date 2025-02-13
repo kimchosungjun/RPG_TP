@@ -87,7 +87,7 @@ public class RangedMonster : StandardMonster
     #region FixedUpdate
     protected override void FixedUpdate()
     {
-        if (isDeathState) return;
+        if (isDeathState || allPlayerDeath) return;
         rangedBTRoot.Evaluate();
         statusUI.FixedExecute();
     }

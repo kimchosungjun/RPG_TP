@@ -17,6 +17,7 @@ public class RedDragonAttackControl : MonoBehaviour
     MonsterStat stat = null;
     MonsterAttack[] attackDatas; // Basic, Claw_1, Claw_2, Flame, Orbit Falme
     [SerializeField] TriggerAttackAction[] attacks;
+    [SerializeField] Transform[] particlePositions;
     protected bool isCoolDown = true;
 
     DRAGON_ATTACK lastAttack;
@@ -93,8 +94,45 @@ public class RedDragonAttackControl : MonoBehaviour
         orbitTransform.GetComponent<HitChaseOverlap>().SetHitData(attackData, conditionData);
     }
 
-    public void DoBasicAttack() { DoAttack(DRAGON_ATTACK.BASIC); }
-    public void DoFirstClawAttack() { DoAttack(DRAGON_ATTACK.CLAW_1); }
-    public void DoSecondClawAttack() { DoAttack(DRAGON_ATTACK.CLAW_2); }
-    public void DoFlameAttack() { DoAttack(DRAGON_ATTACK.FLAME); }
+    public void DoBasicAttack() 
+    {
+        DoAttack(DRAGON_ATTACK.BASIC);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.MON_SLASH_SFX);
+        Transform particle = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MON_BITE);
+        particle.transform.position = particlePositions[0].position;
+        particle.gameObject.SetActive(true);
+    }
+
+    public void DoFirstClawAttack() 
+    {
+        DoAttack(DRAGON_ATTACK.CLAW_1);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.MON_SLASH_SFX);
+        Transform particle = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MON_BITE);
+        particle.transform.position = particlePositions[1].position;
+        particle.gameObject.SetActive(true);
+    }
+
+    public void DoSecondClawAttack() 
+    {
+        DoAttack(DRAGON_ATTACK.CLAW_2);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.MON_SLASH_SFX);
+        Transform particle = SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.MON_BITE);
+        particle.transform.position = particlePositions[2].position;
+        particle.gameObject.SetActive(true);
+    }
+
+    public void DoFlameAttack()
+    {
+        DoAttack(DRAGON_ATTACK.FLAME);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.DRAGON_FIRE_SFX);
+    }
+
+    public void EscapeAttackState()
+    {
+        int attacksCnt = attacks.Length;
+        for(int i=0; i<attacksCnt; i++)
+        {
+            attacks[i].StopAttack();
+        }
+    }
 }

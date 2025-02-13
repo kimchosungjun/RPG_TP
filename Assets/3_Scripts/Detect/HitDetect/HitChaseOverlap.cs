@@ -26,6 +26,7 @@ public class HitChaseOverlap : HitBox
         isExplosion = false;
         particleAction.DoParticle();
         DoExplosion(6.3f);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.DRAGON_GUIDED_SFX);
     }
 
     public override void InActive()
@@ -45,6 +46,7 @@ public class HitChaseOverlap : HitBox
 
     public void DetectEnemyColliders()
     {
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.EXPLOSION_SFX);
         Collider[] colliders = Physics.OverlapSphere(transform.position, overlapRange, 1 << (int)enemyLayer);
         int collCnt = colliders.Length;
         if (collCnt == 0) return;

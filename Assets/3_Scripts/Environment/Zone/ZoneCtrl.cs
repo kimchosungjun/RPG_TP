@@ -6,6 +6,8 @@ using UtilEnums;
 
 public class ZoneCtrl : MonoBehaviour
 {
+    [SerializeField] BattleField[] battleFields;
+
     [SerializeField] ZONE_TPYES cuurentZone;
     [SerializeField] PathNodeControl pathNodeControl;
 
@@ -15,6 +17,18 @@ public class ZoneCtrl : MonoBehaviour
     }    
 
     public PathNode GetPathNode(PATH_TYPES _pathType) { return pathNodeControl.GetPathNode(_pathType); }
+
+    public void AnnouncePlayerState(bool _isDeath)
+    {
+        int battleFieldCnt = battleFields.Length;
+        for(int i=0; i<battleFieldCnt; i++)
+        {
+            if(_isDeath)
+                battleFields[i].AnnounceAllPlayerDeath();
+            else
+                battleFields[i].AnnounceAllPlayerRevival();
+        }
+    }
 }
 
 [Serializable]

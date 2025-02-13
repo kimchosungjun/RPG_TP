@@ -1027,9 +1027,9 @@ MonoBehaviour:
     monsterLevel: 20
     monsterDropID: 11
   statusUI: {fileID: 0}
-  attackControl: {fileID: 1187298642741050657}
   attackRange: 5
   coll: {fileID: 4673686179298581274}
+  attackControl: {fileID: 1187298642741050657}
   glidePostions:
   - {x: 10, y: 0, z: 0}
   - {x: 7.5, y: 0, z: 2.5}
@@ -1077,6 +1077,10 @@ MonoBehaviour:
   - {fileID: 687629194870071990}
   - {fileID: 6039851886553254351}
   - {fileID: 2652445244003842970}
+  particlePositions:
+  - {fileID: 3811755795475646301}
+  - {fileID: 6565020409078772054}
+  - {fileID: 858087072301811535}
 --- !u!195 &4622697291569473080
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1085,7 +1089,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2706487663212848142}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -1190,6 +1194,37 @@ Transform:
   m_Father: {fileID: 7431155645305437373}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -8.815822, y: -165.53352, z: 82.44666}
+--- !u!1 &3045522491681576813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3811755795475646301}
+  m_Layer: 0
+  m_Name: FirstNear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3811755795475646301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045522491681576813}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 3.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3270513453946543073}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3060065181351722155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2019313514889490021}
   - component: {fileID: 5572058502601010358}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirstNearAttack_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1440,7 @@ GameObject:
   - component: {fileID: 2716450658546092493}
   - component: {fileID: 2001064645437972906}
   - component: {fileID: 7266244477365097491}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: FirstNearAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1740,7 +1775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7887672086262979247}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DragonNearAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1762,6 +1797,7 @@ Transform:
   - {fileID: 2019313514889490021}
   - {fileID: 6734962915007808723}
   - {fileID: 8200285204222876077}
+  - {fileID: 3270513453946543073}
   m_Father: {fileID: 8070976511813767409}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1999,7 +2035,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6734962915007808723}
   - component: {fileID: 687629194870071990}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SecondNearAttack_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2141,7 +2177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8200285204222876077}
   - component: {fileID: 6039851886553254351}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: SecondNearAttack_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2188,7 +2224,7 @@ GameObject:
   - component: {fileID: 629550148117931914}
   - component: {fileID: 9158890892923130670}
   - component: {fileID: 7823070166593290600}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Claw_First
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2973,6 +3009,40 @@ Transform:
   m_Father: {fileID: 1507980591587792739}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -2.132406, y: 106.4073, z: -0.62772685}
+--- !u!1 &7753452725257675046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3270513453946543073}
+  m_Layer: 0
+  m_Name: AttackParticleTransforms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3270513453946543073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7753452725257675046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3811755795475646301}
+  - {fileID: 6565020409078772054}
+  - {fileID: 858087072301811535}
+  m_Father: {fileID: 7887672086262979247}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7866976006250205189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,7 +3118,7 @@ GameObject:
   - component: {fileID: 9173947945728318150}
   - component: {fileID: 2711539339198193730}
   - component: {fileID: 1344006853981674543}
-  m_Layer: 7
+  m_Layer: 13
   m_Name: Claw_Second
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3150,6 +3220,37 @@ Transform:
   m_Father: {fileID: 7335255673610759947}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -10.426692, y: 77.74339, z: 52.782715}
+--- !u!1 &8084801914445693636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858087072301811535}
+  m_Layer: 0
+  m_Name: Claw_Second
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858087072301811535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8084801914445693636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 3.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3270513453946543073}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8170237815358528567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3477,37 @@ Transform:
   m_Father: {fileID: 8473640801269055437}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 9.17649, y: 10.54371, z: 6.4256873}
+--- !u!1 &8925913987345041555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6565020409078772054}
+  m_Layer: 0
+  m_Name: Claw_First
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6565020409078772054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8925913987345041555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3270513453946543073}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9007635470930485578
 GameObject:
   m_ObjectHideFlags: 0
@@ -3515,6 +3647,10 @@ PrefabInstance:
     - target: {fileID: 1634767862067424, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
       propertyPath: m_Name
       value: FlameThrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634767862067424, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1634767862067424, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
       propertyPath: m_IsActive
@@ -3722,6 +3858,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2393369671393317127, guid: 7b71972bd20803e40878aa45336bc343,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 3792152484602595667, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3736,6 +3877,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792152484602595667, guid: 7b71972bd20803e40878aa45336bc343,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3792152484602595667, guid: 7b71972bd20803e40878aa45336bc343,
         type: 3}
@@ -3771,6 +3917,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterFunctions
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668999176913685889, guid: 7b71972bd20803e40878aa45336bc343,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

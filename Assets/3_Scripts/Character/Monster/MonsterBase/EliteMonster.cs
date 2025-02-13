@@ -47,17 +47,38 @@ public class EliteMonster : BaseMonster
 
     // Common 
     public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
-    
+
     protected override void CreateStates() { }
 
-    #region Go Off Aggro
+    public override void Death()
+    {
+        SetNoneInteractionType();
+        GetDropItem();
+        BossKillDrop();
+    }
+
+    public virtual void BossKillDrop() { }
+
+    #region  Escape Battle Field
+    public override void EscapeReturnToSpawnPosition() { }
+    public void EscapeCalmState() 
+    {
+        StopAllCoroutines();
+        isRecovery = false; 
+        isGoOffAggro = false; 
+    }
+
+    public bool CheckCalmState() { return (isRecovery==false && isGoOffAggro==false); }
+
+    
+    // Go Off Aggro
     public override void GoOffAggro()
     {
         if (isGoOffAggro) return;
         StartCoroutine(CGoOffAggro());
     }
 
-    IEnumerator CGoOffAggro()
+    protected virtual IEnumerator CGoOffAggro()
     {
         isGoOffAggro = true;
         nav.SetDestination(SpawnPosition);
@@ -70,7 +91,6 @@ public class EliteMonster : BaseMonster
         }
         nav.stoppingDistance = toPlayerStopDistance;
         isGoOffAggro = false;
-        //ChangeAnimation(STATES.IDLE);
     }
     #endregion
 }

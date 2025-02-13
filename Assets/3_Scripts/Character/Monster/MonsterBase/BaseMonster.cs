@@ -113,7 +113,7 @@ public abstract class BaseMonster : BaseActor
     { 
         CreateStates();
         MonsterTable table = SharedMgr.TableMgr.GetMonster;
-        MonsterTableClassGroup.MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
+        MonsterInfoTableData infoTableData = table.GetMonsterInfoTableData(initMonsterData.monsterType);
         MonsterTableClassGroup.MonsterStatTableData statTableData = table.GetMonsterStatTableData(initMonsterData.monsterType);
         monsterStat = new MonsterStat();
         monsterStat.SetMonsterStat(statTableData, initMonsterData.monsterLevel);
@@ -128,8 +128,11 @@ public abstract class BaseMonster : BaseActor
     /******************************************/
 
     #region Announce Area & Spawn 
+    protected bool allPlayerDeath = false;
     public virtual void AnnounceInMonsterArea() { IsInMonsterArea = true; } 
     public virtual void AnnounceOutMonsterArea() { IsInMonsterArea = false; ReturnToSpawnPosition(); }
+    public virtual void AnnounceAllPlayerDeath() { allPlayerDeath = true; }
+    public virtual void AnnounceAllPlayerRevival() { allPlayerDeath = false; }
     public virtual void Death() { StopAllCoroutines(); anim.SetInteger("MState", (int)STATES.DEATH); SetNoneInteractionType(); GetDropItem(); } 
     public virtual void AfterDeath()  { MonsterArea.DeathMonster(this.gameObject);} 
     #endregion
