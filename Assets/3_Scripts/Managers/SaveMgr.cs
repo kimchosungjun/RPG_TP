@@ -88,7 +88,7 @@ public partial class SaveMgr : MonoBehaviour
         userSaveData.InteractionSaveDataGroup = reader.LoadJsonFile<InteractionSaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.INTERACT);
         userSaveData.InventorySaveDataGroup = reader.LoadJsonFile<InventorySaveDataGroup>(GetDirectoryPath(), SAVE_JSON_PATHS.INVEN);
         yield return null;
-        
+        userSaveData.InventorySaveDataGroup.LinkWeaponUniqueIDSet();
         // Check Join Lobby 
         while (true)
         {

@@ -1,5 +1,6 @@
 using PlayerEnums;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -118,20 +119,39 @@ public class PlayerUpgradeUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
         ClearTexts();
     }
 
+    [SerializeField] GameObject notEnoughMoneyWindow;
+    Coroutine notEnoughMoneyCor = null;
     public void PressLevelUpButton()
     {
-        SharedMgr.InventoryMgr.RemoveGold(useGold);
-        SharedMgr.UIMgr.GameUICtrl.GetUpgradeIndicatorUI.TurnOn(actionSoData);
         if (SharedMgr.InventoryMgr.CanUseGold(useGold))
         {
             SharedMgr.InventoryMgr.RemoveGold(useGold);
             SharedMgr.UIMgr.GameUICtrl.GetUpgradeIndicatorUI.TurnOn(actionSoData);
+            SharedMgr.SoundMgr.PressButtonSFX();
+            SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetInventoryGoldUI.UpdateGold();
         }
         else
         {
-            Debug.Log("Don't have enough money!!!");
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.FAIL_SFX);
+            if (notEnoughMoneyCor != null)
+                StopCoroutine(notEnoughMoneyCor);
+            notEnoughMoneyCor = StartCoroutine(CShowDeleteWarnWindow());
         }
     }
 
-    public void UpdateData() { }
+    IEnumerator CShowDeleteWarnWindow()
+    {
+        notEnoughMoneyWindow.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        notEnoughMoneyWindow.SetActive(false);
+        notEnoughMoneyCor = null;
+    }
+
+    public void UpdateData()
+    {
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetInventoryGoldUI.UpdateGold();
+        notEnoughMoneyWindow.SetActive(false);
+        if (notEnoughMoneyCor != null)
+            notEnoughMoneyCor = null;
+    }
 }

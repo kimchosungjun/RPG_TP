@@ -2,7 +2,6 @@ using UnityEngine;
 using PlayerTableClassGroup;
 using ItemEnums;
 using PlayerEnums;
-using System.Linq;
 
 /// <summary>
 /// 파일로부터 불러와 사용하는 스탯 데이터 : 고정 데이터
@@ -81,20 +80,40 @@ public class PlayerStat : BaseStat
         soDatas = _actionDatas;
     }
 
-    public void UpdateCurrentStat()
+    public void LevelUp()
     {
         TableMgr tableMgr = SharedMgr.TableMgr;
         PlayerTableData tableData = new PlayerTableData();
         tableData = tableMgr.GetPlayer.GetPlayerTableData(currentStat.playerTypeID);
 
-        int level = currentStat.currentLevel - 1;
-        maxHp = tableData.defaultHP + tableData.increaseHP * level;
+        maxHp += tableData.increaseHP;
         if(currentStat.currentHP > 0)
             currentStat.currentHP = maxHp;
-        attackValue = tableData.defaultAttack + tableData.increaseAttack * level;
-        defenceValue = tableData.defaultDefence + tableData.increaseDefence * level;
-        criticalValue = tableData.defaultCritical + tableData.increaseCritical * level;
-        attackSpeed = tableData.defaultAttackSpeed + tableData.increaseAttackSpeed * level;
+        attackValue += tableData.increaseAttack;
+        defenceValue += tableData.increaseDefence;
+        criticalValue += tableData.increaseCritical;
+        attackSpeed += tableData.increaseAttackSpeed;
+    }
+    #endregion
+
+    #region Apply WeaponStat
+    WeaponIncreaseStat weaponStat = null;
+
+    public void ApplyWeaponStat(WeaponIncreaseStat _weaponStat)
+    {
+        weaponStat =   _weaponStat;
+        attackValue += weaponStat.GetAttackValue;
+        criticalValue += weaponStat.GetCirticalValue;
+    }
+
+    public void RemoveWeaponStat()
+    {
+        if (weaponStat == null)
+            return;
+
+        attackValue -= weaponStat.GetAttackValue;
+        criticalValue -= weaponStat.GetCirticalValue;
+        weaponStat = null;
     }
     #endregion
 }
@@ -117,13 +136,12 @@ public class PlayerSaveStat
     public void LevelUp()
     {
         currentLevel += 1;
-        SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(playerTypeID)?.UpdateCurrentStat();
+        SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(playerTypeID)?.LevelUp();
     }
 
     public PlayerSaveStat(int _id)
     {
         playerTypeID = _id;
-        Debug.Log(_id);
         currentHP = SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_id).defaultHP;     
         currentLevel = 1;   
         currentExp = 0;       

@@ -5,16 +5,6 @@ using ItemTableClassGroup;
 
 public partial class ItemTable : BaseTable
 {
-    #region Weapon Unique ID
-    int weaponUniqueID = 0;
-    public int GetWeaponUniqueID()
-    {
-        int resultID = weaponUniqueID;
-        weaponUniqueID += 1;
-        return resultID;
-    }
-    #endregion
-
     /*************************************************************
     ************* 플레이어 데이터 저장 Dictionary  **********
     *************************************************************/

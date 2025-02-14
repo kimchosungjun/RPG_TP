@@ -38,12 +38,14 @@ public class ConsumeUseUI : MonoBehaviour
 
     public void Use()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         consumeData.Use();
         InActive();
     }
 
     public void NotUse()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         InActive();
     }
 }

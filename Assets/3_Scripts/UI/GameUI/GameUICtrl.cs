@@ -76,6 +76,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] DialogueUI dialogueUI;
     [SerializeField] SettingUI settingUI;
     [SerializeField] GameExitUI gameExitUI;
+    [SerializeField] EtcUI etcUI;
 
     public IndicatorUI GetIndicatorUI { get { return indicatorUI; } }
     public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
@@ -90,6 +91,7 @@ public class GameUICtrl : MonoBehaviour
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     public SettingUI GetSettingUI { get { return settingUI; } } 
     public GameExitUI GameExitUI { get {  return gameExitUI; } }
+    public EtcUI GetEtcUI { get {   return etcUI; } }
 
     // 나중에 Awake로 변경
     private void Awake()

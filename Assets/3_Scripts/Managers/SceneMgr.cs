@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public partial class SceneMgr : MonoBehaviour
 {
-    bool isPhotonScene = false;
     SCENES nextLoadScene = SCENES.LOADING;
     SCENES currentScene = SCENES.TITLE;
     AsyncOperation asyncOperation = null;
@@ -19,12 +18,11 @@ public partial class SceneMgr : MonoBehaviour
         return false;
     }
 
-    public void LoadScene(SCENES _changeScene, bool _isLoading = false, bool _isPhotonScene = false)
+    public void LoadScene(SCENES _changeScene, bool _isLoading = false)
     {
         if (currentScene == _changeScene)
             return;
 
-        isPhotonScene = _isPhotonScene;
         currentScene = _changeScene;
 
         int _loadSceneIndex = Enums.GetIntValue(currentScene);

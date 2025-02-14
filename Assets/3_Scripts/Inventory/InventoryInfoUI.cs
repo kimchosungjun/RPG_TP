@@ -133,6 +133,7 @@ public class InventoryInfoUI : MonoBehaviour
     [SerializeField] Text weaponLevelText;
     [SerializeField] Text weaponAttackText;
     [SerializeField] Text[] weaponAdditionTexts;
+    [SerializeField] GameObject weaponTakeOnObject;
      
     public void ShowInfo(WeaponData _itemData)
     {
@@ -165,6 +166,11 @@ public class InventoryInfoUI : MonoBehaviour
         InfoObject[currentIndex].SetActive(true);
         if (topIndicateObject.activeSelf == false)
             topIndicateObject.SetActive(true);
+
+        if (_itemData.IsHoldWeapon)
+            weaponTakeOnObject.SetActive(true);
+        else
+            weaponTakeOnObject.SetActive(false);
     }
     #endregion
 

@@ -36,6 +36,7 @@ public class PlayerPartyStatusButton : MonoBehaviour
     public void PressButton()
     {
         if (characterID == -1) return;
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetPlayerPartyStatusUI.PressCharacter(characterID);
         SetEffectRect();
     }
@@ -43,6 +44,7 @@ public class PlayerPartyStatusButton : MonoBehaviour
     public void PressUnderCharacterButton()
     {
         if (characterID == -1) return;
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.InputUnderCharacterButton(characterID);
         SetEffectRect();
     }

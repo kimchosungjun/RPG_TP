@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class InventoryDeleteUI : MonoBehaviour
     [SerializeField] GameObject deleteParent;
     [SerializeField] Slider deleteSlider;
     [SerializeField, Tooltip("0:Cnt, 1:Select")] Text[] deleteCntTexts;
+    [SerializeField] GameObject deleteWarnWindow;
     
     string[] deleteStrings;
     ItemData data = null;
@@ -42,6 +44,11 @@ public class InventoryDeleteUI : MonoBehaviour
     public void Active()
     {
         data = SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.CurrentItemData;
+        SharedMgr.SoundMgr.PressButtonSFX();
+
+        deleteWarnWindow.SetActive(false);
+        if (deleteWarnCor != null)
+            deleteWarnCor = null;
 
         if (data == null)
         {
@@ -76,23 +83,40 @@ public class InventoryDeleteUI : MonoBehaviour
     public void PressPlusBtn()
     {
         if (data != null)
+        {
+            SharedMgr.SoundMgr.PressButtonSFX();
             deleteSlider.value +=1 ;
+        }
     }
 
     public void PressMinusBtn()
     {
-        if(data!=null)
+        if (data != null)
+        {
+            SharedMgr.SoundMgr.PressButtonSFX();
             deleteSlider.value -=1;
+        }
     }
 
+    Coroutine deleteWarnCor = null;
     public void PressDeleteBtn()
     {
         if (data == null)
             return;
 
+        SharedMgr.SoundMgr.PressButtonSFX();
+
+        if (data.CanRemove() == false)
+        {
+            if(deleteWarnCor!=null)
+                StopCoroutine(deleteWarnCor);   
+            deleteWarnCor = StartCoroutine(CShowDeleteWarnWindow());
+            return;
+        }
+
         data.Remove((int)deleteSlider.value);
-        InActive();
         SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
+        InActive();
     }
     #endregion
 
@@ -100,6 +124,20 @@ public class InventoryDeleteUI : MonoBehaviour
     {
         data = null;
         deleteParent.SetActive(false);
+        if (deleteWarnCor != null)
+        {
+            deleteWarnWindow.SetActive(false);
+            StopCoroutine(deleteWarnCor);
+            deleteWarnCor = null;
+        }
+    }
+    
+    IEnumerator CShowDeleteWarnWindow()
+    {
+        deleteWarnWindow.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        deleteWarnWindow.SetActive(false);
+        deleteWarnCor = null;
     }
 }
 

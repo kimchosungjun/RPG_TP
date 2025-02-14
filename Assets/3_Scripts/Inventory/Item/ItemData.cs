@@ -29,4 +29,6 @@ public class ItemData : Item
 
     public ItemData() { }
     public ItemData(ITEMTYPE _itemType, int _itemCnt) { type = _itemType; itemCnt = _itemCnt; }
+
+    public virtual bool CanRemove() { return true; }
 }

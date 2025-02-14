@@ -15,6 +15,7 @@ public class SideBarSlot : MonoBehaviour
 
     public void PressSideBar()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.ChangeShowItemType(slotType);
     }
 }

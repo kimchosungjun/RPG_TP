@@ -38,6 +38,7 @@ public class GameExitUI : MonoBehaviour, IInputKeyUI
     public void PressConfirmBtn()
     {
         SharedMgr.SoundMgr.PressButtonSFX();
+        gameExitWindow.SetActive(false);
         SaveAccountData();
     }
 
@@ -49,7 +50,13 @@ public class GameExitUI : MonoBehaviour, IInputKeyUI
 
     public void SaveAccountData()
     {
-        // To Do Save Data
-        // To Do Back To LobbyScene
+        SharedMgr.UIMgr.GameUICtrl.GetEtcUI.ShowSaveDataUI();
+        SharedMgr.SaveMgr.SavePlayerData(ReturnToLobbyScene);
+    }
+
+    public void ReturnToLobbyScene()
+    {
+        //SharedMgr.PhotonMgr.LeaveRoom(true);
+        SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.LOGIN, true);
     }
 }

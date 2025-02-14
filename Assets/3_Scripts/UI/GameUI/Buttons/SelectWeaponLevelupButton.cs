@@ -14,6 +14,7 @@ public class SelectWeaponLevelupButton : MonoBehaviour
 
     public void PressButton()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetWeaponManageUI.SelectLevelUpButton();
     }
 

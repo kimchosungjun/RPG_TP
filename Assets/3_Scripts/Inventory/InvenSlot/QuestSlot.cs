@@ -33,6 +33,7 @@ public class QuestSlot : MonoBehaviour
 
     public void PressSlot()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetQuestUI.PressQuestSlot(index);
     }
 }

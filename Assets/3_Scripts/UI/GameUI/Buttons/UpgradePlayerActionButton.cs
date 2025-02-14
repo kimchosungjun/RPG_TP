@@ -9,6 +9,7 @@ public class UpgradePlayerActionButton : MonoBehaviour
     
     public void PressButton()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetPlayerUpgradeUI.SetTexts(actionType);
     }
 }

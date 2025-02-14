@@ -110,6 +110,15 @@ namespace SaveDataGroup
         
         public InventorySaveDataGroup() { gold = 0; }
 
+        public void LinkWeaponUniqueIDSet()
+        {
+            int weaponSetCnt = weaponSet.Count;
+            for(int i=0; i<weaponSetCnt; i++)
+            {
+                UniqueIDMaker.AddID(weaponSet[i].uniqueID);
+            }
+        }
+
         public void LinkData()
         {
             InventoryMgr inven = SharedMgr.InventoryMgr;

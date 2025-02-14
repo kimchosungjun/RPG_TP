@@ -155,15 +155,17 @@ public class WeaponUpgradeView : MonoBehaviour
         if (_data == null)
         {
             Debug.LogError("Error Mat Data!!");
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.FAIL_SFX);
             return;
         }
 
         if (isMaxExp) 
         {
-            Debug.Log("현재 최대 경험치");
+            SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.FAIL_SFX);
             return;
         }
 
+        SharedMgr.SoundMgr.PressButtonSFX();
         if (matData == null)
         {
             matData = _data;
@@ -192,11 +194,13 @@ public class WeaponUpgradeView : MonoBehaviour
     public void PressUseMatSlotButton()
     {
         if (matCnt == 0 || matData==null) return;
+       
         matCnt -= 1;
         if(matCnt<=0)
             ClearUseMatSlot();
         else
         {
+            SharedMgr.SoundMgr.PressButtonSFX();
             texts[7].text = matCnt.ToString();
             PredictAddExp(matData.etcExp * matCnt);
         }
@@ -209,11 +213,13 @@ public class WeaponUpgradeView : MonoBehaviour
         matCnt = 0;
         matData = null;
         PredictAddExp(0);
+        SharedMgr.SoundMgr.PressButtonSFX();
     }
 
     public void DecideEnhanceWeapon()
     {
         if (matData == null) return;
+        SharedMgr.SoundMgr.PressButtonSFX();
         data.ApplyEnhance(matCnt * matData.etcExp);
         matData.Use(matCnt);
         ClearUseMatSlot();

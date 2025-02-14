@@ -14,6 +14,7 @@ public class ReplaceWeaponButton : MonoBehaviour
 
     public void PressButton()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetWeaponManageUI.ChangeHoldWeapon();
     }
 

@@ -87,7 +87,7 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
     {
         isAuto = !isAuto;
         autoButton.OnOffEffect(isAuto);
-
+        SharedMgr.SoundMgr.PressButtonSFX();
         if (isWaitingInput && isAuto)
             ShowDialogue();
     }

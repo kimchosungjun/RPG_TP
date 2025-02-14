@@ -153,5 +153,4 @@ public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
             goldUI.gameObject.SetActive(false);
         }
     }
-
 }

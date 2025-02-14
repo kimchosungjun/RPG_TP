@@ -56,6 +56,7 @@ public class UpgradeIndicatorUI : MonoBehaviour
 
     public void TurnOff()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         upgradeIndicatorParent.SetActive(false);
     }
 }

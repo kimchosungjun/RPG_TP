@@ -45,6 +45,7 @@ public class WeaponManageSlot : MonoBehaviour
 
     public void PressButton()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetWeaponManageUI.GetManageView.PressWeaponSlot(data);
      }
 }

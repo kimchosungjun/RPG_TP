@@ -369,6 +369,19 @@ public class InventoryMgr
                 break;
             }
         }
+
+        if (weaponSortGroup.ContainsKey(_weaponData.WeaponType) == false)
+            return;
+        List<WeaponData> list = weaponSortGroup[_weaponData.WeaponType];
+        int listCnt= list.Count;    
+        for(int i=0; i<listCnt; i++)
+        {
+            if (list[i] == _weaponData)
+            {
+                weaponSortGroup[_weaponData.WeaponType].RemoveAt(i);    
+                return;
+            }
+        }
     }
 
     #endregion
@@ -401,7 +414,6 @@ public class InventoryMgr
         _newWeapon.holdPlayerID = _characterID;
         _newWeapon.Use(_characterID);
         holdWeaponGroup.Add(_newWeapon.uniqueID, _newWeapon);
-        // To Do 랠리포인트 
     }
 
     public List<WeaponData> GetSortWeaponGroup(WEAPONTYPE _weaponType)
@@ -422,15 +434,6 @@ public class InventoryMgr
 
     #endregion
 
-
-
-
-
-
-
-
-
-
     #region To Do
 
     public void Init()
@@ -446,5 +449,4 @@ public class InventoryMgr
         // * Call LoginScene 
     }
     #endregion
-
 }

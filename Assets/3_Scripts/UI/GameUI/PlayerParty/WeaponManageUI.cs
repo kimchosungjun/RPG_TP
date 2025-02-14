@@ -74,7 +74,6 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
         weapons = SharedMgr.InventoryMgr.GetSortWeaponGroup(type);
         manageView.SetDataToWeaponList(weapons);
         manageView.ClearWeaponInfos();
-        // To Do Reset Weapon Info
     }
 
     public void ChangeHoldWeapon()
@@ -86,7 +85,6 @@ public class WeaponManageUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
         stat.HoldWeaponUniqueID = currentSelectWeaponData.uniqueID;
         SharedMgr.InventoryMgr.ChangeHoldWeapon(holdWeapon, currentSelectWeaponData, currentSelectCharacterID);
         manageView.PressWeaponSlot(currentSelectWeaponData);
-        // To Do Update Info UI
     }
 
     public void SelectLevelUpButton()

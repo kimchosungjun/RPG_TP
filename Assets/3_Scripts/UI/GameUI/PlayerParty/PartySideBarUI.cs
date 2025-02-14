@@ -26,16 +26,19 @@ public class PartySideBarUI : MonoBehaviour
     #region Press Button
     public void PressPlayerStatus()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.ChangeUI(UIEnums.PARTY.STATUS);
     }
 
     public void PressWeapon()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.ChangeUI(UIEnums.PARTY.WEAPON);
     }
 
     public void PressUpgrade()
     {
+        SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.ChangeUI(UIEnums.PARTY.SKILL_UPGRADE);
     }
     #endregion

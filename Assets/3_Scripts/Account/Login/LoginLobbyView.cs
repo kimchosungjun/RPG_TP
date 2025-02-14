@@ -93,7 +93,7 @@ public class LoginLobbyView : MonoBehaviour
         if (SharedMgr.PhotonMgr.IsFullRoom(ref isExist) == false)
         {
             SharedMgr.PhotonMgr.JoinLobbyRoom(isExist);
-            SharedMgr.SceneMgr.LoadScene(SCENES.GAME, true, true);
+            SharedMgr.SceneMgr.LoadScene(SCENES.GAME, true);
         }
         else
         {
