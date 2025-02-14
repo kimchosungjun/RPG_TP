@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3ae2131f5b57f4685c809726d9b702, type: 3}
   m_Name: Archer_Skill_SO
   m_EditorClassIdentifier: 
-  actionName: 
-  actionDescription: 
-  actionMultipliers: []
-  actionParticleID: 0
-  attackEffectType: 
-  coolTime: 0
-  effectMaintainTime: 0
+  playerTypeID: 1
+  actionName: "\uB09C\uC0AC\uD558\uAE30"
+  actionDescription: "\uC804\uBC29\uC744 \uD5A5\uD574 \uD654\uC0B4 5\uBC29\uC744
+    \uC77C\uC9C1\uC120\uC73C\uB85C \uC3E9\uB2C8\uB2E4.\n\uAC01 45%\uC758 \uB370\uBBF8\uC9C0\uB97C
+    \uC785\uD799\uB2C8\uB2E4."
+  actionParticleID: 1
+  currentLevel: 2
+  maxLevel: 3
+  isUltimateSkill: 0
+  coolTime: 10
+  maintainEffectTime: 0
+  actionMultiplier: 0.45
+  attackEffectType: 1

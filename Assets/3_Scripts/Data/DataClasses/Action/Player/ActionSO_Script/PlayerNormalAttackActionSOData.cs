@@ -50,6 +50,7 @@ public class PlayerNormalAttackActionSOData : PlayerBaseActionSOData
     public override void LevelUp()
     {
         currentLevel += 1;
+        SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat((int)playerTypeID).GetSaveStat.currentNormalAttackLevel = currentLevel;
         SetSOData(SharedMgr.TableMgr.GetPlayer.GetPlayerNormalAttackData(normalType, currentLevel), normalType);
     }
 

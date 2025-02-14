@@ -1,7 +1,7 @@
 using ItemEnums;
 using ItemTableClassGroup;
 using System;
-using System.Diagnostics;
+using UnityEngine;
 
 [Serializable]
 public class WeaponData : ItemData
@@ -18,12 +18,13 @@ public class WeaponData : ItemData
     // Stat
     public int attackValue;
     public float effectValue;
+    [SerializeField] bool isHoldWeapon = false; 
     public float GetEffectValue() { return effectValue * 100; }
-    
+  
     // Enum 값으로 변환 후 저장할 속성
     public WEAPONTYPE WeaponType { get; private set; }
     public WEAPONEFFECT WeaponEffect { get; private set; }
-    public bool IsHoldWeapon { get; private set; } = false; // Check For Sell
+    public bool IsHoldWeapon { get {return isHoldWeapon; } private set { isHoldWeapon = value; } } // Check For Sell
 
     public override bool CanRemove()
     {
@@ -76,8 +77,8 @@ public class WeaponData : ItemData
         itemType = (int)ITEMTYPE.ITEM_WEAPON;
         itemCnt = 1;
         
-        attackValue = _tableData.attackValue;
-        effectValue = _tableData.additionEffectValue;
+        attackValue = _tableData.attackValue + _tableData.increaseAttackValue;
+        effectValue = _tableData.additionEffectValue + _tableData.increaseAdditionEffectValue;
         atlasName = _tableData.atlasName;
         fileName = _tableData.fileName;
         uniqueID = UniqueIDMaker.GetUniqueID();
@@ -86,6 +87,20 @@ public class WeaponData : ItemData
         WeaponType = (WEAPONTYPE)_tableData.weaponType;
         WeaponEffect = (WEAPONEFFECT)_tableData.additionalEffect;
         weaponMaxExp = SharedMgr.TableMgr.GetItem.GetWeaponUpgradeTableData().GetNeedExp(weaponCurrentLevel);
+    }
+
+    public void LoadData(WeaponTableData _tableData)
+    {
+        int levelDiff = weaponCurrentLevel - 1;
+        itemType = (int)ITEMTYPE.ITEM_WEAPON;
+        attackValue = _tableData.attackValue + _tableData.increaseAttackValue * levelDiff;
+        effectValue = _tableData.additionEffectValue + _tableData.increaseAdditionEffectValue * levelDiff;
+        atlasName = _tableData.atlasName;
+        fileName = _tableData.fileName;
+        UniqueIDMaker.AddID(uniqueID);
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+        WeaponType = (WEAPONTYPE)_tableData.weaponType;
+        WeaponEffect = (WEAPONEFFECT)_tableData.additionalEffect;
     }
 
     public void ApplyEnhance(int _exp)

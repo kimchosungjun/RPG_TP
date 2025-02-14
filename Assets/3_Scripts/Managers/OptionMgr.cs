@@ -8,17 +8,17 @@ public partial class SaveMgr : MonoBehaviour
     public OptionData Option = new OptionData();
     public struct OptionData
     {
-        public int masterVolume;
-        public int bgmVolume;
-        public int sfxVolume;
+        public float masterVolume;
+        public float bgmVolume;
+        public float sfxVolume;
         public int graphicQuality;
 
-        public void SetData(int[] _datas)
+        public void SetData(float[] _volumes, int _quality)
         {
-            masterVolume = _datas[0];
-            bgmVolume = _datas[1];
-            sfxVolume = _datas[2];
-            graphicQuality = _datas[3];
+            masterVolume = _volumes[0];
+            bgmVolume = _volumes[1];
+            sfxVolume = _volumes[2];
+            graphicQuality = _quality;
         }
     }
     #endregion
@@ -29,14 +29,19 @@ public partial class SaveMgr : MonoBehaviour
         if (File.Exists(path))
         {
             StreamReader streamReader = File.OpenText(path);
-            int[] optionValues = new int[4];
+            float[] optionValues = new float[3];
             int curIndex = 0;
             string line;
+            int qualityValue = 0;
             while ((line = streamReader.ReadLine()) != null)
             {
-                optionValues[curIndex++] = int.Parse(line);
+                if(curIndex<=2)
+                    optionValues[curIndex] = float.Parse(line);
+                else if (curIndex == 3)
+                    qualityValue = int.Parse(line);
+                curIndex += 1;
             }
-            Option.SetData(optionValues);
+            Option.SetData(optionValues, qualityValue);
             streamReader.Close();
         }
         else

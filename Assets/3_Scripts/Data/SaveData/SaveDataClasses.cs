@@ -108,7 +108,7 @@ namespace SaveDataGroup
         public List<ConsumeData> ConsumeSet { get { return consumeSet; } set {  consumeSet = value; } } 
         public List<WeaponData> WeaponSet { get {   return weaponSet; } set { weaponSet = value; } }    
         
-        public InventorySaveDataGroup() { gold = 0; }
+        public InventorySaveDataGroup() { }
 
         public void LinkWeaponUniqueIDSet()
         {
@@ -119,16 +119,10 @@ namespace SaveDataGroup
             }
         }
 
-        public void LinkData()
-        {
-            InventoryMgr inven = SharedMgr.InventoryMgr;
-            gold = inven.GetGold;
-            consumeSet = SharedMgr.InventoryMgr.GetConsumeInventory();
-        }
-
         public void UpdateData()
         {
             InventoryMgr inven = SharedMgr.InventoryMgr;
+            gold = inven.Gold;
             etcSet = inven.GetEtcInventory();
             consumeSet = inven.GetConsumeInventory();
             weaponSet = inven.GetWeaponInventory();

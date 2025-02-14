@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3ae2131f5b57f4685c809726d9b702, type: 3}
   m_Name: Warrior_Ultimate_SO
   m_EditorClassIdentifier: 
-  actionName: 
-  actionDescription: 
-  actionMultipliers: []
+  playerTypeID: 0
+  actionName: "\uC7A5\uD48D"
+  actionDescription: "\uC804\uBC29\uC744 \uD5A5\uD574 \uAC15\uB825\uD55C \uC5D0\uB108\uC9C0\uD0C4\uC744
+    \uB0A0\uB9BD\uB2C8\uB2E4.\n\uACF5\uACA9\uB825\uC758 330% \uB370\uBBF8\uC9C0\uB97C
+    \uC785\uD799\uB2C8\uB2E4."
   actionParticleID: 0
-  attackEffectType: 
-  coolTime: 0
-  effectMaintainTime: 0
+  currentLevel: 2
+  maxLevel: 3
+  isUltimateSkill: 1
+  coolTime: 20
+  maintainEffectTime: 1.25
+  actionMultiplier: 3.3
+  attackEffectType: 2

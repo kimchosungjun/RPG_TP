@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerBaseActionSOData : ScriptableObject
 {
     #region Protected
+    [SerializeField] protected PlayerEnums.TYPEIDS playerTypeID;
     [SerializeField] protected string actionName;
     [SerializeField] protected string actionDescription;
     [SerializeField] protected int actionParticleID;

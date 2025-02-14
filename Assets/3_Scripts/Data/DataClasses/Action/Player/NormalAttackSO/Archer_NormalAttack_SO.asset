@@ -12,19 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 244ff26c111172640adfd2458157256a, type: 3}
   m_Name: Archer_NormalAttack_SO
   m_EditorClassIdentifier: 
-  actionName: "\uAE30\uBCF8\uACF5\uACA9"
-  actionDescription: "\uC801\uC5D0\uAC8C \uB454\uAE30\uB97C \uD718\uB450\uB985\uB2C8\uB2E4.\n1\uB2E8:
-    100%\uC758 \uACF5\uACA9\uB825\uC73C\uB85C  \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C
-    \uC785\uD799\uB2C8\uB2E4.\n2\uB2E8: 120%\uC758 \uACF5\uACA9\uB825\uC73C\uB85C 
-    \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4.\n3\uB2E8: 130%\uC758
-    \uACF5\uACA9\uB825\uC73C\uB85C  \uC801\uC5D0\uAC8C \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
-  actionParticleID: 0
+  playerTypeID: 1
+  actionName: "\uAD81\uC220"
+  actionDescription: "\uC801\uC5D0\uAC8C \uD65C\uC744 \uC3E9\uB2C8\uB2E4.\n1\uB2E8
+    : 120%\uC758 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4.\n2\uB2E8 : 130%\uC758
+    \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
+  actionParticleID: 1
+  currentLevel: 2
+  maxLevel: 3
   effectMaintatinTimes:
   - 0
   - 0
-  - 0
-  attackEffectType: 000000000000000000000000
+  attackEffectType: 0000000001000000
   actionMultipliers:
-  - 5
-  - 6
-  - 7
+  - 1.2
+  - 1.3

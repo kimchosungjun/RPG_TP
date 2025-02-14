@@ -40309,8 +40309,8 @@ Transform:
   m_Children:
   - {fileID: 543450653140993552}
   - {fileID: 1243695281089320204}
-  - {fileID: 6740149075607734132}
   - {fileID: 1694295081}
+  - {fileID: 6740149075607734132}
   m_Father: {fileID: 998263127}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56685,6 +56685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   etcId: 2
   cnt: 10
+  showClasses: []
 --- !u!1 &1433567991
 GameObject:
   m_ObjectHideFlags: 0
@@ -68547,6 +68548,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 939930231}
     m_Modifications:
+    - target: {fileID: 3200096821353607553, guid: 4f46098734d87e24490aef9267915ad2,
+        type: 3}
+      propertyPath: npcID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4957605393579145644, guid: 4f46098734d87e24490aef9267915ad2,
         type: 3}
       propertyPath: m_Name

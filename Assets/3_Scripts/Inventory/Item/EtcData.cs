@@ -37,4 +37,12 @@ public class EtcData : ItemData
         atlasName = _tableData.atlasName;   
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
     }
+
+    public void LoadData(EtcTableData _tableData)
+    {
+        itemType = (int)ITEMTYPE.ITEM_ETC;
+        fileName = _tableData.fileName;
+        atlasName = _tableData.atlasName;
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+    }
 }

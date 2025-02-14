@@ -1,12 +1,34 @@
+using ItemEnums;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public class TestShowClass
+{
+    public List<WeaponData> weapons = new List<WeaponData>();
+    public WEAPONTYPE weaponType;
+}
 
 public class TestGetItem : MonoBehaviour
 {
     [SerializeField] int etcId;
     [SerializeField] int cnt;
+    [SerializeField] TestShowClass[] showClasses;
     //[SerializeField] int weaponID;
+
+    private void Awake()
+    {
+        List<WEAPONTYPE> keys = new List<WEAPONTYPE>(SharedMgr.InventoryMgr.GetTestData.Keys);
+        showClasses = new TestShowClass[keys.Count];
+        for (int i=0; i<keys.Count; i++)
+        {
+            showClasses[i] = new TestShowClass();
+            showClasses[i].weaponType = keys[i];
+            showClasses[i].weapons= SharedMgr.InventoryMgr.GetTestData[keys[i]];
+        }
+    }
 
 
     private void OnGUI()

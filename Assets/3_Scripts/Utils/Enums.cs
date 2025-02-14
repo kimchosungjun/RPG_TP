@@ -254,6 +254,7 @@ namespace QuestEnums
     public enum NPCID
     {
         ARCHER=0,
-        MAGE=1
+        MAGE=1,
+        TOWNCHIEF=2,
     }
 }

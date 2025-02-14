@@ -151,7 +151,7 @@ public class PoolMgr : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            if (showGetItemSlots[i].gameObject.activeSelf == false)
+            if (showGetItemSlots[i].gameObject.activeSelf == false) 
             {
                 showGetItemSlots[i].transform.SetAsLastSibling();
                 return showGetItemSlots[i];

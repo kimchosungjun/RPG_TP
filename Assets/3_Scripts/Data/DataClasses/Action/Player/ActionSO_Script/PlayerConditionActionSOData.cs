@@ -102,6 +102,11 @@ public class PlayerConditionActionSOData : PlayerActionSkillSOData
     public override void LevelUp()
     {
         currentLevel += 1;
+        if (SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat((int)playerTypeID) == null) return;
+        if (isUltimateSkill)
+            SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat((int)playerTypeID).GetSaveStat.currentUltimateSkillLevel = currentLevel;
+        else
+            SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat((int)playerTypeID).GetSaveStat.currentSkillLevel = currentLevel;
         SetSOData(SharedMgr.TableMgr.GetPlayer.GetPlayerBuffSkillTableData(skillType, currentLevel), skillType);
     }
 

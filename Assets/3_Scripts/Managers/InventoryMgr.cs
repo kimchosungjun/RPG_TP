@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using ItemEnums;
 using System.Collections.Generic;
+using SaveDataGroup;
 public class InventoryMgr  
 {
     /**********************************************/
@@ -22,10 +23,11 @@ public class InventoryMgr
 
     Dictionary<int,WeaponData> holdWeaponGroup = new Dictionary<int, WeaponData>();
     Dictionary<WEAPONTYPE, List<WeaponData>> weaponSortGroup = new Dictionary<WEAPONTYPE, List<WeaponData>>();
+    public Dictionary<WEAPONTYPE, List<WeaponData>> GetTestData { get { return weaponSortGroup; } }
     #endregion
 
     #region Hold Item : Property
-    public int GetGold { get { return gold; } }
+    public int Gold { get { return gold; } set { gold = value; } }
     public List<EtcData> GetEtcInventory()  { return etcDatas; }
     public List<ConsumeData> GetConsumeInventory() { return consumeDatas; }
     public List<WeaponData> GetWeaponInventory() { return weaponDatas; }
@@ -434,19 +436,93 @@ public class InventoryMgr
 
     #endregion
 
-    #region To Do
+    #region Manage Data
 
     public void Init()
     {
         SharedMgr.InventoryMgr = this;
     }
 
-    public void LoadInventory()
+    public void ClearAllData()
     {
-        // Load Inventory 
-        // 1) Check Login
-        // 2) Load
-        // * Call LoginScene 
+        if (etcGroup.Count > 0)
+            etcGroup.Clear();
+        if (consumeGroup.Count > 0)
+            consumeGroup.Clear();
+        if (etcDatas.Count > 0)
+            etcDatas.Clear();
+        if (consumeDatas.Count > 0)
+            consumeDatas.Clear();
+        if (weaponDatas.Count > 0)
+            weaponSortGroup.Clear();
+        if (holdWeaponGroup.Count > 0)
+            holdWeaponGroup.Clear();
+        if (weaponSortGroup.Count > 0)
+            weaponSortGroup.Clear();
+    }
+
+    public void LoadInventory(InventorySaveDataGroup _saveDatas)
+    {
+        ClearAllData();
+        etcDatas = _saveDatas.EtcSet;
+        consumeDatas = _saveDatas.ConsumeSet;
+        weaponDatas = _saveDatas.WeaponSet;
+        gold = _saveDatas.Gold;
+
+        ItemTable table = SharedMgr.TableMgr.GetItem;
+        // Etc
+        int etcCnt = etcDatas.Count;
+        for(int i=0; i<etcCnt; i++)
+        {
+            etcDatas[i].LoadData(table.GetEtcTableData(etcDatas[i].itemID));
+            if (etcGroup.ContainsKey(etcDatas[i].itemID))
+                etcGroup[etcDatas[i].itemID].Add(etcDatas[i]);
+            else
+            {
+                List<EtcData> overlapDatas = new List<EtcData> ();
+                overlapDatas.Add(etcDatas[i]);
+                etcGroup.Add(etcDatas[i].itemID, overlapDatas);
+            }
+        }
+
+        // Consume
+        int consumeCnt = consumeDatas.Count;
+        for (int i = 0; i < consumeCnt; i++)
+        {
+            consumeDatas[i].LoadData(table.GetConsumeTableData(consumeDatas[i].itemID));
+            if (consumeGroup.ContainsKey(consumeDatas[i].itemID))
+                consumeGroup[consumeDatas[i].itemID].Add(consumeDatas[i]);
+            else
+            {
+                List<ConsumeData> overlapDatas = new List<ConsumeData>();
+                overlapDatas.Add(consumeDatas[i]);
+                consumeGroup.Add(consumeDatas[i].itemID, overlapDatas);
+            }
+        }
+
+        // Weapon
+        int weaponCnt = weaponDatas.Count;
+        for (int i = 0; i < weaponCnt; i++)
+        {
+            weaponDatas[i].LoadData(table.GetWeaponTableData(weaponDatas[i].itemID));
+            // Hold Weapon
+            if (weaponDatas[i].IsHoldWeapon)
+                holdWeaponGroup.Add(weaponDatas[i].uniqueID, weaponDatas[i]);
+            // Weapon Sort
+            WEAPONTYPE type = weaponDatas[i].WeaponType;
+            if (weaponSortGroup.ContainsKey(type))
+            {
+                weaponSortGroup[type].Add(_saveDatas.WeaponSet[i]);
+            }
+            else
+            {
+                List<WeaponData> datas = new List<WeaponData>();
+                datas.Add(weaponDatas[i]);
+                weaponSortGroup.Add(type, datas);
+            }
+        }
+
+        gold = _saveDatas.Gold;
     }
     #endregion
 }

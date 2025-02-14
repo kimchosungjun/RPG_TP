@@ -74,12 +74,17 @@ public class SoundControlUI : MonoBehaviour, ITurnOnOffUI
         soundSliders[1].value = SharedMgr.SoundMgr.GetSoundVolume(SOUNDS.BGM);
         soundSliders[2].value = SharedMgr.SoundMgr.GetSoundVolume(SOUNDS.SFX);
 
+        ChangeIndicatePercent(SOUNDS.MASTER);
+        ChangeIndicatePercent(SOUNDS.BGM);
+        ChangeIndicatePercent(SOUNDS.SFX);
+
+
         soundSliders[0].onValueChanged.RemoveAllListeners();
         soundSliders[0].onValueChanged.AddListener(ChangeMasterValue);
         soundSliders[1].onValueChanged.RemoveAllListeners();
         soundSliders[1].onValueChanged.AddListener(ChangeBGMValue);
         soundSliders[2].onValueChanged.RemoveAllListeners();
-        soundSliders[2].onValueChanged.AddListener(ChangeMasterValue);
+        soundSliders[2].onValueChanged.AddListener(ChangeSFXValue);
     }
     #endregion
 

@@ -14,11 +14,11 @@ public class InventoryGoldUI : MonoBehaviour
     {
         goldImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Bar_Atlas", "Gold_Bar");
         goldImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas_2", "Gold_Icon");
-        goldText.text = SharedMgr.InventoryMgr.GetGold.ToString();
+        goldText.text = SharedMgr.InventoryMgr.Gold.ToString();
     }
 
     public void UpdateGold()
     {
-        goldText.text = SharedMgr.InventoryMgr.GetGold.ToString();
+        goldText.text = SharedMgr.InventoryMgr.Gold.ToString();
     }
 }

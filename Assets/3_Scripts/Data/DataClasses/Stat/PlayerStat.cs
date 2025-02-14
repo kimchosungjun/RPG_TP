@@ -24,7 +24,7 @@ public class PlayerStat : BaseStat
     #endregion
 
     #region Public
-    public int HoldWeaponUniqueID = -1;
+    public int HoldWeaponUniqueID { get { return currentStat.holdWeaponUniqueID; }  set { currentStat.holdWeaponUniqueID = value; } }
     public int Attack { get { return attackValue; } set { attackValue = value; } }
     public float Critical { get { return criticalValue; } set { criticalValue = value; } }
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
@@ -72,6 +72,9 @@ public class PlayerStat : BaseStat
         holdWeaponType = tableData.GetWeaponType();
         battleType = tableData.GetBattleType();
         SharedMgr.GameCtrlMgr.GetPlayerStatCtrl?.AddPlayerStat(this);
+
+        if(currentStat.holdWeaponUniqueID >= 0)
+            SharedMgr.InventoryMgr.GetHoldWeaponData(currentStat.holdWeaponUniqueID)?.Use(_currentStat.playerTypeID);
     }
 
     public void SetActionSoDatas(PlayerBaseActionSOData[] _actionDatas)
@@ -132,7 +135,7 @@ public class PlayerSaveStat
     [SerializeField] public int currentNormalAttackLevel;
     [SerializeField] public int currentSkillLevel;
     [SerializeField] public int currentUltimateSkillLevel;
-    
+    [SerializeField] public int holdWeaponUniqueID = -1;
     public void LevelUp()
     {
         currentLevel += 1;

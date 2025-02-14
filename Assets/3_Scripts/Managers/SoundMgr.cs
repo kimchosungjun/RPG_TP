@@ -146,14 +146,17 @@ public partial class SoundMgr : MonoBehaviour
         {
             case SOUNDS.MASTER:
                 masterVolume = _value;
+                SharedMgr.SaveMgr.Option.masterVolume = _value;
                 audioMixer.SetFloat("Master", setValue);
                 break;
             case SOUNDS.BGM:
                 bgmVolume = _value;
+                SharedMgr.SaveMgr.Option.bgmVolume = _value;
                 audioMixer.SetFloat("BGM", setValue);
                 break;
             case SOUNDS.SFX:
-                sfxVolume = _value; 
+                sfxVolume = _value;
+                SharedMgr.SaveMgr.Option.sfxVolume = _value;
                 audioMixer.SetFloat("SFX", setValue);
                 break;
         }

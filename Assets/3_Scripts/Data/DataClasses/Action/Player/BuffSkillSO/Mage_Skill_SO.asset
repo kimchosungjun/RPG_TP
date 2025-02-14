@@ -12,13 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7c4273d462822248a8d1c36eaeb3948, type: 3}
   m_Name: Mage_Skill_SO
   m_EditorClassIdentifier: 
-  actionName: 
-  actionDescription: 
+  playerTypeID: 2
+  actionName: "\uD65C\uB825\uC99D\uAC00"
+  actionDescription: "\uC544\uAD70\uC758 \uCCB4\uB825\uC744 \uACF5\uACA9\uB825\uC758
+    20%\uB9CC\uD07C \uD68C\uBCF5\uC2DC\uCF1C\uC90D\uB2C8\uB2E4.\n\uCD94\uAC00\uC801\uC73C\uB85C
+    \uD30C\uD2F0\uC758 \uACF5\uACA9\uB825\uC744 10%\uB9CC\uD07C 10\uCD08\uAC04 \uC99D\uAC00\uC2DC\uCF1C\uC90D\uB2C8\uB2E4. "
   actionParticleID: 0
-  coolTime: 0
-  maintainEffectTime: 0
-  actionMultipliers: []
-  attributeStatTypes: 
-  effectStatTypes: 
-  continuityTypes: 
-  defaultValues: []
+  currentLevel: 1
+  maxLevel: 3
+  isUltimateSkill: 0
+  coolTime: 15
+  maintainEffectTime: 10
+  actionMultipliers:
+  - 0.2
+  - 0
+  attributeStatTypes: 0200000000000000
+  effectStatTypes: 0000000002000000
+  continuityTypes: 0000000001000000
+  defaultValues:
+  - 10
+  - 0.1
+  applyType: 0000000001000000
+  partyType: 0100000001000000

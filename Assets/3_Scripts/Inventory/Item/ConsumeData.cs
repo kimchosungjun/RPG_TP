@@ -56,4 +56,12 @@ public class ConsumeData : ItemData
         fileName = _tableData.fileName;
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
     }
+
+    public void LoadData(ConsumeTableData _tableData)
+    {
+        itemType = (int)ITEMTYPE.ITEM_COMSUME; 
+        atlasName = _tableData.atlasName;
+        fileName = _tableData.fileName;
+        itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+    }
 }
