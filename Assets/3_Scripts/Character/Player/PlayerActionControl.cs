@@ -14,4 +14,45 @@ public abstract class PlayerActionControl : MonoBehaviour
     public abstract void SetPlayerData(PlayerStatControl _statCtrl, PlayerMovementControl _movementControl);
 
     public abstract void EscapeAttackState();
+
+    #region Cool Down
+    protected float normalAttackTime = 0;
+    protected float SkillTime = 0;
+    protected float UltimateTime = 0;
+    public void NormalAttackCoolDown()
+    {
+        normalAttackTime = Time.time;
+        movementControl.CanNormalAttack = false;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.GetJoystickUI.InputNormalAttack();
+        Invoke("CoolDownNormal", 0.1f);
+    }
+
+    public void CoolDownNormal() 
+    {
+        movementControl.CanNormalAttack = true;
+    }
+    public void SkillCoolDown(float _time)
+    {
+        SkillTime = Time.time;
+        movementControl.CanSkill = false;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.GetJoystickUI.InputSkill(_time);
+        Invoke("CoolDownSkill", _time);
+    }
+    public void CoolDownSkill()
+    {
+        movementControl.CanSkill = true;
+    }
+
+    public void UltimateCoolDown(float _time)
+    {
+        UltimateTime = Time.time;   
+        movementControl.CanUltimate = false;
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.GetJoystickUI.InputUltimate(_time);
+        Invoke("CoolDownUltimate", _time);
+    }
+    public void CoolDownUltimate()
+    {
+        movementControl.CanUltimate = true;
+    }
+    #endregion
 }

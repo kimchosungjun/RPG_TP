@@ -33,6 +33,7 @@ public class HitOverlapSphere : HitBox
 
     public void DetectEnemyColliders()
     {
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.EXPLOSION_SFX);
         Collider[] colliders = Physics.OverlapSphere(transform.position, overlapRange, 1 << (int)enemyLayer);
         int collCnt = colliders.Length;
         if (collCnt == 0) return;

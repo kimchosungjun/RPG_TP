@@ -25,6 +25,12 @@ public class UIIconButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     protected void SettingImages()
     {
         Image img = btn.GetComponent<Image>();
+        if(inputKeyType== GameUICtrl.InputKeyUITypes.Save)
+        {
+            img.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Item_Icon", "Save_Icon");
+            return;
+        }
+
         if (isExitButton)
         {
             img.sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas_4", iconName);
@@ -62,5 +68,11 @@ public class UIIconButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void PressIcon()
     {
         SharedMgr.UIMgr.GameUICtrl.InputUIIcon(inputKeyType);
+    }
+
+    public void PressSave()
+    {
+        SharedMgr.UIMgr.GameUICtrl.GetEtcUI.ShowSaveDataUI();
+        SharedMgr.SaveMgr.SavePlayerData(SharedMgr.UIMgr.GameUICtrl.GetEtcUI.CloseShowSaveDataUI);
     }
 }

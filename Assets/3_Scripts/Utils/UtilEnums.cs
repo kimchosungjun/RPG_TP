@@ -209,6 +209,7 @@ namespace UIEnums
         DIALOGUE,
         SETTING,
         EXIT,
+        SHOP,
         NONE
     }
 }

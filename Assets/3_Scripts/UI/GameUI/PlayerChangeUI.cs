@@ -25,16 +25,16 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
     public void SetButtonData(int _currentPlayerIndex)
     {
         List<BasePlayer> players = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers;
-        int playerCnt = players.Count -1;
+        int playerCnt = players.Count - 1;
         int buttonCnt = buttons.Length;
         PlayerTable playerTable = SharedMgr.TableMgr.GetPlayer;
-        for(int i=0; i<buttonCnt; i++)
+        for (int i = 0; i < buttonCnt; i++)
         {
             if (i > playerCnt)
                 buttons[i].gameObject.SetActive(false);
             else
             {
-                buttons[i].ChangeButtonData(players[i].PlayerStat.GetSaveStat.currentLevel, playerTable.GetPlayerTableData(players[i].PlayerID).prefabName);
+                buttons[i].ChangeButtonData(players[i].PlayerStat);
                 if (_currentPlayerIndex == i)
                     buttons[i].ControlEffect(true);
                 else
@@ -71,9 +71,9 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
 
         }
 
-        while (time <_coolTime)
+        while (time < _coolTime)
         {
-            time += Time.fixedDeltaTime; 
+            time += Time.fixedDeltaTime;
             for (int i = 0; i < cnt; i++)
             {
                 buttons[i].GetPanel().fillAmount = Mathf.Lerp(1, 0, time / _coolTime);
@@ -90,11 +90,11 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
             _announceCoolDown.Invoke();
     }
 
-    public void ShowWarnText(UIEnums.CHANGE _changeType) 
+    public void ShowWarnText(UIEnums.CHANGE _changeType)
     {
         if (warnWindow.gameObject.activeSelf == false)
             warnWindow.gameObject.SetActive(true);
-        warnWindow.ShowWarnText(_changeType); 
+        warnWindow.ShowWarnText(_changeType);
     }
 
     #endregion
@@ -103,12 +103,43 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
     public void ControlButtonEffect(int _index)
     {
         int cnt = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayers.Count;
-        for(int i=0; i<cnt; i++)
+        for (int i = 0; i < cnt; i++)
         {
-            if(i == _index)
+            if (i == _index)
                 buttons[_index].ControlEffect(true);
             else
                 buttons[_index].ControlEffect(false);
+        }
+    }
+
+
+    #endregion
+
+    #region Update Button State
+    public void UpdateChangeButton()
+    {
+        int cnt = buttons.Length;
+        for(int i=0; i<cnt; i++)
+        {
+            buttons[i].UpdateLiveState();
+        }
+    }
+
+    public void UpdateAliveButton()
+    {
+        int cnt = buttons.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            buttons[i].AliveState();
+        }
+    }
+
+    public void LevelUp()
+    {
+        int cnt = buttons.Length;
+        for (int i = 0; i < cnt; i++)
+        {
+            buttons[i].UpdateLevel();
         }
     }
 

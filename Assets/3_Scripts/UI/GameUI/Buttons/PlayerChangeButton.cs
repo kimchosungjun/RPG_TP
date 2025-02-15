@@ -5,26 +5,48 @@ using UnityEngine.UI;
 
 public class PlayerChangeButton : MonoBehaviour
 {
-    [SerializeField, Header("Button Image"), Tooltip("0:Circle, 1:Frame, 2:Icon, 3:Effect, 4 : Panel")] Image[] changeButtonImages;
+    [SerializeField, Header("Button Image"), Tooltip("0:Circle, 1:Frame, 2:Icon, 3:Effect, 4 : Panel, 5: DeathPanel")] Image[] changeButtonImages;
     [SerializeField, Header("Lv Text")] Text levelText;
     [SerializeField] Button button;
     [SerializeField] int index;
+  
+    PlayerStat stat = null;
     public void SetImage()
     {
         changeButtonImages[0].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Circle_Frame");
         changeButtonImages[1].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Player_Frame");
+        changeButtonImages[5].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Button_Atlas", "Circle_Frame");
     }
 
-    public void ChangeButtonData(int _level, string _name)
+    public void ChangeButtonData(PlayerStat _playerStat)
     {
+        stat = _playerStat; 
         button.interactable = true;
-        levelText.text = _level.ToString();
-        string fileName = _name + "_Icon";
+        levelText.text = stat.GetSaveStat.currentLevel.ToString();
+        string fileName = SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(stat.GetSaveStat.playerTypeID).prefabName + "_Icon";
         changeButtonImages[2].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", fileName);
         if (levelText.gameObject.activeSelf == false)
             levelText.gameObject.SetActive(true);
         if (changeButtonImages[2].gameObject.activeSelf == false)
             changeButtonImages[2].gameObject.SetActive(true);
+    }
+
+    public void UpdateLiveState()
+    {
+        if (stat == null) return;
+        if (stat.GetSaveStat.currentHP <= 0)
+            changeButtonImages[5].gameObject.SetActive(true);
+        else
+            changeButtonImages[5].gameObject.SetActive(false);
+    }
+
+    public void AliveState() { changeButtonImages[5].gameObject.SetActive(false); }
+   
+
+    public void UpdateLevel()
+    {
+        if (stat == null) return;
+        levelText.text = stat.GetSaveStat.currentLevel.ToString();
     }
 
     public void EmptyButton()

@@ -156,6 +156,18 @@ public abstract class PlayerMovementControl : MonoBehaviour
         set { canChangePlayer = value; } }
     #endregion
 
+    #region Can Action
+    bool canNormalAttack = true;
+    bool canSkill = true;
+    bool canUltimate = true;
+
+    public bool CanNormalAttack { get { return canNormalAttack; } set { canNormalAttack = value; } }    
+    public bool CanSkill{ get { return canSkill;  } set { canSkill = value; } }    
+    public bool CanUltimate { get { return canUltimate; } set { canUltimate = value; } }    
+
+
+    #endregion
+
     /******************************************/
     /************** 속도 조절  ***************/
     /**************   땅 검출   ***************/

@@ -82,6 +82,9 @@ public class DialogueReader
             case 'X':
                 InActiveNPC();
                 break;
+            case 'S':
+                SharedMgr.UIMgr.GameUICtrl.GetEtcUI.ShowClear();
+                break;
         }
     }
 

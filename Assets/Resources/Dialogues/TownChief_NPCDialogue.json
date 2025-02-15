@@ -1,0 +1,58 @@
+{
+  "dialogueSet": [
+    {
+      "questID": 2,
+      "dialogueID": 2,
+      "speakerName": "마을 촌장",
+      "dialogueContentSet": [
+        {
+          "dialogueIndex": 0,
+          "storyLines": [ "이봐요, 모험가 양반. 낯선 얼굴이군. 혹시 여행 중인가?" ],
+          "choiceLines": [
+            {
+              "continueDialouge": true,
+              "nextDialogueID": 1,
+              "choiceTexts": [ "네, 이곳저곳을 떠돌며 모험을 하고 있습니다." ]
+            },
+            {
+              "continueDialouge": true,
+              "nextDialogueID": 1,
+              "choiceTexts": [ "그렇습니다. 도움이 필요하신가요?" ]
+            }
+          ]
+        },
+        {
+          "dialogueIndex": 1,
+          "storyLines": [ "그래요… 사실 우리 마을에 큰 문제가 생겼소. ", "마을 북쪽의 동굴, 원래는 우리 광부들이 광물을 채굴하던 곳인데, 어느 날 갑자기 레드 드래곤이 둥지를 틀었소.", "그 흉포한 용이 나타난 이후로 우리 마을은 큰 타격을 입었지. 상인들도 떠나고, 광부들도 일하러 가지 못하니 마을 경제가 무너지고 있소.", "게다가 가끔씩 용이 마을 근처까지 내려와 사람들을 위협하기도 하니… 이대로는 마을이 망할 게 뻔하오.", "이보시오, 모험가 양반. 혹시 우리를 도와줄 수 있겠소?" ],
+          "choiceLines": [
+            {
+              "continueDialouge": false,
+              "nextDialogueID": 0,
+              "choiceTexts": [ "그건 너무 위험합니다. 저는 사양하겠습니다." ]
+            },
+            {
+              "continueDialouge": true,
+              "nextDialogueID": 2,
+              "choiceTexts": [ "$Q2", "맡겨주세요. 레드 드래곤을 처치하겠습니다." ]
+            }
+          ]
+        },
+        {
+          "dialogueIndex": 2,
+          "storyLines": [ "정말인가?! 이런 감사할 데가 있나! 우리 마을을 구해주겠다는 용기 있는 모험가를 만나다니…!", "부디 무사히 돌아오길 바라오, 모험가 양반." ],
+          "choiceLines": []
+        },
+        {
+          "dialogueIndex": 3,
+          "storyLines": [ "레드 드래곤은 강력한 브레스와 근접 공격을 한다고 하네.", "충분한 준비를 갖추고 떠나시오." ],
+          "choiceLines": []
+        },
+        {
+          "dialogueIndex": 4,
+          "storyLines": [   "정말로 레드 드래곤을 퇴치하다니…! 그대가 우리 마을의 영웅이오! ", "마을을 대표해서 그대에게 감사드리오…!", "이제 광부들은 다시 동굴로 돌아갈 수 있고, 떠났던 상인들도 돌아올 것이오.", "이 모든 것이 그대 덕분이오. 말뿐만이 아니라, 우리 마을이 준비한 보상도 받아주시오.", "이 보상이 그대의 노고를 전부 갚지는 못하겠지만… 우리의 진심이 담겨 있소. 부디 받아주시오.", "$A2", "$E","$S" ],
+          "choiceLines": []
+        }
+      ]
+    }
+  ]
+}

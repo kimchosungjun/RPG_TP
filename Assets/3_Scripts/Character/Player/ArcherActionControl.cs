@@ -44,6 +44,8 @@ public class ArcherActionControl : PlayerActionControl
     public void DoNormalAttack(int _combo)
     {
         // Set Data
+        NormalAttackCoolDown();
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.ARCHER_ATK_SFX);
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo) * stat.Attack * Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
@@ -57,6 +59,9 @@ public class ArcherActionControl : PlayerActionControl
     public void DoSkillAttack(int _combo)
     {
         // Set Data
+        if(_combo ==0)
+            SkillCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.ARCHER_FULL_BLOWN_SHOOT, 1).coolTime);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.ARCHER_ATK_SFX);
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(attackSkillSOData.GetAttackEffectType,
             attackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), attackSkillSOData.GetMaintainEffectTime);
@@ -69,6 +74,8 @@ public class ArcherActionControl : PlayerActionControl
 
     public void DoUltimateAttack()
     {
+        SkillCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE, 1).coolTime);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.ARCHER_ATK_SFX);
         TransferConditionData transferConditionData = new TransferConditionData();
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,

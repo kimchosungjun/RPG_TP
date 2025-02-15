@@ -17,12 +17,12 @@ public class CharacterActionButton : MonoBehaviour
         UltimateSkill
     }   
 
-    public void PressActionBtn()
+    public void PressActionBtn(float _time)
     {
         if (!canPress)
             return;
         // To Do ~~~~ : Mobile
-        coolDownCor = StartCoroutine(CCoolDown());
+        coolDownCor = StartCoroutine(CCoolDown(_time));
     }
 
     public void Init()
@@ -70,17 +70,22 @@ public class CharacterActionButton : MonoBehaviour
         // To Do ~~~ change
     }
 
-    IEnumerator CCoolDown()
+    IEnumerator CCoolDown(float _time)
     {
         images[1].fillAmount = 0;
+        float coolDownTime = _time;
         float time = 0;
-        float coolDownTime = 5f;
-        while (time < coolDownTime)
+        while (coolDownTime >=0 )
         {
-            coolDownText.text = time.ToString("F1");
-            time+= Time.deltaTime;  
+            if (coolDownTime < 0)
+                break;
+            images[1].fillAmount = time/_time;
+            coolDownText.text = coolDownTime.ToString("F1");
+            coolDownTime -= Time.deltaTime;
+            time += Time.deltaTime;
             yield return null;
         }
+        images[1].fillAmount = 1f;
         coolDownText.text = string.Empty;
         coolDownCor = null;
         canPress = true;

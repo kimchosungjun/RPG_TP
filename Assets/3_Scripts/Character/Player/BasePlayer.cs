@@ -30,7 +30,13 @@ public class BasePlayer : BaseActor
 
     // Call Immediately : Show Animation
     public void DoDeathState() { playerMovementControl.Death(); isAlive = false; }
-    public void DoRevival() { InitState(); isAlive = true; SetDefaultLayerType(); }
+    public void DoRevival() 
+    {
+        InitState(); 
+        isAlive = true; 
+        SetDefaultLayerType();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI?.UpdateAliveButton();
+    }
     public void InitState() { playerMovementControl.ChangeState(PlayerEnums.STATES.MOVEMENT); }
     public bool GetCanChangeState { get { return playerMovementControl.CanChangePlayer; } }
     public void SetTransform(Vector3 _position, Quaternion _rotation, Vector3 _velocity)

@@ -48,7 +48,8 @@ public class GameUICtrl : MonoBehaviour
         Inven,
         Party,
         Setting,
-        Exit
+        Exit,
+        Save
     }
 
     #endregion
@@ -76,6 +77,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] DialogueUI dialogueUI;
     [SerializeField] SettingUI settingUI;
     [SerializeField] GameExitUI gameExitUI;
+    [SerializeField] ShopUI shopUI;
     [SerializeField] EtcUI etcUI;
 
     public IndicatorUI GetIndicatorUI { get { return indicatorUI; } }
@@ -90,7 +92,8 @@ public class GameUICtrl : MonoBehaviour
     public QuestUI GetQuestUI { get {return questUI;} }
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     public SettingUI GetSettingUI { get { return settingUI; } } 
-    public GameExitUI GameExitUI { get {  return gameExitUI; } }
+    public GameExitUI GetGameExitUI { get {  return gameExitUI; } }
+    public ShopUI GetShopUI { get { return shopUI; } } 
     public EtcUI GetEtcUI { get {   return etcUI; } }
 
     // 나중에 Awake로 변경

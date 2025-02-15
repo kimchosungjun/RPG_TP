@@ -51,7 +51,11 @@ public class PlayerStatControl : ActorStatControl
     #endregion
 
     #region Death
-    public override void Death() { player.DoDeathState(); }
+    public override void Death() 
+    { 
+        player.DoDeathState();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI?.UpdateChangeButton();
+    }
     public bool CheckDeathState()
     {
         if (playerStat.GetSaveStat.currentHP <= 0.01f) return true;

@@ -61269,6 +61269,7 @@ GameObject:
   - component: {fileID: 2490600869335994971}
   - component: {fileID: 2490600869335994972}
   - component: {fileID: 2490600869335994973}
+  - component: {fileID: 290904542487039021}
   m_Layer: 0
   m_Name: MAGE_CAST
   m_TagString: Untagged
@@ -61309,7 +61310,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 1
+  stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -66092,3 +66093,32 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &290904542487039021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2490600869335994975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d88b3bca7968c24ca62b34c12a281cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleParent: {fileID: 2490600869335994971}
+  particles:
+  - {fileID: 2490600869335994972}
+  - {fileID: 2490600868291371667}
+  - {fileID: 2490600868358312627}
+  - {fileID: 2490600868503244732}
+  - {fileID: 2490600868215317053}
+  - {fileID: 2490600869270874011}
+  - {fileID: 2490600867310132050}
+  - {fileID: 2490600868511108346}
+  - {fileID: 2490600867559869691}
+  - {fileID: 2490600867507811224}
+  - {fileID: 2490600868742807109}
+  - {fileID: 2490600868200819226}
+  - {fileID: 2490600867882630096}
+  - {fileID: 2490600869152095078}
+  maintainTime: 0

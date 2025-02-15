@@ -27,18 +27,16 @@ public class PlayerJoystickUI : MonoBehaviour
 
     public void InputNormalAttack()
     {
-
+        actionButtons[0].PressActionBtn(0.1f);
     }
 
-    public void InputSkill()
+    public void InputSkill(float _time)
     {
+        actionButtons[1].PressActionBtn(_time);
     }
 
-    public void InputUltimate()
+    public void InputUltimate(float _time)
     {
-
+        actionButtons[2].PressActionBtn(_time);
     }
-
-
-
 }

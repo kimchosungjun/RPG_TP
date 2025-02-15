@@ -80,21 +80,21 @@ public class PlayerGroundMoveState : PlayerOnGroundState
         }
 
         // 공격 입력
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && characterControl.CanNormalAttack)
         {
             characterControl.ChangeState(STATES.ATTACK);
             return;
         }
 
         // 스킬 입력
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && characterControl.CanSkill)
         {
             characterControl.ChangeState(STATES.SKILL);
             return;
         }
 
         // 궁극기 입력
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && characterControl.CanUltimate)
         {
             characterControl.ChangeState(STATES.ULTIMATESKILL);
             return;

@@ -140,6 +140,7 @@ public class PlayerSaveStat
     {
         currentLevel += 1;
         SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(playerTypeID)?.LevelUp();
+        SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI?.LevelUp();
     }
 
     public PlayerSaveStat(int _id)

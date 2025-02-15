@@ -8,6 +8,7 @@ public class PlayerDashState : PlayerState
 
     public override void Enter()
     {
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.ARCHER_ATK_SFX);
         characterControl.CanChangePlayer = false;
         anim.SetInteger("States", (int)PlayerEnums.STATES.DASH);
         characterControl.GetRigid.drag = 0f;

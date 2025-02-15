@@ -40,6 +40,8 @@ public class WarriorActionControl : PlayerActionControl
     #region Action : Relate Animation
     public void DoNormalAttack(int _combo)
     {
+        NormalAttackCoolDown();
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.PLAYER_ATK_SFX);
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo)*stat.Attack*Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
@@ -55,6 +57,7 @@ public class WarriorActionControl : PlayerActionControl
 
     public void DoBuffParticle()
     {
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.BUFF_SFX);
         SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ATTACK_BUFF).GetComponent<ParticleAction>().
            SetParticlePosition(transform.position, transform.rotation, 1f);
     }
@@ -62,7 +65,8 @@ public class WarriorActionControl : PlayerActionControl
     public void DoBuffSkill()
     {
         int buffCnt = buffActionSOData.GetBuffCnt();
-        for(int i = 0; i < buffCnt; i++)
+        SkillCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerBuffSkillTableData((int)PlayerEnums.CONDITION_SKILLS.WARRIOR_ROAR, 1).coolTime);
+        for (int i = 0; i < buffCnt; i++)
         {
             TransferConditionData transferConditionData = new TransferConditionData();
             transferConditionData.SetData(stat, buffActionSOData.GetEffectStatType(i), buffActionSOData.GetAttributeStatType(i), 
@@ -74,12 +78,15 @@ public class WarriorActionControl : PlayerActionControl
 
     public void DoUltimateAttack()
     {
+        UltimateCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.WARRIOR_ULTIMATE, 1).coolTime);
+        SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.PLAYER_ATK_SFX);
         TransferConditionData transferConditionData = new TransferConditionData();
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
         farThrowAttacks.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH).GetComponent<HitTriggerProjectile>());
     }
+
 
     public void DoAnnounceDeathState() 
     {

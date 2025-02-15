@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d077e093e23304aa1fea2bef12f266, type: 3}
+  m_Name: Quest_SO2
+  m_EditorClassIdentifier: 
+  questID: 2
+  questName: "\uB808\uB4DC \uB4DC\uB798\uACE4 \uD1F4\uCE58"
+  questDescription: "\uB9C8\uC744 \uBD81\uCABD\uC5D0 \uC788\uB294 \uB3D9\uAD74\uC744
+    \uB808\uB4DC \uB4DC\uB798\uACE4\uC774 \uCC28\uC9C0\uD558\uC5EC \uB9C8\uC744\uC5D0
+    \uD070 \uD53C\uD574\uB97C \uC785\uD788\uACE0 \uC788\uC2B5\uB2C8\uB2E4.\n\uB808\uB4DC
+    \uB4DC\uB798\uACE4\uC744 \uBB3C\uB9AC\uCE58\uACE0 \uB9C8\uC744\uC758 \uD3C9\uD654\uB97C
+    \uB418\uCC3E\uC74D\uC2DC\uB2E4."
+  notMeetQuestDialogueIndex: 3
+  meetQuestDialogueIndex: 4
+  afterGetAwardDialogueIndex: -1
+  questConditionSet:
+  - type: 1
+    targetName: "\uB808\uB4DC \uB4DC\uB798\uACE4"
+    targetID: 4
+    targetCnt: 1
+    currentCnt: 0
+  itemAwards:
+  - itemType: 3
+    itemID: -1
+    itemAmount: 20000
+  - itemType: 1
+    itemID: 100
+    itemAmount: 30
+  - itemType: 1
+    itemID: 101
+    itemAmount: 30
+  expAwards:
+  - awardAmount: 3000
+  characterAwards: []
