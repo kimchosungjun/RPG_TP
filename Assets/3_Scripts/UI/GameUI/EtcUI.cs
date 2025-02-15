@@ -21,13 +21,12 @@ public class EtcUI : MonoBehaviour
 
     public void ShowClear()
     {
-        saveObject.SetActive(true);
-        StartCoroutine(CShowClear());
+        clearObject.SetActive(true);
+        Invoke("CloseClear",5f);
     }
 
-    IEnumerator CShowClear()
+    public void CloseClear()
     {
-        yield return new WaitForSeconds(5f);
-        saveObject.SetActive(false);
+        clearObject?.SetActive(false);
     }
 }
