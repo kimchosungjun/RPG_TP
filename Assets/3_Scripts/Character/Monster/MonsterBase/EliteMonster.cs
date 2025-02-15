@@ -17,7 +17,7 @@ public abstract class EliteMonster : BaseMonster
         float groggyGauge;
         bool countGroggy;
 
-        public EliteGauge(EliteMonster _monster) { elite = _monster; groggyGauge = 100f; countGroggy = true;  groggyTime = 3f; groggyCheckTime = 0; }
+        public EliteGauge(EliteMonster _monster) { elite = _monster; groggyGauge = 100f; countGroggy = true;  groggyTime = 10f; groggyCheckTime = 0; }
         public EliteGauge(EliteMonster _monster, float _time) { elite = _monster; groggyGauge = 100f; countGroggy = true;  groggyTime = _time; groggyCheckTime = 0; }
         public float GetGroggyTime { get { return groggyTime; } }
         public float GetGroggyGauge { get { return groggyGauge; } }
@@ -34,7 +34,7 @@ public abstract class EliteMonster : BaseMonster
                 }    
                 return;
             }
-            groggyGauge -= Time.fixedDeltaTime* 20;
+            groggyGauge -= Time.fixedDeltaTime* 2;
             CheckGroggy();
         }
 

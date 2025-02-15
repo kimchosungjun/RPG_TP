@@ -312,6 +312,8 @@ public class RedDragon : EliteMonster
     public override void AnnounceGroggyState(float _groggyTime)
     {
         if (isDeathState) return;
+        if (curState == DRAGON_STATE.GLIDE || curState == DRAGON_STATE.TAKEOFF || curState == DRAGON_STATE.LAND)
+            return;
         EffectMaintainTime = _groggyTime;
         currentEffect = EffectEnums.HIT_EFFECTS.STUN; 
         if(curState != DRAGON_STATE.HIT)
@@ -372,7 +374,7 @@ public class RedDragon : EliteMonster
         if (nav == null) nav = GetComponent<NavMeshAgent>();
         if(coll==null) coll = GetComponent<CapsuleCollider>();
         maxGlidePointIndex = glidePostions.Length;
-        eliteGauge = new EliteGauge(this, 3f);
+        eliteGauge = new EliteGauge(this);
     }
 
     protected override void Start()
