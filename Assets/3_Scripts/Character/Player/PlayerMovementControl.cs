@@ -79,7 +79,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /************** 검출 여부 ****************/
     /******************************************/
-    protected bool isOnGround = false;
+    [SerializeField] protected bool isOnGround = false;
     protected bool isOnMaxAngleSlope = false;
 
     public bool IsOnGround { get { return isOnGround; } set { isOnGround = value; } }
