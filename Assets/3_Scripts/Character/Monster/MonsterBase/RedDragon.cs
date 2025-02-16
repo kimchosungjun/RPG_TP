@@ -326,6 +326,8 @@ public class RedDragon : EliteMonster
     public bool GetIsAllPlayerDeathState { get { return allPlayerDeath; } }
     public override void AnnounceOutMonsterArea()
     {
+        if (isDeathState)
+            return;
         base.AnnounceOutMonsterArea();
         IsInMonsterArea = false;
         if (isDeathState==false)
@@ -334,6 +336,8 @@ public class RedDragon : EliteMonster
     public override void EscapeReturnToSpawnPosition() { ChangeState(DRAGON_STATE.CALM); }
     public override void AnnounceAllPlayerDeath()
     {
+        if (isDeathState)
+            return;
         base.AnnounceAllPlayerDeath();
         if(isDeathState==false)
             ChangeState(DRAGON_STATE.CALM);

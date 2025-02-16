@@ -28,7 +28,7 @@ public class InventoryUI : MonoBehaviour, IInputKeyUI
     public ItemData CurrentItemData { get { return currentItemData; } set { currentItemData = value; } }
     #endregion
 
-    int inventoryCurrentIndex = 0;
+    //int inventoryCurrentIndex = 0;
 
     public void Init()
     {

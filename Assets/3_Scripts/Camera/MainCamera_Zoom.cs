@@ -29,14 +29,14 @@ public partial class MainCamera : MonoBehaviour
     }
 
     cZoomInfo ZoomInfo = new cZoomInfo();
-    bool IsEndStage = false;
-    bool IsFallowMe = false;
+    //bool IsEndStage = false;
+    //bool IsFallowMe = false;
 
     protected void ResetZoom()
     {
         ZoomDelta = 0f;
-        IsEndStage = false;
-        IsFallowMe = true;
+        //IsEndStage = false;
+        //IsFallowMe = true;
     }
 
     IEnumerator ZoomEndStageCoroutine()
@@ -57,7 +57,7 @@ public partial class MainCamera : MonoBehaviour
         if(ZoomInfo.DeltaDir != Vector3.zero)
         {
             MoveCamera = true;
-            IsFallowMe = false;
+            //IsFallowMe = false;
         }
 
         while(true)
@@ -164,7 +164,7 @@ public partial class MainCamera : MonoBehaviour
 
     public void ZoomEndStage(float StartDelay, float ZoomDest, float BlendInTime, float Duration, float BlendOutTime, Vector3 DeltaPos)
     {
-        IsEndStage = true;
+        //IsEndStage = true;
 
         ZoomInfo.FadeIn_Time = BlendInTime * Time.timeScale;
         ZoomInfo.FadeOut_Time = BlendOutTime * Time.timeScale;

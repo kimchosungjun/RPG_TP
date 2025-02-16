@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class QuestMgr 
 {
@@ -28,11 +29,6 @@ public class QuestMgr
         QuestSOData data = SharedMgr.ResourceMgr.LoadResource<QuestSOData>(path);
         if (data == null) return;
         questDataGroup.Add(data.GetQuestID, data);
-    }
-
-    public void LoadAcceptQuestData()
-    {
-        // Call when Log in 
     }
 
     public void Clear()

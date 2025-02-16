@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraShakeView : MonoBehaviour
 {
     #region Shake Value
-    bool isCameraShake = false;
+    // bool isCameraShake = false;
     Transform shakeTransform;
 
     public class CameraShakeInfo
@@ -47,13 +47,13 @@ public class CameraShakeView : MonoBehaviour
     private void InitShake()
     {
         shakeTransform = transform.parent;
-        isCameraShake = false;
+        //isCameraShake = false;
     }
 
     private void ResetShakeTransform()
     {
         shakeTransform.localPosition = Vector3.zero;
-        isCameraShake = false;
+        //isCameraShake = false;
         CameraLimit();
     }
     #endregion
@@ -102,7 +102,7 @@ public class CameraShakeView : MonoBehaviour
 
     IEnumerator CShake()
     {
-        isCameraShake = true;
+        //isCameraShake = true;
 
         float dt, dist;
         if(shakeInfo.startDelay > 0)

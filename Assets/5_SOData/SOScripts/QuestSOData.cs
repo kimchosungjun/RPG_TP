@@ -16,7 +16,7 @@ public class QuestSOData : ScriptableObject
     [SerializeField] int afterGetAwardDialogueIndex;
 
     [Header("Quest Conditions")]
-    [SerializeField] List<QuestConditionData> questConditionSet;
+    [SerializeField] List<QuestConditionData> questConditionSet = new List<QuestConditionData>();
     public List<QuestConditionData> GetQuestConditionSet { get { return questConditionSet; } }
     
     [Header("Quest Awards")]

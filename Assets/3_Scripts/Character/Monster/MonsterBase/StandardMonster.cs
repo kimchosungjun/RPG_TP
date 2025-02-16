@@ -63,6 +63,7 @@ public class StandardMonster : BaseMonster
     }
     #endregion
 
+    #region Announce
     // Relate State
     public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
     public override void AnnounceAllPlayerDeath()
@@ -72,6 +73,7 @@ public class StandardMonster : BaseMonster
         if(isDeathState==false)
             ReturnToSpawnPosition();
     }
+    #endregion
 
     #region Go Off Aggro
 
@@ -188,6 +190,8 @@ public class StandardMonster : BaseMonster
     
     public virtual void ChangeAnimation(STATES _animState)
     {
+        if (isDeathState)
+            return;
         int animState = anim.GetInteger("MState");
         int changeAnimState = (int)_animState;
         if (animState == changeAnimState)

@@ -179,7 +179,7 @@ public class MeleeMonster : StandardMonster
             isDoAnimation = true;
             transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             anim.SetInteger("Attack", 1);
-            anim.SetInteger("MState", (int)STATES.ATTACK);
+            ChangeAnimation(STATES.ATTACK);
             return NODESTATES.FAIL;
         }
         return NODESTATES.SUCCESS;
@@ -194,7 +194,7 @@ public class MeleeMonster : StandardMonster
         return NODESTATES.SUCCESS;
     }
     public void DoRush() { rush.DoAttack(); sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.MON_SLASH_SFX); }
-    public void StopRush() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+    public void StopRush() { ChangeAnimation(STATES.IDLE); isDoAnimation = false; }
 
     #endregion
 
@@ -206,7 +206,7 @@ public class MeleeMonster : StandardMonster
             transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             isDoAnimation = true;
             anim.SetInteger("Attack", 0);
-            anim.SetInteger("MState", (int)STATES.ATTACK);
+            ChangeAnimation(STATES.ATTACK);
             return NODESTATES.FAIL;
         }
         return NODESTATES.SUCCESS;
@@ -241,7 +241,7 @@ public class MeleeMonster : StandardMonster
     }
 
     public void DoBite() { bite.DoAttack(); sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.MON_ATK_SFX); }
-    public void StopBite() { bite.StopAttack(); anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+    public void StopBite() { bite.StopAttack(); ChangeAnimation(STATES.IDLE); isDoAnimation = false; }
     #endregion
 
     #endregion

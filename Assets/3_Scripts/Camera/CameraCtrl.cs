@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraCtrl : MonoBehaviour
 {
-    int activeCamIndex = 0;
+    //int activeCamIndex = 0;
     [SerializeField] bool isMoveLock = true;
 
     [SerializeField] CameraQuaterView quaterView;

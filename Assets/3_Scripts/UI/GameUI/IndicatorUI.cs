@@ -224,7 +224,7 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
     [SerializeField] Text zoneIndicateText;
 
     bool isActiveZoneIndicator = false;
-    float zoneTimer = 0f;
+    //float zoneTimer = 0f;
     Coroutine zoneCor = null;
 
     public void ActiveZoneIndicator()
@@ -240,7 +240,7 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
                 StartCoroutine(CZoneIndicate());
                 return;
             }
-            zoneTimer = 0f;
+            //zoneTimer = 0f;
         }
     }
 

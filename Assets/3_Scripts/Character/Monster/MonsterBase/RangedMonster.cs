@@ -178,7 +178,7 @@ public class RangedMonster : StandardMonster
             isDoAnimation = true;
             transform.rotation = Quaternion.LookRotation(monsterFinder.GetDirection());
             anim.SetInteger("Attack", 1);
-            anim.SetInteger("MState", (int)STATES.ATTACK);
+            ChangeAnimation(STATES.ATTACK);
             return NODESTATES.FAIL;
         }
         return NODESTATES.SUCCESS;
@@ -193,7 +193,7 @@ public class RangedMonster : StandardMonster
         return NODESTATES.SUCCESS;
     }
     public void DoSpread() { spread.DoAttack(); sfxPlayer.PlayOneSFX(UtilEnums.SFXCLIPS.VIRUS_SPREAD_SFX); }
-    public void StopSpread() { anim.SetInteger("MState", (int)STATES.IDLE); isDoAnimation = false; }
+    public void StopSpread() { ChangeAnimation(STATES.IDLE); isDoAnimation = false; }
 
     #endregion
 

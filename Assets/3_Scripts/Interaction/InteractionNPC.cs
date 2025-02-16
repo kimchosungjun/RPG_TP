@@ -13,7 +13,7 @@ public class InteractionNPC : Interactable
 
     [SerializeField] Animator anim;
     [SerializeField] NPCID npcID;
-    QuestSOData currentQuestData = null;
+    [SerializeField] QuestSOData currentQuestData = null;
 
     // Property
     NPCSaveData saveData = null;
@@ -87,6 +87,7 @@ public class InteractionNPC : Interactable
         if (saveData.npcAcceptQuestID >= 0)
         {
             currentQuestData = SharedMgr.QuestMgr.GetQuestData(saveData.npcAcceptQuestID);
+            SharedMgr.QuestMgr.AcceptQuestData(saveData.npcAcceptQuestID);
             currentQuestData.LoadQuestLog(SharedMgr.SaveMgr.GetInteractionData.GetQuestLogData(currentQuestData.GetQuestID));
         }
     }

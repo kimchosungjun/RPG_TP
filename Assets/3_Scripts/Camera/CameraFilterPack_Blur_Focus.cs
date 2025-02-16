@@ -52,11 +52,11 @@ public class CameraFilterPack_Blur_Focus : MonoBehaviour
         ChangeEyes = Eyes;
         SCShader = Shader.Find("CameraFilterPack/Blur_Focus");
 
-        if(!SystemInfo.supportsImageEffects)
-        {
-            enabled = false;
-            return;
-        }
+        //if(!SystemInfo.supportsImageEffects)
+        //{
+        //    enabled = false;
+        //    return;
+        //}
     }
 
     // Unity Reserv Method

@@ -91,8 +91,31 @@ public class EliteMonsterStatusUI : StatusUI
     {
         if (stat == null) return;
 
-        statusImages[0].fillAmount = stat.CurrentHP / stat.MaxHP;
+        statusImages[1].fillAmount = (float)stat.CurrentHP / stat.MaxHP;
         statusTexts[2].text = stat.CurrentHP + "/" + stat.MaxHP;
+
+        if (statusImages[0].fillAmount < statusImages[1].fillAmount)
+        {
+            statusImages[0].fillAmount = statusImages[1].fillAmount;
+            return;
+        }
+
+        if (hpUpdateCor != null)
+            return;
+        hpUpdateCor = StartCoroutine(CHpUpdateCor());
+    }
+
+    protected IEnumerator CHpUpdateCor()
+    {
+        while (true)
+        {
+            statusImages[0].fillAmount -= Time.deltaTime;
+            if (statusImages[0].fillAmount < statusImages[1].fillAmount)
+                break;
+            yield return null;
+        }
+        statusImages[0].fillAmount = statusImages[1].fillAmount;
+        hpUpdateCor = null;
     }
 
     private void FixedUpdate()

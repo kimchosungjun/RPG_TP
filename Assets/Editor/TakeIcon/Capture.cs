@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
@@ -21,7 +20,7 @@ public class Capture : MonoBehaviour
     public RenderTexture render;
     public Image img;
     string extention = ".png";
-    [SerializeField] string name;
+    [SerializeField] string filename;
 
     public GameObject[] objs;
     int cnt = 0;
@@ -51,7 +50,7 @@ public class Capture : MonoBehaviour
         Debug.Log(path);
 
         if(!Directory.Exists(path)) Directory.CreateDirectory(path);
-        File.WriteAllBytes(path+name+extention,data);
+        File.WriteAllBytes(path+filename+extention,data);
         yield return null;
     }
 

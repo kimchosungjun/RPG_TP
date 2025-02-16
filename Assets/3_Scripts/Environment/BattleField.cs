@@ -4,14 +4,17 @@ using UnityEngine;
 using UtilEnums;
 public class BattleField : MonoBehaviour
 {
-    [SerializeField] protected BaseMonster[] spawnMonsters;
+    [SerializeField] MonsterPrefabName monsterPrefab;
+    [SerializeField] protected Transform monsterGroupParent;
     [SerializeField] protected Transform[] monsterSpawnTransforms;
     [SerializeField] protected float radius;
     protected List<RespawnChecker> respawnMonsters = new List<RespawnChecker>();
+    protected List<BaseMonster> spawnMonsters = new List<BaseMonster>();
     protected int playerLayer = (int) LAYERS.PLAYER;
     protected bool isWaitRespawn = false;
     public float GetRadius { get { return radius; } protected set { radius = value; } }
 
+    #region Local Data : (Class, Enum)
     protected class RespawnChecker
     {
         float respawnTime;
@@ -34,6 +37,17 @@ public class BattleField : MonoBehaviour
         }
     }
 
+    protected enum MonsterPrefabName
+    {
+        P_Mon_Chest,
+        P_Mon_HornSlime,
+        P_Mon_RedDragon,
+        P_Mon_Slime,
+        P_Mon_Virus
+    }
+
+    #endregion
+
     #region Life Cycle
     protected virtual void Start()
     {
@@ -45,17 +59,26 @@ public class BattleField : MonoBehaviour
 
     public virtual void SetupMonsters()
     {
-        int monsterCnt = spawnMonsters.Length;
+        int monsterCnt = monsterSpawnTransforms.Length;
+        string prefabPath = "Monsters/"+Enums.GetEnumString<MonsterPrefabName>(monsterPrefab);
         for (int i = 0; i < monsterCnt; i++)
         {
-            spawnMonsters[i].SetBattleFieldData(this, i, monsterSpawnTransforms[i].position, this.transform.position);
-            SpawnMonster(spawnMonsters[i]);
+            // To Do revise
+            Transform monsterTransform = SharedMgr.ResourceMgr.LoadResource<Transform>(prefabPath);
+            if (monsterTransform == null)
+                continue;
+            GameObject go = Instantiate(monsterTransform.gameObject);
+            go.transform.SetParent(monsterGroupParent);
+            BaseMonster monster = go.GetComponent<BaseMonster>();   
+            monster.SetBattleFieldData(this, i, monsterSpawnTransforms[i].position, this.transform.position);
+            spawnMonsters.Add(monster);
+            SpawnMonster(monster);
         }
     }
 
     public void AnnounceAllPlayerDeath()
     {
-        int cnt = spawnMonsters.Length;
+        int cnt = spawnMonsters.Count;
         for(int i=0; i<cnt; i++)
         {
             spawnMonsters[i].AnnounceAllPlayerDeath();
@@ -64,7 +87,7 @@ public class BattleField : MonoBehaviour
 
     public void AnnounceAllPlayerRevival()
     {
-        int cnt = spawnMonsters.Length;
+        int cnt = spawnMonsters.Count;
         for (int i = 0; i < cnt; i++)
         {
             spawnMonsters[i].AnnounceAllPlayerRevival();
@@ -100,7 +123,7 @@ public class BattleField : MonoBehaviour
     {
         if(other.gameObject.layer == playerLayer)
         {
-            int monsterCnt = spawnMonsters.Length;
+            int monsterCnt = spawnMonsters.Count;
             for (int i = 0; i < monsterCnt; i++)
             {
                 spawnMonsters[i].AnnounceInMonsterArea();
@@ -112,7 +135,7 @@ public class BattleField : MonoBehaviour
     {
        if (other.gameObject.layer == playerLayer)
         {
-            int monsterCnt = spawnMonsters.Length;
+            int monsterCnt = spawnMonsters.Count;
             for (int i = 0; i < monsterCnt; i++)
             {
                 spawnMonsters[i].AnnounceOutMonsterArea();

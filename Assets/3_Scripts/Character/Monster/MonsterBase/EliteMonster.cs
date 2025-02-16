@@ -67,7 +67,7 @@ public abstract class EliteMonster : BaseMonster
     public abstract void AnnounceGroggyState(float _groggyTime);
 
     // Common 
-    public override void AnnounceStatusUI() { statusUI.UpdateStatusData(); }
+    public override void AnnounceStatusUI() { statusUI?.UpdateStatusData(); }
 
     protected override void CreateStates() { }
 

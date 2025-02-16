@@ -7,11 +7,11 @@ public class ShopUI : MonoBehaviour
     [SerializeField] GameObject shopWindow;
     [SerializeField] ShopButton[] buttons;
     ItemData curItemData = null;
-    int itemCnt = 1;
+    //int itemCnt = 1;
     public ItemData CurItemData
     {
         get { return curItemData; }
-        set { curItemData = value; itemCnt = 1; }
+        set { curItemData = value; /*itemCnt = 1; */}
     }
 
     public void SetShopItemList(List<ItemData> _datas)
