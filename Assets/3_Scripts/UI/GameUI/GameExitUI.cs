@@ -54,9 +54,6 @@ public class GameExitUI : MonoBehaviour, IInputKeyUI
         SharedMgr.SaveMgr.SavePlayerData(ReturnToLobbyScene);
     }
 
-    public void ReturnToLobbyScene()
-    {
-        //SharedMgr.PhotonMgr.LeaveRoom(true);
-        SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.LOGIN, true);
-    }
+    public void ReturnToLobbyScene() { SharedMgr.PhotonMgr.LeaveRoom();  }
+
 }

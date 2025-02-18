@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,9 @@ public class LoginSceneCtrl : MonoBehaviour
     void Start()
     {
         loginUICtrl.DoFadeIn();
+        if (SharedMgr.PhotonMgr.IsInLobby() == false)
+            SharedMgr.PhotonMgr.JoinLobby();
+
         if(SharedMgr.SceneMgr.IsMaintainLogin())
         {
             LoadSaveData();

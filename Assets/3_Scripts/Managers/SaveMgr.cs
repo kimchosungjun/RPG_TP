@@ -93,7 +93,7 @@ public partial class SaveMgr : MonoBehaviour
         // Check Join Lobby 
         while (true)
         {
-            if (SharedMgr.PhotonMgr.CheckConnectLobby() == false)
+            if (SharedMgr.PhotonMgr.CheckConnectNetwork() == false)
                 yield return null;
             else
                 break;
@@ -122,7 +122,7 @@ public partial class SaveMgr : MonoBehaviour
         // Check Join Lobby 
         while (true)
         {
-            if (SharedMgr.PhotonMgr.CheckConnectLobby() == false)
+            if (SharedMgr.PhotonMgr.CheckConnectNetwork() == false)
                 yield return null;
             else
                 break;

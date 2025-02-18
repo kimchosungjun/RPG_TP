@@ -37,12 +37,10 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
-        // 호출되면 정상적인 포톤서버 연결
     }
 
     public void OnLobby()
     {
-        PhotonNetwork.IsMessageQueueRunning = true;
-        // 큐 방식으로 처리하겠다.
+        PhotonNetwork.IsMessageQueueRunning = true; // 큐 방식으로 처리하겠다.
     }
 }

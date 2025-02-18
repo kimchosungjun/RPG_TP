@@ -14,13 +14,10 @@ public class LoginLobbyView : MonoBehaviour
     [SerializeField, Tooltip("0:Button, 1:Button")] Image[] exitImages;
     [SerializeField, Tooltip("0:Button, 1:Button")] Image[] logoutImages;
     [SerializeField, Tooltip("0:Line, 1:Frame, 2:WarnFrame, 3:WarnButton")] Image[] serverIndicatorImages;
-    [SerializeField, Tooltip("0:State, 1:Cnt")] Text[] serverTexts;
     [SerializeField] GameObject overFlowServerIndicator;
     [SerializeField] Button gameStartBtn;
     [SerializeField] Text gameStartText;
 
-    string[] serverStateTexts = new string[5];
-    [SerializeField] Color[] serverStateColors;
     bool onceSetImage = false;
 
     [SerializeField, Header("Connect Text")] PeriodAnimation connectText;
@@ -34,29 +31,12 @@ public class LoginLobbyView : MonoBehaviour
         if(onceSetImage==false)
             SetImage();
 
-        serverStateTexts[0] = "비어있음";
-        serverStateTexts[1] = "원활";
-        serverStateTexts[2] = "보통";
-        serverStateTexts[3] = "혼잡";
-        serverStateTexts[4] = "포화";
-
         connectText.Init();
     }
 
     public void ActiveView() 
     {
         lobbyViewParent.SetActive(true);
-        UpdateServerData();
-    }
-
-    public void UpdateServerData()
-    {
-        int playerCnt = SharedMgr.PhotonMgr.GetServerPlayerCnt();
-        serverTexts[0].text = serverStateTexts[playerCnt];
-        serverTexts[1].text = playerCnt + "/4";
-        serverTexts[0].color = serverStateColors[playerCnt];
-        serverTexts[1].color = serverStateColors[playerCnt];
-        serverIndicatorImages[0].fillAmount = (float)playerCnt / 4;
     }
 
     public void SetImage()
@@ -87,22 +67,15 @@ public class LoginLobbyView : MonoBehaviour
         SharedMgr.SoundMgr.PressButtonSFX();
     }
 
-    public void DecideEnterGame()
+    public void DecideEnterGame() { SharedMgr.PhotonMgr.JoinRoom(); }
+
+    public void FailJoinServer()
     {
-        bool isExist = true;
-        if (SharedMgr.PhotonMgr.IsFullRoom(ref isExist) == false)
-        {
-            SharedMgr.PhotonMgr.JoinLobbyRoom(isExist);
-            SharedMgr.SceneMgr.LoadScene(SCENES.GAME, true);
-        }
-        else
-        {
-            OverFlowServer();
-            connectText.EndPeriodAnimation();
-            gameStartBtn.interactable = true;
-            gameStartText.color = gameStartBtn.colors.normalColor;
-            SharedMgr.UIMgr.LoginUICtrl.GetLoginFadeInView.SetBlock(false);
-        }
+        OverFlowServer();
+        connectText.EndPeriodAnimation();
+        gameStartBtn.interactable = true;
+        gameStartText.color = gameStartBtn.colors.normalColor;
+        SharedMgr.UIMgr.LoginUICtrl.GetLoginFadeInView.SetBlock(false);
     }
 
     public void PressGameExit()
@@ -121,7 +94,7 @@ public class LoginLobbyView : MonoBehaviour
 
     public void DecideGameExit()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR 
         SharedMgr.SoundMgr.PressButtonSFX();
         SharedMgr.UIMgr.LoginUICtrl.GetSceneCtrl.SetActiveEditWindow = false;
         UnityEditor.EditorApplication.isPlaying = false;

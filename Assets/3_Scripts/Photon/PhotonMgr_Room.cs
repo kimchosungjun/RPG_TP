@@ -3,123 +3,95 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; // 함수를 동기화 할 때 사용
 using Photon.Realtime;
-using UnityEngine.Events;
 
 public partial class PhotonMgr : MonoBehaviourPunCallbacks
 {
-    protected string serverRoomName = "Ashen";
-    List<RoomInfo> curRoomSet;
-    const int maxPlayer = 4;
+    /***************************/
+    /********  Network  *******/
+    /***************************/
 
-    // Server = Room 
-    #region Check Server Info (Exist, PlayerCnt)
-    public bool CheckConnectLobby() { return PhotonNetwork.IsConnected ; }
+    public bool CheckConnectNetwork() { return PhotonNetwork.IsConnected ; }
 
-    public bool IsExistServer()
-    {
-        int cnt = curRoomSet.Count;
-        if (cnt == 0)
-            return false;
-        return true;
-    }
+    /***************************/
+    /*********  Lobby  ********/
+    /***************************/
 
-    public int GetServerPlayerCnt()
-    {
-        if (IsExistServer())
-            return curRoomSet[0].PlayerCount;
-        else
-            return 0;
-    }
-
-    public bool IsFullRoom(ref bool _isExist)
-    {
-        if (IsExistServer() == false)
-        {
-            _isExist = false;
-            return false;
-        }
-        if (GetServerPlayerCnt() < 4)
-            return false;
-        return true;
-    }
+    #region Lobby
+    public bool IsInLobby() { return PhotonNetwork.InLobby; }
+    public void JoinLobby() { PhotonNetwork.JoinLobby(); }
+    public void LeaveLobby() { PhotonNetwork.LeaveLobby(); }
     #endregion
 
-    public void CreateLobbyRoom()
-    {
-        if (IsExistServer()) return;
-        RoomOptions option = new RoomOptions()
-        {
-            IsVisible = true,
-            MaxPlayers = maxPlayer
-        };
-        PhotonNetwork.JoinOrCreateRoom(serverRoomName, option, null);
-    }
-     
-    public void RandomLobbyRoom()
-    {
-        PhotonNetwork.JoinRandomRoom();
-    }
+    /***************************/
+    /********  Server   ********/
+    /***************************/
 
-    public void JoinLobbyRoom(bool _isExistRoom)
-    {
-        if (_isExistRoom)
-            PhotonNetwork.JoinRoom(serverRoomName);
-        else
-            CreateLobbyRoom();
-    }
+    #region Join Server
 
-    public void LeaveRoom(bool _com)
-    {
-        PhotonNetwork.LeaveRoom(_com);
-    }
+    const int maxPlayer = 4;
+    protected string serverName = "Ashen";
 
-    public void LeaveLobby()
-    {
-        PhotonNetwork.LeaveLobby(); 
-    }
-
-    public void SecretLobbyRoom(string _room, byte _secret, byte _maxPlayer)
-    {
-        if (_room == null)
-            return;
-        bool open = _secret > 0 ? false : true;
-        RoomOptions option = new RoomOptions()
-        {
-            IsVisible = open,
-            MaxPlayers = _maxPlayer
-        };
-
-        if (option == null)
-            return;
-
-        PhotonNetwork.JoinOrCreateRoom(_room,option,null);
-    }
-
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        base.OnRoomListUpdate(roomList);
-        curRoomSet = roomList;
-
-        if (SharedMgr.SceneMgr.IsLoginScene() == false) return;
-        SharedMgr.UIMgr.LoginUICtrl.GetLoginLobbyView.UpdateServerData();
-    }
+    public void JoinRoom() { PhotonNetwork.JoinRoom(serverName); }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         base.OnJoinRoomFailed(returnCode, message);
+        
+        switch (returnCode)
+        {
+            case ErrorCode.GameDoesNotExist:
+                CreateRoomAndJoin();
+                break;
+            case ErrorCode.GameFull:
+                SharedMgr.UIMgr.LoginUICtrl.GetLoginLobbyView.FailJoinServer();
+                break;
+            default:
+                break;
+        }
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    protected void CreateRoomAndJoin()
     {
-        base.OnJoinRandomFailed(returnCode, message);
+        RoomOptions option = new RoomOptions()
+        {
+            IsVisible = true,
+            MaxPlayers = maxPlayer,
+            EmptyRoomTtl = 0
+        };
+        PhotonNetwork.JoinOrCreateRoom(serverName, option, null);
     }
+    public override void OnCreatedRoom() { base.OnCreatedRoom();  }
 
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        // 방 들어감 : 들어간 유저만 호출
+        SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.GAME, true);
     }
 
+    #endregion
+
+    #region Left Server
+    public void LeaveRoom(bool _com) { PhotonNetwork.LeaveRoom(_com); }
+
+    public void LeaveRoom()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+            return;
+        }
+        Debug.LogError("Error : Dosen't Exit Room Left");
+    }
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.LOGIN, true);
+    }
+
+    #endregion
+
+    #region RPC
     [PunRPC]
     public void SendEntryRoom()
     {
@@ -138,4 +110,5 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     {
         PV.RPC("StartInGame", RpcTarget.All);
     }
+    #endregion
 }
