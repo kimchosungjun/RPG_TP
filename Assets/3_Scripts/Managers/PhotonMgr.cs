@@ -17,30 +17,20 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.SerializationRate = 10; // 1000 = 1초
     }
 
-    public void Setup()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-    }
+    public void Setup() { PhotonNetwork.ConnectUsingSettings(); }
 
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        base.OnDisconnected(cause);
-    }
+    public override void OnDisconnected(DisconnectCause cause) { base.OnDisconnected(cause); }
 
     public override void OnConnectedToMaster()
     {
-        // 서버에 붙으면 호출
         base.OnConnectedToMaster();
         PhotonNetwork.JoinLobby();
     }
 
-    public override void OnJoinedLobby()
-    {
-        base.OnJoinedLobby();
-    }
+    public override void OnJoinedLobby() { base.OnJoinedLobby(); }
 
-    public void OnLobby()
-    {
-        PhotonNetwork.IsMessageQueueRunning = true; // 큐 방식으로 처리하겠다.
-    }
+    /// <summary>
+    /// Manage Queue
+    /// </summary>
+    public void OnLobby() { PhotonNetwork.IsMessageQueueRunning = true;  }
 }

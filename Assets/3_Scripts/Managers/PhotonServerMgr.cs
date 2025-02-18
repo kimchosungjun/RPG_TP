@@ -90,25 +90,4 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     }
 
     #endregion
-
-    #region RPC
-    [PunRPC]
-    public void SendEntryRoom()
-    {
-        // All, Other, MasterClinet 
-        PV.RPC("LobbyRoomEntry", RpcTarget.All);
-    }
-
-    [PunRPC]
-    public void SendRoomReady()
-    {
-        PV.RPC("LobbyRoomReady", RpcTarget.All);
-    }
-
-    [PunRPC]
-    public void SendStartInGame()
-    {
-        PV.RPC("StartInGame", RpcTarget.All);
-    }
-    #endregion
 }

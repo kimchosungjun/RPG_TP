@@ -3244,6 +3244,7 @@ GameObject:
   - component: {fileID: 5820795782589993128}
   - component: {fileID: 938597170127633361}
   - component: {fileID: 4093201118876213466}
+  - component: {fileID: 3915201695294788704}
   m_Layer: 8
   m_Name: Warrior
   m_TagString: Untagged
@@ -3396,6 +3397,7 @@ MonoBehaviour:
       currentNormalAttackLevel: 1
       currentSkillLevel: 1
       currentUltimateSkillLevel: 1
+      holdWeaponUniqueID: 0
     atlasName: Icon_Atlas
     fileName: Warrior_Icon
     holdWeaponType: 0
@@ -3404,7 +3406,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 3b09165b315f0e446b186de0f5b10333, type: 2}
     - {fileID: 11400000, guid: 9c32aed444e645c43a0c1ab43d04aece, type: 2}
     - {fileID: 11400000, guid: a966cca1d5dcaf14f85634d310723565, type: 2}
-    HoldWeaponUniqueID: -1
   playerActionControl: {fileID: 4050084012462725122}
   playerStatControl: {fileID: 4093201118876213466}
   playerMovementControl: {fileID: 938597170127633361}
@@ -3425,6 +3426,7 @@ MonoBehaviour:
   collide: {fileID: 9067457124495748095}
   rigid: {fileID: 9070479362373650058}
   anim: {fileID: 6406824297650797864}
+  isOnGround: 0
   groundDrag: 6
   airDrag: 1
   slopeMaxAngle: 50
@@ -3446,6 +3448,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edbd41751c589447aaa221dadd5fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3915201695294788704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253013963244205539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3269482740535663461
 GameObject:
   m_ObjectHideFlags: 0

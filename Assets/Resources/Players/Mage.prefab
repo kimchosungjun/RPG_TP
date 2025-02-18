@@ -815,6 +815,7 @@ GameObject:
   - component: {fileID: 1866161969179706786}
   - component: {fileID: 4141476038577328447}
   - component: {fileID: 820060188921091454}
+  - component: {fileID: 1850000683760468697}
   m_Layer: 8
   m_Name: Mage
   m_TagString: Untagged
@@ -993,6 +994,7 @@ MonoBehaviour:
   collide: {fileID: 6788566911499289606}
   rigid: {fileID: 5460856481660527134}
   anim: {fileID: 7714048276709154375}
+  isOnGround: 0
   groundDrag: 6
   airDrag: 1
   slopeMaxAngle: 50
@@ -1030,6 +1032,28 @@ MonoBehaviour:
   meteorTransform: {fileID: 6993398300906504184}
   ultimateExplosionTransofrm: {fileID: 2521062520269226841}
   partyConditionControl: {fileID: 0}
+--- !u!114 &1850000683760468697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650061427427315175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &666271700701096882
 GameObject:
   m_ObjectHideFlags: 0

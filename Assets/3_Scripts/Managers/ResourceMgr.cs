@@ -25,17 +25,6 @@ public partial class ResourceMgr
         return loadT;
     }
 
-    /// <summary>
-    /// 팩토리 패턴
-    /// </summary>
-    /// <param name="_id"></param>
-    /// <returns></returns>
-    public BaseCharacter GetCharacter(int _id) 
-    {
-        // switch에서 골라서 사용
-        return null; 
-    }
-
     public T[] LoadAllResource<T>(string _path) where T: Object
     {
         T[] loadDatas = Resources.LoadAll<T>(_path);

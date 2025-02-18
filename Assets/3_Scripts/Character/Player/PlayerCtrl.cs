@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,18 +11,24 @@ public class PlayerCtrl : MonoBehaviour
     /**********************************************/
 
     #region Value
-    [SerializeField] bool isLockPlayerControl = false;
     
-    [Header("동작하는 캐릭터 종류"), SerializeField] List<BasePlayer> players;
-    [Header("파티 버프 관리"), SerializeField] PartyConditionControl partyConditionControl;
-    bool canChangePlayer = true; // when start : must init
-    float changePlayerCoolTime = 1f; 
-    [SerializeField] int currentPlayerIndex = 0; // when start : must init
+    // Index
+    int currentPlayerIndex = 0; // when start : must init
     public int GetCurrentPlayerIndex { get { return currentPlayerIndex; } }
+    
+    // Change
+    float changePlayerCoolTime = 1f; 
+    bool canChangePlayer = true; // when start : must init
+    
+    // Manage
+    bool isLockPlayerControl = false;
+    List<BasePlayer> players;
+    List<int> playerViewIDSet = new List<int>();
     public BasePlayer GetPlayer { get { return players[currentPlayerIndex]; } }
     public List<BasePlayer> GetPlayers { get { return players; } }
-
+    [Header("Manage Party Buff"), SerializeField] PartyConditionControl partyConditionControl;
     public bool CanInteractUI() { return GetPlayer.CanInteractUI(); }
+
     #endregion
 
     #region Life Cycle
@@ -122,11 +129,11 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         players[currentPlayerIndex].InitState();
-        players[currentPlayerIndex].gameObject.SetActive(false);
+        SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[currentPlayerIndex], false);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[_index].GetPlayerMovementControl.GetBodyTransform);
         players[_index].SetTransform(players[currentPlayerIndex].transform.position, players[currentPlayerIndex].transform.rotation, 
             players[currentPlayerIndex].GetPlayerMovementControl.GetRigid.velocity);
-        players[_index].gameObject.SetActive(true);
+        SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[_index], true);
         currentPlayerIndex = _index;
 
         canChangePlayer = false;
@@ -151,23 +158,25 @@ public class PlayerCtrl : MonoBehaviour
         List<BasePlayer> basePlayers = new List<BasePlayer>();
         Vector3 savePosition = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.CurrentPlayerPosition;
         Quaternion saveRotation = SharedMgr.SaveMgr.GetUserSaveData.PlayerSaveDataGroup.GetPlayerRotation();
+        
         for (int i=0; i<idSetCnt; i++)
         {
-            GameObject playerObject = Instantiate(SharedMgr.ResourceMgr.GetBasePlayer
-                (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(playerIDSet[i]).prefabName).gameObject);
-            playerObject.transform.SetParent(this.transform, false);
-            playerObject.transform.position = savePosition;
-            playerObject.transform.rotation = saveRotation; 
-            if(playerObject.activeSelf==false) playerObject.SetActive(true);    
+            // Multi
+            GameObject playerObject = SharedMgr.ResourceMgr.PhotonPlayerInstantiate
+                (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(playerIDSet[i]).prefabName, savePosition, saveRotation);
             BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();
             basePlayer.PlayerID = playerIDSet[i];
             basePlayers.Add(basePlayer);    
         }
+
         players = basePlayers;
         int cnt = players.Count;
         for(int i = 0; i < cnt; i++)
         {
             players[i].Init();
+            PhotonView photonView = players[i].GetComponent<PhotonView>();
+            int viewID = (photonView == null) ? -1 : photonView.ViewID;
+            playerViewIDSet.Add(viewID);
         }
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
     }
@@ -180,13 +189,13 @@ public class PlayerCtrl : MonoBehaviour
             _party[i].Setup();
             if (currentPlayerIndex == i)
             {
-                _party[i].gameObject.SetActive(true);
+                SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[i], true);
                 SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(_party[i].GetPlayerMovementControl.GetBodyTransform);
                 partyConditionControl.SetPlayerStat(_party[i].GetPlayerStatControl.PlayerStat);
                 SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.ChangeData(_party[i].GetPlayerStatControl.PlayerStat);
             }
             else
-                _party[i].gameObject.SetActive(false); 
+                SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[i], false);
         }
     }
 
@@ -209,9 +218,10 @@ public class PlayerCtrl : MonoBehaviour
         playerObject.transform.SetParent(this.transform, false);
         playerObject.transform.position = GetPlayer.transform.position;
         playerObject.transform.rotation = GetPlayer.transform.rotation;
-        BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>(); 
+        BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();    
         basePlayer.PlayerID = _characterID;
         players.Add(basePlayer);
+        playerViewIDSet.Add(playerObject.GetComponent<PhotonView>().ViewID);
         basePlayer.Init();
         basePlayer.Setup();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
@@ -348,53 +358,4 @@ public class PlayerCtrl : MonoBehaviour
     public void ReleaseMoveLock() { SetPlayerControl(false); }
 
     #endregion
-
-
-    /**********************************************/
-    /*************** 소리 설정 ******************/
-    /**********************************************/
-    //public void FootStep() { footStepPlayer.SoundFootStep(); }
 }
-
-
-/**********************************************/
-/*************** 파티 변경 ******************/
-/************ 현재 버전 사용 X *************/
-/**********************************************/
-
-#region Change Party : Not Use
-
-//public bool CanChangeParty(List<BasePlayer> _newParty)
-//{
-//    int newPartyCnt = _newParty.Count;
-//    for (int i = 0; i < newPartyCnt; i++)
-//    {
-//        if (_newParty[i].IsAlive)
-//            return true;
-//    }
-//    return false;
-//}
-
-//public void ChangeParty(List<BasePlayer> _newParty)
-//{
-//    players = _newParty;
-//    int newPartyCnt = _newParty.Count;
-//    for (int i = 0; i < newPartyCnt; i++)
-//    {
-//        if (_newParty[i].IsAlive)
-//        {
-//            currentPlayerIndex = i;
-//            InitPartyData(_newParty);
-//            SetPartyData(_newParty);
-//            players = _newParty;
-//            int legacyPartyCnt = players.Count;
-//            for (int k = 0; k < legacyPartyCnt; k++)
-//            {
-//                players[k].gameObject.SetActive(false);
-//            }
-//            return;
-//        }
-//    }
-//}
-
-#endregion
