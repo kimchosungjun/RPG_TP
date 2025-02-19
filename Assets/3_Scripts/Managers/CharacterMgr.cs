@@ -18,3 +18,9 @@ public partial class ResourceMgr
         return result;
     }
 }
+
+public struct SyncObjectData
+{
+    public int photonViewID;
+    public string resourcePath;
+}

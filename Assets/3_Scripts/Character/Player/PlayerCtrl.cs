@@ -129,11 +129,11 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         players[currentPlayerIndex].InitState();
-        SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[currentPlayerIndex], false);
+        SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[currentPlayerIndex], false);
         SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(players[_index].GetPlayerMovementControl.GetBodyTransform);
         players[_index].SetTransform(players[currentPlayerIndex].transform.position, players[currentPlayerIndex].transform.rotation, 
             players[currentPlayerIndex].GetPlayerMovementControl.GetRigid.velocity);
-        SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[_index], true);
+        SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[_index], true);
         currentPlayerIndex = _index;
 
         canChangePlayer = false;
@@ -189,13 +189,13 @@ public class PlayerCtrl : MonoBehaviour
             _party[i].Setup();
             if (currentPlayerIndex == i)
             {
-                SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[i], true);
+                SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[i], true);
                 SharedMgr.GameCtrlMgr.GetCameraCtrl.SetQuaterView(_party[i].GetPlayerMovementControl.GetBodyTransform);
                 partyConditionControl.SetPlayerStat(_party[i].GetPlayerStatControl.PlayerStat);
                 SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.ChangeData(_party[i].GetPlayerStatControl.PlayerStat);
             }
             else
-                SharedMgr.PhotonMgr.DecideObjectState(playerViewIDSet[i], false);
+                SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[i], false);
         }
     }
 

@@ -34,46 +34,79 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     /***************************/
     /*********  Game *********/
     /***************************/
+    #region Manage SyncObject
+    public Dictionary<int, SyncObjectData> syncObjectGroup = new Dictionary<int, SyncObjectData>();
+
+    public void AddSyncObjectData(int _viewID, string _path)
+    {
+        SyncObjectData syncObject = new SyncObjectData();
+        syncObject.photonViewID = _viewID;
+        syncObject.resourcePath = _path;
+
+        if (syncObjectGroup.ContainsKey(_viewID))
+        {
+            Debug.LogError("동일한 View ID 존재!! ");
+            return;
+        }
+        syncObjectGroup.Add(_viewID, syncObject);
+    }
+
+    public void UpdateSyncObjectData()
+    {
+        if (PhotonNetwork.IsMasterClient == false)
+            return;
+
+        PhotonView[] views = FindObjectsOfType<PhotonView>();
+        int viewCnt = views.Length;
+        for (int i = 0; i < viewCnt; i++)
+        {
+            if (syncObjectGroup.ContainsKey(views[i].ViewID))
+                continue;
+            syncObjectGroup.Remove(views[i].ViewID);
+        }
+    }
+
+    public string GetPath(int _viewID)
+    {
+        string path = string.Empty;
+        if (syncObjectGroup.ContainsKey(_viewID))
+            path = syncObjectGroup[_viewID].resourcePath;
+        return path;
+    }
+    #endregion
+
 
     #region Active State
-    public void DecideObjectState(int _viewID, bool _isActive, bool _isMasterControl = true)
+    public void DoSyncObjectState(int _viewID, bool _isActive, bool _isMasterControl = true)
     {
         PhotonView photonView = PhotonView.Find(_viewID);
         if (photonView == null) return;
         if (_isMasterControl)
         {
             if (photonView.IsMine)
-                PV.RPC("SyncActiveState", RpcTarget.All, _viewID, _isActive);
+                PV.RPC("SyncObjectState", RpcTarget.All, _viewID, _isActive);
         }
         else
-            PV.RPC("SyncActiveState", RpcTarget.All, _viewID, _isActive);
+            PV.RPC("SyncObjectState", RpcTarget.All, _viewID, _isActive);
     }
 
     [PunRPC]
-    public void SyncActiveState(int _viewID, bool _isActive)  { PhotonView.Find(_viewID).gameObject?.SetActive(_isActive); }
+    public void SyncObjectState(int _viewID, bool _isActive)  { PhotonView.Find(_viewID).gameObject?.SetActive(_isActive); }
     #endregion
 
     #region Transform
 
-    public void SetObjectTransform(GameObject _object, Vector3 _position, Quaternion _rotation, bool _isMasterControl = true)
+    public void DoSyncExistObject(int _viewID, Vector3 _position, Quaternion _rotation)
     {
-        if (_object == null) return;
-        PhotonView photonView = _object.GetComponent<PhotonView>();
-        if (photonView == null) return;
-        if (_isMasterControl)
-        {
-            if (photonView.IsMine)
-                photonView.RPC("SyncTransform", RpcTarget.All, _object, _position, _rotation);
-        }
-        else
-            photonView.RPC("SyncTransform", RpcTarget.All, _object, _position, _rotation);
+        photonView.RPC("SyncExistObject", RpcTarget.All, _viewID, _position, _rotation);
     }
 
     [PunRPC]
-    public void SyncTransform(GameObject _object, Vector3 _position, Quaternion _rotation) 
+    public void SyncExistObject(int _viewID, string _path,Vector3 _position, Quaternion _rotation) 
     {
-        _object.transform.position = _position;
-        _object.transform.rotation = _rotation; 
+        if (PhotonView.Find(_viewID) != null)
+            return;
+
     }
     #endregion
 }

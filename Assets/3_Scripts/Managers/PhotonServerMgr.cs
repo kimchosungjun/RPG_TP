@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; // 함수를 동기화 할 때 사용
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public partial class PhotonMgr : MonoBehaviourPunCallbacks
 {
@@ -25,6 +26,15 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     /***************************/
     /********  Server   ********/
     /***************************/
+
+    #region Server Bool
+    public bool IsMasterClient() 
+    {
+        if (PhotonNetwork.InRoom == false) return false;
+        return PhotonNetwork.IsMasterClient;
+    }
+
+    #endregion
 
     #region Join Server
 
@@ -68,6 +78,11 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
         SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.GAME, true);
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        UpdateSyncObjectData();
+    }
     #endregion
 
     #region Left Server
