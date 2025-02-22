@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.3
   m_CustomReflection: {fileID: 8900000, guid: 1331a26d2843a1148a23d5ddc81629dc, type: 3}
   m_Sun: {fileID: 1698739074}
-  m_IndirectSpecularColor: {r: 0.10557687, g: 0.21700002, b: 0.28746253, a: 0.3}
+  m_IndirectSpecularColor: {r: 0.105635196, g: 0.21716571, b: 0.2875296, a: 0.3}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -39576,10 +39576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32fe9e862f7734428afbba1e3fc51eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLockPlayerControl: 0
-  players: []
   partyConditionControl: {fileID: 1452199596}
-  currentPlayerIndex: 0
   increaseDashGaugePerSecond: 0.05
 --- !u!114 &1452199596
 MonoBehaviour:

@@ -17,6 +17,14 @@ public partial class ResourceMgr
         GameObject result = PhotonNetwork.Instantiate(path, _position, _rotation);
         return result;
     }
+
+    public GameObject PhotonRoomTestInstantiate()
+    {
+        Debug.Log("생성하는중");
+        string path = "Players/Cube";
+        GameObject result = PhotonNetwork.InstantiateRoomObject(path, new Vector3(67,0,210), Quaternion.identity);
+        return result;
+    }
 }
 
 public struct SyncObjectData
