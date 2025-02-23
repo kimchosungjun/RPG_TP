@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeIndicatorUI : MonoBehaviour
+public class UpgradeIndicatorUI : UIBase
 {
     [SerializeField, Tooltip("0:Levelup GradientFrame, 1:Direction, 2:Division")] Image[] images;
     [SerializeField] PlayerUpgradeIndicateSlot[] slots;
@@ -54,7 +54,7 @@ public class UpgradeIndicatorUI : MonoBehaviour
         SharedMgr.UIMgr.GameUICtrl.GetPlayerPartyUI.GetPlayerUpgradeUI.UpdateLvUpData();
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         SharedMgr.SoundMgr.PressButtonSFX();
         upgradeIndicatorParent.SetActive(false);

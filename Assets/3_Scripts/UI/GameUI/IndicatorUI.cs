@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UtilEnums;
 
-public class IndicatorUI : MonoBehaviour, ICommonSetUI
+public class IndicatorUI : UIBase
 {
     [SerializeField] GameObject allIndicatorParent;
     public void Init()
@@ -153,12 +153,12 @@ public class IndicatorUI : MonoBehaviour, ICommonSetUI
     #endregion
 
     #region Interface : Turn On & Off
-    public void TurnOn()
+    public override void TurnOn()
     {
         allIndicatorParent.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         allIndicatorParent.SetActive(false);
         if (healIndicatorImage.gameObject.activeSelf)

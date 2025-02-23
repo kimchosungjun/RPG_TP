@@ -61,13 +61,13 @@ public class EliteMonsterStatusUI : StatusUI
     /******************************************/
 
     #region Interface Method
-    public void TurnOn()
+    public override void TurnOn()
     {
         if (gauge == null || stat == null) return;
         statusParentObject.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         statusParentObject.SetActive(false);
         stat = null;

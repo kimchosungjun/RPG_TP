@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UIEnums;
 
-public abstract class StatusUI : MonoBehaviour
+public abstract class StatusUI : UIBase
 {
     /******************************************/
     /*****************  변수  *****************/

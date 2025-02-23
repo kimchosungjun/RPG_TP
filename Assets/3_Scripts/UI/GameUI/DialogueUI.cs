@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueUI : MonoBehaviour, ICommonSetUI
+public class DialogueUI : UIBase
 {
     /******************************************/
     /****************  Value  *****************/
@@ -306,13 +306,13 @@ public class DialogueUI : MonoBehaviour, ICommonSetUI
         return isActive;
     }
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         isActive = true;
         dialogueFrame.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         isActive = false;
         dialogueFrame.SetActive(false);

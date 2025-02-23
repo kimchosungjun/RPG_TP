@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //#if UNITY_EDITOR
 //#endif
 
-public class InteractionUI : MonoBehaviour, ICommonSetUI
+public class InteractionUI : UIBase
 {
     int currentIndex = 0;
     int activeSlotCnt = 0;
@@ -116,12 +116,12 @@ public class InteractionUI : MonoBehaviour, ICommonSetUI
 
     #region Interface
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         slotGroup.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         slotGroup.SetActive(false);
     }

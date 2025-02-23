@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EtcUI : MonoBehaviour
+public class EtcUI : UIBase
 {
     [SerializeField] GameObject saveObject;
     [SerializeField] GameObject clearObject;

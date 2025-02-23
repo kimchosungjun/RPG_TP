@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UIEnums;
 using System.Collections;
 
-public class PlayerStatusUI : StatusUI, ICommonSetUI
+public class PlayerStatusUI : StatusUI
 {
     /******************************************/
     /*****************  변수  *****************/
@@ -176,12 +176,12 @@ public class PlayerStatusUI : StatusUI, ICommonSetUI
     /******************************************/
 
     #region Interface Method
-    public void TurnOn()
+    public override void TurnOn()
     {
         statusParentObject.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         statusParentObject.SetActive(false);
     }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameUICtrl : MonoBehaviour
 {
+   UIBase uiBase = new UIBase();
+
     #region Variable
     bool isConversationState = false;
     private GAMEUI gameUI = GAMEUI.NONE;
@@ -77,7 +79,6 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] DialogueUI dialogueUI;
     [SerializeField] SettingUI settingUI;
     [SerializeField] GameExitUI gameExitUI;
-    [SerializeField] ShopUI shopUI;
     [SerializeField] EtcUI etcUI;
 
     public IndicatorUI GetIndicatorUI { get { return indicatorUI; } }
@@ -93,7 +94,6 @@ public class GameUICtrl : MonoBehaviour
     public DialogueUI GetDialogueUI { get { return  dialogueUI; } } 
     public SettingUI GetSettingUI { get { return settingUI; } } 
     public GameExitUI GetGameExitUI { get {  return gameExitUI; } }
-    public ShopUI GetShopUI { get { return shopUI; } } 
     public EtcUI GetEtcUI { get {   return etcUI; } }
 
     // 나중에 Awake로 변경
@@ -129,11 +129,11 @@ public class GameUICtrl : MonoBehaviour
         if(inputKeyUISet.Count!=0)
             inputKeyUISet.Clear();
 
-        inputKeyUISet.Add(questUI);
-        inputKeyUISet.Add(inventoyUI);
-        inputKeyUISet.Add(playerPartyUI);
-        inputKeyUISet.Add(settingUI);
-        inputKeyUISet.Add(gameExitUI);
+        //inputKeyUISet.Add(questUI);
+        //inputKeyUISet.Add(inventoyUI);
+        //inputKeyUISet.Add(playerPartyUI);
+        //inputKeyUISet.Add(settingUI);
+        //inputKeyUISet.Add(gameExitUI);
     }
 
     public void UIInit()

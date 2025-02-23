@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UIEnums;
 
 
-public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
+public class PlayerPartyUI : UIBase
 {
     bool isActive = false;
     ITurnOnOffUI[] partyUISet;
@@ -99,7 +99,7 @@ public class PlayerPartyUI : MonoBehaviour, IInputKeyUI
     #endregion
 
     // Game UI Ctrl
-    public void InputKey()
+    public override void InputKey()
     {
         isActive = !isActive;
         if (isActive)

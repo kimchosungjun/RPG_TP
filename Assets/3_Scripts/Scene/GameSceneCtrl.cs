@@ -15,6 +15,11 @@ public class GameSceneCtrl : MonoBehaviour
         Instantiate(SharedMgr.ResourceMgr.LoadResource<Transform>(uiPath).gameObject);
     }
 
+    private void Start()
+    {
+        SharedMgr.PhotonMgr.CreateSyncObject();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))

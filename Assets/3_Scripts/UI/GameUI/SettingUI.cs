@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingUI : MonoBehaviour, IInputKeyUI
+public class SettingUI : UIBase
 {
     #region Variable
     bool isActive = false;
@@ -66,7 +66,7 @@ public class SettingUI : MonoBehaviour, IInputKeyUI
         btnImages[2].sprite = SharedMgr.ResourceMgr.GetSpriteAtlas("Icon_Atlas", "Back_Icon");
     }
 
-    public void InputKey()
+    public override void InputKey()
     {
         if (isActive)
         {

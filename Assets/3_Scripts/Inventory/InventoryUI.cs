@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ItemEnums;
 
-public class InventoryUI : MonoBehaviour, IInputKeyUI
+public class InventoryUI : UIBase
 {
     #region UI
     [SerializeField, Header("UI Parent : Use for On/Off")] GameObject inventoryObject;
@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour, IInputKeyUI
     }
 
     #region Input : I (Only Window)
-    public void InputKey()
+    public override void InputKey()
     {
         if (inventoryObject.activeSelf == true)
         {

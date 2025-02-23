@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
+public class PlayerChangeUI : UIBase
 {
 
     [SerializeField] PlayerChangeButton[] buttons;
@@ -152,12 +152,12 @@ public class PlayerChangeUI : MonoBehaviour, ICommonSetUI
 
     #region Interface
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         uiFrameParent.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         warnWindow.gameObject.SetActive(false);
         uiFrameParent.SetActive(false);

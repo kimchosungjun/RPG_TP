@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowGetItemUI : MonoBehaviour, ICommonSetUI
+public class ShowGetItemUI : UIBase
 {
     [SerializeField] ShowGetItemSlot[] slots;
     [SerializeField] GameObject slotGroupParent;
@@ -31,12 +31,12 @@ public class ShowGetItemUI : MonoBehaviour, ICommonSetUI
         }
     }
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         slotGroupParent.SetActive(true);
     }
 
-    public void TurnOff()
+    public override void TurnOff()
     {
         slotGroupParent.SetActive(false);
     }

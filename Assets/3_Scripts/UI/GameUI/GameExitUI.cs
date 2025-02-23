@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameExitUI : MonoBehaviour, IInputKeyUI
+public class GameExitUI : UIBase
 {
     bool isActive =false;
     [SerializeField] GameObject gameExitWindow;
@@ -21,7 +21,7 @@ public class GameExitUI : MonoBehaviour, IInputKeyUI
         frameImages[2].sprite = redBtnSprite;
     }
 
-    public void InputKey()
+    public override void InputKey()
     {
         if (isActive)
         {
