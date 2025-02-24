@@ -14,7 +14,6 @@ public class InventoryInfoUI : MonoBehaviour
     public void TurnOffCurrentInfo()
     {
         if (InfoObject[currentIndex].activeSelf == false) return;
-
         SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.CurrentItemData = null;
         InfoObject[currentIndex].SetActive (false);
         topIndicateObject.SetActive(false);

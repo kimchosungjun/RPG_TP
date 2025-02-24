@@ -9,7 +9,6 @@ public class QuestUI : UIBase
     [SerializeField] QuestInfoUI infoUI;
     [SerializeField] GameObject questFrameParent;
 
-    bool isActive = false;
     List<QuestSOData> soDatas = null;
     public void Init()
     {
@@ -71,18 +70,20 @@ public class QuestUI : UIBase
 
     public override void InputKey()
     {
-        isActive = !isActive;
-        if (isActive)
+        isActiveState = !isActiveState;
+        if (isActiveState)
         {
             UpdateQuestDatas();
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.QUEST;
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PushUIPopup(this);
         }
         else
         {
             infoUI.InActive();
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
         }
-        questFrameParent.SetActive(isActive);
+        questFrameParent.SetActive(isActiveState);
     }
 
     public void ExitQuestUI()

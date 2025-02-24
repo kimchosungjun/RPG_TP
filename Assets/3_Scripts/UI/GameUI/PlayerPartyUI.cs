@@ -7,11 +7,11 @@ using UIEnums;
 
 public class PlayerPartyUI : UIBase
 {
-    bool isActive = false;
     ITurnOnOffUI[] partyUISet;
     PARTY currentShowType = PARTY.STATUS;
     public PARTY GetCurrentUIType { get { return currentShowType; }  }
-    
+
+    [SerializeField] Animator anim;    
     [SerializeField] GameObject playerPartyUISetFrame;
     [SerializeField] PartySideBarUI partySideBarUI;
     [SerializeField] PlayerPartyStatusUI playerPartyStatusUI;
@@ -101,23 +101,37 @@ public class PlayerPartyUI : UIBase
     // Game UI Ctrl
     public override void InputKey()
     {
-        isActive = !isActive;
-        if (isActive)
+        isActiveState = !isActiveState;
+        if (isActiveState)
         {
             Setup();
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
             if (playerPartyUISetFrame.activeSelf == false)
                 playerPartyUISetFrame.SetActive(true);
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = GAMEUI.PLAYER_PARTY;
-
-            if(currentShowType != PARTY.MAX)
+            OpenAnimation();
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PushUIPopup(this);
+            if (currentShowType != PARTY.MAX)
                 updateUIList[(int)currentShowType].UpdateData();
         }
         else
         {
+            anim.Play("Idle");
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
             if (playerPartyUISetFrame.activeSelf)
                 playerPartyUISetFrame.SetActive(false);
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = GAMEUI.NONE;
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
         }
+    }
+    enum PartyAnim { Idle=0, Open=1, Close=2}   
+
+    public override void OpenAnimation()
+    {
+        anim.Play("PartyUIOpen");
+    }
+
+    public override void CloseAnimation()
+    {
+        anim.SetInteger("State", (int)PartyAnim.Close);
     }
 
     // Side Bar 

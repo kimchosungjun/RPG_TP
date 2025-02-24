@@ -26,6 +26,7 @@ public class InventoryUI : UIBase
 
     ItemData currentItemData = null;
     public ItemData CurrentItemData { get { return currentItemData; } set { currentItemData = value; } }
+    [SerializeField] Animator anim;
     #endregion
 
     //int inventoryCurrentIndex = 0;
@@ -52,7 +53,9 @@ public class InventoryUI : UIBase
             return;
         }
 
+        isActiveState = false;
         inventoryInfoUI.TurnOffCurrentInfo();
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
     }
 
     #region Input : I (Only Window)
@@ -60,14 +63,20 @@ public class InventoryUI : UIBase
     {
         if (inventoryObject.activeSelf == true)
         {
+            anim.Play("Idle");
             InActiveAllUI();
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
+            isActiveState = false;
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
         }
         else
         {
+            anim.Play("InvenOpen");
             inventoryObject.SetActive(true);
             ChangeShowItemType(currentShowType);
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.INVENTORY;
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PushUIPopup(this);
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
+            isActiveState = true;
         }
     }
     #endregion
@@ -129,7 +138,7 @@ public class InventoryUI : UIBase
             consumeUseUI.InActive();
             return;
         }
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
+        SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
         inventoryInfoUI.TurnOffCurrentInfo();
         inventoryObject.SetActive(false);
     }

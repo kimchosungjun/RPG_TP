@@ -2,47 +2,12 @@ using System.Collections.Generic;
 using UIEnums;
 using UnityEngine;
 
-
 public class GameUICtrl : MonoBehaviour
 {
-   UIBase uiBase = new UIBase();
+    UIBaseControl uiBaseControl = new UIBaseControl();
+    public UIBaseControl GetUIBaseControl { get { return uiBaseControl; } }
 
-    #region Variable
-    bool isConversationState = false;
-    private GAMEUI gameUI = GAMEUI.NONE;
-    public GAMEUI CurrentOpenUI 
-    {
-        get
-        {
-            return gameUI;
-        }
-        set
-        {
-            gameUI = value;
-            SetCurrentUI(value);
-        }
-    } 
-
-    List<IInputKeyUI> inputKeyUISet = new List<IInputKeyUI>();  
-
-    public void SetCurrentUI(GAMEUI _curUI)
-    {
-        if(_curUI == GAMEUI.NONE)
-        {
-            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
-            SharedMgr.CursorMgr.SetCursorVisibleState(false);
-            PlayUISFX(true);
-        }
-        else
-        {
-            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
-            SharedMgr.CursorMgr.SetCursorVisibleState(true);
-            PlayUISFX(false);
-        }
-    }
-    #endregion
-
-    #region InputKeyUI Enum (Local Enum)
+    #region InputKeyUI Enum
 
     public enum InputKeyUITypes
     {
@@ -56,6 +21,7 @@ public class GameUICtrl : MonoBehaviour
 
     #endregion
 
+    #region Link UI : Private
     [Header("Raw Render : Model UI")]
     [SerializeField] UIModelCam modelCam;
     public UIModelCam GetModelCam { get { return modelCam; } }
@@ -63,7 +29,6 @@ public class GameUICtrl : MonoBehaviour
     [Header("Camera Space")]
     [SerializeField] DashGaugeUI dashGaugeUI;
     public DashGaugeUI GetDashGaugeUI { get { return dashGaugeUI; } }
-
 
     [Header("Overlap")]
     [SerializeField] IndicatorUI indicatorUI;
@@ -80,7 +45,9 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] SettingUI settingUI;
     [SerializeField] GameExitUI gameExitUI;
     [SerializeField] EtcUI etcUI;
+    #endregion
 
+    #region UI Property
     public IndicatorUI GetIndicatorUI { get { return indicatorUI; } }
     public SubBossStatusUI GetBossStatusUI { get { return bossStatusUI; } }
     public PlayerStatusUI GetPlayerStatusUI { get { return playerStatusUI; } }
@@ -95,8 +62,13 @@ public class GameUICtrl : MonoBehaviour
     public SettingUI GetSettingUI { get { return settingUI; } } 
     public GameExitUI GetGameExitUI { get {  return gameExitUI; } }
     public EtcUI GetEtcUI { get {   return etcUI; } }
+    #endregion
 
-    // 나중에 Awake로 변경
+    /*****************************/
+    /********* AWAKE **********/
+    /*****************************/
+    
+    #region Init
     private void Awake()
     {
         UILink();
@@ -126,14 +98,11 @@ public class GameUICtrl : MonoBehaviour
         if(settingUI==null) settingUI = GetComponentInChildren<SettingUI>();
         if(gameExitUI ==null) gameExitUI = GetComponentInChildren<GameExitUI>(); 
 
-        if(inputKeyUISet.Count!=0)
-            inputKeyUISet.Clear();
-
-        //inputKeyUISet.Add(questUI);
-        //inputKeyUISet.Add(inventoyUI);
-        //inputKeyUISet.Add(playerPartyUI);
-        //inputKeyUISet.Add(settingUI);
-        //inputKeyUISet.Add(gameExitUI);
+        uiBaseControl.AddUIBase(questUI);
+        uiBaseControl.AddUIBase(inventoyUI);
+        uiBaseControl.AddUIBase(playerPartyUI);
+        uiBaseControl.AddUIBase(settingUI);
+        uiBaseControl.AddUIBase(gameExitUI);
     }
 
     public void UIInit()
@@ -157,27 +126,41 @@ public class GameUICtrl : MonoBehaviour
         settingUI.Init();
         gameExitUI.Init();
     }
+    #endregion
 
+    /*****************************/
+    /******** UPDATE *********/
+    /*****************************/
+
+    #region Manage Input 
     private void Update()
     {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR
-        // Cursor
-        if(CanOpenUI(gameUI) && isConversationState == false)
+        InputCursor();
+        InputConversation();
+        InputUIKey();
+#endif
+    }
+
+    void InputCursor()
+    {
+        if (uiBaseControl.IsOpenUI() == false && isConversationState == false)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true); 
+                SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
                 SharedMgr.CursorMgr.SetCursorVisibleState(true);
             }
             else if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                if (IsOpenUI() == false)
-                    return;
-                SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);   
+                SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
                 SharedMgr.CursorMgr.SetCursorVisibleState(false);
             }
         }
+    }
 
+    void InputConversation()
+    {
         if (isConversationState)
         {
             if (dialogueUI.GetIsChoiceActive)
@@ -202,101 +185,112 @@ public class GameUICtrl : MonoBehaviour
                 dialogueUI.InputNext();
             }
         }
-        else
+    }
+
+    void InputUIKey()
+    {
+        if (isConversationState) return;
+
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            // Input Key
-            if (Input.GetKeyDown(KeyCode.I) && CanOpenUI(GAMEUI.INVENTORY))
+            uiBaseControl.GetUIBase(InputKeyUITypes.Inven).InputKey();
+            ManageControl();
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            uiBaseControl.GetUIBase(InputKeyUITypes.Quest).InputKey();
+            ManageControl();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            uiBaseControl.GetUIBase(InputKeyUITypes.Party).InputKey();
+            ManageControl();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            uiBaseControl.GetUIBase(InputKeyUITypes.Setting).InputKey();
+            ManageControl();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (uiBaseControl.IsOpenUI() == false)
+                uiBaseControl.GetUIBase(InputKeyUITypes.Exit).InputKey();
+            else
+                uiBaseControl.PeekUIPopup()?.InputKey();
+            ManageControl();
+        }
+
+        // Interaction
+        if (interactionUI.CanInput() && !uiBaseControl.IsOpenUI())
+        {
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                inputKeyUISet[(int)InputKeyUITypes.Inven].InputKey();
-            }
-            if (Input.GetKeyDown(KeyCode.J) && CanOpenUI(GAMEUI.QUEST))
-            {
-                inputKeyUISet[(int)InputKeyUITypes.Quest].InputKey();
-            }
-            if (Input.GetKeyDown(KeyCode.P) && CanOpenUI(GAMEUI.PLAYER_PARTY))
-            {
-                inputKeyUISet[(int)InputKeyUITypes.Party].InputKey();
-            }
-            if (Input.GetKeyDown(KeyCode.O) && CanOpenUI(GAMEUI.SETTING))
-            {
-                inputKeyUISet[(int)InputKeyUITypes.Setting].InputKey();
-            }
-            if (Input.GetKeyDown(KeyCode.Escape) && CanOpenUI(GAMEUI.EXIT))
-            {
-                inputKeyUISet[(int)InputKeyUITypes.Exit].InputKey();
+                interactionUI.Interaction();
             }
 
-            if (interactionUI.CanInput() && CanOpenUI(GAMEUI.INTERACT))
+            float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
+            if (scroll > 0f)
             {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    interactionUI.Interaction();
-                }
-
-                float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-                if (scroll > 0f)
-                {
-                    interactionUI.InputUpKey();
-                }
-                if (scroll < 0f)
-                {
-                    interactionUI.InputDownKey();
-                }
+                interactionUI.InputUpKey();
+            }
+            if (scroll < 0f)
+            {
+                interactionUI.InputDownKey();
             }
         }
-#endif
     }
 
-    public void InputUIIcon(InputKeyUITypes _type)
+    public void ManageControl()
     {
-        inputKeyUISet[(int)_type].InputKey();
+        if (uiBaseControl.IsHaveActiveUI())
+        {
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
+            SharedMgr.CursorMgr.SetCursorVisibleState(true);
+        }
+        else
+        {
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
+            SharedMgr.CursorMgr.SetCursorVisibleState(false);
+        }
     }
 
+    public void InputUIIcon(InputKeyUITypes _type) { uiBaseControl.GetUIBase(_type).InputKey(); }
+    #endregion
+
+    #region Relate Coversation
+
+    bool isConversationState = false;
     public bool CanAccessUI() { return !isConversationState; }
 
     public void StartConversation()
     {
         isConversationState = true;
-
         indicatorUI.TurnOff();  
         playerStatusUI.TurnOff();
         playerChangeUI.TurnOff();
         showGetItemUI.TurnOff();
         interactionUI.TurnOff();
-
         SharedMgr.CursorMgr.SetCursorVisibleState(true);
     }
 
     public void EndConversation()
     {
         isConversationState = false;
-        
         indicatorUI.TurnOn();
         playerStatusUI.TurnOn();
         playerChangeUI.TurnOn();
         showGetItemUI.TurnOn();
         interactionUI.TurnOn();
-
         SharedMgr.CursorMgr.SetCursorVisibleState(false);
     }
-
-    public bool CanOpenUI(GAMEUI _uiType)
+    public bool CanControlPlayer()
     {
-        if (CurrentOpenUI == GAMEUI.NONE)
-            return SharedMgr.GameCtrlMgr.GetPlayerCtrl.CanInteractUI();
-
-        if (_uiType == CurrentOpenUI)
-            return true;
-
-        return false;
+        if (isConversationState || uiBaseControl.IsOpenUI())
+            return false;
+        return true;
     }
-
-    public bool IsOpenUI()
-    {
-        if (CurrentOpenUI == GAMEUI.NONE)
-            return true;
-        return false;
-    }
+    #endregion
 
     public void PlayUISFX(bool _isNone)
     {
@@ -304,12 +298,5 @@ public class GameUICtrl : MonoBehaviour
             SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_CLOSE_SFX);
         else
             SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.INVEN_OPEN_SFX);
-    }
-
-    public bool CanControlPlayer()
-    {
-        if (isConversationState || CurrentOpenUI != GAMEUI.NONE)
-            return false;
-        return true;
     }
 }

@@ -12,7 +12,7 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
     [SerializeField] PlayerPartyStatusButton[] buttons;
     [SerializeField, Tooltip("0:HP, 1:Atk, 2:Def, 3:Cri, 4:Lv, 5:Name, 6 :ClassText")] Text[] characterStatTexts;
     [SerializeField] Slider expSlider;
-
+    [SerializeField, Tooltip("0 :Atk, 1:Cri")] Text[] increaseValueTexts;
     int currentID = -1;
 
     public void Init()
@@ -96,6 +96,28 @@ public class PlayerPartyStatusUI : MonoBehaviour, ITurnOnOffUI, IUpdateUI
         characterStatTexts[3].text = _stat.Critical * 100 + "%";
         characterStatTexts[4].text = "Lv. "+ curLv + "/" + lvTable.maxLevel;
         characterStatTexts[5].text = _stat.GetActorName;
+
+        if(_stat.GetWeaponStat() == null)
+        {
+            increaseValueTexts[0].gameObject.SetActive(false);
+            increaseValueTexts[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            increaseValueTexts[0].text = $"+{_stat.GetWeaponStat().GetAttackValue}";
+            if (_stat.GetWeaponStat().GetCirticalValue < 0.1f)
+            {
+                increaseValueTexts[1].text = string.Empty;
+                increaseValueTexts[1].gameObject.SetActive(false);
+                increaseValueTexts[0].gameObject.SetActive(true);
+            }
+            else
+            {
+                increaseValueTexts[1].text = $"+{_stat.GetWeaponStat().GetCirticalValue * 100}";
+                increaseValueTexts[0].gameObject.SetActive(true);
+                increaseValueTexts[1].gameObject.SetActive(true);
+            }
+        }
 
         #region Class
         // Later Revise 

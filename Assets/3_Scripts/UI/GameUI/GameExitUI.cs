@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GameExitUI : UIBase
 {
-    bool isActive =false;
+ 
     [SerializeField] GameObject gameExitWindow;
     [SerializeField, Tooltip("0:Frame, 1:YesBtn, 2:NoBtn")] Image[] frameImages;
 
@@ -23,16 +23,16 @@ public class GameExitUI : UIBase
 
     public override void InputKey()
     {
-        if (isActive)
+        if (isActiveState)
         {
-            isActive = false;
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
+            isActiveState = false;
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
             gameExitWindow.SetActive(false);
             return;
         }
         gameExitWindow.SetActive(true);
-        isActive = true;
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.EXIT;
+        isActiveState = true;
+        SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PushUIPopup(this);
     }
 
     public void PressConfirmBtn()

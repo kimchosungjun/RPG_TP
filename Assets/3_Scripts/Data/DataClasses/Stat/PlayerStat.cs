@@ -118,6 +118,8 @@ public class PlayerStat : BaseStat
         criticalValue -= weaponStat.GetCirticalValue;
         weaponStat = null;
     }
+
+    public WeaponIncreaseStat GetWeaponStat() { return weaponStat; }
     #endregion
 }
 

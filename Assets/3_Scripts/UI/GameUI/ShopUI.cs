@@ -28,7 +28,7 @@ public class ShopUI : MonoBehaviour
         }
 
         shopWindow.SetActive(true);
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SHOP;
+        //SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SHOP;
     }
 
 
@@ -47,7 +47,6 @@ public class ShopUI : MonoBehaviour
     {
         SharedMgr.SoundMgr.PressButtonSFX();
         shopWindow.SetActive(false);
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
-
+        SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
     }
 }

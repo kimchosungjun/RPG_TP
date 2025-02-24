@@ -4,12 +4,12 @@ using UnityEngine.UI;
 public class SettingUI : UIBase
 {
     #region Variable
-    bool isActive = false;
     [SerializeField] GameObject settingWindow;
     [SerializeField] GraphicControlUI graphicControlUI;
     [SerializeField] SoundControlUI soundControlUI;
     [SerializeField, Tooltip("0:Graphic, 1:Sound, 2:Back")] Image[] btnImages;
     [SerializeField] Text curText;
+    [SerializeField] Animator anim;
     ITurnOnOffUI[] settingUIs;
 
     Setting curState = Setting.Graphic;
@@ -68,16 +68,21 @@ public class SettingUI : UIBase
 
     public override void InputKey()
     {
-        if (isActive)
+        if (isActiveState)
         {
+            SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(false);
+            anim.Play("Idle");
             settingWindow.SetActive(false);
-            isActive = false;
-            SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.NONE;
+            isActiveState = false;
+            SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PopUIPopup();
             return;
         }
-        isActive = true;
+        
+        isActiveState = true;
+        SharedMgr.GameCtrlMgr.GetPlayerCtrl.SetPlayerControl(true);
         settingWindow.SetActive(true);
-        SharedMgr.UIMgr.GameUICtrl.CurrentOpenUI = UIEnums.GAMEUI.SETTING;
+        SharedMgr.UIMgr.GameUICtrl.GetUIBaseControl.PushUIPopup(this);
+        anim.Play("SettingOpen");
     }
 
     #endregion
