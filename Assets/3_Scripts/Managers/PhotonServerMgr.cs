@@ -21,6 +21,13 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     public bool IsInLobby() { return PhotonNetwork.InLobby; }
     public void JoinLobby() { PhotonNetwork.JoinLobby(); }
     public void LeaveLobby() { PhotonNetwork.LeaveLobby(); }
+
+    public override void OnJoinedLobby() { base.OnJoinedLobby(); }
+
+    /// <summary>
+    /// Manage Queue
+    /// </summary>
+    public void OnLobby() { PhotonNetwork.IsMessageQueueRunning = true; }
     #endregion
 
     /***************************/
@@ -67,6 +74,7 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
             IsVisible = true,
             MaxPlayers = maxPlayer,
             EmptyRoomTtl = 0
+
         };
         PhotonNetwork.JoinOrCreateRoom(serverName, option, null);
     }

@@ -28,14 +28,6 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
     }
 
-    public override void OnJoinedLobby() { base.OnJoinedLobby(); }
-
-    /// <summary>
-    /// Manage Queue
-    /// </summary>
-    public void OnLobby() { PhotonNetwork.IsMessageQueueRunning = true; }
-
-
     #region Test Function
     public void CreateSyncObject()
     {

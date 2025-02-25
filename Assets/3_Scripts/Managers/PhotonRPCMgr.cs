@@ -34,6 +34,7 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     /***************************/
     /*********  Game *********/
     /***************************/
+    
     #region Manage SyncObject
     public Dictionary<int, SyncObjectData> syncObjectGroup = new Dictionary<int, SyncObjectData>();
 
@@ -74,7 +75,6 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
         return path;
     }
     #endregion
-
 
     #region Active State
     public void DoSyncObjectState(int _viewID, bool _isActive, bool _isMasterControl = true)

@@ -3,6 +3,7 @@ using UtilEnums;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public partial class SceneMgr : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public partial class SceneMgr : MonoBehaviour
         {
             if(nextLoadScene == _changeScene)       
             {
-                Debug.LogError("잘못된 씬 로딩 호출 방법");
+                Debug.LogError("Scene Load Error!! : Same Scene Load");
                 return;
             }
             nextLoadScene = _changeScene;
@@ -42,20 +43,22 @@ public partial class SceneMgr : MonoBehaviour
 
 
     /// <summary>
-    /// 로딩씬에 의해 호출
+    ///  Call By Loading Scene : Loading UI
     /// </summary>
-    public void LoadingScene(UnityAction _action = null)  { StartCoroutine(CLoadingScene((int)nextLoadScene, _action));}
+    public void LoadingScene(UnityAction _action = null) { StartCoroutine(CLoadingScene((int)nextLoadScene, _action)); }
 
     IEnumerator CLoadingScene(int _loadIndex, UnityAction _action = null)
     {
-        asyncOperation = SceneManager.LoadSceneAsync(_loadIndex);
-        asyncOperation.allowSceneActivation = false;
-        LoadingUICtrl _uiController = SharedMgr.UIMgr.LoadingUICtrl;
+        if (nextLoadScene == SCENES.GAME)
+            PhotonNetwork.LoadLevel(_loadIndex, ref asyncOperation);
+        else
+            asyncOperation = SceneManager.LoadSceneAsync(_loadIndex);
 
+        LoadingUICtrl _uiController = SharedMgr.UIMgr.LoadingUICtrl;
         float fakeProgress = 0f;
         float realProgress = 0f;
         
-        // 로딩 시간을 의도적으로 늘림
+        // Fake Loading
         while (fakeProgress < 0.9f)
         {
             realProgress = asyncOperation.progress;
@@ -72,6 +75,8 @@ public partial class SceneMgr : MonoBehaviour
         if (_action!=null)
             _action();   
     }
+
+
 
     public bool CheckEndSceneLoad() 
     { 
