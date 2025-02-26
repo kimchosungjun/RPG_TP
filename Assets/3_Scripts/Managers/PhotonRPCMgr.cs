@@ -34,47 +34,6 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     /***************************/
     /*********  Game *********/
     /***************************/
-    
-    #region Manage SyncObject
-    public Dictionary<int, SyncObjectData> syncObjectGroup = new Dictionary<int, SyncObjectData>();
-
-    public void AddSyncObjectData(int _viewID, string _path)
-    {
-        SyncObjectData syncObject = new SyncObjectData();
-        syncObject.photonViewID = _viewID;
-        syncObject.resourcePath = _path;
-
-        if (syncObjectGroup.ContainsKey(_viewID))
-        {
-            Debug.LogError("동일한 View ID 존재!! ");
-            return;
-        }
-        syncObjectGroup.Add(_viewID, syncObject);
-    }
-
-    public void UpdateSyncObjectData()
-    {
-        if (PhotonNetwork.IsMasterClient == false)
-            return;
-
-        PhotonView[] views = FindObjectsOfType<PhotonView>();
-        int viewCnt = views.Length;
-        for (int i = 0; i < viewCnt; i++)
-        {
-            if (syncObjectGroup.ContainsKey(views[i].ViewID))
-                continue;
-            syncObjectGroup.Remove(views[i].ViewID);
-        }
-    }
-
-    public string GetPath(int _viewID)
-    {
-        string path = string.Empty;
-        if (syncObjectGroup.ContainsKey(_viewID))
-            path = syncObjectGroup[_viewID].resourcePath;
-        return path;
-    }
-    #endregion
 
     #region Active State
     public void DoSyncObjectState(int _viewID, bool _isActive, bool _isMasterControl = true)

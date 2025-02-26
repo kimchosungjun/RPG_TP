@@ -89,7 +89,6 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
-        UpdateSyncObjectData();
     }
     #endregion
 
