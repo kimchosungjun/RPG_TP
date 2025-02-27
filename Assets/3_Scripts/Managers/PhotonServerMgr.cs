@@ -48,12 +48,14 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
     const int maxPlayer = 4;
     protected string serverName = "Ashen";
 
-    public void JoinRoom() { PhotonNetwork.JoinRoom(serverName); }
+    public void ManageMessageQueueRunning(bool _messageQueue) { PhotonNetwork.IsMessageQueueRunning = _messageQueue;  }
+
+    public void JoinRoom()  { PhotonNetwork.JoinRoom(serverName); }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        ManageMessageQueueRunning(true);
         base.OnJoinRoomFailed(returnCode, message);
-        
         switch (returnCode)
         {
             case ErrorCode.GameDoesNotExist:
@@ -82,6 +84,7 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        ManageMessageQueueRunning(false);
         base.OnJoinedRoom();
         SharedMgr.SceneMgr.LoadScene(UtilEnums.SCENES.GAME, true);
     }

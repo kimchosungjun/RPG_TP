@@ -2898,6 +2898,7 @@ GameObject:
   - component: {fileID: 527695921728382119}
   - component: {fileID: 6691503675938299068}
   - component: {fileID: 2653725773290836737}
+  - component: {fileID: 2080838317792535082}
   m_Layer: 8
   m_Name: Archer
   m_TagString: Untagged
@@ -3125,6 +3126,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 2653725773290836737}
+  - {fileID: 2080838317792535082}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3144,6 +3146,42 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &2080838317792535082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990332241429134673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 3
+    SynchronizeType: 1
+    Name: States
+  - Type: 3
+    SynchronizeType: 1
+    Name: Combo
+  - Type: 1
+    SynchronizeType: 2
+    Name: PlaneVelocity
+  - Type: 1
+    SynchronizeType: 2
+    Name: AttackSpeed
+  - Type: 3
+    SynchronizeType: 1
+    Name: HitCombo
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsFallDownGround
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &4005522734258762090
 GameObject:
   m_ObjectHideFlags: 0

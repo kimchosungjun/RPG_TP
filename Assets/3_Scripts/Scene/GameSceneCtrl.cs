@@ -14,4 +14,9 @@ public class GameSceneCtrl : MonoBehaviour
         string uiPath = "UI/" + "UIGroup";
         Instantiate(SharedMgr.ResourceMgr.LoadResource<Transform>(uiPath).gameObject);
     }
+
+    private void Start()
+    {
+        SharedMgr.PhotonMgr.ManageMessageQueueRunning(true);
+    }
 }
