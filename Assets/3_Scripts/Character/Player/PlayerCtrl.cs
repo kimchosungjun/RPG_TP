@@ -28,7 +28,7 @@ public class PlayerCtrl : MonoBehaviour
     public List<BasePlayer> GetPlayers { get { return players; } }
     [Header("Manage Party Buff"), SerializeField] PartyConditionControl partyConditionControl;
     public bool CanInteractUI() { return GetPlayer.CanInteractUI(); }
-    Transform idCanvasTransform = null;
+
     #endregion
 
     #region Life Cycle
@@ -36,7 +36,6 @@ public class PlayerCtrl : MonoBehaviour
     private void Awake()
     {
         InitPartyData();
-        //CreatePlayerIDCanvas();
     }
 
     private void Start()
@@ -50,7 +49,6 @@ public class PlayerCtrl : MonoBehaviour
         if (isLockPlayerControl || SharedMgr.UIMgr.GameUICtrl.CanControlPlayer() == false) return;
         players[currentPlayerIndex].Execute();
         InputChangeKey();
-        IDFollowPlayer();
     }
 
     private void FixedUpdate() 
@@ -61,9 +59,9 @@ public class PlayerCtrl : MonoBehaviour
     }
     #endregion
 
-    /*******************************************/
+    /**********************************************/
     /************ 플레이어 변경 ****************/
-    /*******************************************/
+    /**********************************************/
 
     #region Change Player 
 
@@ -146,22 +144,6 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     public void CoolDown() { canChangePlayer = true; }
-    #endregion
-
-    #region Player ID
-    public void CreatePlayerIDCanvas()
-    {
-        idCanvasTransform = SharedMgr.ResourceMgr.PhotonSyncInstantiate("Prefabs/IDIndicator");
-        PlayerIDUI idUI = idCanvasTransform.GetComponent<PlayerIDUI>();
-        idUI?.SetText(SharedMgr.SceneMgr.GetPlayerID());
-    }
-
-    public void IDFollowPlayer()
-    {
-        if (idCanvasTransform != null)
-            idCanvasTransform.position= players[currentPlayerIndex].transform.position;
-    }
-
     #endregion
 
     /**********************************************/
