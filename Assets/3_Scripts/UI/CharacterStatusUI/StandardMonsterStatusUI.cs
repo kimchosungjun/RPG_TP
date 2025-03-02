@@ -73,10 +73,11 @@ public class StandardMonsterStatusUI : StatusUI
             UpdateStatusData();
     }
 
-    /******************************************/
+    /*************************************/
     /***** HP UI 위치,회전값 최신화 ******/
     /******  HP 감소 이펙트 최신화 *******/
-    /******************************************/
+    /*************************************/
+
     #region Update Status Information
     public void UpdatePostion()
     {

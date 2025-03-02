@@ -8,6 +8,7 @@ using UtilEnums;
 public class IndicatorUI : UIBase
 {
     [SerializeField] GameObject allIndicatorParent;
+    
     public void Init()
     {
         SetImages();
@@ -259,6 +260,21 @@ public class IndicatorUI : UIBase
         isActiveZoneIndicator = false;
         zoneAnim.SetInteger("State", 2);
         zoneCor = null;
+    }
+    #endregion
+
+    #region Talk UI
+    [SerializeField] TalkUI talkUI;
+    public TalkUI GetTalkUI 
+    {
+        get 
+        {
+            if (talkUI == null)
+            {
+                talkUI = GetComponentInChildren<TalkUI>();
+            }
+            return talkUI; 
+        }
     }
     #endregion
 }
