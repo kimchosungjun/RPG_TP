@@ -46,7 +46,7 @@ public class WarriorActionControl : PlayerActionControl
         attackData.SetData(normalAttackSOData.GetAttackEffectType(_combo),
             normalAttackSOData.GetActionMultiplier(_combo)*stat.Attack*Randoms.GetCritical(stat.Critical), normalAttackSOData.GetMaintainTime(_combo));
         normalAttacks[_combo].SetTransferData(attackData, null);
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_CAST, normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation);
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_CAST, normalAttacks[_combo].transform.position, normalAttacks[_combo].transform.rotation, true);
     }
 
     public void StopNormalAttack(int _combo) 
@@ -58,7 +58,7 @@ public class WarriorActionControl : PlayerActionControl
     public void DoBuffParticle()
     {
         SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.BUFF_SFX);
-        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ATTACK_BUFF).GetComponent<ParticleAction>().
+        SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.ATTACK_BUFF, true).GetComponent<ParticleAction>().
            SetParticlePosition(transform.position, transform.rotation, 1f);
     }
 
@@ -84,7 +84,7 @@ public class WarriorActionControl : PlayerActionControl
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
            ultimateAttackSkillSOData.GetActionMultiplier * stat.Attack * Randoms.GetCritical(stat.Critical), ultimateAttackSkillSOData.GetMaintainEffectTime);
-        farThrowAttacks.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH).GetComponent<HitTriggerProjectile>());
+        farThrowAttacks.SetTransferData(attackData, null, SharedMgr.PoolMgr.GetPool(PoolEnums.OBJECTS.WARRIOR_SLASH, true).GetComponent<HitTriggerProjectile>());
     }
 
 

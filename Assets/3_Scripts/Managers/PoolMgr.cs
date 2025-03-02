@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PoolEnums;
+using Photon.Pun;
 
 public class PoolMgr : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PoolMgr : MonoBehaviour
     #region Object Manage Data Struct
     // Pool Parent Group
     Dictionary<OBJECTS, Transform> poolParentGroup = new Dictionary<OBJECTS, Transform>();
-    // Object Pool Groupww
+    // Object Pool Group
     Dictionary<OBJECTS, List<Transform>> objectPoolGroup = new Dictionary<OBJECTS, List<Transform>>();    
     // Pool Original Group
     Dictionary<OBJECTS, Transform> originalGroup = new Dictionary<OBJECTS, Transform>();
@@ -54,12 +55,13 @@ public class PoolMgr : MonoBehaviour
     /// <param name="_position"></param>
     /// <param name="_rotation"></param>
     /// <returns></returns>
-    public Transform GetPool(OBJECTS _poolObject, Vector3 _position, Quaternion _rotation)
+    public Transform GetPool(OBJECTS _poolObject, Vector3 _position, Quaternion _rotation, bool _isSync = false)
     {
-        Transform result = GetPool(_poolObject);
+        Transform result = GetPool(_poolObject, _isSync);
         result.position = _position;
         result.rotation = _rotation;
         result.gameObject.SetActive(true);
+        result.GetComponent<SyncPoolObject>()?.DoAnnounceActiveState(true);
         return result;
     }
 
@@ -83,7 +85,7 @@ public class PoolMgr : MonoBehaviour
     /// </summary>
     /// <param name="_poolObject"></param>
     /// <returns></returns>
-    public Transform GetPool(OBJECTS _poolObject)
+    public Transform GetPool(OBJECTS _poolObject, bool _isSync = false)
     {
         Transform result = null;
         if (poolParentGroup.ContainsKey(_poolObject) == false)
@@ -95,9 +97,13 @@ public class PoolMgr : MonoBehaviour
             go.transform.SetParent(this.transform, true); // Second Parameter = true : maintain own world position
             poolParentGroup.Add(_poolObject, go.transform);
 
-            result = SharedMgr.ResourceMgr.LoadResource<Transform>("Pools/" + Enums.GetEnumString<OBJECTS>(_poolObject));
+            string path = "Pools/" + Enums.GetEnumString<OBJECTS>(_poolObject);
+            result = SharedMgr.ResourceMgr.LoadResource<Transform>(path);
             originalGroup.Add(_poolObject, result);
-            result = Instantiate(result.gameObject).transform;
+            if (!_isSync)
+                result = Instantiate(result.gameObject).transform;
+            else
+                result = SharedMgr.ResourceMgr.PhotonSyncInstantiate(path);
             result.SetParent(go.transform, true);
 
             objectPoolGroup[_poolObject] = new List<Transform>();
@@ -105,12 +111,12 @@ public class PoolMgr : MonoBehaviour
         }
         else
         {
-            result = GetObjectInPool(_poolObject);
+            result = GetObjectInPool(_poolObject, _isSync);
         }
         return result;
     }
 
-    Transform GetObjectInPool(OBJECTS _poolObject)
+    Transform GetObjectInPool(OBJECTS _poolObject, bool _isSync = false)
     {
         List<Transform> list = objectPoolGroup[_poolObject];   
         int cnt = list.Count;
@@ -119,8 +125,11 @@ public class PoolMgr : MonoBehaviour
             if (list[i].gameObject.activeSelf == false)
                 return list[i];
         }
-
-        GameObject result = Instantiate(originalGroup[_poolObject].gameObject);
+        GameObject result;
+        if (!_isSync)
+            result = Instantiate(originalGroup[_poolObject].gameObject);
+        else
+            result = SharedMgr.ResourceMgr.PhotonSyncInstantiate("Pools/" + Enums.GetEnumString<OBJECTS>(_poolObject)).gameObject;
         list.Add(result.transform);
         result.transform.SetParent(poolParentGroup[_poolObject], true);
         return result.transform;
