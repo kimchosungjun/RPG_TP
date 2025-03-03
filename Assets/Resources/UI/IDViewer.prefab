@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 5816871138567489551}
   - component: {fileID: 4581101676744129660}
   - component: {fileID: 1348580843781118281}
+  - component: {fileID: 7712729768405601970}
   m_Layer: 0
   m_Name: IDViewer
   m_TagString: Untagged
@@ -231,7 +232,7 @@ Transform:
   m_Children:
   - {fileID: 1604519793653559204}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4581101676744129660
 MonoBehaviour:
@@ -265,7 +266,24 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7712729768405601970}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7712729768405601970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756514409832057823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

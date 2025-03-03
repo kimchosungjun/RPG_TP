@@ -29,6 +29,9 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Manage Party Buff"), SerializeField] PartyConditionControl partyConditionControl;
     public bool CanInteractUI() { return GetPlayer.CanInteractUI(); }
 
+    // ID Viewer
+    Transform idViewer = null;
+
     #endregion
 
     #region Life Cycle
@@ -36,6 +39,7 @@ public class PlayerCtrl : MonoBehaviour
     private void Awake()
     {
         InitPartyData();
+        CreateIDViewer();
     }
 
     private void Start()
@@ -49,6 +53,7 @@ public class PlayerCtrl : MonoBehaviour
         if (isLockPlayerControl || SharedMgr.UIMgr.GameUICtrl.CanControlPlayer() == false) return;
         players[currentPlayerIndex].Execute();
         InputChangeKey();
+        IDViewerFollowPlayer();
     }
 
     private void FixedUpdate() 
@@ -144,6 +149,22 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     public void CoolDown() { canChangePlayer = true; }
+    #endregion
+
+    #region Player ID Indicate UI
+
+    public void CreateIDViewer()
+    {
+        idViewer =  SharedMgr.ResourceMgr.PhotonSyncInstantiate("UI/IDViewer");
+        idViewer?.GetComponent<PlayerIDUI>().SetID(SharedMgr.SceneMgr.GetPlayerID());
+    }
+
+    public void IDViewerFollowPlayer()
+    {
+        if (idViewer != null)
+            idViewer.position = GetPlayer.transform.position;
+    }
+
     #endregion
 
     /**********************************************/
