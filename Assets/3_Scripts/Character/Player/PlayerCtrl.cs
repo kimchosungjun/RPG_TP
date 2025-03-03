@@ -213,11 +213,9 @@ public class PlayerCtrl : MonoBehaviour
             if (players[i].PlayerID == _characterID)
                 return;
         }
-        GameObject playerObject = Instantiate(SharedMgr.ResourceMgr.GetBasePlayer
-               (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_characterID).prefabName).gameObject);
+        GameObject playerObject = SharedMgr.ResourceMgr.PhotonPlayerInstantiate(SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_characterID).prefabName, 
+            GetPlayer.transform.position, GetPlayer.transform.rotation);
         playerObject.transform.SetParent(this.transform, false);
-        playerObject.transform.position = GetPlayer.transform.position;
-        playerObject.transform.rotation = GetPlayer.transform.rotation;
         BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();    
         basePlayer.PlayerID = _characterID;
         players.Add(basePlayer);

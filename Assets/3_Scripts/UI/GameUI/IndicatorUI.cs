@@ -8,6 +8,8 @@ using UtilEnums;
 public class IndicatorUI : UIBase
 {
     [SerializeField] GameObject allIndicatorParent;
+
+    #region Init
     public void Init()
     {
         SetImages();
@@ -25,6 +27,7 @@ public class IndicatorUI : UIBase
         minimapImages[2].sprite = res.GetSpriteAtlas("Minimap_Atlas", "PlusBtn");
         minimapImages[3].sprite = res.GetSpriteAtlas("Minimap_Atlas", "MinutBtn");
     }
+    #endregion
 
     #region Heal Indicator
     [Header("Heal Indicator")]
@@ -260,5 +263,11 @@ public class IndicatorUI : UIBase
         zoneAnim.SetInteger("State", 2);
         zoneCor = null;
     }
+    #endregion
+
+    #region Chat
+    [Header("Chat")]
+    [SerializeField] ChatUI chatUI;
+    public ChatUI GetChatUI { get { return chatUI; }  }
     #endregion
 }

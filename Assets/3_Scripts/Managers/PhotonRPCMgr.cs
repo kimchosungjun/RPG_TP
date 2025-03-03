@@ -55,17 +55,15 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
 
     #region Transform
 
-    public void DoSyncExistObject(int _viewID, Vector3 _position, Quaternion _rotation)
+    public void DoChat(string _chatText)
     {
-        photonView.RPC("SyncExistObject", RpcTarget.All, _viewID, _position, _rotation);
+        PV.RPC("Chat", RpcTarget.All, _chatText);   
     }
 
     [PunRPC]
-    public void SyncExistObject(int _viewID, string _path,Vector3 _position, Quaternion _rotation) 
+    public void Chat(string _chatText) 
     {
-        if (PhotonView.Find(_viewID) != null)
-            return;
-
+        SharedMgr.UIMgr.GameUICtrl.GetIndicatorUI.GetChatUI.DoChat(_chatText);
     }
     #endregion
 }
