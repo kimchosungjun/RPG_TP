@@ -129,16 +129,28 @@ public class GameUICtrl : MonoBehaviour
     #endregion
 
     /*****************************/
+    /********* AWAKE **********/
+    /*****************************/
+
+    #region Setup
+
+    private void Start()
+    {
+        playerStatusUI.Setup();
+    }
+    #endregion
+
+    /*****************************/
     /******** UPDATE *********/
     /*****************************/
 
     #region Manage Input 
     private void Update()
     {
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
         InputCursor();
         InputConversation();
         InputUIKey();
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
 #endif
     }
 

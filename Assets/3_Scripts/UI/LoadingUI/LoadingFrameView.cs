@@ -30,6 +30,7 @@ public class LoadingFrameView : MonoBehaviour
     {
         canvasGroup.alpha = 1f;
         float time = 0f;
+        SharedMgr.UIMgr.LoadingUICtrl.DeleteCam();
         while (time < fadeTimer)
         {
             time += Time.deltaTime;

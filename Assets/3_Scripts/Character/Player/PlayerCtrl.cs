@@ -72,13 +72,13 @@ public class PlayerCtrl : MonoBehaviour
 
     public void InputChangeKey()
     {
-#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1))
             ChangePlayer(0);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
             ChangePlayer(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangePlayer(2);
+#if UNITY_EDITOR
 #endif
     }
 
@@ -208,6 +208,10 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < cnt; i++)
         {
             _party[i].Setup();
+        }
+
+        for (int i = 0; i < cnt; i++)
+        {
             if (currentPlayerIndex == i)
             {
                 SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[i], true);

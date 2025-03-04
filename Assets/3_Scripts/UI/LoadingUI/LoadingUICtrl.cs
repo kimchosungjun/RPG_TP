@@ -11,6 +11,7 @@ public class LoadingUICtrl : MonoBehaviour
     [SerializeField] LoadingFrameView fadeView;
     [SerializeField] LoadingView loadingView;
 
+    [SerializeField] GameObject loadingCam;
     private void Awake()
     {
         if (fadeView == null) fadeView = GetComponentInChildren<LoadingFrameView>();
@@ -47,5 +48,6 @@ public class LoadingUICtrl : MonoBehaviour
     
     // 페이드 인 효과
     public void FrameFadeIn() { fadeView.FadeIn(); }
+    public void DeleteCam() { loadingCam.gameObject.SetActive(false); }
     public void DeleteCtrl() { SharedMgr.UIMgr.LoadingUICtrl = null; Destroy(ctrlObject); }
 }

@@ -67,9 +67,19 @@ public class PlayerStatusUI : StatusUI
         hpText.text = (int)currentHP + "/" + (int)maxHp;
         levelText.text = "Lv." + _playerStat.GetSaveStat.currentLevel;
         
-
         TurnOn();
     }
+
+    public void Setup()
+    {
+        if(statusParentObject.activeSelf == false)
+        {
+            //ChangeData(SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer.PlayerStat);
+            //PlayerIDUI id = FindObjectOfType<PlayerIDUI>();
+            //id.SetID("여기서 호출되었습니다.");
+        }
+    }
+
     #endregion
 
     /******************************************/

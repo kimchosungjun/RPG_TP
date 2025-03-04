@@ -74,7 +74,7 @@ public class ArcherActionControl : PlayerActionControl
 
     public void DoUltimateAttack()
     {
-        SkillCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE, 1).coolTime);
+        UltimateCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.ARCHER_ULTIMATE, 1).coolTime);
         SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.ARCHER_ATK_SFX);
         TransferConditionData transferConditionData = new TransferConditionData();
         TransferAttackData attackData = new TransferAttackData();
