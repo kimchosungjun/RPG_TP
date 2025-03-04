@@ -52167,6 +52167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrolGuard
       objectReference: {fileID: 0}
+    - target: {fileID: 1293175642485622991, guid: bc65fa574627dfd4ba769ffc4e0d5259,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1293227928298305087, guid: bc65fa574627dfd4ba769ffc4e0d5259,
         type: 3}
       propertyPath: m_LocalPosition.x

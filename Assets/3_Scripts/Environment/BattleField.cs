@@ -67,7 +67,7 @@ public class BattleField : MonoBehaviour
             Transform monsterTransform = SharedMgr.ResourceMgr.LoadResource<Transform>(prefabPath);
             if (monsterTransform == null)
                 continue;
-            GameObject go = Instantiate(monsterTransform.gameObject);
+            GameObject go = Instantiate(monsterTransform.gameObject, monsterSpawnTransforms[i].position, monsterSpawnTransforms[i].rotation, monsterGroupParent);
             go.transform.SetParent(monsterGroupParent);
             BaseMonster monster = go.GetComponent<BaseMonster>();   
             monster.SetBattleFieldData(this, i, monsterSpawnTransforms[i].position, this.transform.position);
