@@ -15,7 +15,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     #endregion
 
     #region Component
-    [Header("필수 연결 컴포넌트")]
+    [Header("Component")]
     [SerializeField] protected Transform bodyTransform;
     [SerializeField] protected CapsuleCollider collide;
     [SerializeField] protected Rigidbody rigid;
@@ -36,11 +36,11 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /************** 평면 이동 ****************/
     /******************************************/
-    protected float playerRotateSpeed = 12f;
-    protected float moveCoefficient = 10f; // 이동 계수
+    [SerializeField] protected float playerRotateSpeed = 12f;
+    [SerializeField] protected float moveCoefficient = 10f; // 이동 계수
     protected float xMove;
     protected float zMove;
-    protected float playerMoveSpeed;
+    [SerializeField] protected float playerMoveSpeed;
     protected Vector3 moveDirection;
     protected Quaternion moveRotation;
     public Quaternion SetMoveRotation { set { moveRotation = value; } } 
@@ -54,8 +54,8 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /***************** 점프  ******************/
     /******************************************/
-    protected float playerJumpForce;
-    protected float airMovementMultiplier = 0.2f;
+    [SerializeField] protected float playerJumpForce;
+    [SerializeField] protected float airMovementMultiplier = 0.2f;
     public float PlayerJumpForce { get { return playerJumpForce; } }
     public float AirMovementMultiplier { get { return airMovementMultiplier; } }
 
@@ -88,7 +88,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /**************** 땅 검출 ****************/
     /******************************************/
-    [Header("저항값")]
+    [Header("Resistance Value")]
     [SerializeField, Tooltip("땅 저항 값")] protected float groundDrag = 6;
     [SerializeField, Tooltip("공기 저항 값")] protected float airDrag = 1;
     protected float detectGroundDelta = 0.15f;
@@ -103,7 +103,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /******************************************/
     /************ 경사로 검출 ***************/
     /******************************************/
-    [Header("경사로")]
+    [Header("Slope")]
     [SerializeField] protected float slopeMaxAngle = 50f;
     [SerializeField] protected float stepHeight = 0.2f;
 
@@ -117,7 +117,7 @@ public abstract class PlayerMovementControl : MonoBehaviour
     #endregion
 
     #region Gravity
-    [Header("중력")]
+    [Header("Gravity")]
     [SerializeField] protected bool useGravity = true;
     protected float gravityIncreasemenet = -9.8f;
     protected float curGravity = 0f;
@@ -126,11 +126,11 @@ public abstract class PlayerMovementControl : MonoBehaviour
     #endregion
 
     #region State
-    [SerializeField] protected float attackRange;
-
+    protected float attackRange;
     protected PlayerState[] playerStates;
     protected PlayerStateMachine stateMachine;
     protected PlayerAttackCombo attackCombo;
+    [Header("Player State")]
     [SerializeField] protected STATES currentPlayerState = STATES.MAX;
     protected bool canTakeDamageState = true;
     public bool CanTakeDamage { get { return canTakeDamageState; } set { canTakeDamageState = value; } }

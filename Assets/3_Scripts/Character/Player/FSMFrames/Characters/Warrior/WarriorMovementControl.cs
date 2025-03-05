@@ -6,7 +6,7 @@ using PlayerEnums;
 
 public class WarriorMovementControl : PlayerMovementControl
 {
-    [Header("전사 애니메이션 제어"),SerializeField] WarriorActionControl warriorActionControl;
+    [Header("Animation Control"),SerializeField] WarriorActionControl warriorActionControl;
     public WarriorActionControl GetWarriorActionControl { get { return warriorActionControl; } }    
 
     bool canPlayerCtrl = true;

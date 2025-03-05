@@ -13,22 +13,22 @@ public class TestGetItem : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
         InputCheatKey();
+#if UNITY_EDITOR
 #endif
     }
 
     void InputCheatKey()
     {
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             GetEtc();
         }
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             GetConsume();
         }
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             GetWeapon();
         }

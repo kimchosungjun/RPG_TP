@@ -1,7 +1,6 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
@@ -248,6 +247,7 @@ public class PlayerCtrl : MonoBehaviour
         basePlayer.Init();
         basePlayer.Setup();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
+        SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[players.Count -1], false);
     }
     #endregion
 
