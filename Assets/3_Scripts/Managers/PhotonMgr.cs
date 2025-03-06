@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; // 함수를 동기화 할 때 사용
 using Photon.Realtime;
-using System; // 
+using System;
+using Unity.VisualScripting; // 
 
 public partial class PhotonMgr : MonoBehaviourPunCallbacks
 {
@@ -27,28 +28,4 @@ public partial class PhotonMgr : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         PhotonNetwork.JoinLobby();
     }
-
-    #region Test Function
-    public void CreateSyncObject()
-    {
-        if (!PhotonNetwork.IsMasterClient) return;
-        TDG tdg = new TDG();
-        PV.RPC("CreateRPC", RpcTarget.All, tdg.path, tdg.position, tdg.rotation);
-    }
-
-    [PunRPC]
-    public void CreateRPC(string path, Vector3 position, Quaternion rotation)
-    {
-        Instantiate(SharedMgr.ResourceMgr.LoadResource<Transform>(path).gameObject, position, rotation);
-    }
-    #endregion
-}
-
-
-[Serializable]
-public class TDG
-{
-    public string path = "Cube";
-    public Vector3 position = new Vector3(162, 0, 210);
-    public Quaternion rotation = Quaternion.identity;
 }

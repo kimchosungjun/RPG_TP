@@ -6,7 +6,7 @@ public class OptionSetting : MonoBehaviour
 {
     [SerializeField, Tooltip("0:Low, 1:Mid, 2:High")] 
     List<RenderPipelineAsset> renderPipeLineSet;
-    
+
     private void Start()
     {
         SetOptions();
