@@ -1,6 +1,7 @@
 using ItemTableClassGroup;
 using ItemEnums;
 using System;
+using ItemStrategy;
 
 [Serializable]
 public class ConsumeData : ItemData
@@ -19,22 +20,12 @@ public class ConsumeData : ItemData
 
     public override void Remove(int _cnt = 1)
     {
-        itemCnt -= _cnt;
-        if (itemCnt <= 0)
-            SharedMgr.InventoryMgr.RemoveItem(this);
+        interact?.Use(_cnt);
     }
 
     public override void Use(int _value = 1)
     {
-        itemCnt -= _value;
-        BasePlayer player = SharedMgr.GameCtrlMgr.GetPlayerCtrl.GetPlayer;
-        TransferConditionData data = new TransferConditionData();
-        data.SetData(player.PlayerStat, effectStat, attributeStat, duration, defaultValue, maintainTime, multiplier, applyStatType);
-        player.GetPlayerStatControl.AddCondition(data);
-        if (itemCnt <= 0)
-            SharedMgr.InventoryMgr.RemoveItem(this);
-        else
-            SharedMgr.UIMgr.GameUICtrl.GetInventoyUI.UpdateInventory();
+        interact?.Use(_value);
     }
 
     public void SetData(ConsumeTableData _tableData, int _cnt = 1)
@@ -55,6 +46,7 @@ public class ConsumeData : ItemData
         atlasName = _tableData.atlasName;
         fileName = _tableData.fileName;
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+        interact = new ConsumeInteract(this);
     }
 
     public void LoadData(ConsumeTableData _tableData)
@@ -63,5 +55,6 @@ public class ConsumeData : ItemData
         atlasName = _tableData.atlasName;
         fileName = _tableData.fileName;
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+        interact = new ConsumeInteract(this);
     }
 }

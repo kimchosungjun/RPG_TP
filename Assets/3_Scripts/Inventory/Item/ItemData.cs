@@ -2,13 +2,7 @@ using ItemEnums;
 using UnityEngine;
 using ItemStrategy;
 
-public interface Item 
-{
-    public void Use(int _value = 1);
-    public void Remove(int _cnt = 1);
-}
-
-public class ItemData : Item
+public class ItemData 
 {
     public int itemID;
     public string itemName;

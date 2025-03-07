@@ -1,4 +1,5 @@
 using ItemEnums;
+using ItemStrategy;
 using ItemTableClassGroup;
 using System;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class WeaponData : ItemData
     // Enum 값으로 변환 후 저장할 속성
     public WEAPONTYPE WeaponType { get; private set; }
     public WEAPONEFFECT WeaponEffect { get; private set; }
-    public bool IsHoldWeapon { get {return isHoldWeapon; } private set { isHoldWeapon = value; } } // Check For Sell
+    public bool IsHoldWeapon { get {return isHoldWeapon; }  set { isHoldWeapon = value; } } // Check For Sell
 
     public override bool CanRemove()
     {
@@ -35,30 +36,12 @@ public class WeaponData : ItemData
 
     public override void Remove(int _cnt = 1)
     {
-        SharedMgr.InventoryMgr.AddGold(weaponPrice);
-        SharedMgr.InventoryMgr.RemoveItem(this);
-        UniqueIDMaker.RemoveID(uniqueID);
+       interact?.Remove(_cnt);
     }
 
     public override void Use(int _value = 1)
     {
-        IsHoldWeapon = true;
-        holdPlayerID = _value;
-        WeaponIncreaseStat weaponStat = new WeaponIncreaseStat();
-        PlayerStat playerStat = SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(_value);
-        if (playerStat == null)
-            return;
-        switch (WeaponEffect)
-        {
-            case WEAPONEFFECT.WEAPON_ATTACK:
-                int increaseValue = (int)(playerStat.Attack * effectValue);
-                weaponStat.SetValues(increaseValue + attackValue, 0);
-                break;
-            case WEAPONEFFECT.WEAPON_CRITICAL:
-                weaponStat.SetValues(attackValue, effectValue);
-                break;
-        }
-        SharedMgr.GameCtrlMgr.GetPlayerStatCtrl.GetPlayerStat(_value).ApplyWeaponStat(weaponStat);
+        interact?.Use(_value);
     }
 
     public void TakeOff()
@@ -87,6 +70,7 @@ public class WeaponData : ItemData
         WeaponType = (WEAPONTYPE)_tableData.weaponType;
         WeaponEffect = (WEAPONEFFECT)_tableData.additionalEffect;
         weaponMaxExp = SharedMgr.TableMgr.GetItem.GetWeaponUpgradeTableData().GetNeedExp(weaponCurrentLevel);
+        interact = new WeaponInteract(this);
     }
 
     public void LoadData(WeaponTableData _tableData)
@@ -101,6 +85,7 @@ public class WeaponData : ItemData
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
         WeaponType = (WEAPONTYPE)_tableData.weaponType;
         WeaponEffect = (WEAPONEFFECT)_tableData.additionalEffect;
+        interact = new WeaponInteract(this);
     }
 
     public void ApplyEnhance(int _exp)

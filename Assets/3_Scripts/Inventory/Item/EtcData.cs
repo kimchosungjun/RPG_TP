@@ -7,24 +7,17 @@ using ItemStrategy;
 public class EtcData : ItemData 
 {
     public int etcExp;
-
+    
     int maxCnt = 999;
     public int GetMaxCnt { get { return maxCnt; } }
 
     public override void Remove(int _cnt = 1)
     {
-        //itemCnt -= _cnt;
-        //SharedMgr.InventoryMgr.AddGold(_cnt * etcExp);
-        //if (itemCnt <=0)
-        //    SharedMgr.InventoryMgr.RemoveItem(this);
         interact?.Remove(_cnt);
     }
 
     public override void Use(int _value = 1)
     {
-        //itemCnt -= _value;
-        //if (itemCnt <= 0)
-        //    SharedMgr.InventoryMgr.RemoveItem(this);
         interact?.Use(_value);
     }
 
