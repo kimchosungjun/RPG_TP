@@ -32,6 +32,9 @@ public class CameraQuaterView : MonoBehaviour
     public void InitValues()
     {
         offset = new Vector3(0f, 0f, -1f * deltaDistance);
+
+        if (camTransform == null)
+            camTransform = this.transform;
         mMouseYValue = camTransform.rotation.eulerAngles.x;
         mMouseXValue = camTransform.rotation.eulerAngles.y;
         camTransform.rotation = Quaternion.Euler(mMouseYValue, mMouseXValue, 0f);      // 설정된 회전값을 적용해둠

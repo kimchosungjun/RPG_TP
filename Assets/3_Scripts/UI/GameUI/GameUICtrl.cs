@@ -45,6 +45,7 @@ public class GameUICtrl : MonoBehaviour
     [SerializeField] SettingUI settingUI;
     [SerializeField] GameExitUI gameExitUI;
     [SerializeField] EtcUI etcUI;
+    [SerializeField] VideoUI videoUI;
     #endregion
 
     #region UI Property
@@ -62,6 +63,8 @@ public class GameUICtrl : MonoBehaviour
     public SettingUI GetSettingUI { get { return settingUI; } } 
     public GameExitUI GetGameExitUI { get {  return gameExitUI; } }
     public EtcUI GetEtcUI { get {   return etcUI; } }
+    public VideoUI GetVideoUI { get { return videoUI; } }
+
     #endregion
 
     /*****************************/
@@ -129,16 +132,28 @@ public class GameUICtrl : MonoBehaviour
     #endregion
 
     /*****************************/
+    /********* AWAKE **********/
+    /*****************************/
+
+    #region Setup
+
+    private void Start()
+    {
+        playerStatusUI.Setup();
+    }
+    #endregion
+
+    /*****************************/
     /******** UPDATE *********/
     /*****************************/
 
     #region Manage Input 
     private void Update()
     {
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR
         InputCursor();
         InputConversation();
         InputUIKey();
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
 #endif
     }
 

@@ -1,7 +1,6 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
@@ -29,6 +28,9 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Manage Party Buff"), SerializeField] PartyConditionControl partyConditionControl;
     public bool CanInteractUI() { return GetPlayer.CanInteractUI(); }
 
+    // ID Viewer
+    Transform idViewer = null;
+
     #endregion
 
     #region Life Cycle
@@ -36,6 +38,7 @@ public class PlayerCtrl : MonoBehaviour
     private void Awake()
     {
         InitPartyData();
+        CreateIDViewer();
     }
 
     private void Start()
@@ -49,6 +52,7 @@ public class PlayerCtrl : MonoBehaviour
         if (isLockPlayerControl || SharedMgr.UIMgr.GameUICtrl.CanControlPlayer() == false) return;
         players[currentPlayerIndex].Execute();
         InputChangeKey();
+        IDViewerFollowPlayer();
     }
 
     private void FixedUpdate() 
@@ -67,13 +71,13 @@ public class PlayerCtrl : MonoBehaviour
 
     public void InputChangeKey()
     {
-#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1))
             ChangePlayer(0);
         else if (Input.GetKeyDown(KeyCode.Alpha2))
             ChangePlayer(1);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangePlayer(2);
+#if UNITY_EDITOR
 #endif
     }
 
@@ -146,6 +150,22 @@ public class PlayerCtrl : MonoBehaviour
     public void CoolDown() { canChangePlayer = true; }
     #endregion
 
+    #region Player ID Indicate UI
+
+    public void CreateIDViewer()
+    {
+        idViewer =  SharedMgr.ResourceMgr.PhotonSyncInstantiate("UI/IDViewer");
+        idViewer?.GetComponent<PlayerIDUI>().SetID(SharedMgr.SceneMgr.GetPlayerID());
+    }
+
+    public void IDViewerFollowPlayer()
+    {
+        if (idViewer != null)
+            idViewer.position = GetPlayer.transform.position;
+    }
+
+    #endregion
+
     /**********************************************/
     /*************** 파티 설정 ******************/
     /**********************************************/
@@ -187,6 +207,10 @@ public class PlayerCtrl : MonoBehaviour
         for (int i = 0; i < cnt; i++)
         {
             _party[i].Setup();
+        }
+
+        for (int i = 0; i < cnt; i++)
+        {
             if (currentPlayerIndex == i)
             {
                 SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[i], true);
@@ -213,11 +237,9 @@ public class PlayerCtrl : MonoBehaviour
             if (players[i].PlayerID == _characterID)
                 return;
         }
-        GameObject playerObject = Instantiate(SharedMgr.ResourceMgr.GetBasePlayer
-               (SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_characterID).prefabName).gameObject);
+        GameObject playerObject = SharedMgr.ResourceMgr.PhotonPlayerInstantiate(SharedMgr.TableMgr.GetPlayer.GetPlayerTableData(_characterID).prefabName, 
+            GetPlayer.transform.position, GetPlayer.transform.rotation);
         playerObject.transform.SetParent(this.transform, false);
-        playerObject.transform.position = GetPlayer.transform.position;
-        playerObject.transform.rotation = GetPlayer.transform.rotation;
         BasePlayer basePlayer = playerObject.GetComponent<BasePlayer>();    
         basePlayer.PlayerID = _characterID;
         players.Add(basePlayer);
@@ -225,6 +247,7 @@ public class PlayerCtrl : MonoBehaviour
         basePlayer.Init();
         basePlayer.Setup();
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
+        SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[players.Count -1], false);
     }
     #endregion
 

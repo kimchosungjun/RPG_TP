@@ -15,6 +15,7 @@ public class PlayerDashState : PlayerState
         characterControl.Dash();
         characterControl.GetRigid.useGravity= true;
         characterControl.CanTakeDamage = false;
+        SharedMgr.GameCtrlMgr.OnMontionBlur();
     }
 
     public override void Execute()
@@ -33,5 +34,6 @@ public class PlayerDashState : PlayerState
         characterControl.CanTakeDamage = true;
         characterControl.GetRigid.useGravity = false;
         characterControl.CanChangePlayer = true;
+        SharedMgr.GameCtrlMgr.OffMotionBlur();
     }
 }

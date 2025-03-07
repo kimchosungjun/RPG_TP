@@ -110,7 +110,7 @@ buffActionSOData.GetMaintainEffectTime, buffActionSOData.GetMultiplier(i), buffA
 
     public void DoUltimateAttack()
     {
-        SkillCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.MAGE_ULTIMATE, 1).coolTime);
+        UltimateCoolDown(SharedMgr.TableMgr.GetPlayer.GetPlayerAttackSkillTableData((int)PlayerEnums.ATTACK_SKILLS.MAGE_ULTIMATE, 1).coolTime);
         SharedMgr.SoundMgr.PlaySFX(UtilEnums.SFXCLIPS.MAGE_FIRE_SFX);
         TransferAttackData attackData = new TransferAttackData();
         attackData.SetData(ultimateAttackSkillSOData.GetAttackEffectType,
