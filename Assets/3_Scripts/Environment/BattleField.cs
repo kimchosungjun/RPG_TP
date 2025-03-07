@@ -64,12 +64,10 @@ public class BattleField : MonoBehaviour
         for (int i = 0; i < monsterCnt; i++)
         {
             // To Do revise
-            Transform monsterTransform = SharedMgr.ResourceMgr.LoadResource<Transform>(prefabPath);
-            if (monsterTransform == null)
-                continue;
-            GameObject go = Instantiate(monsterTransform.gameObject);
-            go.transform.SetParent(monsterGroupParent);
-            BaseMonster monster = go.GetComponent<BaseMonster>();   
+            BaseMonster monster = SharedMgr.ResourceMgr.MonsterFactory(prefabPath);
+            if (monster == null)
+                return;
+            monster.transform.SetParent(monsterGroupParent);
             monster.SetBattleFieldData(this, i, monsterSpawnTransforms[i].position, this.transform.position);
             spawnMonsters.Add(monster);
             SpawnMonster(monster);

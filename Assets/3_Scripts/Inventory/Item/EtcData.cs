@@ -1,6 +1,7 @@
 using ItemTableClassGroup;
 using ItemEnums;
 using System;
+using ItemStrategy;
 
 [Serializable]
 public class EtcData : ItemData 
@@ -12,17 +13,19 @@ public class EtcData : ItemData
 
     public override void Remove(int _cnt = 1)
     {
-        itemCnt -= _cnt;
-        SharedMgr.InventoryMgr.AddGold(_cnt * etcExp);
-        if (itemCnt <=0)
-            SharedMgr.InventoryMgr.RemoveItem(this);
+        //itemCnt -= _cnt;
+        //SharedMgr.InventoryMgr.AddGold(_cnt * etcExp);
+        //if (itemCnt <=0)
+        //    SharedMgr.InventoryMgr.RemoveItem(this);
+        interact?.Remove(_cnt);
     }
 
     public override void Use(int _value = 1)
     {
-        itemCnt -= _value;
-        if (itemCnt <= 0)
-            SharedMgr.InventoryMgr.RemoveItem(this);
+        //itemCnt -= _value;
+        //if (itemCnt <= 0)
+        //    SharedMgr.InventoryMgr.RemoveItem(this);
+        interact?.Use(_value);
     }
 
     public void SetData(EtcTableData _tableData, int _cnt = 1)
@@ -36,6 +39,7 @@ public class EtcData : ItemData
         fileName = _tableData.fileName;
         atlasName = _tableData.atlasName;   
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+        interact = new EtcInteract(this);
     }
 
     public void LoadData(EtcTableData _tableData)
@@ -44,5 +48,6 @@ public class EtcData : ItemData
         fileName = _tableData.fileName;
         atlasName = _tableData.atlasName;
         itemIcon = SharedMgr.ResourceMgr.GetSpriteAtlas(atlasName, fileName + "_Icon");
+        interact = new EtcInteract(this);
     }
 }

@@ -1,5 +1,6 @@
 using ItemEnums;
 using UnityEngine;
+using ItemStrategy;
 
 public interface Item 
 {
@@ -17,6 +18,7 @@ public class ItemData : Item
     public string fileName;
     public string atlasName;
 
+    protected ItemInteract interact;
 
     protected Sprite itemIcon;
     public Sprite GetIcon { get { return itemIcon; } }
