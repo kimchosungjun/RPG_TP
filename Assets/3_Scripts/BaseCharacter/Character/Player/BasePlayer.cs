@@ -120,6 +120,9 @@ public class BasePlayer : BaseActor
     {
         playerStatusUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
         playerMovementControl.Setup();
+#if UNITY_ANDROID
+    playerMovementControl.LinkJoyStick();
+#endif
     }
 
     public virtual void Execute()
@@ -132,5 +135,5 @@ public class BasePlayer : BaseActor
     {
         playerMovementControl.FixedExecute();
     }
-    #endregion
+#endregion
 }

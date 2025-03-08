@@ -59,9 +59,13 @@ public class PlayerGroundMoveState : PlayerOnGroundState
     #region Excute
     public void InputKey()
     {
+#if UNITY_ANDROID
+        characterControl.XMove = characterControl.GetJoyStickUI.InputX();
+        characterControl.ZMove = characterControl.GetJoyStickUI.InputZ();
+#else
         characterControl.XMove = Input.GetAxisRaw("Horizontal");
         characterControl.ZMove = Input.GetAxisRaw("Vertical");
-
+#endif
         // 점프 입력
         if (Input.GetKeyDown(KeyCode.Space) && characterControl.IsOnGround && !characterControl.IsOnMaxAngleSlope)
         {
@@ -123,5 +127,5 @@ public class PlayerGroundMoveState : PlayerOnGroundState
                 characterControl.ChangeState(STATES.JUMP);
         }
     }
-    #endregion
+#endregion
 }

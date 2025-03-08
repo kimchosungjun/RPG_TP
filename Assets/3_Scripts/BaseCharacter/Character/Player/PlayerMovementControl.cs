@@ -9,6 +9,21 @@ public abstract class PlayerMovementControl : MonoBehaviour
     /**************   변수들    ***************/
     /******************************************/
 
+    #region JoyStick : Mobile
+    JoystickUI joyStick = null;
+    public JoystickUI GetJoyStickUI 
+    {
+        get 
+        {
+            return joyStick;
+        } 
+    }    
+    public void LinkJoyStick()
+    {
+        joyStick = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI.GetJoystickUI.GetJoyStickUI;
+    }
+    #endregion
+
     #region Relate Hit
     public EffectEnums.HIT_EFFECTS HitCombo { get; set; } = EffectEnums.HIT_EFFECTS.NONE;
     public float HitEffectTime { get; set; } = 0f;

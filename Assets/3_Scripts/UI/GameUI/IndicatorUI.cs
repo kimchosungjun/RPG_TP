@@ -13,6 +13,11 @@ public class IndicatorUI : UIBase
     public void Init()
     {
         SetImages();
+#if UNITY_ANDROID
+        chatUI.gameObject.SetActive(false);
+#else
+        chatUI.gameObject.SetActive(true);
+#endif
     }
 
     public void SetImages()

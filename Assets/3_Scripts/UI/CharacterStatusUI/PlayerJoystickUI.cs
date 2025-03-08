@@ -7,7 +7,9 @@ public class PlayerJoystickUI : MonoBehaviour
 {
     [SerializeField, Tooltip("0:Area, 1:Joystick , 2:Normal, 3: Q, 4:Skill, 5:W, 6 :Ultimate, 7 :R")] Image[] images;
     [SerializeField] CharacterActionButton[] actionButtons;
+    [SerializeField] JoystickUI joystickUI;
 
+    public JoystickUI GetJoyStickUI { get { return joystickUI; } }
     public void Init()
     {
         SetImages();
@@ -15,6 +17,11 @@ public class PlayerJoystickUI : MonoBehaviour
         {
             actionButtons[i].Init();
         }
+#if UNITY_ANDROID
+    joystickUI.gameObject.SetActive(true);
+#else
+        joystickUI.gameObject.SetActive(false);
+#endif
     }
 
     public void SetImages()
