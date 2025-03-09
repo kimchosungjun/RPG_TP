@@ -18,6 +18,9 @@ public class PoolMgr : MonoBehaviour
 
     #region UI Pool
     [Header("Float Damage Text")]
+    // Current
+    [SerializeField] FloatDamageUI damageUI;
+    // Legacy
     [SerializeField] Transform floatDamageParent;
     [SerializeField] FloatDamageTextUI floatDamageOriginal;
     [SerializeField] List <FloatDamageTextUI> floatDamageTexts = new List<FloatDamageTextUI>();
@@ -138,6 +141,30 @@ public class PoolMgr : MonoBehaviour
 
     #region UI Pool
 
+    public void GetFloatDamageUI(int _number, Vector3 _position)
+    {
+        // To Do ~~ Offset 
+        damageUI.ShowFloatDamage(_number, _position);
+    }
+   
+    public ShowGetItemSlot GetItemSlot()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (showGetItemSlots[i].gameObject.activeSelf == false) 
+            {
+                showGetItemSlots[i].transform.SetAsLastSibling();
+                return showGetItemSlots[i];
+            }
+        }
+        return null;
+    }
+
+
+
+    #endregion
+
+    #region Float Damage UI : Legacy
     public FloatDamageTextUI GetFloatDamageText()
     {
         int cnt = floatDamageTexts.Count;
@@ -155,21 +182,5 @@ public class PoolMgr : MonoBehaviour
         floatDamageTexts.Add(instText);
         return instText;
     }
-
-    public ShowGetItemSlot GetItemSlot()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            if (showGetItemSlots[i].gameObject.activeSelf == false) 
-            {
-                showGetItemSlots[i].transform.SetAsLastSibling();
-                return showGetItemSlots[i];
-            }
-        }
-        return null;
-    }
-
-
-
     #endregion
 }

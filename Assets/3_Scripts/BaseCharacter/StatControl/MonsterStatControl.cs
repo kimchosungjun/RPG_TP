@@ -33,8 +33,13 @@ public class MonsterStatControl : ActorStatControl
         // Min Damage = 1
         int allDamage = _attackData.GetAttackValue - monsterStat.Defence;
         allDamage = (allDamage) <= 0 ? 1 : allDamage;
+
         // Float Damage
-        SharedMgr.PoolMgr.GetFloatDamageText().SetFloat(this.transform, allDamage);
+        SharedMgr.PoolMgr.GetFloatDamageUI(allDamage, this.transform.position);
+        
+        // Float Damage : Legacy
+        //SharedMgr.PoolMgr.GetFloatDamageText().SetFloat(this.transform, allDamage);
+
         // Check Death
         int curHp = monsterStat.CurrentHP - (int)allDamage;
         if (curHp <= 0)
