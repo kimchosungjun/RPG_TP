@@ -3086,13 +3086,17 @@ MonoBehaviour:
   collide: {fileID: 689479133218076883}
   rigid: {fileID: 3462945907725710858}
   anim: {fileID: 5660750942170666708}
+  playerRotateSpeed: 12
+  moveCoefficient: 10
+  playerMoveSpeed: 0
+  playerJumpForce: 0
+  airMovementMultiplier: 0.2
   isOnGround: 0
   groundDrag: 6
   airDrag: 1
   slopeMaxAngle: 50
   stepHeight: 0.2
   useGravity: 1
-  attackRange: 10
   currentPlayerState: 10
   canChangePlayer: 1
 --- !u!114 &527695921728382119

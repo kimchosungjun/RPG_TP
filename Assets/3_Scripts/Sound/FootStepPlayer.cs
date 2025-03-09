@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class FootStepPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip[] footStepClips;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip[] footStepClips;
     private int lastClip = -1;
 
     public void SoundFootStep()

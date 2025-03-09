@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerCtrl : MonoBehaviour
 {
     /**********************************************/
-    /************ 캐릭터 변경 변수 *************/
+    /********* Character Change Variable **********/
     /**********************************************/
 
     #region Value
@@ -30,7 +30,8 @@ public class PlayerCtrl : MonoBehaviour
 
     // ID Viewer
     Transform idViewer = null;
-
+    [SerializeField] FootStepPlayer footStepPlayer;
+    public FootStepPlayer GetFootStepPlayer { get { return footStepPlayer; } }
     #endregion
 
     #region Life Cycle
@@ -60,11 +61,12 @@ public class PlayerCtrl : MonoBehaviour
         if (isLockPlayerControl || SharedMgr.UIMgr.GameUICtrl.CanControlPlayer() ==false) return;
         players[currentPlayerIndex].FixedExecute(); 
         partyConditionControl.FixedExecute();
+        FollowFootStep();
     }
     #endregion
 
     /**********************************************/
-    /************ 플레이어 변경 ****************/
+    /************ Player Change *******************/
     /**********************************************/
 
     #region Change Player 
@@ -167,7 +169,7 @@ public class PlayerCtrl : MonoBehaviour
     #endregion
 
     /**********************************************/
-    /*************** 파티 설정 ******************/
+    /*************** Set Party ********************/
     /**********************************************/
 
     #region Set Player Data
@@ -206,7 +208,7 @@ public class PlayerCtrl : MonoBehaviour
         int cnt = _party.Count;
         for (int i = 0; i < cnt; i++)
         {
-            _party[i].Setup();
+            _party[i].Setup(footStepPlayer);
         }
 
         for (int i = 0; i < cnt; i++)
@@ -245,7 +247,7 @@ public class PlayerCtrl : MonoBehaviour
         players.Add(basePlayer);
         playerViewIDSet.Add(playerObject.GetComponent<PhotonView>().ViewID);
         basePlayer.Init();
-        basePlayer.Setup();
+        basePlayer.Setup(footStepPlayer);
         SharedMgr.UIMgr.GameUICtrl.GetPlayerChangeUI.SetButtonData(currentPlayerIndex);
         SharedMgr.PhotonMgr.DoSyncObjectState(playerViewIDSet[players.Count -1], false);
     }
@@ -361,7 +363,7 @@ public class PlayerCtrl : MonoBehaviour
     #endregion
 
     /**********************************************/
-    /*************** 상태 설정 ******************/
+    /*************** Set State ********************/
     /**********************************************/
 
     #region Conversation Control
@@ -380,5 +382,17 @@ public class PlayerCtrl : MonoBehaviour
 
     public void ReleaseMoveLock() { SetPlayerControl(false); }
 
+    #endregion
+
+    /**********************************************/
+    /*************** Foot Step ********************/
+    /**********************************************/
+
+    #region Foot Step
+    public void FollowFootStep()
+    {
+        if (GetPlayer == null) return;
+        footStepPlayer.transform.position = GetPlayer.transform.position;
+    }
     #endregion
 }

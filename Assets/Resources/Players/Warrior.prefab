@@ -3428,13 +3428,17 @@ MonoBehaviour:
   collide: {fileID: 9067457124495748095}
   rigid: {fileID: 9070479362373650058}
   anim: {fileID: 6406824297650797864}
+  playerRotateSpeed: 12
+  moveCoefficient: 10
+  playerMoveSpeed: 0
+  playerJumpForce: 0
+  airMovementMultiplier: 0.2
   isOnGround: 0
   groundDrag: 6
   airDrag: 1
   slopeMaxAngle: 50
   stepHeight: 0.2
   useGravity: 1
-  attackRange: 3
   currentPlayerState: 0
   canChangePlayer: 0
   warriorActionControl: {fileID: 4050084012462725122}

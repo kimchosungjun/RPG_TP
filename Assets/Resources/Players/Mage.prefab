@@ -997,13 +997,17 @@ MonoBehaviour:
   collide: {fileID: 6788566911499289606}
   rigid: {fileID: 5460856481660527134}
   anim: {fileID: 7714048276709154375}
+  playerRotateSpeed: 12
+  moveCoefficient: 10
+  playerMoveSpeed: 0
+  playerJumpForce: 0
+  airMovementMultiplier: 0.2
   isOnGround: 0
   groundDrag: 6
   airDrag: 1
   slopeMaxAngle: 50
   stepHeight: 0.2
   useGravity: 1
-  attackRange: 7.5
   currentPlayerState: 10
   canChangePlayer: 1
   mageActionControl: {fileID: 820060188921091454}

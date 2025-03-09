@@ -12,6 +12,8 @@ public class BasePlayer : BaseActor
     [Header("플레이어 스탯 관리"), SerializeField] protected PlayerStatControl playerStatControl; 
     [Header("플레이어 움직임 관리"), SerializeField] protected PlayerMovementControl playerMovementControl;
     [SerializeField] WEAPONTYPE playerWeaponType;
+
+    FootStepPlayer footStepPlayer = null;
     #endregion
 
     #region Property
@@ -87,7 +89,11 @@ public class BasePlayer : BaseActor
     #endregion
 
     #region Foot Step
-    //public void FootStep() { SharedMgr.GameCtrlMgr.GetPlayerCtrl.FootStep(); }
+    public void PlayFootStepSound() 
+    {
+        if (footStepPlayer == null) return;
+        footStepPlayer.SoundFootStep();
+    }    
     #endregion
 
     /****************************************/
@@ -116,10 +122,11 @@ public class BasePlayer : BaseActor
         playerMovementControl.Init(playerStat);
     }
 
-    public virtual void Setup()
+    public virtual void Setup(FootStepPlayer _footStpePlayer)
     {
         playerStatusUI = SharedMgr.UIMgr.GameUICtrl.GetPlayerStatusUI;
         playerMovementControl.Setup();
+        footStepPlayer = _footStpePlayer;
     }
 
     public virtual void Execute()
