@@ -16,6 +16,8 @@ public partial class SoundMgr : MonoBehaviour
     float bgmVolume = 0f;
     float sfxVolume = 0;
 
+    [SerializeField] AudioSource buttonSource;
+
     #region Set Sound Mgr Setting
     public void Init()
     {
@@ -134,7 +136,21 @@ public partial class SoundMgr : MonoBehaviour
         sfxSource.PlayOneShot(sfxClipGroup[_sfxClip]);
     }
 
-    public void PressButtonSFX() { PlaySFX(SFXCLIPS.BUTTON_SFX); }
+    public void PressButtonSFX() 
+    {
+        if (sfxClipGroup.ContainsKey(SFXCLIPS.BUTTON_SFX) == false)
+        {
+            string path = "Sounds/SFX/" + Enums.GetEnumString<SFXCLIPS>(SFXCLIPS.BUTTON_SFX);
+            Object obj = Resources.Load(path);
+            if (obj == null)
+                return;
+            AudioClip clip = obj as AudioClip;
+            if (clip == null)
+                return;
+            sfxClipGroup.Add(SFXCLIPS.BUTTON_SFX, clip);
+        }
+        buttonSource.PlayOneShot(sfxClipGroup[SFXCLIPS.BUTTON_SFX]);
+    }
     #endregion
 
     #region Control Sound

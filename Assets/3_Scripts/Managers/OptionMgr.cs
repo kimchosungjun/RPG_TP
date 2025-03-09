@@ -12,13 +12,15 @@ public partial class SaveMgr : MonoBehaviour
         public float bgmVolume;
         public float sfxVolume;
         public int graphicQuality;
+        public int watchOpening;
 
-        public void SetData(float[] _volumes, int _quality)
+        public void SetData(float[] _volumes, int _quality, int _watchOpening)
         {
             masterVolume = _volumes[0];
             bgmVolume = _volumes[1];
             sfxVolume = _volumes[2];
             graphicQuality = _quality;
+            watchOpening = _watchOpening;
         }
     }
     #endregion
@@ -33,15 +35,18 @@ public partial class SaveMgr : MonoBehaviour
             int curIndex = 0;
             string line;
             int qualityValue = 0;
+            int watchOpening = 0;
             while ((line = streamReader.ReadLine()) != null)
             {
                 if(curIndex<=2)
                     optionValues[curIndex] = float.Parse(line);
                 else if (curIndex == 3)
                     qualityValue = int.Parse(line);
+                else if(curIndex == 4)
+                    watchOpening = int.Parse(line);
                 curIndex += 1;
             }
-            Option.SetData(optionValues, qualityValue);
+            Option.SetData(optionValues, qualityValue, watchOpening);
             streamReader.Close();
         }
         else
@@ -51,6 +56,7 @@ public partial class SaveMgr : MonoBehaviour
             streamWriter.WriteLine("1");
             streamWriter.WriteLine("1");
             streamWriter.WriteLine("2");
+            streamWriter.WriteLine("0");
             streamWriter.Close();
         }
     }
@@ -63,6 +69,7 @@ public partial class SaveMgr : MonoBehaviour
         streamWriter.WriteLine(Option.bgmVolume);
         streamWriter.WriteLine(Option.sfxVolume);
         streamWriter.WriteLine(Option.graphicQuality);
+        streamWriter.WriteLine(Option.watchOpening);
         streamWriter.Close();
     }
 }

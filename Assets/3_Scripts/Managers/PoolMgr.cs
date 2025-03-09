@@ -143,8 +143,8 @@ public class PoolMgr : MonoBehaviour
 
     public void GetFloatDamageUI(int _number, Vector3 _position)
     {
-        // To Do ~~ Offset 
-        damageUI.ShowFloatDamage(_number, _position);
+        Vector3 offSet = new Vector3(Random.Range(-0.5f,0.5f) ,0.5f, Random.Range(-0.5f, 0.5f));
+        damageUI.ShowFloatDamage(_number, _position + offSet);
     }
    
     public ShowGetItemSlot GetItemSlot()
