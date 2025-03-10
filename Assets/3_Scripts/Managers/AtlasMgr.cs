@@ -9,7 +9,7 @@ public partial class ResourceMgr
     Dictionary<string, SpriteAtlas> spriteAtlasGroup = new Dictionary<string, SpriteAtlas>();
 
     /// <summary>
-    /// Atlas의 이름, Atlas에 저장된 Sprite이름 : 경로는 생략
+    /// Atlas Name, Atlas Sprite: Only File Name
     /// </summary>
     /// <param name="_Atlas"></param>
     /// <param name="_spriteName"></param>

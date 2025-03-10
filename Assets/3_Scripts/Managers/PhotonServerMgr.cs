@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun; // 함수를 동기화 할 때 사용
+using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 

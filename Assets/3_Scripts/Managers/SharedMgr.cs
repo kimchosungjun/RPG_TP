@@ -21,12 +21,6 @@ public static class SharedMgr
     public static CursorMgr CursorMgr = null;
     #endregion
 
-    //public static TableMgr InitTableMgr()
-    //{
-    // tablemgr==null이면 table을 만들어서 연결할때 return 한다.
-    // 프로그래머가 메모리를 원할때 할당, 해제하고 싶다면 monobehaviour를 상속받으면 안된다.
-    //}
-
     #region Stick Game Scene
     public static PoolMgr PoolMgr = null;
     public static GameCtrlMgr GameCtrlMgr = null;

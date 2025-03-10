@@ -6,7 +6,7 @@ using SaveDataGroup;
 public class InventoryMgr  
 {
     /**********************************************/
-    /************ 인벤토리 변수 ****************/
+    /************ Inventory Value ***************/
     /**********************************************/
     
     #region Hold Item : Private
@@ -66,7 +66,7 @@ public class InventoryMgr
     #endregion
 
     /**********************************************/
-    /************ 인벤토리 관리 ****************/
+    /************ Inven Manage ****************/
     /**********************************************/
 
     #region Check Can Add Item : Check Inventory Size

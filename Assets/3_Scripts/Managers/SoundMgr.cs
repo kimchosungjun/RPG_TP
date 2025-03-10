@@ -62,7 +62,7 @@ public partial class SoundMgr : MonoBehaviour
         {
             string path = "Sounds/BGM/" + Enums.GetEnumString<BGMCLIPS>(_bgmClip);
             Object obj = Resources.Load(path);
-            if (obj == null)    // obj = null 이 성립되기 때문에 실수로 지우면 사운드 플레이 버그가 발생하지만 찾기가 어렵다.
+            if (obj == null)    
                 return;
             AudioClip clip = obj as AudioClip;
             if (null == clip)
