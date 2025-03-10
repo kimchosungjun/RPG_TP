@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatDamageUI : MonoBehaviour
+public class FloatDamageUI : UIBase
 {
     [SerializeField] Transform[] numberLengthTransform;
     Dictionary<int, FlaotDamageGroupSet> damageGroup = new Dictionary<int, FlaotDamageGroupSet>();

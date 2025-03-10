@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class CameraTalkView : MonoBehaviour
 {
-    Transform camTransform = null; // 카메라의 Transform
-    Vector2 offset = Vector2.zero;   // 캐릭터로부터 얼마나 떨어져 있는지에 대한 변위(위치)
+    Transform camTransform = null; 
+    Vector2 offset = Vector2.zero;   
     [SerializeField] float moveTalkViewTime;
 
     Vector3 legacyPostion;

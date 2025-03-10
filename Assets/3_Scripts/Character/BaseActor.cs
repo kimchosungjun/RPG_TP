@@ -1,10 +1,9 @@
 public abstract class BaseActor : BaseCharacter
 {
-    public override void SetCharacterType() {  /* 이를 상속받는 몬스터와 캐릭터는 다시 선언해야 함*/}
+    public override void SetCharacterType() {  }
 
     /**************************************/
-    /***********  피격 가능  *************/
-    /********** 상태인지 확인 **********/
+    /*****  Check Can Damaged ******/
     /**************************************/
     #region Relate Take Damage
     public virtual void TakeDamage(TransferAttackData _attackData)
